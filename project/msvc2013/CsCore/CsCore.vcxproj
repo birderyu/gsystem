@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{248D9550-B9EC-4A1C-B914-9E17B2483266}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CBase</RootNamespace>
+    <ProjectName>CsCore</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(BinaryFolder)</OutDir>
+    <IntDir>$(ObjectFolder)$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>CsPrecompiler.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(ImportFolder)\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(SymbolFolder)\$(TargetName).pdb</ProgramDatabaseFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\CsCore\CsAutoLock.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsDefine.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsEndian.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsCoreGlobal.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsGlobal.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsInt32.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsLogger.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsMath.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsMutex.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsObject.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSemaphore.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSockAddress.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSocket.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSocket_Private.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsString.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsTable.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsTcpSocket.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsThread.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsType.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsVector.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsAutoLock_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsMutex_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsNumber.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsObject_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsSemaphore_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsSockAddress_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsString_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsTcpSocket_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsThread_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsUdpSocket_Private.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsCore\CsAutoLock.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsAutoLock_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsMath.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsMutex_Private_Win32.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsMutex.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsNumber.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsObject_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Private_Win32.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSemaphore.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSocket_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsString.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsString_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsTcpSocket.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsTcpSocket_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsThread_Private_Win32.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsThread.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket_Private.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
