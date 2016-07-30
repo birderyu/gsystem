@@ -7,9 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wrapper", "wrapper", "{9D2D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{11BB7215-A054-4ADC-9A4F-E6739D7622B5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsCore", "project\msvc2013\CsCore\CsCore.vcxproj", "{248D9550-B9EC-4A1C-B914-9E17B2483266}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsCore_Test", "test\CsCore_Test\CsCore_Test.vcxproj", "{E65C8832-92BC-4757-93E6-C1186200CC81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsCore", "project\msvc2013\CsCore\CsCore.vcxproj", "{248D9550-B9EC-4A1C-B914-9E17B2483266}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsGeometry", "project\msvc2013\CsGeometry\CsGeometry.vcxproj", "{F5613B62-40AE-490C-8E69-4515492A06FA}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -22,14 +25,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Debug|Win32.ActiveCfg = Debug|Win32
-		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Debug|Win32.Build.0 = Debug|Win32
-		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Release|Win32.ActiveCfg = Release|Win32
-		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Release|Win32.Build.0 = Release|Win32
 		{E65C8832-92BC-4757-93E6-C1186200CC81}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E65C8832-92BC-4757-93E6-C1186200CC81}.Debug|Win32.Build.0 = Debug|Win32
 		{E65C8832-92BC-4757-93E6-C1186200CC81}.Release|Win32.ActiveCfg = Release|Win32
 		{E65C8832-92BC-4757-93E6-C1186200CC81}.Release|Win32.Build.0 = Release|Win32
+		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Debug|Win32.ActiveCfg = Debug|Win32
+		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Debug|Win32.Build.0 = Debug|Win32
+		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Release|Win32.ActiveCfg = Release|Win32
+		{248D9550-B9EC-4A1C-B914-9E17B2483266}.Release|Win32.Build.0 = Release|Win32
 		{F5613B62-40AE-490C-8E69-4515492A06FA}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F5613B62-40AE-490C-8E69-4515492A06FA}.Debug|Win32.Build.0 = Debug|Win32
 		{F5613B62-40AE-490C-8E69-4515492A06FA}.Release|Win32.ActiveCfg = Release|Win32
