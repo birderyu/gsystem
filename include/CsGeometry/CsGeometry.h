@@ -4,14 +4,16 @@
 #include "CsGeoGlobal.h"
 #include "CsObject.h"
 
+class CsGeometry_Private;
 class CsEnvelope;
 
 class CsGeo_Export CsGeometry :public CsObject
 {
 public:
-	CsGeometry();
-	virtual ~CsGeometry();
+	CsGeometry(CsGeometry_Private *pPrivate);
+	virtual ~CsGeometry() = 0;
 	//CsEnvelope GetEnvelope();
+	//virtual EM_GEO_TYPE GetGeometryType();
 
 public:
 	enum { CLASSCODE = GEO_CLASSCODE_GEOMETRY, };

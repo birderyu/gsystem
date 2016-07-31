@@ -9,11 +9,18 @@
 #    define CsGeo_Export CS_DECL_IMPORT
 #  endif  
 
+//#define CS_GEO_HAS_Z
+
 enum EM_GEO_CLASSCODE
 {
 	GEO_CLASSCODE_GEOMETRY = 1001,
 	GEO_CLASSCODE_ENVELOPE = 1001,
 	GEO_CLASSCODE_POINT,
+};
+
+enum EM_GEO_TYPE
+{
+	GEO_TYPE_UNKNOWN,
 };
 
 #endif // _CSGEO_CSGEOGLOBAL_H_

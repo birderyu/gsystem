@@ -12,11 +12,16 @@ public:
 	~CsEnvelope_Private();
 	cs_real GetLength() const;
 	cs_real GetWidth() const;
+#ifdef CS_GEO_HAS_Z
 	cs_real GetHeight() const;
+#endif // CS_GEO_HAS_Z
+
+	cs_bool Union(CsEnvelope_Private *pEnvelope);
+	cs_bool Intersection(CsEnvelope_Private *pEnvelope);
 
 private:
-	CsCoordinate m_tLeftTop;
-	CsCoordinate m_tRightBottom;
+	CsCoordinate m_tMax;
+	CsCoordinate m_tMin;
 };
 
 #endif // _CSGEO_CSENVELOPE_PRIVATE_H_

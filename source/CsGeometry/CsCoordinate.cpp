@@ -14,11 +14,13 @@ CsCoordinate::CsCoordinate(const cs_real nX, const cs_real nY)
 
 }
 
+#ifdef CS_GEO_HAS_Z
 CsCoordinate::CsCoordinate(const cs_real nX, const cs_real nY, const cs_real nZ)
 : CsObject(new CsCoordinate_Private(this, nX, nY, nZ))
 {
 
 }
+#endif // CS_GEO_HAS_Z
 
 CsCoordinate::CsCoordinate(const CsCoordinate &tCoord)
 : CsObject(new CsCoordinate_Private(this, *(CsCoordinate_Private*)tCoord.m_pPrivate))
@@ -33,7 +35,12 @@ CsCoordinate::~CsCoordinate()
 
 CsString CsCoordinate::ToString() const
 {
+#ifdef CS_GEO_HAS_Z
 	return "(" + CsString::FromNum(GetX()) + ", " + CsString::FromNum(GetY()) + ", " + CsString::FromNum(GetZ()) + ")";
+#else
+	return "(" + CsString::FromNum(GetX()) + ", " + CsString::FromNum(GetY()) + ")";
+#endif // CS_GEO_HAS_Z
+	
 }
 
 cs_real CsCoordinate::GetX() const
@@ -60,6 +67,7 @@ cs_bool CsCoordinate::SetY(const cs_real nY)
 	return pPrivate->SetY(nY);
 }
 
+#ifdef CS_GEO_HAS_Z
 cs_real CsCoordinate::GetZ() const
 {
 	CS_PRIVATE(CsCoordinate);
@@ -71,3 +79,4 @@ cs_bool CsCoordinate::SetZ(const cs_real nZ)
 	CS_PRIVATE(CsCoordinate);
 	return pPrivate->SetZ(nZ);
 }
+#endif // CS_GEO_HAS_Z
