@@ -7,7 +7,7 @@
 
 class CsStringList;
 
-class CsCore_Export CsString :public CsObject
+class CsCore_Export CsString final :public CsObject
 {
 public:
 	CsString();

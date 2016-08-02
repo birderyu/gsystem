@@ -43,6 +43,9 @@
     <Filter Include="源文件\Thread">
       <UniqueIdentifier>{4d31afef-c4e1-4565-bde1-a96591576f97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Table">
+      <UniqueIdentifier>{62c68275-69f7-49b7-a2e2-e462dcfd6a85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h">
@@ -55,9 +58,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsString.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsVector.h">
@@ -140,6 +140,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h">
       <Filter>头文件\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTable.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsArray.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

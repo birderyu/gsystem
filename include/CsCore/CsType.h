@@ -39,4 +39,12 @@ typedef unsigned long long	cs_uint64;
 
 typedef unsigned int cs_size_t;
 
+/* 64位整型: 字面常量 */
+#ifndef INT64_C
+#	define INT64_C(c)  c ## LL
+#endif
+
+#define	cs_true		true
+#define cs_false	false
+
 #endif // _CSCORE_CSTYPE_H_

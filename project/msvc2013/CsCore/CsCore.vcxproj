@@ -86,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\CsCore\CsArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsAutoLock.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDefine.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsEndian.h" />

@@ -1,8 +1,13 @@
 #ifndef _CSCORE_CSVECTOR_H_
 #define _CSCORE_CSVECTOR_H_
 
+#include "CsArray.h"
+
+#define CS_DEFAULT_VECTOR_SIZE			5
+#define CS_DEFAULT_VECTOR_CAPACITY		0.5
+
 template <typename T>
-class CsVector
+class CsVector :public CsObject
 {
 public:
 	typedef T* Iterator;
@@ -10,65 +15,77 @@ public:
 
 public:
 	CsVector();
+	explicit CsVector(cs_size_t size);
 	~CsVector();
 	Iterator Begin();
-	ConstIterator CBegin();
+	ConstIterator CBegin() const;
 	Iterator End();
-	ConstIterator CEnd();
+	ConstIterator CEnd() const;
+	cs_size_t Size() const;
 
 private:
-	T *m_pData;
-	cs_uint m_nCount;
+	CsArray<T> m_tArray;
+	cs_size_t m_nSize;
 };
 
 template <typename T>
-CsVector::CsVector()
-:m_nCount(0),
-m_pData(NULL)
+CsVector<T>::CsVector()
+:m_nSize(CS_DEFAULT_VECTOR_SIZE)
 {
-	
+	m_tArray.ReSize(CS_DEFAULT_VECTOR_SIZE * (1 + CS_DEFAULT_VECTOR_CAPACITY));
 }
 
 template <typename T>
-CsVector::~CsVector()
+CsVector<T>::CsVector(cs_size_t size)
+:m_nSize(size)
 {
-	if (m_pData)
+	m_tArray.ReSize(size * (1 + CS_DEFAULT_VECTOR_CAPACITY));
+}
+
+template <typename T>
+cs_size_t CsVector<T>::Size() const
+{
+	return m_nSize;
+}
+
+template <typename T>
+CsVector<T>::Iterator CsVector<T>::Begin()
+{
+	if (m_nSize <= 0)
 	{
-		delete [] m_pData;
-		m_pData = NULL;
+		return NULL;
 	}
+	return m_tArray.Data();
 }
 
 template <typename T>
-CsVector::Iterator CsVector::Begin()
+CsVector<T>::ConstIterator CsVector<T>::CBegin() const
 {
-	return m_pData;
-}
-
-template <typename T>
-CsVector::ConstIterator CsVector::CBegin()
-{
-	return m_pData;
-}
-
-template <typename T>
-CsVector::Iterator CsVector::End()
-{
-	if (!m_pData)
+	if (m_nSize <= 0)
 	{
-		return m_pData
+		return NULL;
 	}
-	return m_pData + m_nCount;
+	return m_tArray.Data();
 }
 
 template <typename T>
-CsVector::ConstIterator CsVector::CEnd()
+CsVector<T>::Iterator CsVector<T>::End()
 {
-	if (!m_pData)
+	if (m_nSize <= 0)
 	{
-		return m_pData
+		return NULL;
 	}
-	return m_pData + m_nCount;
+	return m_tArray.Data() + m_nSize;
+}
+
+template <typename T>
+CsVector<T>::ConstIterator CsVector<T>::CEnd() const
+{
+	if (m_nSize <= 0)
+	{
+		return NULL;
+	}
+	return m_tArray.Data() + m_nSize;
 }
 
 #endif // _CSCORE_CSVECTOR_H_
