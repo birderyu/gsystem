@@ -21,6 +21,11 @@ CsString CsObject::ToString() const
 	return "CsObject";
 }
 
+CsObject *CsObject::CopyToObject() const
+{
+	return NULL;
+}
+
 cs_uint CsObject::ClassCode() const
 {
 	return CsObject::CLASSCODE;

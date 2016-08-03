@@ -22,6 +22,7 @@ public:
 	Iterator End();
 	ConstIterator CEnd() const;
 	cs_size_t Size() const;
+	void Reserve(const cs_size_t size) const;
 
 private:
 	CsArray<T> m_tArray;
@@ -55,7 +56,7 @@ CsVector<T>::Iterator CsVector<T>::Begin()
 	{
 		return NULL;
 	}
-	return m_tArray.Data();
+	return m_tArray.GetData();
 }
 
 template <typename T>
@@ -65,7 +66,7 @@ CsVector<T>::ConstIterator CsVector<T>::CBegin() const
 	{
 		return NULL;
 	}
-	return m_tArray.Data();
+	return m_tArray.GetData();
 }
 
 template <typename T>
@@ -75,7 +76,7 @@ CsVector<T>::Iterator CsVector<T>::End()
 	{
 		return NULL;
 	}
-	return m_tArray.Data() + m_nSize;
+	return m_tArray.GetData() + m_nSize;
 }
 
 template <typename T>
@@ -85,7 +86,7 @@ CsVector<T>::ConstIterator CsVector<T>::CEnd() const
 	{
 		return NULL;
 	}
-	return m_tArray.Data() + m_nSize;
+	return m_tArray.GetData() + m_nSize;
 }
 
 #endif // _CSCORE_CSVECTOR_H_

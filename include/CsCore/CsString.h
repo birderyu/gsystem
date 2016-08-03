@@ -30,6 +30,7 @@ public:
 	CsString ToLower() const;
 	cs_ccharptr GetCStr() const;
 
+	CsObject *CopyToObject() const;
 	cs_uint ClassCode() const;
 	CsString ToString() const;
 

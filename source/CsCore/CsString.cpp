@@ -30,6 +30,11 @@ CsString::~CsString()
 	
 }
 
+CsObject *CsString::CopyToObject() const
+{
+	return new CsString(*this);
+}
+
 cs_uint CsString::ClassCode() const
 {
 	return CsString::CLASSCODE;

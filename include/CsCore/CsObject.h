@@ -12,6 +12,7 @@ public:
 	CsObject(CsObject_Private *pPrivate);
 	virtual ~CsObject() = 0;
 
+	virtual CsObject *CopyToObject() const;
 	virtual cs_uint ClassCode() const;
 	virtual CsString ToString() const;
 	virtual cs_bool Equals(CsObject *pObject) const;

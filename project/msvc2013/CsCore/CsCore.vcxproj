@@ -86,6 +86,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\CsCore\CsBTree.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSort.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsAutoLock.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDefine.h" />
@@ -93,6 +95,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsCoreGlobal.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsGlobal.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsInt32.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsLink.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMath.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h" />

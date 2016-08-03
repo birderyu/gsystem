@@ -16,3 +16,4 @@ bin/CsCore_Testd.exe
 *.opensdf
 .vscode/.BROWSE.VC.DB
 *.DB-wal
+lib/CsCore_Testd.lib

@@ -19,6 +19,12 @@
     <Filter Include="源文件\_private">
       <UniqueIdentifier>{763a9b99-6529-4a8d-ab9c-91b2699e2847}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\SpatialIndex">
+      <UniqueIdentifier>{c7c94a25-5ef9-4a54-b57f-3774b638b091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\SpatialIndex">
+      <UniqueIdentifier>{9510995e-d3bd-4b37-9d03-c7051ecafc99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeoGlobal.h">
