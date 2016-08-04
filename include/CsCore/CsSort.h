@@ -8,41 +8,41 @@
 /// ElemType需实现拷贝构造和等号重载的方法
 /// arr：待排序的数组
 /// start：待排序的数组起始位置
-/// length：待排序的数组长度，注意是从start位开始的数组长度
+/// len：待排序的数组长度，注意是从start位开始的数组长度
 class CsCore_Export CsSort
 {
 public:
 	/// 冒泡排序
 	template<typename ArrType, typename ElemType>
-	static void BubbleSort(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void BubbleSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 插入排序
 	template<typename ArrType, typename ElemType>
-	static void InsertSort(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void InsertSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 	
-	/// 插入排序，递归实现
+	/// 插入排序，递归实现（Recursive）
 	template<typename ArrType, typename ElemType>
-	static void InsertSort_Recursive(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void InsertSort_Recur(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 希尔排序
 	template<typename ArrType, typename ElemType>
-	static void ShellSort(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void ShellSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 选择排序
 	template<typename ArrType, typename ElemType>
-	static void SelectSort(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void SelectSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 堆排序（算法有误）
 	template<typename ArrType, typename ElemType>
-	static void HeapSort(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void HeapSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 归并排序（算法有误）
 	template<typename ArrType, typename ElemType>
-	static void MergeSort(ArrType &arr, const cs_size_t length);
+	static void MergeSort(ArrType &arr, const cs_size_t len);
 
 	/// 快速排序
 	template<typename ArrType, typename ElemType>
-	static void QuickSort(ArrType &arr, const cs_size_t length);
+	static void QuickSort(ArrType &arr, const cs_size_t len);
 
 private:
 	static cs_size_t LeftChild(const cs_size_t i);
@@ -52,7 +52,7 @@ private:
 
 	/// 构建大根堆
 	template<typename ArrType, typename ElemType>
-	static void PercDown(ArrType &arr, const cs_size_t start, const cs_size_t length);
+	static void PercDown(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 归并
 	template<typename ArrType, typename ElemType>
@@ -82,34 +82,34 @@ CsSort::~CsSort()
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::BubbleSort(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::BubbleSort(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
-	for (cs_size_t i = 0; i < length; ++i)
+	for (cs_size_t i = 0; i < len; ++i)
 	{
-		for (cs_size_t j = 0; j < length - i - 1; ++j)
+		for (cs_size_t j = 0; j < len - i - 1; ++j)
 		{
-			if (arr[j + start] > arr[j + 1 + start])
+			if (arr[j + start] > arr[j + start + 1])
 			{
 				ElemType tmp(arr[j + start]);
-				arr[j + start] = arr[j + 1 + start];
-				arr[j + 1 + start] = tmp;
+				arr[j + start] = arr[j + start + 1];
+				arr[j + start + 1] = tmp;
 			}
 		}
 	}
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::InsertSort(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::InsertSort(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
 	cs_size_t i, j;
-	for (i = 1; i < length; ++i)
+	for (i = 1; i < len; ++i)
 	{
 		ElemType tmp(arr[i + start]);
 		for (j = i; j > 0; --j)
 		{
-			if (arr[j - 1 + start] > tmp)
+			if (arr[j + start - 1] > tmp)
 			{
-				arr[j + start] = arr[j - 1 + start];
+				arr[j + start] = arr[j + start - 1];
 			}
 			else
 			{
@@ -121,42 +121,42 @@ void CsSort::InsertSort(ArrType &arr, const cs_size_t start, const cs_size_t len
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::InsertSort_Recursive(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::InsertSort_Recur(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
-	if (length > 1)
+	if (len > 1)
 	{
-		InsertSort_Recursive<ArrType, ElemType>(arr, start, length - 1);
-		ElemType key(arr[length - 1 + start]);
+		InsertSort_Recur<ArrType, ElemType>(arr, start, len - 1);
+		ElemType tmp(arr[len + start - 1]);
 		cs_size_t i;
-		for (i = length - 1; i > 0; i--)
+		for (i = len - 1; i > 0; i--)
 		{
-			if (arr[i - 1 + start] > key)
+			if (arr[i + start - 1] > tmp)
 			{
-				arr[i + start] = arr[i - 1 + start];
+				arr[i + start] = arr[i + start - 1];
 			}
 			else
 			{
 				break;
 			}
 		}
-		arr[i + start] = key;
+		arr[i + start] = tmp;
 	}
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::ShellSort(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::ShellSort(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
 	cs_size_t i, j;
-	for (cs_size_t inc = length / 2; inc > 0; inc /= 2)
+	for (cs_size_t inc = len / 2; inc > 0; inc /= 2)
 	{
-		for (i = inc; i < length; ++i)
+		for (i = inc; i < len; ++i)
 		{
 			ElemType tmp(arr[i + start]);
 			for (j = i; j >= inc; j -= inc)
 			{
-				if (arr[j - inc + start] > tmp)
+				if (arr[j + start - inc] > tmp)
 				{
-					arr[j + start] = arr[j - inc + start];
+					arr[j + start] = arr[j + start - inc];
 				}
 				else
 				{
@@ -169,25 +169,25 @@ void CsSort::ShellSort(ArrType &arr, const cs_size_t start, const cs_size_t leng
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::SelectSort(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::SelectSort(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
 	cs_size_t index;
-	for (cs_size_t i = 0; i < length - 1; ++i)
+	for (cs_size_t i = 0; i < len - 1; ++i)
 	{
-		ElemType minv(arr[i + start]);
+		ElemType tmp(arr[i + start]);
 		index = i;
-		for (cs_size_t j = i + 1; j < length; ++j)
+		for (cs_size_t j = i + 1; j < len; ++j)
 		{
-			if (arr[j + start] < minv)
+			if (arr[j + start] < tmp)
 			{
 				index = j;
-				minv = arr[j + start];
+				tmp = arr[j + start];
 			}
 		}
 		if (index != i)
 		{
 			arr[index + start] = arr[i + start];
-			arr[i + start] = minv;
+			arr[i + start] = tmp;
 		}
 	}
 }
@@ -206,14 +206,14 @@ void CsSort::Swap(ElemType* l, ElemType* r)
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::PercDown(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::PercDown(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
 	ElemType tmp(arr[start]);
 	cs_size_t j, nc;
-	for (j = start; LeftChild(j) < length; j = nc)
+	for (j = start; LeftChild(j) < len; j = nc)
 	{
 		nc = LeftChild(j);
-		if (nc < length - 1 && arr[nc + 1] > arr[nc])
+		if (nc < len - 1 && arr[nc + 1] > arr[nc])
 		{
 			nc++;
 		}
@@ -230,14 +230,14 @@ void CsSort::PercDown(ArrType &arr, const cs_size_t start, const cs_size_t lengt
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::HeapSort(ArrType &arr, const cs_size_t start, const cs_size_t length)
+void CsSort::HeapSort(ArrType &arr, const cs_size_t start, const cs_size_t len)
 {
-	for (cs_int i = length / 2; i >= 0; --i)
+	for (cs_int i = len / 2; i >= 0; --i)
 	{
-		PercDown<ArrType, ElemType>(arr, i + start, length);
+		PercDown<ArrType, ElemType>(arr, i + start, len);
 	}
 
-	for (cs_size_t i = length - 1; i > 0; --i)
+	for (cs_size_t i = len - 1; i > 0; --i)
 	{
 		Swap<ElemType>(&arr[start], &arr[i + start]);
 		PercDown<ArrType, ElemType>(arr, start, i);
@@ -306,9 +306,9 @@ void CsSort::MergeSorting(ArrType &arr, const cs_size_t first, const cs_size_t l
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::MergeSort(ArrType &arr, const cs_size_t length)
+void CsSort::MergeSort(ArrType &arr, const cs_size_t len)
 {
-	MergeSorting<ArrType, ElemType>(arr, 0, length - 1);
+	MergeSorting<ArrType, ElemType>(arr, 0, len - 1);
 }
 
 template<typename ArrType, typename ElemType>
@@ -364,9 +364,9 @@ void CsSort::QuickSorting(ArrType &arr, const cs_size_t first, const cs_size_t l
 }
 
 template<typename ArrType, typename ElemType>
-void CsSort::QuickSort(ArrType &arr, const cs_size_t length)
+void CsSort::QuickSort(ArrType &arr, const cs_size_t len)
 {
-	QuickSorting<ArrType, ElemType>(arr, 0, length - 1);
+	QuickSorting<ArrType, ElemType>(arr, 0, len - 1);
 }
 
 #endif // _CSCORE_SORT_H_

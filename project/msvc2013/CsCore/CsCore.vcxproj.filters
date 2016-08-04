@@ -165,6 +165,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
       <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\SortStack.h">
+      <Filter>头文件\Algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">
