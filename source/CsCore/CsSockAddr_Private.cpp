@@ -1,5 +1,5 @@
-#include "CsSockAddress_Private.h"
-#include "CsSockAddress.h"
+#include "CsSockAddr_Private.h"
+#include "CsSockAddr.h"
 #include "CsString.h"
 
 CsSockAddress_Private::CsSockAddress_Private(CsSockAddress *pPublic)

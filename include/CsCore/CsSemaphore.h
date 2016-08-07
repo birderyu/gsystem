@@ -4,7 +4,7 @@
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
 
-/// –≈∫≈¡ø
+/// ‰ø°Âè∑Èáè
 class CsCore_Export CsSemaphore :public CsObject
 {
 public:

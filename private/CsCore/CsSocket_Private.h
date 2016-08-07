@@ -2,7 +2,7 @@
 #define _CSCORE_CSSOCKET_PRIVATE_H_
 
 #include "CsObject_Private.h"
-#include "CsSockAddress_Private.h"
+#include "CsSockAddr_Private.h"
 
 class CsSocket;
 
@@ -23,7 +23,7 @@ public:
 	cs_int GetLocalAddr(CsSockAddress_Private *pSockAddr) const;
 
 protected:
-	// Ì×½Ó×ÖµÄ¾ä±ú
+	// å¥—æ¥å­—çš„å¥æŸ„
 	TSocket m_hSocket;
 };
 

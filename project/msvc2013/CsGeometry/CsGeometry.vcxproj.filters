@@ -42,30 +42,30 @@
     <ClInclude Include="..\..\..\private\CsGeometry\CsEnvelope_Private.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\CsGeometry\CsCoordinate_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinate.h">
+    <ClInclude Include="..\..\..\include\CsGeometry\CsCoord.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsGeometry\CsCoord_Private.h">
+      <Filter>头文件\_private</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope_Private.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CsGeometry\CsGeometry_Private.cpp">
       <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsGeometry\CsGeometry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsCoord_Private.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsCoord.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

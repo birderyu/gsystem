@@ -108,20 +108,11 @@
     <ClInclude Include="..\..\..\include\CsCore\CsCoreGlobal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsSockAddress_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsTcpSocket_Private.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsUdpSocket_Private.h">
       <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsSocket_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsInt32.h">
-      <Filter>头文件\Number</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsThread.h">
       <Filter>头文件\Thread</Filter>
@@ -134,9 +125,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsSemaphore.h">
       <Filter>头文件\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsSockAddress.h">
-      <Filter>头文件\Socket</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsSocket.h">
       <Filter>头文件\Socket</Filter>
@@ -159,14 +147,41 @@
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h">
       <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsLink.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
       <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\SortStack.h">
       <Filter>头文件\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDecimal.h">
+      <Filter>头文件\Number</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsSocket_Private.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSList.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSockAddr.h">
+      <Filter>头文件\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsSockAddr_Private.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLStack.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsAStack.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDList.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCList.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +221,6 @@
     <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Private_Win32.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket_Private.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
@@ -217,9 +229,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket_Private.cpp">
       <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress.cpp">
-      <Filter>源文件\Socket</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">
       <Filter>源文件\Socket</Filter>
@@ -241,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsSemaphore.cpp">
       <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddr_Private.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddr.cpp">
+      <Filter>源文件\Socket</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

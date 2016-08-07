@@ -4,7 +4,7 @@
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
 
-/// »¥³âËø
+/// äº’æ–¥é”
 class CsCore_Export CsMutex :public CsObject
 {
 public:

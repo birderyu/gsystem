@@ -39,7 +39,7 @@ typedef unsigned long long	cs_uint64;
 
 typedef unsigned int cs_size_t;
 
-/* 64Î»ÕûĞÍ: ×ÖÃæ³£Á¿ */
+/* 64ä½æ•´å‹: å­—é¢å¸¸é‡ */
 #ifndef INT64_C
 #	define INT64_C(c)  c ## LL
 #endif

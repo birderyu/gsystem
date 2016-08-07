@@ -6,36 +6,36 @@
 class CsCore_Export CsMath
 {
 public:
-	/// ¸ùºÅ2
+	/// æ ¹å·2
 	static cs_double Cs_Sqrt2;
 
-	/// Ô²ÖÜÂÊ
+	/// åœ†å‘¨ç‡
 	static cs_double Cs_PI;
 
-	/// Ô²ÖÜÂÊ³ıÒÔ2
+	/// åœ†å‘¨ç‡é™¤ä»¥2
 	static cs_double Cs_PI_2;
 
-	/// Ô²ÖÜÂÊ³ıÒÔ4
+	/// åœ†å‘¨ç‡é™¤ä»¥4
 	static cs_double Cs_PI_4;
 
-	/// Ô²ÖÜÂÊµÄµ¹Êı
+	/// åœ†å‘¨ç‡çš„å€’æ•°
 	static cs_double Cs_1_PI;
 
-	/// 2³ıÒÔÔ²ÖÜÂÊ
+	/// 2é™¤ä»¥åœ†å‘¨ç‡
 	static cs_double Cs_2_PI;
 
-	/// ×ÔÈ»³£Êı
+	/// è‡ªç„¶å¸¸æ•°
 	static cs_double Cs_E;
 	static cs_double Cs_Log2E;
 	static cs_double Cs_Log10E;
 	static cs_double Cs_Ln2;
 	static cs_double Cs_Ln10;
 
-	/// Êı×Ö±È½Ï
+	/// æ•°å­—æ¯”è¾ƒ
 	static cs_bool Equals(cs_float v1, cs_float v2, cs_float precision);
 	static cs_bool Equals(cs_double v1, cs_double v2, cs_double precision);
 
-	/// È¡¾ø¶ÔÖµ
+	/// å–ç»å¯¹å€¼
 	static cs_uint Abs(cs_int v);
 	static cs_uint Abs(cs_float v);
 	static cs_double Abs(cs_double v);
@@ -47,7 +47,7 @@ public:
 
 	static cs_int Floor(cs_double v);
 
-	/// Èı½Çº¯Êı
+	/// ä¸‰è§’å‡½æ•°
 	static cs_double FastSin(cs_double x);
 
 protected:

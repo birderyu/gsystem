@@ -1,5 +1,5 @@
-#ifndef _CSCORE_CSNUMBER_PRIVATE_H_
-#define _CSCORE_CSNUMBER_PRIVATE_H_
+﻿#ifndef _CSCORE_NUMBER_PRIVATE_H_
+#define _CSCORE_NUMBER_PRIVATE_H_
 
 #include "CsObject_Private.h"
 #include "CsType.h"

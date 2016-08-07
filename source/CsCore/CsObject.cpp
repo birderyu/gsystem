@@ -2,6 +2,12 @@
 #include "CsObject_Private.h"
 #include "CsString.h"
 
+CsObject::CsObject()
+: m_pPrivate(NULL)
+{
+
+}
+
 CsObject::CsObject(CsObject_Private *pPrivate)
 : m_pPrivate(pPrivate)
 {

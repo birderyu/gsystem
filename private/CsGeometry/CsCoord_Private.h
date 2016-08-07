@@ -1,4 +1,4 @@
-#ifndef _CSGEO_CSCOORDINATE_PRIVATE_H_
+﻿#ifndef _CSGEO_CSCOORDINATE_PRIVATE_H_
 #define _CSGEO_CSCOORDINATE_PRIVATE_H_
 
 #include "CsGeoGlobal.h"

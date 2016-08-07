@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////
-/// @brief Ïß³ÌÀàµÄ¶¨Òå
+/// @brief çº¿ç¨‹ç±»çš„å®šä¹‰
 /// 
-///  ¸ÃÎÄ¼şÖĞ°üº¬ÁËÏß³ÌÀàCsThreadµÄ¶¨Òå
+///  è¯¥æ–‡ä»¶ä¸­åŒ…å«äº†çº¿ç¨‹ç±»CsThreadçš„å®šä¹‰
 /// 
 /// @author  Birderyu
 /// @version 1.0
@@ -14,29 +14,29 @@
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
 
-/// Ïß³ÌÀà
+/// çº¿ç¨‹ç±»
 class CsCore_Export CsThread :public CsObject
 {
 public:
 	CsThread();
 	virtual ~CsThread();
 
-	/// ´´½¨Ïß³Ì²¢Æô¶¯
+	/// åˆ›å»ºçº¿ç¨‹å¹¶å¯åŠ¨
 	virtual cs_int Start();
 
-	/// ÖÕÖ¹Ò»¸öÏß³Ì
+	/// ç»ˆæ­¢ä¸€ä¸ªçº¿ç¨‹
 	virtual void Stop(cs_ulong nMsecs = 0);
 
-	/// ÈÃµ±Ç°Ïß³ÌË¯Ãß£¬µ¥Î»£ºÃë
+	/// è®©å½“å‰çº¿ç¨‹ç¡çœ ï¼Œå•ä½ï¼šç§’
 	static void Sleep(cs_ulong nSecs);
 
-	/// ÈÃµ±Ç°Ïß³ÌË¯Ãß£¬µ¥Î»£ººÁÃë
+	/// è®©å½“å‰çº¿ç¨‹ç¡çœ ï¼Œå•ä½ï¼šæ¯«ç§’
 	static void MSleep(cs_ulong nMsecs);
 
-	/// »ØÊÕÖ¸¶¨µÄÏß³Ì
+	/// å›æ”¶æŒ‡å®šçš„çº¿ç¨‹
 	static void Join(CsThread *pThread);
 
-	/// Ïß³ÌÌåÖ÷º¯Êı
+	/// çº¿ç¨‹ä½“ä¸»å‡½æ•°
 	virtual int Run() = 0;
 
 public:

@@ -9,6 +9,7 @@ class CsString;
 class CsCore_Export CsObject
 {
 public:
+	CsObject();
 	CsObject(CsObject_Private *pPrivate);
 	virtual ~CsObject() = 0;
 

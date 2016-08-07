@@ -15,11 +15,11 @@ public:
 	static void operator delete (void *pBlock);
 
 private:
-	cs_int m_nSize;              //¸ÃÄÚ´æ¿éµÄ´óĞ¡£¬ÒÔ×Ö½ÚÎªµ¥Î»
-	cs_int m_nFree;              //¸ÃÄÚ´æ¿é»¹ÓĞ¶àÉÙ¿É·ÖÅäµÄµ¥Ôª
-	cs_int m_nFirst;             //µ±Ç°¿ÉÓÃµ¥ÔªµÄĞòºÅ£¬´Ó0¿ªÊ¼
-	CsMemoryBlock *m_pNext;              //Ö¸ÏòÏÂÒ»¸öÄÚ´æ¿é
-	cs_char aData[1];           //ÓÃÓÚ±ê¼Ç·ÖÅäµ¥Ôª¿ªÊ¼µÄÎ»ÖÃ£¬·ÖÅäµ¥Ôª´ÓaDataµÄÎ»ÖÃ¿ªÊ¼
+	cs_int m_nSize;              //è¯¥å†…å­˜å—çš„å¤§å°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½
+	cs_int m_nFree;              //è¯¥å†…å­˜å—è¿˜æœ‰å¤šå°‘å¯åˆ†é…çš„å•å…ƒ
+	cs_int m_nFirst;             //å½“å‰å¯ç”¨å•å…ƒçš„åºå·ï¼Œä»0å¼€å§‹
+	CsMemoryBlock *m_pNext;              //æŒ‡å‘ä¸‹ä¸€ä¸ªå†…å­˜å—
+	cs_char aData[1];           //ç”¨äºæ ‡è®°åˆ†é…å•å…ƒå¼€å§‹çš„ä½ç½®ï¼Œåˆ†é…å•å…ƒä»aDataçš„ä½ç½®å¼€å§‹
 };
 
 class CsCore_Export CsMemoryPool
@@ -33,10 +33,10 @@ public:
 	void Free(void *pFree);
 
 private:
-	cs_int m_nInitSize;          //³õÊ¼´óĞ¡
-	cs_int m_nGrowSize;          //Ôö³¤´óĞ¡
-	cs_int m_nUnitSize;          //·ÖÅäµ¥Ôª´óĞ¡
-	CsMemoryBlock *m_pBlock;     //ÄÚ´æ¿éÁ´±í
+	cs_int m_nInitSize;          //åˆå§‹å¤§å°
+	cs_int m_nGrowSize;          //å¢é•¿å¤§å°
+	cs_int m_nUnitSize;          //åˆ†é…å•å…ƒå¤§å°
+	CsMemoryBlock *m_pBlock;     //å†…å­˜å—é“¾è¡¨
 };
 
 #endif // _CSCORE_CSMEMORYPOOL_H_

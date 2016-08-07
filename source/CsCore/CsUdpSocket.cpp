@@ -1,6 +1,6 @@
 #include "CsUdpSocket.h"
 #include "CsUdpSocket_Private.h"
-#include "CsSockAddress.h"
+#include "CsSockAddr.h"
 
 CsUdpSocket::CsUdpSocket()
 : CsSocket(new CsUdpSocket_Private(this))

@@ -1,8 +1,8 @@
-#ifndef _CSGEO_CSENVELOPE_PRIVATE_H_
+﻿#ifndef _CSGEO_CSENVELOPE_PRIVATE_H_
 #define _CSGEO_CSENVELOPE_PRIVATE_H_
 
 #include "CsObject_Private.h"
-#include "CsCoordinate.h"
+#include "CsCoord.h"
 class CsEnvelope;
 
 class CsEnvelope_Private :public CsObject_Private

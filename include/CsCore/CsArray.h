@@ -3,12 +3,12 @@
 
 #include "CsObject.h"
 
-/// 可变长模板数组
 template <typename T>
 class CsArray :public CsObject
 {
 public:
 	CsArray();
+	CsArray(const cs_size_t len, const T &t = T());
 	CsArray(const CsArray<T> &tArray);
 	~CsArray();
 	cs_size_t Length() const;
@@ -30,14 +30,42 @@ private:
 
 template <typename T>
 CsArray<T>::CsArray()
-: CsObject(NULL), m_pData(NULL), m_nLength(0)
+: m_pData(NULL), m_nLength(0)
 {
 
 }
 
 template <typename T>
+CsArray<T>::CsArray(const cs_size_t len, const T &t = T())
+: m_pData(NULL), m_nLength(0)
+{
+	if (len <= 0)
+	{
+		return;
+	}
+	try
+	{
+		m_pData = new T[len];
+	}
+	catch (std::bad_alloc&)
+	{
+		m_pData = NULL;
+	}
+	if (!m_pData)
+	{
+		return;
+	}
+	m_nLength = len;
+	for (cs_size_t i = 0; i < len; i++)
+	{
+		m_pData[i] = t;
+	}
+}
+
+template <typename T>
 CsArray<T>::CsArray(const CsArray<T> &tArray)
-: CsObject(NULL), m_pData(tArray.CopyData(0, tArray.Length())), m_nLength(tArray.Length())
+: m_pData(tArray.CopyData(0, tArray.Length()))
+, m_nLength(tArray.Length())
 {
 	
 }
@@ -55,18 +83,17 @@ cs_size_t CsArray<T>::Length() const
 }
 
 template <typename T>
-cs_bool CsArray<T>::ReSize(cs_size_t length)
+cs_bool CsArray<T>::ReSize(cs_size_t len)
 {
-	if (length <= m_nLength)
+	if (len <= m_nLength)
 	{
 		return false;
 	}
-	T *pData = (T*)malloc(sizeof(T) * length);
+	T *pData = new T[len];
 	if (!pData)
 	{
 		return false;
 	}
-	memset(pData, 0, sizeof(T) * length);
 
 	if (m_pData && m_nLength > 0)
 	{
@@ -76,7 +103,7 @@ cs_bool CsArray<T>::ReSize(cs_size_t length)
 
 	Clear();
 	m_pData = pData;
-	m_nLength = length;
+	m_nLength = len;
 	return true;
 }
 
@@ -85,7 +112,7 @@ void CsArray<T>::Clear()
 {
 	if (m_pData)
 	{
-		free(m_pData);
+		delete[] m_pData;
 		m_pData = NULL;
 	}
 	m_nLength = 0;
@@ -114,18 +141,18 @@ T *CsArray<T>::GetData(const cs_size_t start) const
 }
 
 template <typename T>
-T *CsArray<T>::CopyData(const cs_size_t start, const cs_size_t length) const
+T *CsArray<T>::CopyData(const cs_size_t start, const cs_size_t len) const
 {
-	if (!m_pData || start >= m_nLength || length + start > m_nLength)
+	if (!m_pData || start >= m_nLength || len + start > m_nLength)
 	{
 		return NULL;
 	}
-	T *pData = (T*)malloc(sizeof(T)* length);
-	if (!CopyDataTo(pData, start, length))
+	T *pData = new T[len];
+	if (!CopyDataTo(pData, start, len))
 	{
 		if (pData)
 		{
-			free(pData);
+			delete[] pData;
 			pData = NULL;
 		}
 		return NULL;
@@ -134,46 +161,45 @@ T *CsArray<T>::CopyData(const cs_size_t start, const cs_size_t length) const
 }
 
 template <typename T>
-cs_bool CsArray<T>::CopyDataTo(T *pData, const cs_size_t start, const cs_size_t length) const
+cs_bool CsArray<T>::CopyDataTo(T *pData, const cs_size_t start, const cs_size_t len) const
 {
-	if (!pData || !m_pData || start >= m_nLength || length + start > m_nLength)
+	if (!pData || !m_pData || start >= m_nLength || len + start > m_nLength)
 	{
 		return false;
 	}
-	memcpy(pData, m_pData + start, sizeof(T) * length);
+	memcpy(pData, m_pData + start, sizeof(T) * len);
 	return true;
 }
 
 template <typename T>
 cs_bool CsArray<T>::RemoveAt(const cs_size_t id)
 {
-	cs_size_t length = m_nLength - 1;
-	if (length < 0 || length < id)
+	cs_size_t len = m_nLength - 1;
+	if (len < 0 || len < id)
 	{
 		return false;
 	}
-	if (length == 0)
+	if (len == 0)
 	{
 		Clear();
 		return true;
 	}
-	T *pData = (T*)malloc(sizeof(T)* length);
+	T *pData = new T[len];
 	if (!pData)
 	{
 		return false;
 	}
-	memset(pData, 0, sizeof(T) + length);
 	if (CopyDataTo(pData, 0, id))
 	{
-		if (CopyDataTo(pData + id, id + 1, length - id))
+		if (CopyDataTo(pData + id, id + 1, len - id))
 		{
 			Clear();
 			m_pData = pData;
-			m_nLength = length;
+			m_nLength = len;
 			return true;
 		}
 	}
-	free(pData);
+	delete[] pData;
 	pData = NULL;
 	return false;
 }
@@ -186,7 +212,7 @@ cs_bool CsArray<T>::RemoveAt(const CsArray<cs_size_t> &ids)
 		return false;
 	}
 	cs_size_t *keep_ids = new cs_size_t[m_nLength];
-	cs_size_t keep_length = 0;
+	cs_size_t keep_len = 0;
 	if (!keep_ids)
 	{
 		return false;
@@ -195,24 +221,24 @@ cs_bool CsArray<T>::RemoveAt(const CsArray<cs_size_t> &ids)
 	{
 		if (!ids.Contains(i))
 		{
-			keep_ids[keep_length++] = i;
+			keep_ids[keep_len++] = i;
 		}
 	}
-	T *pData = (T*)malloc(sizeof(T) * keep_length);
+	T *pData = new T[keep_len];
 	if (!pData)
 	{
 		delete[] keep_ids;
 		keep_ids = NULL;
 		return false;
 	}
-	memset(pData, 0, sizeof(T) + keep_length);
-	for (cs_size_t i = 0; i < keep_length; i++)
+
+	for (cs_size_t i = 0; i < keep_len; i++)
 	{
 		if (!CopyDataTo(pData + i, keep_ids[i], 1))
 		{
 			delete[] keep_ids;
 			keep_ids = NULL;
-			free(pData);
+			delete[] pData;
 			pData = false;
 			return false;
 		}
@@ -221,7 +247,7 @@ cs_bool CsArray<T>::RemoveAt(const CsArray<cs_size_t> &ids)
 	keep_ids = NULL;
 	Clear();
 	m_pData = pData;
-	m_nLength = keep_length;
+	m_nLength = keep_len;
 	return true;
 }
 

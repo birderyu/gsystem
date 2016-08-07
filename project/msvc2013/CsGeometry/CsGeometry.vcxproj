@@ -11,17 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinate.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsCoord.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsEnvelope.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeoGlobal.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h" />
-    <ClInclude Include="..\..\..\private\CsGeometry\CsCoordinate_Private.h" />
+    <ClInclude Include="..\..\..\private\CsGeometry\CsCoord_Private.h" />
     <ClInclude Include="..\..\..\private\CsGeometry\CsEnvelope_Private.h" />
     <ClInclude Include="..\..\..\private\CsGeometry\CsGeometry_Private.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate.cpp" />
-    <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsGeometry\CsCoord.cpp" />
+    <ClCompile Include="..\..\..\source\CsGeometry\CsCoord_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsGeometry.cpp" />

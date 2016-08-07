@@ -6,7 +6,7 @@
 
 class CsMutex;
 
-/// ×Ô¶¯Ëø
+/// è‡ªåŠ¨é”
 class CsCore_Export CsAutoLock :public CsObject
 {
 public:

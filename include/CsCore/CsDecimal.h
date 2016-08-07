@@ -1,13 +1,13 @@
-#ifndef _CSCORE_CSINT32_H_
-#define _CSCORE_CSINT32_H_
+#ifndef _CSCORE_DECIMAL_H_
+#define _CSCORE_DECIMAL_H_
 
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
 
-class CsCore_Export CsInt32 : public CsObject
+class CsCore_Export CsDecimal : public CsObject
 {
 public:
-	CsInt32(const cs_int32 nValue);
+	CsDecimal(const cs_decimal nValue);
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_INT32, };

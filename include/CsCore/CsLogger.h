@@ -3,7 +3,6 @@
 
 #include "CsCoreGlobal.h"
 
-/// »’÷æ
 class CsCore_Export CsLogger
 {
 

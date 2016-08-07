@@ -1,5 +1,5 @@
-#include "CsCoordinate_Private.h"
-#include "CsCoordinate.h"
+#include "CsCoord_Private.h"
+#include "CsCoord.h"
 
 CsCoordinate_Private::CsCoordinate_Private(CsCoordinate *pPublic)
 : CsObject_Private(pPublic), m_X(0), m_Y(0)

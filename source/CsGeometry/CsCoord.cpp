@@ -1,5 +1,5 @@
-#include "CsCoordinate.h"
-#include "CsCoordinate_Private.h"
+#include "CsCoord.h"
+#include "CsCoord_Private.h"
 #include "CsString.h"
 
 CsCoordinate::CsCoordinate()

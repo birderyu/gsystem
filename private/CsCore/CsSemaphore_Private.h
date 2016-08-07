@@ -5,7 +5,7 @@
 
 class CsSemaphore;
 
-/// ĞÅºÅÁ¿
+/// ä¿¡å·é‡
 class CsSemaphore_Private :public CsObject_Private
 {
 public:

@@ -6,38 +6,38 @@
 class CsCore_Export CsEndian
 {
 public:
-	/// ½«Êı×Ö×ª»»Îª´ó¶Ë×Ö½ÚÊı×é
+	/// å°†æ•°å­—è½¬æ¢ä¸ºå¤§ç«¯å­—èŠ‚æ•°ç»„
 	/// 
-	/// @param[in]	nValue ´ı×ª»»µÄÊı×Ö
-	/// @parma[out]	nData Êı×Ö´ó¶ËÔÚÇ°µÄ×Ö½ÚĞòÁĞ
-	/// @return void¡£
+	/// @param[in]	nValue å¾…è½¬æ¢çš„æ•°å­—
+	/// @parma[out]	nData æ•°å­—å¤§ç«¯åœ¨å‰çš„å­—èŠ‚åºåˆ—
+	/// @return voidã€‚
 	static void ToBigEndianBytes(cs_uint16 nValue, cs_byte nData[]);
 	static void ToBigEndianBytes(cs_uint32 nValue, cs_byte nData[]);
 	static void ToBigEndianBytes(cs_uint64 nValue, cs_byte nData[]);
 
-	/// ½«´ó¶Ë×Ö½ÚÊı×é×ª»»ÎªÊı×Ö
+	/// å°†å¤§ç«¯å­—èŠ‚æ•°ç»„è½¬æ¢ä¸ºæ•°å­—
 	/// 
-	/// @param[in]	nData ´ó¶ËÔÚÇ°µÄ×Ö½ÚĞòÁĞ
-	/// @param[out]	nValue ×ª»»ºóµÄÊı×Ö
-	/// @return void¡£
+	/// @param[in]	nData å¤§ç«¯åœ¨å‰çš„å­—èŠ‚åºåˆ—
+	/// @param[out]	nValue è½¬æ¢åçš„æ•°å­—
+	/// @return voidã€‚
 	static void ToBigEndianNumber(cs_byte nData[], cs_uint16 &nValue);
 	static void ToBigEndianNumber(cs_byte nData[], cs_uint32 &nValue);
 	static void ToBigEndianNumber(cs_byte nData[], cs_uint64 &nValue);
 
-	/// ½«Êı×Ö×ª»»ÎªĞ¡¶Ë×Ö½ÚÊı×é
+	/// å°†æ•°å­—è½¬æ¢ä¸ºå°ç«¯å­—èŠ‚æ•°ç»„
 	/// 
-	/// @param[in]	nValue ´ı×ª»»µÄÊı×Ö
-	/// @param[out]	nData Êı×ÖĞ¡¶ËÔÚÇ°µÄ×Ö½ÚĞòÁĞ
-	/// @return void¡£
+	/// @param[in]	nValue å¾…è½¬æ¢çš„æ•°å­—
+	/// @param[out]	nData æ•°å­—å°ç«¯åœ¨å‰çš„å­—èŠ‚åºåˆ—
+	/// @return voidã€‚
 	static void ToLittleEndianBytes(cs_uint16 nValue, cs_byte nData[]);
 	static void ToLittleEndianBytes(cs_uint32 nValue, cs_byte nData[]);
 	static void ToLittleEndianBytes(cs_uint64 nValue, cs_byte nData[]);
 	
-	/// ½«Ğ¡¶Ë×Ö½ÚÊı×é×ª»»ÎªÊı×Ö
+	/// å°†å°ç«¯å­—èŠ‚æ•°ç»„è½¬æ¢ä¸ºæ•°å­—
 	/// 
-	/// @param[in]	nData Ğ¡¶ËÔÚÇ°µÄ×Ö½ÚĞòÁĞ
-	/// @param[out]	nValue ×ª»»ºóµÄÊı×Ö
-	/// @return void¡£
+	/// @param[in]	nData å°ç«¯åœ¨å‰çš„å­—èŠ‚åºåˆ—
+	/// @param[out]	nValue è½¬æ¢åçš„æ•°å­—
+	/// @return voidã€‚
 	static void ToLittleEndianNumber(cs_byte nData[], cs_uint16 &nValue);
 	static void ToLittleEndianNumber(cs_byte nData[], cs_uint32 &nValue);
 	static void ToLittleEndianNumber(cs_byte nData[], cs_uint64 &nValue);

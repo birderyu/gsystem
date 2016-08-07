@@ -1,6 +1,6 @@
 #include "CsTcpSocket.h"
 #include "CsTcpSocket_Private.h"
-#include "CsSockAddress.h"
+#include "CsSockAddr.h"
 
 CsTcpSocket::CsTcpSocket()
 :CsSocket(new CsTcpSocket_Private(this))

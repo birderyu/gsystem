@@ -1,4 +1,4 @@
-#ifndef _CSCORE_CSMUTEX_PRIVATE_H_
+﻿#ifndef _CSCORE_CSMUTEX_PRIVATE_H_
 #define _CSCORE_CSMUTEX_PRIVATE_H_
 
 #include "CsObject_Private.h"

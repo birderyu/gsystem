@@ -1,4 +1,4 @@
-#ifndef _CSCORE_CSOBJECT_PRIVATE_H_
+﻿#ifndef _CSCORE_CSOBJECT_PRIVATE_H_
 #define _CSCORE_CSOBJECT_PRIVATE_H_
 
 #include "CsGlobal.h"

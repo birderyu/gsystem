@@ -1,7 +1,7 @@
 #include "CsSocket.h"
 #include "CsSocket_Private.h"
-#include "CsSockAddress.h"
-#include "CsSockAddress_Private.h"
+#include "CsSockAddr.h"
+#include "CsSockAddr_Private.h"
 
 CsSocket::CsSocket(CsObject_Private *pPrivate)
 :CsObject(pPrivate)

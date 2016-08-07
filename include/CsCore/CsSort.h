@@ -4,43 +4,43 @@
 #include "CsCoreGlobal.h"
 #include "CsArray.h"
 
-/// ArrTypeĞèÏÂ±ê²Ù×÷ÔªËØµÄ·½·¨
-/// ElemTypeĞèÊµÏÖ¿½±´¹¹ÔìºÍµÈºÅÖØÔØµÄ·½·¨
-/// arr£º´ıÅÅĞòµÄÊı×é
-/// start£º´ıÅÅĞòµÄÊı×éÆğÊ¼Î»ÖÃ
-/// len£º´ıÅÅĞòµÄÊı×é³¤¶È£¬×¢ÒâÊÇ´ÓstartÎ»¿ªÊ¼µÄÊı×é³¤¶È
+/// ArrTypeéœ€ä¸‹æ ‡æ“ä½œå…ƒç´ çš„æ–¹æ³•
+/// ElemTypeéœ€å®ç°æ‹·è´æ„é€ å’Œç­‰å·é‡è½½çš„æ–¹æ³•
+/// arrï¼šå¾…æ’åºçš„æ•°ç»„
+/// startï¼šå¾…æ’åºçš„æ•°ç»„èµ·å§‹ä½ç½®
+/// lenï¼šå¾…æ’åºçš„æ•°ç»„é•¿åº¦ï¼Œæ³¨æ„æ˜¯ä»startä½å¼€å§‹çš„æ•°ç»„é•¿åº¦
 class CsCore_Export CsSort
 {
 public:
-	/// Ã°ÅİÅÅĞò
+	/// å†’æ³¡æ’åº
 	template<typename ArrType, typename ElemType>
 	static void BubbleSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
-	/// ²åÈëÅÅĞò
+	/// æ’å…¥æ’åº
 	template<typename ArrType, typename ElemType>
 	static void InsertSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
-	
-	/// ²åÈëÅÅĞò£¬µİ¹éÊµÏÖ£¨Recursive£©
+
+	/// æ’å…¥æ’åºï¼Œé€’å½’å®ç°ï¼ˆRecursiveï¼‰
 	template<typename ArrType, typename ElemType>
 	static void InsertSort_Recur(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
-	/// Ï£¶ûÅÅĞò
+	/// å¸Œå°”æ’åº
 	template<typename ArrType, typename ElemType>
 	static void ShellSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
-	/// Ñ¡ÔñÅÅĞò
+	/// é€‰æ‹©æ’åº
 	template<typename ArrType, typename ElemType>
 	static void SelectSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
-	/// ¶ÑÅÅĞò£¨Ëã·¨ÓĞÎó£©
+	/// å †æ’åºï¼ˆç®—æ³•æœ‰è¯¯ï¼‰
 	template<typename ArrType, typename ElemType>
 	static void HeapSort(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
-	/// ¹é²¢ÅÅĞò£¨Ëã·¨ÓĞÎó£©
+	/// å½’å¹¶æ’åºï¼ˆç®—æ³•æœ‰è¯¯ï¼‰
 	template<typename ArrType, typename ElemType>
 	static void MergeSort(ArrType &arr, const cs_size_t len);
 
-	/// ¿ìËÙÅÅĞò
+	/// å¿«é€Ÿæ’åº
 	template<typename ArrType, typename ElemType>
 	static void QuickSort(ArrType &arr, const cs_size_t len);
 
@@ -50,11 +50,11 @@ private:
 	template<typename ElemType>
 	static void Swap(ElemType* l, ElemType* r);
 
-	/// ¹¹½¨´ó¸ù¶Ñ
+	/// æ„å»ºå¤§æ ¹å †
 	template<typename ArrType, typename ElemType>
 	static void PercDown(ArrType &arr, const cs_size_t start, const cs_size_t len);
 
-	/// ¹é²¢
+	/// å½’å¹¶
 	template<typename ArrType, typename ElemType>
 	static void Merge(ArrType &arr, const cs_size_t first, const cs_size_t mid, const cs_size_t last);
 
@@ -247,8 +247,8 @@ void CsSort::HeapSort(ArrType &arr, const cs_size_t start, const cs_size_t len)
 template<typename ArrType, typename ElemType>
 void CsSort::Merge(ArrType &arr, const cs_size_t first, const cs_size_t mid, const cs_size_t last)
 {
-	//ÉèÖÃindexA£¬²¢É¨ÃèsubArray1 [first,mid)  
-	//ÉèÖÃindexB,²¢É¨ÃèsubArray2 [mid,last]  
+	//è®¾ç½®indexAï¼Œå¹¶æ‰«æsubArray1 [first,mid)  
+	//è®¾ç½®indexB,å¹¶æ‰«æsubArray2 [mid,last]  
 	cs_size_t inda = first;
 	cs_size_t indb = mid;
 	cs_size_t noe = last - first + 1;//number of elements  
@@ -338,7 +338,7 @@ void CsSort::QuickSorting(ArrType &arr, const cs_size_t first, const cs_size_t l
 	if (first + cutoff < last)
 	{
 		ElemType pivot(Median3<ArrType, ElemType>(arr, first, last));
-		cs_size_t i = first, j = last - 1;//i,j³õÊ¼»¯Îª±ÈËüÃÇµÄÕıÈ·Öµ³¬³ö1.  
+		cs_size_t i = first, j = last - 1;//i,jåˆå§‹åŒ–ä¸ºæ¯”å®ƒä»¬çš„æ­£ç¡®å€¼è¶…å‡º1.  
 		for (;;)
 		{
 			while (arr[++i]<pivot){}

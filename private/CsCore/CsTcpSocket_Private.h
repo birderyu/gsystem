@@ -1,4 +1,4 @@
-#ifndef _CSCORE_CSTCPSOCKET_PRIVATE_H_
+﻿#ifndef _CSCORE_CSTCPSOCKET_PRIVATE_H_
 #define _CSCORE_CSTCPSOCKET_PRIVATE_H_
 
 #include "CsSocket_Private.h"

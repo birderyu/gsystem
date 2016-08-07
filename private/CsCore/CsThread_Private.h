@@ -11,21 +11,21 @@ public:
 	CsThread_Private(CsThread *pPublic);
 	~CsThread_Private();
 
-	/// ´´½¨Ïß³Ì²¢Æô¶¯
+	/// åˆ›å»ºçº¿ç¨‹å¹¶å¯åŠ¨
 	virtual cs_int Start();
 	virtual void Stop(cs_ulong nMsecs);
 
-	/// ÈÃµ±Ç°Ïß³ÌË¯Ãß£¬µ¥Î»£ºÃë
+	/// è®©å½“å‰çº¿ç¨‹ç¡çœ ï¼Œå•ä½ï¼šç§’
 	static void Sleep(cs_ulong nSecs);
 
-	/// ÈÃµ±Ç°Ïß³ÌË¯Ãß£¬µ¥Î»£ººÁÃë
+	/// è®©å½“å‰çº¿ç¨‹ç¡çœ ï¼Œå•ä½ï¼šæ¯«ç§’
 	static void MSleep(cs_ulong nMsecs);
 
-	/// »ØÊÕÖ¸¶¨µÄÏß³Ì
+	/// å›æ”¶æŒ‡å®šçš„çº¿ç¨‹
 	static void Join(CsThread_Private *pThread);
 
 private:
-	/// µ±Ç°Ïß³ÌÌåµÄ¾ä±ú£¬ÔÚ²»Í¬µÄ²Ù×÷ÏµÍ³ÏÂÊ¹ÓÃ²»Í¬µÄ½á¹¹
+	/// å½“å‰çº¿ç¨‹ä½“çš„å¥æŸ„ï¼Œåœ¨ä¸åŒçš„æ“ä½œç³»ç»Ÿä¸‹ä½¿ç”¨ä¸åŒçš„ç»“æ„
 	void *m_pHandle;
 };
 

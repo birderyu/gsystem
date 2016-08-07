@@ -86,7 +86,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\CsCore\CsAStack.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsCList.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsDList.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsLStack.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSort.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsAutoLock.h" />
@@ -94,17 +99,16 @@
     <ClInclude Include="..\..\..\include\CsCore\CsEndian.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsCoreGlobal.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsGlobal.h" />
-    <ClInclude Include="..\..\..\include\CsCore\CsInt32.h" />
-    <ClInclude Include="..\..\..\include\CsCore\CsLink.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsDecimal.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSList.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMath.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMutex.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsObject.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSemaphore.h" />
-    <ClInclude Include="..\..\..\include\CsCore\CsSockAddress.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSockAddr.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSocket.h" />
-    <ClInclude Include="..\..\..\include\CsCore\CsSocket_Private.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsString.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsTable.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsTcpSocket.h" />
@@ -118,7 +122,8 @@
     <ClInclude Include="..\..\..\private\CsCore\CsNumber.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsObject_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsSemaphore_Private.h" />
-    <ClInclude Include="..\..\..\private\CsCore\CsSockAddress_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsSockAddr_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsSocket_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsString_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsTcpSocket_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsThread_Private.h" />
@@ -137,8 +142,8 @@
     <ClCompile Include="..\..\..\source\CsCore\CsObject_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Private_Win32.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSemaphore.cpp" />
-    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress.cpp" />
-    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddr.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddr_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSocket_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsString.cpp" />

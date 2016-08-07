@@ -1,11 +1,9 @@
 #ifndef _SORT_STACK_H_
 #define _SORT_STACK_H_
 
-#include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 
-/// ÓĞĞòÕ»
+/// æœ‰åºæ ˆ
 template <typename T>
 class CSortStack
 {
@@ -18,35 +16,35 @@ public:
 	~CSortStack();
 
 public:
-	/// ·ÖÅäÈİÁ¿
-	/// Ö»·ÖÅäÈİÁ¿£¬³¬³öÓĞĞ§·¶Î§µÄÊı¾İÒÀÈ»ÊÇÎŞĞ§µÄ
+	/// åˆ†é…å®¹é‡
+	/// åªåˆ†é…å®¹é‡ï¼Œè¶…å‡ºæœ‰æ•ˆèŒƒå›´çš„æ•°æ®ä¾ç„¶æ˜¯æ— æ•ˆçš„
 	bool reserve(const size_t len);
 
-	/// ÓĞĞ§Êı¾İµÄ³¤¶È
+	/// æœ‰æ•ˆæ•°æ®çš„é•¿åº¦
 	size_t size() const;
 
-	/// ÈİÁ¿
+	/// å®¹é‡
 	size_t capacity() const;
 
-	/// ÊÇ·ñÎª¿Õ
+	/// æ˜¯å¦ä¸ºç©º
 	bool empty() const;
 
-	/// Çå¿Õ¼ÇÂ¼
+	/// æ¸…ç©ºè®°å½•
 	void clear();
 
-	/// ²åÈëÒ»Ìõ¼ÇÂ¼
+	/// æ’å…¥ä¸€æ¡è®°å½•
 	bool insert(const T &t);
 
-	/// É¾³ıÒ»Ìõ¼ÇÂ¼
+	/// åˆ é™¤ä¸€æ¡è®°å½•
 	bool remove(const T &t);
 
-	/// ¸ù¾İÏÂ±êÉ¾³ıÒ»Ìõ¼ÇÂ¼
+	/// æ ¹æ®ä¸‹æ ‡åˆ é™¤ä¸€æ¡è®°å½•
 	bool removeAt(const size_t id);
 
-	/// ²éÕÒÄ³ÌõÊı¾İ£¬·µ»ØÆäÏÂ±ê£¬·µ»Ø-1±íÊ¾¸ÃÊı¾İ²»´æÔÚ
+	/// æŸ¥æ‰¾æŸæ¡æ•°æ®ï¼Œè¿”å›å…¶ä¸‹æ ‡ï¼Œè¿”å›-1è¡¨ç¤ºè¯¥æ•°æ®ä¸å­˜åœ¨
 	int search(const T &t) const;
 
-	/// È¡Î²¼ÇÂ¼µÄµü´úÆ÷
+	/// å–å°¾è®°å½•çš„è¿­ä»£å™¨
 	inline const_iterator cfind(const T &t) const
 	{
 		int id = search(t);
@@ -57,7 +55,7 @@ public:
 		return at(id);
 	}
 
-	/// È¡³öÊ×¼ÇÂ¼£¬·µ»Ø¸Ã¼ÇÂ¼µÄµü´úÆ÷
+	/// å–å‡ºé¦–è®°å½•ï¼Œè¿”å›è¯¥è®°å½•çš„è¿­ä»£å™¨
 	inline const_iterator pop_front()
 	{
 		if (!valid())
@@ -67,7 +65,7 @@ public:
 		return m_pData + m_nHead++;
 	}
 
-	/// È¡³öÎ²¼ÇÂ¼£¬·µ»Ø¸Ã¼ÇÂ¼µÄµü´úÆ÷
+	/// å–å‡ºå°¾è®°å½•ï¼Œè¿”å›è¯¥è®°å½•çš„è¿­ä»£å™¨
 	inline const_iterator pop_back()
 	{
 		if (!valid())
@@ -77,7 +75,7 @@ public:
 		return m_pData + (m_nTail--) - 1;
 	}
 
-	/// È¡Ê×¼ÇÂ¼µÄµü´úÆ÷
+	/// å–é¦–è®°å½•çš„è¿­ä»£å™¨
 	inline const_iterator cbegin() const
 	{
 		if (!valid())
@@ -87,7 +85,7 @@ public:
 		return m_pData + m_nHead;
 	}
 
-	/// È¡Î²¼ÇÂ¼µÄµü´úÆ÷
+	/// å–å°¾è®°å½•çš„è¿­ä»£å™¨
 	inline const_iterator cend() const
 	{
 		if (!valid())
@@ -97,7 +95,7 @@ public:
 		return m_pData + m_nTail;
 	}
 
-	/// »ñÈ¡Ö¸¶¨Î»ÖÃµÄµü´úÆ÷
+	/// è·å–æŒ‡å®šä½ç½®çš„è¿­ä»£å™¨
 	inline const_iterator at(const size_t id) const
 	{
 		if (!valid())
@@ -107,44 +105,43 @@ public:
 		return m_pData + real_id(id);
 	}
 
-	/// Í¨¹ıÏÂ±ê»ñÈ¡Êı¾İ£¨Ö»¶Á£©
+	/// é€šè¿‡ä¸‹æ ‡è·å–æ•°æ®ï¼ˆåªè¯»ï¼‰
 	inline const T &operator[](const size_t id) const
 	{
-		assert(valid());
 		return *(m_pData + real_id(id));
 	}
 	
 private:
-	/// ·ÖÅäÓĞĞ§Êı¾İ
-	/// Ê¹ÓÃÄ¬ÈÏ¹¹Ôìº¯Êı·ÖÅäÓĞĞ§Êı¾İ£¬·¶Î§ÄÚµÄÊı¾İ¶¼ÊÇÓĞĞ§µÄ
+	/// åˆ†é…æœ‰æ•ˆæ•°æ®
+	/// ä½¿ç”¨é»˜è®¤æ„é€ å‡½æ•°åˆ†é…æœ‰æ•ˆæ•°æ®ï¼ŒèŒƒå›´å†…çš„æ•°æ®éƒ½æ˜¯æœ‰æ•ˆçš„
 	bool resize(const size_t len);
 
-	/// ÊÇ·ñÓĞĞ§
+	/// æ˜¯å¦æœ‰æ•ˆ
 	bool valid() const;
 
-	/// »ñÈ¡²åÈëÊı¾İµÄÎ»ÖÃ
+	/// è·å–æ’å…¥æ•°æ®çš„ä½ç½®
 	size_t insertPos(const T &t) const;
 
-	/// ÔÚÖ¸¶¨Î»ÖÃ²åÈëÒ»ÌõÊı¾İ
+	/// åœ¨æŒ‡å®šä½ç½®æ’å…¥ä¸€æ¡æ•°æ®
 	bool insertAt(const size_t id, const T &t);
 
-	/// ¿½±´²¿·ÖÄÚ´æÖÁpData£¬pDataĞèÒªÊÇÒ»¿éÒÑ¾­·ÖÅäµÄºÏ·¨ÄÚ´æ
+	/// æ‹·è´éƒ¨åˆ†å†…å­˜è‡³pDataï¼ŒpDataéœ€è¦æ˜¯ä¸€å—å·²ç»åˆ†é…çš„åˆæ³•å†…å­˜
 	bool copyPartTo(const size_t start, const size_t len, T *pData) const;
 
-	/// Êµ¼ÊID
+	/// å®é™…ID
 	size_t real_id(const size_t id) const;
 
 private:
-	// ÄÚ´æ¿éÊ×µØÖ·
+	// å†…å­˜å—é¦–åœ°å€
 	T *m_pData;
 
-	// Í·Ö¸Õë£¬Ö¸ÏòÊ×ÔªËØ£¬Ä¬ÈÏÇé¿öÏÂÖ¸Ïò-1
+	// å¤´æŒ‡é’ˆï¼ŒæŒ‡å‘é¦–å…ƒç´ ï¼Œé»˜è®¤æƒ…å†µä¸‹æŒ‡å‘-1
 	int m_nHead; 
 
-	// Î²Ö¸Õë£¬Ö¸ÏòÄ©Î²ÔªËØµÄÏÂÒ»Î»£¬Ä¬ÈÏÇé¿öÏÂÖ¸Ïò-1
+	// å°¾æŒ‡é’ˆï¼ŒæŒ‡å‘æœ«å°¾å…ƒç´ çš„ä¸‹ä¸€ä½ï¼Œé»˜è®¤æƒ…å†µä¸‹æŒ‡å‘-1
 	int m_nTail;
 
-	// ÄÚ´æµÄ³¤¶È
+	// å†…å­˜çš„é•¿åº¦
 	size_t m_nMemSize; 
 };
 
@@ -166,21 +163,21 @@ bool CSortStack<T>::reserve(const size_t len)
 {
 	if (len <= capacity())
 	{
-		// ÎŞĞèÀ©Èİ
+		// æ— éœ€æ‰©å®¹
 		return true;
 	}
 
 	T *pData = (T*)malloc(sizeof(T)* len);
 	if (!pData)
 	{
-		// À©ÈİÊ§°Ü
+		// æ‰©å®¹å¤±è´¥
 		return false;
 	}
 
 	size_t n_size = size();
 	if (m_pData && n_size > 0)
 	{
-		// ±¸·İ¾ÉµÄÊı¾İ£¨Ö»±¸·İÓĞĞ§Êı¾İ£©
+		// å¤‡ä»½æ—§çš„æ•°æ®ï¼ˆåªå¤‡ä»½æœ‰æ•ˆæ•°æ®ï¼‰
 		if (!copyPartTo(m_nHead, n_size, pData))
 		{
 			return false;
@@ -278,11 +275,11 @@ bool CSortStack<T>::removeAt(const size_t id)
 	size_t n_real_id = real_id(id);
 	if (n_real_id < m_nHead || n_real_id >= m_nTail)
 	{
-		// ÎŞĞ§Êı¾İ£¬ÎŞĞèÉ¾³ı
+		// æ— æ•ˆæ•°æ®ï¼Œæ— éœ€åˆ é™¤
 		return true;
 	}
 
-	// Ê×Î²Ö±½ÓÒÆ¶¯Ö¸Õë
+	// é¦–å°¾ç›´æ¥ç§»åŠ¨æŒ‡é’ˆ
 	if (n_real_id == m_nHead)
 	{
 		return pop_front() != NULL;
@@ -292,7 +289,7 @@ bool CSortStack<T>::removeAt(const size_t id)
 		return pop_back() != NULL;
 	}
 
-	// ÆäËûÎ»ÖÃ£¬½«Êı¾İºóÒÆ
+	// å…¶ä»–ä½ç½®ï¼Œå°†æ•°æ®åç§»
 	T bakup(m_pData[n_real_id]);
 	if (!copyPartTo(n_real_id + 1, m_nTail - n_real_id - 1, m_pData + n_real_id))
 	{
@@ -383,10 +380,10 @@ bool CSortStack<T>::insertAt(const size_t id, const T &t)
 	{
 		reserve(capacity() + 1);
 	}
-	size_t n_real_id = real_id(id); // Êµ¼ÊÏÂ±ê£¨m_nHead + id£©
+	size_t n_real_id = real_id(id); // å®é™…ä¸‹æ ‡ï¼ˆm_nHead + idï¼‰
 	if (m_nTail < m_nMemSize)
 	{
-		// ²»ĞèÒª´´½¨ĞÂµÄÄÚ´æ£¬Ö±½ÓºóÒÆ
+		// ä¸éœ€è¦åˆ›å»ºæ–°çš„å†…å­˜ï¼Œç›´æ¥åç§»
 		if (copyPartTo(n_real_id, m_nTail - n_real_id, m_pData + n_real_id + 1))
 		{
 			m_pData[n_real_id] = t;
@@ -395,12 +392,12 @@ bool CSortStack<T>::insertAt(const size_t id, const T &t)
 	}
 	else
 	{
-		// ´´½¨ĞÂµÄÄÚ´æ
-		size_t len = size() + 1; // ĞÂÄÚ´æµÄ³¤¶È£¨m_nTail - m_nHead + 1£©
+		// åˆ›å»ºæ–°çš„å†…å­˜
+		size_t len = size() + 1; // æ–°å†…å­˜çš„é•¿åº¦ï¼ˆm_nTail - m_nHead + 1ï¼‰
 		T *pData = (T*)malloc(sizeof(T)* len);
 		if (!pData)
 		{
-			// ĞÂÄÚ´æ·ÖÅäÊ§°Ü
+			// æ–°å†…å­˜åˆ†é…å¤±è´¥
 			return false;
 		}
 		if (copyPartTo(m_nHead, id, pData))

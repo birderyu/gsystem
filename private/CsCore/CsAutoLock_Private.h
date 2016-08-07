@@ -6,7 +6,7 @@
 class CsAutoLock;
 class CsMutex;
 
-/// ×Ô¶¯Ëø
+/// è‡ªåŠ¨é”
 class CsAutoLock_Private :public CsObject_Private
 {
 public:

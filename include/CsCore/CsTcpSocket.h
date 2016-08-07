@@ -13,14 +13,14 @@ public:
 	cs_int Open(const CsSockAddress &tSockAddr, cs_bool nResue = false);
 	void Close();
 
-	// ·şÎñÆ÷
+	// æœåŠ¡å™¨
 	cs_int Listen(cs_int nBackLog = 16);
 	cs_int Accept(const CsTcpSocket &pPeer);
 
-	// ¿Í»§¶Ë
+	// å®¢æˆ·ç«¯
 	cs_int Connect(const CsSockAddress &tSockAddr);
 
-	// ·¢ËÍ½ÓÊÕ
+	// å‘é€æ¥æ”¶
 	cs_int Send(const void *pBufData, cs_int nDataLen);
 	cs_int Recv(void *pBufData, cs_int nDataLen, cs_int nWaitAll = 0);
 
