@@ -37,4 +37,24 @@
 # define CS_BEGIN_NAMESPACE namespace CSYSTEM {
 # define CS_END_NAMESPACE }
 
+#  ifdef __cplusplus
+#    define CS_DECL_NOTHROW  throw()
+#  endif
+
+#  if defined (CS_CORE_BUILD_DLL)
+#    define CS_CORE_EXPORT CS_DECL_EXPORT
+#  else 
+#    define CS_CORE_EXPORT CS_DECL_IMPORT
+#  endif 
+
+//inline void cs_noop(void) {}
+//CS_CORE_EXPORT void cs_assert(const char *assertion, const char *file, int line) CS_DECL_NOTHROW;
+
+#if defined(_DEBUG)
+#	include <assert.h>  
+#	define CS_ASSERT(e) assert(e)
+#else
+#	define CS_ASSERT(e) do { } while ((false) && (e))
+#endif // 
+
 #endif // _CSCORE_CSDEFINE_H_

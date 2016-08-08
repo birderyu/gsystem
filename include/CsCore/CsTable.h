@@ -29,7 +29,7 @@ private:
 	CsVector<CsTableField*> m_tFields;
 };
 
-class CsCore_Export CsTableCell
+class CS_CORE_EXPORT CsTableCell
 {
 public:
 	CsTableCell();
@@ -41,12 +41,12 @@ private:
 	CsObject *m_pObject;
 };
 
-class CsCore_Export CsTableRow
+class CS_CORE_EXPORT CsTableRow
 {
 
 };
 
-class CsCore_Export CsTable
+class CS_CORE_EXPORT CsTable
 {
 private:
 	CsTableFields m_pFields;

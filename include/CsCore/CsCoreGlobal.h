@@ -3,12 +3,6 @@
 
 #include "CsGlobal.h"
 
-#  if defined (CS_CORE_BUILD_DLL)
-#    define CsCore_Export CS_DECL_EXPORT
-#  else 
-#    define CsCore_Export CS_DECL_IMPORT
-#  endif  
-
 enum EM_CORE_CLASSCODE
 {
 	CORE_CLASSCODE_OBJECT = 0,		// Object

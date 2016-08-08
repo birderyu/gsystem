@@ -6,7 +6,7 @@
 class CsObject_Private;
 class CsString;
 
-class CsCore_Export CsObject
+class CS_CORE_EXPORT CsObject
 {
 public:
 	CsObject();

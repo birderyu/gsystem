@@ -7,7 +7,7 @@
 
 class CsStringList;
 
-class CsCore_Export CsString final :public CsObject
+class CS_CORE_EXPORT CsString final :public CsObject
 {
 public:
 	CsString();
@@ -16,7 +16,7 @@ public:
 	CsString(const CsString &sStr);
 	~CsString();
 
-	friend CsCore_Export CsString operator+(const CsString &s1, const CsString &s2);
+	friend CS_CORE_EXPORT CsString operator+(const CsString &s1, const CsString &s2);
 	CsString &operator=(const CsString &sStr);
 	CsString &operator+=(const CsString &sStr);
 
@@ -28,7 +28,7 @@ public:
 	CsString Trim() const;
 	CsString ToUpper() const;
 	CsString ToLower() const;
-	cs_ccharptr GetCStr() const;
+	cs_cstring GetCStr() const;
 
 	CsObject *CopyToObject() const;
 	cs_uint ClassCode() const;
@@ -43,6 +43,6 @@ public:
 	enum { CLASSCODE = CORE_CLASSCODE_STRING, };
 };
 
-CsCore_Export CsString operator+(const CsString &s1, const CsString &s2);
+CS_CORE_EXPORT CsString operator+(const CsString &s1, const CsString &s2);
 
 #endif // _CSCORE_CSSTRING_H_

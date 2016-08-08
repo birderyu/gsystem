@@ -55,15 +55,15 @@
     <Filter Include="头文件\Algorithm\Structure">
       <UniqueIdentifier>{83ca5347-1b9d-4f77-b41c-c66fc4a31a0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Global">
+      <UniqueIdentifier>{28f440d1-1aad-4501-bca8-0cc244512cf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsString.h">
@@ -150,9 +150,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
       <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\SortStack.h">
-      <Filter>头文件\Algorithm</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsDecimal.h">
       <Filter>头文件\Number</Filter>
     </ClInclude>
@@ -183,12 +180,12 @@
     <ClInclude Include="..\..\..\include\CsCore\CsCList.h">
       <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsObject.h">
+      <Filter>头文件\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsString.cpp">
@@ -256,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsSockAddr.cpp">
       <Filter>源文件\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp">
+      <Filter>源文件\Global</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

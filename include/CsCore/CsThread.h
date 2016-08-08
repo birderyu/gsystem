@@ -15,7 +15,7 @@
 #include "CsObject.h"
 
 /// 线程类
-class CsCore_Export CsThread :public CsObject
+class CS_CORE_EXPORT CsThread :public CsObject
 {
 public:
 	CsThread();

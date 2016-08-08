@@ -47,6 +47,7 @@ template<typename T>
 class CsBTree :public CsObject
 {
 	typedef CsBTreeNode<T> Node;
+	typedef void(*funtype)(const T&);
 
 public:
 	CsBTree(Node *pRoot = NULL);
@@ -76,7 +77,6 @@ public:
 	int IsEmpty() const;
 
 public:
-	typedef void(*funtype)(const T&);
 	void PreOrderTraverse(funtype fVisit) const;
 	void InOrderTraverse(funtype fVisit) const;
 	void PostOrderTraverse(funtype fVisit) const;
@@ -92,7 +92,7 @@ private:
 	void PostOrderTraverse(const Node *pNode, funtype fVisit) const;
 	void GetNodesCount(const Node *pNode, cs_size_t *nCount) const;
 	void GetLeafCount(const Node *pNode, cs_size_t *nCount) const;
-	unsigned int GetDepth(const Node *pNode) const;
+	cs_size_t GetDepth(const Node *pNode) const;
 
 protected:
 	Node *m_pNodeRoot;

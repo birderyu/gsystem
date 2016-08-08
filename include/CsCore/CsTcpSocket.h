@@ -3,7 +3,7 @@
 
 #include "CsSocket.h"
 
-class CsCore_Export CsTcpSocket :public CsSocket
+class CS_CORE_EXPORT CsTcpSocket :public CsSocket
 {
 public:
 	CsTcpSocket();

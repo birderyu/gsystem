@@ -24,7 +24,7 @@ public:
 
 	cs_uint GetSize() const;
 	cs_bool IsEmpty() const;
-	cs_ccharptr GetCStr() const;
+	cs_cstring GetCStr() const;
 
 	void MakeTrim();
 	void MakeUpper();

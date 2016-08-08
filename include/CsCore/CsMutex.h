@@ -5,7 +5,7 @@
 #include "CsObject.h"
 
 /// 互斥锁
-class CsCore_Export CsMutex :public CsObject
+class CS_CORE_EXPORT CsMutex :public CsObject
 {
 public:
 	CsMutex();

@@ -3,7 +3,7 @@
 
 #include "CsCoreGlobal.h"
 
-class CsCore_Export CsEndian
+class CS_CORE_EXPORT CsEndian
 {
 public:
 	/// 将数字转换为大端字节数组

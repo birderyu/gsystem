@@ -6,7 +6,7 @@
 
 class CsString;
 
-class CsCore_Export CsSockAddress :public CsObject
+class CS_CORE_EXPORT CsSockAddress :public CsObject
 {
 	friend class CsSocket;
 	friend class CsTcpSocket;

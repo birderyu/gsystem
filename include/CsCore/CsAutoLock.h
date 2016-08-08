@@ -7,7 +7,7 @@
 class CsMutex;
 
 /// 自动锁
-class CsCore_Export CsAutoLock :public CsObject
+class CS_CORE_EXPORT CsAutoLock :public CsObject
 {
 public:
 	CsAutoLock(CsMutex *pMutex);

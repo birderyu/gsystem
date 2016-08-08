@@ -102,7 +102,7 @@ CsString CsString::ToLower() const
 	return sStr;
 }
 
-cs_ccharptr CsString::GetCStr() const
+cs_cstring CsString::GetCStr() const
 {
 	CS_PRIVATE(CsString);
 	return pPrivate->GetCStr();

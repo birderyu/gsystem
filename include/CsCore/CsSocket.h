@@ -7,7 +7,7 @@
 class CsSocket_Private;
 class CsSockAddress;
 
-class CsCore_Export CsSocket :public CsObject
+class CS_CORE_EXPORT CsSocket :public CsObject
 {
 public:
 	CsSocket(CsObject_Private *pPrivate);

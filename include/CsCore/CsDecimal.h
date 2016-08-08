@@ -4,7 +4,7 @@
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
 
-class CsCore_Export CsDecimal : public CsObject
+class CS_CORE_EXPORT CsDecimal : public CsObject
 {
 public:
 	CsDecimal(const cs_decimal nValue);

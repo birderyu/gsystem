@@ -3,7 +3,7 @@
 
 #include "CsCoreGlobal.h"
 
-class CsCore_Export CsMath
+class CS_CORE_EXPORT CsMath
 {
 public:
 	/// 根号2

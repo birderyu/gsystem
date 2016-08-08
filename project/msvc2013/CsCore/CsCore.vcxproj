@@ -116,7 +116,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsType.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsVector.h" />
-    <ClInclude Include="..\..\..\include\CsCore\SortStack.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsAutoLock_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsMutex_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsNumber.h" />

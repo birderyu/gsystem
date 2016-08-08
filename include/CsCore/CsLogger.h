@@ -3,7 +3,7 @@
 
 #include "CsCoreGlobal.h"
 
-class CsCore_Export CsLogger
+class CS_CORE_EXPORT CsLogger
 {
 
 };

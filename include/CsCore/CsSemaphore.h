@@ -5,7 +5,7 @@
 #include "CsObject.h"
 
 /// 信号量
-class CsCore_Export CsSemaphore :public CsObject
+class CS_CORE_EXPORT CsSemaphore :public CsObject
 {
 public:
 	CsSemaphore(cs_int nInitialValue = 1);

@@ -79,7 +79,7 @@ cs_bool CsString_Private::IsEmpty() const
 	return m_sStr.empty();
 }
 
-cs_ccharptr CsString_Private::GetCStr() const
+cs_cstring CsString_Private::GetCStr() const
 {
 	return m_sStr.c_str();
 }

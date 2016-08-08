@@ -9,7 +9,7 @@
 /// arr：待排序的数组
 /// start：待排序的数组起始位置
 /// len：待排序的数组长度，注意是从start位开始的数组长度
-class CsCore_Export CsSort
+class CS_CORE_EXPORT CsSort
 {
 public:
 	/// 冒泡排序

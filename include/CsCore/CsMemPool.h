@@ -4,7 +4,7 @@
 #include "CsCoreGlobal.h"
 
 class CsMemoryPool;
-class CsCore_Export CsMemoryBlock
+class CS_CORE_EXPORT CsMemoryBlock
 {
 	friend class CsMemoryPool;
 public:
@@ -22,7 +22,7 @@ private:
 	cs_char aData[1];           //用于标记分配单元开始的位置，分配单元从aData的位置开始
 };
 
-class CsCore_Export CsMemoryPool
+class CS_CORE_EXPORT CsMemoryPool
 {
 public:
 	CsMemoryPool(cs_int nUnitSize,
