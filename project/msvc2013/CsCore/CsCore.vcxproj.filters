@@ -183,6 +183,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsObject.h">
       <Filter>头文件\Global</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
+      <Filter>头文件\Algorithm\Structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">

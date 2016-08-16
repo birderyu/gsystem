@@ -17,3 +17,4 @@ bin/CsCore_Testd.exe
 .vscode/.BROWSE.VC.DB
 *.DB-wal
 lib/CsCore_Testd.lib
+*.DB-shm

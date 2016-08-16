@@ -92,6 +92,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsCList.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDList.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsLStack.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSort.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsAutoLock.h" />

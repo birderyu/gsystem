@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////
-/// @brief ¶ş²æÅÅĞòÊ÷£¨binary sort tree£©
+/// @brief äºŒå‰æ’åºæ ‘ï¼ˆbinary sort treeï¼‰
 /// 
-///  ¶ş²æÅÅĞòÊ÷µÄ¶¨Òå¼°ÊµÏÖ
+///  äºŒå‰æ’åºæ ‘çš„å®šä¹‰åŠå®ç°
 /// 
 /// @author  Birderyu
 /// @version 1.0
@@ -23,17 +23,13 @@ public:
 	virtual Node *Insert(const T &data);
 	virtual Node *Delete(const T &data);
 
-private:
+protected:
 	Node *Find(const T &data, Node *p) const;
 	Node *FindMin(Node *p) const;
 	Node *FindMax(Node *p) const;
-	virtual Node *Insert(const T &data, Node *p);//insert data in the proper place which is always a child of a leafnode.  
+	virtual Node *Insert(const T &data, Node *p);
 	virtual Node *Delete(const T &data, Node *p);
 };
-
-/*--------------------------------------------------------------------------------------------
-*public interfaces for core operations
-----------------------------------------------------------------------------------------------*/
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Find(const T &data) const
@@ -65,11 +61,6 @@ inline CsBTreeNode<T>* CsBSTree<T>::Delete(const T &data)
 	return Delete(data, m_pNodeRoot);
 }
 
-
-/*-------------------------------------------------------------------------------------------------
-*real functions implementing core operations
---------------------------------------------------------------------------------------------------*/
-
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Find(const T &data, CsBTreeNode<T> *p) const
 {
@@ -91,8 +82,6 @@ inline CsBTreeNode<T>* CsBSTree<T>::Find(const T &data, CsBTreeNode<T> *p) const
 	}
 }
 
-
-
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::FindMin(CsBTreeNode<T> *p) const
 {
@@ -103,8 +92,6 @@ inline CsBTreeNode<T>* CsBSTree<T>::FindMin(CsBTreeNode<T> *p) const
 	else
 		return FindMin(p->left);
 }
-
-
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::FindMax(CsBTreeNode<T> *p) const
@@ -118,50 +105,46 @@ inline CsBTreeNode<T>* CsBSTree<T>::FindMax(CsBTreeNode<T> *p) const
 }
 
 
-//·µ»ØÖµ£ºÈç¹ûpÎªNULL£¬Ôò·µ»ØÖµÎªĞÂ·ÖÅäÄÚ´æµÄÖ¸Õë£»Èç¹ûp²»ÊÇNULL£¬Ôò·µ»ØÖµ¼´Îªp.  
+//è¿”å›å€¼ï¼šå¦‚æœpä¸ºNULLï¼Œåˆ™è¿”å›å€¼ä¸ºæ–°åˆ†é…å†…å­˜çš„æŒ‡é’ˆï¼›å¦‚æœpä¸æ˜¯NULLï¼Œåˆ™è¿”å›å€¼å³ä¸ºp.  
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Insert(const T &data, CsBTreeNode<T> *p)
 {
-	if (NULL == p)//ÖÕÖ¹Ìõ¼ş¡£Ö»ÄÜ²åÔÚÒ³½ÚµãµÄ×Ó½ÚµãÎ»ÖÃÉÏ¡£  
+	if (NULL == p)//ç»ˆæ­¢æ¡ä»¶ã€‚åªèƒ½æ’åœ¨é¡µèŠ‚ç‚¹çš„å­èŠ‚ç‚¹ä½ç½®ä¸Šã€‚  
 	{
 		try
 		{
-			p = new CsBTreeNode<T>;
+			p = new CsBTreeNode<T>(data, NULL, NULL, NULL);
 		}
 		catch (std::bad_alloc&)
 		{
 			return NULL;
 		}
-
-		p->data = data;
-		p->left = NULL;
-		p->right = NULL;
 		if (NULL == m_pNodeRoot)
 		{
 			m_pNodeRoot = p;
-			m_pNodeRoot->parent = NULL;
 		}
-
 	}
 	else if (data < p->data)
 	{
 		p->left = Insert(data, p->left);
 		if (p->left)
+		{
 			p->left->parent = p;
+		}
 	}
 	else if (data > p->data)
 	{
 		p->right = Insert(data, p->right);
 		if (p->right)
+		{
 			p->right->parent = p;
+		}
 	}
-	// else data is in the tree already, we'll do nothing!  
-
 	return p;
 }
 
-//·µ»ØÖµ£ºÈç¹û½ÚµãpµÄÊı¾İÓëdata²»µÈ£¬Ôò·µ»ØÖµ¼´Îªp;Èç¹ûÏàµÈ£¬µ«ÓĞÁ½¸ö×Ó½Úµã£¬·µ»ØÖµÒ²Îªp£¬ÓĞÒ»¸ö×Ó½Úµã£¬·µ»ØÖµÎª¸Ã×Ó½ÚµãÖ¸Õë£¬  
-//Èç¹ûÎŞ½Úµã£¬·µ»ØÖµNULL¡£  
+//è¿”å›å€¼ï¼šå¦‚æœèŠ‚ç‚¹pçš„æ•°æ®ä¸dataä¸ç­‰ï¼Œåˆ™è¿”å›å€¼å³ä¸ºp;å¦‚æœç›¸ç­‰ï¼Œä½†æœ‰ä¸¤ä¸ªå­èŠ‚ç‚¹ï¼Œè¿”å›å€¼ä¹Ÿä¸ºpï¼Œæœ‰ä¸€ä¸ªå­èŠ‚ç‚¹ï¼Œè¿”å›å€¼ä¸ºè¯¥å­èŠ‚ç‚¹æŒ‡é’ˆï¼Œ  
+//å¦‚æœæ— èŠ‚ç‚¹ï¼Œè¿”å›å€¼NULLã€‚  
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Delete(const T &data, CsBTreeNode<T> *p)
 {

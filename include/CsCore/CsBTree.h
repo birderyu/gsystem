@@ -36,7 +36,7 @@ public:
 	CsBTreeNode<T> *GetRight();
 	CsBTreeNode<T> *GetRight() const;
 
-private:
+protected:
 	T m_tData;
 	CsBTreeNode<T> *m_pParent;
 	CsBTreeNode<T> *m_pLeft;
@@ -84,7 +84,7 @@ public:
 	cs_size_t GetLeafCount() const;
 	cs_size_t GetDepth() const;
 
-private: 
+protected:
 	Node* CloneSubTree(Node *pNode);
 	void DestroySubTree(Node *pNode);
 	void PreOrderTraverse(const Node *pNode, funtype fVisit) const;
