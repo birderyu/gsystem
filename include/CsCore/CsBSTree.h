@@ -15,16 +15,15 @@
 
 template<typename T>
 class CsBSTree : public CsBTree<T>
-{//不需要自行定义构造函数和copying函数，编译器合成的版本工作良好：它们会调用基类和各个数据成员的相应的构造函数和copying函数  
-
-public://public interfaces for core operations  
+{
+public:
 	Node *Find(const T &data) const;
 	Node *FindMin() const;
 	Node *FindMax() const;
 	virtual Node *Insert(const T &data);
 	virtual Node *Delete(const T &data);
 
-private://real functions implementing core operations  
+private:
 	Node *Find(const T &data, Node *p) const;
 	Node *FindMin(Node *p) const;
 	Node *FindMax(Node *p) const;
