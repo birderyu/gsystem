@@ -194,23 +194,26 @@ inline CsBTreeNode<T>* CsBSTree_Private<T>::Delete(const T &data, CsBTreeNode<T>
 	}
 	else
 	{
-		// 查找成功，并且它没有孩子或只有一个孩子
-		CsBTreeNode<T> *pTmp = p;
+		// 查找成功，并且它没有孩子或只有一个孩子（有漏洞）
+		CsBTreeNode<T> *pTmp = p; // 备份
 		if (NULL == p->m_pLeft)
 		{
+			// 没有孩子，或只有右孩子
 			p = p->m_pRight;
 		}
 		else if (NULL == p->m_pRight)
 		{
+			// 只有左孩子
 			p = p->m_pLeft;
 		}
-
 		if (p)
+		{
 			p->m_pParent = pTmp->m_pParent;
-
+		}
 		if (root == pTmp)
+		{
 			root = p;
-
+		}
 		delete pTmp;
 	}
 
