@@ -8,71 +8,96 @@
 /// @date    2016-08-07
 /////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _CSCORE_BINARY_SORT_TREE_H_
-#define _CSCORE_BINARY_SORT_TREE_H_
+#ifndef _CORE_BINARY_SORT_TREE_H_
+#define _CORE_BINARY_SORT_TREE_H_
 
 #include "CsBTree.h"
 
+template<typename T> class CsBSTree_Private;
+
+/// 二叉排序树
 template<typename T>
 class CsBSTree : public CsBTree<T>
 {
 public:
+	virtual ~CsBSTree();
 	Node *Find(const T &data) const;
 	Node *FindMin() const;
 	Node *FindMax() const;
+
+	/// 插入一个数据
+	/// 如果改变了Node的结构，Insert方法需要重新实现
 	virtual Node *Insert(const T &data);
+
+	/// 删除一个数据
 	virtual Node *Delete(const T &data);
 
-protected:
+private:
+	CsBSTree_Private<T> m_tBSTree_Private;
+};
+
+/// 二叉排序树功能实现类
+template<typename T> 
+class CsBSTree_Private
+{
+	friend class CsBSTree<T>;
+private:
+	typedef CsBTreeNode<T> Node;
 	Node *Find(const T &data, Node *p) const;
 	Node *FindMin(Node *p) const;
 	Node *FindMax(Node *p) const;
-	virtual Node *Insert(const T &data, Node *p);
-	virtual Node *Delete(const T &data, Node *p);
+	Node *Insert(const T &data, Node *&p, Node *&root);
+	Node *Delete(const T &data, Node *&p, Node *&root);
 };
+
+template<typename T>
+inline CsBSTree<T>::~CsBSTree()
+{
+
+}
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Find(const T &data) const
 {
-	return Find(data, m_pNodeRoot);
+	return m_tBSTree_Private.Find(data, GetRoot());
 }
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::FindMin() const
 {
-	return FindMin(m_pNodeRoot);
+	return m_tBSTree_Private.FindMin(GetRoot());
 }
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::FindMax() const
 {
-	return FindMax(m_pNodeRoot);
+	return m_tBSTree_Private.FindMax(GetRoot());
 }
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Insert(const T &data)
 {
-	return Insert(data, m_pNodeRoot);
+	return m_tBSTree_Private.Insert(data, GetRoot(), GetRoot());
 }
 
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Delete(const T &data)
 {
-	return Delete(data, m_pNodeRoot);
+	return m_tBSTree_Private.Delete(data, GetRoot(), GetRoot());
 }
 
 template<typename T>
-inline CsBTreeNode<T>* CsBSTree<T>::Find(const T &data, CsBTreeNode<T> *p) const
+inline CsBTreeNode<T>* CsBSTree_Private<T>::Find(const T &data, CsBTreeNode<T> *p) const
 {
 	if (NULL == p)
 	{
 		return NULL;
 	}
-	if (data < p->data)
+	if (data < p->m_tData)
 	{
 		return Find(data, p->m_pLeft);
 	}
-	else if (data > p->data)
+	else if (data > p->m_tData)
 	{
 		return Find(data, p->m_pRight);
 	}
@@ -83,33 +108,33 @@ inline CsBTreeNode<T>* CsBSTree<T>::Find(const T &data, CsBTreeNode<T> *p) const
 }
 
 template<typename T>
-inline CsBTreeNode<T>* CsBSTree<T>::FindMin(CsBTreeNode<T> *p) const
+inline CsBTreeNode<T>* CsBSTree_Private<T>::FindMin(CsBTreeNode<T> *p) const
 {
 	if (NULL == p)
 		return NULL;
-	else if (NULL == p->left)
+	else if (NULL == p->m_pLeft)
 		return p;
 	else
-		return FindMin(p->left);
+		return FindMin(p->m_pLeft);
 }
 
 template<typename T>
-inline CsBTreeNode<T>* CsBSTree<T>::FindMax(CsBTreeNode<T> *p) const
+inline CsBTreeNode<T>* CsBSTree_Private<T>::FindMax(CsBTreeNode<T> *p) const
 {
 	if (NULL == p)
 		return NULL;
-	else if (NULL == p->right)
+	else if (NULL == p->m_pRight)
 		return p;
 	else
-		return FindMax(p->right);
+		return FindMax(p->m_pRight);
 }
 
 
 //返回值：如果p为NULL，则返回值为新分配内存的指针；如果p不是NULL，则返回值即为p.  
 template<typename T>
-inline CsBTreeNode<T>* CsBSTree<T>::Insert(const T &data, CsBTreeNode<T> *p)
+inline CsBTreeNode<T>* CsBSTree_Private<T>::Insert(const T &data, CsBTreeNode<T> *&p, CsBTreeNode<T> *&root)
 {
-	if (NULL == p)//终止条件。只能插在页节点的子节点位置上。  
+	if (NULL == p)
 	{
 		try
 		{
@@ -119,25 +144,25 @@ inline CsBTreeNode<T>* CsBSTree<T>::Insert(const T &data, CsBTreeNode<T> *p)
 		{
 			return NULL;
 		}
-		if (NULL == m_pNodeRoot)
+		if (NULL == root)
 		{
-			m_pNodeRoot = p;
+			root = p;
 		}
 	}
-	else if (data < p->data)
+	else if (data < p->m_tData)
 	{
-		p->left = Insert(data, p->left);
-		if (p->left)
+		p->m_pLeft = Insert(data, p->m_pLeft, root);
+		if (p->m_pLeft)
 		{
-			p->left->parent = p;
+			p->m_pLeft->m_pParent = p;
 		}
 	}
-	else if (data > p->data)
+	else if (data > p->m_tData)
 	{
-		p->right = Insert(data, p->right);
-		if (p->right)
+		p->m_pRight = Insert(data, p->m_pRight, root);
+		if (p->m_pRight)
 		{
-			p->right->parent = p;
+			p->m_pRight->m_pParent = p;
 		}
 	}
 	return p;
@@ -146,39 +171,45 @@ inline CsBTreeNode<T>* CsBSTree<T>::Insert(const T &data, CsBTreeNode<T> *p)
 //返回值：如果节点p的数据与data不等，则返回值即为p;如果相等，但有两个子节点，返回值也为p，有一个子节点，返回值为该子节点指针，  
 //如果无节点，返回值NULL。  
 template<typename T>
-inline CsBTreeNode<T>* CsBSTree<T>::Delete(const T &data, CsBTreeNode<T> *p)
+inline CsBTreeNode<T>* CsBSTree_Private<T>::Delete(const T &data, CsBTreeNode<T> *&p, CsBTreeNode<T> *&root)
 {
 	if (NULL == p)
 	{
 		// Error! data not found!  
 	}
-	else if (data < p->data)
+	else if (data < p->m_tData)
 	{
-		p->left = Delete(data, p->left);
+		p->m_pLeft = Delete(data, p->m_pLeft, root);
 	}
-	else if (data > p->data)
+	else if (data > p->m_tData)
 	{
-		p->right = Delete(data, p->right);
+		p->m_pRight = Delete(data, p->m_pRight, root);
 	}
-	else if (p->left && p->right)   // found it, and it has two children  
+	else if (p->m_pLeft && p->m_pRight) 
 	{
-		CsBTreeNode<T> *pTmp = FindMin(p->right);
-		p->data = pTmp->data;
-		p->right = Delete(p->data, p->right);
+		// 查找成功，并且它有两个孩子
+		CsBTreeNode<T> *pTmp = FindMin(p->m_pRight);
+		p->m_tData = pTmp->m_tData;
+		p->m_pRight = Delete(p->m_tData, p->m_pRight, root);
 	}
-	else    // found it, and it has one or zero children  
+	else
 	{
+		// 查找成功，并且它没有孩子或只有一个孩子
 		CsBTreeNode<T> *pTmp = p;
-		if (NULL == p->left)
-			p = p->right;
-		else if (NULL == p->right)
-			p = p->left;
+		if (NULL == p->m_pLeft)
+		{
+			p = p->m_pRight;
+		}
+		else if (NULL == p->m_pRight)
+		{
+			p = p->m_pLeft;
+		}
 
 		if (p)
-			p->parent = pTmp->parent;
+			p->m_pParent = pTmp->m_pParent;
 
-		if (m_pNodeRoot == pTmp)
-			m_pNodeRoot = p;
+		if (root == pTmp)
+			root = p;
 
 		delete pTmp;
 	}
@@ -186,4 +217,4 @@ inline CsBTreeNode<T>* CsBSTree<T>::Delete(const T &data, CsBTreeNode<T> *p)
 	return p;
 }
 
-#endif // _CSCORE_BINARY_SEARCH_TREE_H_
+#endif // _CORE_BINARY_SORT_TREE_H_

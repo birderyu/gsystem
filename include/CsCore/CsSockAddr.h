@@ -21,7 +21,7 @@ public:
 	void SetPortID(const cs_ushort nPort);
 
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_SOCKET_ADDRESS, };
+	enum { CLASSCODE = CORE_CLASSCODE_SOCKET_ADDR, };
 };
 
 #endif // _CSCORE_CSSOCKET_ADDRESS_H_

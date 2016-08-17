@@ -22,7 +22,7 @@ cs_uint CsMath::Abs(cs_int v)
 	return abs(v);
 }
 
-cs_uint CsMath::Abs(cs_float v)
+cs_float CsMath::Abs(cs_float v)
 {
 	using std::abs;
 	return abs(v);

@@ -1,7 +1,5 @@
-/// 使用数组实现
-
-#ifndef _CSCORE_VECTOR_H_
-#define _CSCORE_VECTOR_H_
+#ifndef _CORE_VECTOR_H_
+#define _CORE_VECTOR_H_
 
 #include "CsArray.h"
 
@@ -220,4 +218,4 @@ size_t RealID(const size_t i) const
 	return m_nHead + i;
 }
 
-#endif // _CSCORE_VECTOR_H_
+#endif // _CORE_VECTOR_H_

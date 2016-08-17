@@ -37,7 +37,7 @@ public:
 
 	/// 取绝对值
 	static cs_uint Abs(cs_int v);
-	static cs_uint Abs(cs_float v);
+	static cs_float Abs(cs_float v);
 	static cs_double Abs(cs_double v);
 	static cs_decimal Abs(cs_decimal v);
 
