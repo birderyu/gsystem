@@ -29,7 +29,7 @@ public:
 	/// 如果改变了Node的结构，Insert方法需要重新实现
 	virtual Node *Insert(const T &data);
 
-	/// 删除一个数据，返回删除数据的节点（这个需求暂未能实现）
+	/// 删除一个数据，返回删除数据的节点（TODO：这个需求暂未能实现）
 	virtual Node *Delete(const T &data);
 
 private:
@@ -47,7 +47,8 @@ private:
 	Node *FindMin(Node *p) const;
 	Node *FindMax(Node *p) const;
 	Node *Insert(const T &data, Node *&p, Node *&root);
-	Node *Delete(const T &data, Node *&p, Node *&root);
+	Node *Delete(const T &data, Node *&p, Node *&root, Node *&node);
+	cs_bool SwitchNode(Node *node1, Node *node2);
 };
 
 template<typename T>
@@ -83,7 +84,9 @@ inline CsBTreeNode<T>* CsBSTree<T>::Insert(const T &data)
 template<typename T>
 inline CsBTreeNode<T>* CsBSTree<T>::Delete(const T &data)
 {
-	return m_tBSTree_Private.Delete(data, GetRoot(), GetRoot());
+	CsBTreeNode<T>* node = NULL;
+	m_tBSTree_Private.Delete(data, GetRoot(), GetRoot(), node);
+	return node;
 }
 
 template<typename T>
@@ -170,53 +173,112 @@ inline CsBTreeNode<T>* CsBSTree_Private<T>::Insert(const T &data, CsBTreeNode<T>
 
 //返回值：如果节点p的数据与data不等，则返回值即为p;如果相等，但有两个子节点，返回值也为p，有一个子节点，返回值为该子节点指针，  
 //如果无节点，返回值NULL。  
+//node为待删除的节点
 template<typename T>
-inline CsBTreeNode<T>* CsBSTree_Private<T>::Delete(const T &data, CsBTreeNode<T> *&p, CsBTreeNode<T> *&root)
+inline CsBTreeNode<T>* CsBSTree_Private<T>::Delete(const T &data, CsBTreeNode<T> *&p, CsBTreeNode<T> *&root, CsBTreeNode<T> *&node)
 {
 	if (NULL == p)
 	{
-		// Error! data not found!  
+		// Error! data not found!
 	}
 	else if (data < p->m_tData)
 	{
-		p->m_pLeft = Delete(data, p->m_pLeft, root);
+		p->m_pLeft = Delete(data, p->m_pLeft, root, node);
 	}
 	else if (data > p->m_tData)
 	{
-		p->m_pRight = Delete(data, p->m_pRight, root);
+		p->m_pRight = Delete(data, p->m_pRight, root, node);
 	}
-	else if (p->m_pLeft && p->m_pRight) 
+	else
 	{
-		// 查找成功，并且它有两个孩子
-		// 注意，这里应该改进为节点（Node*）的替换，而非节点值（Node->Data）的替换，以追求效率
-		CsBTreeNode<T> *pTmp = FindMin(p->m_pRight);
-		p->m_tData = pTmp->m_tData;
-		p->m_pRight = Delete(p->m_tData, p->m_pRight, root);
+		// 查找成功
+		if (p->m_pLeft && p->m_pRight)
+		{
+			// 有两个孩子
+			// 注意为节点（Node*）的调换，而非节点值（Node->Data）的调换，以追求效率，并且避免内存泄露
+			CsBTreeNode<T> *tmp = FindMin(p->m_pRight);
+			SwitchNode(p, tmp);
+			if (root == p)
+			{
+				root = tmp;
+			}
+			p->m_pRight = Delete(data, tmp->m_pRight, root, node);
+		}
+		else
+		{
+			// 查找成功，并且它没有孩子或只有一个孩子
+			node = p;
+			if (NULL == p->m_pLeft)
+			{
+				p = p->m_pRight;
+			}
+			else if (NULL == p->m_pRight)
+			{
+				p = p->m_pLeft;
+			}
+			if (p)
+			{
+				p->m_pParent = node->m_pParent;
+			}
+			if (root == node)
+			{
+				root = p;
+			}
+			// delete pTmp; 交由外界去删除
+		}
 	}
-	else	
+	return p;
+}
+
+template<typename T>
+inline cs_bool CsBSTree_Private<T>::SwitchNode(CsBTreeNode<T> *node1, CsBTreeNode<T> *node2)
+{
+	if (!node1 || !node2)
 	{
-		// 查找成功，并且它没有孩子或只有一个孩子
-		CsBTreeNode<T> *pTmp = p;
-		if (NULL == p->m_pLeft)
+		return false;
+	}
+	if (node1 == node2)
+	{
+		return true;
+	}
+	CsBTreeNode<T> *pnode1 = node1->m_pParent;
+	CsBTreeNode<T> *pnode2 = node2->m_pParent;
+
+	if (pnode1)
+	{
+		if (pnode1->m_pLeft == node1)
 		{
-			p = p->m_pRight;
+			pnode1->m_pLeft = node2;
 		}
-		else if (NULL == p->m_pRight)
+		else
 		{
-			p = p->m_pLeft;
+			pnode1->m_pRight = node2;
 		}
-		if (p)
-		{
-			p->m_pParent = pTmp->m_pParent;
-		}
-		if (root == pTmp)
-		{
-			root = p;
-		}
-		delete pTmp;
 	}
 
-	return p;
+	if (pnode2)
+	{
+		if (pnode2->m_pLeft == node2)
+		{
+			pnode2->m_pLeft = node1;
+		}
+		else
+		{
+			pnode2->m_pRight = node1;
+		}
+	}
+
+	node1->m_pParent = pnode2;
+	node2->m_pParent = pnode1;
+
+	CsBTreeNode<T> *tmp = node1->m_pLeft;
+	node1->m_pLeft = node2->m_pLeft;
+	node2->m_pLeft = tmp;
+
+	tmp = node1->m_pRight;
+	node1->m_pRight = node2->m_pRight;
+	node2->m_pRight = tmp;
+	return true;
 }
 
 #endif // _CORE_BINARY_SORT_TREE_H_

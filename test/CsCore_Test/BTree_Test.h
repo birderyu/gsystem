@@ -11,14 +11,28 @@ void Visit(const T &data)
 
 void TestBTree()
 {
-	CsBTree<cs_int> btree(new CsBTreeNode<cs_int>(0));
-	btree.GetRoot()->m_pLeft = new CsBTreeNode<cs_int>(-2);
-	btree.GetRoot()->m_pRight = new CsBTreeNode<cs_int>(2);
-	btree.GetLeftChild(btree.GetRoot())->m_pLeft = new CsBTreeNode<cs_int>(-3);
-	btree.GetLeftChild(btree.GetRoot())->m_pRight = new CsBTreeNode<cs_int>(-1);
-	btree.GetRightChild(btree.GetRoot())->m_pLeft = new CsBTreeNode<cs_int>(1);
-	btree.GetRightChild(btree.GetRoot())->m_pRight = new CsBTreeNode<cs_int>(3);
+	CsBTreeNode<cs_int> *node_3 = new CsBTreeNode<cs_int>(-3);
+	CsBTreeNode<cs_int> *node_2 = new CsBTreeNode<cs_int>(-2);
+	CsBTreeNode<cs_int> *node_1 = new CsBTreeNode<cs_int>(-1);
+	CsBTreeNode<cs_int> *node0 = new CsBTreeNode<cs_int>(0);
+	CsBTreeNode<cs_int> *node1 = new CsBTreeNode<cs_int>(1);
+	CsBTreeNode<cs_int> *node2 = new CsBTreeNode<cs_int>(2);
+	CsBTreeNode<cs_int> *node3 = new CsBTreeNode<cs_int>(3);
 
+	node0->m_pParent = NULL;
+	node0->m_pLeft = node_2;
+	node0->m_pRight = node2;
+
+	node_2->m_pParent = node2->m_pParent = node0;
+	node_2->m_pLeft = node_3;
+	node_2->m_pRight = node_1;
+
+	node_3->m_pParent = node_1->m_pParent = node_2;
+	node2->m_pLeft = node1;
+	node2->m_pRight = node3;
+	node3->m_pParent = node1->m_pParent = node2;
+
+	CsBTree<cs_int> btree(node0);
 	cs_size_t ncount = btree.GetNodeCount();
 
 	CsBTree<cs_int> btree2;
@@ -29,7 +43,7 @@ void TestBTree()
 	cs_size_t dcount2 = btree2.GetDepth();
 
 	//btree.PreOrderTraverse(Visit);
-	btree2.InOrderTraverse(Visit);
+	btree.InOrderTraverse(Visit);
 	//btree.PostOrderTraverse(Visit);
 
 	int stop = 1;
@@ -40,16 +54,19 @@ void TestBSTree()
 {
 	CsBSTree<cs_int> bstree;
 	bstree.Insert(0);
-	bstree.Insert(-1);
+	bstree.Insert(-2);
 	bstree.Insert(5);
 	bstree.Insert(2);
 	bstree.Insert(-3);
+	bstree.Insert(-1);
 	bstree.InOrderTraverse(Visit);
 
 	CsBSTree<cs_int>::Node *node = bstree.Find(-3);
 	CsBSTree<cs_int>::Node *root1 = bstree.GetRoot();
-	CsBSTree<cs_int>::Node *root2 = bstree.Delete(2);
+	CsBSTree<cs_int>::Node *del = bstree.Delete(0);
+	CsBSTree<cs_int>::Node *root2 = bstree.GetRoot();
 
+	bstree.InOrderTraverse(Visit);
 	int stop = 1;
 	stop++;
 }

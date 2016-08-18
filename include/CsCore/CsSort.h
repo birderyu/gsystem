@@ -25,23 +25,33 @@ public:
 	static void InsertSort(ArrT &arr, const cs_size_t start, const cs_size_t len, const cs_bool bRecur = false);
 
 	/// 希尔排序
-	template<typename ArrT, typename ElemT>
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT = CsLess<ElemT >>
 	static void ShellSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 选择排序
-	template<typename ArrT, typename ElemT>
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT = CsLess<ElemT >>
 	static void SelectSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
-	/// 堆排序（算法有误）
-	template<typename ArrT, typename ElemT>
+	/// 堆排序
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT = CsLess<ElemT >>
 	static void HeapSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 归并排序（算法有误）
-	template<typename ArrT, typename ElemT>
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT = CsLess<ElemT >>
 	static void MergeSort(ArrT &arr, const cs_size_t len);
 
-	/// 快速排序
-	template<typename ArrT, typename ElemT>
+	/// 快速排序（算法有误）
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT = CsLess<ElemT >>
 	static void QuickSort(ArrT &arr, const cs_size_t len);
 };
 
@@ -57,27 +67,40 @@ private:
 		typename CompareT>
 	static void InsertSorting(ArrT &arr, const cs_size_t start, const cs_size_t len, const CompareT &compareF);
 
-	static cs_size_t LeftChild(const cs_size_t i);
+	static cs_size_t LeftChild(const cs_size_t i)
+	{
+		return 2 * i + 1;
+	}
 
 	template<typename ElemT>
 	static void Swap(ElemT* l, ElemT* r);
 
 	/// 构建大根堆
-	template<typename ArrT, typename ElemT>
-	static void PercDown(ArrT &arr, const cs_size_t start, const cs_size_t len);
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT>
+	static void PercDown(ArrT &arr, const cs_size_t start, const cs_size_t len, const CompareT &compareF);
 
 	/// 归并
-	template<typename ArrT, typename ElemT>
-	static void Merge(ArrT &arr, const cs_size_t first, const cs_size_t mid, const cs_size_t last);
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT>
+	static void Merge(ArrT &arr, const cs_size_t first, const cs_size_t mid, const cs_size_t last, const CompareT &compareF);
 
-	template<typename ArrT, typename ElemT>
-	static void MergeSorting(ArrT &arr, const cs_size_t first, const cs_size_t last);
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT >
+	static void MergeSorting(ArrT &arr, const cs_size_t first, const cs_size_t last, const CompareT &compareF);
 
-	template<typename ArrT, typename ElemT>
-	static ElemT Median3(ArrT &arr, const cs_size_t left, const cs_size_t right);
+	template<typename ArrT, 
+		typename ElemT,
+		typename CompareT>
+	static ElemT Median3(ArrT &arr, const cs_size_t left, const cs_size_t right, const CompareT &compareF);
 
-	template<typename ArrT, typename ElemT>
-	static void QuickSorting(ArrT &arr, const cs_size_t first, const cs_size_t last);
+	template<typename ArrT, 
+		typename ElemT, 
+		typename CompareT>
+	static void QuickSorting(ArrT &arr, const cs_size_t first, const cs_size_t last, const CompareT &compareF);
 };
 
 template<typename ArrT, typename ElemT, typename CompareT>
@@ -130,9 +153,10 @@ void CsSort::InsertSort(ArrT &arr, const cs_size_t start, const cs_size_t len, c
 	}
 }
 
-template<typename ArrT, typename ElemT>
+template<typename ArrT, typename ElemT, typename CompareT>
 void CsSort::ShellSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 {
+	CompareT compareF;
 	cs_size_t i, j;
 	for (cs_size_t inc = len / 2; inc > 0; inc /= 2)
 	{
@@ -141,7 +165,7 @@ void CsSort::ShellSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 			ElemT tmp(arr[i + start]);
 			for (j = i; j >= inc; j -= inc)
 			{
-				if (tmp < arr[j + start - inc])
+				if (compareF(tmp, arr[j + start - inc]))
 				{
 					arr[j + start] = arr[j + start - inc];
 				}
@@ -155,9 +179,10 @@ void CsSort::ShellSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 	}
 }
 
-template<typename ArrT, typename ElemT>
+template<typename ArrT, typename ElemT, typename CompareT>
 void CsSort::SelectSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 {
+	CompareT compareF;
 	cs_size_t index;
 	for (cs_size_t i = 0; i < len - 1; ++i)
 	{
@@ -165,7 +190,7 @@ void CsSort::SelectSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 		index = i;
 		for (cs_size_t j = i + 1; j < len; ++j)
 		{
-			if (arr[j + start] < tmp)
+			if (compareF(arr[j + start], tmp))
 			{
 				index = j;
 				tmp = arr[j + start];
@@ -179,31 +204,34 @@ void CsSort::SelectSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 	}
 }
 
-template<typename ArrT, typename ElemT>
+template<typename ArrT, typename ElemT, typename CompareT>
 void CsSort::HeapSort(ArrT &arr, const cs_size_t start, const cs_size_t len)
 {
+	CompareT compareF;
 	for (cs_int i = len / 2; i >= 0; --i)
 	{
-		CsSort_Private::PercDown<ArrT, ElemT>(arr, i + start, len);
+		CsSort_Private::PercDown<ArrT, ElemT, CompareT>(arr, i + start, len, compareF);
 	}
 
 	for (cs_size_t i = len - 1; i > 0; --i)
 	{
 		CsSort_Private::Swap<ElemT>(&arr[start], &arr[i + start]);
-		CsSort_Private::PercDown<ArrT, ElemT>(arr, start, i);
+		CsSort_Private::PercDown<ArrT, ElemT, CompareT>(arr, start, i, compareF);
 	}
 }
 
-template<typename ArrT, typename ElemT>
+template<typename ArrT, typename ElemT, typename CompareT>
 void CsSort::MergeSort(ArrT &arr, const cs_size_t len)
 {
-	CsSort_Private::MergeSorting<ArrT, ElemT>(arr, 0, len - 1);
+	CompareT compareF;
+	CsSort_Private::MergeSorting<ArrT, ElemT, CompareT>(arr, 0, len - 1, compareF);
 }
 
-template<typename ArrT, typename ElemT>
+template<typename ArrT, typename ElemT, typename CompareT>
 void CsSort::QuickSort(ArrT &arr, const cs_size_t len)
 {
-	CsSort_Private::QuickSorting<ArrT, ElemT>(arr, 0, len - 1);
+	CompareT compareF;
+	CsSort_Private::QuickSorting<ArrT, ElemT, CompareT>(arr, 0, len - 1, compareF);
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
@@ -237,19 +265,19 @@ void CsSort_Private::Swap(ElemT* l, ElemT* r)
 	*r = tmp;
 }
 
-template<typename ArrT, typename ElemT>
-void CsSort_Private::PercDown(ArrT &arr, const cs_size_t start, const cs_size_t len)
+template<typename ArrT, typename ElemT, typename CompareT>
+void CsSort_Private::PercDown(ArrT &arr, const cs_size_t start, const cs_size_t len, const CompareT &compareF)
 {
 	ElemT tmp(arr[start]);
 	cs_size_t j, nc;
 	for (j = start; LeftChild(j) < len; j = nc)
 	{
 		nc = LeftChild(j);
-		if (nc < len - 1 && arr[nc + 1] > arr[nc])
+		if (nc < len - 1 && compareF(arr[nc], arr[nc + 1]))
 		{
 			nc++;
 		}
-		if (tmp < arr[nc])
+		if (compareF(tmp, arr[nc]))
 		{
 			arr[j] = arr[nc];
 		}
@@ -261,8 +289,8 @@ void CsSort_Private::PercDown(ArrT &arr, const cs_size_t start, const cs_size_t 
 	arr[j] = tmp;
 }
 
-template<typename ArrT, typename ElemT>
-void CsSort_Private::Merge(ArrT &arr, const cs_size_t first, const cs_size_t mid, const cs_size_t last)
+template<typename ArrT, typename ElemT, typename CompareT>
+void CsSort_Private::Merge(ArrT &arr, const cs_size_t first, const cs_size_t mid, const cs_size_t last, const CompareT &compareF)
 {
 	//设置indexA，并扫描subArray1 [first,mid)  
 	//设置indexB,并扫描subArray2 [mid,last]  
@@ -276,7 +304,7 @@ void CsSort_Private::Merge(ArrT &arr, const cs_size_t first, const cs_size_t mid
 	//main loop  
 	while (inda < mid && indb <= last)
 	{
-		if (arr[inda] <= arr[indb])
+		if (compareF(arr[inda], arr[indb]))
 		{
 			tmparr[indtmp++] = arr[inda++];
 		}
@@ -310,31 +338,31 @@ void CsSort_Private::Merge(ArrT &arr, const cs_size_t first, const cs_size_t mid
 	free(tmparr);
 }
 
-template<typename ArrT, typename ElemT>
-void CsSort_Private::MergeSorting(ArrT &arr, const cs_size_t first, const cs_size_t last)
+template<typename ArrT, typename ElemT, typename CompareT>
+void CsSort_Private::MergeSorting(ArrT &arr, const cs_size_t first, const cs_size_t last, const CompareT &compareF)
 {
 	if (first < last - 1)
 	{
 		cs_size_t mid = (first + last) / 2;
-		MergeSorting<ArrT, ElemT>(arr, first, mid - 1);
-		MergeSorting<ArrT, ElemT>(arr, mid, last);
-		Merge<ArrT, ElemT>(arr, first, mid, last);
+		MergeSorting<ArrT, ElemT, CompareT>(arr, first, mid - 1, compareF);
+		MergeSorting<ArrT, ElemT, CompareT>(arr, mid, last, compareF);
+		Merge<ArrT, ElemT, CompareT>(arr, first, mid, last, compareF);
 	}
 }
 
-template<typename ArrT, typename ElemT>
-ElemT CsSort_Private::Median3(ArrT &arr, const cs_size_t left, const cs_size_t right)
+template<typename ArrT, typename ElemT, typename CompareT>
+ElemT CsSort_Private::Median3(ArrT &arr, const cs_size_t left, const cs_size_t right, const CompareT &compareF)
 {
 	cs_size_t mid = (left + right) / 2;
-	if (arr[left] > arr[mid])
+	if (compareF(arr[mid], arr[left]))
 	{
 		Swap<ElemT>(&arr[left], &arr[right]);
 	}
-	if (arr[left] > arr[right])
+	if (compareF(arr[right], arr[left]))
 	{
 		Swap<ElemT>(&arr[left], &arr[right]);
 	}
-	if (arr[mid] > arr[right])
+	if (compareF(arr[right], arr[mid]))
 	{
 		Swap<ElemT>(&arr[mid], &arr[right]);
 	}
@@ -342,18 +370,18 @@ ElemT CsSort_Private::Median3(ArrT &arr, const cs_size_t left, const cs_size_t r
 	return arr[right - 1];
 }
 
-template<typename ArrT, typename ElemT>
-void CsSort_Private::QuickSorting(ArrT &arr, const cs_size_t first, const cs_size_t last)
+template<typename ArrT, typename ElemT, typename CompareT>
+void CsSort_Private::QuickSorting(ArrT &arr, const cs_size_t first, const cs_size_t last, const CompareT &compareF)
 {
 	const cs_size_t cutoff = 3;
 	if (first + cutoff < last)
 	{
-		ElemT pivot(Median3<ArrT, ElemT>(arr, first, last));
+		ElemT pivot(Median3<ArrT, ElemT, CompareT>(arr, first, last, compareF));
 		cs_size_t i = first, j = last - 1;//i,j初始化为比它们的正确值超出1.  
 		for (;;)
 		{
-			while (arr[++i]<pivot){}
-			while (arr[--j]>pivot){}
+			while (compareF(arr[++i], pivot)){}
+			while (compareF(arr[--j], pivot)){}
 			if (i < j)
 			{
 				Swap<ElemT>(&arr[i], &arr[j]);
@@ -365,12 +393,12 @@ void CsSort_Private::QuickSorting(ArrT &arr, const cs_size_t first, const cs_siz
 		}
 		//restore pivot  
 		Swap<ElemT>(&arr[i], &arr[last - 1]);
-		QuickSorting<ArrT, ElemT>(arr, first, i - 1);
-		QuickSorting<ArrT, ElemT>(arr, i + 1, last);
+		QuickSorting<ArrT, ElemT, CompareT>(arr, first, i - 1, compareF);
+		QuickSorting<ArrT, ElemT, CompareT>(arr, i + 1, last, compareF);
 	}
 	else
 	{
-		InsertSort<ArrT, ElemT>(arr, first, last - first + 1);
+		CsSort::InsertSort<ArrT, ElemT, CompareT>(arr, first, last - first + 1);
 	}
 }
 

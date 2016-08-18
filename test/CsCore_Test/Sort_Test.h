@@ -13,13 +13,18 @@ struct CsMore
 
 void TestInsertSort()
 {
-	CsArray<cs_int> arr(5);
+	CsArray<cs_int> arr(10);
 	arr[0] = 5;
 	arr[1] = 3;
 	arr[2] = 9;
 	arr[3] = 8;
 	arr[4] = 1;
-	CsSort::InsertSort<CsArray<cs_int>, cs_int, CsMore<cs_int>>(arr, 0, 5, true);
+	arr[5] = 1200;
+	arr[6] = -51;
+	arr[7] = 12;
+	arr[8] = 4;
+	arr[9] = 2;
+	CsSort::QuickSort<CsArray<cs_int>, cs_int>(arr/*, 0*/, arr.Length());
 	for (cs_size_t i = 0; i < arr.Length(); i++)
 	{
 		std::cout << arr[i] << std::endl;
