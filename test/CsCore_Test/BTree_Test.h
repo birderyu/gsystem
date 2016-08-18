@@ -47,7 +47,8 @@ void TestBSTree()
 	bstree.InOrderTraverse(Visit);
 
 	CsBSTree<cs_int>::Node *node = bstree.Find(-3);
-	CsBSTree<cs_int>::Node *root = bstree.Delete(2);
+	CsBSTree<cs_int>::Node *root1 = bstree.GetRoot();
+	CsBSTree<cs_int>::Node *root2 = bstree.Delete(2);
 
 	int stop = 1;
 	stop++;

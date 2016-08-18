@@ -83,7 +83,7 @@ public:
 	cs_size_t GetDepth() const;
 
 private:
-	Node *m_pNodeRoot;
+	Node *m_pRoot;
 	CsBTree_Private<T> m_tBTree_Private;
 };
 
@@ -155,14 +155,14 @@ CsBTreeNode<T> *CsBTreeNode<T>::Copy() const
 
 template<typename T>
 inline CsBTree<T>::CsBTree(CsBTreeNode<T> *pRoot)
-: m_pNodeRoot(pRoot)
+: m_pRoot(pRoot)
 {
 	
 }
 
 template<typename T>
 inline CsBTree<T>::CsBTree(const CsBTree<T> &tTree) 
-: m_pNodeRoot(NULL)
+: m_pRoot(NULL)
 {
 	Clone(tTree);
 }
@@ -177,11 +177,11 @@ template<typename T>
 inline void CsBTree<T>::Attach(CsBTreeNode<T> *pNode)
 {
 	CS_ASSERT(pNode);
-	if (m_pNodeRoot != NULL)
+	if (m_pRoot != NULL)
 	{
 		Destroy();
 	}
-	m_pNodeRoot = pNode;
+	m_pRoot = pNode;
 }
 
 template<typename T>
@@ -198,25 +198,25 @@ inline void CsBTree<T>::Clone(const CsBTree<T> &tTree)
 	{
 		return;
 	}
-	if (m_pNodeRoot != NULL)
+	if (m_pRoot != NULL)
 	{
 		Destroy();
 	}
-	if (NULL != tTree.m_pNodeRoot)
+	if (NULL != tTree.m_pRoot)
 	{
-		m_pNodeRoot = tTree.m_pNodeRoot->Copy();
+		m_pRoot = tTree.m_pRoot->Copy();
 	}
 	else
 	{
-		m_pNodeRoot = NULL;
+		m_pRoot = NULL;
 	}
 }
 
 template<typename T>
 inline void CsBTree<T>::Destroy()
 {
-	m_tBTree_Private.DestroySubTree(m_pNodeRoot);
-	m_pNodeRoot = NULL;
+	m_tBTree_Private.DestroySubTree(m_pRoot);
+	m_pRoot = NULL;
 }
 
 template<typename T>
@@ -329,44 +329,44 @@ inline void CsBTree<T>::SetNodeData(CsBTreeNode<T> *p, const T &data)
 template<typename T>
 inline cs_bool CsBTree<T>::IsEmpty() const
 {
-	return NULL == m_pNodeRoot;
+	return NULL == m_pRoot;
 }
 
 template<typename T>
 inline CsBTreeNode<T>*& CsBTree<T>::GetRoot()
 {
-	return *(&(m_pNodeRoot));
+	return *(&(m_pRoot));
 }
 
 template<typename T>
 inline CsBTreeNode<T>* CsBTree<T>::GetRoot() const
 {
-	return m_pNodeRoot;
+	return m_pRoot;
 }
 
 template<typename T>
 inline void CsBTree<T>::PreOrderTraverse(funtype fVisit) const
 {
-	m_tBTree_Private.PreOrderTraverse(m_pNodeRoot, fVisit);
+	m_tBTree_Private.PreOrderTraverse(m_pRoot, fVisit);
 }
 
 template<typename T>
 inline void CsBTree<T>::InOrderTraverse(funtype fVisit) const
 {
-	m_tBTree_Private.InOrderTraverse(m_pNodeRoot, fVisit);
+	m_tBTree_Private.InOrderTraverse(m_pRoot, fVisit);
 }
 
 template<typename T>
 inline void CsBTree<T>::PostOrderTraverse(funtype fVisit) const
 {
-	m_tBTree_Private.PostOrderTraverse(m_pNodeRoot, fVisit);
+	m_tBTree_Private.PostOrderTraverse(m_pRoot, fVisit);
 }
 
 template<typename T>
 inline cs_size_t CsBTree<T>::GetNodeCount() const
 {
 	cs_size_t unCount = 0;
-	m_tBTree_Private.GetNodeCount(m_pNodeRoot, &unCount);
+	m_tBTree_Private.GetNodeCount(m_pRoot, &unCount);
 	return unCount;
 }
 
@@ -374,7 +374,7 @@ template<typename T>
 inline cs_size_t CsBTree<T>::GetLeafCount() const
 {
 	cs_size_t unCount = 0;
-	m_tBTree_Private.GetLeafCount(m_pNodeRoot, &unCount);
+	m_tBTree_Private.GetLeafCount(m_pRoot, &unCount);
 	return unCount;
 }
 
@@ -383,7 +383,7 @@ inline unsigned int CsBTree<T>::GetDepth() const
 {
 	// Minus 1 here because I think the root node's depth should be 0.  
 	// So, don't do it if u think the root node's depth should be 1.  
-	return m_tBTree_Private.GetDepth(m_pNodeRoot) - 1;
+	return m_tBTree_Private.GetDepth(m_pRoot) - 1;
 }
 
 template<typename T>

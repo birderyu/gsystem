@@ -1,61 +1,69 @@
-#ifndef _CSCORE_SINGLE_LINK_H_
-#define _CSCORE_SINGLE_LINK_H_
+/////////////////////////////////////////////////////////////////////////////////
+/// @brief 单向链表（single linked list）
+/// 
+///  单向链表的定义及实现
+/// 
+/// @author  Birderyu
+/// @version 1.0
+/// @date    2016-08-07
+/////////////////////////////////////////////////////////////////////////////////
 
-#include <assert.h>  
-#include <crtdbg.h>  
+#ifndef _CORE_SINGLE_LINKED_LIST_H_
+#define _CORE_SINGLE_LINKED_LIST_H_
+
+#include "CsObject.h"
 
 template<typename T>
 class CsSList;
 
 template<typename T>
-class CsSListNode
+struct CsSListNode :public CsObject
 {
-	friend class CsSList<T>;
-public:
-	T data;
-	CsSListNode<T> *next;
-	CsSListNode() : data(T()), next(NULL) {}
-	CsSListNode(const T &initdata) : data(initdata), next(NULL) {}
-	CsSListNode(const T &initdata, CsSListNode<T> *p) : data(initdata), next(p) {}
+	T m_tData;
+	CsSListNode<T> *m_pNext;
+	CsSListNode() : m_tData(T()), m_pNext(NULL) {}
+	CsSListNode(const T &data) : m_tData(data), m_pNext(NULL) {}
+	CsSListNode(const T &data, CsSListNode<T> *next) : m_tData(data), m_pNext(next) {}
 };
 
 template<typename T>
-class CsSList
+class CsSList :public CsObject
 {
+public:
 	typedef CsSListNode<T> Node;
 
 public:
 	CsSList();
-	CsSList(const T &initdata);
+	CsSList(const T &data);
 	CsSList(const CsSList<T>& other);
 	CsSList<T>& operator=(const CsSList<T>& other);
-	~CsSList();
+	virtual ~CsSList();
 
 public:
-	void    Invert();
-	int     IsEmpty() const;
-	int     GetCount() const;
-	int     InsertBefore(const int pos, const T data);
-	int     InsertAfter(const int pos, const T data);
-	int     AddHead(const T data);
-	int     AddTail(const T data);
-	void    RemoveAt(const int pos);
-	void    RemoveHead();
-	void    RemoveTail();
-	void    RemoveAll();
-	T&      GetTail();
-	T       GetTail() const;
-	T&      GetHead();
-	T       GetHead() const;
-	T&      GetAt(const int pos);
-	T       GetAt(const int pos) const;
-	void    SetAt(const int pos, T data);
-	int     Find(const T data) const;
-	int     FindCircle() const;
-	int     FindCross(CsSList& testlist);
+	void Invert();
+	cs_int IsEmpty() const;
+	cs_int GetCount() const;
+	cs_int InsertBefore(const cs_int pos, const T data);
+	cs_int InsertAfter(const cs_int pos, const T data);
+	cs_int AddHead(const T data);
+	cs_int AddTail(const T data);
+	virtual void RemoveAt(const cs_int pos);
+	void RemoveHead();
+	void RemoveTail();
+	void RemoveAll();
+	T& GetTail();
+	T  GetTail() const;
+	T& GetHead();
+	T  GetHead() const;
+	T& GetAt(const int pos);
+	T  GetAt(const int pos) const;
+	void SetAt(const int pos, T data);
+	cs_int Find(const T data) const;
+	cs_int FindCircle() const;
+	cs_int FindCross(CsSList& testlist);
 
 protected:
-	int m_nCount;
+	cs_size_t m_nCount;
 	Node *m_pNodeHead;
 };
 
@@ -125,8 +133,8 @@ inline void CsSList<T>::Invert()
 	preNod = NULL;
 	for (int i = 1; i <= m_nCount; i++)
 	{
-		nextNod = curNod->next;
-		curNod->next = preNod;
+		nextNod = curNod->m_pNext;
+		curNod->m_pNext = preNod;
 		preNod = curNod;
 		curNod = nextNod;
 	}
@@ -190,12 +198,12 @@ inline int CsSList<T>::InsertBefore(const int pos, const T data)
 		return nRetPos;
 	}
 
-	pNewNode->data = data;
+	pNewNode->m_tData = data;
 
 	// if the list is empty, replace the head node with the new node.  
 	if (NULL == m_pNodeHead)
 	{
-		pNewNode->next = NULL;
+		pNewNode->m_pNext = NULL;
 		m_pNodeHead = pNewNode;
 		nRetPos = 1;
 		++m_nCount;
@@ -208,7 +216,7 @@ inline int CsSList<T>::InsertBefore(const int pos, const T data)
 	// insert before head node?  
 	if (1 == pos)
 	{
-		pNewNode->next = m_pNodeHead;
+		pNewNode->m_pNext = m_pNodeHead;
 		m_pNodeHead = pNewNode;
 		nRetPos = 1;
 		++m_nCount;
@@ -221,10 +229,10 @@ inline int CsSList<T>::InsertBefore(const int pos, const T data)
 	for (i = 1; i < pos; ++i)
 	{
 		pTmpNode2 = pTmpNode1;
-		pTmpNode1 = pTmpNode1->next;
+		pTmpNode1 = pTmpNode1->m_pNext;
 	}
-	pNewNode->next = pTmpNode1;
-	pTmpNode2->next = pNewNode;
+	pNewNode->m_pNext = pTmpNode1;
+	pTmpNode2->m_pNext = pNewNode;
 
 	nRetPos = pos;
 	++m_nCount;
@@ -250,12 +258,12 @@ inline int CsSList<T>::InsertAfter(const int pos, const T data)
 		return nRetPos;
 	}
 
-	pNewNode->data = data;
+	pNewNode->m_tData = data;
 
 	// if the list is empty, replace the head node with the new node.  
 	if (NULL == m_pNodeHead)
 	{
-		pNewNode->next = NULL;
+		pNewNode->m_pNext = NULL;
 		m_pNodeHead = pNewNode;
 		nRetPos = 1;
 		++m_nCount;
@@ -270,10 +278,10 @@ inline int CsSList<T>::InsertAfter(const int pos, const T data)
 	pTmpNode = m_pNodeHead;
 	for (i = 1; i < pos; ++i)
 	{
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
-	pNewNode->next = pTmpNode->next;
-	pTmpNode->next = pNewNode;
+	pNewNode->m_pNext = pTmpNode->m_pNext;
+	pTmpNode->m_pNext = pNewNode;
 
 	nRetPos = pos + 1;
 	++m_nCount;
@@ -311,9 +319,9 @@ inline void CsSList<T>::RemoveAt(const int pos)
 		// we will get the previous node of the target node after  
 		// the for loop finished, and it would be stored into pTmpNode2  
 		pTmpNode2 = pTmpNode1;
-		pTmpNode1 = pTmpNode1->next;
+		pTmpNode1 = pTmpNode1->m_pNext;
 	}
-	pTmpNode2->next = pTmpNode1->next;
+	pTmpNode2->m_pNext = pTmpNode1->m_pNext;
 	delete pTmpNode1;
 	--m_nCount;
 }
@@ -367,10 +375,10 @@ inline T& CsSList<T>::GetTail()
 	nCount = m_nCount;
 	for (i = 1; i < nCount; ++i)
 	{
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
 
-	return pTmpNode->data;
+	return pTmpNode->m_tData;
 }
 
 template<typename T>
@@ -385,10 +393,10 @@ inline T CsSList<T>::GetTail() const
 	nCount = m_nCount;
 	for (i = 1; i < nCount; ++i)
 	{
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
 
-	return pTmpNode->data;
+	return pTmpNode->m_tData;
 }
 
 template<typename T>
@@ -415,10 +423,10 @@ inline T& CsSList<T>::GetAt(const int pos)
 
 	for (i = 1; i < pos; ++i)
 	{
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
 
-	return pTmpNode->data;
+	return pTmpNode->m_tData;
 }
 
 template<typename T>
@@ -431,10 +439,10 @@ inline T CsSList<T>::GetAt(const int pos) const
 
 	for (i = 1; i < pos; ++i)
 	{
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
 
-	return pTmpNode->data;
+	return pTmpNode->m_tData;
 }
 
 template<typename T>
@@ -447,9 +455,9 @@ inline void CsSList<T>::SetAt(const int pos, T data)
 
 	for (i = 1; i < pos; ++i)
 	{
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
-	pTmpNode->data = data;
+	pTmpNode->m_tData = data;
 }
 
 template<typename T>
@@ -462,9 +470,9 @@ inline int CsSList<T>::Find(const T data) const
 	nCount = m_nCount;
 	for (i = 0; i < nCount; ++i)
 	{
-		if (data == pTmpNode->data)
+		if (data == pTmpNode->m_tData)
 			return i + 1;
-		pTmpNode = pTmpNode->next;
+		pTmpNode = pTmpNode->m_pNext;
 	}
 
 	return 0;
@@ -484,10 +492,10 @@ inline int CsSList<T>::FindCircle() const
 
 	/*判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。*/
 	do{
-		if (p1 != NULL&&p2 != NULL&&p2->next != NULL)
+		if (p1 != NULL&&p2 != NULL&&p2->m_pNext != NULL)
 		{
-			p1 = p1->next;
-			p2 = p2->next->next;
+			p1 = p1->m_pNext;
+			p2 = p2->m_pNext->next;
 		}
 		else
 			return 0;
@@ -497,8 +505,8 @@ inline int CsSList<T>::FindCircle() const
 	p2 = m_pNodeHead;
 	while (p1 != p2)
 	{
-		p1 = p1->next;
-		p2 = p2->next;
+		p1 = p1->m_pNext;
+		p2 = p2->m_pNext;
 	}
 
 	int i;
@@ -506,7 +514,7 @@ inline int CsSList<T>::FindCircle() const
 	for (i = 1; i <= m_nCount; i++)
 	{
 		if (p1 == p2) break;
-		p2 = p2->next;
+		p2 = p2->m_pNext;
 	}
 	return i;
 
@@ -531,7 +539,7 @@ inline int CsSList<T>::FindCross(CsSList& testlist)
 	CsSListNode<T>* pTail = m_pNodeHead;
 	for (int i = 1; i<m_nCount; i++)
 	{
-		pTail = pTail->next;
+		pTail = pTail->m_pNext;
 	}
 
 	pTail = testlist.m_pNodeHead;
@@ -544,4 +552,4 @@ inline int CsSList<T>::FindCross(CsSList& testlist)
 	return i;
 }
 
-#endif // _CSCORE_SINGLE_LINK_H_
+#endif // _CORE_SINGLE_LINKED_LIST_H_

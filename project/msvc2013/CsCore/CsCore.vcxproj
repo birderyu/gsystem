@@ -114,6 +114,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsString.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsTable.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsTcpSocket.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsTemplate.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsThread.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsType.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="..\..\..\source\CsCore\CsSockAddr_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSocket_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsSort.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsString.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsString_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsTcpSocket.cpp" />

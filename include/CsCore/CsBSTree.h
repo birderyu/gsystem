@@ -25,11 +25,11 @@ public:
 	Node *FindMin() const;
 	Node *FindMax() const;
 
-	/// 插入一个数据
+	/// 插入一个数据，返回插入数据的节点
 	/// 如果改变了Node的结构，Insert方法需要重新实现
 	virtual Node *Insert(const T &data);
 
-	/// 删除一个数据
+	/// 删除一个数据，返回删除数据的节点（这个需求暂未能实现）
 	virtual Node *Delete(const T &data);
 
 private:
@@ -188,22 +188,21 @@ inline CsBTreeNode<T>* CsBSTree_Private<T>::Delete(const T &data, CsBTreeNode<T>
 	else if (p->m_pLeft && p->m_pRight) 
 	{
 		// 查找成功，并且它有两个孩子
+		// 注意，这里应该改进为节点（Node*）的替换，而非节点值（Node->Data）的替换，以追求效率
 		CsBTreeNode<T> *pTmp = FindMin(p->m_pRight);
 		p->m_tData = pTmp->m_tData;
 		p->m_pRight = Delete(p->m_tData, p->m_pRight, root);
 	}
-	else
+	else	
 	{
-		// 查找成功，并且它没有孩子或只有一个孩子（有漏洞）
-		CsBTreeNode<T> *pTmp = p; // 备份
+		// 查找成功，并且它没有孩子或只有一个孩子
+		CsBTreeNode<T> *pTmp = p;
 		if (NULL == p->m_pLeft)
 		{
-			// 没有孩子，或只有右孩子
 			p = p->m_pRight;
 		}
 		else if (NULL == p->m_pRight)
 		{
-			// 只有左孩子
 			p = p->m_pLeft;
 		}
 		if (p)

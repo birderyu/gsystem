@@ -1,5 +1,5 @@
-#ifndef _CSCORE_TYPE_H_
-#define _CSCORE_TYPE_H_
+#ifndef _CORE_TYPE_H_
+#define _CORE_TYPE_H_
 
 typedef	char			cs_char;
 typedef	signed char		cs_schar;
@@ -53,4 +53,4 @@ typedef cs_uint cs_size_t;
 #define	cs_true		true
 #define cs_false	false
 
-#endif // _CSCORE_TYPE_H_
+#endif // _CORE_TYPE_H_

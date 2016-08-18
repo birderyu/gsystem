@@ -26,5 +26,8 @@
     <ClInclude Include="BTree_Test.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Sort_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

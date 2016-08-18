@@ -1,5 +1,5 @@
-#ifndef _CSCORE_CSDEFINE_H_
-#define _CSCORE_CSDEFINE_H_
+#ifndef _CORE_DEFINE_H_
+#define _CORE_DEFINE_H_
 
 #if defined(_MSC_VER)
 #	define CS_DECL_EXPORT __declspec(dllexport)
@@ -57,4 +57,4 @@
 #	define CS_ASSERT(e) do { } while ((false) && (e))
 #endif // 
 
-#endif // _CSCORE_CSDEFINE_H_
+#endif // _CORE_DEFINE_H_

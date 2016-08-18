@@ -1,5 +1,15 @@
-#ifndef _CSCORE_DOUBLE_LINK_H_
-#define _CSCORE_DOUBLE_LINK_H_
+/////////////////////////////////////////////////////////////////////////////////
+/// @brief 双向链表（double linked list）
+/// 
+///  双向链表的定义及实现
+/// 
+/// @author  Birderyu
+/// @version 1.0
+/// @date    2016-08-07
+/////////////////////////////////////////////////////////////////////////////////
+
+#ifndef _CSCORE_DOUBLE_LINKED_LIST_H_
+#define _CSCORE_DOUBLE_LINKED_LIST_H_
 
 /*dlist.h*/
 
@@ -10,10 +20,8 @@ template<typename T>
 class CsDList;
 
 template<typename T>
-class CsDListNode
+struct CsDListNode
 {
-	friend class CsDList<T>;
-public:
 	T data;
 	CsDListNode<T> *prior;
 	CsDListNode<T> *next;
@@ -597,4 +605,4 @@ inline T& CsDList<T>::GetPrev(int &pos)
 	return pTmpNode->data;
 }
 
-#endif // _CSCORE_DOUBLE_LINK_H_
+#endif // _CSCORE_DOUBLE_LINKED_LIST_H_

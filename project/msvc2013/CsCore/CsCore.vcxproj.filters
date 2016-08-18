@@ -58,6 +58,12 @@
     <Filter Include="源文件\Global">
       <UniqueIdentifier>{28f440d1-1aad-4501-bca8-0cc244512cf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Algorithm">
+      <UniqueIdentifier>{38c39005-d465-4696-b57f-ea56d527838a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Algorithm\Structure">
+      <UniqueIdentifier>{045ae1c4-49f8-4ef1-9d46-d58494869a98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h">
@@ -189,6 +195,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsMap.h">
       <Filter>头文件\Container</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTemplate.h">
+      <Filter>头文件\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">
@@ -262,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp">
       <Filter>源文件\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSort.cpp">
+      <Filter>源文件\Algorithm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
