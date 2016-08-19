@@ -1,5 +1,7 @@
-#ifndef _CSCORE_DECIMAL_H_
-#define _CSCORE_DECIMAL_H_
+/// 高精度浮点数
+
+#ifndef _CORE_DECIMAL_H_
+#define _CORE_DECIMAL_H_
 
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
@@ -13,6 +15,4 @@ public:
 	enum { CLASSCODE = CORE_CLASSCODE_INT32, };
 };
 
-typedef CsInt32 CsInteger;
-
-#endif // _CSCORE_CSINT32_H_
+#endif // _CORE_DECIMAL_H_

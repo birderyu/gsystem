@@ -37,18 +37,18 @@ typedef cs_int TSocket;
 #define _GetSocketOpt	getsockopt
 
 class CsString;
-class CsSockAddress;
+class CsSockAddr;
 
-class CsSockAddress_Private :public CsObject_Private
+class CsSockAddr_Private :public CsObject_Private
 {
 	friend class CsSocket_Private;
 	friend class CsTcpSocket_Private;
 	friend class CsUdpSocket_Private;
 
 public:
-	CsSockAddress_Private(CsSockAddress *pPublic);
-	CsSockAddress_Private(CsSockAddress *pPublic, const CsString &sIP, cs_ushort nPort);
-	~CsSockAddress_Private();
+	CsSockAddr_Private(CsSockAddr *pPublic);
+	CsSockAddr_Private(CsSockAddr *pPublic, const CsString &sIP, cs_ushort nPort);
+	~CsSockAddr_Private();
 	void SetIP(const CsString &sIP);
 	void SetIP(const cs_uint nIP);
 	void SetPortID(const cs_ushort nPort);

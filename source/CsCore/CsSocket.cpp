@@ -44,14 +44,14 @@ cs_int CsSocket::SetReuseAddr(const cs_bool nResue)
 	return pPrivate->SetReuseAddr(nResue);
 }
 
-cs_int CsSocket::GetPeerAddr(CsSockAddress &tSockAddr) const
+cs_int CsSocket::GetPeerAddr(CsSockAddr &tSockAddr) const
 {
 	CS_PRIVATE(CsSocket);
-	return pPrivate->GetPeerAddr((CsSockAddress_Private*)tSockAddr.m_pPrivate);
+	return pPrivate->GetPeerAddr((CsSockAddr_Private*)tSockAddr.m_pPrivate);
 }
 
-cs_int CsSocket::GetLocalAddr(CsSockAddress &tSockAddr) const
+cs_int CsSocket::GetLocalAddr(CsSockAddr &tSockAddr) const
 {
 	CS_PRIVATE(CsSocket);
-	return pPrivate->GetLocalAddr((CsSockAddress_Private*)tSockAddr.m_pPrivate);
+	return pPrivate->GetLocalAddr((CsSockAddr_Private*)tSockAddr.m_pPrivate);
 }

@@ -23,7 +23,7 @@ cs_int CsUdpSocket_Private::Open(cs_bool nResue)
 	return 0;
 }
 
-cs_int CsUdpSocket_Private::Open(CsSockAddress_Private *pSockAddr, cs_bool nResue)
+cs_int CsUdpSocket_Private::Open(CsSockAddr_Private *pSockAddr, cs_bool nResue)
 {
 	if (!pSockAddr)
 	{
@@ -52,7 +52,7 @@ void CsUdpSocket_Private::Close()
 	}
 }
 
-cs_int CsUdpSocket_Private::SendTo(const void *pBufData, cs_int nLen, CsSockAddress_Private *pPeer)
+cs_int CsUdpSocket_Private::SendTo(const void *pBufData, cs_int nLen, CsSockAddr_Private *pPeer)
 {
 	if (!pPeer)
 	{
@@ -68,7 +68,7 @@ cs_int CsUdpSocket_Private::SendTo(const void *pBufData, cs_int nLen, CsSockAddr
 	return 0;
 }
 
-cs_int CsUdpSocket_Private::RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddress_Private *pPeer)
+cs_int CsUdpSocket_Private::RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddr_Private *pPeer)
 {
 	if (!pPeer)
 	{

@@ -2,7 +2,7 @@
 #include "CsSockAddr.h"
 #include "CsString.h"
 
-CsSockAddress_Private::CsSockAddress_Private(CsSockAddress *pPublic)
+CsSockAddr_Private::CsSockAddr_Private(CsSockAddr *pPublic)
 : CsObject_Private(pPublic)
 {
 	m_tSocketAddr.sin_family = AF_INET;
@@ -10,7 +10,7 @@ CsSockAddress_Private::CsSockAddress_Private(CsSockAddress *pPublic)
 	m_tSocketAddr.sin_port = 0;
 }
 
-CsSockAddress_Private::CsSockAddress_Private(CsSockAddress *pPublic, const CsString &sIP, cs_ushort nPort)
+CsSockAddr_Private::CsSockAddr_Private(CsSockAddr *pPublic, const CsString &sIP, cs_ushort nPort)
 : CsObject_Private(pPublic)
 {
 	m_tSocketAddr.sin_family = AF_INET;
@@ -18,22 +18,22 @@ CsSockAddress_Private::CsSockAddress_Private(CsSockAddress *pPublic, const CsStr
 	m_tSocketAddr.sin_port = htons(nPort);
 }
 
-CsSockAddress_Private::~CsSockAddress_Private()
+CsSockAddr_Private::~CsSockAddr_Private()
 {
 
 }
 
-void CsSockAddress_Private::SetIP(const CsString &sIP)
+void CsSockAddr_Private::SetIP(const CsString &sIP)
 {
 	m_tSocketAddr.sin_addr.s_addr = inet_addr(sIP.GetCStr());
 }
 
-void CsSockAddress_Private::SetIP(const cs_uint nIP)
+void CsSockAddr_Private::SetIP(const cs_uint nIP)
 {
 	m_tSocketAddr.sin_addr.s_addr = nIP;
 }
 
-void CsSockAddress_Private::SetPortID(const cs_ushort nPort)
+void CsSockAddr_Private::SetPortID(const cs_ushort nPort)
 {
 	m_tSocketAddr.sin_port = htons(nPort);
 }

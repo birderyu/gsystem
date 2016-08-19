@@ -10,14 +10,16 @@
 #	define NULL	0
 #endif // !NULL
 
-/*
-#if !defined(CXX_11) || __cplusplus < 201103
+//#if __cplusplus >= 201103L
+#	define CS_CPP_11
+//#endif
+
+#ifndef CS_CPP_11
 #	define nullptr NULL
 #	define override
 #	define constexpr
 #	define final
 #endif // for C++11
-*/
 
 #define CS_DECLARE_PUBLIC(Class) \
 	Class *const m_pPublic; \
@@ -34,12 +36,12 @@
 #define CS_PUBLIC(Class) Class *const pPublic = (Class*)GetPublic()
 #define CS_PRIVATE(Class) Class##_Private *const pPrivate = (Class##_Private*)GetPrivate()
 
-# define CS_BEGIN_NAMESPACE namespace CSYSTEM {
-# define CS_END_NAMESPACE }
+#define CS_BEGIN_NAMESPACE namespace CSYSTEM {
+#define CS_END_NAMESPACE }
 
-#  ifdef __cplusplus
-#    define CS_DECL_NOTHROW  throw()
-#  endif
+#ifdef __cplusplus
+#	define CS_DECL_NOTHROW  throw()
+#endif
 
 #  if defined (CS_CORE_BUILD_DLL)
 #    define CS_CORE_EXPORT CS_DECL_EXPORT

@@ -1,5 +1,5 @@
-﻿#ifndef _CSCORE_SORT_H_
-#define _CSCORE_SORT_H_
+﻿#ifndef _CORE_SORT_H_
+#define _CORE_SORT_H_
 
 #include "CsCoreGlobal.h"
 #include "CsArray.h"
@@ -15,43 +15,43 @@ public:
 	/// 冒泡排序
 	template<typename ArrT, 
 		typename ElemT, 
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void BubbleSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 插入排序
 	template<typename ArrT, 
 		typename ElemT,
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void InsertSort(ArrT &arr, const cs_size_t start, const cs_size_t len, const cs_bool bRecur = false);
 
 	/// 希尔排序
 	template<typename ArrT, 
 		typename ElemT,
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void ShellSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 选择排序
 	template<typename ArrT, 
 		typename ElemT,
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void SelectSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 堆排序
 	template<typename ArrT, 
 		typename ElemT,
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void HeapSort(ArrT &arr, const cs_size_t start, const cs_size_t len);
 
 	/// 归并排序（算法有误）
 	template<typename ArrT, 
 		typename ElemT,
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void MergeSort(ArrT &arr, const cs_size_t len);
 
 	/// 快速排序（算法有误）
 	template<typename ArrT, 
 		typename ElemT,
-		typename CompareT = CsLess<ElemT >>
+		typename CompareT = CsLessF<ElemT >>
 	static void QuickSort(ArrT &arr, const cs_size_t len);
 };
 
@@ -402,4 +402,4 @@ void CsSort_Private::QuickSorting(ArrT &arr, const cs_size_t first, const cs_siz
 	}
 }
 
-#endif // _CSCORE_SORT_H_
+#endif // _CORE_SORT_H_

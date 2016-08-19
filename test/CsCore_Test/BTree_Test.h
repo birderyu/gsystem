@@ -3,11 +3,47 @@
 #include "CsBSTree.h"
 #include "CsRBTree.h"
 
+template<class T>
+struct NoLessF
+	: public CsBinaryF<T, T, cs_bool>
+{
+	cs_bool operator()(const T &left, const T &right) const
+	{
+		CsLessF<T> fCompare;
+		return !fCompare(left, right);
+	}
+};
+
+template<class T>
+struct NoCompareF
+	: public CsBinaryF<T, T, cs_int>
+{
+	cs_int operator()(const T &left, const T &right) const
+	{
+		CsCompareF<T> fCompare;
+		return 0 - fCompare(left, right);
+	}
+};
+
 template<typename T>
 void Visit(const T &data)
 {
 	std::cout << data << std::endl;
 }
+
+template<typename T = double>
+class CTestT
+{
+public:
+	template<typename K = int>
+	void test()
+	{
+		T t = 1.1;
+		K i = 2;
+		int stop = 1;
+	}
+};
+
 
 void TestBTree()
 {
@@ -52,7 +88,7 @@ void TestBTree()
 
 void TestBSTree()
 {
-	CsBSTree<cs_int> bstree;
+	CsBSTree<cs_int, NoCompareF<cs_int>> bstree;
 	bstree.Insert(0);
 	bstree.Insert(-2);
 	bstree.Insert(5);
@@ -61,12 +97,28 @@ void TestBSTree()
 	bstree.Insert(-1);
 	bstree.InOrderTraverse(Visit);
 
-	CsBSTree<cs_int>::Node *node = bstree.Find(-3);
-	CsBSTree<cs_int>::Node *root1 = bstree.GetRoot();
-	CsBSTree<cs_int>::Node *del = bstree.Delete(0);
-	CsBSTree<cs_int>::Node *root2 = bstree.GetRoot();
+	auto *node = bstree.Find(-3);
+	auto *root1 = bstree.GetRoot();
+	auto *del = bstree.Delete(0);
+	auto *root2 = bstree.GetRoot();
 
 	bstree.InOrderTraverse(Visit);
+	int stop = 1;
+	stop++;
+}
+
+void TestRBTree()
+{
+	CsRBTree<cs_int> bstree;
+	bstree.Insert(0);
+	bstree.Insert(0);
+	bstree.Insert(-2);
+	bstree.Insert(5);
+	bstree.Insert(2);
+	bstree.Insert(-3);
+	bstree.Insert(-1);
+	bstree.InOrderTraverse(Visit);
+
 	int stop = 1;
 	stop++;
 }

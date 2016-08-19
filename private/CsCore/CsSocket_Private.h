@@ -19,8 +19,8 @@ public:
 
 	cs_int SetReuseAddr(const cs_bool nResue);
 
-	cs_int GetPeerAddr(CsSockAddress_Private *pSockAddr) const;
-	cs_int GetLocalAddr(CsSockAddress_Private *pSockAddr) const;
+	cs_int GetPeerAddr(CsSockAddr_Private *pSockAddr) const;
+	cs_int GetLocalAddr(CsSockAddr_Private *pSockAddr) const;
 
 protected:
 	// 套接字的句柄

@@ -137,7 +137,7 @@ cs_int CsSocket_Private::SetReuseAddr(const cs_bool nResue)
 	return 0;
 }
 
-cs_int CsSocket_Private::GetPeerAddr(CsSockAddress_Private *pSockAddr) const
+cs_int CsSocket_Private::GetPeerAddr(CsSockAddr_Private *pSockAddr) const
 {
 	if (!pSockAddr)
 	{
@@ -151,7 +151,7 @@ cs_int CsSocket_Private::GetPeerAddr(CsSockAddress_Private *pSockAddr) const
 	return 0;
 }
 
-cs_int CsSocket_Private::GetLocalAddr(CsSockAddress_Private *pSockAddr) const
+cs_int CsSocket_Private::GetLocalAddr(CsSockAddr_Private *pSockAddr) const
 {
 	if (!pSockAddr)
 	{

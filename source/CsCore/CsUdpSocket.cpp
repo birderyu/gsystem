@@ -19,10 +19,10 @@ cs_int CsUdpSocket::Open(cs_bool nResue)
 	return pPrivate->Open(nResue);
 }
 
-cs_int CsUdpSocket::Open(const CsSockAddress &tSockAddr, cs_bool nResue)
+cs_int CsUdpSocket::Open(const CsSockAddr &tSockAddr, cs_bool nResue)
 {
 	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->Open((CsSockAddress_Private*)tSockAddr.m_pPrivate, nResue);
+	return pPrivate->Open((CsSockAddr_Private*)tSockAddr.m_pPrivate, nResue);
 }
 
 void CsUdpSocket::Close()
@@ -31,14 +31,14 @@ void CsUdpSocket::Close()
 	pPrivate->Close();
 }
 
-cs_int CsUdpSocket::SendTo(const void *pBufData, cs_int nLen, const CsSockAddress &tPeer)
+cs_int CsUdpSocket::SendTo(const void *pBufData, cs_int nLen, const CsSockAddr &tPeer)
 {
 	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->SendTo(pBufData, nLen, (CsSockAddress_Private*)tPeer.m_pPrivate);
+	return pPrivate->SendTo(pBufData, nLen, (CsSockAddr_Private*)tPeer.m_pPrivate);
 }
 
-cs_int CsUdpSocket::RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddress &tPeer)
+cs_int CsUdpSocket::RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddr &tPeer)
 {
 	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->RecvFrom(pBufData, nMaxLen, (CsSockAddress_Private*)tPeer.m_pPrivate);
+	return pPrivate->RecvFrom(pBufData, nMaxLen, (CsSockAddr_Private*)tPeer.m_pPrivate);
 }

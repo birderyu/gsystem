@@ -5,7 +5,7 @@
 #include "CsObject.h"
 
 class CsSocket_Private;
-class CsSockAddress;
+class CsSockAddr;
 
 class CS_CORE_EXPORT CsSocket :public CsObject
 {
@@ -21,8 +21,8 @@ public:
 
 	cs_int SetReuseAddr(const cs_bool nResue);
 
-	cs_int GetPeerAddr(CsSockAddress &tSockAddr) const;
-	cs_int GetLocalAddr(CsSockAddress &tSockAddr) const;
+	cs_int GetPeerAddr(CsSockAddr &tSockAddr) const;
+	cs_int GetLocalAddr(CsSockAddr &tSockAddr) const;
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_SOCKET, };

@@ -10,10 +10,10 @@ public:
 	virtual ~CsUdpSocket();
 
 	cs_int Open(cs_bool nResue = false);
-	cs_int Open(const CsSockAddress &tSockAddr, cs_bool nResue = false);
+	cs_int Open(const CsSockAddr &tSockAddr, cs_bool nResue = false);
 	void Close();
-	cs_int SendTo(const void *pBufData, cs_int nLen, const CsSockAddress &tPeer);
-	cs_int RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddress &tPeer);
+	cs_int SendTo(const void *pBufData, cs_int nLen, const CsSockAddr &tPeer);
+	cs_int RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddr &tPeer);
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_UDPSOCKET, };

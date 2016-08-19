@@ -18,10 +18,10 @@ cs_int CsTcpSocket::Open(cs_bool nResue)
 	return pPrivate->Open(nResue);
 }
 
-cs_int CsTcpSocket::Open(const CsSockAddress &tSockAddr, cs_bool nResue)
+cs_int CsTcpSocket::Open(const CsSockAddr &tSockAddr, cs_bool nResue)
 {
 	CS_PRIVATE(CsTcpSocket);
-	return pPrivate->Open((CsSockAddress_Private*)tSockAddr.m_pPrivate, nResue);
+	return pPrivate->Open((CsSockAddr_Private*)tSockAddr.m_pPrivate, nResue);
 }
 
 void CsTcpSocket::Close()
@@ -42,10 +42,10 @@ cs_int CsTcpSocket::Accept(const CsTcpSocket &pPeer)
 	return pPrivate->Accept((CsTcpSocket_Private*)pPeer.m_pPrivate);
 }
 
-cs_int CsTcpSocket::Connect(const CsSockAddress &tSockAddr)
+cs_int CsTcpSocket::Connect(const CsSockAddr &tSockAddr)
 {
 	CS_PRIVATE(CsTcpSocket);
-	return pPrivate->Connect((CsSockAddress_Private*)tSockAddr.m_pPrivate);
+	return pPrivate->Connect((CsSockAddr_Private*)tSockAddr.m_pPrivate);
 }
 
 cs_int CsTcpSocket::Send(const void *pBufData, cs_int nDataLen)

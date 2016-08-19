@@ -5,7 +5,8 @@
 
 int main(int argc, char *argv[])
 {
-	TestBSTree();
+	//TestBSTree();
+	TestRBTree();
 	//TestInsertSort();
 	system("pause");
 }

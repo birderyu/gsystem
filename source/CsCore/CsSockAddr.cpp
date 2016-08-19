@@ -2,37 +2,37 @@
 #include "CsSockAddr_Private.h"
 #include "CsString.h"
 
-CsSockAddress::CsSockAddress()
-: CsObject(new CsSockAddress_Private(this))
+CsSockAddr::CsSockAddr()
+: CsObject(new CsSockAddr_Private(this))
 {
 
 }
 
-CsSockAddress::CsSockAddress(const CsString &sIP, cs_ushort nPort)
-: CsObject(new CsSockAddress_Private(this, sIP, nPort))
+CsSockAddr::CsSockAddr(const CsString &sIP, cs_ushort nPort)
+: CsObject(new CsSockAddr_Private(this, sIP, nPort))
 {
 
 }
 
-CsSockAddress::~CsSockAddress()
+CsSockAddr::~CsSockAddr()
 {
 
 }
 
-void CsSockAddress::SetIP(const CsString sIP)
+void CsSockAddr::SetIP(const CsString sIP)
 {
-	CS_PRIVATE(CsSockAddress);
+	CS_PRIVATE(CsSockAddr);
 	pPrivate->SetIP(sIP);
 }
 
-void CsSockAddress::SetIP(const cs_uint nIP)
+void CsSockAddr::SetIP(const cs_uint nIP)
 {
-	CS_PRIVATE(CsSockAddress);
+	CS_PRIVATE(CsSockAddr);
 	pPrivate->SetIP(nIP);
 }
 
-void CsSockAddress::SetPortID(const cs_ushort nPort)
+void CsSockAddr::SetPortID(const cs_ushort nPort)
 {
-	CS_PRIVATE(CsSockAddress);
+	CS_PRIVATE(CsSockAddr);
 	pPrivate->SetPortID(nPort);
 }

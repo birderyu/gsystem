@@ -23,7 +23,7 @@ cs_int CsTcpSocket_Private::Open(cs_bool nResue)
 	return 0;
 }
 
-cs_int CsTcpSocket_Private::Open(CsSockAddress_Private *pSockAddr, cs_bool nResue)
+cs_int CsTcpSocket_Private::Open(CsSockAddr_Private *pSockAddr, cs_bool nResue)
 {
 	if (!pSockAddr)
 	{
@@ -86,7 +86,7 @@ cs_int CsTcpSocket_Private::Accept(CsTcpSocket_Private *pPeer)
 	return 0;
 }
 
-cs_int CsTcpSocket_Private::Connect(CsSockAddress_Private *pSockAddr)
+cs_int CsTcpSocket_Private::Connect(CsSockAddr_Private *pSockAddr)
 {
 	if (!pSockAddr)
 	{
