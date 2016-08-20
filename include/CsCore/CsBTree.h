@@ -13,60 +13,60 @@
 
 #include "CsObject.h"
 
-template<typename T> class CsBTree;
-template<typename T> class CsBTree_Private;
+template<typename KeyT, typename NodeT> class CsBTree;
+template<typename KeyT, typename NodeT> class CsBTree_Private;
 
 /// 二叉树节点
-template<typename T>
+template<typename KeyT>
 struct CsBTreeNode :public CsObject
 {
-	T m_tData;					// 数据，需要由外部去析构，否则可能造成内存泄露
-	CsBTreeNode<T> *m_pParent;	// 双亲
-	CsBTreeNode<T> *m_pLeft;	// 左孩子
-	CsBTreeNode<T> *m_pRight;	// 右孩子
+	KeyT m_tKey;					// 数据，需要由外部去析构，否则可能造成内存泄露
+	CsBTreeNode<KeyT> *m_pParent;	// 双亲
+	CsBTreeNode<KeyT> *m_pLeft;		// 左孩子
+	CsBTreeNode<KeyT> *m_pRight;	// 右孩子
 
 	CsBTreeNode(
-		const T &data = T(),
-		CsBTreeNode<T> *parent = NULL,
-		CsBTreeNode<T> *left = NULL,
-		CsBTreeNode<T> *right = NULL);
+		const KeyT &key = KeyT(),
+		CsBTreeNode<KeyT> *parent = NULL,
+		CsBTreeNode<KeyT> *left = NULL,
+		CsBTreeNode<KeyT> *right = NULL);
 	virtual ~CsBTreeNode();
-	virtual CsBTreeNode<T> *Copy() const;
+	virtual CsBTreeNode<KeyT> *Copy() const;
 };
 
 /// 二叉树
-template<typename T>
+template<typename KeyT, 
+	typename NodeT = CsBTreeNode<KeyT>>
 class CsBTree :public CsObject
 {
 public:
-	typedef CsBTreeNode<T> Node;
-	typedef void(*funtype)(const T&);
+	typedef void(*funtype)(const KeyT&);
 
 public:
-	CsBTree(Node *pRoot = NULL);
-	CsBTree(const CsBTree<T> &tTree);
+	CsBTree(NodeT *pRoot = NULL);
+	CsBTree(const CsBTree<KeyT, NodeT> &tTree);
 	virtual ~CsBTree();
-	CsBTree<T>& operator=(const CsBTree<T> &tTree);
-	void Clone(const CsBTree<T> &tTree);
-	void Attach(Node *pNode);
+	CsBTree<KeyT, NodeT>& operator=(const CsBTree<KeyT, NodeT> &tTree);
+	void Clone(const CsBTree<KeyT, NodeT> &tTree);
+	void Attach(NodeT *pNode);
 	void Destroy();
 
 public:
-	T &GetNodeData(Node *pNode);
-	T GetNodeData(const Node *pNode) const;
-	void SetNodeData(Node *pNode, const T &tData);
-	Node *&GetRoot();
-	Node *GetRoot() const;
-	Node *&GetParent(Node *pNode);
-	Node *GetParent(const Node *pNode) const;
-	Node *&GetLeftChild(Node *pNode);
-	Node *GetLeftChild(const Node *pNode) const;
-	Node *&GetRightChild(Node *pNode);
-	Node *GetRightChild(const Node *pNode) const;
-	Node *&GetLeftSibling(Node *pNode);
-	Node *GetLeftSiblig(const Node *pNode) const;
-	Node *&GetRightSibling(Node *pNode);
-	Node *GetRightSibling(const Node *pNode) const;
+	KeyT &GetNodeKey(NodeT *pNode);
+	KeyT GetNodeKey(const NodeT *pNode) const;
+	void SetNodeKey(NodeT *pNode, const KeyT &tKey);
+	NodeT *&GetRoot();
+	NodeT *GetRoot() const;
+	NodeT *&GetParent(NodeT *pNode);
+	NodeT *GetParent(const NodeT *pNode) const;
+	NodeT *&GetLeftChild(NodeT *pNode);
+	NodeT *GetLeftChild(const NodeT *pNode) const;
+	NodeT *&GetRightChild(NodeT *pNode);
+	NodeT *GetRightChild(const NodeT *pNode) const;
+	NodeT *&GetLeftSibling(NodeT *pNode);
+	NodeT *GetLeftSiblig(const NodeT *pNode) const;
+	NodeT *&GetRightSibling(NodeT *pNode);
+	NodeT *GetRightSibling(const NodeT *pNode) const;
 	cs_bool IsEmpty() const;
 
 public:
@@ -83,35 +83,34 @@ public:
 	cs_size_t GetDepth() const;
 
 private:
-	Node *m_pRoot;
-	CsBTree_Private<T> m_tBTree_Private;
+	NodeT *m_pRoot;
+	CsBTree_Private<KeyT, NodeT> m_tBTree_Private;
 };
 
 /// 二叉树功能实现类
-template<typename T>
+template<typename KeyT, typename NodeT>
 class CsBTree_Private
 {
-	friend class CsBTree<T>;
+	friend class CsBTree<KeyT, NodeT>;
 
 private:
-	typedef CsBTreeNode<T> Node;
-	typedef void(*funtype)(const T&);
-	void DestroySubTree(Node *pNode);
-	void PreOrderTraverse(const Node *pNode, funtype fVisit) const;
-	void InOrderTraverse(const Node *pNode, funtype fVisit) const;
-	void PostOrderTraverse(const Node *pNode, funtype fVisit) const;
-	void GetNodeCount(const Node *pNode, cs_size_t *nCount) const;
-	void GetLeafCount(const Node *pNode, cs_size_t *nCount) const;
-	cs_size_t GetDepth(const Node *pNode) const;
+	typedef void(*funtype)(const KeyT&);
+	void DestroySubTree(NodeT *pNode);
+	void PreOrderTraverse(const NodeT *pNode, funtype fVisit) const;
+	void InOrderTraverse(const NodeT *pNode, funtype fVisit) const;
+	void PostOrderTraverse(const NodeT *pNode, funtype fVisit) const;
+	void GetNodeCount(const NodeT *pNode, cs_size_t *nCount) const;
+	void GetLeafCount(const NodeT *pNode, cs_size_t *nCount) const;
+	cs_size_t GetDepth(const NodeT *pNode) const;
 };
 
-template<typename T>
-inline CsBTreeNode<T>::CsBTreeNode(
-	const T &tData, 
-	CsBTreeNode<T> *pParent, 
-	CsBTreeNode<T> *pLeft, 
-	CsBTreeNode<T> *pRight) 
-	: m_tData(tData)
+template<typename KeyT>
+inline CsBTreeNode<KeyT>::CsBTreeNode(
+	const KeyT &tKey,
+	CsBTreeNode<KeyT> *pParent, 
+	CsBTreeNode<KeyT> *pLeft, 
+	CsBTreeNode<KeyT> *pRight) 
+	: m_tKey(tKey)
 	, m_pParent(pParent)
 	, m_pLeft(pLeft)
 	, m_pRight(pRight) 
@@ -119,20 +118,20 @@ inline CsBTreeNode<T>::CsBTreeNode(
 
 }
 
-template<typename T>
-inline CsBTreeNode<T>::~CsBTreeNode()
+template<typename KeyT>
+inline CsBTreeNode<KeyT>::~CsBTreeNode()
 {
 
 }
 
-template<typename T>
-CsBTreeNode<T> *CsBTreeNode<T>::Copy() const
+template<typename KeyT>
+CsBTreeNode<KeyT> *CsBTreeNode<KeyT>::Copy() const
 {
-	CsBTreeNode<T> *pNode = NULL;
+	CsBTreeNode<KeyT> *pNode = NULL;
 	try
 	{
 		// 创建一个RBTree的节点
-		pNode = new CsBTreeNode<T>(m_tData, m_pParent, NULL, NULL);
+		pNode = new CsBTreeNode<KeyT>(m_tKey, m_pParent, NULL, NULL);
 	}
 	catch (std::bad_alloc&)
 	{
@@ -153,28 +152,28 @@ CsBTreeNode<T> *CsBTreeNode<T>::Copy() const
 	return pNode;
 }
 
-template<typename T>
-inline CsBTree<T>::CsBTree(CsBTreeNode<T> *pRoot)
+template<typename KeyT, typename NodeT>
+inline CsBTree<KeyT, NodeT>::CsBTree(NodeT *pRoot)
 : m_pRoot(pRoot)
 {
 	
 }
 
-template<typename T>
-inline CsBTree<T>::CsBTree(const CsBTree<T> &tTree) 
+template<typename KeyT, typename NodeT>
+inline CsBTree<KeyT, NodeT>::CsBTree(const CsBTree<KeyT, NodeT> &tTree) 
 : m_pRoot(NULL)
 {
 	Clone(tTree);
 }
 
-template<typename T>
-inline CsBTree<T>::~CsBTree()
+template<typename KeyT, typename NodeT>
+inline CsBTree<KeyT, NodeT>::~CsBTree()
 {
 	Destroy();
 }
 
-template<typename T>
-inline void CsBTree<T>::Attach(CsBTreeNode<T> *pNode)
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::Attach(NodeT *pNode)
 {
 	CS_ASSERT(pNode);
 	if (m_pRoot != NULL)
@@ -184,15 +183,15 @@ inline void CsBTree<T>::Attach(CsBTreeNode<T> *pNode)
 	m_pRoot = pNode;
 }
 
-template<typename T>
-inline CsBTree<T>& CsBTree<T>::operator=(const CsBTree<T> &tTree)
+template<typename KeyT, typename NodeT>
+inline CsBTree<KeyT, NodeT>& CsBTree<KeyT, NodeT>::operator=(const CsBTree<KeyT, NodeT> &tTree)
 {
 	Clone(tTree);
 	return *this;
 }
 
-template<typename T>
-inline void CsBTree<T>::Clone(const CsBTree<T> &tTree)
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::Clone(const CsBTree<KeyT, NodeT> &tTree)
 {
 	if (this == &tTree)
 	{
@@ -212,43 +211,43 @@ inline void CsBTree<T>::Clone(const CsBTree<T> &tTree)
 	}
 }
 
-template<typename T>
-inline void CsBTree<T>::Destroy()
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::Destroy()
 {
 	m_tBTree_Private.DestroySubTree(m_pRoot);
 	m_pRoot = NULL;
 }
 
-template<typename T>
-inline CsBTreeNode<T> *&CsBTree<T>::GetLeftChild(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline NodeT *&CsBTree<KeyT, NodeT>::GetLeftChild(NodeT *p)
 {
 	CS_ASSERT(p);
 	return *(&(p->m_pLeft));
 }
 
-template<typename T>
-inline CsBTreeNode<T> *CsBTree<T>::GetLeftChild(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline NodeT *CsBTree<KeyT, NodeT>::GetLeftChild(const NodeT *p) const
 {
 	CS_ASSERT(p);
 	return p->m_pLeft;
 }
 
-template<typename T>
-inline CsBTreeNode<T> *&CsBTree<T>::GetRightChild(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline NodeT *&CsBTree<KeyT, NodeT>::GetRightChild(NodeT *p)
 {
 	CS_ASSERT(p);
 	return *(&(p->m_pRight));
 }
 
-template<typename T>
-inline CsBTreeNode<T> *CsBTree<T>::GetRightChild(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline NodeT *CsBTree<KeyT, NodeT>::GetRightChild(const NodeT *p) const
 {
 	CS_ASSERT(p);
 	return p->m_pRight;
 }
 
-template<typename T>
-inline CsBTreeNode<T>*& CsBTree<T>::GetLeftSibling(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline NodeT*& CsBTree<KeyT, NodeT>::GetLeftSibling(NodeT *p)
 {
 	CS_ASSERT(p);
 
@@ -258,8 +257,8 @@ inline CsBTreeNode<T>*& CsBTree<T>::GetLeftSibling(CsBTreeNode<T> *p)
 		return *(&(p->m_pParent)); // return NULL;  
 }
 
-template<typename T>
-inline CsBTreeNode<T>* CsBTree<T>::GetLeftSiblig(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline NodeT* CsBTree<KeyT, NodeT>::GetLeftSiblig(const NodeT *p) const
 {
 	CS_ASSERT(p);
 
@@ -269,8 +268,8 @@ inline CsBTreeNode<T>* CsBTree<T>::GetLeftSiblig(const CsBTreeNode<T> *p) const
 		return p->m_pParent;       // return NULL;  
 }
 
-template<typename T>
-inline CsBTreeNode<T>*& CsBTree<T>::GetRightSibling(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline NodeT*& CsBTree<KeyT, NodeT>::GetRightSibling(NodeT *p)
 {
 	CS_ASSERT(p);
 
@@ -280,8 +279,8 @@ inline CsBTreeNode<T>*& CsBTree<T>::GetRightSibling(CsBTreeNode<T> *p)
 		return *(&(p->m_pParent)); // return NULL;  
 }
 
-template<typename T>
-inline CsBTreeNode<T>* CsBTree<T>::GetRightSibling(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline NodeT* CsBTree<KeyT, NodeT>::GetRightSibling(const NodeT *p) const
 {
 	CS_ASSERT(p);
 
@@ -291,103 +290,103 @@ inline CsBTreeNode<T>* CsBTree<T>::GetRightSibling(const CsBTreeNode<T> *p) cons
 		return p->m_pParent;       // return NULL;  
 }
 
-template<typename T>
-inline CsBTreeNode<T>*& CsBTree<T>::GetParent(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline NodeT*& CsBTree<KeyT, NodeT>::GetParent(NodeT *p)
 {
 	CS_ASSERT(p);
 	return *(&(p->m_pParent));
 }
 
-template<typename T>
-inline CsBTreeNode<T>* CsBTree<T>::GetParent(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline NodeT* CsBTree<KeyT, NodeT>::GetParent(const NodeT *p) const
 {
 	CS_ASSERT(p);
 	return p->m_pParent;
 }
 
-template<typename T>
-inline T& CsBTree<T>::GetNodeData(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline KeyT& CsBTree<KeyT, NodeT>::GetNodeKey(NodeT *p)
 {
 	CS_ASSERT(p);
-	return p->m_tData;
+	return p->m_tKey;
 }
 
-template<typename T>
-inline T CsBTree<T>::GetNodeData(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline KeyT CsBTree<KeyT, NodeT>::GetNodeKey(const NodeT *p) const
 {
 	CS_ASSERT(p);
-	return p->m_tData;
+	return p->m_tKey;
 }
 
-template<typename T>
-inline void CsBTree<T>::SetNodeData(CsBTreeNode<T> *p, const T &data)
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::SetNodeKey(NodeT *p, const KeyT &key)
 {
 	CS_ASSERT(p);
-	p->m_tData = data;
+	p->m_tKey = key;
 }
 
-template<typename T>
-inline cs_bool CsBTree<T>::IsEmpty() const
+template<typename KeyT, typename NodeT>
+inline cs_bool CsBTree<KeyT, NodeT>::IsEmpty() const
 {
 	return NULL == m_pRoot;
 }
 
-template<typename T>
-inline CsBTreeNode<T>*& CsBTree<T>::GetRoot()
+template<typename KeyT, typename NodeT>
+inline NodeT*& CsBTree<KeyT, NodeT>::GetRoot()
 {
 	return *(&(m_pRoot));
 }
 
-template<typename T>
-inline CsBTreeNode<T>* CsBTree<T>::GetRoot() const
+template<typename KeyT, typename NodeT>
+inline NodeT* CsBTree<KeyT, NodeT>::GetRoot() const
 {
 	return m_pRoot;
 }
 
-template<typename T>
-inline void CsBTree<T>::PreOrderTraverse(funtype fVisit) const
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::PreOrderTraverse(funtype fVisit) const
 {
 	m_tBTree_Private.PreOrderTraverse(m_pRoot, fVisit);
 }
 
-template<typename T>
-inline void CsBTree<T>::InOrderTraverse(funtype fVisit) const
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::InOrderTraverse(funtype fVisit) const
 {
 	m_tBTree_Private.InOrderTraverse(m_pRoot, fVisit);
 }
 
-template<typename T>
-inline void CsBTree<T>::PostOrderTraverse(funtype fVisit) const
+template<typename KeyT, typename NodeT>
+inline void CsBTree<KeyT, NodeT>::PostOrderTraverse(funtype fVisit) const
 {
 	m_tBTree_Private.PostOrderTraverse(m_pRoot, fVisit);
 }
 
-template<typename T>
-inline cs_size_t CsBTree<T>::GetNodeCount() const
+template<typename KeyT, typename NodeT>
+inline cs_size_t CsBTree<KeyT, NodeT>::GetNodeCount() const
 {
 	cs_size_t unCount = 0;
 	m_tBTree_Private.GetNodeCount(m_pRoot, &unCount);
 	return unCount;
 }
 
-template<typename T>
-inline cs_size_t CsBTree<T>::GetLeafCount() const
+template<typename KeyT, typename NodeT>
+inline cs_size_t CsBTree<KeyT, NodeT>::GetLeafCount() const
 {
 	cs_size_t unCount = 0;
 	m_tBTree_Private.GetLeafCount(m_pRoot, &unCount);
 	return unCount;
 }
 
-template<typename T>
-inline unsigned int CsBTree<T>::GetDepth() const
+template<typename KeyT, typename NodeT>
+inline unsigned int CsBTree<KeyT, NodeT>::GetDepth() const
 {
 	// Minus 1 here because I think the root node's depth should be 0.  
 	// So, don't do it if u think the root node's depth should be 1.  
 	return m_tBTree_Private.GetDepth(m_pRoot) - 1;
 }
 
-template<typename T>
-inline void CsBTree_Private<T>::DestroySubTree(CsBTreeNode<T> *p)
+template<typename KeyT, typename NodeT>
+inline void CsBTree_Private<KeyT, NodeT>::DestroySubTree(NodeT *p)
 {
 	if (p)
 	{
@@ -397,42 +396,42 @@ inline void CsBTree_Private<T>::DestroySubTree(CsBTreeNode<T> *p)
 	}
 }
 
-template<typename T>
-inline void CsBTree_Private<T>::PreOrderTraverse(const CsBTreeNode<T> *p, funtype fVisit) const
+template<typename KeyT, typename NodeT>
+inline void CsBTree_Private<KeyT, NodeT>::PreOrderTraverse(const NodeT *p, funtype fVisit) const
 {
 	if (p)
 	{
-		fVisit(p->m_tData);
+		fVisit(p->m_tKey);
 		PreOrderTraverse(p->m_pLeft, fVisit);
 		PreOrderTraverse(p->m_pRight, fVisit);
 	}
 }
 
-template<typename T>
-inline void CsBTree_Private<T>::InOrderTraverse(const CsBTreeNode<T> *p, funtype fVisit) const
+template<typename KeyT, typename NodeT>
+inline void CsBTree_Private<KeyT, NodeT>::InOrderTraverse(const NodeT *p, funtype fVisit) const
 {
 	if (p)
 	{
 		InOrderTraverse(p->m_pLeft, fVisit);
-		fVisit(p->m_tData);
+		fVisit(p->m_tKey);
 		InOrderTraverse(p->m_pRight, fVisit);
 	}
 }
 
-template<typename T>
-inline void CsBTree_Private<T>::PostOrderTraverse(const CsBTreeNode<T> *p, funtype fVisit) const
+template<typename KeyT, typename NodeT>
+inline void CsBTree_Private<KeyT, NodeT>::PostOrderTraverse(const NodeT *p, funtype fVisit) const
 {
 	if (p)
 	{
 		PostOrderTraverse(p->m_pLeft, fVisit);
 		PostOrderTraverse(p->m_pRight, fVisit);
-		fVisit(p->m_tData);
+		fVisit(p->m_tKey);
 	}
 }
 
-template<typename T>
-inline void CsBTree_Private<T>::GetNodeCount(
-	const CsBTreeNode<T> *p,
+template<typename KeyT, typename NodeT>
+inline void CsBTree_Private<KeyT, NodeT>::GetNodeCount(
+	const NodeT *p,
 	cs_size_t *unCount
 	) const
 {
@@ -453,9 +452,9 @@ inline void CsBTree_Private<T>::GetNodeCount(
 	}
 }
 
-template<typename T>
-inline void CsBTree_Private<T>::GetLeafCount(
-	const CsBTreeNode<T> *p,
+template<typename KeyT, typename NodeT>
+inline void CsBTree_Private<KeyT, NodeT>::GetLeafCount(
+	const NodeT *p,
 	cs_size_t *unCount
 	) const
 {
@@ -471,8 +470,8 @@ inline void CsBTree_Private<T>::GetLeafCount(
 	}
 }
 
-template<typename T>
-inline cs_size_t CsBTree_Private<T>::GetDepth(const CsBTreeNode<T> *p) const
+template<typename KeyT, typename NodeT>
+inline cs_size_t CsBTree_Private<KeyT, NodeT>::GetDepth(const NodeT *p) const
 {
 	cs_size_t unDepthLeft;
 	cs_size_t unDepthRight;

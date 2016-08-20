@@ -89,12 +89,12 @@ void TestBTree()
 void TestBSTree()
 {
 	CsBSTree<cs_int, NoCompareF<cs_int>> bstree;
-	bstree.Insert(0);
-	bstree.Insert(-2);
-	bstree.Insert(5);
-	bstree.Insert(2);
-	bstree.Insert(-3);
-	bstree.Insert(-1);
+	bstree.InsertByKey(0);
+	bstree.InsertByKey(-2);
+	bstree.InsertByKey(5);
+	bstree.InsertByKey(2);
+	bstree.InsertByKey(-3);
+	bstree.InsertByKey(-1);
 	bstree.InOrderTraverse(Visit);
 
 	auto *node = bstree.Find(-3);
@@ -110,13 +110,13 @@ void TestBSTree()
 void TestRBTree()
 {
 	CsRBTree<cs_int> bstree;
-	bstree.Insert(0);
-	bstree.Insert(0);
-	bstree.Insert(-2);
-	bstree.Insert(5);
-	bstree.Insert(2);
-	bstree.Insert(-3);
-	bstree.Insert(-1);
+	bstree.InsertByKey(0);
+	//bstree.Insert(0);
+	bstree.InsertByKey(-2);
+	bstree.InsertByKey(5);
+	bstree.InsertByKey(2);
+	bstree.InsertByKey(-3);
+	bstree.InsertByKey(-1);
 	bstree.InOrderTraverse(Visit);
 
 	int stop = 1;

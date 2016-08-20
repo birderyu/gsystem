@@ -13,100 +13,117 @@
 
 #include "CsBTree.h"
 
-template<typename T, typename CompareT> class CsBSTree_Private;
+template<typename KeyT, typename CompareT, typename NodeT> class CsBSTree_Private;
 
 /// 二叉排序树
-template<typename T, typename CompareT = CsCompareF<T >>
-class CsBSTree : public CsBTree<T>
+template<typename KeyT, 
+	typename CompareT = CsCompareF<KeyT >,
+	typename NodeT = CsBTreeNode<KeyT >>
+class CsBSTree : public CsBTree<KeyT, NodeT>
 {
 public:
 	virtual ~CsBSTree();
-	Node *Find(const T &data) const;
-	Node *FindMin() const;
-	Node *FindMax() const;
+	NodeT *Find(const KeyT &key) const;
+	NodeT *FindFirst() const;
+	NodeT *FindLast() const;
 
 	/// 插入一个数据，返回插入数据的节点
 	/// 如果改变了Node的结构，Insert方法需要重新实现
-	virtual Node *Insert(const T &data);
-
-	/// 删除一个数据，返回删除数据的节点（TODO：这个需求暂未能实现）
-	virtual Node *Delete(const T &data);
-
+	/// realInsert指示是否进行了实际的插入操作，返回false则表明并没有插入任何元素（元素原本就已经存在）
+	virtual NodeT *InsertByNode(const NodeT &node, cs_bool *realInsert = NULL);
+	virtual NodeT *InsertByKey(const KeyT &key, cs_bool *realInsert = NULL);
+	
+	/// 删除一个数据，返回实际删除数据的节点
+	virtual NodeT *Delete(const KeyT &key);
+	
 private:
-	CsBSTree_Private<T, CompareT> m_tBSTree_Private;
+	CsBSTree_Private<KeyT, CompareT, NodeT> m_tBSTree_Private;
 };
 
 /// 二叉排序树功能实现类
-template<typename T, typename CompareT>
+template<typename KeyT, typename CompareT, typename NodeT>
 class CsBSTree_Private
 {
-	friend class CsBSTree<T, CompareT>;
+	friend class CsBSTree<KeyT, CompareT, NodeT>;
 private:
-	typedef CsBTreeNode<T> Node;
-	Node *Find(const T &data, Node *p) const;
-	Node *FindMin(Node *p) const;
-	Node *FindMax(Node *p) const;
-	Node *Insert(const T &data, Node *&p, Node *&root);
-	Node *Delete(const T &data, Node *&p, Node *&root, Node *&node);
-	cs_bool SwitchNode(Node *node1, Node *node2);
+	NodeT *Find(const KeyT &key, NodeT *p) const;
+	NodeT *FindFirst(NodeT *p) const;
+	NodeT *FindLast(NodeT *p) const;
+
+	// insert指示是否完成了插入操作，若data值与原本的值相同，则不会进行插入操作
+	NodeT *InsertByNode(const NodeT &node, NodeT *&p, NodeT *&root, cs_bool &insert);
+	NodeT *Delete(const KeyT &key, NodeT *&p, NodeT *&root, NodeT *&delNode);
+	cs_bool SwitchNode(NodeT *node1, NodeT *node2);
 
 private:
 	CompareT m_fCompare;
 };
 
-template<typename T, typename CompareT>
-inline CsBSTree<T, CompareT>::~CsBSTree()
+template<typename KeyT, typename CompareT, typename NodeT>
+inline CsBSTree<KeyT, CompareT, NodeT>::~CsBSTree()
 {
 
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree<T, CompareT>::Find(const T &data) const
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree<KeyT, CompareT, NodeT>::Find(const KeyT &key) const
 {
-	return m_tBSTree_Private.Find(data, GetRoot());
+	return m_tBSTree_Private.Find(key, GetRoot());
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree<T, CompareT>::FindMin() const
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree<KeyT, CompareT, NodeT>::FindFirst() const
 {
-	return m_tBSTree_Private.FindMin(GetRoot());
+	return m_tBSTree_Private.FindFirst(GetRoot());
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree<T, CompareT>::FindMax() const
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree<KeyT, CompareT, NodeT>::FindLast() const
 {
-	return m_tBSTree_Private.FindMax(GetRoot());
+	return m_tBSTree_Private.FindLast(GetRoot());
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree<T, CompareT>::Insert(const T &data)
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree<KeyT, CompareT, NodeT>::InsertByKey(const KeyT &key, cs_bool *realInsert)
 {
-	return m_tBSTree_Private.Insert(data, GetRoot(), GetRoot());
+	return InsertByNode(NodeT(key), realInsert);
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree<T, CompareT>::Delete(const T &data)
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree<KeyT, CompareT, NodeT>::InsertByNode(const NodeT &node, cs_bool *realInsert)
 {
-	CsBTreeNode<T>* node = NULL;
-	m_tBSTree_Private.Delete(data, GetRoot(), GetRoot(), node);
-	return node;
+	cs_bool insert = false;
+	NodeT *p = m_tBSTree_Private.InsertByNode(node, GetRoot(), GetRoot(), insert);
+	if (realInsert)
+	{
+		*realInsert = insert;
+	}
+	return p;
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Find(const T &data, CsBTreeNode<T> *p) const
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree<KeyT, CompareT, NodeT>::Delete(const KeyT &key)
+{
+	NodeT* pDelNode = NULL;
+	m_tBSTree_Private.Delete(key, GetRoot(), GetRoot(), pDelNode);
+	return pDelNode;
+}
+
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree_Private<KeyT, CompareT, NodeT>::Find(const KeyT &key, NodeT *p) const
 {
 	if (NULL == p)
 	{
 		return NULL;
 	}
-	cs_int ret = m_fCompare(data, p->m_tData);
+	cs_int ret = m_fCompare(key, p->m_tKey);
 	if (ret < 0)
 	{
-		return Find(data, p->m_pLeft);
+		return Find(key, p->m_pLeft);
 	}
 	else if (ret > 0)
 	{
-		return Find(data, p->m_pRight);
+		return Find(key, p->m_pRight);
 	}
 	else
 	{
@@ -114,8 +131,8 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Find(const T &data, CsBTre
 	}
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::FindMin(CsBTreeNode<T> *p) const
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree_Private<KeyT, CompareT, NodeT>::FindFirst(NodeT *p) const
 {
 	if (NULL == p)
 	{
@@ -127,12 +144,12 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::FindMin(CsBTreeNode<T> *p)
 	}
 	else
 	{
-		return FindMin(p->m_pLeft);
+		return FindFirst(p->m_pLeft);
 	}
 }
 
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::FindMax(CsBTreeNode<T> *p) const
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree_Private<KeyT, CompareT, NodeT>::FindLast(NodeT *p) const
 {
 	if (NULL == p)
 	{
@@ -144,24 +161,21 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::FindMax(CsBTreeNode<T> *p)
 	}
 	else
 	{
-		return FindMax(p->m_pRight);
+		return FindLast(p->m_pRight);
 	}
 }
 
-
 //返回值：如果p为NULL，则返回值为新分配内存的指针；如果p不是NULL，则返回值即为p.  
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Insert(const T &data, CsBTreeNode<T> *&p, CsBTreeNode<T> *&root)
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree_Private<KeyT, CompareT, NodeT>::InsertByNode(const NodeT &node, NodeT *&p, NodeT *&root, cs_bool &insert)
 {
 	if (NULL == p)
 	{
-		try
+		insert = true;
+		p = (NodeT*)node.Copy();
+		if (NULL == p)
 		{
-			p = new CsBTreeNode<T>(data, NULL, NULL, NULL);
-		}
-		catch (std::bad_alloc&)
-		{
-			return NULL;
+			insert = false;
 		}
 		if (NULL == root)
 		{
@@ -170,21 +184,21 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Insert(const T &data, CsBT
 		return p;
 	}
 	
-	cs_int ret = m_fCompare(data, p->m_tData);
+	cs_int ret = m_fCompare(node.m_tKey, p->m_tKey);
 	if (ret < 0)
 	{
-		p->m_pLeft = Insert(data, p->m_pLeft, root);
+		p->m_pLeft = InsertByNode(node, p->m_pLeft, root, insert);
 		if (p->m_pLeft)
 		{
-			p->m_pLeft->m_pParent = p;
+			((NodeT*)p->m_pLeft)->m_pParent = p;
 		}
 	}
 	else if (ret > 0)
 	{
-		p->m_pRight = Insert(data, p->m_pRight, root);
+		p->m_pRight = InsertByNode(node, p->m_pRight, root, insert);
 		if (p->m_pRight)
 		{
-			p->m_pRight->m_pParent = p;
+			((NodeT*)p->m_pRight)->m_pParent = p;
 		}
 	}
 	return p;
@@ -193,8 +207,8 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Insert(const T &data, CsBT
 //返回值：如果节点p的数据与data不等，则返回值即为p;如果相等，但有两个子节点，返回值也为p，有一个子节点，返回值为该子节点指针，  
 //如果无节点，返回值NULL。  
 //node为待删除的节点
-template<typename T, typename CompareT>
-inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Delete(const T &data, CsBTreeNode<T> *&p, CsBTreeNode<T> *&root, CsBTreeNode<T> *&node)
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT* CsBSTree_Private<KeyT, CompareT, NodeT>::Delete(const KeyT &key, NodeT *&p, NodeT *&root, NodeT *&delNode)
 {
 	if (NULL == p)
 	{
@@ -202,14 +216,14 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Delete(const T &data, CsBT
 		return p;
 	}
 	
-	cs_int ret = m_fCompare(data, p->m_tData);
+	cs_int ret = m_fCompare(key, p->m_tKey);
 	if (ret < 0)
 	{
-		p->m_pLeft = Delete(data, p->m_pLeft, root, node);
+		p->m_pLeft = Delete(key, p->m_pLeft, root, delNode);
 	}
 	else if (ret > 0)
 	{
-		p->m_pRight = Delete(data, p->m_pRight, root, node);
+		p->m_pRight = Delete(key, p->m_pRight, root, delNode);
 	}
 	else
 	{
@@ -218,31 +232,31 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Delete(const T &data, CsBT
 		{
 			// 有两个孩子
 			// 注意为节点（Node*）的调换，而非节点值（Node->Data）的调换，以追求效率，并且避免内存泄露
-			CsBTreeNode<T> *tmp = FindMin(p->m_pRight);
+			NodeT *tmp = FindFirst(p->m_pRight);
 			SwitchNode(p, tmp);
 			if (root == p)
 			{
 				root = tmp;
 			}
-			p->m_pRight = Delete(data, tmp->m_pRight, root, node);
+			p->m_pRight = Delete(key, tmp->m_pRight, root, delNode);
 		}
 		else
 		{
 			// 查找成功，并且它没有孩子或只有一个孩子
-			node = p;
+			delNode = p;
 			if (NULL == p->m_pLeft)
 			{
-				p = p->m_pRight;
+				p = (NodeT*)p->m_pRight;
 			}
 			else if (NULL == p->m_pRight)
 			{
-				p = p->m_pLeft;
+				p = (NodeT*)p->m_pLeft;
 			}
 			if (p)
 			{
-				p->m_pParent = node->m_pParent;
+				p->m_pParent = delNode->m_pParent;
 			}
-			if (root == node)
+			if (root == delNode)
 			{
 				root = p;
 			}
@@ -252,8 +266,8 @@ inline CsBTreeNode<T>* CsBSTree_Private<T, CompareT>::Delete(const T &data, CsBT
 	return p;
 }
 
-template<typename T, typename CompareT>
-inline cs_bool CsBSTree_Private<T, CompareT>::SwitchNode(CsBTreeNode<T> *node1, CsBTreeNode<T> *node2)
+template<typename KeyT, typename CompareT, typename NodeT>
+inline cs_bool CsBSTree_Private<KeyT, CompareT, NodeT>::SwitchNode(NodeT *node1, NodeT *node2)
 {
 	if (!node1 || !node2)
 	{
@@ -263,8 +277,8 @@ inline cs_bool CsBSTree_Private<T, CompareT>::SwitchNode(CsBTreeNode<T> *node1, 
 	{
 		return true;
 	}
-	CsBTreeNode<T> *pnode1 = node1->m_pParent;
-	CsBTreeNode<T> *pnode2 = node2->m_pParent;
+	NodeT *pnode1 = node1->m_pParent;
+	NodeT *pnode2 = node2->m_pParent;
 
 	if (pnode1)
 	{
@@ -293,7 +307,7 @@ inline cs_bool CsBSTree_Private<T, CompareT>::SwitchNode(CsBTreeNode<T> *node1, 
 	node1->m_pParent = pnode2;
 	node2->m_pParent = pnode1;
 
-	CsBTreeNode<T> *tmp = node1->m_pLeft;
+	NodeT *tmp = node1->m_pLeft;
 	node1->m_pLeft = node2->m_pLeft;
 	node2->m_pLeft = tmp;
 

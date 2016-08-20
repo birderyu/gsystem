@@ -9,7 +9,7 @@
 #    define CsGeo_Export CS_DECL_IMPORT
 #  endif  
 
-//#define CS_GEO_HAS_Z
+#define CS_GEO_HAS_Z
 
 enum EM_GEO_CLASSCODE
 {

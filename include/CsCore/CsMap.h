@@ -6,73 +6,82 @@
 #include "CsRBTree.h"
 
 /// 节点
-template <typename KeyType, typename ValueType>
-struct CsMapNode :public CsRBTreeNode<KeyType>
+template <typename KeyT, typename ValueT>
+struct CsMapNode :CsObject
 {
-	ValueType m_tValue;
+	enum COLOR
+	{
+		COLOR_RED = 0,
+		COLOR_BLACK = 1
+	};
+	KeyT m_tKey;						// 数据，需要由外部去析构，否则可能造成内存泄露
+	ValueT m_tValue;					// 数据，需要由外部去析构，否则可能造成内存泄露
+	CsMapNode<KeyT, ValueT> *m_pParent;	// 双亲
+	CsMapNode<KeyT, ValueT> *m_pLeft;	// 左孩子
+	CsMapNode<KeyT, ValueT> *m_pRight;	// 右孩子
+	cs_uint8 m_nColor;
+
 	CsMapNode(
-		const KeyType &key = KeyType(),
-		const ValueType &value = ValueType(),
-		CsBTreeNode<KeyType> *parent = NULL,
-		CsBTreeNode<KeyType> *left = NULL,
-		CsBTreeNode<KeyType> *right = NULL,
+		const KeyT &key = KeyT(),
+		const ValueT &value = ValueT(),
+		CsMapNode<KeyT, ValueT> *parent = NULL,
+		CsMapNode<KeyT, ValueT> *left = NULL,
+		CsMapNode<KeyT, ValueT> *right = NULL,
 		COLOR color = COLOR_BLACK);
-	virtual ~CsMapNode();
-	virtual CsBTreeNode<KeyType> *Copy() const;
+	~CsMapNode();
+	CsMapNode<KeyT, ValueT> *Copy() const;
 };
 
-template <typename KeyType, typename ValueType>
-class CsMap :private CsRBTreeNode<KeyType>
+template<typename KeyT,
+	typename ValueT,
+	typename CompareT = CsCompareF<KeyT >>
+class CsMap :public CsObject
 {
+	typedef CsMapNode<KeyT, ValueT> Node;
+
 public:
-	void Insert(const KeyType &key, const ValueType &value);
+	class ConstIterator;
+	class Iterator
+	{
+		friend class ConstIterator;
+	public:
+		Iterator(Node *node = NULL)
+			:m_pNode(node)
+		{
+
+		}
+		inline const KeyT &key() const { return node->m_tKey; }
+		inline ValueT &value() const { return node->m_tValue; }
+		inline ValueT &operator*() const { return node->m_tValue; }
+		inline ValueT *operator->() const { return &node->m_tValue; }
+		inline cs_bool operator==(const Iterator &o) const { return node == o.node; }
+		inline cs_bool operator!=(const Iterator &o) const { return node != o.node; }
+
+	private:
+		Node *m_pNode
+	};
+
+public:
+	Iterator Insert(const KeyT &key, const ValueT &value)
+	{
+		Node node(key, value);
+		Node *p = m_tRBTree.InsertByNode(node);
+		return Iterator(p);
+	}
+
+	cs_bool Contains(const KeyT &key) const
+	{
+		return m_tRBTree.Find(key) != NULL;
+	}
+
+	Iterator Remove(const KeyT &key)
+	{
+		Node *p = m_tRBTree.Delete(key);
+		return Iterator(p);
+	}
+
+private:
+	CsRBTree <KeyT, CompareT, CsMapNode<KeyT, ValueT>> m_tRBTree;
 };
-
-template <typename KeyType, typename ValueType>
-inline CsMapNode<KeyType, ValueType>::CsMapNode(
-	const KeyType &key,
-	const ValueType &value,
-	CsBTreeNode<KeyType> *parent,
-	CsBTreeNode<KeyType> *left,
-	CsBTreeNode<KeyType> *right,
-	COLOR color)
-	: CsRBTreeNode(key, parent, left, right, color)
-	, m_tValue(value)
-{
-
-}
-
-template <typename KeyType, typename ValueType>
-inline CsMapNode<KeyType, ValueType>::~CsMapNode()
-{
-
-}
-
-template <typename KeyType, typename ValueType>
-inline CsBTreeNode<KeyType> *CsMapNode<KeyType, ValueType>::Copy() const
-{
-	CsMapNode<KeyType, ValueType> *pNode = NULL;
-	try
-	{
-		pNode = new CsMapNode<KeyType, ValueType>(m_tData, m_tValue, m_pParent, NULL, NULL, m_emColor);
-	}
-	catch (std::bad_alloc&)
-	{
-		pNode = NULL;
-	}
-	if (!pNode)
-	{
-		return NULL;
-	}
-	if (m_pLeft)
-	{
-		pNode->m_pLeft = m_pLeft->Copy();
-	}
-	if (m_pRight)
-	{
-		pNode->m_pRight = m_pRight->Copy();
-	}
-	return pNode;
-}
 
 #endif // _CORE_MAP_H_

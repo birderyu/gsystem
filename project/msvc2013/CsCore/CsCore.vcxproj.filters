@@ -64,6 +64,9 @@
     <Filter Include="源文件\Algorithm\Structure">
       <UniqueIdentifier>{045ae1c4-49f8-4ef1-9d46-d58494869a98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Algorithm\Structure\BinTree">
+      <UniqueIdentifier>{56556b69-a8cc-4b83-ab06-b3d86c0ffe22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h">
@@ -153,17 +156,11 @@
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h">
       <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsDecimal.h">
       <Filter>头文件\Number</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsSocket_Private.h">
       <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsSList.h">
       <Filter>头文件\Algorithm\Structure</Filter>
@@ -189,14 +186,20 @@
     <ClInclude Include="..\..\..\include\CsCore\CsObject.h">
       <Filter>头文件\Global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsMap.h">
       <Filter>头文件\Container</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsTemplate.h">
       <Filter>头文件\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h">
+      <Filter>头文件\Algorithm\Structure\BinTree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
+      <Filter>头文件\Algorithm\Structure\BinTree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
+      <Filter>头文件\Algorithm\Structure\BinTree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
