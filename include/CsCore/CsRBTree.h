@@ -19,7 +19,6 @@
 
 #include "CsBSTree.h"
 
-template<typename KeyT, typename CompareT, typename NodeT> class CsRBTree;
 template<typename KeyT, typename CompareT, typename NodeT> class CsRBTree_Private;
 
 template<typename KeyT>
@@ -57,6 +56,7 @@ public:
 
 	/// 插入一个数据
 	/// 如果改变了Node的结构，Insert方法需要重新实现
+	virtual NodeT *InsertByNode(const NodeT &node, cs_bool *realInsert = NULL);
 	virtual NodeT *InsertByKey(const KeyT &key, cs_bool *realInsert = NULL);
 
 	/// 删除一个数据
@@ -140,8 +140,14 @@ inline CsRBTree<KeyT, CompareT, NodeT>::~CsRBTree()
 template<typename KeyT, typename CompareT, typename NodeT>
 inline NodeT *CsRBTree<KeyT, CompareT, NodeT>::InsertByKey(const KeyT &key, cs_bool *realInsert)
 {
+	return InsertByNode(NodeT(key, NULL, NULL, NULL, NodeT::COLOR_RED), realInsert);
+}
+
+template<typename KeyT, typename CompareT, typename NodeT>
+inline NodeT *CsRBTree<KeyT, CompareT, NodeT>::InsertByNode(const NodeT &node, cs_bool *realInsert = NULL)
+{
 	cs_bool insert = false;
-	NodeT *p = CsBSTree<KeyT, CompareT, NodeT>::InsertByKey(key, &insert);
+	NodeT *p = CsBSTree<KeyT, CompareT, NodeT>::InsertByNode(node, &insert);
 	if (realInsert)
 	{
 		*realInsert = insert;
@@ -151,6 +157,7 @@ inline NodeT *CsRBTree<KeyT, CompareT, NodeT>::InsertByKey(const KeyT &key, cs_b
 		return p;
 	}
 	m_tRBTree_Private.InsertFixUp(p, GetRoot());
+	//GetRoot()->m_nColor = NodeT::COLOR_BLACK;
 	return p;
 }
 
@@ -183,47 +190,61 @@ inline cs_bool CsRBTree_Private<KeyT, CompareT, NodeT>::InsertFixUp(NodeT *&node
 	{
 		NodeT *gnode = pnode->m_pParent; // 祖父节点
 		NodeT *unode = NULL; // 叔叔节点
-		pnode->m_nColor = NodeT::COLOR_BLACK;
-		gnode->m_nColor = NodeT::COLOR_RED;
+		
 		if (pnode == gnode->m_pLeft)
 		{
 			// 双亲是祖父的左孩子，叔叔是祖父的右孩子
 			unode = gnode->m_pRight;
-			if (NULL == unode)
+			if (NULL == unode || unode->m_nColor == NodeT::COLOR_BLACK)
 			{
-				return true;
+				// 叔叔为空，或者为黑色
+				if (node == pnode->m_pRight)
+				{
+					// 当前节点为双亲的右孩子
+					RotateLeft(pnode, root); // 以双亲为支点进行左旋
+					return InsertFixUp(pnode, root);
+				}
+				else
+				{
+					// 当前节点为双亲的左孩子
+					pnode->m_nColor = NodeT::COLOR_BLACK;
+					gnode->m_nColor = NodeT::COLOR_RED;
+					RotateRight(gnode, root); // 以祖父为支点进行右旋
+					return InsertFixUp(node, root);
+				}
 			}
-			if (unode->m_nColor == NodeT::COLOR_RED)
-			{
-				// 叔叔是红色
-				unode->m_nColor = NodeT::COLOR_BLACK;
-				return InsertFixUp(gnode, root);
-			}
-			else
-			{
-				// 叔叔是黑色
-				RotateLeft(pnode, root); // 以双亲为支点进行左旋
-				return InsertFixUp(pnode, root);
-			}
-			
 		}
 		else
 		{
 			// 双亲是祖父的右孩子，叔叔是祖父的左孩子
 			unode = pnode->m_pParent->m_pLeft;
-			if (NULL == unode)
+			if (NULL == unode || unode->m_nColor == NodeT::COLOR_BLACK)
 			{
-				return true;
+				// 叔叔为空，或者为黑色
+				if (node == pnode->m_pLeft)
+				{
+					// 当前节点为双亲的左孩子
+					RotateRight(pnode, root); // 以双亲为支点进行右旋
+					return InsertFixUp(pnode, root);
+				}
+				else
+				{
+					// 当前节点为双亲的右孩子
+					pnode->m_nColor = NodeT::COLOR_BLACK;
+					gnode->m_nColor = NodeT::COLOR_RED;
+					RotateLeft(gnode, root); // 以祖父为支点进行左旋
+					return InsertFixUp(node, root);
+				}
 			}
-			if (unode->m_nColor == NodeT::COLOR_RED)
-			{
-				// 叔叔是红色
-			}
-			else
-			{
-				// 叔叔是黑色
-				RotateLeft(gnode, root); // 以祖父为支点进行左旋
-			}
+		}
+
+		if (NULL != unode && unode->m_nColor == NodeT::COLOR_RED)
+		{
+			// 叔叔是红色
+			pnode->m_nColor = NodeT::COLOR_BLACK;
+			unode->m_nColor = NodeT::COLOR_BLACK;
+			gnode->m_nColor = NodeT::COLOR_RED;
+			return InsertFixUp(gnode, root);
 		}
 	}
 }

@@ -38,6 +38,7 @@ template<typename KeyT,
 class CsMap :public CsObject
 {
 	typedef CsMapNode<KeyT, ValueT> Node;
+	typedef CsRBTree <KeyT, CompareT, Node> Tree;
 
 public:
 	class ConstIterator;
@@ -45,8 +46,8 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		Iterator(Node *node = NULL)
-			:m_pNode(node)
+		Iterator(Node *node = NULL, Tree *tree = NULL)
+			:m_pNode(node), m_pTree(tree)
 		{
 
 		}
@@ -56,32 +57,49 @@ public:
 		inline ValueT *operator->() const { return &node->m_tValue; }
 		inline cs_bool operator==(const Iterator &o) const { return node == o.node; }
 		inline cs_bool operator!=(const Iterator &o) const { return node != o.node; }
+		inline Iterator &operator++() 
+		{
+			if (m_pTree)
+			{
+				node = m_pTree->NextNode(node);
+			}
+			return *this;
+		}
+		inline Iterator &operator--()
+		{
+			if (m_pTree)
+			{
+				node = m_pTree->PreviousNode(node);
+			}
+			return *this;
+		}
 
 	private:
-		Node *m_pNode
+		Node *m_pNode;
+		Tree *m_pTree;
 	};
 
 public:
 	Iterator Insert(const KeyT &key, const ValueT &value)
 	{
 		Node node(key, value);
-		Node *p = m_tRBTree.InsertByNode(node);
-		return Iterator(p);
+		Node *p = m_tTree.InsertByNode(node);
+		return Iterator(p, &m_tTree);
 	}
 
 	cs_bool Contains(const KeyT &key) const
 	{
-		return m_tRBTree.Find(key) != NULL;
+		return m_tTree.Find(key) != NULL;
 	}
 
 	Iterator Remove(const KeyT &key)
 	{
-		Node *p = m_tRBTree.Delete(key);
+		Node *p = m_tTree.Delete(key);
 		return Iterator(p);
 	}
 
 private:
-	CsRBTree <KeyT, CompareT, CsMapNode<KeyT, ValueT>> m_tRBTree;
+	Tree m_tTree;
 };
 
 #endif // _CORE_MAP_H_

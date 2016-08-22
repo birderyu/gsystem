@@ -13,7 +13,6 @@
 
 #include "CsObject.h"
 
-template<typename KeyT, typename NodeT> class CsBTree;
 template<typename KeyT, typename NodeT> class CsBTree_Private;
 
 /// 二叉树节点
@@ -378,7 +377,7 @@ inline cs_size_t CsBTree<KeyT, NodeT>::GetLeafCount() const
 }
 
 template<typename KeyT, typename NodeT>
-inline unsigned int CsBTree<KeyT, NodeT>::GetDepth() const
+inline cs_size_t CsBTree<KeyT, NodeT>::GetDepth() const
 {
 	// Minus 1 here because I think the root node's depth should be 0.  
 	// So, don't do it if u think the root node's depth should be 1.  

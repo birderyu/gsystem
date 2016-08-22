@@ -64,7 +64,7 @@
     <Filter Include="源文件\Algorithm\Structure">
       <UniqueIdentifier>{045ae1c4-49f8-4ef1-9d46-d58494869a98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Algorithm\Structure\BinTree">
+    <Filter Include="头文件\Algorithm\Structure\Tree">
       <UniqueIdentifier>{56556b69-a8cc-4b83-ab06-b3d86c0ffe22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -193,13 +193,13 @@
       <Filter>头文件\Global</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h">
-      <Filter>头文件\Algorithm\Structure\BinTree</Filter>
+      <Filter>头文件\Algorithm\Structure\Tree</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
-      <Filter>头文件\Algorithm\Structure\BinTree</Filter>
+      <Filter>头文件\Algorithm\Structure\Tree</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
-      <Filter>头文件\Algorithm\Structure\BinTree</Filter>
+      <Filter>头文件\Algorithm\Structure\Tree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,10 +7,8 @@
 
 int main(int argc, char *argv[])
 {
-	int a = sizeof(CsString);
-	int b = sizeof(CsString_Private);
+	//TestBSTree();
 	TestRBTree();
-	//TestRBTree();
 	//TestInsertSort();
 	system("pause");
 }

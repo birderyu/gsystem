@@ -88,21 +88,27 @@ void TestBTree()
 
 void TestBSTree()
 {
-	CsBSTree<cs_int, NoCompareF<cs_int>> bstree;
-	bstree.InsertByKey(0);
-	bstree.InsertByKey(-2);
-	bstree.InsertByKey(5);
-	bstree.InsertByKey(2);
-	bstree.InsertByKey(-3);
-	bstree.InsertByKey(-1);
+	CsBSTree<cs_int, CsCompareF<cs_int>, CsRBTreeNode<cs_int>> bstree;
+	auto n1 = bstree.InsertByKey(0);
+	auto n2 = bstree.InsertByKey(-2);
+	auto n3 = bstree.InsertByKey(5);
+	auto n4 = bstree.InsertByKey(2);
+	auto n5 = bstree.InsertByKey(-3);
+	auto n6 = bstree.InsertByKey(-1);
+	auto n6_1 = bstree.InsertByKey(-1);
 	bstree.InOrderTraverse(Visit);
 
-	auto *node = bstree.Find(-3);
-	auto *root1 = bstree.GetRoot();
-	auto *del = bstree.Delete(0);
-	auto *root2 = bstree.GetRoot();
+	//auto *node = bstree.Find(-3);
+	//auto *root1 = bstree.GetRoot();
+	//auto *del = bstree.Delete(0);
+	//auto *root2 = bstree.GetRoot();
+	//bstree.InOrderTraverse(Visit);
 
-	bstree.InOrderTraverse(Visit);
+	auto n = bstree.FirstNode();
+	n = bstree.NextNode(n);
+	n = bstree.PreviousNode(n);
+	n = bstree.LastNode();
+
 	int stop = 1;
 	stop++;
 }
@@ -111,12 +117,32 @@ void TestRBTree()
 {
 	CsRBTree<cs_int> bstree;
 	bstree.InsertByKey(0);
-	//bstree.Insert(0);
-	bstree.InsertByKey(-2);
-	bstree.InsertByKey(5);
+	bstree.InsertByKey(1);
 	bstree.InsertByKey(2);
-	bstree.InsertByKey(-3);
-	bstree.InsertByKey(-1);
+	bstree.InsertByKey(3);
+	bstree.InsertByKey(4);
+	bstree.InsertByKey(5);
+	bstree.InsertByKey(6);
+	bstree.InsertByKey(7);
+	bstree.InsertByKey(8);
+	bstree.InsertByKey(9);
+	bstree.InsertByKey(10);
+	bstree.InsertByKey(11);
+	bstree.InsertByKey(12);
+	bstree.InsertByKey(13);
+	bstree.InsertByKey(14);
+	bstree.InsertByKey(15);
+	bstree.InsertByKey(16);
+	bstree.InsertByKey(17);
+	bstree.InsertByKey(18);
+	bstree.InsertByKey(19);
+	bstree.InsertByKey(20);
+
+	cs_size_t d = bstree.GetDepth();
+
+
+	auto n = bstree.GetRoot();
+
 	bstree.InOrderTraverse(Visit);
 
 	int stop = 1;
