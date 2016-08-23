@@ -137,6 +137,10 @@ void TestRBTree()
 	bstree.InsertByKey(18);
 	bstree.InsertByKey(19);
 	bstree.InsertByKey(20);
+	for (int i = 0; i < 10000; i++)
+	{
+		bstree.InsertByKey(i + 1000);
+	}
 
 	cs_size_t d = bstree.GetDepth();
 

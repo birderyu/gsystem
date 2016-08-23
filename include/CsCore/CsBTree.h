@@ -120,7 +120,25 @@ inline CsBTreeNode<KeyT>::CsBTreeNode(
 template<typename KeyT>
 inline CsBTreeNode<KeyT>::~CsBTreeNode()
 {
-
+	if (m_pParent)
+	{
+		if (this == m_pParent->m_pLeft)
+		{
+			m_pParent->m_pLeft = NULL;
+		}
+		else
+		{
+			m_pParent->m_pRight = NULL;
+		}
+	}
+	if (m_pLeft)
+	{
+		delete m_pLeft;
+	}
+	if (m_pRight)
+	{
+		delete m_pRight
+	}
 }
 
 template<typename KeyT>
