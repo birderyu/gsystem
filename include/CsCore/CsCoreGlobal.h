@@ -3,7 +3,7 @@
 
 #include "CsGlobal.h"
 
-enum EM_CORE_CLASSCODE
+enum CS_CORE_CLASSCODE
 {
 	CORE_CLASSCODE_OBJECT = 0,			// Object
 	CORE_CLASSCODE_ARRAY,				// Array

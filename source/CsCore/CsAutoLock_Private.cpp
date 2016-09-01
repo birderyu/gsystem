@@ -3,7 +3,7 @@
 #include "CsMutex.h"
 
 CsAutoLock_Private::CsAutoLock_Private(CsAutoLock *pPublic, CsMutex *pMutex)
-:CsObject_Private(pPublic), m_pMutex(pMutex), m_bLocked(true)
+: CsObject_Private(pPublic), m_pMutex(pMutex), m_bLocked(true)
 {
 	if (!m_pMutex)
 	{

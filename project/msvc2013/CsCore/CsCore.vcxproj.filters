@@ -195,11 +195,20 @@
     <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h">
       <Filter>头文件\Algorithm\Structure\Tree</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
+      <Filter>头文件\Algorithm\Structure\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBinTree.h">
+      <Filter>头文件\Algorithm\Structure\Tree</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
       <Filter>头文件\Algorithm\Structure\Tree</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
-      <Filter>头文件\Algorithm\Structure\Tree</Filter>
+    <ClInclude Include="..\..\..\include\CsCore\CsVariant.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsVariant_Private.h">
+      <Filter>头文件\_private</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +286,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsSort.cpp">
       <Filter>源文件\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsVariant_Private.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsVariant.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

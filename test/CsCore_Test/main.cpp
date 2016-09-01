@@ -4,9 +4,14 @@
 
 #include "CsString.h"
 #include "CsString_Private.h"
+#include "CsVariant.h"
 
 int main(int argc, char *argv[])
 {
+	CsVariant v("123");
+	v.SetValue("321");
+	CsString s = v.ToString();
+
 	//TestBSTree();
 	TestRBTree();
 	//TestInsertSort();

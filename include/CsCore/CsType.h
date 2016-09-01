@@ -1,6 +1,9 @@
 #ifndef _CORE_TYPE_H_
 #define _CORE_TYPE_H_
 
+typedef	void			cs_void;
+typedef	void*			cs_pointer;
+
 typedef	char			cs_char;
 typedef	signed char		cs_schar;
 typedef	unsigned char	cs_uchar;

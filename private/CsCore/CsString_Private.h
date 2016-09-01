@@ -11,6 +11,7 @@ class CsString_Private :public CsObject_Private
 {
 public:
 	CsString_Private(CsString *pPublic);
+	CsString_Private(CsString *pPublic, const cs_char cChar);
 	CsString_Private(CsString *pPublic, const cs_char *pStr);
 	CsString_Private(CsString *pPublic, const std::string &sStr);
 	CsString_Private(CsString *pPublic, const CsString_Private &sStr);
@@ -29,6 +30,7 @@ public:
 	void MakeTrim();
 	void MakeUpper();
 	void MakeLower();
+	void Format(const char *format, ...);
 
 	template <typename T>
 	static CsString FromNum(T nNum, cs_int nBase);

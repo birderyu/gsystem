@@ -11,15 +11,15 @@
 #ifndef _CORE_BINARY_SORT_TREE_H_
 #define _CORE_BINARY_SORT_TREE_H_
 
-#include "CsBTree.h"
+#include "CsBinTree.h"
 
 template<typename KeyT, typename CompareT, typename NodeT> class CsBSTree_Private;
 
 /// 二叉排序树
 template<typename KeyT, 
 	typename CompareT = CsCompareF<KeyT >,
-	typename NodeT = CsBTreeNode<KeyT >>
-class CsBSTree : public CsBTree<KeyT, NodeT>
+	typename NodeT = CsBinTreeNode<KeyT >>
+class CsBSTree : public CsBinTree<KeyT, NodeT>
 {
 public:
 	virtual ~CsBSTree();

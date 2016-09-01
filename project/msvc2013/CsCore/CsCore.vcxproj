@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsAStack.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsBinTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsCList.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDList.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsThread.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsType.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsVariant.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsVector.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsAutoLock_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsMutex_Private.h" />
@@ -130,6 +132,7 @@
     <ClInclude Include="..\..\..\private\CsCore\CsTcpSocket_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsThread_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsUdpSocket_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsVariant_Private.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsAutoLock.cpp" />
@@ -157,6 +160,8 @@
     <ClCompile Include="..\..\..\source\CsCore\CsThread.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsVariant.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsVariant_Private.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

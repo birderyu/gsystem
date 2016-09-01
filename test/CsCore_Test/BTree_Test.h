@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CsBTree.h"
+#include "CsBinTree.h"
 #include "CsBSTree.h"
 #include "CsRBTree.h"
 
@@ -47,13 +47,13 @@ public:
 
 void TestBTree()
 {
-	CsBTreeNode<cs_int> *node_3 = new CsBTreeNode<cs_int>(-3);
-	CsBTreeNode<cs_int> *node_2 = new CsBTreeNode<cs_int>(-2);
-	CsBTreeNode<cs_int> *node_1 = new CsBTreeNode<cs_int>(-1);
-	CsBTreeNode<cs_int> *node0 = new CsBTreeNode<cs_int>(0);
-	CsBTreeNode<cs_int> *node1 = new CsBTreeNode<cs_int>(1);
-	CsBTreeNode<cs_int> *node2 = new CsBTreeNode<cs_int>(2);
-	CsBTreeNode<cs_int> *node3 = new CsBTreeNode<cs_int>(3);
+	CsBinTreeNode<cs_int> *node_3 = new CsBinTreeNode<cs_int>(-3);
+	CsBinTreeNode<cs_int> *node_2 = new CsBinTreeNode<cs_int>(-2);
+	CsBinTreeNode<cs_int> *node_1 = new CsBinTreeNode<cs_int>(-1);
+	CsBinTreeNode<cs_int> *node0 = new CsBinTreeNode<cs_int>(0);
+	CsBinTreeNode<cs_int> *node1 = new CsBinTreeNode<cs_int>(1);
+	CsBinTreeNode<cs_int> *node2 = new CsBinTreeNode<cs_int>(2);
+	CsBinTreeNode<cs_int> *node3 = new CsBinTreeNode<cs_int>(3);
 
 	node0->m_pParent = NULL;
 	node0->m_pLeft = node_2;
@@ -68,10 +68,10 @@ void TestBTree()
 	node2->m_pRight = node3;
 	node3->m_pParent = node1->m_pParent = node2;
 
-	CsBTree<cs_int> btree(node0);
+	CsBinTree<cs_int> btree(node0);
 	cs_size_t ncount = btree.GetNodeCount();
 
-	CsBTree<cs_int> btree2;
+	CsBinTree<cs_int> btree2;
 	cs_bool b = btree2.IsEmpty();
 	btree2.Clone(btree);
 	cs_size_t ncount2 = btree2.GetNodeCount();

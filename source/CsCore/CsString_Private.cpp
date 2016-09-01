@@ -8,6 +8,12 @@ CsString_Private::CsString_Private(CsString *pPublic)
 
 }
 
+CsString_Private::CsString_Private(CsString *pPublic, const cs_char cChar)
+: CsObject_Private(pPublic), m_sStr()
+{
+	m_sStr = cChar;
+}
+
 CsString_Private::CsString_Private(CsString *pPublic, const cs_char *pStr)
 : CsObject_Private(pPublic), m_sStr(pStr)
 {
