@@ -49,9 +49,9 @@ public:
 	CsSockAddr_Private(CsSockAddr *pPublic);
 	CsSockAddr_Private(CsSockAddr *pPublic, const CsString &sIP, cs_ushort nPort);
 	~CsSockAddr_Private();
-	void SetIP(const CsString &sIP);
-	void SetIP(const cs_uint nIP);
-	void SetPortID(const cs_ushort nPort);
+	cs_void SetIP(const CsString &sIP);
+	cs_void SetIP(const cs_uint nIP);
+	cs_void SetPortID(const cs_ushort nPort);
 
 private:
 	sockaddr_in m_tSocketAddr;

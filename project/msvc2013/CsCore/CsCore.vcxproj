@@ -90,10 +90,14 @@
     <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsBinTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsBTree.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsBytes.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsCList.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsCriticalSection.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDList.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsLStack.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMap.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsMemBlock.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsNumber.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSort.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h" />
@@ -121,9 +125,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsVariant.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsVector.h" />
-    <ClInclude Include="..\..\..\private\CsCore\CsAutoLock_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsBytes_Private.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsCriticalSection_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsMutex_Private.h" />
-    <ClInclude Include="..\..\..\private\CsCore\CsNumber.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsObject_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsSemaphore_Private.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsSockAddr_Private.h" />
@@ -135,14 +139,16 @@
     <ClInclude Include="..\..\..\private\CsCore\CsVariant_Private.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\CsCore\CsAutoLock.cpp" />
-    <ClCompile Include="..\..\..\source\CsCore\CsAutoLock_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsBytes.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsBytes_Private.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection_Private_Win32.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsMath.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsMemBlock.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsMutex_Private_Win32.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsMutex.cpp" />
-    <ClCompile Include="..\..\..\source\CsCore\CsNumber.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsObject_Private.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Private_Win32.cpp" />

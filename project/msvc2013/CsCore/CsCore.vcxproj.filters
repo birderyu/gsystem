@@ -67,19 +67,19 @@
     <Filter Include="头文件\Algorithm\Structure\Tree">
       <UniqueIdentifier>{56556b69-a8cc-4b83-ab06-b3d86c0ffe22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Memory">
+      <UniqueIdentifier>{b5520bd9-742b-4636-a4a2-4fb27f2e6bc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Memory">
+      <UniqueIdentifier>{803bc837-3161-4f45-870b-283933bf67f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsLogger.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsString.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsNumber.h">
-      <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsObject_Private.h">
       <Filter>头文件\_private</Filter>
@@ -107,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsMath.h">
       <Filter>头文件\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsAutoLock_Private.h">
-      <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsSemaphore_Private.h">
       <Filter>头文件\_private</Filter>
@@ -143,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h">
       <Filter>头文件\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsTable.h">
-      <Filter>头文件\Table</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsVector.h">
       <Filter>头文件\Container</Filter>
@@ -210,11 +204,32 @@
     <ClInclude Include="..\..\..\private\CsCore\CsVariant_Private.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMemBlock.h">
+      <Filter>头文件\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h">
+      <Filter>头文件\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsNumber.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBytes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsBytes_Private.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCriticalSection.h">
+      <Filter>头文件\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsCriticalSection_Private.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTable.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsString.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -224,16 +239,10 @@
     <ClCompile Include="..\..\..\source\CsCore\CsString_Private.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsNumber.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsThread_Private_Win32.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsMutex_Private_Win32.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsAutoLock_Private.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp">
@@ -266,9 +275,6 @@
     <ClCompile Include="..\..\..\source\CsCore\CsThread.cpp">
       <Filter>源文件\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsAutoLock.cpp">
-      <Filter>源文件\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsMutex.cpp">
       <Filter>源文件\Thread</Filter>
     </ClCompile>
@@ -292,6 +298,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsVariant.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">
+      <Filter>源文件\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsMemBlock.cpp">
+      <Filter>源文件\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsBytes_Private.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsBytes.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection.cpp">
+      <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection_Private_Win32.cpp">
+      <Filter>源文件\_private</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -31,7 +31,7 @@ public:
 	cs_bool Resize(const cs_size_t len, const T &t);
 
 	// 清空数组
-	void Clear();
+	cs_void Clear();
 
 	// 通过下标访问和修改数组元素
 	T &operator[](const cs_size_t id);
@@ -177,7 +177,7 @@ cs_bool CsArray<T>::Resize(const cs_size_t len, const T &t)
 }
 
 template <typename T>
-void CsArray<T>::Clear()
+cs_void CsArray<T>::Clear()
 {
 	if (m_pData)
 	{

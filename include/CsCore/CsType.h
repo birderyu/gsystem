@@ -3,6 +3,7 @@
 
 typedef	void			cs_void;
 typedef	void*			cs_pointer;
+typedef	const void*		cs_cpointer;
 
 typedef	char			cs_char;
 typedef	signed char		cs_schar;

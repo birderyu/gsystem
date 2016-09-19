@@ -103,6 +103,12 @@ CsVariant::CsVariant(const CsString &sValue)
 
 }
 
+CsVariant::CsVariant(const CsObject &tValue)
+: CsObject(new CsVariant_Private(this, tValue))
+{
+
+}
+
 CsVariant::CsVariant(const cs_pointer pValue)
 : CsObject(new CsVariant_Private(this, pValue))
 {
@@ -132,106 +138,112 @@ cs_pointer CsVariant::GetPoiter() const
 	return pPrivate->GetPoiter();
 }
 
-void CsVariant::SetPoiter(const cs_pointer pValue)
+cs_void CsVariant::SetPoiter(const cs_pointer pValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetPoiter(pValue);
 }
 
-void CsVariant::SetValue(const cs_bool bValue)
+cs_void CsVariant::SetValue(const cs_bool bValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(bValue);
 }
 
-void CsVariant::SetValue(const cs_char cValue)
+cs_void CsVariant::SetValue(const cs_char cValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(cValue);
 }
 
-void CsVariant::SetValue(const cs_uchar cValue)
+cs_void CsVariant::SetValue(const cs_uchar cValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(cValue);
 }
 
-void CsVariant::SetValue(const cs_wchar cValue)
+cs_void CsVariant::SetValue(const cs_wchar cValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(cValue);
 }
 
-void CsVariant::SetValue(const cs_short nValue)
+cs_void CsVariant::SetValue(const cs_short nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_ushort nValue)
+cs_void CsVariant::SetValue(const cs_ushort nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_int nValue)
+cs_void CsVariant::SetValue(const cs_int nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_uint nValue)
+cs_void CsVariant::SetValue(const cs_uint nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_long nValue)
+cs_void CsVariant::SetValue(const cs_long nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_ulong nValue)
+cs_void CsVariant::SetValue(const cs_ulong nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_longlong nValue)
+cs_void CsVariant::SetValue(const cs_longlong nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_ulonglong nValue)
+cs_void CsVariant::SetValue(const cs_ulonglong nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_float nValue)
+cs_void CsVariant::SetValue(const cs_float nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(const cs_double nValue)
+cs_void CsVariant::SetValue(const cs_double nValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(nValue);
 }
 
-void CsVariant::SetValue(cs_cstring sValue)
+cs_void CsVariant::SetValue(cs_cstring sValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(CsString(sValue));
 }
 
-void CsVariant::SetValue(const CsString &sValue)
+cs_void CsVariant::SetValue(const CsString &sValue)
 {
 	CS_PRIVATE(CsVariant);
 	pPrivate->SetValue(sValue);
+}
+
+cs_void CsVariant::SetValue(const CsObject &tValue)
+{
+	CS_PRIVATE(CsVariant);
+	pPrivate->SetValue(tValue);
 }
 
 cs_bool CsVariant::ToBool(const cs_bool def) const
@@ -324,6 +336,12 @@ CsString CsVariant::ToString(const CsString &def) const
 	return pPrivate->ToString(def);
 }
 
+CsObject *CsVariant::ToObject() const
+{
+	CS_PRIVATE(CsVariant);
+	return pPrivate->ToObject();
+}
+
 cs_byte CsVariant::ToByte(const cs_byte &def) const
 {
 	return ToUChar(def);
@@ -372,4 +390,10 @@ cs_uint64 CsVariant::ToUInt64(const cs_uint64 &def) const
 cs_size_t CsVariant::ToSizeType(const cs_size_t &def) const
 {
 	return ToUInt(def);
+}
+
+cs_bool CsVariant::Valid() const
+{
+	CS_PRIVATE(CsVariant);
+	return pPrivate->Valid();
 }

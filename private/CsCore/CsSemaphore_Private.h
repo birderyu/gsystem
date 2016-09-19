@@ -13,11 +13,11 @@ public:
 	~CsSemaphore_Private();
 	cs_int Wait();
 	cs_int Wait(cs_ulong nMsecs);
-	void Post();
+	cs_void Post();
 
 private:
 	cs_int Initialize(cs_int nInitialValue);
-	void *m_pHandle;
+	cs_pointer m_pHandle;
 };
 
 #endif // _CSCORE_CSSEMAPHORE_PRIVATE_H_

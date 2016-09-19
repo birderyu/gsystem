@@ -13,20 +13,20 @@ public:
 
 	/// 创建线程并启动
 	virtual cs_int Start();
-	virtual void Stop(cs_ulong nMsecs);
+	virtual cs_void Stop(cs_ulong nMsecs);
 
 	/// 让当前线程睡眠，单位：秒
-	static void Sleep(cs_ulong nSecs);
+	static cs_void Sleep(cs_ulong nSecs);
 
 	/// 让当前线程睡眠，单位：毫秒
-	static void MSleep(cs_ulong nMsecs);
+	static cs_void MSleep(cs_ulong nMsecs);
 
 	/// 回收指定的线程
-	static void Join(CsThread_Private *pThread);
+	static cs_void Join(CsThread_Private *pThread);
 
 private:
 	/// 当前线程体的句柄，在不同的操作系统下使用不同的结构
-	void *m_pHandle;
+	cs_pointer m_pHandle;
 };
 
 #endif // _CSCORE_CSTHREAD_PRIVATE_H_

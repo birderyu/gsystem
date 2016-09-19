@@ -39,21 +39,21 @@ template<typename KeyT,
 class CsBinTree :public CsObject
 {
 public:
-	typedef void(*funtype)(const KeyT&);
+	typedef cs_void(*funtype)(const KeyT&);
 
 public:
 	CsBinTree(NodeT *pRoot = NULL);
 	CsBinTree(const CsBinTree<KeyT, NodeT> &tTree);
 	virtual ~CsBinTree();
 	CsBinTree<KeyT, NodeT>& operator=(const CsBinTree<KeyT, NodeT> &tTree);
-	void Clone(const CsBinTree<KeyT, NodeT> &tTree);
-	void Attach(NodeT *pNode);
-	void Destroy();
+	cs_void CopyFrom(const CsBinTree<KeyT, NodeT> &tTree);
+	cs_void Attach(NodeT *pNode);
+	cs_void Destroy();
 
 public:
 	KeyT &GetNodeKey(NodeT *pNode);
 	KeyT GetNodeKey(const NodeT *pNode) const;
-	void SetNodeKey(NodeT *pNode, const KeyT &tKey);
+	cs_void SetNodeKey(NodeT *pNode, const KeyT &tKey);
 	NodeT *&GetRoot();
 	NodeT *GetRoot() const;
 	NodeT *&GetParent(NodeT *pNode);
@@ -70,13 +70,13 @@ public:
 
 public:
 	// 先（根）序遍历
-	void PreOrderTraverse(funtype fVisit) const;
+	cs_void PreOrderTraverse(funtype fVisit) const;
 
 	// 中（根）序遍历
-	void InOrderTraverse(funtype fVisit) const;
+	cs_void InOrderTraverse(funtype fVisit) const;
 
 	// 后（根）序遍历
-	void PostOrderTraverse(funtype fVisit) const;
+	cs_void PostOrderTraverse(funtype fVisit) const;
 	cs_size_t GetNodeCount() const;
 	cs_size_t GetLeafCount() const;
 	cs_size_t GetDepth() const;
@@ -93,13 +93,13 @@ class CsBTree_Private
 	friend class CsBinTree<KeyT, NodeT>;
 
 private:
-	typedef void(*funtype)(const KeyT&);
-	void DestroySubTree(NodeT *pNode);
-	void PreOrderTraverse(const NodeT *pNode, funtype fVisit) const;
-	void InOrderTraverse(const NodeT *pNode, funtype fVisit) const;
-	void PostOrderTraverse(const NodeT *pNode, funtype fVisit) const;
-	void GetNodeCount(const NodeT *pNode, cs_size_t *nCount) const;
-	void GetLeafCount(const NodeT *pNode, cs_size_t *nCount) const;
+	typedef cs_void(*funtype)(const KeyT&);
+	cs_void DestroySubTree(NodeT *pNode);
+	cs_void PreOrderTraverse(const NodeT *pNode, funtype fVisit) const;
+	cs_void InOrderTraverse(const NodeT *pNode, funtype fVisit) const;
+	cs_void PostOrderTraverse(const NodeT *pNode, funtype fVisit) const;
+	cs_void GetNodeCount(const NodeT *pNode, cs_size_t *nCount) const;
+	cs_void GetLeafCount(const NodeT *pNode, cs_size_t *nCount) const;
 	cs_size_t GetDepth(const NodeT *pNode) const;
 };
 
@@ -180,7 +180,7 @@ template<typename KeyT, typename NodeT>
 inline CsBinTree<KeyT, NodeT>::CsBinTree(const CsBinTree<KeyT, NodeT> &tTree) 
 : m_pRoot(NULL)
 {
-	Clone(tTree);
+	CopyFrom(tTree);
 }
 
 template<typename KeyT, typename NodeT>
@@ -190,7 +190,7 @@ inline CsBinTree<KeyT, NodeT>::~CsBinTree()
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::Attach(NodeT *pNode)
+inline cs_void CsBinTree<KeyT, NodeT>::Attach(NodeT *pNode)
 {
 	CS_ASSERT(pNode);
 	if (m_pRoot != NULL)
@@ -203,12 +203,12 @@ inline void CsBinTree<KeyT, NodeT>::Attach(NodeT *pNode)
 template<typename KeyT, typename NodeT>
 inline CsBinTree<KeyT, NodeT>& CsBinTree<KeyT, NodeT>::operator=(const CsBinTree<KeyT, NodeT> &tTree)
 {
-	Clone(tTree);
+	CopyFrom(tTree);
 	return *this;
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::Clone(const CsBinTree<KeyT, NodeT> &tTree)
+inline cs_void CsBinTree<KeyT, NodeT>::CopyFrom(const CsBinTree<KeyT, NodeT> &tTree)
 {
 	if (this == &tTree)
 	{
@@ -229,7 +229,7 @@ inline void CsBinTree<KeyT, NodeT>::Clone(const CsBinTree<KeyT, NodeT> &tTree)
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::Destroy()
+inline cs_void CsBinTree<KeyT, NodeT>::Destroy()
 {
 	m_tBTree_Private.DestroySubTree(m_pRoot);
 	m_pRoot = NULL;
@@ -336,7 +336,7 @@ inline KeyT CsBinTree<KeyT, NodeT>::GetNodeKey(const NodeT *p) const
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::SetNodeKey(NodeT *p, const KeyT &key)
+inline cs_void CsBinTree<KeyT, NodeT>::SetNodeKey(NodeT *p, const KeyT &key)
 {
 	CS_ASSERT(p);
 	p->m_tKey = key;
@@ -361,19 +361,19 @@ inline NodeT* CsBinTree<KeyT, NodeT>::GetRoot() const
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::PreOrderTraverse(funtype fVisit) const
+inline cs_void CsBinTree<KeyT, NodeT>::PreOrderTraverse(funtype fVisit) const
 {
 	m_tBTree_Private.PreOrderTraverse(m_pRoot, fVisit);
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::InOrderTraverse(funtype fVisit) const
+inline cs_void CsBinTree<KeyT, NodeT>::InOrderTraverse(funtype fVisit) const
 {
 	m_tBTree_Private.InOrderTraverse(m_pRoot, fVisit);
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBinTree<KeyT, NodeT>::PostOrderTraverse(funtype fVisit) const
+inline cs_void CsBinTree<KeyT, NodeT>::PostOrderTraverse(funtype fVisit) const
 {
 	m_tBTree_Private.PostOrderTraverse(m_pRoot, fVisit);
 }
@@ -403,7 +403,7 @@ inline cs_size_t CsBinTree<KeyT, NodeT>::GetDepth() const
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBTree_Private<KeyT, NodeT>::DestroySubTree(NodeT *p)
+inline cs_void CsBTree_Private<KeyT, NodeT>::DestroySubTree(NodeT *p)
 {
 	if (p)
 	{
@@ -414,7 +414,7 @@ inline void CsBTree_Private<KeyT, NodeT>::DestroySubTree(NodeT *p)
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBTree_Private<KeyT, NodeT>::PreOrderTraverse(const NodeT *p, funtype fVisit) const
+inline cs_void CsBTree_Private<KeyT, NodeT>::PreOrderTraverse(const NodeT *p, funtype fVisit) const
 {
 	if (p)
 	{
@@ -425,7 +425,7 @@ inline void CsBTree_Private<KeyT, NodeT>::PreOrderTraverse(const NodeT *p, funty
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBTree_Private<KeyT, NodeT>::InOrderTraverse(const NodeT *p, funtype fVisit) const
+inline cs_void CsBTree_Private<KeyT, NodeT>::InOrderTraverse(const NodeT *p, funtype fVisit) const
 {
 	if (p)
 	{
@@ -436,7 +436,7 @@ inline void CsBTree_Private<KeyT, NodeT>::InOrderTraverse(const NodeT *p, funtyp
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBTree_Private<KeyT, NodeT>::PostOrderTraverse(const NodeT *p, funtype fVisit) const
+inline cs_void CsBTree_Private<KeyT, NodeT>::PostOrderTraverse(const NodeT *p, funtype fVisit) const
 {
 	if (p)
 	{
@@ -447,7 +447,7 @@ inline void CsBTree_Private<KeyT, NodeT>::PostOrderTraverse(const NodeT *p, funt
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBTree_Private<KeyT, NodeT>::GetNodeCount(
+inline cs_void CsBTree_Private<KeyT, NodeT>::GetNodeCount(
 	const NodeT *p,
 	cs_size_t *unCount
 	) const
@@ -470,7 +470,7 @@ inline void CsBTree_Private<KeyT, NodeT>::GetNodeCount(
 }
 
 template<typename KeyT, typename NodeT>
-inline void CsBTree_Private<KeyT, NodeT>::GetLeafCount(
+inline cs_void CsBTree_Private<KeyT, NodeT>::GetLeafCount(
 	const NodeT *p,
 	cs_size_t *unCount
 	) const

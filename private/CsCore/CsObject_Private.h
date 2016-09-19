@@ -2,6 +2,7 @@
 #define _CSCORE_CSOBJECT_PRIVATE_H_
 
 #include "CsGlobal.h"
+#include "CsMemPool.h"
 
 class CsObject;
 

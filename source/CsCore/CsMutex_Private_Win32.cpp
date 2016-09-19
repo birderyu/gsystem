@@ -1,13 +1,20 @@
 #ifdef _WIN32
+
 #include "CsMutex_Private.h"
 #include "CsMutex.h"
 #include <windows.h>
 
-/// Win32»¥³âËøÊµÀý¾ä±ú
+/// Win32»¥³âÁ¿ÊµÀý¾ä±ú
 struct CsMutex_Handle
 {
 	HANDLE m_hMutex;
 };
+
+CsMutex_Private::CsMutex_Private()
+:CsObject_Private(NULL), m_pHandle(NULL)
+{
+	Initialize();
+}
 
 CsMutex_Private::CsMutex_Private(CsMutex *pPublic)
 :CsObject_Private(pPublic), m_pHandle(NULL)
@@ -17,52 +24,51 @@ CsMutex_Private::CsMutex_Private(CsMutex *pPublic)
 
 CsMutex_Private::~CsMutex_Private()
 {
-	if (m_pHandle)
-	{
-		CsMutex_Handle *pHandle = (CsMutex_Handle*)m_pHandle;
-		delete pHandle;
-		m_pHandle = NULL;
-	}
+	Release();
 }
 
-cs_int CsMutex_Private::Lock()
+cs_bool CsMutex_Private::Lock()
 {
-	CsMutex_Handle *pHandle = (CsMutex_Handle*)m_pHandle;
-	if (!pHandle) return -1;
+	CsMutex_Handle *pHandle = static_cast<CsMutex_Handle*>(m_pHandle);
+	if (!pHandle) return false;
 
 	WaitForSingleObject(pHandle->m_hMutex, INFINITE);
-	return 0;
+	return true;
 }
 
-cs_int CsMutex_Private::TryLock()
+cs_bool CsMutex_Private::TryLock()
 {
-	CsMutex_Handle *pHandle = (CsMutex_Handle*)m_pHandle;
-	if (!pHandle) return -1;
+	CsMutex_Handle *pHandle = static_cast<CsMutex_Handle*>(m_pHandle);
+	if (!pHandle) return false;
 
 	DWORD nRet = WaitForSingleObject(pHandle->m_hMutex, 1);
 	if (nRet == WAIT_OBJECT_0)
 	{
-		return 0; // success
+		return true; // success
 	}
 	if (nRet == WAIT_TIMEOUT)
 	{
-		return -1; // timeout
+		return false; // timeout
 	}
-	return -1;
+	return true;
 }
 
-void CsMutex_Private::Unlock()
+cs_void CsMutex_Private::Unlock()
 {
-	CsMutex_Handle *pHandle_Priv = (CsMutex_Handle*)m_pHandle;
-	if (!pHandle_Priv) return;
+	CsMutex_Handle *pHandle = static_cast<CsMutex_Handle*>(m_pHandle);
+	if (!pHandle) return;
 
-	ReleaseMutex(pHandle_Priv->m_hMutex);
+	ReleaseMutex(pHandle->m_hMutex);
 }
 
-cs_int CsMutex_Private::Initialize()
+cs_bool CsMutex_Private::Initialize()
 {
+	if (!m_pHandle)
+	{
+		return true;
+	}
 	CsMutex_Handle *pHandle = new CsMutex_Handle;
-	if (!pHandle) return -1;
+	if (!pHandle) return false;
 	m_pHandle = pHandle;
 
 	pHandle->m_hMutex = CreateMutex(NULL, true, NULL);
@@ -70,11 +76,21 @@ cs_int CsMutex_Private::Initialize()
 	{
 		delete pHandle;
 		pHandle = NULL;
-		return -1;
+		return false;
 	}
 
 	ReleaseMutex(pHandle->m_hMutex);
-	return 0;
+	return true;
+}
+
+cs_void CsMutex_Private::Release()
+{
+	if (m_pHandle)
+	{
+		CsMutex_Handle *pHandle = static_cast<CsMutex_Handle*>(m_pHandle);
+		delete pHandle;
+		m_pHandle = NULL;
+	}
 }
 
 #endif // _WIN32

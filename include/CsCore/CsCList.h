@@ -24,7 +24,7 @@ public:
 
 public:
 	T& GetNext();
-	void RemoveAt(const cs_int pos);
+	cs_void RemoveAt(const cs_int pos);
 	int GetCurrentIndex() const;
 };
 
@@ -74,7 +74,7 @@ inline int CsCList<T>::GetCurrentIndex() const
 //删除一个节点，就让当前节点指向其前一个节点；如果删除的是头节点，则应将当前节点置为NULL。 
 //这个函数似乎专为解决约瑟夫问题而设计的。 
 template<typename T>
-inline void CsCList<T>::RemoveAt(const int pos)
+inline cs_void CsCList<T>::RemoveAt(const int pos)
 {
 	ASSERT(1 <= pos && pos <= m_nCount);
 

@@ -1,21 +1,53 @@
-#ifndef _CSCORE_CSAUTOLOCK_H_
-#define _CSCORE_CSAUTOLOCK_H_
+/// 自动锁
+/// 根据传入的锁类型自动加锁
 
-#include "CsCoreGlobal.h"
+#ifndef _CORE_AUTOLOCK_H_
+#define _CORE_AUTOLOCK_H_
+
 #include "CsObject.h"
 
-class CsMutex;
-
-/// 自动锁
+template <typename LockT>
 class CS_CORE_EXPORT CsAutoLock :public CsObject
 {
 public:
-	CsAutoLock(CsMutex *pMutex);
+	CsAutoLock(LockT *pLock);
 	~CsAutoLock();
-	void Unlock();
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_AUTO_LOCK, };
+
+private:
+	cs_void Unlock();
+
+	/// 锁
+	LockT *m_pLock;
 };
 
-#endif // _CSCORE_CSAUTOLOCK_H_
+template <typename LockT>
+CsAutoLock<LockT>::CsAutoLock(LockT *pLock)
+: m_pLock(pLock)
+{
+	if (!m_pLock)
+	{
+		return;
+	}
+	m_pLock->Lock();
+}
+
+template <typename LockT>
+CsAutoLock<LockT>::~CsAutoLock()
+{
+	Unlock();
+}
+
+template <typename LockT>
+cs_void CsAutoLock<LockT>::Unlock()
+{
+	if (!m_pLock)
+	{
+		return;
+	}
+	m_pLock->Unlock();
+}
+
+#endif // _CORE_AUTOLOCK_H_

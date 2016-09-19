@@ -1,56 +1,60 @@
-#ifndef _CSCORE_CSTABLE_H_
-#define _CSCORE_CSTABLE_H_
+/// 数据表
+
+#ifndef _CORE_DATA_TABLE_H_
+#define _CORE_DATA_TABLE_H_
 
 #include "CsCoreGlobal.h"
 #include "CsObject.h"
-#include "CsVector.h"
 
-class CsTableField;
-class CsTableFields;
-class CsTableColumn;
-class CsTableColumns;
-class CsTableRow;
-class CsTableRows;
-class CsTableCell;
-
-class CsTableField
+enum CS_FIELD_TYPE
 {
-public:
-
+	FIELD_TYPE_ILLEGAL = -1,
 };
 
-class CsTableFields
+class CsField
 {
 public:
-	CsTableFields();
-	~CsTableFields();
-
-private:
-	CsVector<CsTableField*> m_tFields;
+	CsField(const CsString &sFieldName, CS_FIELD_TYPE emFieldType);
+	const CsString &GetFieldName() const;
+	FIELD_TYPE_ILLEGAL GetFieldType() const;
 };
 
-class CS_CORE_EXPORT CsTableCell
+class CsFields
 {
 public:
-	CsTableCell();
-	~CsTableCell();
-
-	CsObject *GetValue() const;
-
-private:
-	CsObject *m_pObject;
+	CsFields();
+	~CsFields();
+	cs_bool Add(const CsField&);
+	cs_size_t Count() const;
+	const CsField &operator[](cs_size_t) const;
+	CsField &operator[](cs_size_t);
+	const CsField &operator[](const CsString&) const;
+	CsField &operator[](const CsString&);
 };
 
-class CS_CORE_EXPORT CsTableRow
+class CsRecord
 {
-
+public:
+	CsRecord(CsTable *pTable, const cs_long nRow);
 };
 
 class CS_CORE_EXPORT CsTable
 {
-private:
-	CsTableFields m_pFields;
+public:
+	CsTable();
+	CsTable(const CsFields &sFields);
+	cs_bool SetFields(const CsFields &sFields);
+	const CsFields &GetFields() const;
 
+	/// 预分配行数
+	cs_bool Resize(const cs_size_t row) const;
+
+
+	cs_size_t GetColumnCount() const;
+	cs_size_t GetRowCount() const;
+
+	CsVariant &GetValue(const cs_size_t row, const cs_size_t col);
+	cs_bool SetValue(const cs_size_t row, const cs_size_t col, const CsVariant &val);
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_TABLE, };

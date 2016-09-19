@@ -51,6 +51,12 @@ CsString CsString::ToString() const
 	return *this;
 }
 
+cs_bool CsString::operator == (const CsString &sStr)
+{
+	CS_PRIVATE(CsString);
+	return *pPrivate == *(CsString_Private*)sStr.GetPrivate();
+}
+
 CsString &CsString::operator+=(const CsString &sStr)
 {
 	CS_PRIVATE(CsString);
@@ -237,4 +243,9 @@ CsString operator+(const CsString &s1, const CsString &s2)
 	CsString sStr(s1);
 	sStr += s2;
 	return sStr;
+}
+
+cs_bool operator==(const CsString &s1, const CsString &s2)
+{
+	return s1 == s2;
 }

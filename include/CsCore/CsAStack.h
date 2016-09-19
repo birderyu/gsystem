@@ -19,7 +19,7 @@ public:
 	~CsAStack();
 public:
 	int IsEmpty() const;
-	void MakeEmpty();
+	cs_void MakeEmpty();
 	int GetCount() const;
 	int IsFull();
 	int Resize(int newmaxsize);//change the capacity. 
@@ -27,7 +27,7 @@ public:
 	int Pop(T *data = NULL);
 	int Top(T *data) const;
 private:
-	void DisposeStack();//释放数组所占的内存，即栈被销毁. 
+	cs_void DisposeStack();//释放数组所占的内存，即栈被销毁. 
 private:
 	int capacity;
 	int tos;//Top of stack for now. 
@@ -101,7 +101,7 @@ inline CsAStack<T>::~CsAStack()
 }
 
 template<typename T>
-inline void CsAStack<T>::DisposeStack()
+inline cs_void CsAStack<T>::DisposeStack()
 {
 	capacity = 0;
 	tos = EmptyTOS;
@@ -119,7 +119,7 @@ inline int CsAStack<T>::IsEmpty() const
 
 
 template<typename T>
-inline void CsAStack<T>::MakeEmpty()
+inline cs_void CsAStack<T>::MakeEmpty()
 {
 	tos = EmptyTOS;
 }

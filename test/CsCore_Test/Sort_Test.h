@@ -11,7 +11,7 @@ struct CsMore
 	}
 };
 
-void TestInsertSort()
+cs_void TestInsertSort()
 {
 	CsArray<cs_int> arr(10);
 	arr[0] = 5;

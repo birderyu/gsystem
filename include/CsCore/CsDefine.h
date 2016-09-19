@@ -40,7 +40,7 @@
 #define CS_END_NAMESPACE }
 
 #ifdef __cplusplus
-#	define CS_DECL_NOTHROW  throw()
+#	define CS_DECLARE_NOTHROW  throw()
 #endif
 
 #  if defined (CS_CORE_BUILD_DLL)
@@ -58,5 +58,54 @@
 #else
 #	define CS_ASSERT(e) do { } while ((false) && (e))
 #endif // 
+
+#define CS_DECLARE_OPERATOR_NEW_DELETE \
+public: \
+	static cs_pointer operator new(cs_size_t) \
+		throw(std::bad_alloc); \
+	static cs_void operator delete (cs_pointer);
+
+#define CS_IMPLEMENT_OPERATOR_NEW_DELETE(Class, Lock) \
+	CsMemoryPool m_gMemoryPool = CsMemoryPool(sizeof(##Class)); \
+	Lock m_gLock; \
+	cs_pointer Class##::operator new(cs_size_t size) \
+	{ \
+		CsAutoLock<##Lock> tLock(&m_gLock); \
+		cs_pointer pBuf = m_gMemoryPool.Alloc(); \
+		if (!pBuf) \
+		{ \
+			throw std::bad_alloc(); \
+		} \
+		return pBuf; \
+	} \
+	cs_void Class##::operator delete(cs_pointer pFree) \
+	{ \
+		if (pFree == NULL) \
+		{ \
+			return; \
+		} \
+		CsAutoLock<##Lock> tLock(&m_gLock); \
+		m_gMemoryPool.Free(pFree); \
+	} \
+
+#define CS_IMPLEMENT_OPERATOR_NEW_DELETE_NO_SAFE(Class) \
+	CsMemoryPool m_gMemoryPool = CsMemoryPool(sizeof(##Class)); \
+	cs_pointer Class##::operator new(cs_size_t size) \
+	{ \
+		cs_pointer pBuf = m_gMemoryPool.Alloc(); \
+		if (!pBuf) \
+		{ \
+			throw std::bad_alloc(); \
+		} \
+		return pBuf; \
+	} \
+	cs_void Class##::operator delete(cs_pointer pFree) \
+	{ \
+		if (pFree == NULL) \
+		{ \
+			return; \
+		} \
+		m_gMemoryPool.Free(pFree); \
+	} \
 
 #endif // _CORE_DEFINE_H_

@@ -37,12 +37,17 @@ cs_uint CsObject::ClassCode() const
 	return CsObject::CLASSCODE;
 }
 
-cs_bool CsObject::Equals(CsObject *pObject) const
-{
-	return this == pObject;
-}
-
 cs_uint64 CsObject::HashCode() const
 {
 	return (cs_uint64)this;
+}
+
+cs_bool CsObject::Serialize(CsBytes &tBytes) const
+{
+	return false;
+}
+
+cs_bool CsObject::Deserialize(const CsBytes &tBytes)
+{
+	return false;
 }

@@ -29,7 +29,7 @@
 
   <ItemDefinitionGroup>
     <ClCompile>
-      <DisableSpecificWarnings>4293;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
 

@@ -26,7 +26,7 @@ struct NoCompareF
 };
 
 template<typename T>
-void Visit(const T &data)
+cs_void Visit(const T &data)
 {
 	std::cout << data << std::endl;
 }
@@ -36,7 +36,7 @@ class CTestT
 {
 public:
 	template<typename K = int>
-	void test()
+	cs_void test()
 	{
 		T t = 1.1;
 		K i = 2;
@@ -45,7 +45,7 @@ public:
 };
 
 
-void TestBTree()
+cs_void TestBTree()
 {
 	CsBinTreeNode<cs_int> *node_3 = new CsBinTreeNode<cs_int>(-3);
 	CsBinTreeNode<cs_int> *node_2 = new CsBinTreeNode<cs_int>(-2);
@@ -73,7 +73,7 @@ void TestBTree()
 
 	CsBinTree<cs_int> btree2;
 	cs_bool b = btree2.IsEmpty();
-	btree2.Clone(btree);
+	btree2.CopyFrom(btree);
 	cs_size_t ncount2 = btree2.GetNodeCount();
 	cs_size_t lcount2 = btree2.GetLeafCount();
 	cs_size_t dcount2 = btree2.GetDepth();
@@ -86,7 +86,7 @@ void TestBTree()
 	stop++;
 }
 
-void TestBSTree()
+cs_void TestBSTree()
 {
 	CsBSTree<cs_int, CsCompareF<cs_int>, CsRBTreeNode<cs_int>> bstree;
 	auto n1 = bstree.InsertByKey(0);
@@ -113,7 +113,7 @@ void TestBSTree()
 	stop++;
 }
 
-void TestRBTree()
+cs_void TestRBTree()
 {
 	CsRBTree<cs_int> bstree;
 	bstree.InsertByKey(0);

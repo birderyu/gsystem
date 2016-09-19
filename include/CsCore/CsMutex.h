@@ -1,21 +1,19 @@
-#ifndef _CSCORE_CSMUTEX_H_
-#define _CSCORE_CSMUTEX_H_
+/// 互斥量
+#ifndef _CORE_MUTEX_H_
+#define _CORE_MUTEX_H_
 
-#include "CsCoreGlobal.h"
 #include "CsObject.h"
 
-/// 互斥锁
 class CS_CORE_EXPORT CsMutex :public CsObject
 {
 public:
 	CsMutex();
-	~CsMutex();
-	cs_int Lock();
-	cs_int TryLock();
-	void Unlock();
+	cs_bool Lock();
+	cs_bool TryLock();
+	cs_void Unlock();
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_MUTEX, };
 };
 
-#endif // _CSCORE_CSMUTEX_H_
+#endif // _CORE_MUTEX_H_

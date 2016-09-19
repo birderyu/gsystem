@@ -5,6 +5,7 @@
 
 class CsObject_Private;
 class CsString;
+class CsBytes;
 
 class CS_CORE_EXPORT CsObject
 {
@@ -16,8 +17,9 @@ public:
 	virtual CsObject *CopyToObject() const;
 	virtual cs_uint ClassCode() const;
 	virtual CsString ToString() const;
-	virtual cs_bool Equals(CsObject *pObject) const;
 	virtual cs_uint64 HashCode() const;
+	virtual cs_bool Serialize(CsBytes &tBytes) const;
+	virtual cs_bool Deserialize(const CsBytes &tBytes);
 
 protected:
 	CS_DECLARE_PRIVATE(CsObject);

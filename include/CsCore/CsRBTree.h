@@ -247,6 +247,7 @@ inline cs_bool CsRBTree_Private<KeyT, CompareT, NodeT>::InsertFixUp(NodeT *&node
 			return InsertFixUp(gnode, root);
 		}
 	}
+	return true;
 }
 
 template<typename KeyT, typename CompareT, typename NodeT>

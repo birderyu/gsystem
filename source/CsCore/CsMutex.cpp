@@ -7,24 +7,19 @@ CsMutex::CsMutex()
 	
 }
 
-CsMutex::~CsMutex()
-{
-	
-}
-
-cs_int CsMutex::Lock()
+cs_bool CsMutex::Lock()
 {
 	CS_PRIVATE(CsMutex);
 	return pPrivate->Lock();
 }
 
-cs_int CsMutex::TryLock()
+cs_bool CsMutex::TryLock()
 {
 	CS_PRIVATE(CsMutex);
 	return pPrivate->TryLock();
 }
 
-void CsMutex::Unlock()
+cs_void CsMutex::Unlock()
 {
 	CS_PRIVATE(CsMutex);
 	pPrivate->Unlock();

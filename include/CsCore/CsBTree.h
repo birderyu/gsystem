@@ -14,11 +14,11 @@ public:
 	virtual ~CsBTreeNode();
 
 	KeyT &GetKeyAt(const cs_size_t id);
-	void *GetChildAt(const cs_size_t id);
+	cs_pointer GetChildAt(const cs_size_t id);
 
 private:
 	CsBTreeNode<KeyT> *m_pParent;		// 双亲
-	CsArray<cs_uchar*> m_tChildren;		// 孩子
+	CsArray<cs_pointer> m_tChildren;		// 孩子
 	CsRBTree<KeyT, CompareT> m_tKeys;	// 使用红黑树排序的关键字？
 };
 

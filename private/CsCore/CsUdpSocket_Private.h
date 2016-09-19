@@ -13,9 +13,9 @@ public:
 
 	cs_int Open(cs_bool nResue);
 	cs_int Open(CsSockAddr_Private *pSockAddr, cs_bool nResue);
-	void Close();
-	cs_int SendTo(const void *pBufData, cs_int nLen, CsSockAddr_Private *pPeer);
-	cs_int RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddr_Private *pPeer);
+	cs_void Close();
+	cs_int SendTo(cs_cpointer pBufData, cs_int nLen, CsSockAddr_Private *pPeer);
+	cs_int RecvFrom(cs_pointer pBufData, cs_int nMaxLen, CsSockAddr_Private *pPeer);
 };
 
 #endif // _CSCORE_CSUDPSOCKET_PRIVATE_H_

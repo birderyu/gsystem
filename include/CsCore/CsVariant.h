@@ -18,10 +18,11 @@ enum CS_VARIANT_TYPE
 	VARIANT_TYPE_LONG,
 	VARIANT_TYPE_ULONG,
 	VARIANT_TYPE_LONGLONG,
-	VARIANT_TYPE_ULONGLONG,	// longlong
+	VARIANT_TYPE_ULONGLONG,
 	VARIANT_TYPE_FLOAT,
-	VARIANT_TYPE_DOUBLE,	// double
+	VARIANT_TYPE_DOUBLE,
 	VARIANT_TYPE_STRING,	// ×Ö·û´®
+	VARIANT_TYPE_OBJECT,	// object
 	VARIANT_TYPE_POINTER,	// Ö¸Õë
 };
 
@@ -45,6 +46,7 @@ public:
 	CsVariant(const cs_double nValue);
 	CsVariant(cs_cstring sValue);
 	CsVariant(const CsString &sValue);
+	CsVariant(const CsObject &tValue);
 	CsVariant(const cs_pointer pValue);
 	CsVariant(const CsVariant &tOther);
 	~CsVariant();
@@ -52,23 +54,24 @@ public:
 	CS_VARIANT_TYPE GetVariantType() const;
 	cs_pointer GetPoiter() const;
 
-	void SetPoiter(const cs_pointer pValue);
-	void SetValue(const cs_bool bValue);
-	void SetValue(const cs_char cValue);
-	void SetValue(const cs_uchar cValue);
-	void SetValue(const cs_wchar cValue);
-	void SetValue(const cs_short nValue);
-	void SetValue(const cs_ushort nValue);
-	void SetValue(const cs_int nValue);
-	void SetValue(const cs_uint nValue);
-	void SetValue(const cs_long nValue);
-	void SetValue(const cs_ulong nValue);
-	void SetValue(const cs_longlong nValue);
-	void SetValue(const cs_ulonglong nValue);
-	void SetValue(const cs_float nValue);
-	void SetValue(const cs_double nValue);
-	void SetValue(cs_cstring sValue);
-	void SetValue(const CsString &sValue);
+	cs_void SetPoiter(const cs_pointer pValue);
+	cs_void SetValue(const cs_bool bValue);
+	cs_void SetValue(const cs_char cValue);
+	cs_void SetValue(const cs_uchar cValue);
+	cs_void SetValue(const cs_wchar cValue);
+	cs_void SetValue(const cs_short nValue);
+	cs_void SetValue(const cs_ushort nValue);
+	cs_void SetValue(const cs_int nValue);
+	cs_void SetValue(const cs_uint nValue);
+	cs_void SetValue(const cs_long nValue);
+	cs_void SetValue(const cs_ulong nValue);
+	cs_void SetValue(const cs_longlong nValue);
+	cs_void SetValue(const cs_ulonglong nValue);
+	cs_void SetValue(const cs_float nValue);
+	cs_void SetValue(const cs_double nValue);
+	cs_void SetValue(cs_cstring sValue);
+	cs_void SetValue(const CsString &sValue);
+	cs_void SetValue(const CsObject &tValue);
 
 	cs_bool ToBool(const cs_bool def = false) const;
 	cs_char ToChar(const cs_char def = ' ') const;
@@ -85,6 +88,7 @@ public:
 	cs_float ToFloat(const cs_float def = 0) const;
 	cs_double ToDouble(const cs_double def = 0) const;
 	CsString ToString(const CsString &def = "") const;
+	CsObject *ToObject() const;
 
 	cs_byte ToByte(const cs_byte &def = 0) const;
 	cs_int8 ToInt8(const cs_int8 &def = 0) const;
@@ -96,6 +100,8 @@ public:
 	cs_int64 ToInt64(const cs_int64 &def = 0) const;
 	cs_uint64 ToUInt64(const cs_uint64 &def = 0) const;
 	cs_size_t ToSizeType(const cs_size_t &def = 0) const;
+
+	cs_bool Valid() const;
 };
 
 #endif // _CORE_VARIANT_H_

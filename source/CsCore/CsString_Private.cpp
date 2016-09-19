@@ -1,6 +1,10 @@
 #include "CsString_Private.h"
+#include "CsMutex_Private.h"
+#include "CsAutoLock.h"
 
 #define HASHCODE_BASE 31
+
+CS_IMPLEMENT_OPERATOR_NEW_DELETE(CsString_Private, CsMutex_Private)
 
 CsString_Private::CsString_Private(CsString *pPublic)
 : CsObject_Private(pPublic), m_sStr()
@@ -61,6 +65,11 @@ cs_uint64 CsString_Private::HashCode() const
 		nCode = nCode * HASHCODE_BASE + c;
 	}
 	return nCode;
+}
+
+cs_bool CsString_Private::operator==(const CsString_Private &sStr)
+{
+	return m_sStr == sStr.m_sStr;
 }
 
 CsString_Private &CsString_Private::operator=(const CsString_Private &sStr)

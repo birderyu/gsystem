@@ -1,5 +1,6 @@
 #include "CsVariant_Private.h"
 #include "CsString.h"
+#include "CsNumber.h"
 
 CsVariant_Private::CsVariant_Private(CsVariant *pPublic)
 : CsObject_Private(pPublic)
@@ -129,6 +130,14 @@ CsVariant_Private::CsVariant_Private(CsVariant *pPublic, const CsString &sValue)
 
 }
 
+CsVariant_Private::CsVariant_Private(CsVariant *pPublic, const CsObject &tValue)
+: CsObject_Private(pPublic)
+, m_emType(VARIANT_TYPE_OBJECT)
+, m_pVal(tValue.CopyToObject())
+{
+
+}
+
 CsVariant_Private::CsVariant_Private(CsVariant *pPublic, const cs_pointer pValue)
 : CsObject_Private(pPublic)
 , m_emType(VARIANT_TYPE_POINTER)
@@ -194,6 +203,14 @@ CsVariant_Private::CsVariant_Private(CsVariant *pPublic, const CsVariant_Private
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+	{
+		if (tOther.m_pVal)
+		{
+			m_pVal = static_cast<CsObject*>(tOther.m_pVal)->CopyToObject();
+		}
+	}
+		break;
 	case VARIANT_TYPE_POINTER:
 		m_pVal = tOther.m_pVal;
 		break;
@@ -221,111 +238,112 @@ cs_pointer CsVariant_Private::GetPoiter() const
 	return NULL;
 }
 
-void CsVariant_Private::SetPoiter(const cs_pointer pValue)
+cs_void CsVariant_Private::SetPoiter(const cs_pointer pValue)
 {
 	ClearMemery();
+	m_emType = VARIANT_TYPE_POINTER;
 	m_pVal = pValue;
 }
 
-void CsVariant_Private::SetValue(const cs_bool bValue)
+cs_void CsVariant_Private::SetValue(const cs_bool bValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_BOOL;
 	m_bVal = bValue;
 }
 
-void CsVariant_Private::SetValue(const cs_char cValue)
+cs_void CsVariant_Private::SetValue(const cs_char cValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_CHAR;
 	m_cVal = cValue;
 }
 
-void CsVariant_Private::SetValue(const cs_uchar cValue)
+cs_void CsVariant_Private::SetValue(const cs_uchar cValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_USHORT;
 	m_ucVal = cValue;
 }
 
-void CsVariant_Private::SetValue(const cs_wchar cValue)
+cs_void CsVariant_Private::SetValue(const cs_wchar cValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_WCHAR;
 	m_wcVal = cValue;
 }
 
-void CsVariant_Private::SetValue(const cs_short nValue)
+cs_void CsVariant_Private::SetValue(const cs_short nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_SHORT;
 	m_sVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_ushort nValue)
+cs_void CsVariant_Private::SetValue(const cs_ushort nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_USHORT;
 	m_usVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_int nValue)
+cs_void CsVariant_Private::SetValue(const cs_int nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_INT;
 	m_iVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_uint nValue)
+cs_void CsVariant_Private::SetValue(const cs_uint nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_UINT;
 	m_uiVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_long nValue)
+cs_void CsVariant_Private::SetValue(const cs_long nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_LONG;
 	m_lVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_ulong nValue)
+cs_void CsVariant_Private::SetValue(const cs_ulong nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_ULONG;
 	m_ulVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_longlong nValue)
+cs_void CsVariant_Private::SetValue(const cs_longlong nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_LONGLONG;
 	m_llVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_ulonglong nValue)
+cs_void CsVariant_Private::SetValue(const cs_ulonglong nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_ULONGLONG;
 	m_ullVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_float nValue)
+cs_void CsVariant_Private::SetValue(const cs_float nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_FLOAT;
 	m_fVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const cs_double nValue)
+cs_void CsVariant_Private::SetValue(const cs_double nValue)
 {
 	ClearMemery();
 	m_emType = VARIANT_TYPE_DOUBLE;
 	m_dVal = nValue;
 }
 
-void CsVariant_Private::SetValue(const CsString &sValue)
+cs_void CsVariant_Private::SetValue(const CsString &sValue)
 {
 	if (m_emType == VARIANT_TYPE_STRING && m_pVal)
 	{
@@ -337,6 +355,13 @@ void CsVariant_Private::SetValue(const CsString &sValue)
 		m_emType = VARIANT_TYPE_STRING;
 		m_pVal = new CsString(sValue);
 	}
+}
+
+cs_void CsVariant_Private::SetValue(const CsObject &tValue)
+{
+	ClearMemery();
+	m_emType = VARIANT_TYPE_OBJECT;
+	m_pVal = tValue.CopyToObject();
 }
 
 cs_bool CsVariant_Private::ToBool(const cs_bool bDefValue) const
@@ -367,6 +392,25 @@ cs_bool CsVariant_Private::ToBool(const cs_bool bDefValue) const
 		return m_llVal != 0;
 	case VARIANT_TYPE_ULONGLONG:
 		return m_ullVal != 0;
+	case VARIANT_TYPE_STRING:
+	{
+		if (m_pVal)
+		{
+			CsString sStr = static_cast<CsString*>(m_pVal)->ToUpper();
+			if (sStr == "TRUE")
+			{
+				return true;
+			}
+			else if (sStr == "FALSE")
+			{
+				return false;
+			}
+		}
+	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_bool, CsBoolean>(CORE_CLASSCODE_BOOLEAN, bDefValue);
+		break;
 	default:
 		break;
 	}
@@ -419,6 +463,8 @@ cs_char CsVariant_Private::ToChar(const cs_char cDefValue) const
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_char, CsCharacter>(CORE_CLASSCODE_CHARACTER, cDefValue);
 	default:
 		break;
 	}
@@ -436,9 +482,9 @@ cs_uchar CsVariant_Private::ToUChar(const cs_uchar cDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return m_cVal;
+		return static_cast<cs_uchar>(m_cVal);
 	case VARIANT_TYPE_WCHAR:
-		return m_wcVal;
+		return static_cast<cs_uchar>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
 		return static_cast<cs_uchar>(m_sVal);
 	case VARIANT_TYPE_USHORT:
@@ -470,6 +516,9 @@ cs_uchar CsVariant_Private::ToUChar(const cs_uchar cDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_uchar, CsUCharacter>(CORE_CLASSCODE_UCHARACTER, cDefValue);
 		break;
 	default:
 		break;
@@ -522,6 +571,9 @@ cs_wchar CsVariant_Private::ToWChar(const cs_wchar cDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_wchar, CsWCharacter>(CORE_CLASSCODE_WCHARACTER, cDefValue);
 		break;
 	default:
 		break;
@@ -576,6 +628,9 @@ cs_short CsVariant_Private::ToShort(const cs_short nDefValue) const
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_short, CsShort>(CORE_CLASSCODE_SHORT, nDefValue);
+		break;
 	default:
 		break;
 	}
@@ -628,6 +683,9 @@ cs_ushort CsVariant_Private::ToUShort(const cs_ushort nDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_ushort, CsUShort>(CORE_CLASSCODE_USHORT, nDefValue);
 		break;
 	default:
 		break;
@@ -682,6 +740,9 @@ cs_int CsVariant_Private::ToInt(const cs_int nDefValue) const
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_int, CsInteger>(CORE_CLASSCODE_INTEGER, nDefValue);
+		break;
 	default:
 		break;
 	}
@@ -734,6 +795,9 @@ cs_uint CsVariant_Private::ToUInt(const cs_uint nDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_uint, CsUInteger>(CORE_CLASSCODE_UINTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -788,6 +852,9 @@ cs_long CsVariant_Private::ToLong(const cs_long nDefValue) const
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_long, CsLong>(CORE_CLASSCODE_LONG, nDefValue);
+		break;
 	default:
 		break;
 	}
@@ -840,6 +907,9 @@ cs_ulong CsVariant_Private::ToULong(const cs_ulong nDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_ulong, CsULong>(CORE_CLASSCODE_ULONG, nDefValue);
 		break;
 	default:
 		break;
@@ -894,6 +964,9 @@ cs_longlong CsVariant_Private::ToLongLong(const cs_longlong nDefValue) const
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_longlong, CsLongLong>(CORE_CLASSCODE_LONGLONG, nDefValue);
+		break;
 	default:
 		break;
 	}
@@ -946,6 +1019,9 @@ cs_ulonglong CsVariant_Private::ToULongLong(const cs_ulonglong nDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_ulonglong, CsULongLong>(CORE_CLASSCODE_ULONGLONG, nDefValue);
 		break;
 	default:
 		break;
@@ -1000,6 +1076,9 @@ cs_float CsVariant_Private::ToFloat(const cs_float nDefValue) const
 		}
 	}
 		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_float, CsFloat>(CORE_CLASSCODE_FLOAT, nDefValue);
+		break;
 	default:
 		break;
 	}
@@ -1052,6 +1131,9 @@ cs_double CsVariant_Private::ToDouble(const cs_double nDefValue) const
 			}
 		}
 	}
+		break;
+	case VARIANT_TYPE_OBJECT:
+		return ToNumber<cs_double, CsDouble>(CORE_CLASSCODE_DOUBLE, nDefValue);
 		break;
 	default:
 		break;
@@ -1114,6 +1196,15 @@ CsString CsVariant_Private::ToString(const CsString &sDefValue) const
 	case VARIANT_TYPE_DOUBLE:
 		return CsString::FromNum(m_dVal);
 		break;
+	case VARIANT_TYPE_OBJECT:
+	{
+		if (m_pVal)
+		{
+			CsObject *pObjcet = static_cast<CsObject*>(m_pVal);
+			return pObjcet->ToString();
+		}
+	}
+		break;
 	case VARIANT_TYPE_POINTER:
 		break;
 	default:
@@ -1122,11 +1213,106 @@ CsString CsVariant_Private::ToString(const CsString &sDefValue) const
 	return sDefValue;
 }
 
+CsObject *CsVariant_Private::ToObject() const
+{
+	switch (m_emType)
+	{
+	case VARIANT_TYPE_OBJECT:
+	{
+		if (m_pVal)
+		{
+			return static_cast<CsObject*>(m_pVal)->CopyToObject();
+		}
+	}
+		break;
+	case VARIANT_TYPE_BOOL:
+		return new CsBoolean(m_bVal);
+		break;
+	case VARIANT_TYPE_CHAR:
+		return new CsCharacter(m_cVal);
+		break;
+	case VARIANT_TYPE_UCHAR:
+		return new CsUCharacter(m_ucVal);
+		break;
+	case VARIANT_TYPE_WCHAR:
+		return new CsWCharacter(m_wcVal);
+		break;
+	case VARIANT_TYPE_SHORT:
+		return new CsShort(m_sVal);
+		break;
+	case VARIANT_TYPE_USHORT:
+		return new CsUShort(m_usVal);
+		break;
+	case VARIANT_TYPE_INT:
+		return new CsInteger(m_iVal);
+		break;
+	case VARIANT_TYPE_UINT:
+		return new CsUInteger(m_uiVal);
+		break;
+	case VARIANT_TYPE_LONG:
+		return new CsLong(m_lVal);
+		break;
+	case VARIANT_TYPE_ULONG:
+		return new CsULong(m_ulVal);
+		break;
+	case VARIANT_TYPE_LONGLONG:
+		return new CsLongLong(m_llVal);
+		break;
+	case VARIANT_TYPE_ULONGLONG:
+		return new CsULongLong(m_ullVal);
+		break;
+	case VARIANT_TYPE_FLOAT:
+		return new CsFloat(m_fVal);
+		break;
+	case VARIANT_TYPE_DOUBLE:
+		return new CsDouble(m_dVal);
+		break;
+	case VARIANT_TYPE_STRING:
+	{
+		if (m_pVal)
+		{
+			return static_cast<CsString*>(m_pVal)->CopyToObject();
+		}
+	}
+		break;
+	case VARIANT_TYPE_POINTER:
+		break;
+	default:
+		break;
+	}
+	return NULL;
+}
+
+cs_bool CsVariant_Private::Valid() const
+{
+	if (m_emType == VARIANT_TYPE_ILLEGAL)
+	{
+		return false;
+	}
+	else if (m_emType == VARIANT_TYPE_STRING
+		|| m_emType == VARIANT_TYPE_OBJECT
+		|| m_emType == VARIANT_TYPE_POINTER)
+	{
+		return m_pVal != NULL;
+	}
+	return true;
+}
+
 void CsVariant_Private::ClearMemery()
 {
-	if (m_emType == VARIANT_TYPE_STRING && m_pVal)
+	if (!m_pVal)
 	{
-		delete (CsString*)m_pVal;
-		m_pVal = NULL;
+		return;
 	}
+	if (m_emType == VARIANT_TYPE_STRING)
+	{
+		CsString *pString = static_cast<CsString*>(m_pVal);
+		delete pString;
+	}
+	else if (m_emType == VARIANT_TYPE_OBJECT)
+	{
+		CsObject *pObject = static_cast<CsObject*>(m_pVal);
+		delete pObject;
+	}
+	m_pVal = NULL;
 }

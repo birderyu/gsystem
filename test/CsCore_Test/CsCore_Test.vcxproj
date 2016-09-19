@@ -92,6 +92,7 @@
   <ItemGroup>
     <ClInclude Include="BTree_Test.h" />
     <ClInclude Include="Map_Test.h" />
+    <ClInclude Include="MemPool_Test.h" />
     <ClInclude Include="SortStack.h" />
     <ClInclude Include="Sort_Test.h" />
   </ItemGroup>

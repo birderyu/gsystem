@@ -49,7 +49,7 @@ public:
 public:
 	////插入或删除需要注意处理：插入节点本身的next 和prior,前一个节点的next,后一个节点的prior. 
 	//注意在第一个节点或最后一个节点插入或删除时的特殊情况：前一个或后一个节点为NULL,而且注意移动m_pNodeHead或m_pNodeTail 
-	void    Invert();
+	cs_void    Invert();
 	int     IsEmpty() const;
 	int     GetCount() const;
 	int     InsertBefore(const int pos, const T data);

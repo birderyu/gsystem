@@ -18,6 +18,9 @@ public:
 	~CsString();
 
 	friend CS_CORE_EXPORT CsString operator+(const CsString &s1, const CsString &s2);
+	friend CS_CORE_EXPORT cs_bool operator==(const CsString &s1, const CsString &s2);
+
+	cs_bool operator == (const CsString &sStr);
 	CsString &operator=(const CsString &sStr);
 	CsString &operator+=(const CsString &sStr);
 
@@ -65,5 +68,6 @@ public:
 };
 
 CS_CORE_EXPORT CsString operator+(const CsString &s1, const CsString &s2);
+CS_CORE_EXPORT cs_bool operator==(const CsString &s1, const CsString &s2);
 
 #endif // _CSCORE_CSSTRING_H_

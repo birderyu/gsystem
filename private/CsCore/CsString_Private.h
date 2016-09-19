@@ -1,7 +1,6 @@
-﻿#ifndef _CSCORE_CSSTRING_PRIVATE_H_
-#define _CSCORE_CSSTRING_PRIVATE_H_
+﻿#ifndef _CORE_STRING_PRIVATE_H_
+#define _CORE_STRING_PRIVATE_H_
 
-#include "CsType.h"
 #include "CsObject_Private.h"
 #include "CsString.h"
 #include <string>
@@ -9,6 +8,8 @@
 
 class CsString_Private :public CsObject_Private
 {
+	CS_DECLARE_OPERATOR_NEW_DELETE
+
 public:
 	CsString_Private(CsString *pPublic);
 	CsString_Private(CsString *pPublic, const cs_char cChar);
@@ -20,6 +21,7 @@ public:
 	cs_bool Equals(CsString_Private *pStr) const;
 	cs_uint64 HashCode() const;
 
+	cs_bool operator==(const CsString_Private &sStr);
 	CsString_Private &operator=(const CsString_Private &sStr);
 	CsString_Private &operator+=(const CsString_Private &sStr);
 
@@ -27,10 +29,10 @@ public:
 	cs_bool IsEmpty() const;
 	cs_cstring GetCStr() const;
 
-	void MakeTrim();
-	void MakeUpper();
-	void MakeLower();
-	void Format(const char *format, ...);
+	cs_void MakeTrim();
+	cs_void MakeUpper();
+	cs_void MakeLower();
+	cs_void Format(const char *format, ...);
 
 	template <typename T>
 	static CsString FromNum(T nNum, cs_int nBase);
@@ -69,7 +71,7 @@ CsString CsString_Private::FromNum(T nNum, cs_int nBase)
 template <typename T>
 T CsString_Private::ToNum(cs_bool *bIsOk) const
 {
-	std::istringstream iss(m_sStr);
+	std::istringstream iss(m_sStr.c_str());
 	T nNum;
 	if (bIsOk)
 	{
@@ -85,4 +87,4 @@ T CsString_Private::ToNum(cs_bool *bIsOk) const
 	return nNum;
 }
 
-#endif // _CSCORE_CSSTRING_PRIVATE_H_
+#endif // _CORE_STRING_PRIVATE_H_

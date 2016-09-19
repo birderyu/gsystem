@@ -23,29 +23,31 @@ public:
 	CsVariant_Private(CsVariant *pPublic, const cs_float nValue);
 	CsVariant_Private(CsVariant *pPublic, const cs_double nValue);
 	CsVariant_Private(CsVariant *pPublic, const CsString &sValue);
+	CsVariant_Private(CsVariant *pPublic, const CsObject &tValue);
 	CsVariant_Private(CsVariant *pPublic, const cs_pointer pValue);
 	CsVariant_Private(CsVariant *pPublic, const CsVariant_Private &tOther);
 	~CsVariant_Private();
 
 	CS_VARIANT_TYPE GetVariantType() const;
 	cs_pointer GetPoiter() const;
-	void SetPoiter(const cs_pointer pValue);
+	cs_void SetPoiter(const cs_pointer pValue);
 
-	void SetValue(const cs_bool bValue);
-	void SetValue(const cs_char cValue);
-	void SetValue(const cs_uchar cValue);
-	void SetValue(const cs_wchar cValue);
-	void SetValue(const cs_short nValue);
-	void SetValue(const cs_ushort nValue);
-	void SetValue(const cs_int nValue);
-	void SetValue(const cs_uint nValue);
-	void SetValue(const cs_long nValue);
-	void SetValue(const cs_ulong nValue);
-	void SetValue(const cs_longlong nValue);
-	void SetValue(const cs_ulonglong nValue);
-	void SetValue(const cs_float nValue);
-	void SetValue(const cs_double nValue);
-	void SetValue(const CsString &sValue);
+	cs_void SetValue(const cs_bool bValue);
+	cs_void SetValue(const cs_char cValue);
+	cs_void SetValue(const cs_uchar cValue);
+	cs_void SetValue(const cs_wchar cValue);
+	cs_void SetValue(const cs_short nValue);
+	cs_void SetValue(const cs_ushort nValue);
+	cs_void SetValue(const cs_int nValue);
+	cs_void SetValue(const cs_uint nValue);
+	cs_void SetValue(const cs_long nValue);
+	cs_void SetValue(const cs_ulong nValue);
+	cs_void SetValue(const cs_longlong nValue);
+	cs_void SetValue(const cs_ulonglong nValue);
+	cs_void SetValue(const cs_float nValue);
+	cs_void SetValue(const cs_double nValue);
+	cs_void SetValue(const CsString &sValue);
+	cs_void SetValue(const CsObject &tValue);
 
 	cs_bool ToBool(const cs_bool bDefValue) const;
 	cs_char ToChar(const cs_char cDefValue) const;
@@ -62,9 +64,16 @@ public:
 	cs_float ToFloat(const cs_float nDefValue) const;
 	cs_double ToDouble(const cs_double nDefValue) const;
 	CsString ToString(const CsString &sDefValue) const;
+	CsObject *ToObject() const;
+
+	cs_bool Valid() const;
 	
 private:
-	void ClearMemery();
+	cs_void ClearMemery();
+
+	template<typename BaseT, typename PackageT>
+	BaseT ToNumber(const cs_uint nClassCode, const BaseT &nDefValue) const;
+
 	union
 	{
 		cs_bool			m_bVal;
@@ -81,9 +90,33 @@ private:
 		cs_ulonglong	m_ullVal;
 		cs_float		m_fVal;
 		cs_double		m_dVal;
-		cs_pointer			m_pVal;
+		cs_pointer		m_pVal;
 	};
 	CS_VARIANT_TYPE m_emType;
 };
+
+template<typename BaseT, typename PackageT>
+BaseT CsVariant_Private::ToNumber(const cs_uint nClassCode, const BaseT &nDefValue) const
+{
+	if (m_emType != VARIANT_TYPE_OBJECT)
+	{
+		return nDefValue;
+	}
+	if (!m_pVal)
+	{
+		return nDefValue;
+	}
+	CsObject *pObjcet = static_cast<CsObject*>(m_pVal);
+	if (pObjcet->CLASSCODE != nClassCode)
+	{
+		return nDefValue;
+	}
+	PackageT *pObj = dynamic_cast<PackageT*>(pObjcet);
+	if (!pObj)
+	{
+		return nDefValue;
+	}
+	return pObj->Value();
+}
 
 #endif // _CORE_VARIANT_PRIVATE_H_
