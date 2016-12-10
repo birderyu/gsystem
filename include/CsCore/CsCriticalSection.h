@@ -2,18 +2,22 @@
 #ifndef _CORE_CRITICAL_SECTION_H_
 #define _CORE_CRITICAL_SECTION_H_
 
-#include "CsObject.h"
+#include "CsLock.h"
 
-class CS_CORE_EXPORT CsCriticalSection :public CsObject
+class CS_API CsCriticalSection final 
+	: public CsLock
 {
 public:
 	CsCriticalSection();
-	cs_int Lock();
-	cs_int TryLock();
+	~CsCriticalSection();
+	cs_bool Lock();
+	cs_bool Trylock();
 	cs_void Unlock();
 
-public:
-	enum { CLASSCODE = CORE_CLASSCODE_CRITICAL_SECTION, };
+private:
+	cs_int Initialize();
+	cs_void Release();
+	cs_pointer m_pHandle;
 };
 
 #endif // _CORE_CRITICAL_SECTION_H_

@@ -1,345 +1,322 @@
 #include "CsVariant.h"
-#include "CsVariant_Private.h"
+#include "CsVariant_Ex.h"
 
 CsVariant::CsVariant()
-: CsObject(new CsVariant_Private(this))
+: m_pVariant_Ex(new CsVariant_Ex())
 {
 
 }
 
-CsVariant::CsVariant(const cs_bool bValue)
-: CsObject(new CsVariant_Private(this, bValue))
+CsVariant::CsVariant(cs_bool bValue)
+: m_pVariant_Ex(new CsVariant_Ex(bValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_char cValue)
-: CsObject(new CsVariant_Private(this, cValue))
+CsVariant::CsVariant(cs_char cValue)
+: m_pVariant_Ex(new CsVariant_Ex(cValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_uchar cValue)
-: CsObject(new CsVariant_Private(this, cValue))
+CsVariant::CsVariant(cs_uchar cValue)
+: m_pVariant_Ex(new CsVariant_Ex(cValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_wchar cValue)
-: CsObject(new CsVariant_Private(this, cValue))
+CsVariant::CsVariant(cs_wchar cValue)
+: m_pVariant_Ex(new CsVariant_Ex(cValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_short nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_short nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_ushort nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_ushort nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_int nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_int nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_uint nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_uint nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_long nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_long nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_ulong nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_ulong nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_longlong nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_longlong nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_ulonglong nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_ulonglong nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_float nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_float nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
-CsVariant::CsVariant(const cs_double nValue)
-: CsObject(new CsVariant_Private(this, nValue))
+CsVariant::CsVariant(cs_double nValue)
+: m_pVariant_Ex(new CsVariant_Ex(nValue))
 {
 
 }
 
 CsVariant::CsVariant(cs_cstring sValue)
-: CsObject(new CsVariant_Private(this, CsString(sValue)))
+: m_pVariant_Ex(new CsVariant_Ex(CsString(sValue)))
 {
 
 }
 
 CsVariant::CsVariant(const CsString &sValue)
-: CsObject(new CsVariant_Private(this, sValue))
+: m_pVariant_Ex(new CsVariant_Ex(sValue))
 {
 
 }
 
 CsVariant::CsVariant(const CsObject &tValue)
-: CsObject(new CsVariant_Private(this, tValue))
+: m_pVariant_Ex(new CsVariant_Ex(tValue))
 {
 
 }
 
 CsVariant::CsVariant(const cs_pointer pValue)
-: CsObject(new CsVariant_Private(this, pValue))
+: m_pVariant_Ex(new CsVariant_Ex(pValue))
 {
 
 }
 
 CsVariant::CsVariant(const CsVariant &tOther)
-: CsObject(new CsVariant_Private(this, *(CsVariant_Private*)tOther.m_pPrivate))
+: m_pVariant_Ex(new CsVariant_Ex(*tOther.m_pVariant_Ex))
 {
 
 }
 
 CsVariant::~CsVariant()
 {
-
+	if (m_pVariant_Ex)
+	{
+		delete m_pVariant_Ex;
+	}
 }
 
 CS_VARIANT_TYPE CsVariant::GetVariantType() const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->GetVariantType();
+	return m_pVariant_Ex->GetVariantType();
 }
 
 cs_pointer CsVariant::GetPoiter() const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->GetPoiter();
+	return m_pVariant_Ex->GetPoiter();
 }
 
 cs_void CsVariant::SetPoiter(const cs_pointer pValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetPoiter(pValue);
+	m_pVariant_Ex->SetPoiter(pValue);
 }
 
 cs_void CsVariant::SetValue(const cs_bool bValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(bValue);
+	m_pVariant_Ex->SetValue(bValue);
 }
 
 cs_void CsVariant::SetValue(const cs_char cValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(cValue);
+	m_pVariant_Ex->SetValue(cValue);
 }
 
 cs_void CsVariant::SetValue(const cs_uchar cValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(cValue);
+	m_pVariant_Ex->SetValue(cValue);
 }
 
 cs_void CsVariant::SetValue(const cs_wchar cValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(cValue);
+	m_pVariant_Ex->SetValue(cValue);
 }
 
 cs_void CsVariant::SetValue(const cs_short nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_ushort nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_int nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_uint nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_long nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_ulong nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_longlong nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_ulonglong nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_float nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(const cs_double nValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(nValue);
+	m_pVariant_Ex->SetValue(nValue);
 }
 
 cs_void CsVariant::SetValue(cs_cstring sValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(CsString(sValue));
+	m_pVariant_Ex->SetValue(CsString(sValue));
 }
 
 cs_void CsVariant::SetValue(const CsString &sValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(sValue);
+	m_pVariant_Ex->SetValue(sValue);
 }
 
 cs_void CsVariant::SetValue(const CsObject &tValue)
 {
-	CS_PRIVATE(CsVariant);
-	pPrivate->SetValue(tValue);
+	m_pVariant_Ex->SetValue(tValue);
 }
 
 cs_bool CsVariant::ToBool(const cs_bool def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToBool(def);
+	return m_pVariant_Ex->ToBool(def);
 }
 
 cs_char CsVariant::ToChar(const cs_char def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToChar(def);
+	return m_pVariant_Ex->ToChar(def);
 }
 
 cs_uchar CsVariant::ToUChar(const cs_uchar def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToUChar(def);
+	return m_pVariant_Ex->ToUChar(def);
 }
 
 cs_wchar CsVariant::ToWChar(const cs_wchar def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToWChar(def);
+	return m_pVariant_Ex->ToWChar(def);
+}
+
+cs_small CsVariant::ToSmall(const cs_small def) const
+{
+	return m_pVariant_Ex->ToSmall(def);
+}
+
+cs_usmall CsVariant::ToUSmall(const cs_usmall def) const
+{
+	return m_pVariant_Ex->ToUSmall(def);
 }
 
 cs_short CsVariant::ToShort(const cs_short def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToShort(def);
+	return m_pVariant_Ex->ToShort(def);
 }
 
 cs_ushort CsVariant::ToUShort(const cs_ushort def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToUShort(def);
+	return m_pVariant_Ex->ToUShort(def);
 }
 
 cs_int CsVariant::ToInt(const cs_int def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToInt(def);
+	return m_pVariant_Ex->ToInt(def);
 }
 
 cs_uint CsVariant::ToUInt(const cs_uint def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToUInt(def);
+	return m_pVariant_Ex->ToUInt(def);
 }
 
 cs_long CsVariant::ToLong(const cs_long def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToLong(def);
+	return m_pVariant_Ex->ToLong(def);
 }
 
 cs_ulong CsVariant::ToULong(const cs_ulong def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToULong(def);
+	return m_pVariant_Ex->ToULong(def);
 }
 
 cs_longlong CsVariant::ToLongLong(const cs_longlong def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToLongLong(def);
+	return m_pVariant_Ex->ToLongLong(def);
 }
 
 cs_ulonglong CsVariant::ToULongLong(const cs_ulonglong def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToULongLong(def);
+	return m_pVariant_Ex->ToULongLong(def);
 }
 
 cs_float CsVariant::ToFloat(const cs_float def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToFloat(def);
+	return m_pVariant_Ex->ToFloat(def);
 }
 
 cs_double CsVariant::ToDouble(const cs_double def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToDouble(def);
+	return m_pVariant_Ex->ToDouble(def);
 }
 
 CsString CsVariant::ToString(const CsString &def) const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToString(def);
+	return m_pVariant_Ex->ToString(def);
 }
 
 CsObject *CsVariant::ToObject() const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->ToObject();
+	return m_pVariant_Ex->ToObject();
 }
 
 cs_byte CsVariant::ToByte(const cs_byte &def) const
@@ -349,12 +326,12 @@ cs_byte CsVariant::ToByte(const cs_byte &def) const
 
 cs_int8 CsVariant::ToInt8(const cs_int8 &def) const
 {
-	return ToChar(def);
+	return ToSmall(def);
 }
 
 cs_uint8 CsVariant::ToUInt8(const cs_uint8 &def) const
 {
-	return ToUChar(def);
+	return ToUSmall(def);
 }
 
 cs_int16 CsVariant::ToInt16(const cs_int16 &def) const
@@ -392,8 +369,13 @@ cs_size_t CsVariant::ToSizeType(const cs_size_t &def) const
 	return ToUInt(def);
 }
 
-cs_bool CsVariant::Valid() const
+cs_bool CsVariant::IsValid() const
 {
-	CS_PRIVATE(CsVariant);
-	return pPrivate->Valid();
+	return m_pVariant_Ex->IsValid();
+}
+
+CsVariant &CsVariant::operator = (const CsVariant &var)
+{
+	m_pVariant_Ex->operator=(*var.m_pVariant_Ex);
+	return *this;
 }

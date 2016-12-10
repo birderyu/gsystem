@@ -1,9 +1,9 @@
-#ifndef _CSCORE_CSENDIAN_H_
-#define _CSCORE_CSENDIAN_H_
+#ifndef _CORE_ENDIAN_UTILITY_H_
+#define _CORE_ENDIAN_UTILITY_H_
 
-#include "CsCoreGlobal.h"
+#include "CsGlobal.h"
 
-class CS_CORE_EXPORT CsEndian
+class CS_API CsEndian
 {
 public:
 	/// 将数字转换为大端字节数组
@@ -42,9 +42,26 @@ public:
 	static void ToLittleEndianNumber(cs_byte nData[], cs_uint32 &nValue);
 	static void ToLittleEndianNumber(cs_byte nData[], cs_uint64 &nValue);
 
-protected:
+	static cs_bool Swap(cs_bool);
+	static cs_char Swap(cs_char);
+	static cs_schar Swap(cs_schar);
+	static cs_uchar Swap(cs_uchar);
+	static cs_short Swap(cs_short);
+	static cs_ushort Swap(cs_ushort);
+	static cs_int Swap(cs_int);
+	static cs_uint Swap(cs_uint);
+	static cs_long Swap(cs_long);
+	static cs_ulong Swap(cs_ulong);
+	static cs_longlong Swap(cs_longlong);
+	static cs_ulonglong Swap(cs_ulonglong);
+	static cs_float Swap(cs_float);
+	static cs_double Swap(cs_double);
+	static cs_decimal Swap(cs_decimal);
+
+private:
 	CsEndian();
+	CsEndian(const CsEndian&);
 	~CsEndian();
 };
 
-#endif // _CSCORE_CSENDIAN_H_
+#endif // _CORE_ENDIAN_UTILITY_H_

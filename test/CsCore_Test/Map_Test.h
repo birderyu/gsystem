@@ -1,9 +1,9 @@
-#include "CsMap.h"
+//#include "CsMap.h"
+#include "CsGlobal.h"
 
 cs_void TestMap()
 {
-	CsMap<cs_int, CsString> map;
-	CsMap<cs_int, CsString>::Iterator iter = map.Insert(1, "aaa");
+	//CsMap<cs_size_t, CsString>
 
 	int stop = 1;
 	stop++;

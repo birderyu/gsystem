@@ -28,65 +28,59 @@
     <Filter Include="源文件\Utility">
       <UniqueIdentifier>{ab25b991-b54f-4ad4-9d3c-ba0a9a648cc0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Number">
-      <UniqueIdentifier>{7c872e24-75f4-4dcf-b851-a822c134b2a5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Thread">
       <UniqueIdentifier>{8aa84173-66c3-4a8e-9b2c-c2098fbcd20d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Socket">
-      <UniqueIdentifier>{3ff3dc84-26c3-4762-8d6b-955856a6a630}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Socket">
-      <UniqueIdentifier>{9dea15f7-bbf3-47ac-aa23-3f743d682dc5}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Thread">
       <UniqueIdentifier>{4d31afef-c4e1-4565-bde1-a96591576f97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Table">
-      <UniqueIdentifier>{62c68275-69f7-49b7-a2e2-e462dcfd6a85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Container">
-      <UniqueIdentifier>{00bf05dc-42bc-4ed1-94fd-a67546ac959d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Algorithm">
-      <UniqueIdentifier>{8c06657f-d4ae-4ffa-95fd-c511947cebd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Algorithm\Structure">
-      <UniqueIdentifier>{83ca5347-1b9d-4f77-b41c-c66fc4a31a0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\Global">
       <UniqueIdentifier>{28f440d1-1aad-4501-bca8-0cc244512cf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Algorithm">
-      <UniqueIdentifier>{38c39005-d465-4696-b57f-ea56d527838a}</UniqueIdentifier>
+    <Filter Include="头文件\Tool">
+      <UniqueIdentifier>{1d442519-a6c1-41ba-bef2-5f09661e83b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Algorithm\Structure">
-      <UniqueIdentifier>{045ae1c4-49f8-4ef1-9d46-d58494869a98}</UniqueIdentifier>
+    <Filter Include="源文件\Tool">
+      <UniqueIdentifier>{68fc5468-82fa-4da5-aa97-b579a67420fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Algorithm\Structure\Tree">
-      <UniqueIdentifier>{56556b69-a8cc-4b83-ab06-b3d86c0ffe22}</UniqueIdentifier>
+    <Filter Include="头文件\Structure">
+      <UniqueIdentifier>{83ca5347-1b9d-4f77-b41c-c66fc4a31a0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Memory">
-      <UniqueIdentifier>{b5520bd9-742b-4636-a4a2-4fb27f2e6bc5}</UniqueIdentifier>
+    <Filter Include="源文件\_thirds">
+      <UniqueIdentifier>{8d5ca92e-1cdb-46a2-a647-2ef02cae0979}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Memory">
-      <UniqueIdentifier>{803bc837-3161-4f45-870b-283933bf67f7}</UniqueIdentifier>
+    <Filter Include="头文件\_thirds">
+      <UniqueIdentifier>{e6fecc52-0e8e-4ed9-aeeb-003ec70d9455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Template">
+      <UniqueIdentifier>{a048f02d-61f7-4bd6-8c49-f33a100f051d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Geometry">
+      <UniqueIdentifier>{a32cbdcb-d6eb-4add-b171-788d657f0d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Net">
+      <UniqueIdentifier>{3ff3dc84-26c3-4762-8d6b-955856a6a630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Net">
+      <UniqueIdentifier>{9dea15f7-bbf3-47ac-aa23-3f743d682dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Package">
+      <UniqueIdentifier>{5051c812-484c-4efe-ac43-14156acb198d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Package">
+      <UniqueIdentifier>{0503ffbe-d709-4af1-89d3-1f728a999d53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Template">
+      <UniqueIdentifier>{19e68479-25cf-4bdf-bfae-92b3c796ca2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\_inline">
+      <UniqueIdentifier>{db5f1c4b-0335-4e9a-87be-2a8f20ae2584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Table">
+      <UniqueIdentifier>{f087937a-28d4-4472-8b18-6c14403bc837}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\CsCore\CsLogger.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsString.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsObject_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsString_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsDefine.h">
       <Filter>头文件\Global</Filter>
     </ClInclude>
@@ -95,30 +89,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsType.h">
       <Filter>头文件\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsThread_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsMutex_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsEndian.h">
-      <Filter>头文件\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMath.h">
-      <Filter>头文件\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsSemaphore_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsCoreGlobal.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsTcpSocket_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsUdpSocket_Private.h">
-      <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsThread.h">
       <Filter>头文件\Thread</Filter>
@@ -133,189 +103,662 @@
       <Filter>头文件\Thread</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsSocket.h">
-      <Filter>头文件\Socket</Filter>
+      <Filter>头文件\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsTcpSocket.h">
-      <Filter>头文件\Socket</Filter>
+      <Filter>头文件\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h">
-      <Filter>头文件\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsVector.h">
-      <Filter>头文件\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsSort.h">
-      <Filter>头文件\Algorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsArray.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsDecimal.h">
-      <Filter>头文件\Number</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsSocket_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsSList.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsSockAddr.h">
-      <Filter>头文件\Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsSockAddr_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsLStack.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsAStack.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsDList.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsCList.h">
-      <Filter>头文件\Algorithm\Structure</Filter>
+      <Filter>头文件\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsObject.h">
       <Filter>头文件\Global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMap.h">
-      <Filter>头文件\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsTemplate.h">
-      <Filter>头文件\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBSTree.h">
-      <Filter>头文件\Algorithm\Structure\Tree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsRBTree.h">
-      <Filter>头文件\Algorithm\Structure\Tree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBinTree.h">
-      <Filter>头文件\Algorithm\Structure\Tree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
-      <Filter>头文件\Algorithm\Structure\Tree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsVariant.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsVariant_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMemBlock.h">
-      <Filter>头文件\Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMemPool.h">
-      <Filter>头文件\Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsNumber.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBytes.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsBytes_Private.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsCriticalSection.h">
       <Filter>头文件\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsCriticalSection_Private.h">
+    <ClInclude Include="..\..\..\include\CsCore\CsFile.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBinaryFile.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTextFile.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDateTime.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDate.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTime.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsHashTable.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsString.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBytes.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsVariant.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsFilter.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsAtomic.h">
+      <Filter>头文件\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLock.h">
+      <Filter>头文件\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsString_Ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsTable.h">
+    <ClInclude Include="..\..\..\private\CsCore\CsStringPool_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsGlobal_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsStringList_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\thirds\CsCore\dlmalloc.h">
+      <Filter>头文件\_thirds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsVariant_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTraits.h">
+      <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTemplate.h">
+      <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsHash.h">
+      <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsDateTime_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsReadWriteLock.h">
+      <Filter>头文件\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsAmazing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsReadBlackTree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBinaryTree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBinarySortTree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBTree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsArrayStack.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSingleLinkedList.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsNullLock.h">
+      <Filter>头文件\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBlock.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCircularLinkedList.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDoubleLinkedList.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsListStack.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStringBuilder.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsList.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMap.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsOrderMap.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsOrderSet.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSet.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnorderMap.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnorderSet.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsVector.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSort.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMemoryPool.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMemoryStore.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPointerArray.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStringPool.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsGeometry.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsGeometryPool.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsGeometryFactory.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsGeometryCollection.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPoint.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLine.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSurface.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCoordinate.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsEnvelope.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPolyline.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPolygon.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTriangle.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMultiPoint.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCurve.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPath.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsRectangle.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsRing.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsGeometryBulider.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSharedPointer.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsReferenceCounter.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUniquePointer.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsWeakPointer.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsRTree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsGraph.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsClassCode.h">
+      <Filter>头文件\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsFile_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsSocket_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSockAddress.h">
+      <Filter>头文件\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsSockAddress_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsTcpSocket_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsUdpSocket_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsFilter_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsBytes_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsTextFile_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPackage.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsByte.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBoolean.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCharacter.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSignedCharacter.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnsignedCharacter.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsNumber.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnsignedInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsWideCharacter.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSmallInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnsignedSmallInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsShortInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLongInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLongLongInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnsignedLongInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnsignedLongLongInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnsignedShortInteger.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMath.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsEndian.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsCStringHelper.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStdStringHelper.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsHuffmanTree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsSingleFloat.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDoubleFloat.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLongDoubleFloat.h">
+      <Filter>头文件\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMatrix.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStringList.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsArchive.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStack.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsFunctor.h">
+      <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsNew.h">
+      <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsNode.h">
+      <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStaticArray.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDynamicArray.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsArray.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsLinkedList.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsObjectTable_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsVariantTable_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsVirtualTable_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsSimpleTable_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsSerialTable_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDataIndex.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsDataTable.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableCell.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableColumn.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableColumns.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableField.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableFields.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableGlobal.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableRow.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableRows.h">
+      <Filter>头文件\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTableView.h">
       <Filter>头文件\Table</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\CsCore\CsString.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsObject_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsString_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsThread_Private_Win32.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsMutex_Private_Win32.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp">
-      <Filter>源文件\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsMath.cpp">
-      <Filter>源文件\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Private_Win32.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsTcpSocket_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSocket_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">
-      <Filter>源文件\Socket</Filter>
+      <Filter>源文件\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket.cpp">
-      <Filter>源文件\Socket</Filter>
+      <Filter>源文件\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsTcpSocket.cpp">
-      <Filter>源文件\Socket</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsThread.cpp">
-      <Filter>源文件\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsMutex.cpp">
-      <Filter>源文件\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSemaphore.cpp">
-      <Filter>源文件\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSockAddr_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSockAddr.cpp">
-      <Filter>源文件\Socket</Filter>
+      <Filter>源文件\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp">
       <Filter>源文件\Global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsSort.cpp">
-      <Filter>源文件\Algorithm</Filter>
+    <ClCompile Include="..\..\..\source\CsCore\CsFile.cpp">
+      <Filter>源文件\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsVariant_Private.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsVariant.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsMemPool.cpp">
-      <Filter>源文件\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsMemBlock.cpp">
-      <Filter>源文件\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsBytes_Private.cpp">
-      <Filter>源文件\_private</Filter>
+    <ClCompile Include="..\..\..\source\CsCore\CsString.cpp">
+      <Filter>源文件\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsBytes.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection.cpp">
+    <ClCompile Include="..\..\..\source\CsCore\CsVariant.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsFilter.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsLock.cpp">
       <Filter>源文件\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection_Private_Win32.cpp">
+    <ClCompile Include="..\..\..\source\CsCore\CsString_Ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\dlmalloc.c">
+      <Filter>源文件\_thirds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsVariant_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsMutex_Win32.cpp">
+      <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection_Win32.cpp">
+      <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsDateTime_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Win32.cpp">
+      <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsThread_Win32.cpp">
+      <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsNullLock.cpp">
+      <Filter>源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsBlock.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsMemoryPool.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsMemoryStore.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsFile_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSocket_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress.cpp">
+      <Filter>源文件\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSockAddress_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsTcpSocket_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsFilter_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsBytes_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsTextFile_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsBoolean.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsByte.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsCharacter.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSignedCharacter.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUnsignedCharacter.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSmallInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUnsignedSmallInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsWideCharacter.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsShortInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUnsignedShortInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUnsignedInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsLongInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUnsignedLongInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsLongLongInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsUnsignedLongLongInteger.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsNew.cpp">
+      <Filter>源文件\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsHash.cpp">
+      <Filter>源文件\Template</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsMath.cpp">
+      <Filter>源文件\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp">
+      <Filter>源文件\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsCStringHelper.cpp">
+      <Filter>源文件\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsStdStringHelper.cpp">
+      <Filter>源文件\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsDoubleFloat.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsLongDoubleFloat.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsSingleFloat.cpp">
+      <Filter>源文件\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsStringPool.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsStringList.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\CsCore\CsBinaryTree.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsPackage.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsBinarySortTree.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsReadBlackTree.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsDynamicArray.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsStaticArray.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsHashTable.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsNew.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsNode.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsAtomic.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsAutoLock.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsDoubleLinkedList.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsCircularLinkedList.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsSingleLinkedList.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsReferenceCounter.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsSharedPointer.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsArrayStack.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsListStack.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,17 +1,79 @@
 #ifndef _CORE_VECTOR_H_
 #define _CORE_VECTOR_H_
 
-#include "CsArray.h"
+#include "CsDynamicArray.h"
 
 #define CS_DEFAULT_VECTOR_SIZE			5
 #define CS_DEFAULT_VECTOR_CAPACITY		0.5
 
 template <typename T>
-class CsVector :public CsObject
+class CsVector 
+	: public CsObject
 {
 public:
-	typedef T* Iterator;
-	typedef const T* ConstIterator;
+	class Iterator
+	{
+	public:
+		inline Iterator() : i(NULL) {}
+		inline Iterator(T *n) : i(n) {}
+
+		inline T &operator*() const { return *i; }
+		inline T *operator->() const { return i; }
+		inline T &operator[](int j) const { return *(i + j); }
+		inline bool operator==(const Iterator &o) const { return i == o.i; }
+		inline bool operator!=(const Iterator &o) const { return i != o.i; }
+		inline bool operator<(const Iterator& other) const { return i < other.i; }
+		inline bool operator<=(const Iterator& other) const { return i <= other.i; }
+		inline bool operator>(const Iterator& other) const { return i > other.i; }
+		inline bool operator>=(const Iterator& other) const { return i >= other.i; }
+		inline Iterator &operator++() { ++i; return *this; }
+		inline Iterator operator++(int) { T *n = i; ++i; return n; }
+		inline Iterator &operator--() { i--; return *this; }
+		inline Iterator operator--(int) { T *n = i; i--; return n; }
+		inline Iterator &operator+=(int j) { i += j; return *this; }
+		inline Iterator &operator-=(int j) { i -= j; return *this; }
+		inline Iterator operator+(int j) const { return Iterator(i + j); }
+		inline Iterator operator-(int j) const { return Iterator(i - j); }
+		inline int operator-(Iterator j) const { return i - j.i; }
+		inline operator T*() const { return i; }
+
+	private:
+		T *i;
+	};
+
+	class ConstIterator
+	{
+	public:
+		inline ConstIterator() : i(0) {}
+		inline ConstIterator(const T *n) : i(n) {}
+		
+		inline explicit ConstIterator(const Iterator &o) : i(o.i) {}
+		inline const T &operator*() const { return *i; }
+		inline const T *operator->() const { return i; }
+		inline const T &operator[](int j) const { return *(i + j); }
+		inline bool operator==(const ConstIterator &o) const { return i == o.i; }
+		inline bool operator!=(const ConstIterator &o) const { return i != o.i; }
+		inline bool operator<(const ConstIterator& other) const { return i < other.i; }
+		inline bool operator<=(const ConstIterator& other) const { return i <= other.i; }
+		inline bool operator>(const ConstIterator& other) const { return i > other.i; }
+		inline bool operator>=(const ConstIterator& other) const { return i >= other.i; }
+		inline ConstIterator &operator++() { ++i; return *this; }
+		inline ConstIterator operator++(int) { const T *n = i; ++i; return n; }
+		inline ConstIterator &operator--() { i--; return *this; }
+		inline ConstIterator operator--(int) { const T *n = i; i--; return n; }
+		inline ConstIterator &operator+=(int j) { i += j; return *this; }
+		inline ConstIterator &operator-=(int j) { i -= j; return *this; }
+		inline ConstIterator operator+(int j) const { return ConstIterator(i + j); }
+		inline ConstIterator operator-(int j) const { return ConstIterator(i - j); }
+		inline int operator-(ConstIterator j) const { return i - j.i; }
+		inline operator const T*() const { return i; }
+
+	private:
+		const T *i;
+	};
+
+	friend class Iterator;
+	friend class ConstIterator;
 
 public:
 	CsVector();
@@ -19,7 +81,7 @@ public:
 	cs_bool Reserve(const cs_size_t len) const;
 	cs_bool Resize(const cs_size_t len) const;
 
-	cs_size_t Size() const;
+	cs_size_t Length() const;
 	cs_size_t Capacity() const;
 	cs_bool IsEmpty() const;
 	void Clear();
@@ -37,7 +99,7 @@ private:
 	size_t RealID(const size_t i) const;
 	cs_bool Valid() const;
 
-	CsArray<T> m_tArray;
+	CsDynamicArray<T> m_tArray;
 
 	// 头指针，指向首元素，初始值为-1
 	cs_int m_nHead;
@@ -48,7 +110,7 @@ private:
 
 template <typename T>
 CsVector<T>::CsVector()
-:CsArray(), m_nHead(-1), m_nTail(-1)
+:CsDynamicArray(), m_nHead(-1), m_nTail(-1)
 {
 	
 }
@@ -71,7 +133,7 @@ cs_bool CsVector<T>::Reserve(const cs_size_t len) const
 		// 无需扩容
 		return true;
 	}
-	CsArray tArray(len);
+	CsDynamicArray tArray(len);
 
 }
 
@@ -82,7 +144,7 @@ cs_bool CsVector<T>::Resize(const cs_size_t len) const
 }
 
 template <typename T>
-cs_size_t CsVector<T>::Size() const
+cs_size_t CsVector<T>::Length() const
 {
 	if (!Valid())
 	{
@@ -104,7 +166,7 @@ cs_size_t CsVector<T>::Capacity() const
 template <typename T>
 cs_bool CsVector<T>::IsEmpty() const
 {
-	return Size() == 0;
+	return Length() == 0;
 }
 
 template <typename T>
@@ -201,7 +263,7 @@ void CsVector<T>::PopFront()
 template <typename T>
 cs_size_t CsVector<T>::MemSize() const
 {
-	return m_tArray.Length();
+	return m_tArray.Size();
 }
 
 template <typename T>

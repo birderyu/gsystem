@@ -1,35 +1,29 @@
 #include "CsObject.h"
-#include "CsObject_Private.h"
 #include "CsString.h"
-
-CsObject::CsObject()
-: m_pPrivate(NULL)
-{
-
-}
-
-CsObject::CsObject(CsObject_Private *pPrivate)
-: m_pPrivate(pPrivate)
-{
-	
-}
 
 CsObject::~CsObject()
 {
-	if (m_pPrivate)
-	{
-		delete m_pPrivate;
-	}
+
+}
+
+CsObjectP CsObject::Clone() const
+{
+	return CsObjectP();
+}
+
+const CsObject *CsObject::Boxing() const
+{
+	return this;
+}
+
+cs_bool CsObject::Unboxing(const CsObject *)
+{
+	return false;
 }
 
 CsString CsObject::ToString() const
 {
-	return "CsObject";
-}
-
-CsObject *CsObject::CopyToObject() const
-{
-	return NULL;
+	return "This is an object.";
 }
 
 cs_uint CsObject::ClassCode() const
@@ -37,17 +31,22 @@ cs_uint CsObject::ClassCode() const
 	return CsObject::CLASSCODE;
 }
 
-cs_uint64 CsObject::HashCode() const
+cs_uint CsObject::HashCode() const
 {
-	return (cs_uint64)this;
+	return 0;
 }
 
-cs_bool CsObject::Serialize(CsBytes &tBytes) const
+cs_bool CsObject::Equals(const CsObject *) const
 {
 	return false;
 }
 
-cs_bool CsObject::Deserialize(const CsBytes &tBytes)
+cs_bool CsObject::Serialize(CsBytes &) const
+{
+	return false;
+}
+
+cs_bool CsObject::Deserialize(const CsBytes &)
 {
 	return false;
 }

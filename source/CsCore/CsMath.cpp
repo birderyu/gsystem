@@ -13,7 +13,7 @@ cs_double CsMath::Cs_2_PI	= 0.63661977236758134308;
 cs_double CsMath::Cs_E		= 2.7182818284590452354;
 cs_double CsMath::Cs_Log2E	= 1.4426950408889634074;
 cs_double CsMath::Cs_Log10E	= 0.43429448190325182765;
-cs_double CsMath::Cs_Ln2	= 0.69314718055994530942;
+cs_double CsMath::Cs_Ln2		= 0.69314718055994530942;
 cs_double CsMath::Cs_Ln10	= 2.30258509299404568402;
 
 cs_uint CsMath::Abs(cs_int v)
@@ -58,6 +58,54 @@ cs_int CsMath::Ceil(cs_decimal v)
 	return cs_int(ceil(v));
 }
 
+cs_double CsMath::Log(cs_double v)
+{
+	using std::log;
+	return log(v);
+}
+
+cs_decimal CsMath::Log(cs_decimal v)
+{
+	using std::log;
+	return log(v);
+}
+
+cs_float CsMath::Log(cs_float v)
+{
+	using std::log;
+	return log(v);
+}
+
+cs_float CsMath::Exp(cs_float x)
+{
+	using std::exp;
+	return exp(x);
+}
+
+cs_double CsMath::Exp(cs_double x)
+{
+	using std::exp;
+	return exp(x);
+}
+
+cs_decimal CsMath::Exp(cs_decimal x)
+{
+	using std::exp;
+	return exp(x);
+}
+
+cs_double Log(cs_double v)
+{
+	using std::log;
+	return log(v);
+}
+
+cs_decimal Log(cs_decimal v)
+{
+	using std::log;
+	return log(v);
+}
+
 cs_int CsMath::Floor(cs_double v)
 {
 	using std::floor;
@@ -74,12 +122,22 @@ cs_double CsMath::FastSin(cs_double x)
 	return cs_sine_table[si] + (cs_sine_table[ci] - 0.5 * cs_sine_table[si] * d) * d;
 }
 
-CsMath::CsMath()
+cs_float CsMath::Sqrt(cs_float v)
 {
-
+	using std::sqrt;
+	return sqrt(v);
 }
 
-CsMath::~CsMath()
+cs_double CsMath::Sqrt(cs_double v)
 {
-
+	using std::sqrt;
+	return sqrt(v);
 }
+
+#ifdef CS_HAS_DECIMAL
+cs_decimal CsMath::Sqrt(cs_decimal v)
+{
+	using std::sqrt;
+	return sqrt(v);
+}
+#endif // CS_HAS_DECIMAL

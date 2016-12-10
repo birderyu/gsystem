@@ -4,11 +4,14 @@
 #include "CsObject.h"
 #include "CsString.h"
 
+class CsVariant_Ex;
+
 enum CS_VARIANT_TYPE
 {
 	VARIANT_TYPE_ILLEGAL = -1,
 	VARIANT_TYPE_BOOL,
 	VARIANT_TYPE_CHAR,
+	VARIANT_TYPE_SCHAR,
 	VARIANT_TYPE_UCHAR,
 	VARIANT_TYPE_WCHAR,
 	VARIANT_TYPE_SHORT,
@@ -21,12 +24,15 @@ enum CS_VARIANT_TYPE
 	VARIANT_TYPE_ULONGLONG,
 	VARIANT_TYPE_FLOAT,
 	VARIANT_TYPE_DOUBLE,
-	VARIANT_TYPE_STRING,	// 字符串
-	VARIANT_TYPE_OBJECT,	// object
-	VARIANT_TYPE_POINTER,	// 指针
+	VARIANT_TYPE_DECIMAL,
+	VARIANT_TYPE_STRING,		// 字符串
+	VARIANT_TYPE_GEOMERTY,		// 几何对象
+	VARIANT_TYPE_OBJECT,		// object
+	VARIANT_TYPE_POINTER,		// 指针
 };
 
-class CS_CORE_EXPORT CsVariant :public CsObject
+class CS_API CsVariant 
+	: public CsObject
 {
 public:
 	CsVariant();
@@ -77,6 +83,8 @@ public:
 	cs_char ToChar(const cs_char def = ' ') const;
 	cs_uchar ToUChar(const cs_uchar def = ' ') const;
 	cs_wchar ToWChar(const cs_wchar def = ' ') const;
+	cs_small ToSmall(const cs_small def = 0) const;
+	cs_usmall ToUSmall(const cs_usmall def = 0) const;
 	cs_short ToShort(const cs_short def = 0) const;
 	cs_ushort ToUShort(const cs_ushort def = 0) const;
 	cs_int ToInt(const cs_int def = 0) const;
@@ -101,7 +109,12 @@ public:
 	cs_uint64 ToUInt64(const cs_uint64 &def = 0) const;
 	cs_size_t ToSizeType(const cs_size_t &def = 0) const;
 
-	cs_bool Valid() const;
+	cs_bool IsValid() const;
+	
+	CsVariant &operator=(const CsVariant &var);
+
+private:
+	CsVariant_Ex *m_pVariant_Ex;
 };
 
 #endif // _CORE_VARIANT_H_

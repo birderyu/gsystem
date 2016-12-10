@@ -36,7 +36,7 @@
 #define CS_PUBLIC(Class) Class *const pPublic = (Class*)GetPublic()
 #define CS_PRIVATE(Class) Class##_Private *const pPrivate = (Class##_Private*)GetPrivate()
 
-#define CS_BEGIN_NAMESPACE namespace CSYSTEM {
+#define CS_BEGIN_NAMESPACE namespace CSuperNova {
 #define CS_END_NAMESPACE }
 
 #ifdef __cplusplus
@@ -44,13 +44,12 @@
 #endif
 
 #  if defined (CS_CORE_BUILD_DLL)
-#    define CS_CORE_EXPORT CS_DECL_EXPORT
+#    define CSYSTEM_EXPORT CS_DECL_EXPORT
 #  else 
-#    define CS_CORE_EXPORT CS_DECL_IMPORT
+#    define CSYSTEM_EXPORT CS_DECL_IMPORT
 #  endif 
 
-//inline void cs_noop(void) {}
-//CS_CORE_EXPORT void cs_assert(const char *assertion, const char *file, int line) CS_DECL_NOTHROW;
+#define CS_API CSYSTEM_EXPORT
 
 #if defined(_DEBUG)
 #	include <assert.h>  
@@ -70,7 +69,7 @@ public: \
 	Lock m_gLock; \
 	cs_pointer Class##::operator new(cs_size_t size) \
 	{ \
-		CsAutoLock<##Lock> tLock(&m_gLock); \
+		CsAutoLock<##Lock> tLock(m_gLock); \
 		cs_pointer pBuf = m_gMemoryPool.Alloc(); \
 		if (!pBuf) \
 		{ \
@@ -84,7 +83,7 @@ public: \
 		{ \
 			return; \
 		} \
-		CsAutoLock<##Lock> tLock(&m_gLock); \
+		CsAutoLock<##Lock> tLock(m_gLock); \
 		m_gMemoryPool.Free(pFree); \
 	} \
 
@@ -107,5 +106,30 @@ public: \
 		} \
 		m_gMemoryPool.Free(pFree); \
 	} \
+
+#if defined (i386) || defined (__i386__) || defined (_M_IX86) || \
+	defined (vax) || defined (__alpha) || defined (__LITTLE_ENDIAN__) || \
+	defined (ARM) || defined (_M_IA64) || defined (_M_AMD64) || \
+	defined (__amd64) || \
+	((defined (__ia64__) || defined (__ia64)) && !defined (__hpux))
+#	define CS_LITTLE_ENDIAN 0x0123
+#	define CS_BYTE_ORDER CS_LITTLE_ENDIAN
+#else
+#	define CS_BIG_ENDIAN 0x3210
+#	define CS_BYTE_ORDER CS_BIG_ENDIAN
+#endif
+
+#define CS_POINTER_ADDRESS_SIZE	4
+
+#define CS_INT32_MAX 0x7fffffff
+#define CS_INT64_MAX 0x7fffffffffffffffLL
+
+#ifdef __cplusplus__
+extern "C"{
+#endif
+
+#ifdef __cplusplus__
+}
+#endif
 
 #endif // _CORE_DEFINE_H_

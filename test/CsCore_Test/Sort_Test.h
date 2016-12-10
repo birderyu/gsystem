@@ -1,5 +1,5 @@
 #include "CsSort.h"
-#include "CsArray.h"
+#include "CsDynamicArray.h"
 
 template<class T>
 struct CsMore
@@ -11,21 +11,16 @@ struct CsMore
 	}
 };
 
-cs_void TestInsertSort()
+cs_void TestSort()
 {
-	CsArray<cs_int> arr(10);
+	CsDynamicArray<cs_int> arr(5);
 	arr[0] = 5;
 	arr[1] = 3;
 	arr[2] = 9;
 	arr[3] = 8;
 	arr[4] = 1;
-	arr[5] = 1200;
-	arr[6] = -51;
-	arr[7] = 12;
-	arr[8] = 4;
-	arr[9] = 2;
-	CsSort::QuickSort<CsArray<cs_int>, cs_int>(arr/*, 0*/, arr.Length());
-	for (cs_size_t i = 0; i < arr.Length(); i++)
+	CsSort::QuickSort<CsDynamicArray<cs_int>, cs_int>(arr, 1, arr.Size() - 2);
+	for (cs_size_t i = 0; i < arr.Size(); i++)
 	{
 		std::cout << arr[i] << std::endl;
 	}

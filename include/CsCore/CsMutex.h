@@ -2,18 +2,22 @@
 #ifndef _CORE_MUTEX_H_
 #define _CORE_MUTEX_H_
 
-#include "CsObject.h"
+#include "CsLock.h"
 
-class CS_CORE_EXPORT CsMutex :public CsObject
+class CS_API CsMutex final 
+	: public CsLock
 {
 public:
 	CsMutex();
+	~CsMutex();
 	cs_bool Lock();
-	cs_bool TryLock();
+	cs_bool Trylock();
 	cs_void Unlock();
 
-public:
-	enum { CLASSCODE = CORE_CLASSCODE_MUTEX, };
+private:
+	cs_bool Initialize();
+	cs_void Release();
+	cs_pointer m_pHandle;
 };
 
 #endif // _CORE_MUTEX_H_

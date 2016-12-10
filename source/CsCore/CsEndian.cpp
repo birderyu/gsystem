@@ -55,6 +55,87 @@ void CsEndian::ToBigEndianNumber(cs_byte nData[], cs_uint64 &nValue)
 	nValue += (nData[7]);
 }
 
+cs_bool CsEndian::Swap(cs_bool val)
+{
+	return val;
+}
+
+cs_char CsEndian::Swap(cs_char val)
+{
+	return val;
+}
+
+cs_schar CsEndian::Swap(cs_schar val)
+{
+	return val;
+}
+
+cs_uchar CsEndian::Swap(cs_uchar val)
+{
+	return val;
+}
+
+cs_short CsEndian::Swap(cs_short val)
+{
+	return val;
+}
+
+cs_ushort CsEndian::Swap(cs_ushort val)
+{
+	return val;
+}
+
+cs_int CsEndian::Swap(cs_int val)
+{
+	return val;
+}
+
+cs_uint CsEndian::Swap(cs_uint val)
+{
+	return val;
+}
+
+cs_long CsEndian::Swap(cs_long val)
+{
+	return val;
+}
+
+cs_ulong CsEndian::Swap(cs_ulong val)
+{
+	return val;
+}
+
+cs_longlong CsEndian::Swap(cs_longlong val)
+{
+	return val;
+}
+
+cs_ulonglong CsEndian::Swap(cs_ulonglong val)
+{
+	return val;
+}
+
+cs_float CsEndian::Swap(cs_float val)
+{
+	return val;
+}
+
+cs_double CsEndian::Swap(cs_double val)
+{
+	return val;
+}
+
+cs_decimal CsEndian::Swap(cs_decimal val)
+{
+	//cs_uint16 ret = nValue;
+	//cs_char *c1 = (cs_char*)&nValue;
+	//cs_char *c0 = (cs_char*)&ret;
+	//c0[0] = c1[1];
+	//c0[1] = c1[0];
+	//return ret;
+	return val;
+}
+
 void CsEndian::ToLittleEndianBytes(cs_uint16 nValue, cs_byte nData[])
 {
 	nData[0] = (cs_byte)(nValue);
@@ -111,6 +192,11 @@ void CsEndian::ToLittleEndianNumber(cs_byte nData[], cs_uint64 &nValue)
 }
 
 CsEndian::CsEndian()
+{
+
+}
+
+CsEndian::CsEndian(const CsEndian&)
 {
 
 }

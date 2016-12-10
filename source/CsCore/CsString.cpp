@@ -1,42 +1,31 @@
 #include "CsString.h"
-#include "CsString_Private.h"
+#include "CsString_Ex.h"
 
 CsString::CsString()
-: CsObject(new CsString_Private(this))
+: m_pString_Ex(new CsString_Ex())
 {
 
 }
 
 CsString::CsString(const cs_char cChar)
-: CsObject(new CsString_Private(this, cChar))
+: m_pString_Ex(new CsString_Ex(cChar))
 {
 
 }
 
 CsString::CsString(const cs_char *pStr)
-: CsObject(new CsString_Private(this, pStr))
-{
-
-}
-
-CsString::CsString(const std::string &sStr)
-: CsObject(new CsString_Private(this, sStr))
+: m_pString_Ex(new CsString_Ex(pStr))
 {
 
 }
 
 CsString::CsString(const CsString &sStr)
-: CsObject(new CsString_Private(this, *(CsString_Private*)sStr.m_pPrivate))
+: m_pString_Ex(sStr.m_pString_Ex)
 {
-
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
 }
 
-CsString::~CsString()
-{
-	
-}
-
-CsObject *CsString::CopyToObject() const
+CsObject *CsString::Boxing() const
 {
 	return new CsString(*this);
 }
@@ -51,191 +40,339 @@ CsString CsString::ToString() const
 	return *this;
 }
 
-cs_bool CsString::operator == (const CsString &sStr)
+cs_bool CsString::operator == (const CsString &sStr) const
 {
-	CS_PRIVATE(CsString);
-	return *pPrivate == *(CsString_Private*)sStr.GetPrivate();
+	return *m_pString_Ex == *sStr.m_pString_Ex;
 }
 
 CsString &CsString::operator+=(const CsString &sStr)
 {
-	CS_PRIVATE(CsString);
-	*pPrivate += *(CsString_Private*)sStr.GetPrivate();
+	if (m_pString_Ex.IsShared())
+	{
+		m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
+	}
+	*m_pString_Ex += *sStr.m_pString_Ex;
 	return *this;
 }
 
 CsString &CsString::operator=(const CsString &sStr)
 {
-	CS_PRIVATE(CsString);
-	*pPrivate = *(CsString_Private*)sStr.GetPrivate();
+	if (m_pString_Ex.IsShared())
+	{
+		//m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
+		// 由于下一步就要做拷贝操作，因此只需要重置一个空字符串即可
+		m_pString_Ex.Reset(new CsString_Ex());
+	}
+	*m_pString_Ex = *sStr.m_pString_Ex;
 	return *this;
+}
+
+cs_char CsString::operator[](cs_size_t id) const
+{
+	return m_pString_Ex->GetAt(id);
 }
 
 CsString CsString::FromNum(cs_short nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_short>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_short>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_ushort nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_ushort>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_ushort>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_int nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_int>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_int>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_uint nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_uint>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_uint>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_long nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_long>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_long>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_ulong nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_ulong>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_ulong>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_longlong nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_longlong>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_longlong>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_ulonglong nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_ulonglong>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_ulonglong>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_float nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_float>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_float>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
 }
 
 CsString CsString::FromNum(cs_double nNum, cs_int nBase)
 {
-	return CsString_Private::FromNum<cs_double>(nNum, nBase);
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_double>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
+}
+
+CsString CsString::FromNum(cs_decimal nNum, cs_int nBase)
+{
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_decimal>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
+}
+
+CsString CsString::FromStdString(const std::string &sStr)
+{
+	return CsString(sStr.c_str());
+}
+
+cs_small CsString::ToSmall(cs_bool *bIsOk) const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_small>(bIsOk);
+}
+
+cs_usmall CsString::ToUSmall(cs_bool *bIsOk) const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_usmall>(bIsOk);
 }
 
 cs_short CsString::ToShort(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_short>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_short>(bIsOk);
 }
 
 cs_ushort CsString::ToUShort(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_ushort>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_ushort>(bIsOk);
 }
 
 cs_int CsString::ToInt(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_int>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_int>(bIsOk);
 }
 
 cs_uint CsString::ToUInt(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_uint>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_uint>(bIsOk);
 }
 
 cs_long CsString::ToLong(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_long>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_long>(bIsOk);
 }
 
 cs_ulong CsString::ToULong(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_ulong>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_ulong>(bIsOk);
 }
 
 cs_longlong CsString::ToLongLong(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_longlong>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_longlong>(bIsOk);
 }
 
 cs_ulonglong CsString::ToULongLong(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_ulonglong>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_ulonglong>(bIsOk);
 }
 
 cs_float CsString::ToFloat(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_float>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_float>(bIsOk);
 }
 
 cs_double CsString::ToDouble(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_double>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_double>(bIsOk);
 }
 
 cs_decimal CsString::ToDecimal(cs_bool *bIsOk) const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->ToNum<cs_decimal>(bIsOk);
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->ToNum<cs_decimal>(bIsOk);
 }
 
 cs_bool CsString::IsEmpty() const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->IsEmpty();
+	CS_ASSERT(!m_pString_Ex.IsNull());
+
+	return m_pString_Ex->IsEmpty();
 }
 
 CsString CsString::Trim() const
 {
+	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	sStr.MakeTrim();
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	sStr.m_pString_Ex->MakeTrim();
+	return sStr;
+}
+
+CsString CsString::TrimLeft() const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	CsString sStr(*this);
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	sStr.m_pString_Ex->MakeTrimLeft();
+	return sStr;
+}
+
+CsString CsString::TrimRight() const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	CsString sStr(*this);
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	sStr.m_pString_Ex->MakeTrimRight();
 	return sStr;
 }
 
 CsString CsString::ToUpper() const
 {
+	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	sStr.MakeUpper();
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	sStr.m_pString_Ex->MakeUpper();
 	return sStr;
 }
 
 CsString CsString::ToLower() const
 {
+	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	sStr.MakeLower();
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	sStr.m_pString_Ex->MakeLower();
 	return sStr;
 }
 
-cs_cstring CsString::GetCStr() const
+cs_cstring CsString::CString() const
 {
-	CS_PRIVATE(CsString);
-	return pPrivate->GetCStr();
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->CString();
 }
 
-void CsString::MakeTrim()
+cs_size_t CsString::Length() const
 {
-	CS_PRIVATE(CsString);
-	pPrivate->MakeTrim();
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->Length();
 }
 
-void CsString::MakeUpper()
+cs_char CsString::GetAt(cs_size_t id) const
 {
-	CS_PRIVATE(CsString);
-	pPrivate->MakeUpper();
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return m_pString_Ex->GetAt(id);
 }
 
-void CsString::MakeLower()
+CsString &CsString::Replace(const CsString &from, const CsString &to, cs_bool bIsSensitive)
 {
-	CS_PRIVATE(CsString);
-	pPrivate->MakeLower();
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	CS_ASSERT(!from.m_pString_Ex.IsNull());
+	CS_ASSERT(!to.m_pString_Ex.IsNull());
+
+	if (m_pString_Ex.IsShared())
+	{
+		m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
+	}
+
+	if (Length() <= 0 || from.Length() <= 0)
+	{
+		return *this;
+	}
+
+	cs_cstring cfrom = from.CString();
+	cs_cstring cto = to.CString();
+	cs_size_t to_len = to.Length();
+	if (!cfrom ||
+		(!cto && to_len >= 0))
+	{
+		return *this;
+	}
+
+	m_pString_Ex->Replace(cfrom, from.Length(), cto, to_len, bIsSensitive);
+	return *this;
+}
+
+CsStringList CsString::Split(const CsString &sSep, cs_bool bIgnoreEmpty, cs_bool bIsSensitive) const
+{
+	CsStringList t;
+	return t;
+}
+
+cs_int CsString::Find(cs_char c, cs_size_t start, cs_bool bIsSensitive) const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return -1;
+}
+
+cs_int CsString::Find(const CsString &str, cs_size_t start, cs_bool bIsSensitive) const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return -1;
+}
+
+CsString CsString::SubString(cs_size_t start, cs_size_t length) const
+{
+	CS_ASSERT(!m_pString_Ex.IsNull());
+	return "";
+}
+
+cs_bool CsString::Equals(const CsString &str, cs_bool bIsSensitive) const
+{
+	if (bIsSensitive)
+	{
+		return *this == str;
+	}
+	return false;
 }
 
 CsString operator+(const CsString &s1, const CsString &s2)
@@ -245,7 +382,9 @@ CsString operator+(const CsString &s1, const CsString &s2)
 	return sStr;
 }
 
+/*
 cs_bool operator==(const CsString &s1, const CsString &s2)
 {
-	return s1 == s2;
+	return s1.operator==(s2);
 }
+*/

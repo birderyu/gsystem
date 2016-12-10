@@ -1,44 +1,39 @@
 #include "CsUdpSocket.h"
-#include "CsUdpSocket_Private.h"
-#include "CsSockAddr.h"
+#include "CsUdpSocket_Ex.h"
+#include "CsSockAddress.h"
 
 CsUdpSocket::CsUdpSocket()
-: CsSocket(new CsUdpSocket_Private(this))
+: CsSocket(new CsUdpSocket_Ex())
 {
-
-}
-
-CsUdpSocket::~CsUdpSocket()
-{
-
+	CS_ASSERT(m_pSocket_Ex);
 }
 
 cs_int CsUdpSocket::Open(cs_bool nResue)
 {
-	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->Open(nResue);
+	CS_ASSERT(m_pSocket_Ex);
+	return ((CsUdpSocket_Ex*)m_pSocket_Ex)->Open(nResue);
 }
 
-cs_int CsUdpSocket::Open(const CsSockAddr &tSockAddr, cs_bool nResue)
+cs_int CsUdpSocket::Open(const CsSockAddress &tSockAddr, cs_bool nResue)
 {
-	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->Open((CsSockAddr_Private*)tSockAddr.m_pPrivate, nResue);
+	CS_ASSERT(m_pSocket_Ex);
+	return ((CsUdpSocket_Ex*)m_pSocket_Ex)->Open(tSockAddr.m_pSockAddress_Ex, nResue);
 }
 
 void CsUdpSocket::Close()
 {
-	CS_PRIVATE(CsUdpSocket);
-	pPrivate->Close();
+	CS_ASSERT(m_pSocket_Ex);
+	((CsUdpSocket_Ex*)m_pSocket_Ex)->Close();
 }
 
-cs_int CsUdpSocket::SendTo(const void *pBufData, cs_int nLen, const CsSockAddr &tPeer)
+cs_int CsUdpSocket::SendTo(const cs_char *pBufData, cs_int nLen, const CsSockAddress &tPeer)
 {
-	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->SendTo(pBufData, nLen, (CsSockAddr_Private*)tPeer.m_pPrivate);
+	CS_ASSERT(m_pSocket_Ex);
+	return ((CsUdpSocket_Ex*)m_pSocket_Ex)->SendTo(pBufData, nLen, tPeer.m_pSockAddress_Ex);
 }
 
-cs_int CsUdpSocket::RecvFrom(void *pBufData, cs_int nMaxLen, CsSockAddr &tPeer)
+cs_int CsUdpSocket::RecvFrom(cs_char *pBufData, cs_int nMaxLen, CsSockAddress &tPeer)
 {
-	CS_PRIVATE(CsUdpSocket);
-	return pPrivate->RecvFrom(pBufData, nMaxLen, (CsSockAddr_Private*)tPeer.m_pPrivate);
+	CS_ASSERT(m_pSocket_Ex);
+	return ((CsUdpSocket_Ex*)m_pSocket_Ex)->RecvFrom(pBufData, nMaxLen, tPeer.m_pSockAddress_Ex);
 }

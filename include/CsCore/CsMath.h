@@ -1,9 +1,9 @@
-#ifndef _CSCORE_CSMATH_H_
-#define _CSCORE_CSMATH_H_
+#ifndef _CORE_MATH_UTILITY_H_
+#define _CORE_MATH_UTILITY_H_
 
-#include "CsCoreGlobal.h"
+#include "CsGlobal.h"
 
-class CS_CORE_EXPORT CsMath
+class CS_API CsMath
 {
 public:
 	/// 根号2
@@ -45,14 +45,30 @@ public:
 	static cs_int Ceil(cs_double v);
 	static cs_int Ceil(cs_decimal v);
 
+	static cs_float Log(cs_float);
+	static cs_double Log(cs_double);
+	static cs_decimal Log(cs_decimal);
+
+	static cs_float Exp(cs_float);
+	static cs_double Exp(cs_double);
+	static cs_decimal Exp(cs_decimal);
+
 	static cs_int Floor(cs_double v);
 
 	/// 三角函数
 	static cs_double FastSin(cs_double x);
 
-protected:
-	CsMath();
-	~CsMath();
+	// 平方根
+	static cs_float Sqrt(cs_float v);
+	static cs_double Sqrt(cs_double v);
+#ifdef CS_HAS_DECIMAL
+	static cs_decimal Sqrt(cs_decimal v);
+#endif // CS_HAS_DECIMAL
+
+private:
+	CsMath() {}
+	CsMath(const CsMath &) {}
+	~CsMath() {}
 };
 
-#endif // _CSCORE_CSMATH_H_
+#endif // _CORE_MATH_UTILITY_H_

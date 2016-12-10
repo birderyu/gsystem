@@ -2,8 +2,8 @@
 #define _CORE_B_TREE_H_
 
 #include "CsObject.h"
-#include "CsArray.h"
-#include "CsRBTree.h"
+#include "CsDynamicArray.h"
+#include "CsReadBlackTree.h"
 
 template<typename KeyT,
 	typename CompareT = CsCompareF<KeyT >>
@@ -18,8 +18,8 @@ public:
 
 private:
 	CsBTreeNode<KeyT> *m_pParent;		// 双亲
-	CsArray<cs_pointer> m_tChildren;		// 孩子
-	CsRBTree<KeyT, CompareT> m_tKeys;	// 使用红黑树排序的关键字？
+	CsDynamicArray<cs_pointer> m_tChildren;		// 孩子
+	CsReadBlackTree<KeyT, CompareT> m_tKeys;	// 使用红黑树排序的关键字？
 };
 
 template<typename KeyT,

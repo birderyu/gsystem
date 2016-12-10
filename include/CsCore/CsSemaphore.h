@@ -1,21 +1,21 @@
-#ifndef _CSCORE_CSSEMAPHORE_H_
-#define _CSCORE_CSSEMAPHORE_H_
+#ifndef _CORE_SEMAPHORE_H_
+#define _CORE_SEMAPHORE_H_
 
-#include "CsCoreGlobal.h"
-#include "CsObject.h"
+#include "CsGlobal.h"
 
 /// 信号量
-class CS_CORE_EXPORT CsSemaphore :public CsObject
+class CS_API CsSemaphore
 {
 public:
 	CsSemaphore(cs_int nInitialValue = 1);
 	~CsSemaphore();
 	cs_int Wait();
 	cs_int Wait(cs_ulong nMsecs);
-	void Post();
+	cs_void Post();
 
-public:
-	enum { CLASSCODE = CORE_CLASSCODE_SEMAPHORE, };
+private:
+	cs_int Initialize(cs_int nInitialValue);
+	cs_pointer m_pHandle;
 };
 
-#endif // _CSCORE_CSSEMAPHORE_H_
+#endif // _CORE_SEMAPHORE_H_

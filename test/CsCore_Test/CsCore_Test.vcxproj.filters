@@ -35,5 +35,17 @@
     <ClInclude Include="MemPool_Test.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Bytes_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="List_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RBTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
