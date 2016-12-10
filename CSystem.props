@@ -22,8 +22,6 @@
     <THD_DIR>$(SolutionDir)\thirds\</THD_DIR>
     <INC_DIRS>$(INC_DIR);$(INC_DIRS);</INC_DIRS>
     <INC_DIRS>$(INC_DIR)CsCore\;$(PRV_DIR)CsCore\;$(THD_DIR)CsCore\;$(INC_DIRS);</INC_DIRS>
-    <INC_DIRS>$(INC_DIR)CsGeometry\;$(PRV_DIR)CsGeometry\;$(THD_DIR)CsGeometry\;$(INC_DIRS);</INC_DIRS>
-    <INC_DIRS>$(INC_DIR)CsData\;$(PRV_DIR)CsData\;$(THD_DIR)CsData\;$(INC_DIRS);</INC_DIRS>
     <THD_DIR>$(SolutionDir)\thirds\</THD_DIR>
     <IncludePath>$(THD_DIR)include\;$(INC_DIRS);$(IncludePath);</IncludePath>
     <LibraryPath>$(THD_DIR)lib\;$(LibraryPath)</LibraryPath>
