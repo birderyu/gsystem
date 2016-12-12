@@ -46,7 +46,7 @@ cs_bool CsObject::Serialize(CsBytes &) const
 	return false;
 }
 
-cs_bool CsObject::Deserialize(const CsBytes &)
+cs_bool CsObject::Deserialize(CsBytes &)
 {
 	return false;
 }

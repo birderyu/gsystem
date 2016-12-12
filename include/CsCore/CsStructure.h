@@ -1,7 +1,15 @@
 #ifndef _CORE_NODE_H_
 #define _CORE_NODE_H_
 
-#include "CsType.h"
+#include "CsGlobal.h"
+
+/// 一维链表通用模式定义
+template<typename ListT>
+struct CsListT
+{
+	static const cs_size_t MAX_SIZE = CS_LIST_MAX_SIZE;
+	static const cs_size_t NULL_POS = CS_LIST_NULL_POS;
+};
 
 /// 单向链表节点
 template<typename NodeT>
@@ -72,6 +80,6 @@ struct CsKeyValueNodeT
 	CsKeyValueNodeT(const KeyT &key, const ValueT &value);
 };
 
-#include "CsNode.inl"
+#include "CsStructure.inl"
 
 #endif // _CORE_NODE_H_

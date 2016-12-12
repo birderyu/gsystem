@@ -2,9 +2,12 @@
 #define _CORE_STACK_H_
 
 #include "CsObject.h"
+#include "CsStructure.h"
 
 template<typename DataT>
-class CsStack :public CsObject
+class CsStack 
+	: public CsObject
+	, public CsListT<CsStack<DataT>>
 {
 public:
 	virtual ~CsStack() = 0 {}

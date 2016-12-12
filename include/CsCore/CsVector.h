@@ -6,7 +6,7 @@
 #define CS_DEFAULT_VECTOR_SIZE			5
 #define CS_DEFAULT_VECTOR_CAPACITY		0.5
 
-template <typename T>
+template <typename DataT>
 class CsVector 
 	: public CsObject
 {
@@ -15,11 +15,11 @@ public:
 	{
 	public:
 		inline Iterator() : i(NULL) {}
-		inline Iterator(T *n) : i(n) {}
+		inline Iterator(DataT *n) : i(n) {}
 
-		inline T &operator*() const { return *i; }
-		inline T *operator->() const { return i; }
-		inline T &operator[](int j) const { return *(i + j); }
+		inline DataT &operator*() const { return *i; }
+		inline DataT *operator->() const { return i; }
+		inline DataT &operator[](int j) const { return *(i + j); }
 		inline bool operator==(const Iterator &o) const { return i == o.i; }
 		inline bool operator!=(const Iterator &o) const { return i != o.i; }
 		inline bool operator<(const Iterator& other) const { return i < other.i; }
@@ -27,49 +27,49 @@ public:
 		inline bool operator>(const Iterator& other) const { return i > other.i; }
 		inline bool operator>=(const Iterator& other) const { return i >= other.i; }
 		inline Iterator &operator++() { ++i; return *this; }
-		inline Iterator operator++(int) { T *n = i; ++i; return n; }
+		inline Iterator operator++(int) { DataT *n = i; ++i; return n; }
 		inline Iterator &operator--() { i--; return *this; }
-		inline Iterator operator--(int) { T *n = i; i--; return n; }
+		inline Iterator operator--(int) { DataT *n = i; i--; return n; }
 		inline Iterator &operator+=(int j) { i += j; return *this; }
 		inline Iterator &operator-=(int j) { i -= j; return *this; }
 		inline Iterator operator+(int j) const { return Iterator(i + j); }
 		inline Iterator operator-(int j) const { return Iterator(i - j); }
-		inline int operator-(Iterator j) const { return i - j.i; }
-		inline operator T*() const { return i; }
+		inline cs_int operator-(Iterator j) const { return i - j.i; }
+		inline operator DataT*() const { return i; }
 
 	private:
-		T *i;
+		DataT *i;
 	};
 
 	class ConstIterator
 	{
 	public:
 		inline ConstIterator() : i(0) {}
-		inline ConstIterator(const T *n) : i(n) {}
+		inline ConstIterator(const DataT *n) : i(n) {}
 		
 		inline explicit ConstIterator(const Iterator &o) : i(o.i) {}
-		inline const T &operator*() const { return *i; }
-		inline const T *operator->() const { return i; }
-		inline const T &operator[](int j) const { return *(i + j); }
-		inline bool operator==(const ConstIterator &o) const { return i == o.i; }
-		inline bool operator!=(const ConstIterator &o) const { return i != o.i; }
-		inline bool operator<(const ConstIterator& other) const { return i < other.i; }
-		inline bool operator<=(const ConstIterator& other) const { return i <= other.i; }
-		inline bool operator>(const ConstIterator& other) const { return i > other.i; }
-		inline bool operator>=(const ConstIterator& other) const { return i >= other.i; }
+		inline const DataT &operator*() const { return *i; }
+		inline const DataT *operator->() const { return i; }
+		inline const DataT &operator[](int j) const { return *(i + j); }
+		inline cs_bool operator==(const ConstIterator &o) const { return i == o.i; }
+		inline cs_bool operator!=(const ConstIterator &o) const { return i != o.i; }
+		inline cs_bool operator<(const ConstIterator& other) const { return i < other.i; }
+		inline cs_bool operator<=(const ConstIterator& other) const { return i <= other.i; }
+		inline cs_bool operator>(const ConstIterator& other) const { return i > other.i; }
+		inline cs_bool operator>=(const ConstIterator& other) const { return i >= other.i; }
 		inline ConstIterator &operator++() { ++i; return *this; }
-		inline ConstIterator operator++(int) { const T *n = i; ++i; return n; }
+		inline ConstIterator operator++(int) { const DataT *n = i; ++i; return n; }
 		inline ConstIterator &operator--() { i--; return *this; }
-		inline ConstIterator operator--(int) { const T *n = i; i--; return n; }
+		inline ConstIterator operator--(int) { const DataT *n = i; i--; return n; }
 		inline ConstIterator &operator+=(int j) { i += j; return *this; }
 		inline ConstIterator &operator-=(int j) { i -= j; return *this; }
 		inline ConstIterator operator+(int j) const { return ConstIterator(i + j); }
 		inline ConstIterator operator-(int j) const { return ConstIterator(i - j); }
 		inline int operator-(ConstIterator j) const { return i - j.i; }
-		inline operator const T*() const { return i; }
+		inline operator const DataT*() const { return i; }
 
 	private:
-		const T *i;
+		const DataT *i;
 	};
 
 	friend class Iterator;
@@ -77,11 +77,11 @@ public:
 
 public:
 	CsVector();
-	explicit CsVector(const cs_size_t len, const &T t = T());
+	explicit CsVector(const cs_size_t len, const &DataT t = T());
 	cs_bool Reserve(const cs_size_t len) const;
 	cs_bool Resize(const cs_size_t len) const;
 
-	cs_size_t Length() const;
+	cs_size_t Size() const;
 	cs_size_t Capacity() const;
 	cs_bool IsEmpty() const;
 	void Clear();
@@ -89,8 +89,8 @@ public:
 	T &operator[](const size_t i);
 	T operator[](const size_t i) const;
 
-	void PushBack(const T &t);
-	void PushFront(const T &t);
+	void PushBack(const DataT &t);
+	void PushFront(const DataT &t);
 	void PopBack();
 	void PopFront();
 
@@ -99,7 +99,8 @@ private:
 	size_t RealID(const size_t i) const;
 	cs_bool Valid() const;
 
-	CsDynamicArray<T> m_tArray;
+	// 动态数组
+	CsDynamicArray<DataT> m_tArray;
 
 	// 头指针，指向首元素，初始值为-1
 	cs_int m_nHead;
@@ -144,7 +145,7 @@ cs_bool CsVector<T>::Resize(const cs_size_t len) const
 }
 
 template <typename T>
-cs_size_t CsVector<T>::Length() const
+cs_size_t CsVector<T>::Size() const
 {
 	if (!Valid())
 	{
@@ -166,7 +167,7 @@ cs_size_t CsVector<T>::Capacity() const
 template <typename T>
 cs_bool CsVector<T>::IsEmpty() const
 {
-	return Length() == 0;
+	return Size() == 0;
 }
 
 template <typename T>

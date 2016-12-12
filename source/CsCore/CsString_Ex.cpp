@@ -127,7 +127,7 @@ cs_bool CsNormalStr_Ex::Initialize(const cs_char *pStr, cs_size_t len)
 	{
 		real_len = CsNormalStr_Ex::MaxSize();
 	}
-	m_pStr = (cs_char*)CsCalloc(real_len + 1, sizeof(cs_char));
+	m_pStr = (cs_char*)CsMalloc((real_len + 1)* sizeof(cs_char));
 	if (!m_pStr)
 	{
 		m_nLength = 0;
@@ -146,7 +146,7 @@ cs_bool CsNormalStr_Ex::Initialize(const cs_char *pStr, cs_size_t len)
 
 cs_bool CsNormalStr_Ex::Initialize(const CsNormalStr_Ex &sStr)
 {
-	m_pStr = (cs_char*)CsCalloc(sStr.m_nLength + 1, sizeof(cs_char));
+	m_pStr = (cs_char*)CsMalloc((sStr.m_nLength + 1) * sizeof(cs_char));
 	if (!m_pStr)
 	{
 		m_nLength = 0;
@@ -761,7 +761,7 @@ CsString_Ex &CsString_Ex::Replace(const cs_char *from, cs_size_t from_len, const
 	if (nEstimateType != VALUE_STRING_BIG)
 	{
 		// 替换之后为普通字符串
-		cs_char *pStr = (cs_char*)CsCalloc(estimate_len + 1, sizeof(cs_char));
+		cs_char *pStr = (cs_char*)CsMalloc((estimate_len + 1) * sizeof(cs_char));
 		cs_size_t out_len = 0;
 		if (!CsCStringHelper::Replace(CString(), length, from, from_len, to, to_len, bIsSensitive,
 			pStr, out_len))

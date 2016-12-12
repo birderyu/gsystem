@@ -5,9 +5,9 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 typedef SOCKET TSocket;
-#define _OpenSocket			socket
-#define _CloseSocket		closesocket
-#define _ControlSocketIO	ioctlsocket
+#define CsOpenSocket		socket
+#define CsCloseSocket		closesocket
+#define CsControlSocketIO	ioctlsocket
 #else
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -19,20 +19,20 @@ typedef SOCKET TSocket;
 #include <sys/time.h>
 #include <fcntl.h>
 typedef cs_int TSocket;
-#define _OpenSocket			socket
-#define _CloseSocket		close
-#define _ControlSocketIO	ioctl
+#define CsOpenSocket		socket
+#define CsCloseSocket		close
+#define CsControlSocketIO	ioctl
 #endif
-#define _BindSocket		bind
-#define _ListenSocket	listen
-#define _AcceptSocket	accept
-#define _ConnectSocket	connect
-#define _SendSocket		send
-#define _RecvSocket		recv
-#define _SendToSocket	sendto
-#define _RecvFromSocket	recvfrom
-#define _SetSocketOpt	setsockopt
-#define _GetSocketOpt	getsockopt
+#define CsBindSocket		bind
+#define CsListenSocket		listen
+#define CsAcceptSocket		accept
+#define CsConnectSocket		connect
+#define CsSendSocket		send
+#define CsRecvSocket		recv
+#define CsSendToSocket		sendto
+#define CsRecvFromSocket	recvfrom
+#define CsSetSocketOpt		setsockopt
+#define CsGetSocketOpt		getsockopt
 
 #include "CsGlobal_Ex.h"
 

@@ -15,16 +15,20 @@ public:
 public:
 	virtual ~CsSocket() = 0;
 
-	cs_int SetRecvTimeout(const cs_int nMsecs);
-	cs_int GetRecvTimeout() const;
+	virtual cs_bool Open(cs_bool nResue = false) = 0;
+	virtual cs_bool Open(const CsSockAddress &tSockAddr, cs_bool nResue = false) = 0;
+	virtual cs_void Close() = 0;
 
-	cs_int SetSendTimeout(const cs_int nMsecs);
-	cs_int GetSendTimeout() const;
+	cs_bool SetRecvTimeout(cs_int nMsecs);
+	cs_int	GetRecvTimeout() const;
 
-	cs_int SetReuseAddr(const cs_bool nResue);
+	cs_bool SetSendTimeout(cs_int nMsecs);
+	cs_int	GetSendTimeout() const;
 
-	cs_int GetPeerAddr(CsSockAddress &tSockAddr) const;
-	cs_int GetLocalAddr(CsSockAddress &tSockAddr) const;
+	cs_bool SetReuseAddress(cs_bool nResue);
+
+	cs_bool GetPeerAddr(CsSockAddress &tSockAddr) const;
+	cs_bool GetLocalAddr(CsSockAddress &tSockAddr) const;
 
 protected:
 	CsSocket(CsSocket_Ex *);

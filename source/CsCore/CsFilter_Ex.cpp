@@ -341,7 +341,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_ParseUnionType(const CsString &s
 
 cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const CsString &sFilter)
 {
-	cs_size_t length = sFilter.Length();
+	cs_size_t length = sFilter.Size();
 	CsListStack<cs_char> stack;
 
 	for (cs_size_t i = 0; i < length; i++)
@@ -363,10 +363,10 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const CsString &s
 
 cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(CsString &sFilter)
 {
-	if (sFilter[0] == '(' && sFilter[sFilter.Length() - 1] == ')')
+	if (sFilter[0] == '(' && sFilter[sFilter.Size() - 1] == ')')
 	{
 		// ÒÆ³ýÀ¨ºÅ
-		sFilter = sFilter.SubString(1, sFilter.Length() - 2);
+		sFilter = sFilter.SubString(1, sFilter.Size() - 2);
 		return ParseFilter_TrimBracket(sFilter);
 	}
 	else
@@ -377,7 +377,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(CsString &sFilter)
 
 cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const CsString &sFilter, const CsString &sUnion, CsStringList &tFilterList)
 {
-	cs_size_t length = sFilter.Length();
+	cs_size_t length = sFilter.Size();
 	CsListStack<cs_char> stack;
 	cs_size_t cursor = 0;
 	for (cs_size_t i = 0; i < length; i++)
@@ -391,7 +391,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const C
 		if (stack.IsEmpty())
 		{
 			tFilterList.Add(sFilter.SubString(cursor, i - cursor));
-			i += sUnion.Length();
+			i += sUnion.Size();
 			cursor = i;
 		}
 		else
@@ -513,6 +513,7 @@ cs_bool CsFilter_Ex::CsFilterParse::GetCompareString(CS_COMPARE_TYPE emCompareTy
 	default:
 		break;
 	}
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -12,7 +12,7 @@
 #define _CORE_DOUBLE_LINKED_LIST_H_
 
 #include "CsLinkedList.h"
-#include "CsNode.h"
+#include "CsStructure.h"
 
 template<typename DataT>
 class CsDoubleLinkedList 
@@ -62,9 +62,9 @@ public:
 	DataT& GetAt(cs_size_t pos);
 	DataT  GetAt(cs_size_t pos) const;
 	cs_void SetAt(cs_size_t pos, const DataT &data);
-	cs_int Find(const DataT &data) const;
-	cs_int FindCircle() const;
-	cs_int FindCross(const CsDoubleLinkedList &list);
+	cs_size_t Find(const DataT &data) const;
+	cs_size_t FindCircle() const;
+	cs_size_t FindCross(const CsDoubleLinkedList &list);
 
 	DataT &operator[](cs_size_t id);
 	DataT operator[](cs_size_t id) const;

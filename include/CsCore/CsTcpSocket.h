@@ -12,16 +12,16 @@ public:
 public:
 	CsTcpSocket();
 
-	cs_int Open(cs_bool nResue = false);
-	cs_int Open(const CsSockAddress &tSockAddr, cs_bool nResue = false);
+	cs_bool Open(cs_bool nResue = false);
+	cs_bool Open(const CsSockAddress &tSockAddr, cs_bool nResue = false);
 	cs_void Close();
 
 	// 服务器
-	cs_int Listen(cs_int nBackLog = 16);
-	cs_int Accept(const CsTcpSocket &pPeer);
+	cs_bool Listen(cs_int nBackLog = 16);
+	cs_bool Accept(const CsTcpSocket &pPeer);
 
 	// 客户端
-	cs_int Connect(const CsSockAddress &tSockAddr);
+	cs_bool Connect(const CsSockAddress &tSockAddr);
 
 	// 发送接收
 	cs_int Send(const cs_char *pBufData, cs_int nDataLen);

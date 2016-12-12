@@ -21,12 +21,12 @@ cs_bool CsStringList::Add(const CsString &str)
 	{
 		return false;
 	}
-	cs_char *ptr = (cs_char*)m_tPool.Alloc(str.Length() + 1);
+	cs_char *ptr = (cs_char*)m_tPool.Alloc(str.Size() + 1);
 	if (!ptr)
 	{
 		return false;
 	}
-	CsCStringHelper::Copy(str.CString(), str.Length() + 1, ptr);
+	CsCStringHelper::Copy(str.CString(), str.Size() + 1, ptr);
 	m_t.insert(std::pair<cs_size_t, cs_pointer>(m_t.size(), ptr));
 	return true;
 }

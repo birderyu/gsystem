@@ -16,7 +16,7 @@ inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t len)
 	{
 		return;
 	}
-	m_pData = (DataT *)CsCalloc(len, sizeof(DataT));
+	m_pData = (DataT *)CsMalloc(len * sizeof(DataT));
 	if (!m_pData)
 	{
 		m_nSize = 0;
@@ -32,7 +32,7 @@ inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t len, const DataT &t)
 	{
 		return;
 	}
-	m_pData = (DataT *)CsCalloc(len, sizeof(DataT));
+	m_pData = (DataT *)CsMalloc(len * sizeof(DataT));
 	if (!m_pData)
 	{
 		m_nSize = 0;
@@ -52,7 +52,7 @@ inline CsDynamicArray<DataT>::CsDynamicArray(const CsDynamicArray<DataT> &tArray
 	{
 		return;
 	}
-	m_pData = (DataT *)CsCalloc(m_nSize, sizeof(DataT));
+	m_pData = (DataT *)CsMalloc(m_nSize * sizeof(DataT));
 	if (!m_pData)
 	{
 		m_nSize = 0;
@@ -96,7 +96,7 @@ inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t len)
 
 	if (!m_pData)
 	{
-		m_pData = (DataT *)CsCalloc(m_nSize, sizeof(DataT));
+		m_pData = (DataT *)CsMalloc(m_nSize * sizeof(DataT));
 	}
 	else
 	{
@@ -126,7 +126,7 @@ inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t len, const DataT &t)
 
 	if (!m_pData)
 	{
-		m_pData = (DataT *)CsCalloc(m_nSize, sizeof(DataT));
+		m_pData = (DataT *)CsMalloc(m_nSize * sizeof(DataT));
 	}
 	else
 	{
@@ -202,7 +202,7 @@ inline cs_bool CsDynamicArray<DataT>::RemoveAt(cs_size_t id)
 		Clear();
 		return true;
 	}
-	DataT *pData = (DataT *)CsCalloc(len, sizeof(DataT));
+	DataT *pData = (DataT *)CsMalloc(len * sizeof(DataT));
 	if (!pData)
 	{
 		return false;
@@ -236,7 +236,7 @@ inline CsDynamicArray<DataT> &CsDynamicArray<DataT>::operator=(const CsDynamicAr
 	}
 	if (m_nSize != arr.m_nSize)
 	{
-		m_pData = (DataT *)CsCalloc(arr.m_nSize, sizeof(DataT));
+		m_pData = (DataT *)CsMalloc(arr.m_nSize * sizeof(DataT));
 		if (!m_pData)
 		{
 			throw std::bad_alloc();

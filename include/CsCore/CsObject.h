@@ -177,7 +177,7 @@ public:
 	** 将字节流反序列化为当前对象的数据
 	**
 	****************************************************************************/
-	virtual cs_bool Deserialize(const CsBytes &);
+	virtual cs_bool Deserialize(CsBytes &);
 };
 
 #endif // _CORE_OBJECT_H_

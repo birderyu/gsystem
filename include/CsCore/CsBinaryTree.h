@@ -16,7 +16,7 @@
 #define _CORE_BINARY_TREE_H_
 
 #include "CsObject.h"
-#include "CsNode.h"
+#include "CsStructure.h"
 
 /****************************************************************************
 **

@@ -72,6 +72,22 @@ cs_char CsString::operator[](cs_size_t id) const
 	return m_pString_Ex->GetAt(id);
 }
 
+CsString CsString::FromNum(cs_small nNum, cs_int nBase)
+{
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_small>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
+}
+
+CsString CsString::FromNum(cs_usmall nNum, cs_int nBase)
+{
+	CsString sStr;
+	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
+	CsString_Ex::FromNum<cs_usmall>(nNum, nBase, *sStr.m_pString_Ex);
+	return sStr;
+}
+
 CsString CsString::FromNum(cs_short nNum, cs_int nBase)
 {
 	CsString sStr;
@@ -301,7 +317,7 @@ cs_cstring CsString::CString() const
 	return m_pString_Ex->CString();
 }
 
-cs_size_t CsString::Length() const
+cs_size_t CsString::Size() const
 {
 	CS_ASSERT(!m_pString_Ex.IsNull());
 	return m_pString_Ex->Length();
@@ -324,21 +340,21 @@ CsString &CsString::Replace(const CsString &from, const CsString &to, cs_bool bI
 		m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
 	}
 
-	if (Length() <= 0 || from.Length() <= 0)
+	if (Size() <= 0 || from.Size() <= 0)
 	{
 		return *this;
 	}
 
 	cs_cstring cfrom = from.CString();
 	cs_cstring cto = to.CString();
-	cs_size_t to_len = to.Length();
+	cs_size_t to_len = to.Size();
 	if (!cfrom ||
 		(!cto && to_len >= 0))
 	{
 		return *this;
 	}
 
-	m_pString_Ex->Replace(cfrom, from.Length(), cto, to_len, bIsSensitive);
+	m_pString_Ex->Replace(cfrom, from.Size(), cto, to_len, bIsSensitive);
 	return *this;
 }
 

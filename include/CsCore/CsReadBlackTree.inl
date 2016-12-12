@@ -8,7 +8,7 @@ inline CsReadBlackTreeNode<KeyT, ValueT>::CsReadBlackTreeNode(
 	CsReadBlackTreeNode<KeyT, ValueT> *parent,
 	CsReadBlackTreeNode<KeyT, ValueT> *left,
 	CsReadBlackTreeNode<KeyT, ValueT> *right,
-	COLOR color)
+	cs_small color)
 	: CsBinaryTreeNodeT<CsReadBlackTreeNode<KeyT, ValueT>>(parent, left, right)
 	, CsKeyValueNodeT<KeyT, ValueT>(key, value)
 	, m_nColor(color)
@@ -51,7 +51,7 @@ inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT 
 	{
 		//插入的是一颗空树
 		m_pRoot = insert_node;
-		insert_node->m_nColor = NodeT::RBTREE_COLOR_BLACK;
+		insert_node->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 	}
 	else
 	{
@@ -124,7 +124,7 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT
 		}
 	}
 
-	if (delete_point->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+	if (delete_point->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 	{
 		if (delete_point_child && delete_point_child != m_pRoot)
 		{
@@ -138,12 +138,12 @@ template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::InsertFixUp(NodeT *node)
 {
 	while (node->m_pParent &&
-		node->m_pParent->m_nColor == NodeT::RBTREE_COLOR_RED)
+		node->m_pParent->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 	{
 		if (node->m_pParent == node->m_pParent->m_pParent->m_pLeft)
 		{
 			NodeT *uncle = node->m_pParent->m_pParent->m_pRight;
-			if (!uncle || uncle->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+			if (!uncle || uncle->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 			{
 				if (node == node->m_pParent->m_pRight)
 				{
@@ -152,23 +152,23 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::InsertFixUp(NodeT
 				}
 				else
 				{
-					node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-					node->m_pParent->m_pParent->m_nColor = NodeT::RBTREE_COLOR_RED;
+					node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+					node->m_pParent->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 					RotateRight(node->m_pParent->m_pParent);
 				}
 			}
-			else if (uncle->m_nColor == NodeT::RBTREE_COLOR_RED)
+			else if (uncle->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 			{
-				node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-				uncle->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-				node->m_pParent->m_pParent->m_nColor = NodeT::RBTREE_COLOR_RED;
+				node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+				uncle->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+				node->m_pParent->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 				node = node->m_pParent->m_pParent;
 			}
 		}
 		else
 		{
 			NodeT *uncle = node->m_pParent->m_pParent->m_pLeft;
-			if (!uncle || uncle->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+			if (!uncle || uncle->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 			{
 				if (node == node->m_pParent->m_pLeft)
 				{
@@ -177,56 +177,56 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::InsertFixUp(NodeT
 				}
 				else
 				{
-					node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-					node->m_pParent->m_pParent->m_nColor = NodeT::RBTREE_COLOR_RED;
+					node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+					node->m_pParent->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 					RotateLeft(node->m_pParent->m_pParent);
 				}
 			}
-			else if (uncle->m_nColor == NodeT::RBTREE_COLOR_RED)
+			else if (uncle->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 			{
-				node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-				uncle->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-				uncle->m_pParent->m_nColor = NodeT::RBTREE_COLOR_RED;
+				node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+				uncle->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+				uncle->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 				node = node->m_pParent->m_pParent;
 			}
 		}
 	}
-	m_pRoot->m_nColor = NodeT::RBTREE_COLOR_BLACK;
+	m_pRoot->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::DeleteFixUp(NodeT *node)
 {
-	while (node != m_pRoot && node->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+	while (node != m_pRoot && node->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 	{
 		if (node == node->m_pParent->m_pLeft)
 		{
 			NodeT *brother = node->m_pParent->m_pRight;
-			if (brother->m_nColor == NodeT::RBTREE_COLOR_RED)
+			if (brother->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 			{
-				brother->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-				node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_RED;
+				brother->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+				node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 				RotateLeft(node->m_pParent);
 			}
 			else
 			{
-				if (brother->m_pLeft->m_nColor == NodeT::RBTREE_COLOR_BLACK
-					&& brother->m_pRight->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+				if (brother->m_pLeft->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK
+					&& brother->m_pRight->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 				{
-					brother->m_nColor = NodeT::RBTREE_COLOR_RED;
+					brother->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 					node = node->m_pParent;
 				}
-				else if (brother->m_pRight->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+				else if (brother->m_pRight->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 				{
-					brother->m_nColor = NodeT::RBTREE_COLOR_RED;
-					brother->m_pLeft->m_nColor = NodeT::RBTREE_COLOR_BLACK;
+					brother->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
+					brother->m_pLeft->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 					RotateRight(brother);
 				}
-				else if (brother->m_pRight->m_nColor == NodeT::RBTREE_COLOR_RED)
+				else if (brother->m_pRight->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 				{
 					brother->m_nColor = node->m_pParent->m_nColor;
-					node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-					brother->m_pRight->m_nColor = NodeT::RBTREE_COLOR_BLACK;
+					node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+					brother->m_pRight->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 					RotateLeft(node->m_pParent);
 					node = m_pRoot;
 				}
@@ -235,31 +235,31 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::DeleteFixUp(NodeT
 		else
 		{
 			NodeT *brother = node->m_pParent->m_pLeft;
-			if (brother->m_nColor == NodeT::RBTREE_COLOR_RED)
+			if (brother->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 			{
-				brother->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-				node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_RED;
+				brother->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+				node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 				RotateRight(node->m_pParent);
 			}
 			else
 			{
-				if (brother->m_pLeft->m_nColor == NodeT::RBTREE_COLOR_BLACK
-					&& brother->m_pRight->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+				if (brother->m_pLeft->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK
+					&& brother->m_pRight->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 				{
-					brother->m_nColor = NodeT::RBTREE_COLOR_RED;
+					brother->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
 					node = node->m_pParent;
 				}
-				else if (brother->m_pLeft->m_nColor == NodeT::RBTREE_COLOR_BLACK)
+				else if (brother->m_pLeft->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 				{
-					brother->m_nColor = NodeT::RBTREE_COLOR_RED;
-					brother->m_pRight->m_nColor = NodeT::RBTREE_COLOR_BLACK;
+					brother->m_nColor = CS_RED_BLACK_TREE_NODE_RED;
+					brother->m_pRight->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 					RotateLeft(brother);
 				}
-				else if (brother->m_pLeft->m_nColor == NodeT::RBTREE_COLOR_RED)
+				else if (brother->m_pLeft->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
 				{
 					brother->m_nColor = node->m_pParent->m_nColor;
-					node->m_pParent->m_nColor = NodeT::RBTREE_COLOR_BLACK;
-					brother->m_pLeft->m_nColor = NodeT::RBTREE_COLOR_BLACK;
+					node->m_pParent->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
+					brother->m_pLeft->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 					RotateRight(node->m_pParent);
 					node = m_pRoot;
 				}
@@ -267,7 +267,7 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::DeleteFixUp(NodeT
 		}
 	}
 	//最后将node置为根结点，
-	node->m_nColor = NodeT::RBTREE_COLOR_BLACK;    //并改为黑色。
+	node->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;    //并改为黑色。
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>

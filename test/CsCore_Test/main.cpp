@@ -33,6 +33,7 @@
 
 #include "CsStringList.h"
 #include "CsStaticArray.h"
+#include "CsSingleton.h"
 
 void TestSharedPtr()
 {
@@ -49,26 +50,52 @@ void TestSharedPtr()
 	stop++;
 }
 
+void TestArray()
+{
+	const cs_size_t length = 100000;
+	cs_int _nStartTime = GetTickCount(); // time
+	for (cs_size_t i = 0; i < length; i++)
+	{
+		CsDynamicArray<cs_int> arr(length);
+		for (cs_size_t j = 0; j < length; j++)
+		{
+			arr[j] = j;
+		}
+	}
+	cs_int _nMiddleTime = GetTickCount(); // time
+	for (cs_size_t i = 0; i < length; i++)
+	{
+		cs_int *arr = new cs_int[length];
+		for (cs_size_t j = 0; j < length; j++)
+		{
+			arr[j] = j;
+		}
+		delete[]arr;
+	}
+	cs_int _nEndTime = GetTickCount(); // time
+	cs_int _nTime1 = (_nMiddleTime - _nStartTime); // time
+	cs_int _nTime2 = (_nEndTime - _nMiddleTime); // time
+}
+
 int main(int argc, char *argv[])
 {
-	TestHashTable();
+	CsBytes bytes;
+	cs_byte v1 = 9;
+	cs_int v2 = 123321;
+	cs_int64 v3 = 1233211233223321LL;
+	cs_float v4 = 9.87;
+	cs_double v5 = 2314.6546546;
+	bytes << v1 << v2 << v3 << v4 << v5;
+
+	cs_byte _v1;
+	cs_int _v2;
+	cs_int64 _v3;
+	cs_float _v4;
+	cs_double _v5;
+	bytes >> _v1 >> _v2 >> _v3 >> _v4 >> _v5;
+
+	//TestHashTable();
 	//TestBSTree();
-	std::string stdstr;
-	cs_size_t stdstrsize = stdstr.max_size();
-	cs_size_t stdstrnpos= stdstr.npos;
-
-	CsString s1("111");
-	CsString s2("222");
-	cs_cstring cs1 = s1.CString();
-	cs_cstring cs2 = s2.CString();
-	CsStringList sl;
-	sl.Add(s1);
-	sl.Add(s2);
-	CsString sl1 = sl.GetAt(0);
-	CsString sl2 = sl.GetAt(1);
-	cs_cstring csl1 = sl1.CString();
-	cs_cstring csl2 = sl2.CString();
-
 	//TestSharedPtr();
 
 	//TestHashTable();
@@ -82,8 +109,8 @@ int main(int argc, char *argv[])
 	{
 		//CsString str("123456789012345");
 		//std::string str("123456789012345123456789012345123456789012345123456789012345123456789012345");
-		CsString str("123456789012345123456789012345123456789012345123456789012345123456789012345");
-		//CsString_Ex str("123");
+		//CsString str("123456789012345123456789012345123456789012345123456789012345123456789012345");
+		CsString_Ex str("123456789012345123456789012345123456789012345123456789012345123456789012345");
 		//delete str;
 
 		//CsString str(str1);

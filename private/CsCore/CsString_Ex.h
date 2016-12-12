@@ -102,7 +102,7 @@ private:
 
 /****************************************************************************
 **
-** CsString.h
+** CsStringStore.h
 **
 ** @struct: CsStringStore
 ** @module: CsCore

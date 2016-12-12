@@ -4,28 +4,22 @@
 
 #include "CsReadBlackTree.h"
 
+#define CS_ORDER_MAPM_NODE_RED		CS_RED_BLACK_TREE_NODE_RED
+#define CS_ORDER_MAPM_NODE_BLACK	CS_RED_BLACK_TREE_NODE_BLACK
+
 template < typename KeyT,
 	typename ValueT,
 	typename CompareT>
 class CsOrderMap;
 
 /// 节点
-template < typename KeyT,
-	typename ValueT>
+template < typename KeyT, typename ValueT>
 struct CsOrderMapNode 
-	: public CsObject
+	: public CsBinaryTreeNodeT<CsOrderMapNode<KeyT, ValueT>>
+	, public CsKeyValueNodeT<KeyT, ValueT>
+	, public CsNewT<CsOrderMapNode<KeyT, ValueT>>
 {
-	enum COLOR
-	{
-		COLOR_RED = 0,
-		COLOR_BLACK = 1
-	};
-	KeyT m_tKey;								// 数据，需要由外部去析构，否则可能造成内存泄露
-	ValueT m_tValue;							// 数据，需要由外部去析构，否则可能造成内存泄露
-	CsOrderMapNode<KeyT, ValueT> *m_pParent;		// 双亲
-	CsOrderMapNode<KeyT, ValueT> *m_pLeft;		// 左孩子
-	CsOrderMapNode<KeyT, ValueT> *m_pRight;		// 右孩子
-	cs_byte m_nColor;
+	cs_small m_nColor;
 
 	CsOrderMapNode(
 		const KeyT &key = KeyT(),
@@ -33,18 +27,16 @@ struct CsOrderMapNode
 		CsOrderMapNode<KeyT, ValueT> *parent = NULL,
 		CsOrderMapNode<KeyT, ValueT> *left = NULL,
 		CsOrderMapNode<KeyT, ValueT> *right = NULL,
-		COLOR color = COLOR_BLACK);
-	~CsOrderMapNode();
-	CsOrderMapNode<KeyT, ValueT> *Copy() const;
+		cs_small color = CS_ORDER_MAPM_NODE_RED);
 };
 
-template<typename KeyT,
-	typename ValueT,
+template<typename KeyT, typename ValueT,
 	typename CompareT = CsCompareF<KeyT >>
-class CsOrderMap :public CsObject
+class CsOrderMap 
+	: public CsObject
 {
 	typedef CsOrderMapNode<KeyT, ValueT> Node;
-	typedef CsReadBlackTree<KeyT, CompareT, Node> Tree;
+	typedef CsReadBlackTree<KeyT, ValueT, CompareT, CsOrderMapNode<KeyT, ValueT>> Tree;
 
 public:
 	class ConstIterator;
@@ -52,73 +44,70 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		Iterator(Node *node = NULL, Tree *tree = NULL)
-			:m_pNode(node), m_pTree(tree)
+		Iterator(Node *node = NULL)
+			:m_pNode(node)
 		{
 
 		}
 		Iterator(const Iterator &iter)
-			:m_pNode(iter.m_pNode), m_pTree(iter.m_pTree)
+			:m_pNode(iter.m_pNode)
 		{
 
 		}
-		inline const KeyT &Key() const { return node->m_tKey; }
-		inline ValueT &Value() const { return node->m_tValue; }
-		inline ValueT &operator*() const { return node->m_tValue; }
-		inline ValueT *operator->() const { return &node->m_tValue; }
-		inline cs_bool operator==(const Iterator &o) const { return node == o.node; }
-		inline cs_bool operator!=(const Iterator &o) const { return node != o.node; }
+		inline const KeyT &Key() const { return m_pNode->m_tKey; }
+		inline ValueT &Value() const { return m_pNode->m_tValue; }
+		inline ValueT &operator*() const { return m_pNode->m_tValue; }
+		inline ValueT *operator->() const { return &m_pNode->m_tValue; }
+		inline cs_bool operator==(const Iterator &o) const { return m_pNode == o.m_pNode; }
+		inline cs_bool operator!=(const Iterator &o) const { return m_pNode != o.m_pNode; }
 		inline Iterator &operator++() 
 		{
-			if (m_pTree)
+			if (m_pNode)
 			{
-				node = m_pTree->NextNode(node);
+				m_pNode = m_pNode->Next();
 			}
 			return *this;
 		}
 		inline Iterator &operator--()
 		{
-			if (m_pTree)
+			if (m_pNode)
 			{
-				node = m_pTree->PreviousNode(node);
+				m_pNode = m_pNode->Previous();
 			}
 			return *this;
 		}
 		inline Iterator &operator=(const Iterator &iter)
 		{
 			m_pNode = iter.m_pNode;
-			m_pTree = iter.m_pTree;
 		}
 
 	private:
 		Node *m_pNode;
-		Tree *m_pTree;
 	};
 
 public:
 	CsOrderMap();
 	CsOrderMap(const CsOrderMap<KeyT, ValueT, CompareT> &map);
 
-	cs_size_t Length() const
+	cs_size_t Size() const
 	{
 		return 0;
 	}
 	cs_bool IsEmpty() const
 	{
-		return m_tTree.IsEmpty();
+		
 	}
 
-	Iterator &GetValue(const KeyT &key)
+	Iterator GetValue(const KeyT &key)
 	{
-		return m_tTree.
+		Node *node = m_tTree.Find(key);
+		return Iterator(node);
 	}
-	const ValueT &GetValue(const KeyT &key) const;
 
 	Iterator Insert(const KeyT &key, const ValueT &value)
 	{
-		Node node(key, value);
-		Node *p = m_tTree.InsertByNode(node);
-		return Iterator(p, &m_tTree);
+		Node *node = m_tTree.Insert(key, value);
+		return Iterator(node);
 	}
 
 	cs_bool Contains(const KeyT &key) const
@@ -126,14 +115,14 @@ public:
 		return m_tTree.Find(key) != NULL;
 	}
 
-	Iterator Remove(const KeyT &key)
+	cs_void Remove(const KeyT &key)
 	{
-		Node *p = m_tTree.Delete(key);
-		return Iterator(p);
+		m_tTree.Delete(key);
 	}
 
 private:
 	Tree m_tTree;
+	cs_size_t m_nSize;
 };
 
 #endif // _CORE_ORDER_MAP_H_

@@ -2,10 +2,12 @@
 #define _CORE_ARRAY_H_
 
 #include "CsObject.h"
+#include "CsStructure.h"
 
 template <typename DataT>
 class CsArray
 	: public CsObject
+	, public CsListT<CsArray<DataT>>
 {
 public:
 	virtual ~CsArray() = 0 {}

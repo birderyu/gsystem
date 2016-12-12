@@ -19,26 +19,26 @@
 #include "CsBytes.h"
 #include "CsHash.h"
 
-template <typename T>
+template <typename ValueT>
 class CsPackage 
 	: public CsObject
 {
 public:
-	typedef typename CsTraits<T>::ParameterType ValueType;
+	typedef typename CsTraits<ValueT>::ParameterType ValueType;
 
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_PACKAGE, };
 
 public:
-	static CsPackage<T> ValueOf(ValueType); 
+	static CsPackage<ValueT> ValueOf(ValueType); 
 
 public:
 	CsPackage(ValueType);
-	CsPackage(const CsPackage<T> &);
+	CsPackage(const CsPackage<ValueT> &);
 	virtual ~CsPackage();
 
-	T &Value();
-	T Value() const;
+	ValueT &Value();
+	ValueT Value() const;
 
 	// 从Object中继承的方法，其中ClassCode和Equals需要再次继承
 	CsObjectP Clone() const;
@@ -50,57 +50,57 @@ public:
 	cs_uint HashCode() const;
 	virtual cs_bool Equals(const CsObject *) const;
 	cs_bool Equals(ValueType) const;
-	cs_bool Equals(const CsPackage<T> &) const;
+	cs_bool Equals(const CsPackage<ValueT> &) const;
 	cs_bool Serialize(CsBytes &) const;
-	cs_bool Deserialize(const CsBytes &);
+	cs_bool Deserialize(CsBytes &);
 
 	// 运算符重载
-	CsPackage<T> &operator=(ValueType);
-	CsPackage<T> &operator=(const CsPackage<T> &);
+	CsPackage<ValueT> &operator=(ValueType);
+	CsPackage<ValueT> &operator=(const CsPackage<ValueT> &);
 	cs_bool operator==(ValueType) const;
-	cs_bool operator==(const CsPackage<T> &) const;
+	cs_bool operator==(const CsPackage<ValueT> &) const;
 	cs_bool operator!=(ValueType) const;
-	cs_bool operator!=(const CsPackage<T> &) const;
+	cs_bool operator!=(const CsPackage<ValueT> &) const;
 
 protected:
-	T m_nValue;
+	ValueT m_nValue;
 };
 
-template <typename T>
+template <typename ValueT>
 class CsNumber 
-	: public CsPackage<T>
+	: public CsPackage<ValueT>
 {
 public:
 	enum { CLASSCODE = CORE_CLASSCODE_NUMBER, };
 
 public:
 	CsNumber(ValueType);
-	CsNumber(const CsNumber<T> &);
+	CsNumber(const CsNumber<ValueT> &);
 	virtual ~CsNumber();
 
 	virtual cs_uint ClassCode() const;
 
 	// 运算符重载
-	T operator+(ValueType);
-	T operator+(const CsNumber<T> &);
-	T operator++();
-	T operator++(cs_int);
-	T operator+=(ValueType);
-	T operator+=(const CsNumber<T> &);
-	T operator-(ValueType);
-	T operator-(const CsNumber<T> &);
-	T operator--();
-	T operator--(cs_int);
-	T operator-=(ValueType);
-	T operator-=(const CsNumber<T> &);
+	ValueT operator+(ValueType);
+	ValueT operator+(const CsNumber<ValueT> &);
+	ValueT operator++();
+	ValueT operator++(cs_int);
+	ValueT operator+=(ValueType);
+	ValueT operator+=(const CsNumber<ValueT> &);
+	ValueT operator-(ValueType);
+	ValueT operator-(const CsNumber<ValueT> &);
+	ValueT operator--();
+	ValueT operator--(cs_int);
+	ValueT operator-=(ValueType);
+	ValueT operator-=(const CsNumber<ValueT> &);
 	cs_bool operator>=(ValueType) const;
-	cs_bool operator>=(const CsNumber<T> &) const;
+	cs_bool operator>=(const CsNumber<ValueT> &) const;
 	cs_bool operator>(ValueType) const;
-	cs_bool operator>(const CsNumber<T> &) const;
+	cs_bool operator>(const CsNumber<ValueT> &) const;
 	cs_bool operator<=(ValueType) const;
-	cs_bool operator<=(const CsNumber<T> &) const;
+	cs_bool operator<=(const CsNumber<ValueT> &) const;
 	cs_bool operator<(ValueType) const;
-	cs_bool operator<(const CsNumber<T> &) const;
+	cs_bool operator<(const CsNumber<ValueT> &) const;
 };
 
 #include "CsPackage.inl"

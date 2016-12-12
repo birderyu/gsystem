@@ -12,7 +12,7 @@
 #define _CORE_SINGLE_LINKED_LIST_H_
 
 #include "CsLinkedList.h"
-#include "CsNode.h"
+#include "CsStructure.h"
 
 template<typename DataT>
 class CsSingleLinkedList 
@@ -61,13 +61,15 @@ public:
 	DataT& GetAt(cs_size_t id);
 	DataT  GetAt(cs_size_t id) const;
 	cs_void SetAt(cs_size_t pos, const DataT &data);
-	cs_int Find(const DataT &data) const; // 不存在则返回-1
 
-	// 不存在则返回-1，存在则返回首节点的位置
-	cs_int FindCircle() const; 
+	// 不存在则返回NULL_POS
+	cs_size_t Find(const DataT &data) const; 
 
-	// 不存在则返回-1，存在则返回首节点的位置
-	cs_int FindCross(const CsSingleLinkedList<DataT>& list);
+	// 不存在则返回NULL_POS，存在则返回首节点的位置
+	cs_size_t FindCircle() const;
+
+	// 不存在则返回NULL_POS，存在则返回首节点的位置
+	cs_size_t FindCross(const CsSingleLinkedList<DataT>& list);
 
 	DataT &operator[](cs_size_t id);
 	DataT operator[](cs_size_t id) const;

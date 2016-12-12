@@ -19,17 +19,16 @@
 
 #include "CsBinarySortTree.h"
 
+#define CS_RED_BLACK_TREE_NODE_RED		0
+#define CS_RED_BLACK_TREE_NODE_BLACK	1
+
 template<typename KeyT, typename ValueT>
 struct CsReadBlackTreeNode 
 	: public CsBinaryTreeNodeT<CsReadBlackTreeNode<KeyT, ValueT>>
 	, public CsKeyValueNodeT<KeyT, ValueT>
 	, public CsNewT<CsReadBlackTreeNode<KeyT, ValueT>>
 {
-	enum COLOR 
-	{ 
-		RBTREE_COLOR_RED = 0,
-		RBTREE_COLOR_BLACK = 1
-	};
+	cs_small m_nColor;
 
 	CsReadBlackTreeNode(
 		const KeyT &key = KeyT(),
@@ -37,9 +36,7 @@ struct CsReadBlackTreeNode
 		CsReadBlackTreeNode<KeyT, ValueT> *parent = NULL,
 		CsReadBlackTreeNode<KeyT, ValueT> *left = NULL,
 		CsReadBlackTreeNode<KeyT, ValueT> *right = NULL,
-		COLOR color = RBTREE_COLOR_RED);
-
-	cs_byte m_nColor;
+		cs_small color = CS_RED_BLACK_TREE_NODE_RED);
 };
 
 /****************************************************************************

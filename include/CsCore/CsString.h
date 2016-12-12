@@ -14,9 +14,13 @@
 #define _CORE_STRING_H_
 
 #include "CsObject.h"
+#include "CsStructure.h"
+
 #include "CsSharedPointer.h"
 #include "CsStringList.h"
 #include <string>
+#include "CsString_Ex.h"
+template class CS_API CsSharedPointer<CsString_Ex>;
 
 class CsString_Ex;
 
@@ -29,8 +33,8 @@ class CsString_Ex;
 ** @brief	字符串类型
 **
 ** 提供基础的字符串类型，该类不可以被继承（final）。
-**		字符串的实现类位于字符串实现类（CsString_Ex）[1]中，它是一个私有实现类，对于库的
-** 使用者和开发者，可以不用关心该类的具体实现细节。
+**		字符串的实现类位于字符串实现类（CsString_Ex）中，它是一个私有实现类，对于库的使用
+** 者和开发者，可以不用关心该类的具体实现细节。
 **		本类采用写时拷贝（Copy-on-Write）的思想，使用一个共享指针（CsSharedPointer）[2]
 ** 存储具体字符串的指针，这是一个带有引用计数器的智能指针。当执行字符串拷贝操作时，加一个引用
 ** 计数，源字符串和拷贝字符串共同享有一份资源。当进行读操作时，使用共享资源；当进行写操作时，
@@ -43,10 +47,13 @@ class CsString_Ex;
 ****************************************************************************/
 class CS_API CsString final 
 	: public CsObject
+	, public CsListT<CsString>
 {
 	friend class CsStringList;
 
 public:
+	static CsString FromNum(cs_small nNum, cs_int nBase = 10);
+	static CsString FromNum(cs_usmall nNum, cs_int nBase = 10);
 	static CsString FromNum(cs_short nNum, cs_int nBase = 10);
 	static CsString FromNum(cs_ushort nNum, cs_int nBase = 10);
 	static CsString FromNum(cs_int nNum, cs_int nBase = 10);
@@ -58,6 +65,7 @@ public:
 	static CsString FromNum(cs_float nNum, cs_int nBase = 10);
 	static CsString FromNum(cs_double nNum, cs_int nBase = 10);
 	static CsString FromNum(cs_decimal nNum, cs_int nBase = 10);
+
 	static CsString FromStdString(const std::string &sStr);
 
 public:
@@ -80,7 +88,7 @@ public:
 	CsString(const cs_char *pStr);
 	CsString(const CsString &sStr);
 
-	cs_size_t Length() const;
+	cs_size_t Size() const;
 	cs_char GetAt(cs_size_t id) const;
 	cs_bool Equals(const CsString &, cs_bool bIsSensitive = true) const;
 

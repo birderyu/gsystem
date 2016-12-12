@@ -1,5 +1,5 @@
-#ifndef _CORE_C_STRING_UTILITY_H_
-#define _CORE_C_STRING_UTILITY_H_
+#ifndef _CORE_C_STRING_HELPER_H_
+#define _CORE_C_STRING_HELPER_H_
 
 #include "CsGlobal.h"
 
@@ -47,4 +47,4 @@ public:
 		cs_char *c_str_out, cs_size_t &out_len);
 };
 
-#endif // _CORE_C_STRING_UTILITY_H_
+#endif // _CORE_C_STRING_HELPER_H_

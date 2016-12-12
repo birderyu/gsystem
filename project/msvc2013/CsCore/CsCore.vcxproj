@@ -109,6 +109,8 @@
     <ClInclude Include="..\..\..\include\CsCore\CsDate.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDateTime.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsArray.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsGeometry3D.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsIndex.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsLinkedList.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsLongDoubleFloat.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDoubleFloat.h" />
@@ -117,7 +119,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsFile.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsFilter.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMatrix.h" />
-    <ClInclude Include="..\..\..\include\CsCore\CsNode.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsStructure.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSingleFloat.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsGeometry.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsGeometryBulider.h" />
@@ -149,7 +151,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsSharedPointer.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsShortInteger.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSignedCharacter.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSingleton.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSmallInteger.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsSpatialIndex.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsStack.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsStaticArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsStringBuilder.h" />
@@ -215,7 +219,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsWeakPointer.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsWideCharacter.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsFunctor.h" />
-    <ClInclude Include="..\..\..\private\CsCore\CsBytes_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsDateTime_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsFile_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsFilter_Ex.h" />
@@ -240,7 +243,6 @@
     <ClCompile Include="..\..\..\source\CsCore\CsBoolean.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsByte.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsBytes.cpp" />
-    <ClCompile Include="..\..\..\source\CsCore\CsBytes_Ex.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsCharacter.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsCriticalSection_Win32.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsCStringHelper.cpp" />
@@ -308,7 +310,7 @@
     <None Include="..\..\..\include\CsCore\CsHashTable.inl" />
     <None Include="..\..\..\include\CsCore\CsListStack.inl" />
     <None Include="..\..\..\include\CsCore\CsNew.inl" />
-    <None Include="..\..\..\include\CsCore\CsNode.inl" />
+    <None Include="..\..\..\include\CsCore\CsStructure.inl" />
     <None Include="..\..\..\include\CsCore\CsPackage.inl" />
     <None Include="..\..\..\include\CsCore\CsReadBlackTree.inl" />
     <None Include="..\..\..\include\CsCore\CsReferenceCounter.inl" />

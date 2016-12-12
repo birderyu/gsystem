@@ -1,315 +1,779 @@
 #include "CsBytes.h"
-#include "CsBytes_Ex.h"
+#include "CsEndian.h"
 #include "CsString.h"
 
-CsBytes::CsBytes(cs_size_t nBufSize)
-: m_pBytes_Ex(new CsBytes_Ex(nBufSize))
+#define CS_BYTES_DEFAULT_ADD_SIZE 512
+
+CsBytes::CsBytes(cs_size_t nCapacity, cs_size_t nAddSize)
+: m_nHeadCursor(CS_LIST_NULL_POS)
+, m_nTailCursor(CS_LIST_NULL_POS)
+, m_nAddSize(nAddSize)
 {
-	CS_ASSERT(m_pBytes_Ex);
+	if (nCapacity > 0)
+	{
+		Reserve(nCapacity);
+	}
 }
 
 CsBytes::CsBytes(const CsBytes &tBytes)
-: m_pBytes_Ex(new CsBytes_Ex(*tBytes.m_pBytes_Ex))
+: m_nHeadCursor(CS_LIST_NULL_POS)
+, m_nTailCursor(CS_LIST_NULL_POS)
+, m_nAddSize(CS_BYTES_DEFAULT_ADD_SIZE)
 {
-	CS_ASSERT(m_pBytes_Ex);
+	cs_size_t size = tBytes.Size();
+	if (size <= 0)
+	{
+		return;
+	}
+	m_tBlock.CreateFrom(tBytes.m_tBlock, tBytes.m_nHeadCursor, size);
+	m_nHeadCursor = 0;
+	m_nTailCursor = size;
 }
 
 CsBytes::~CsBytes()
 {
-	delete m_pBytes_Ex;
+	Clear();
+}
+
+cs_bool CsBytes::Reserve(cs_size_t size)
+{
+	cs_size_t capacity = Capacity();
+	if (size <= capacity)
+	{
+		// 无需扩容
+		return true;
+	}
+	if (size - capacity < m_nAddSize)
+	{
+		// 按照扩容步长进行扩容
+		size = capacity + m_nAddSize;
+	}
+	cs_size_t bytes_size = Size();
+	if (!m_tBlock.Resize(size, m_nHeadCursor, bytes_size))
+	{
+		return false;
+	}
+	m_nHeadCursor = 0;
+	m_nTailCursor = bytes_size;
+	return true;
 }
 
 cs_void CsBytes::Clear()
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->Clear();
+	if (!m_tBlock.Resize(0))
+	{
+		return;
+	}
+	m_nHeadCursor = m_nTailCursor = CS_LIST_NULL_POS;
+}
+
+cs_bool CsBytes::Valid() const
+{
+	return m_tBlock.Valid()
+		&& m_nHeadCursor != CS_LIST_NULL_POS
+		&& m_nTailCursor != CS_LIST_NULL_POS
+		&& m_nTailCursor >= m_nHeadCursor
+		&& m_nTailCursor <= m_tBlock.Size();
 }
 
 cs_bool CsBytes::IsEmpty() const
 {
-	CS_ASSERT(m_pBytes_Ex);
-	return m_pBytes_Ex->IsEmpty();
+	return Size() == 0;
 }
 
-cs_byte *CsBytes::GetBuffer() const
+cs_size_t CsBytes::Size() const
 {
-	CS_ASSERT(m_pBytes_Ex);
-	return m_pBytes_Ex->GetHead();
+	if (!Valid())
+	{
+		return 0;
+	}
+	return m_nTailCursor - m_nHeadCursor;
 }
 
-cs_size_t CsBytes::Length() const
+cs_size_t CsBytes::Capacity() const
 {
-	CS_ASSERT(m_pBytes_Ex);
-	return m_pBytes_Ex->Length();
+	cs_size_t nMemSize = m_tBlock.Size();
+	if (m_nHeadCursor == CS_LIST_NULL_POS || nMemSize <= m_nHeadCursor)
+	{
+		return 0;
+	}
+	return nMemSize - m_nHeadCursor;
 }
 
 cs_bool CsBytes::ReadFrom(const cs_byte *pBuf, cs_size_t len)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	return m_pBytes_Ex->ReadFrom(pBuf, len);
+	if (len <= 0)
+	{
+		return false;
+	}
+
+	cs_size_t nNewLen = Size() + len;
+	if (nNewLen > Capacity())
+	{
+		if (!Reserve(nNewLen))
+		{
+			return false;
+		}
+	}
+	memcpy(Tail(), pBuf, len);
+	m_nTailCursor += len;
+	return true;
 }
 
 cs_bool CsBytes::WriteTo(cs_size_t len, cs_byte *&pBuf)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	return m_pBytes_Ex->WriteTo(len, pBuf);
-}
-
-cs_bool CsBytes::WriteAllTo(cs_byte *&pBuf)
-{
-	return WriteTo(Length(), pBuf);
+	if (len <= 0)
+	{
+		return false;
+	}
+	cs_int nNewLen = Size() - len;
+	if (nNewLen < 0)
+	{
+		return false;
+	}
+	memcpy(pBuf, Head(), len);
+	m_nHeadCursor += len;
+	return true;
 }
 
 CsBytes &CsBytes::operator<<(cs_bool val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_bool>((cs_bool)val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_bool);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_char val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_char>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_char);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_schar val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_schar>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_schar);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_uchar val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_uchar>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_uchar);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_wchar val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_wchar>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_wchar);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_short val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_short>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_short);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_ushort val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_ushort>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_ushort);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_int val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_int>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_int);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_uint val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_uint>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_uint);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_long val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_long>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_long);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_ulong val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_ulong>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_ulong);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_longlong val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_longlong>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_longlong);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_ulonglong val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_ulonglong>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_ulonglong);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_float val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_float>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_float);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_double val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_double>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_double);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(cs_decimal val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator<<<cs_decimal>(val);
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+
+	cs_size_t value_size = sizeof(cs_decimal);
+	cs_size_t new_size = Size() + value_size;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), &val, value_size);
+	m_nTailCursor += value_size;
 	return *this;
 }
 
 CsBytes &CsBytes::operator<<(const CsString &val)
 {
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->ReadFrom(val.CString());
-	return *this;
-}
-
-CsBytes &CsBytes::operator<<(const CsBytes &val)
-{
-	ReadFrom(val.GetBuffer(), val.Length());
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_bool &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_bool>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_char &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_char>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_schar &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_schar>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_uchar &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_uchar>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_wchar &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_wchar>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_short &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_short>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_ushort &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_ushort>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_int &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_int>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_uint &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_uint>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_long &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_long>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_ulong &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_ulong>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_longlong &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_longlong>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_ulonglong &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_ulonglong>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_float &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_float>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_double &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_double>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(cs_decimal &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	m_pBytes_Ex->operator>><cs_decimal>(val);
-	return *this;
-}
-
-const CsBytes &CsBytes::operator>>(CsString &val) const
-{
-	CS_ASSERT(m_pBytes_Ex);
-	cs_char c[CS_DEFAULT_BUF_SIZE];
-	if (m_pBytes_Ex->WriteToStr(c, CS_DEFAULT_BUF_SIZE))
+	cs_size_t str_len = val.Size();
+	if (str_len <= 0)
 	{
-		val = c;
+		return *this;
 	}
+	else
+	{
+		str_len++;
+	}
+	cs_size_t new_size = Size() + str_len;
+	if (new_size > Capacity())
+	{
+		if (!Reserve(new_size))
+		{
+			return *this;
+		}
+	}
+	memcpy(Tail(), val.CString(), str_len);
+	m_nTailCursor += str_len;
 	return *this;
 }
 
-const CsBytes &CsBytes::operator>>(CsBytes &val) const
+CsBytes &CsBytes::operator>>(cs_bool &val)
+{
+	cs_size_t value_size = sizeof(cs_bool);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_char &val)
+{
+	cs_size_t value_size = sizeof(cs_char);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_schar &val)
+{
+	cs_size_t value_size = sizeof(cs_schar);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_uchar &val)
+{
+	cs_size_t value_size = sizeof(cs_uchar);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_wchar &val)
+{
+	cs_size_t value_size = sizeof(cs_wchar);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_short &val)
+{
+	cs_size_t value_size = sizeof(cs_short);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_ushort &val)
+{
+	cs_size_t value_size = sizeof(cs_ushort);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_int &val)
+{
+	cs_size_t value_size = sizeof(cs_int);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_uint &val)
+{
+	cs_size_t value_size = sizeof(cs_uint);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_long &val)
+{
+	cs_size_t value_size = sizeof(cs_long);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_ulong &val)
+{
+	cs_size_t value_size = sizeof(cs_ulong);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_longlong &val)
+{
+	cs_size_t value_size = sizeof(cs_longlong);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_ulonglong &val)
+{
+	cs_size_t value_size = sizeof(cs_ulonglong);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_float &val)
+{
+	cs_size_t value_size = sizeof(cs_float);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_double &val)
+{
+	cs_size_t value_size = sizeof(cs_double);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(cs_decimal &val)
+{
+	cs_size_t value_size = sizeof(cs_decimal);
+	cs_int new_size = Size() - value_size;
+	if (new_size < 0)
+	{
+		return *this;
+	}
+	memcpy(&val, Head(), value_size);
+	m_nHeadCursor += value_size;
+
+#ifdef CS_LITTLE_ENDIAN
+	val = CsEndian::Swap(val);
+#endif // CS_LITTLE_ENDIAN
+	return *this;
+}
+
+CsBytes &CsBytes::operator>>(CsString &val)
 {
 	// TODO
 	return *this;
 }
+
+cs_byte *CsBytes::Head() const
+{
+	if (!Valid())
+	{
+		return NULL;
+	}
+	return (cs_byte *)m_tBlock.Cursor(m_nHeadCursor);
+}
+
+cs_byte *CsBytes::Tail() const
+{
+	if (!Valid())
+	{
+		return NULL;
+	}
+	return (cs_byte *)m_tBlock.Cursor(m_nTailCursor);
+}
+
+#undef CS_BYTES_DEFAULT_ADD_SIZE

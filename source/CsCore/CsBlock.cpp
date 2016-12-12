@@ -58,10 +58,11 @@ cs_size_t CsBlock::Size() const
 
 cs_pointer CsBlock::Cursor(cs_size_t nCursor) const
 {
-	if (!Valid() || nCursor >= m_nMemSize)
+	if (!Valid())
 	{
 		return NULL;
 	}
+	CS_ASSERT(nCursor < m_nMemSize);
 	return (cs_byte*)m_pMemory + nCursor;
 }
 

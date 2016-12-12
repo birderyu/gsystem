@@ -36,25 +36,25 @@ CsSocket_Ex::~CsSocket_Ex()
 
 }
 
-cs_int CsSocket_Ex::SetRecvTimeout(cs_int nMsecs)
+cs_bool CsSocket_Ex::SetRecvTimeout(cs_int nMsecs)
 {
 #ifdef _WIN32
-	if (_SetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
+	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
 		(cs_char*)&nMsecs, sizeof(cs_int)) < 0)
 	{
-		return  -1;
+		return  false;
 	}
-	return 0;
+	return true;
 #else
 	timeval tTimeValue;
 	tTimeValue.tv_sec = nMsecs / 1000;
 	tTimeValue.tv_usec = nMsecs % 1000 * 1000;
-	if (_SetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
+	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
 		(cs_char*)&tTimeValue, sizeof(timeval)) < 0)
 	{
-		return  -1;
+		return false;
 	}
-	return 0;
+	return true;
 #endif
 }
 
@@ -63,8 +63,8 @@ cs_int CsSocket_Ex::GetRecvTimeout() const
 #ifdef _WIN32
 	cs_int nArgs = 0;
 	socklen_t tArgsLen = sizeof(cs_int);
-	if (_GetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(char*)&nArgs, &tArgsLen) < 0)
+	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
+		(cs_char*)&nArgs, &tArgsLen) < 0)
 	{
 		return  -1;
 	}
@@ -72,8 +72,8 @@ cs_int CsSocket_Ex::GetRecvTimeout() const
 #else
 	timeval tTimeValue;
 	socklen_t tTimeValueLen = sizeof(tTimeValue);
-	if (_GetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(char*)&tTimeValue, &tTimeValueLen) < 0)
+	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
+		(cs_char*)&tTimeValue, &tTimeValueLen) < 0)
 	{
 		return  -1;
 	}
@@ -81,25 +81,25 @@ cs_int CsSocket_Ex::GetRecvTimeout() const
 #endif
 }
 
-cs_int CsSocket_Ex::SetSendTimeout(cs_int nMsecs)
+cs_bool CsSocket_Ex::SetSendTimeout(cs_int nMsecs)
 {
 #ifdef _WIN32
-	if (_SetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
+	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
 		(cs_char*)&nMsecs, sizeof(cs_int)) < 0)
 	{
-		return  -1;
+		return  false;
 	}
-	return 0;
+	return true;
 #else
 	timeval tTimeValue;
 	tTimeValue.tv_sec = nMsecs / 1000;
 	tTimeValue.tv_usec = nMsecs % 1000 * 1000;
-	if (_SetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
+	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
 		(cs_char*)&tTimeValue, sizeof(timeval)) < 0)
 	{
-		return  -1;
+		return false;
 	}
-	return 0;
+	return true;
 #endif
 }
 
@@ -108,8 +108,8 @@ cs_int CsSocket_Ex::GetSendTimeout() const
 #ifdef _WIN32
 	cs_int nArgs = 0;
 	socklen_t tArgsLen = sizeof(cs_int);
-	if (_GetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(char*)&nArgs, &tArgsLen) < 0)
+	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
+		(cs_char*)&nArgs, &tArgsLen) < 0)
 	{
 		return  -1;
 	}
@@ -117,8 +117,8 @@ cs_int CsSocket_Ex::GetSendTimeout() const
 #else
 	timeval tTimeValue;
 	socklen_t tTimeValueLen = sizeof(tTimeValue);
-	if (_GetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(char*)&tTimeValue, &tTimeValueLen) < 0)
+	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
+		(cs_char*)&tTimeValue, &tTimeValueLen) < 0)
 	{
 		return  -1;
 	}
@@ -126,42 +126,42 @@ cs_int CsSocket_Ex::GetSendTimeout() const
 #endif
 }
 
-cs_int CsSocket_Ex::SetReuseAddr(cs_bool nResue)
+cs_bool CsSocket_Ex::SetReuseAddress(cs_bool nResue)
 {
 	cs_int nOpt = nResue ? 1 : 0;
 	socklen_t nLen = sizeof(nOpt);
-	if (_SetSocketOpt(m_hSocket, SOL_SOCKET, SO_REUSEADDR,
+	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_REUSEADDR,
 		(char*)&nOpt, nLen) < 0)
 	{
-		return -1;
+		return false;
 	}
-	return 0;
+	return true;
 }
 
-cs_int CsSocket_Ex::GetPeerAddr(CsSockAddress_Ex *pSockAddr) const
+cs_bool CsSocket_Ex::GetPeerAddr(CsSockAddress_Ex *pSockAddr) const
 {
 	if (!pSockAddr)
 	{
-		return -1;
+		return false;
 	}
 	socklen_t nLen = sizeof(pSockAddr->m_tSocketAddr);
 	if (getpeername(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), &nLen) < 0)
 	{
-		return -1;
+		return false;
 	}
-	return 0;
+	return true;
 }
 
-cs_int CsSocket_Ex::GetLocalAddr(CsSockAddress_Ex *pSockAddr) const
+cs_bool CsSocket_Ex::GetLocalAddr(CsSockAddress_Ex *pSockAddr) const
 {
 	if (!pSockAddr)
 	{
-		return -1;
+		return false;
 	}
 	socklen_t nLen = sizeof(pSockAddr->m_tSocketAddr);
 	if (getsockname(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), &nLen) < 0)
 	{
-		return -1;
+		return false;
 	}
-	return 0;
+	return true;
 }

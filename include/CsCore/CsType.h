@@ -63,9 +63,4 @@ typedef cs_uint32 cs_ptr_addr;
 
 typedef cs_uint cs_size_t;
 
-/* 64位整型: 字面常量 */
-#ifndef INT64_C
-#	define INT64_C(c)  c ## LL
-#endif
-
 #endif // _CORE_TYPE_H_

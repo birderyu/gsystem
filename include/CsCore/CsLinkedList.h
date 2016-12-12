@@ -2,10 +2,12 @@
 #define _CORE_LINKED_LIST_H_
 
 #include "CsObject.h"
+#include "CsStructure.h"
 
 template<typename DataT>
 class CsLinkedList
 	: public CsObject
+	, public CsListT<CsLinkedList<DataT>>
 {
 public:
 	virtual ~CsLinkedList() = 0 {}
@@ -27,8 +29,8 @@ public:
 	virtual DataT& GetAt(cs_size_t pos) = 0;
 	virtual DataT  GetAt(cs_size_t pos) const = 0;
 	virtual cs_void SetAt(cs_size_t pos, const DataT &data) = 0;
-	virtual cs_int Find(const DataT &data) const = 0;
-	virtual cs_int FindCircle() const = 0;
+	virtual cs_size_t Find(const DataT &data) const = 0;
+	virtual cs_size_t FindCircle() const = 0;
 	virtual DataT &operator[](cs_size_t id) = 0;
 	virtual DataT operator[](cs_size_t id) const = 0;
 };

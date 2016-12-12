@@ -4,7 +4,7 @@
 #include "CsObject.h"
 #include "CsHash.h"
 #include "CsDynamicArray.h"
-#include "CsNode.h"
+#include "CsStructure.h"
 
 #define CS_HASH_DEFAULT_MODULE_SIZE		0x10
 #define CS_HASH_MAX_MODULE_SIZE			0x40000000

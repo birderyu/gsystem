@@ -304,7 +304,7 @@ void CsSort_Ex::Merge(ArrT &arr, cs_size_t first, cs_size_t mid, cs_size_t last,
 		return;
 	}
 
-	ElemT *arr_tmp = (ElemT*)CsCalloc(len, sizeof(ElemT));
+	ElemT *arr_tmp = (ElemT*)CsMalloc(len * sizeof(ElemT));
 	cs_size_t id_tmp = 0;
 
 	//main loop  

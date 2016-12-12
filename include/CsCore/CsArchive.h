@@ -7,9 +7,12 @@ class CS_API CsArchive
 {
 public:
 	CsArchive();
+	cs_void SetClassCode(cs_uint);
 
 private:
-	// 缓冲区
+	cs_uint m_nClassCode;
+	//CsBytes m_tBuffer; // 缓冲区
+	//CsFile &m_rFile; // 文件归档
 };
 
 #endif // _CORE_ARCHIVE_H_

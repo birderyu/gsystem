@@ -12,10 +12,11 @@ public:
 public:
 	CsUdpSocket();
 
-	cs_int Open(cs_bool nResue = false);
-	cs_int Open(const CsSockAddress &tSockAddr, cs_bool nResue = false);
-	void Close();
-	cs_int SendTo(const cs_char *pBufData, cs_int nLen, const CsSockAddress &tPeer);
+	cs_bool Open(cs_bool nResue = false);
+	cs_bool Open(const CsSockAddress &tSockAddr, cs_bool nResue = false);
+	cs_void Close();
+
+	cs_bool SendTo(const cs_char *pBufData, cs_int nLen, const CsSockAddress &tPeer);
 	cs_int RecvFrom(cs_char *pBufData, cs_int nMaxLen, CsSockAddress &tPeer);
 };
 

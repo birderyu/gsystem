@@ -308,7 +308,7 @@ inline cs_void CsSingleLinkedList<DataT>::SetAt(cs_size_t pos, const DataT &data
 }
 
 template<typename DataT>
-inline cs_int CsSingleLinkedList<DataT>::Find(const DataT &data) const
+inline cs_size_t CsSingleLinkedList<DataT>::Find(const DataT &data) const
 {
 	CsSingleLinkedListNode<DataT> *pTmpNode = m_pHead;
 	for (cs_size_t i = 0; i < m_nLength; ++i)
@@ -317,15 +317,15 @@ inline cs_int CsSingleLinkedList<DataT>::Find(const DataT &data) const
 			return i;
 		pTmpNode = pTmpNode->m_pNext;
 	}
-	return -1;
+	return NULL_POS;
 }
 
 template<typename DataT>
-inline cs_int CsSingleLinkedList<DataT>::FindCircle() const
+inline cs_size_t CsSingleLinkedList<DataT>::FindCircle() const
 {
 	if (0 == m_nLength)
 	{
-		return -1;
+		return NULL_POS;
 	}
 
 	CsSingleLinkedListNode<DataT>* p1 = m_pHead; // p1，步长为1
@@ -341,7 +341,7 @@ inline cs_int CsSingleLinkedList<DataT>::FindCircle() const
 		}
 		else
 		{
-			return -1;
+			return NULL_POS;
 		}
 	} while (p1 != p2);
 
@@ -364,17 +364,17 @@ inline cs_int CsSingleLinkedList<DataT>::FindCircle() const
 }
 
 template<typename DataT>
-inline cs_int CsSingleLinkedList<DataT>::FindCross(const CsSingleLinkedList &list)
+inline cs_size_t CsSingleLinkedList<DataT>::FindCross(const CsSingleLinkedList &list)
 {
 	if (0 == m_nLength || 0 == list.m_nLength)
 	{
-		return -1;
+		return NULL_POS;
 	}
 
 	if (FindCircle() > 0
 		|| list.FindCircle() > 0)
 	{
-		return -1;
+		return NULL_POS;
 	}
 
 	/*将第二个链表接在第一个链表后面*/

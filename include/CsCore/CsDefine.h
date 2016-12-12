@@ -124,6 +124,9 @@ public: \
 #define CS_INT32_MAX 0x7fffffff
 #define CS_INT64_MAX 0x7fffffffffffffffLL
 
+#define CS_LIST_MAX_SIZE 0xfffffffe
+#define CS_LIST_NULL_POS 0xffffffff
+
 #ifdef __cplusplus__
 extern "C"{
 #endif
@@ -131,5 +134,7 @@ extern "C"{
 #ifdef __cplusplus__
 }
 #endif
+
+#define CsCallAtExit atexit
 
 #endif // _CORE_DEFINE_H_

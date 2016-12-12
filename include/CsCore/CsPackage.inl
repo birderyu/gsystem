@@ -1,58 +1,58 @@
 #ifndef _CORE_PACKAGE_INLINE_
 #define _CORE_PACKAGE_INLINE_
 
-template <typename T>
-inline CsPackage<T> CsPackage<T>::ValueOf(typename CsPackage<T>::ValueType val)
+template <typename ValueT>
+inline CsPackage<ValueT> CsPackage<ValueT>::ValueOf(typename CsPackage<ValueT>::ValueType val)
 {
-	return CsPackage<T>(val);
+	return CsPackage<ValueT>(val);
 }
 
-template <typename T>
-inline CsPackage<T>::CsPackage(typename CsPackage<T>::ValueType val)
+template <typename ValueT>
+inline CsPackage<ValueT>::CsPackage(typename CsPackage<ValueT>::ValueType val)
 : m_nValue(val)
 {
 
 }
 
-template <typename T>
-inline CsPackage<T>::CsPackage(const CsPackage<T> &val)
+template <typename ValueT>
+inline CsPackage<ValueT>::CsPackage(const CsPackage<ValueT> &val)
 : m_nValue(val.m_nValue)
 {
 
 }
 
-template <typename T>
-inline CsPackage<T>::~CsPackage()
+template <typename ValueT>
+inline CsPackage<ValueT>::~CsPackage()
 {
 
 }
 
-template <typename T>
-inline T &CsPackage<T>::Value()
-{
-	return m_nValue;
-}
-
-template <typename T>
-inline T CsPackage<T>::Value() const
+template <typename ValueT>
+inline ValueT &CsPackage<ValueT>::Value()
 {
 	return m_nValue;
 }
 
-template <typename T>
-inline CsObjectP CsPackage<T>::Clone() const
+template <typename ValueT>
+inline ValueT CsPackage<ValueT>::Value() const
 {
-	return CsObjectP(new CsPackage<T>(m_nValue));
+	return m_nValue;
 }
 
-template <typename T>
-inline const CsObject *CsPackage<T>::Boxing() const
+template <typename ValueT>
+inline CsObjectP CsPackage<ValueT>::Clone() const
+{
+	return CsObjectP(new CsPackage<ValueT>(m_nValue));
+}
+
+template <typename ValueT>
+inline const CsObject *CsPackage<ValueT>::Boxing() const
 {
 	return this;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::Unboxing(const CsObject *pObj)
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Unboxing(const CsObject *pObj)
 {
 	if (!pObj)
 	{
@@ -67,7 +67,7 @@ inline cs_bool CsPackage<T>::Unboxing(const CsObject *pObj)
 		return false;
 	}
 
-	const CsPackage<T> *pPackage = dynamic_cast<const CsPackage<T>*>(pObj);
+	const CsPackage<ValueT> *pPackage = dynamic_cast<const CsPackage<ValueT>*>(pObj);
 	if (!pPackage)
 	{
 		return false;
@@ -76,32 +76,32 @@ inline cs_bool CsPackage<T>::Unboxing(const CsObject *pObj)
 	return true;
 }
 
-template <typename T>
-inline CsString CsPackage<T>::ToString() const
+template <typename ValueT>
+inline CsString CsPackage<ValueT>::ToString() const
 {
 	return CsString::FromNum(m_nValue);
 }
 
-template <typename T>
-inline CsString CsPackage<T>::ToString(cs_int nBase) const
+template <typename ValueT>
+inline CsString CsPackage<ValueT>::ToString(cs_int nBase) const
 {
 	return CsString::FromNum(m_nValue, nBase);
 }
 
-template <typename T>
-inline cs_uint CsPackage<T>::ClassCode() const
+template <typename ValueT>
+inline cs_uint CsPackage<ValueT>::ClassCode() const
 {
 	return CORE_CLASSCODE_PACKAGE;
 }
 
-template <typename T>
-inline cs_uint CsPackage<T>::HashCode() const
+template <typename ValueT>
+inline cs_uint CsPackage<ValueT>::HashCode() const
 {
 	return CsHashing(m_nValue);
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::Equals(const CsObject *pObj) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Equals(const CsObject *pObj) const
 {
 	if (!pObj)
 	{
@@ -116,7 +116,7 @@ inline cs_bool CsPackage<T>::Equals(const CsObject *pObj) const
 		return false;
 	}
 
-	const CsPackage<T> *pPackage = dynamic_cast<const CsPackage<T>*>(pObj);
+	const CsPackage<ValueT> *pPackage = dynamic_cast<const CsPackage<ValueT>*>(pObj);
 	if (!pPackage)
 	{
 		return false;
@@ -124,214 +124,214 @@ inline cs_bool CsPackage<T>::Equals(const CsObject *pObj) const
 	return m_nValue == pPackage->m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::Equals(typename CsPackage<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Equals(typename CsPackage<ValueT>::ValueType val) const
 {
 	return m_nValue == val;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::Equals(const CsPackage<T> &val) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Equals(const CsPackage<ValueT> &val) const
 {
 	return m_nValue == val.m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::Serialize(CsBytes &bytes) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Serialize(CsBytes &bytes) const
 {
-	cs_size_t len = bytes.Length();
+	cs_size_t len = bytes.Size();
 	bytes << m_nValue;
-	return bytes.Length() - len == sizeof(T);
+	return bytes.Size() - len == sizeof(ValueT);
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::Deserialize(const CsBytes &bytes)
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Deserialize(CsBytes &bytes)
 {
-	cs_size_t len = bytes.Length();
+	cs_size_t len = bytes.Size();
 	bytes >> m_nValue;
-	return len - bytes.Length() == sizeof(T);
+	return len - bytes.Size() == sizeof(ValueT);
 }
 
-template <typename T>
-inline CsPackage<T> &CsPackage<T>::operator=(typename CsPackage<T>::ValueType val)
+template <typename ValueT>
+inline CsPackage<ValueT> &CsPackage<ValueT>::operator=(typename CsPackage<ValueT>::ValueType val)
 {
 	m_nValue = val;
 	return *this;
 }
 
-template <typename T>
-inline CsPackage<T> &CsPackage<T>::operator=(const CsPackage<T> &val)
+template <typename ValueT>
+inline CsPackage<ValueT> &CsPackage<ValueT>::operator=(const CsPackage<ValueT> &val)
 {
 	m_nValue = val.m_nValue;
 	return *this;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::operator==(typename CsPackage<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::operator==(typename CsPackage<ValueT>::ValueType val) const
 {
 	return m_nValue == val;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::operator==(const CsPackage<T> &val) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::operator==(const CsPackage<ValueT> &val) const
 {
 	return m_nValue == val.m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::operator!=(typename CsPackage<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::operator!=(typename CsPackage<ValueT>::ValueType val) const
 {
 	return m_nValue != val;
 }
 
-template <typename T>
-inline cs_bool CsPackage<T>::operator!=(const CsPackage<T> &val) const
+template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::operator!=(const CsPackage<ValueT> &val) const
 {
 	return m_nValue != val.m_nValue;
 }
 
-template <typename T>
-inline CsNumber<T>::CsNumber(typename CsNumber<T>::ValueType val)
-: CsPackage<T>(val)
+template <typename ValueT>
+inline CsNumber<ValueT>::CsNumber(typename CsNumber<ValueT>::ValueType val)
+: CsPackage<ValueT>(val)
 {
 
 }
 
-template <typename T>
-inline CsNumber<T>::CsNumber(const CsNumber<T> &val)
-: CsPackage<T>(val)
+template <typename ValueT>
+inline CsNumber<ValueT>::CsNumber(const CsNumber<ValueT> &val)
+: CsPackage<ValueT>(val)
 {
 
 }
 
-template <typename T>
-inline CsNumber<T>::~CsNumber()
+template <typename ValueT>
+inline CsNumber<ValueT>::~CsNumber()
 {
 
 }
 
-template <typename T>
-inline cs_uint CsNumber<T>::ClassCode() const
+template <typename ValueT>
+inline cs_uint CsNumber<ValueT>::ClassCode() const
 {
 	return CORE_CLASSCODE_NUMBER;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator+(typename CsNumber<T>::ValueType val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator+(typename CsNumber<ValueT>::ValueType val)
 {
 	return m_nValue + val;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator+(const CsNumber<T> &val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator+(const CsNumber<ValueT> &val)
 {
 	return m_nValue + val.m_nValue;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator++()
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator++()
 {
 	return ++m_nValue;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator++(cs_int)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator++(cs_int)
 {
 	return m_nValue++;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator+=(typename CsNumber<T>::ValueType val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator+=(typename CsNumber<ValueT>::ValueType val)
 {
 	return m_nValue += val;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator+=(const CsNumber<T> &val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator+=(const CsNumber<ValueT> &val)
 {
 	return m_nValue += val.m_nValue;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator-(typename CsNumber<T>::ValueType val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator-(typename CsNumber<ValueT>::ValueType val)
 {
 	return m_nValue - val;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator-(const CsNumber<T> &val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator-(const CsNumber<ValueT> &val)
 {
 	return m_nValue - val.m_nValue;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator--()
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator--()
 {
 	return --m_nValue;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator--(cs_int)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator--(cs_int)
 {
 	return m_nValue--;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator-=(typename CsNumber<T>::ValueType val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator-=(typename CsNumber<ValueT>::ValueType val)
 {
 	return m_nValue -= val;
 }
 
-template <typename T>
-inline T CsNumber<T>::operator-=(const CsNumber<T> &val)
+template <typename ValueT>
+inline ValueT CsNumber<ValueT>::operator-=(const CsNumber<ValueT> &val)
 {
 	return m_nValue -= val.m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator>=(typename CsNumber<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator>=(typename CsNumber<ValueT>::ValueType val) const
 {
 	return m_nValue >= val;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator>=(const CsNumber<T> &val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator>=(const CsNumber<ValueT> &val) const
 {
 	return m_nValue >= val.m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator>(typename CsNumber<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator>(typename CsNumber<ValueT>::ValueType val) const
 {
 	return m_nValue > val;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator>(const CsNumber<T> &val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator>(const CsNumber<ValueT> &val) const
 {
 	return m_nValue > val.m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator<=(typename CsNumber<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator<=(typename CsNumber<ValueT>::ValueType val) const
 {
 	return m_nValue <= val;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator<=(const CsNumber<T> &val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator<=(const CsNumber<ValueT> &val) const
 {
 	return m_nValue <= val.m_nValue;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator<(typename CsNumber<T>::ValueType val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator<(typename CsNumber<ValueT>::ValueType val) const
 {
 	return m_nValue < val;
 }
 
-template <typename T>
-inline cs_bool CsNumber<T>::operator<(const CsNumber<T> &val) const
+template <typename ValueT>
+inline cs_bool CsNumber<ValueT>::operator<(const CsNumber<ValueT> &val) const
 {
 	return m_nValue < val.m_nValue;
 }

@@ -8,13 +8,13 @@ CsTcpSocket::CsTcpSocket()
 	CS_ASSERT(m_pSocket_Ex);
 }
 
-cs_int CsTcpSocket::Open(cs_bool nResue)
+cs_bool CsTcpSocket::Open(cs_bool nResue)
 {
 	CS_ASSERT(m_pSocket_Ex);
 	return ((CsTcpSocket_Ex*)m_pSocket_Ex)->Open(nResue);
 }
 
-cs_int CsTcpSocket::Open(const CsSockAddress &tSockAddr, cs_bool nResue)
+cs_bool CsTcpSocket::Open(const CsSockAddress &tSockAddr, cs_bool nResue)
 {
 	CS_ASSERT(m_pSocket_Ex);
 	return ((CsTcpSocket_Ex*)m_pSocket_Ex)->Open(tSockAddr.m_pSockAddress_Ex, nResue);
@@ -26,19 +26,19 @@ cs_void CsTcpSocket::Close()
 	((CsTcpSocket_Ex*)m_pSocket_Ex)->Close();
 }
 
-cs_int CsTcpSocket::Listen(cs_int nBackLog)
+cs_bool CsTcpSocket::Listen(cs_int nBackLog)
 {
 	CS_ASSERT(m_pSocket_Ex);
 	return ((CsTcpSocket_Ex*)m_pSocket_Ex)->Listen(nBackLog);
 }
 
-cs_int CsTcpSocket::Accept(const CsTcpSocket &pPeer)
+cs_bool CsTcpSocket::Accept(const CsTcpSocket &pPeer)
 {
 	CS_ASSERT(m_pSocket_Ex);
 	return ((CsTcpSocket_Ex*)m_pSocket_Ex)->Accept((CsTcpSocket_Ex*)pPeer.m_pSocket_Ex);
 }
 
-cs_int CsTcpSocket::Connect(const CsSockAddress &tSockAddr)
+cs_bool CsTcpSocket::Connect(const CsSockAddress &tSockAddr)
 {
 	CS_ASSERT(m_pSocket_Ex);
 	return ((CsTcpSocket_Ex*)m_pSocket_Ex)->Connect(tSockAddr.m_pSockAddress_Ex);

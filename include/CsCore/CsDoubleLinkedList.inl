@@ -349,7 +349,7 @@ inline cs_void CsDoubleLinkedList<DataT>::SetAt(cs_size_t pos, const DataT &data
 }
 
 template<typename DataT>
-inline cs_int CsDoubleLinkedList<DataT>::Find(const DataT &data) const
+inline cs_size_t CsDoubleLinkedList<DataT>::Find(const DataT &data) const
 {
 	CsDoubleLinkedListNode<DataT> *pTmpNode = m_pHead;
 	for (cs_size_t i = 0; i < m_nSize; ++i)
@@ -358,15 +358,15 @@ inline cs_int CsDoubleLinkedList<DataT>::Find(const DataT &data) const
 			return i;
 		pTmpNode = pTmpNode->m_pNext;
 	}
-	return -1;
+	return NULL_POS;
 }
 
 template<typename DataT>
-inline cs_int CsDoubleLinkedList<DataT>::FindCircle() const
+inline cs_size_t CsDoubleLinkedList<DataT>::FindCircle() const
 {
 	if (0 == m_nSize)
 	{
-		return -1;
+		return NULL_POS;
 	}
 
 	CsDoubleLinkedListNode<DataT>* p1 = m_pHead;
@@ -382,7 +382,7 @@ inline cs_int CsDoubleLinkedList<DataT>::FindCircle() const
 		}
 		else
 		{
-			return -1;
+			return NULL_POS;
 		}
 	} while (p1 != p2);
 
@@ -405,17 +405,17 @@ inline cs_int CsDoubleLinkedList<DataT>::FindCircle() const
 }
 
 template<typename DataT>
-inline cs_int CsDoubleLinkedList<DataT>::FindCross(const CsDoubleLinkedList &list)
+inline cs_size_t CsDoubleLinkedList<DataT>::FindCross(const CsDoubleLinkedList &list)
 {
 	if (0 == m_nSize || 0 == list.m_nSize)
 	{
-		return -1;
+		return NULL_POS;
 	}
 
 	if (FindCircle() > 0
 		|| list.FindCircle() > 0)
 	{
-		return -1;
+		return NULL_POS;
 	}
 
 	// 将第二个链表接在第一个链表后面

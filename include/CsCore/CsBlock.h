@@ -10,10 +10,6 @@ class CS_API CsBlock
 public:
 	// µ¥Î»£º×Ö½Ú
 	CsBlock(cs_size_t nSize = 0);
-
-	// Not Safe
-	CsBlock(cs_pointer, cs_size_t, cs_bool bAutoRelease = false);
-
 	CsBlock(const CsBlock &);
 	~CsBlock();
 
@@ -28,13 +24,15 @@ public:
 	cs_bool CreateFrom(const CsBlock &tFrom, cs_size_t nFromStart, cs_size_t nFromLength);
 
 private:
+	// Not Safe
+	CsBlock(cs_pointer, cs_size_t, cs_bool bAutoRelease = false);
+
 	cs_bool Initialize();
 	cs_void Free();
 
 	cs_pointer m_pMemory;
 	cs_size_t m_nMemSize;
 	cs_bool m_bAutoRelease;
-
 };
 
 #endif // _CORE_BLOCK_H_
