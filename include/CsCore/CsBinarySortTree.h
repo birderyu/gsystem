@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Supernova
+** CNova: A quick, micro library of C++
 **
 ** @file	CsBinarySortTree.h
 ** @brief	该文件包含了二叉排序树的定义及实现
@@ -34,7 +34,7 @@ struct CsBinarySortTreeNode
 };
 
 template<typename KeyT, typename ValueT,
-	typename CompareT = CsCompareF<KeyT >,
+	typename CompareT = CsCompareToF<KeyT >,
 	typename NodeT = CsBinarySortTreeNode<KeyT, ValueT>>
 class CsBinarySortTree 
 	: public CsBinaryTree<NodeT>

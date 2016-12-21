@@ -22,8 +22,9 @@ CS_API cs_uint CsHashing(cs_decimal);
 CS_API cs_uint CsHashing(cs_pointer);
 
 /// Hashº¯Êý
-template<class T>
+template<typename T>
 struct CsHashF
+	: CsUnaryF<T, cs_uint>
 {
 	cs_uint operator()(const T &v) const
 	{

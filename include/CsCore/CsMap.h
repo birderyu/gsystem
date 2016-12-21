@@ -7,7 +7,7 @@
 #include "CsOrderMap.h"
 template < typename KeyT,
 	typename ValueT,
-	typename CompareT = CsCompareF < KeyT >>
+	typename CompareT = CsCompareToF < KeyT >>
 class CsMap 
 	: public CsOrderMap<KeyT, ValueT, CompareT> {};
 #else // !CS_MAP_USER_ORDER

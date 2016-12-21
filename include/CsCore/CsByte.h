@@ -7,7 +7,7 @@ class CS_API CsByte
 	: public CsPackage<cs_byte>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_BYTE, };
+	enum { CLASS_CODE = CLASS_CODE_BYTE, };
 
 public:
 	CsByte(cs_byte val = 0);

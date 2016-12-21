@@ -7,7 +7,7 @@ class CS_API CsShortInteger
 	: public CsNumber<cs_short>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_SHORT_INTEGER, };
+	enum { CLASS_CODE = CLASS_CODE_SHORT_INTEGER, };
 
 public:
 	static cs_short MaxValue();

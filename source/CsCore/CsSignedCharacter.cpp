@@ -19,5 +19,5 @@ CsSignedCharacter::~CsSignedCharacter()
 
 cs_uint CsSignedCharacter::ClassCode() const
 {
-	return CsSignedCharacter::CLASSCODE;
+	return CsSignedCharacter::CLASS_CODE;
 }

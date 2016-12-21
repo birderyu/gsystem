@@ -7,9 +7,6 @@ class CS_API CsUdpSocket
 	: public CsSocket
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_UDPSOCKET, };
-
-public:
 	CsUdpSocket();
 
 	cs_bool Open(cs_bool nResue = false);

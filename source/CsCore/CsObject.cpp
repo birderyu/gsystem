@@ -28,7 +28,7 @@ CsString CsObject::ToString() const
 
 cs_uint CsObject::ClassCode() const
 {
-	return CsObject::CLASSCODE;
+	return CsObject::ClassCode();
 }
 
 cs_uint CsObject::HashCode() const
@@ -41,12 +41,7 @@ cs_bool CsObject::Equals(const CsObject *) const
 	return false;
 }
 
-cs_bool CsObject::Serialize(CsBytes &) const
-{
-	return false;
-}
-
-cs_bool CsObject::Deserialize(CsBytes &)
+cs_bool CsObject::Serializable() const
 {
 	return false;
 }

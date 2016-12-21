@@ -13,5 +13,5 @@ CsCharacter::CsCharacter(const CsCharacter &val)
 
 cs_uint CsCharacter::ClassCode() const
 {
-	return CsCharacter::CLASSCODE;
+	return CsCharacter::CLASS_CODE;
 }

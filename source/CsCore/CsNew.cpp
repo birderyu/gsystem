@@ -20,3 +20,8 @@ cs_void CsFree(cs_pointer pfree)
 {
 	dlfree(pfree);
 }
+
+cs_pointer CsMemoryCopy(cs_void *dst, const cs_void *src, cs_size_t size)
+{
+	return memcpy(dst, src, size);
+}

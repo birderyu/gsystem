@@ -13,5 +13,5 @@ CsWideCharacter::CsWideCharacter(const CsWideCharacter &val)
 
 cs_uint CsWideCharacter::ClassCode() const
 {
-	return CsWideCharacter::CLASSCODE;
+	return CsWideCharacter::CLASS_CODE;
 }

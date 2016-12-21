@@ -2,12 +2,12 @@
 
 cs_longlong CsLongLongInteger::MaxValue()
 {
-	return 9223372036854775807LL;
+	return CS_INT64_MAX;
 }
 
 cs_longlong CsLongLongInteger::MinValue()
 {
-	return -9223372036854775807LL - 1;
+	return CS_INT64_MIN;
 }
 
 CsLongLongInteger CsLongLongInteger::ValueOf(const CsString &str)
@@ -38,5 +38,5 @@ CsLongLongInteger::~CsLongLongInteger()
 
 cs_uint CsLongLongInteger::ClassCode() const
 {
-	return CsLongLongInteger::CLASSCODE;
+	return CsLongLongInteger::CLASS_CODE;
 }

@@ -7,7 +7,7 @@ class CS_API CsUnsignedShortInteger
 	: public CsNumber<cs_ushort>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_UNSIGNED_SHORT_INTEGER, };
+	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_SHORT_INTEGER, };
 
 public:
 	static cs_ushort MaxValue();

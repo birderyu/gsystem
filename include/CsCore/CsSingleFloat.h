@@ -7,7 +7,7 @@ class CS_API CsSingleFloat
 	: public CsNumber<cs_float>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_SINGLE_FLOAT, };
+	enum { CLASS_CODE = CLASS_CODE_SINGLE_FLOAT, };
 
 public:
 	static cs_float MaxValue();

@@ -1,5 +1,4 @@
 /// 二进制字节流
-
 #ifndef _CORE_BYTES_H_
 #define _CORE_BYTES_H_
 
@@ -7,29 +6,38 @@
 #include "CsStructure.h"
 #include "CsBlock.h"
 
-#define CS_BYTES_DEFAULT_BUF_SIZE 4096
+#define CS_BYTES_DEFAULT_CAPACITY 1024
 #define CS_BYTES_DEFAULT_ADD_SIZE 512
 
 class CS_API CsBytes 
-	: public CsObject
-	, public CsListT<CsBytes>
+	: public CsListT<CsBytes>
+	, public CsObject
 {
 public:
-	CsBytes(cs_size_t nCapacity = CS_BYTES_DEFAULT_BUF_SIZE,
+	CsBytes(cs_size_t nCapacity = CS_BYTES_DEFAULT_CAPACITY,
 		cs_size_t nAddSize = CS_BYTES_DEFAULT_ADD_SIZE);
 	CsBytes(const CsBytes &tBytes);
 	~CsBytes();
 
 	cs_bool Reserve(cs_size_t);
 	cs_void Clear();
+	cs_void Dispose();
 
 	cs_bool Valid() const;
 	cs_bool IsEmpty() const;
 	cs_size_t Size() const;
 	cs_size_t Capacity() const;
 
+	cs_byte &GetAt(cs_size_t);
+	cs_byte  GetAt(cs_size_t) const;
+	cs_byte &operator[](cs_size_t);
+	cs_byte  operator[](cs_size_t) const;
+
 	cs_bool ReadFrom(const cs_byte *pBuf, cs_size_t len);
 	cs_bool WriteTo(cs_size_t len, cs_byte *&pBuf);
+
+	cs_byte *Head() const;
+	cs_byte *Tail() const;
 
 	/// 写入二进制字节流
 	CsBytes &operator<<(cs_bool);
@@ -69,12 +77,7 @@ public:
 	CsBytes &operator>>(cs_decimal &);
 	CsBytes &operator>>(CsString &);
 
-private:
-	cs_byte *Head() const;
-	cs_byte *Tail() const;
-
-private:
-	// 头指针，指向首元素，初始值为NULL
+	// 头指针，指向首元素，初始值为NULL_POS
 	cs_size_t m_nHeadCursor;
 	//cs_pointer m_nHeadCursor;
 
@@ -82,14 +85,15 @@ private:
 	cs_size_t m_nTailCursor;
 	//cs_pointer m_nTailCursor;
 
+private:
 	// 每次增长时的步长单元
 	cs_size_t m_nAddSize;
 
 	// 内存块
-	CsBlock m_tBlock;
+	CsBlock<cs_byte> m_tBlock;
 };
 
 #undef CS_BYTES_DEFAULT_ADD_SIZE
-#undef CS_BYTES_DEFAULT_BUF_SIZE
+#undef CS_BYTES_DEFAULT_CAPACITY
 
 #endif // _CORE_BYTES_H_

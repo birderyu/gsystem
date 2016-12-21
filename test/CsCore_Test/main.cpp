@@ -20,11 +20,8 @@
 #include "CsNullLock.h"
 #include "CsNew.h"
 
-#include "dlmalloc.h"
 #include "CsBlock.h"
 #include "CsCStringHelper.h"
-#include "CsString_Ex.h"
-#include "CsVariant_Ex.h"
 #include "List_Test.h"
 #include "CsNumber.h"
 #include "Hash_Test.h"
@@ -34,6 +31,7 @@
 #include "CsStringList.h"
 #include "CsStaticArray.h"
 #include "CsSingleton.h"
+#include "CsBinaryHeap.h"
 
 void TestSharedPtr()
 {
@@ -77,8 +75,34 @@ void TestArray()
 	cs_int _nTime2 = (_nEndTime - _nMiddleTime); // time
 }
 
+
 int main(int argc, char *argv[])
 {
+	cs_int arr[5];
+	arr[0] = 12;
+	arr[1] = 21;
+	arr[2] = 32;
+	arr[3] = 1;
+	arr[4] = 18;
+
+	CsMinHeap<cs_int> min_heap;
+	//MaxHeap<cs_int> min_heap;
+	min_heap.Append(arr, 5);
+	//min_heap.Insert(12);
+	//min_heap.Insert(21);
+	//min_heap.Insert(32);
+	//min_heap.Insert(1);
+	//min_heap.Insert(18);
+	min_heap.Output();
+	cs_int a1, a2, a3, a4, a5;
+	min_heap.Pop(&a1);
+	min_heap.Pop(&a2);
+	min_heap.Pop(&a3);
+	min_heap.Pop(&a4);
+	min_heap.Pop(&a5);
+
+	cs_size_t ssss1 = CsBytes::MAX_SIZE;
+	cs_size_t ssss2 = CsBytes::NULL_POS;
 	CsBytes bytes;
 	cs_byte v1 = 9;
 	cs_int v2 = 123321;
@@ -108,9 +132,9 @@ int main(int argc, char *argv[])
 	for (cs_size_t i = 0; i < 10000000; i++)
 	{
 		//CsString str("123456789012345");
-		//std::string str("123456789012345123456789012345123456789012345123456789012345123456789012345");
+		//std::string str("123");
 		//CsString str("123456789012345123456789012345123456789012345123456789012345123456789012345");
-		CsString_Ex str("123456789012345123456789012345123456789012345123456789012345123456789012345");
+		CsString str("123456789012345123456789012345123456789012345123456789012345123456789012345");
 		//delete str;
 
 		//CsString str(str1);

@@ -3,12 +3,13 @@
 
 #include <new>
 #include "CsMemoryPool.h"
-#include "CsAutoLock.h"
+#include "CsLockGuard.h"
 
-CS_API cs_pointer CsMalloc(cs_size_t size);
-CS_API cs_pointer CsCalloc(cs_size_t n, cs_size_t size);
-CS_API cs_pointer CsRealloc(cs_pointer oldptr, cs_size_t newsize);
-CS_API cs_void	CsFree(cs_pointer);
+CS_API cs_pointer	CsMalloc(cs_size_t size);
+CS_API cs_pointer	CsCalloc(cs_size_t n, cs_size_t size);
+CS_API cs_pointer	CsRealloc(cs_pointer oldptr, cs_size_t newsize);
+CS_API cs_void		CsFree(cs_pointer);
+CS_API cs_pointer	CsMemoryCopy(cs_void *dst, const cs_void *src, cs_size_t size);
 
 // NewHandler
 class CsNewHander

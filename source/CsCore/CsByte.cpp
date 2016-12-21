@@ -14,5 +14,5 @@ CsByte::CsByte(const CsByte &val)
 
 cs_uint CsByte::ClassCode() const
 {
-	return CsByte::CLASSCODE;
+	return CsByte::CLASS_CODE;
 }

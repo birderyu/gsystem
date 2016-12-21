@@ -88,7 +88,7 @@ CsSingleFloat::CsSingleFloat(const CsSingleFloat &val)
 
 cs_uint CsSingleFloat::ClassCode() const
 {
-	return CsSingleFloat::CLASSCODE;
+	return CsSingleFloat::CLASS_CODE;
 }
 
 cs_bool CsSingleFloat::IsNaN() const

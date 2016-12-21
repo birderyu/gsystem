@@ -7,7 +7,7 @@ class CS_API CsSignedCharacter
 	: public CsPackage<cs_schar>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_SIGNED_CHARACTER, };
+	enum { CLASS_CODE = CLASS_CODE_SIGNED_CHARACTER, };
 
 public:
 	CsSignedCharacter(cs_schar val = '\0');

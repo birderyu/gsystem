@@ -2,8 +2,9 @@
 #define _CORE_STRING_LIST_H_
 
 #include "CsStringPool.h"
-#include "CsString.h"
 #include <map>
+
+class CsString;
 
 enum CS_STRING_TYPE
 {

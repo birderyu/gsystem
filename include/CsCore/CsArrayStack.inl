@@ -3,9 +3,8 @@
 
 template<typename DataT>
 inline CsArrayStack<DataT>::CsArrayStack(cs_size_t capacity)
-: m_TopCursor(EmptyTOS)
+: m_TopCursor(NULL_POS)
 {
-	ASSERT(capacity >= MinStackSize);
 	m_tArray.Resize(capacity);
 }
 
@@ -38,26 +37,26 @@ inline CsArrayStack<DataT>::~CsArrayStack()
 template<typename DataT>
 inline cs_void CsArrayStack<DataT>::Dispose()
 {
-	m_TopCursor = EmptyTOS;
+	m_TopCursor = NULL_POS;
 	m_tArray.Clear();
 }
 
 template<typename DataT>
-inline int CsArrayStack<DataT>::IsEmpty() const
+inline cs_bool CsArrayStack<DataT>::IsEmpty() const
 {
-	return EmptyTOS == m_TopCursor;
+	return NULL_POS == m_TopCursor;
 }
 
 template<typename DataT>
 inline cs_void CsArrayStack<DataT>::Clear()
 {
-	m_TopCursor = EmptyTOS;
+	m_TopCursor = NULL_POS;
 }
 
 template<typename DataT>
 inline cs_size_t CsArrayStack<DataT>::Size() const
 {
-	if (m_TopCursor == EmptyTOS)
+	if (m_TopCursor == NULL_POS)
 	{
 		return 0;
 	}
@@ -65,9 +64,9 @@ inline cs_size_t CsArrayStack<DataT>::Size() const
 }
 
 template<typename DataT>
-inline cs_bool CsArrayStack<DataT>::IsFull()
+inline cs_bool CsArrayStack<DataT>::IsFull() const
 {
-	if (m_TopCursor == EmptyTOS)
+	if (m_TopCursor == NULL_POS)
 	{
 		return false;
 	}
@@ -77,7 +76,7 @@ inline cs_bool CsArrayStack<DataT>::IsFull()
 template<typename DataT>
 inline cs_bool CsArrayStack<DataT>::Resize(cs_size_t capacity)
 {
-	m_TopCursor = EmptyTOS;
+	m_TopCursor = NULL_POS;
 	m_tArray.Clear();
 	return m_tArray.Resize(capacity);
 }
@@ -89,7 +88,15 @@ inline cs_bool CsArrayStack<DataT>::Push(const DataT& data)
 	{
 		return false;
 	}
-	m_tArray[++m_TopCursor] = data;
+	if (m_TopCursor == NULL_POS)
+	{
+		m_TopCursor = 0;
+		m_tArray[m_TopCursor] = data;
+	}
+	else
+	{
+		m_tArray[++m_TopCursor] = data;
+	}
 	return true;
 }
 
@@ -104,7 +111,14 @@ inline cs_bool CsArrayStack<DataT>::Pop(DataT* data = NULL)
 	{
 		*data = m_tArray[m_TopCursor];
 	}
-	--m_TopCursor;
+	if (m_TopCursor == 0)
+	{
+		m_TopCursor = NULL_POS;
+	}
+	else
+	{
+		--m_TopCursor;
+	}
 	return true;
 }
 

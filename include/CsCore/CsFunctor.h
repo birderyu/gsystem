@@ -20,9 +20,22 @@ struct CsBinaryF
 
 };
 
-/// 二元函数：小于
+/// 二元函数：等于
+/// 等于应返回两个状态：等于、不等于
 template<typename ArgType = void>
-struct CsLessF
+struct CsEqualToF
+	: public CsBinaryF<ArgType, ArgType, cs_bool>
+{
+	cs_bool operator()(const ArgType &left, const ArgType &right) const
+	{
+		return (left == right);
+	}
+};
+
+/// 二元函数：小于
+/// 小于应返回两个状态：小于、不小于
+template<typename ArgType = void>
+struct CsLessThanF
 	: public CsBinaryF<ArgType, ArgType, cs_bool>
 {
 	cs_bool operator()(const ArgType &left, const ArgType &right) const
@@ -31,9 +44,22 @@ struct CsLessF
 	}
 };
 
-/// 二元函数：比较
+/// 二元函数：大于
+/// 大于应返回两个状态：大于、不大于
 template<typename ArgType = void>
-struct CsCompareF
+struct CsGreaterThanF
+	: public CsBinaryF<ArgType, ArgType, cs_bool>
+{
+	cs_bool operator()(const ArgType &left, const ArgType &right) const
+	{
+		return (left > right);
+	}
+};
+
+/// 二元函数：比较
+/// 比较应该返回三个状态：大于、等于、小于
+template<typename ArgType = void>
+struct CsCompareToF
 	: public CsBinaryF<ArgType, ArgType, cs_int>
 {
 	cs_int operator()(const ArgType &left, const ArgType &right) const

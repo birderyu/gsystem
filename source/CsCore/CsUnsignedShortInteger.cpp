@@ -2,7 +2,7 @@
 
 cs_ushort CsUnsignedShortInteger::MaxValue()
 {
-	return 0xffff;
+	return CS_UINT16_MAX;
 }
 
 cs_ushort CsUnsignedShortInteger::MinValue()
@@ -38,5 +38,5 @@ CsUnsignedShortInteger::~CsUnsignedShortInteger()
 
 cs_uint CsUnsignedShortInteger::ClassCode() const
 {
-	return CsUnsignedShortInteger::CLASSCODE;
+	return CsUnsignedShortInteger::CLASS_CODE;
 }

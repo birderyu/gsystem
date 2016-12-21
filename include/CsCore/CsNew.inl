@@ -92,7 +92,7 @@ inline cs_void CsNewInPoolWithHandlerT<ClassT>::operator delete(cs_pointer free)
 	{
 		return;
 	}
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	pool.Free(free);
 }
 
@@ -104,14 +104,14 @@ template<typename ClassT, typename LockT>
 inline cs_pointer CsSafeNewT<ClassT, LockT>::operator new(cs_size_t size)
 throw(std::bad_alloc)
 {
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	return CsMalloc(size);
 }
 
 template<typename ClassT, typename LockT>
 inline cs_void CsSafeNewT<ClassT, LockT>::operator delete(cs_pointer free)
 {
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	CsFree(free);
 }
 
@@ -137,14 +137,14 @@ throw(std::bad_alloc)
 {
 	CsNewHander h(std::set_new_handler(currentHandler));
 
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	return CsMalloc(size);
 }
 
 template<typename ClassT, typename LockT>
 inline cs_void CsSafeNewWithHandlerT<ClassT, LockT>::operator delete(cs_pointer free)
 {
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	CsFree(free);
 }
 
@@ -159,7 +159,7 @@ template<typename ClassT, typename LockT>
 inline cs_pointer CsSafeNewInPoolT<ClassT, LockT>::operator new(cs_size_t)
 throw(std::bad_alloc)
 {
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	cs_pointer pBuf = pool.Alloc();
 	if (!pBuf)
 	{
@@ -175,7 +175,7 @@ inline cs_void CsSafeNewInPoolT<ClassT, LockT>::operator delete(cs_pointer free)
 	{
 		return;
 	}
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	pool.Free(free);
 }
 
@@ -204,7 +204,7 @@ throw(std::bad_alloc)
 {
 	CsNewHander h(std::set_new_handler(currentHandler));
 
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	cs_pointer pBuf = pool.Alloc();
 	if (!pBuf)
 	{
@@ -220,7 +220,7 @@ inline cs_void CsSafeNewInPoolWithHandlerT<ClassT, LockT>::operator delete(cs_po
 	{
 		return;
 	}
-	CsAutoLock<LockT> autolock(lock);
+	CsLockGuard<LockT> autolock(lock);
 	pool.Free(free);
 }
 

@@ -1,4 +1,5 @@
 #include "CsStringList.h"
+#include "CsString.h"
 #include "CsCStringHelper.h"
 
 CsString CsStringList::GetAt(cs_size_t id, CS_STRING_TYPE emStrType) const

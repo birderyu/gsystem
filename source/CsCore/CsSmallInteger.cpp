@@ -2,12 +2,12 @@
 
 cs_small CsSmallInteger::MaxValue()
 {
-	return 127;
+	return CS_INT8_MAX;
 }
 
 cs_small CsSmallInteger::MinValue()
 {
-	return -128;
+	return CS_INT8_MIN;
 }
 
 CsSmallInteger CsSmallInteger::ValueOf(const CsString &str)
@@ -33,5 +33,5 @@ CsSmallInteger::CsSmallInteger(const CsSmallInteger &val)
 
 cs_uint CsSmallInteger::ClassCode() const
 {
-	return CsSmallInteger::CLASSCODE;
+	return CsSmallInteger::CLASS_CODE;
 }

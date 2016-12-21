@@ -5,26 +5,24 @@
 #include "CsStack.h"
 #include "CsDynamicArray.h"
 
-const cs_int EmptyTOS = -1;
-const cs_size_t MinStackSize = 5;
-const cs_size_t MaxStackSize = 500;
+#define CS_STACK_DEFAULT_CAPACITY 1024
 
 template<typename DataT>
 class CsArrayStack 
 	: public CsStack<DataT>
 {
 public:
-	CsArrayStack(cs_size_t capacity = MaxStackSize);
+	CsArrayStack(cs_size_t capacity = CS_STACK_DEFAULT_CAPACITY);
 	CsArrayStack(const CsArrayStack<DataT>& other);
 	CsArrayStack<DataT>& operator=(const CsArrayStack<DataT>& other);
 	~CsArrayStack();
 
 public:
-	cs_int IsEmpty() const;
+	cs_bool IsEmpty() const;
 	cs_void Clear();
 	cs_size_t Size() const;
-	cs_bool IsFull();
-	cs_bool Resize(cs_size_t capacity);//change the capacity. 
+	cs_bool IsFull() const;
+	cs_bool Resize(cs_size_t capacity);
 	cs_bool Push(const DataT& data);
 	cs_bool Pop(DataT *data = NULL);
 	cs_bool Top(DataT &data) const;
@@ -36,9 +34,11 @@ private:
 	CsDynamicArray<DataT> m_tArray;
 
 	// ’ª∂•÷∏’Î
-	cs_int m_TopCursor;
+	cs_size_t m_TopCursor;
 };
 
 #include "CsArrayStack.inl"
+
+#undef CS_STACK_DEFAULT_CAPACITY
 
 #endif // _CSCORE_ARRAY_STACK_H_

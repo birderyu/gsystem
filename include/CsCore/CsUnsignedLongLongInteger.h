@@ -7,7 +7,7 @@ class CS_API CsUnsignedLongLongInteger
 	: public CsNumber<cs_ulonglong>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_UNSIGNED_LONG_LONG_INTEGER, };
+	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_LONG_LONG_INTEGER, };
 
 public:
 	static cs_ulonglong MaxValue();

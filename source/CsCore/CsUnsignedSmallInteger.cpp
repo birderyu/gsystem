@@ -2,7 +2,7 @@
 
 cs_usmall CsUnsignedSmallInteger::MaxValue()
 {
-	return 0xff;
+	return CS_UINT8_MAX;
 }
 
 cs_usmall CsUnsignedSmallInteger::MinValue()
@@ -38,5 +38,5 @@ CsUnsignedSmallInteger::~CsUnsignedSmallInteger()
 
 cs_uint CsUnsignedSmallInteger::ClassCode() const
 {
-	return CsUnsignedSmallInteger::CLASSCODE;
+	return CsUnsignedSmallInteger::CLASS_CODE;
 }

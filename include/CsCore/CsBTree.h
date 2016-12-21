@@ -6,8 +6,9 @@
 #include "CsReadBlackTree.h"
 
 template<typename KeyT,
-	typename CompareT = CsCompareF<KeyT >>
-class CsBTreeNode :public CsObject
+	typename CompareT = CsCompareToF<KeyT >>
+class CsBTreeNode 
+	: public CsObject
 {
 public:
 	CsBTreeNode();
@@ -24,9 +25,10 @@ private:
 
 template<typename KeyT,
 	cs_size_t LevelN = 3,
-	typename CompareT = CsCompareF<KeyT >,
+	typename CompareT = CsCompareToF<KeyT >,
 	typename NodeT = CsBTreeNode<KeyT>>
-class CsBTree :public CsObject
+class CsBTree 
+	: public CsObject
 {
 
 };

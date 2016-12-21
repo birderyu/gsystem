@@ -405,7 +405,7 @@ cs_bool CsVariant_Ex::ToBool(const cs_bool bDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_bool, CsBoolean>(CORE_CLASSCODE_BOOLEAN, bDefValue);
+		return ToNumber<cs_bool, CsBoolean>(CLASS_CODE_BOOLEAN, bDefValue);
 		break;
 	default:
 		break;
@@ -460,7 +460,7 @@ cs_char CsVariant_Ex::ToChar(const cs_char cDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_char, CsChar>(CORE_CLASSCODE_CHARACTER, cDefValue);
+		return ToNumber<cs_char, CsChar>(CLASS_CODE_CHARACTER, cDefValue);
 	default:
 		break;
 	}
@@ -514,7 +514,7 @@ cs_uchar CsVariant_Ex::ToUChar(const cs_uchar cDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_uchar, CsUChar>(CORE_CLASSCODE_UNSIGNED_CHARACTER, cDefValue);
+		return ToNumber<cs_uchar, CsUChar>(CLASS_CODE_UNSIGNED_CHARACTER, cDefValue);
 		break;
 	default:
 		break;
@@ -569,7 +569,7 @@ cs_wchar CsVariant_Ex::ToWChar(const cs_wchar cDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_wchar, CsWChar>(CORE_CLASSCODE_WIND_CHARACTER, cDefValue);
+		return ToNumber<cs_wchar, CsWChar>(CLASS_CODE_WIND_CHARACTER, cDefValue);
 		break;
 	default:
 		break;
@@ -637,7 +637,7 @@ cs_short CsVariant_Ex::ToShort(const cs_short nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_short, CsShort>(CORE_CLASSCODE_SHORT_INTEGER, nDefValue);
+		return ToNumber<cs_short, CsShort>(CLASS_CODE_SHORT_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -693,7 +693,7 @@ cs_ushort CsVariant_Ex::ToUShort(const cs_ushort nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_ushort, CsUShort>(CORE_CLASSCODE_UNSIGNED_SHORT_INTEGER, nDefValue);
+		return ToNumber<cs_ushort, CsUShort>(CLASS_CODE_UNSIGNED_SHORT_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -749,7 +749,7 @@ cs_int CsVariant_Ex::ToInt(const cs_int nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_int, CsInteger>(CORE_CLASSCODE_INTEGER, nDefValue);
+		return ToNumber<cs_int, CsInteger>(CLASS_CODE_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -805,7 +805,7 @@ cs_uint CsVariant_Ex::ToUInt(const cs_uint nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_uint, CsUInteger>(CORE_CLASSCODE_UNSIGNED_INTEGER, nDefValue);
+		return ToNumber<cs_uint, CsUInteger>(CLASS_CODE_UNSIGNED_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -861,7 +861,7 @@ cs_long CsVariant_Ex::ToLong(const cs_long nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_long, CsLong>(CORE_CLASSCODE_LONG_INTEGER, nDefValue);
+		return ToNumber<cs_long, CsLong>(CLASS_CODE_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -917,7 +917,7 @@ cs_ulong CsVariant_Ex::ToULong(const cs_ulong nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_ulong, CsULong>(CORE_CLASSCODE_UNSIGNED_LONG_INTEGER, nDefValue);
+		return ToNumber<cs_ulong, CsULong>(CLASS_CODE_UNSIGNED_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -973,7 +973,7 @@ cs_longlong CsVariant_Ex::ToLongLong(const cs_longlong nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_longlong, CsLongLong>(CORE_CLASSCODE_LONG_LONG_INTEGER, nDefValue);
+		return ToNumber<cs_longlong, CsLongLong>(CLASS_CODE_LONG_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -1029,7 +1029,7 @@ cs_ulonglong CsVariant_Ex::ToULongLong(const cs_ulonglong nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_ulonglong, CsULongLong>(CORE_CLASSCODE_UNSIGNED_LONG_LONG_INTEGER, nDefValue);
+		return ToNumber<cs_ulonglong, CsULongLong>(CLASS_CODE_UNSIGNED_LONG_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -1085,7 +1085,7 @@ cs_float CsVariant_Ex::ToFloat(const cs_float nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_float, CsFloat>(CORE_CLASSCODE_SINGLE_FLOAT, nDefValue);
+		return ToNumber<cs_float, CsFloat>(CLASS_CODE_SINGLE_FLOAT, nDefValue);
 		break;
 	default:
 		break;
@@ -1141,7 +1141,7 @@ cs_double CsVariant_Ex::ToDouble(const cs_double nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_double, CsDoubleFloat>(CORE_CLASSCODE_DOUBLE_FLOAT, nDefValue);
+		return ToNumber<cs_double, CsDoubleFloat>(CLASS_CODE_DOUBLE_FLOAT, nDefValue);
 		break;
 	default:
 		break;

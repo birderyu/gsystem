@@ -3,7 +3,7 @@
 #ifndef _CORE_SINGLETON_H_
 #define _CORE_SINGLETON_H_
 
-#include "CsAutoLock.h"
+#include "CsLockGuard.h"
 
 template <typename ClassT, typename LockT>
 class CsSingleton
@@ -13,10 +13,11 @@ public:
 	{
 		if (m_pInstance == NULL)
 		{
-			CsAutoLock<LockT> lock(m_tLock);
+			CsLockGuard<LockT> lock(m_tLock);
 			if (m_pInstance == NULL)
 			{
 				m_pInstance = new ClassT;
+				m_pInstance->Initialize();
 				CsCallAtExit(Destroy);
 			}
 			return *m_pInstance;
@@ -24,13 +25,16 @@ public:
 		return *m_pInstance;
 	}
 
+	cs_void Initialize() {}
+
 protected:
 	CsSingleton() {}
 	~CsSingleton() {}
+	static LockT m_tLock;
 
 private:
 	CsSingleton(const CsSingleton<ClassT, LockT> &) {}
-	CsSingleton &operator=(const CsSingleton<ClassT, LockT> &){}
+	CsSingleton &operator=(const CsSingleton<ClassT, LockT> &){ return *this; }
 
 	static cs_void Destroy()
 	{
@@ -40,7 +44,6 @@ private:
 	}
 
 	static ClassT * volatile m_pInstance;
-	static LockT m_tLock;
 };
 
 template <typename ClassT, typename LockT>

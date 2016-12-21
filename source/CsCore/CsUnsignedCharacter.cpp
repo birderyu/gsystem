@@ -14,5 +14,5 @@ CsUnsignedCharacter::CsUnsignedCharacter(const CsUnsignedCharacter &val)
 
 cs_uint CsUnsignedCharacter::ClassCode() const
 {
-	return CsUnsignedCharacter::CLASSCODE;
+	return CsUnsignedCharacter::CLASS_CODE;
 }

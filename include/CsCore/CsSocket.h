@@ -7,11 +7,7 @@ class CsSocket_Ex;
 class CsSockAddress;
 
 class CS_API CsSocket 
-	: public CsObject
 {
-public:
-	enum { CLASSCODE = CORE_CLASSCODE_SOCKET, };
-
 public:
 	virtual ~CsSocket() = 0;
 

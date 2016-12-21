@@ -9,7 +9,7 @@ struct NoLessF
 {
 	cs_bool operator()(const T &left, const T &right) const
 	{
-		CsLessF<T> fCompare;
+		CsLessThanF<T> fCompare;
 		return !fCompare(left, right);
 	}
 };
@@ -20,7 +20,7 @@ struct NoCompareF
 {
 	cs_int operator()(const T &left, const T &right) const
 	{
-		CsCompareF<T> fCompare;
+		CsCompareToF<T> fCompare;
 		return 0 - fCompare(left, right);
 	}
 };

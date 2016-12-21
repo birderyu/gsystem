@@ -7,7 +7,7 @@ class CS_API CsBoolean
 	: public CsPackage<cs_bool>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_BOOLEAN, };
+	enum { CLASS_CODE = CLASS_CODE_BOOLEAN, };
 
 public:
 	static CsBoolean ValueOf(const CsString &);

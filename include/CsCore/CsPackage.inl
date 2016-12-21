@@ -89,15 +89,15 @@ inline CsString CsPackage<ValueT>::ToString(cs_int nBase) const
 }
 
 template <typename ValueT>
-inline cs_uint CsPackage<ValueT>::ClassCode() const
-{
-	return CORE_CLASSCODE_PACKAGE;
-}
-
-template <typename ValueT>
 inline cs_uint CsPackage<ValueT>::HashCode() const
 {
 	return CsHashing(m_nValue);
+}
+
+template <typename ValueT>
+inline cs_uint CsPackage<ValueT>::ClassCode() const
+{
+	return CsPackage<ValueT>::CLASS_CODE;
 }
 
 template <typename ValueT>
@@ -131,25 +131,36 @@ inline cs_bool CsPackage<ValueT>::Equals(typename CsPackage<ValueT>::ValueType v
 }
 
 template <typename ValueT>
+inline cs_bool CsPackage<ValueT>::Serializable() const
+{
+	return true;
+}
+
+template <typename ValueT>
+template <typename ArchiveT>
+cs_bool CsPackage<ValueT>::Serialize(ArchiveT &archive) const
+{
+	archive.PushCode(ClassCode());
+	archive << m_nValue;
+	return true;
+}
+
+template <typename ValueT>
+template <typename ArchiveT>
+cs_bool CsPackage<ValueT>::Deserialize(ArchiveT &archive)
+{
+	if (archive.PopCode() != ClassCode())
+	{
+		return false;
+	}
+	archive >> m_nValue;
+	return true;
+}
+
+template <typename ValueT>
 inline cs_bool CsPackage<ValueT>::Equals(const CsPackage<ValueT> &val) const
 {
 	return m_nValue == val.m_nValue;
-}
-
-template <typename ValueT>
-inline cs_bool CsPackage<ValueT>::Serialize(CsBytes &bytes) const
-{
-	cs_size_t len = bytes.Size();
-	bytes << m_nValue;
-	return bytes.Size() - len == sizeof(ValueT);
-}
-
-template <typename ValueT>
-inline cs_bool CsPackage<ValueT>::Deserialize(CsBytes &bytes)
-{
-	cs_size_t len = bytes.Size();
-	bytes >> m_nValue;
-	return len - bytes.Size() == sizeof(ValueT);
 }
 
 template <typename ValueT>
@@ -213,7 +224,7 @@ inline CsNumber<ValueT>::~CsNumber()
 template <typename ValueT>
 inline cs_uint CsNumber<ValueT>::ClassCode() const
 {
-	return CORE_CLASSCODE_NUMBER;
+	return CsNumber<ValueT>::CLASS_CODE;
 }
 
 template <typename ValueT>

@@ -1,10 +1,11 @@
-#ifndef _CORE_VARIANT_PRIVATE_H_
-#define _CORE_VARIANT_PRIVATE_H_
+#ifndef _CORE_VARIANT_EX_H_
+#define _CORE_VARIANT_EX_H_
 
+#include "CsGlobal.h"
 #include "CsVariant.h"
-#include "CsString_Ex.h"
 
 class CsVariant_Ex
+	: public CsNewT<CsVariant_Ex>
 {
 public:
 	CsVariant_Ex();
@@ -112,25 +113,8 @@ private:
 template<typename BaseT, typename PackageT>
 BaseT CsVariant_Ex::ToNumber(const cs_uint nClassCode, const BaseT &nDefValue) const
 {
-	if (m_nType != VARIANT_TYPE_OBJECT)
-	{
-		return nDefValue;
-	}
-	if (!m_pVal)
-	{
-		return nDefValue;
-	}
-	CsObject *pObjcet = static_cast<CsObject*>(m_pVal);
-	if (pObjcet->CLASSCODE != nClassCode)
-	{
-		return nDefValue;
-	}
-	PackageT *pObj = static_cast<PackageT*>(pObjcet);
-	if (!pObj)
-	{
-		return nDefValue;
-	}
-	return pObj->Value();
+	// TODO
+	return BaseT();
 }
 
 #endif // _CORE_VARIANT_PRIVATE_H_

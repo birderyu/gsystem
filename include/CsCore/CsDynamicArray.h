@@ -6,9 +6,17 @@
 #include "CsArray.h"
 
 template <typename DataT>
-class CsDynamicArray 
+class CsDynamicArray final
 	: public CsArray<DataT>
 {
+public:
+	enum { CLASS_CODE = CLASS_CODE_DYNAMIC_ARRAY, };
+
+public:
+	// 从src的start位开始，拷贝len个元素，到dst的first位
+	static cs_bool ArrayCopy(const CsDynamicArray<DataT> &src, cs_size_t start, cs_size_t len,
+		CsDynamicArray<DataT> &dst, cs_size_t first = 0);
+
 public:
 	CsDynamicArray();
 	CsDynamicArray(cs_size_t len);
@@ -32,22 +40,26 @@ public:
 	cs_void Clear();
 
 	DataT &GetAt(cs_size_t);
-	const DataT &GetAt(cs_size_t) const;
+	DataT  GetAt(cs_size_t) const;
 
 	// 通过下标访问和修改数组元素
 	DataT &operator[](cs_size_t);
-	const DataT &operator[](cs_size_t) const;
+	DataT  operator[](cs_size_t) const;
 	
 	// 移除特定位置的元素
 	cs_bool RemoveAt(cs_size_t);
 
 	// 拷贝
-	CsDynamicArray<DataT> &operator=(const CsDynamicArray<DataT> &arr);
+	CsDynamicArray<DataT> &operator=(const CsDynamicArray<DataT> &);
 
-public:
-	// 从src的start位开始，拷贝len个元素，到dst的first位
-	static cs_bool ArrayCopy(const CsDynamicArray<DataT> &src, cs_size_t start, cs_size_t len,
-		CsDynamicArray<DataT> &dst, cs_size_t first = 0);
+	// 相等
+	cs_bool operator==(const CsDynamicArray<DataT> &);
+
+	///
+	cs_uint ClassCode() const;
+	cs_bool Serializable() const;
+	template<typename ArchiveT> cs_bool Serialize(ArchiveT &) const;
+	template<typename ArchiveT> cs_bool Deserialize(ArchiveT &);
 
 private:
 	// 注意：以下两个方法，只拷贝内存，即浅拷贝
@@ -63,6 +75,9 @@ private:
 	DataT *m_pData;
 	cs_size_t m_nSize;
 };
+
+typedef CsDynamicArray<cs_int> CsIntegerArray;
+typedef CsDynamicArray<cs_size_t> CsSizeTypeArray;
 
 #include "CsDynamicArray.inl"
 

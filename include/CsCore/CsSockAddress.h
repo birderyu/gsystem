@@ -7,14 +7,10 @@ class CsString;
 class CsSockAddress_Ex;
 
 class CS_API CsSockAddress 
-	: public CsObject
 {
 	friend class CsSocket;
 	friend class CsTcpSocket;
 	friend class CsUdpSocket;
-
-public:
-	enum { CLASSCODE = CORE_CLASSCODE_SOCKET_ADDRESS, };
 
 public:
 	explicit CsSockAddress();

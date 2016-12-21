@@ -7,11 +7,11 @@ class CS_API CsLongInteger
 	: public CsNumber<cs_long>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_LONG_INTEGER, };
+	enum { CLASS_CODE = CLASS_CODE_LONG_INTEGER, };
 
 public:
-	static cs_long MaxValue();
-	static cs_long MinValue();
+	static cs_int MaxValue();
+	static cs_int MinValue();
 	static CsLongInteger ValueOf(const CsString &);
 
 public:

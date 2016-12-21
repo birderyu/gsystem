@@ -229,7 +229,7 @@ inline CsAtomic_Ex<ElemT, LockT>::CsAtomic_Ex(const CsAtomic_Ex<ElemT, LockT>& v
 template <typename ElemT, typename LockT>
 inline CsAtomic_Ex<ElemT, LockT> &CsAtomic_Ex<ElemT, LockT>::operator=(typename CsAtomic_Ex<ElemT, LockT>::ValueType val)
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	m_tValue = val;
 	return *this;
 }
@@ -239,7 +239,7 @@ inline CsAtomic_Ex<ElemT, LockT> &CsAtomic_Ex<ElemT, LockT>::operator=(const CsA
 {
 	CsAtomic_Ex<ElemT, LockT> tmp(val);
 
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	std::swap(m_tValue, tmp.m_tValue);
 
 	return *this;
@@ -248,49 +248,49 @@ inline CsAtomic_Ex<ElemT, LockT> &CsAtomic_Ex<ElemT, LockT>::operator=(const CsA
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::operator++()
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return ++m_tValue;
 }
 
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::operator++(cs_int)
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue++;
 }
 
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::operator+=(typename CsAtomic_Ex<ElemT, LockT>::ValueType val)
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue += val;
 }
 
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::operator--()
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return --m_tValue;
 }
 
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::operator--(cs_int)
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue--;
 }
 
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::operator-=(typename CsAtomic_Ex<ElemT, LockT>::ValueType val)
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue -= val;
 }
 
 template <typename ElemT, typename LockT>
 inline cs_bool CsAtomic_Ex<ElemT, LockT>::operator==(typename CsAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue == val;
 }
 
@@ -304,42 +304,42 @@ inline cs_bool CsAtomic_Ex<ElemT, LockT>::operator!=(typename CsAtomic_Ex<ElemT,
 template <typename ElemT, typename LockT>
 inline cs_bool CsAtomic_Ex<ElemT, LockT>::operator>=(typename CsAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue >= val;
 }
 
 template <typename ElemT, typename LockT>
 inline cs_bool CsAtomic_Ex<ElemT, LockT>::operator>(typename CsAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue > val;
 }
 
 template <typename ElemT, typename LockT>
 inline cs_bool CsAtomic_Ex<ElemT, LockT>::operator<=(typename CsAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue <= val;
 }
 
 template <typename ElemT, typename LockT>
 inline cs_bool CsAtomic_Ex<ElemT, LockT>::operator<(typename CsAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue < val;
 }
 
 template <typename ElemT, typename LockT>
 inline ElemT CsAtomic_Ex<ElemT, LockT>::GetValue() const
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	return m_tValue;
 }
 
 template <typename ElemT, typename LockT>
 inline cs_void CsAtomic_Ex<ElemT, LockT>::SetValue(typename CsAtomic_Ex<ElemT, LockT>::ValueType val)
 {
-	CsAutoLock<LockT> tLock(m_rLock);
+	CsLockGuard<LockT> tLock(m_rLock);
 	m_tValue = val;
 }
 

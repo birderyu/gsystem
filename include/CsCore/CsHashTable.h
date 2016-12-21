@@ -24,6 +24,7 @@ struct CsHashTableNode
 /// 哈希表
 template<typename KeyT, typename ValueT,
 	typename HashT = CsHashF<KeyT>,
+	typename CompareT = CsEqualToF<KeyT>,
 	typename NodeT = CsHashTableNode<KeyT, ValueT>>
 class CsHashTable
 	: public CsObject
@@ -77,19 +78,20 @@ public:
 
 private:
 	// 哈希冲突
-	template<typename KeyT, typename ValueT, typename NodeT>
+	template<typename KeyT, typename ValueT , typename CompareT, typename NodeT>
 	struct CsHashSlot 
-		: public CsNewT<CsHashSlot<KeyT, ValueT, NodeT>>
+		: public CsNewT<CsHashSlot<KeyT, ValueT, CompareT, NodeT>>
 	{
 		NodeT *m_pHead;
 		cs_size_t m_nLength;
+		CompareT m_fCompare;
 
 		CsHashSlot()
 			:m_pHead(NULL), m_nLength(0)
 		{
 
 		}
-		CsHashSlot(const CsHashSlot<KeyT, ValueT, NodeT> &slot)
+		CsHashSlot(const CsHashSlot<KeyT, ValueT, CompareT, NodeT> &slot)
 			:m_pHead(slot.m_pHead), m_nLength(slot.m_nLength)
 		{
 
@@ -99,7 +101,7 @@ private:
 			Free();
 		}
 
-		CsHashSlot<KeyT, ValueT, NodeT> &operator=(const CsHashSlot<KeyT, ValueT, NodeT> &slot)
+		CsHashSlot<KeyT, ValueT, CompareT, NodeT> &operator=(const CsHashSlot<KeyT, ValueT, CompareT, NodeT> &slot)
 		{
 			m_pHead = slot.m_pHead;
 			m_nLength = slot.m_nLength;
@@ -134,7 +136,7 @@ private:
 			NodeT *pNode = m_pHead;
 			while (pNode)
 			{
-				if (pNode->m_tKey == key)
+				if (m_fCompare(pNode->m_tKey, key))
 				{
 					nodes.Add(pNode);
 					if (!allowRepeat)
@@ -156,7 +158,7 @@ private:
 			NodeT *pNode = m_pHead;
 			while (pNode)
 			{
-				if (pNode->m_tKey == key)
+				if (m_fCompare(pNode->m_tKey, key))
 				{
 					return pNode;
 				}
@@ -173,7 +175,7 @@ private:
 			NodeT *pNode = m_pHead;
 			while (pNode)
 			{
-				if (pNode->m_tKey == key)
+				if (m_fCompare(pNode->m_tKey, key))
 				{
 					return true;
 				}
@@ -239,7 +241,7 @@ private:
 	cs_size_t m_nModule;
 	cs_size_t m_nLength; // 实际元素的个数
 	cs_float m_nFactor;	// 负载因子
-	CsDynamicArray<CsHashSlot<KeyT, ValueT, NodeT>*> m_tBuckets;
+	CsDynamicArray<CsHashSlot<KeyT, ValueT, CompareT, NodeT>*> m_tBuckets;
 	HashT m_fHash;
 	cs_bool m_bAllowRepeat; // 允许重复
 };

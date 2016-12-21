@@ -1,0 +1,4 @@
+#ifndef _CORE_VECTOR_INLINE_
+#define _CORE_VECTOR_INLINE_
+
+#endif // _CORE_VECTOR_INLINE_

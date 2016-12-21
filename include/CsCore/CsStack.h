@@ -6,8 +6,8 @@
 
 template<typename DataT>
 class CsStack 
-	: public CsObject
-	, public CsListT<CsStack<DataT>>
+	: public CsListT<CsStack<DataT>>
+	, public CsObject
 {
 public:
 	virtual ~CsStack() = 0 {}

@@ -11,8 +11,8 @@ inline CsHashTableNode<KeyT, ValueT>::CsHashTableNode(const KeyT &key,
 
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline CsHashTable<KeyT, ValueT, HashT, NodeT>::CsHashTable(cs_size_t module, cs_float factor, cs_bool allowRepeat)
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::CsHashTable(cs_size_t module, cs_float factor, cs_bool allowRepeat)
 : m_nModule(module), m_nFactor(factor), m_bAllowRepeat(allowRepeat), m_nLength(0)
 {
 	if (m_nModule < CS_HASH_DEFAULT_MODULE_SIZE)
@@ -44,8 +44,8 @@ inline CsHashTable<KeyT, ValueT, HashT, NodeT>::CsHashTable(cs_size_t module, cs
 	m_tBuckets.Resize(m_nModule, NULL);
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline CsHashTable<KeyT, ValueT, HashT, NodeT>::~CsHashTable()
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::~CsHashTable()
 {
 	cs_size_t len = m_tBuckets.Size();
 	for (cs_size_t i = 0; i < len; i++)
@@ -58,8 +58,8 @@ inline CsHashTable<KeyT, ValueT, HashT, NodeT>::~CsHashTable()
 	}
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline NodeT *CsHashTable<KeyT, ValueT, HashT, NodeT>::FirstNode() const
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline NodeT *CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::FirstNode() const
 {
 	if (m_nLength <= 0)
 	{
@@ -75,8 +75,8 @@ inline NodeT *CsHashTable<KeyT, ValueT, HashT, NodeT>::FirstNode() const
 	return NULL;
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline NodeT *CsHashTable<KeyT, ValueT, HashT, NodeT>::NextNode(NodeT *node) const
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline NodeT *CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::NextNode(NodeT *node) const
 {
 	if (!node)
 	{
@@ -97,13 +97,13 @@ inline NodeT *CsHashTable<KeyT, ValueT, HashT, NodeT>::NextNode(NodeT *node) con
 	return NULL;
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline NodeT * CsHashTable<KeyT, ValueT, HashT, NodeT>::Insert(const KeyT &key, const ValueT &value)
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline NodeT * CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value)
 {
 	cs_size_t n = IndexOf(key);
 	if (!m_tBuckets[n])
 	{
-		m_tBuckets[n] = new CsHashSlot<KeyT, ValueT, NodeT>();
+		m_tBuckets[n] = new CsHashSlot<KeyT, ValueT, CompareT, NodeT>();
 	}
 	if (!m_tBuckets[n])
 	{
@@ -126,8 +126,8 @@ inline NodeT * CsHashTable<KeyT, ValueT, HashT, NodeT>::Insert(const KeyT &key, 
 	return pnode;
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline NodeT * CsHashTable<KeyT, ValueT, HashT, NodeT>::Find(const KeyT &key) const
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline NodeT * CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::Find(const KeyT &key) const
 {
 	cs_size_t n = IndexOf(key);
 	if (!m_tBuckets[n])
@@ -137,8 +137,8 @@ inline NodeT * CsHashTable<KeyT, ValueT, HashT, NodeT>::Find(const KeyT &key) co
 	return m_tBuckets[n]->Search(key);
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline cs_bool CsHashTable<KeyT, ValueT, HashT, NodeT>::Find(const KeyT &key, CsHashNodes<NodeT> &nodes) const
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline cs_bool CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::Find(const KeyT &key, CsHashNodes<NodeT> &nodes) const
 {
 	cs_size_t n = IndexOf(key);
 	if (!m_tBuckets[n])
@@ -148,8 +148,8 @@ inline cs_bool CsHashTable<KeyT, ValueT, HashT, NodeT>::Find(const KeyT &key, Cs
 	return m_tBuckets[n]->Search(key, m_bAllowRepeat, nodes);
 }
 
-template<typename KeyT, typename ValueT, typename HashT, typename NodeT>
-inline cs_size_t CsHashTable<KeyT, ValueT, HashT, NodeT>::IndexOf(const KeyT &key) const
+template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+inline cs_size_t CsHashTable<KeyT, ValueT, HashT, CompareT, NodeT>::IndexOf(const KeyT &key) const
 {
 	cs_uint h = m_fHash(key);
 	h ^= (h >> 20) ^ (h >> 12);

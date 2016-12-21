@@ -1,7 +1,7 @@
 #ifndef _CORE_ATOMIC_H_
 #define _CORE_ATOMIC_H_
 
-#include "CsAutoLock.h"
+#include "CsLockGuard.h"
 
 //#define CS_USE_STD_ATOMIC
 

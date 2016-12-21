@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Supernova
+** CNova: A quick, micro library of C++
 **
 ** @author	Birderyu
 ** @contact	https://github.com/birderyu

@@ -1,6 +1,6 @@
 ﻿/****************************************************************************
 **
-** Supernova
+** CNova: A quick, micro library of C++
 **
 ** @file	CsPackage.h
 ** @brief	基础类型封装类的定义
@@ -16,7 +16,6 @@
 
 #include "CsObject.h"
 #include "CsString.h"
-#include "CsBytes.h"
 #include "CsHash.h"
 
 template <typename ValueT>
@@ -27,7 +26,7 @@ public:
 	typedef typename CsTraits<ValueT>::ParameterType ValueType;
 
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_PACKAGE, };
+	enum { CLASS_CODE = CLASS_CODE_PACKAGE, };
 
 public:
 	static CsPackage<ValueT> ValueOf(ValueType); 
@@ -51,8 +50,9 @@ public:
 	virtual cs_bool Equals(const CsObject *) const;
 	cs_bool Equals(ValueType) const;
 	cs_bool Equals(const CsPackage<ValueT> &) const;
-	cs_bool Serialize(CsBytes &) const;
-	cs_bool Deserialize(CsBytes &);
+	cs_bool Serializable() const;
+	template<typename ArchiveT> cs_bool Serialize(ArchiveT &) const;
+	template<typename ArchiveT> cs_bool Deserialize(ArchiveT &);
 
 	// 运算符重载
 	CsPackage<ValueT> &operator=(ValueType);
@@ -71,7 +71,7 @@ class CsNumber
 	: public CsPackage<ValueT>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_NUMBER, };
+	enum { CLASS_CODE = CLASS_CODE_NUMBER, };
 
 public:
 	CsNumber(ValueType);

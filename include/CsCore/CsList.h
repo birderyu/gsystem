@@ -3,9 +3,10 @@
 
 #include "CsDoubleLinkedList.h"
 
-template <typename T>
+template <typename DataT>
 class CsList 
-	: public CsObject
+	: public CsListT<CsList<DataT>>
+	, public CsObject
 {
 
 };

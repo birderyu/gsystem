@@ -7,9 +7,12 @@ class CS_API CsInteger
 	: public CsNumber<cs_int>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_INTEGER, };
+	enum { CLASS_CODE = CLASS_CODE_INTEGER, };
 
 public:
+	static const cs_size_t MAX_VALUE = CS_INT32_MAX;
+	static const cs_size_t MIN_VALUE = CS_INT32_MIN;
+
 	static cs_int MaxValue();
 	static cs_int MinValue();
 	static CsInteger ValueOf(const CsString &);

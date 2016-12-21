@@ -4,13 +4,8 @@
 
 #include "CsReadBlackTree.h"
 
-#define CS_ORDER_MAPM_NODE_RED		CS_RED_BLACK_TREE_NODE_RED
-#define CS_ORDER_MAPM_NODE_BLACK	CS_RED_BLACK_TREE_NODE_BLACK
-
-template < typename KeyT,
-	typename ValueT,
-	typename CompareT>
-class CsOrderMap;
+#define CS_ORDER_MAPM_NODE_RED		0
+#define CS_ORDER_MAPM_NODE_BLACK	1
 
 /// ½Úµã
 template < typename KeyT, typename ValueT>
@@ -31,7 +26,7 @@ struct CsOrderMapNode
 };
 
 template<typename KeyT, typename ValueT,
-	typename CompareT = CsCompareF<KeyT >>
+	typename CompareT = CsCompareToF<KeyT >>
 class CsOrderMap 
 	: public CsObject
 {
@@ -124,5 +119,8 @@ private:
 	Tree m_tTree;
 	cs_size_t m_nSize;
 };
+
+#undef CS_ORDER_MAPM_NODE_BLACK
+#undef CS_ORDER_MAPM_NODE_RED
 
 #endif // _CORE_ORDER_MAP_H_

@@ -7,9 +7,6 @@ class CS_API CsTcpSocket
 	: public CsSocket
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_TCPSOCKET, };
-
-public:
 	CsTcpSocket();
 
 	cs_bool Open(cs_bool nResue = false);

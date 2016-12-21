@@ -7,7 +7,7 @@ class CS_API CsCharacter
 	: public CsPackage<cs_char>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_CHARACTER, };
+	enum { CLASS_CODE = CLASS_CODE_CHARACTER, };
 
 public:
 	CsCharacter(cs_char val = '\0');

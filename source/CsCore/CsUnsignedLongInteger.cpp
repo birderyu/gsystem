@@ -2,7 +2,7 @@
 
 cs_ulong CsUnsignedLongInteger::MaxValue()
 {
-	return 0xffffffffUL;
+	return CS_UINT32L_MAX;
 }
 
 cs_ulong CsUnsignedLongInteger::MinValue()
@@ -33,5 +33,5 @@ CsUnsignedLongInteger::CsUnsignedLongInteger(const CsUnsignedLongInteger &val)
 
 cs_uint CsUnsignedLongInteger::ClassCode() const
 {
-	return CsUnsignedLongInteger::CLASSCODE;
+	return CsUnsignedLongInteger::CLASS_CODE;
 }

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Supernova
+** CNova: A quick, micro library of C++
 **
 ** @file	CsBinaryTree.h
 ** @brief	该文件包含了二叉树节点的定义、二叉树的定义及实现
@@ -74,7 +74,7 @@ class CsBinaryTree
 	: public CsObject
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_BINARY_TREE, };
+	enum { CLASS_CODE = CLASS_CODE_BINARY_TREE, };
 
 public:
 	typedef NodeT Node;

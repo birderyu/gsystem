@@ -2,6 +2,26 @@
 #define _CORE_DYNAMIC_ARRAY_INLINE_
 
 template <typename DataT>
+inline cs_bool CsDynamicArray<DataT>::ArrayCopy(const CsDynamicArray<DataT> &src, cs_size_t start, cs_size_t len,
+	CsDynamicArray<DataT> &dst, cs_size_t first)
+{
+	if (len + start > src.Size())
+	{
+		return false;
+	}
+	if (len + first > dst.Size())
+	{
+		dst.Resize(len + first);
+	}
+	//return src.CopyMemTo(dst.GetData() + first, start, len);
+	for (cs_size_t i = start, cs_size_t j = first;
+		i < len + start; i++, j++)
+	{
+		dst[j] = src[i];
+	}
+}
+
+template <typename DataT>
 inline CsDynamicArray<DataT>::CsDynamicArray()
 : m_pData(NULL), m_nSize(0)
 {
@@ -158,31 +178,31 @@ inline cs_void CsDynamicArray<DataT>::Clear()
 }
 
 template <typename DataT>
-inline DataT &CsDynamicArray<DataT>::GetAt(cs_size_t id)
+inline DataT &CsDynamicArray<DataT>::GetAt(cs_size_t pos)
 {
-	CS_ASSERT(id < m_nSize);
-	return *(m_pData + id);
+	CS_ASSERT(pos < m_nSize);
+	return *(m_pData + pos);
 }
 
 template <typename DataT>
-inline const DataT &CsDynamicArray<DataT>::GetAt(cs_size_t id) const
+inline DataT CsDynamicArray<DataT>::GetAt(cs_size_t pos) const
 {
-	CS_ASSERT(id < m_nSize);
-	return *(m_pData + id);
+	CS_ASSERT(pos < m_nSize);
+	return *(m_pData + pos);
 }
 
 template <typename DataT>
-inline DataT &CsDynamicArray<DataT>::operator[](cs_size_t id)
+inline DataT &CsDynamicArray<DataT>::operator[](cs_size_t pos)
 {
-	CS_ASSERT(id < m_nSize);
-	return *(m_pData + id);
+	CS_ASSERT(pos < m_nSize);
+	return *(m_pData + pos);
 }
 
 template <typename DataT>
-inline const DataT &CsDynamicArray<DataT>::operator[](cs_size_t id) const
+inline DataT CsDynamicArray<DataT>::operator[](cs_size_t pos) const
 {
-	CS_ASSERT(id < m_nSize);
-	return *(m_pData + id);
+	CS_ASSERT(pos < m_nSize);
+	return *(m_pData + pos);
 }
 
 template <typename DataT>
@@ -251,6 +271,97 @@ inline CsDynamicArray<DataT> &CsDynamicArray<DataT>::operator=(const CsDynamicAr
 }
 
 template <typename DataT>
+cs_bool CsDynamicArray<DataT>::operator==(const CsDynamicArray<DataT> &arr)
+{
+	if (this == &arr)
+	{
+		return true;
+	}
+	cs_size_t size = Size();
+	if (size != arr.Size())
+	{
+		return false;
+	}
+	for (cs_size_t i = 0; i < size; i++)
+	{
+		if (GetAt(i) != arr.GetAt(i))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+template <typename DataT>
+inline cs_uint CsDynamicArray<DataT>::ClassCode() const
+{
+	return CsDynamicArray<DataT>::CLASS_CODE;
+}
+
+template <typename DataT>
+inline cs_bool CsDynamicArray<DataT>::Serializable() const
+{
+	return true;
+}
+
+template <typename DataT>
+template<typename ArchiveT> 
+inline cs_bool CsDynamicArray<DataT>::Serialize(ArchiveT &archive) const
+{
+	if (!archive.Input())
+	{
+		return false;
+	}
+
+	archive.PushCode(ClassCode());
+	cs_size_t size = Size();
+	archive << size;
+
+	CsSerializeF<ArchiveT, DataT> fSerialize;
+	for (cs_size_t i = 0; i < size; i++)
+	{
+		if (!fSerialize(GetAt(i), archive))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+template <typename DataT>
+template<typename ArchiveT> 
+inline cs_bool CsDynamicArray<DataT>::Deserialize(ArchiveT &archive)
+{
+	if (!archive.Output())
+	{
+		return false;
+	}
+	if (archive.PopCode() != ClassCode())
+	{
+		return false;
+	}
+	cs_size_t size = 0;
+	archive >> size;
+	Clear(); // 清空所有数据
+	if (!Resize(size))
+	{
+		return false;
+	}
+
+	CsDeserializeF<ArchiveT, DataT> fDeserialize;
+	for (cs_size_t i = 0; i < size; i++)
+	{
+		if (!fDeserialize(GetAt(i), archive))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+template <typename DataT>
 inline cs_bool CsDynamicArray<DataT>::CopyMemoryFrom(cs_size_t first, cs_size_t len,
 	const DataT *pData, cs_size_t start)
 {
@@ -259,7 +370,7 @@ inline cs_bool CsDynamicArray<DataT>::CopyMemoryFrom(cs_size_t first, cs_size_t 
 	{
 		return false;
 	}
-	memcpy(m_pData + first, pData + start, sizeof(DataT)* len);
+	CsMemoryCopy(m_pData + first, pData + start, sizeof(DataT)* len);
 	return true;
 }
 
@@ -272,28 +383,8 @@ inline cs_bool CsDynamicArray<DataT>::CopyMemoryTo(cs_size_t start, cs_size_t le
 	{
 		return false;
 	}
-	memcpy(pData + first, m_pData + start, sizeof(DataT)* len);
+	CsMemoryCopy(pData + first, m_pData + start, sizeof(DataT)* len);
 	return true;
-}
-
-template <typename DataT>
-inline cs_bool CsDynamicArray<DataT>::ArrayCopy(const CsDynamicArray<DataT> &src, cs_size_t start, cs_size_t len,
-	CsDynamicArray<DataT> &dst, cs_size_t first)
-{
-	if (len + start > src.Size())
-	{
-		return false;
-	}
-	if (len + first > dst.Size())
-	{
-		dst.Resize(len + first);
-	}
-	//return src.CopyMemTo(dst.GetData() + first, start, len);
-	for (cs_size_t i = start, cs_size_t j = first;
-		i < len + start; i++, j++)
-	{
-		dst[j] = src[i];
-	}
 }
 
 #endif // _CORE_DYNAMIC_ARRAY_INLINE_

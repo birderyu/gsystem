@@ -27,5 +27,5 @@ CsBoolean::CsBoolean(const CsBoolean &val)
 
 cs_uint CsBoolean::ClassCode() const
 {
-	return CsBoolean::CLASSCODE;
+	return CsBoolean::CLASS_CODE;
 }

@@ -2,12 +2,12 @@
 
 cs_short CsShortInteger::MaxValue()
 {
-	return 32767;
+	return CS_INT16_MAX;
 }
 
 cs_short CsShortInteger::MinValue()
 {
-	return -32768;
+	return CS_INT16_MIN;
 }
 
 CsShortInteger CsShortInteger::ValueOf(const CsString &str)
@@ -38,5 +38,5 @@ CsShortInteger::~CsShortInteger()
 
 cs_uint CsShortInteger::ClassCode() const
 {
-	return CsShortInteger::CLASSCODE;
+	return CsShortInteger::CLASS_CODE;
 }

@@ -21,22 +21,7 @@
 #	define final
 #endif // for C++11
 
-#define CS_DECLARE_PUBLIC(Class) \
-	Class *const m_pPublic; \
-	inline Class* GetPublic() { return static_cast<Class *>(m_pPublic); } \
-	inline const Class* GetPublic() const { return static_cast<const Class *>(m_pPublic); } \
-	friend class Class;
-
-#define CS_DECLARE_PRIVATE(Class) \
-	Class##_Private *const m_pPrivate; \
-	inline Class##_Private* GetPrivate() { return reinterpret_cast<Class##_Private *>(m_pPrivate); } \
-	inline const Class##_Private* GetPrivate() const { return reinterpret_cast<const Class##_Private *>(m_pPrivate); } \
-	friend class Class##_Private;
-
-#define CS_PUBLIC(Class) Class *const pPublic = (Class*)GetPublic()
-#define CS_PRIVATE(Class) Class##_Private *const pPrivate = (Class##_Private*)GetPrivate()
-
-#define CS_BEGIN_NAMESPACE namespace CSuperNova {
+#define CS_BEGIN_NAMESPACE namespace CNova {
 #define CS_END_NAMESPACE }
 
 #ifdef __cplusplus
@@ -44,12 +29,11 @@
 #endif
 
 #  if defined (CS_CORE_BUILD_DLL)
-#    define CSYSTEM_EXPORT CS_DECL_EXPORT
+#    define CNOVA_EXPORT CS_DECL_EXPORT
 #  else 
-#    define CSYSTEM_EXPORT CS_DECL_IMPORT
+#    define CNOVA_EXPORT CS_DECL_IMPORT
 #  endif 
-
-#define CS_API CSYSTEM_EXPORT
+#define CS_API CNOVA_EXPORT
 
 #if defined(_DEBUG)
 #	include <assert.h>  
@@ -57,55 +41,6 @@
 #else
 #	define CS_ASSERT(e) do { } while ((false) && (e))
 #endif // 
-
-#define CS_DECLARE_OPERATOR_NEW_DELETE \
-public: \
-	static cs_pointer operator new(cs_size_t) \
-		throw(std::bad_alloc); \
-	static cs_void operator delete (cs_pointer);
-
-#define CS_IMPLEMENT_OPERATOR_NEW_DELETE(Class, Lock) \
-	CsMemoryPool m_gMemoryPool = CsMemoryPool(sizeof(##Class)); \
-	Lock m_gLock; \
-	cs_pointer Class##::operator new(cs_size_t size) \
-	{ \
-		CsAutoLock<##Lock> tLock(m_gLock); \
-		cs_pointer pBuf = m_gMemoryPool.Alloc(); \
-		if (!pBuf) \
-		{ \
-			throw std::bad_alloc(); \
-		} \
-		return pBuf; \
-	} \
-	cs_void Class##::operator delete(cs_pointer pFree) \
-	{ \
-		if (pFree == NULL) \
-		{ \
-			return; \
-		} \
-		CsAutoLock<##Lock> tLock(m_gLock); \
-		m_gMemoryPool.Free(pFree); \
-	} \
-
-#define CS_IMPLEMENT_OPERATOR_NEW_DELETE_NO_SAFE(Class) \
-	CsMemoryPool m_gMemoryPool = CsMemoryPool(sizeof(##Class)); \
-	cs_pointer Class##::operator new(cs_size_t size) \
-	{ \
-		cs_pointer pBuf = m_gMemoryPool.Alloc(); \
-		if (!pBuf) \
-		{ \
-			throw std::bad_alloc(); \
-		} \
-		return pBuf; \
-	} \
-	cs_void Class##::operator delete(cs_pointer pFree) \
-	{ \
-		if (pFree == NULL) \
-		{ \
-			return; \
-		} \
-		m_gMemoryPool.Free(pFree); \
-	} \
 
 #if defined (i386) || defined (__i386__) || defined (_M_IX86) || \
 	defined (vax) || defined (__alpha) || defined (__LITTLE_ENDIAN__) || \
@@ -121,11 +56,28 @@ public: \
 
 #define CS_POINTER_ADDRESS_SIZE	4
 
-#define CS_INT32_MAX 0x7fffffff
-#define CS_INT64_MAX 0x7fffffffffffffffLL
+#define CS_INT8_MAX		0x7f
+#define CS_INT8_MIN		(-0x80)
+#define CS_UINT8_MAX	0xff
 
-#define CS_LIST_MAX_SIZE 0xfffffffe
-#define CS_LIST_NULL_POS 0xffffffff
+#define CS_INT16_MAX	0x7fff
+#define CS_INT16_MIN	(-0x8000)
+#define CS_UINT16_MAX	0xffff
+
+#define CS_INT32_MAX	0x7fffffff
+#define CS_INT32_MIN	(-0x7fffffff - 1)
+#define CS_UINT32_MAX	0xffffffffU
+
+#define CS_INT32L_MAX	0x7fffffffL
+#define CS_INT32L_MIN	(-0x7fffffffL - 1)
+#define CS_UINT32L_MAX	0xffffffffUL
+
+#define CS_INT64_MAX	0x7fffffffffffffffLL
+#define CS_INT64_MIN	(-0x7fffffffffffffffLL - 1)
+#define CS_UINT64_MAX	0xffffffffffffffffULL
+
+#define CS_LIST_MAX_SIZE (CS_UINT32_MAX - 1)
+#define CS_LIST_NULL_POS CS_UINT32_MAX
 
 #ifdef __cplusplus__
 extern "C"{

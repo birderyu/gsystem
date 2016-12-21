@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Supernova: A quick, micro library of C++
+** CNova: A quick, micro library of C++
 **
 ** @file	CsObject.h
 ** @brief	基础对象类型的定义
@@ -20,7 +20,6 @@
 
 class CsObject;
 class CsString;
-class CsBytes;
 typedef CsSharedPointer<CsObject> CsObjectP;
 
 /****************************************************************************
@@ -31,15 +30,6 @@ typedef CsSharedPointer<CsObject> CsObjectP;
 ** @brief		基础对象类型
 ** @module		CsCore
 ** @property	CLASSCODE
-** @method		Clone
-** @method		Boxing
-** @method		Unboxing
-** @method		ToString
-** @method		ClassCode
-** @method		HashCode
-** @method		Equals
-** @method		Serialize
-** @method		Deserialize
 **
 ** 基础对象类型是所有资源对象的基类型，对于非资源型对象或内核对象，则不推荐继承该类。
 **
@@ -47,7 +37,7 @@ typedef CsSharedPointer<CsObject> CsObjectP;
 class CS_API CsObject
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_OBJECT, };
+	enum { CLASS_CODE = CLASS_CODE_OBJECT, };
 
 public:
 	/****************************************************************************
@@ -153,16 +143,31 @@ public:
 	**
 	** CsObject
 	**
-	** @name		Serialize
-	** @brief		序列化
-	** @param[out]	字节流
-	** @return		序列化是否成功
-	** @see			CsBytes
+	** @name	Serializable
+	** @brief	当前对象是否支持序列化
+	** @return	若支持序列化，则返回true，否则返回false
 	**
-	** 将当前对象的数据序列化到字节流中
+	** 若对象支持序列化，则应提供序列化（Serialize）和反序列化（Deserialize）的方法，
+	** 这两个方法是模板方法（template），需要传入序列化的档案类（ArchiveT），并需要
+	** 模块CsSerialization的支持。
 	**
 	****************************************************************************/
-	virtual cs_bool Serialize(CsBytes &) const;
+	virtual cs_bool Serializable() const;
+
+	/****************************************************************************
+	**
+	** CsObject
+	**
+	** @name		Serialize
+	** @brief		序列化
+	** @param[out]	归档类
+	** @return		序列化是否成功
+	** @see			CsArchive
+	**
+	** 将当前对象的数据序列化到档案中，需要序列化模块CsSerialization的支持
+	**
+	****************************************************************************/
+	//template<typename ArchiveT> cs_bool Serialize(ArchiveT &) const;
 
 	/****************************************************************************
 	**
@@ -170,14 +175,14 @@ public:
 	**
 	** @name		Deserialize
 	** @brief		反序列化
-	** @param[in]	字节流
+	** @param[in]	归档类
 	** @return		反序列化是否成功
-	** @see			CsBytes
+	** @see			CsArchive
 	**
-	** 将字节流反序列化为当前对象的数据
+	** 将档案反序列化为当前对象的数据，需要序列化模块CsSerialization的支持
 	**
 	****************************************************************************/
-	virtual cs_bool Deserialize(CsBytes &);
+	//template<typename ArchiveT> cs_bool Deserialize(ArchiveT &);
 };
 
 #endif // _CORE_OBJECT_H_

@@ -60,7 +60,7 @@ struct CsReadBlackTreeNode
 **
 ****************************************************************************/
 template<typename KeyT, typename ValueT,
-	typename CompareT = CsCompareF<KeyT>,
+	typename CompareT = CsCompareToF<KeyT>,
 	typename NodeT = CsReadBlackTreeNode<KeyT, ValueT> >
 class CsReadBlackTree 
 	: public CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>
@@ -76,15 +76,18 @@ public:
 
 protected:
 	// 插入修复
-	cs_void InsertFixUp(NodeT *node);
+	cs_void InsertFixUp(NodeT *);
 	// 删除修复
-	cs_void DeleteFixUp(NodeT *node);
+	cs_void DeleteFixUp(NodeT *);
 	// 左旋
-	cs_void RotateLeft(NodeT *node);
+	cs_void RotateLeft(NodeT *);
 	// 右旋
-	cs_void RotateRight(NodeT *node);
+	cs_void RotateRight(NodeT *);
 };
 
 #include "CsReadBlackTree.inl"
+
+#undef CS_RED_BLACK_TREE_NODE_BLACK
+#undef CS_RED_BLACK_TREE_NODE_RED
 
 #endif // _CORE_RED_BLACK_TREE_H_

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Supernova
+** CNova: A quick, micro library of C++
 **
 ** @author	Birderyu
 ** @contact	https://github.com/birderyu
@@ -15,14 +15,10 @@
 
 #include "CsObject.h"
 #include "CsStructure.h"
-
-#include "CsSharedPointer.h"
-#include "CsStringList.h"
+#include "CsStringStore.h"
 #include <string>
-#include "CsString_Ex.h"
-template class CS_API CsSharedPointer<CsString_Ex>;
 
-class CsString_Ex;
+class CsStringList;
 
 /****************************************************************************
 **
@@ -46,10 +42,17 @@ class CsString_Ex;
 **
 ****************************************************************************/
 class CS_API CsString final 
-	: public CsObject
-	, public CsListT<CsString>
+	: public CsListT<CsString>
+	, public CsObject
 {
-	friend class CsStringList;
+public:
+	enum { CLASS_CODE = CLASS_CODE_STRING, };
+
+public:
+	class Iterator
+	{
+
+	};
 
 public:
 	static CsString FromNum(cs_small nNum, cs_int nBase = 10);
@@ -69,48 +72,32 @@ public:
 	static CsString FromStdString(const std::string &sStr);
 
 public:
-	class Iterator
-	{
-
-	};
-
-public:
 	/****************************************************************************
 	**
 	** CsString
 	**
-	** @name	构造函数（constructor）
-	** @brief	默认构造函数
+	** @name	CsString
+	** @brief	构造函数（constructor）
 	**
 	****************************************************************************/
 	CsString();
-	CsString(const cs_char cChar);
+	CsString(cs_char cChar);
 	CsString(const cs_char *pStr);
 	CsString(const CsString &sStr);
+	~CsString();
 
 	cs_size_t Size() const;
 	cs_char GetAt(cs_size_t id) const;
 	cs_bool Equals(const CsString &, cs_bool bIsSensitive = true) const;
 
 	friend CS_API CsString operator+(const CsString &s1, const CsString &s2);
-	//friend CS_API cs_bool operator==(const CsString &s1, const CsString &s2);
 
-	/// 运算符
+	/// 运算符重载
 	cs_bool operator == (const CsString &sStr) const;
 	CsString &operator=(const CsString &sStr);
 	CsString &operator+=(const CsString &sStr);
 	cs_char operator[](cs_size_t id) const;
 
-	/****************************************************************************
-	**
-	** CsString
-	**
-	** @name		ToShort
-	** @brief		转换成短整型数字
-	** @param[out]	bIsOk: 转换是否成功，若不想获取该信息，则不传入该参数，或传入一个NULL
-	** @return		转换成的整型值
-	**
-	****************************************************************************/
 	cs_small ToSmall(cs_bool *bIsOk = NULL) const;
 	cs_usmall ToUSmall(cs_bool *bIsOk = NULL) const;
 	cs_short ToShort(cs_bool *bIsOk = NULL) const;
@@ -135,28 +122,30 @@ public:
 	CsString ToLower() const;
 	cs_cstring CString() const;
 	CsString &Replace(const CsString &from, const CsString &to, cs_bool bIsSensitive = true);
+ 
 	// bIgnoreEmpty：是否忽略空格
 	// bIsSensitive：大小写是否敏感
 	CsStringList Split(const CsString &sSep, cs_bool bIgnoreEmpty = false, cs_bool bIsSensitive = true) const;
-	cs_int Find(cs_char c, cs_size_t start = 0, cs_bool bIsSensitive = true) const;
-	cs_int Find(const CsString &str, cs_size_t start = 0, cs_bool bIsSensitive = true) const;
+	cs_size_t Find(cs_char c, cs_size_t start = 0, cs_bool bIsSensitive = true) const;
+	cs_size_t Find(const CsString &str, cs_size_t start = 0, cs_bool bIsSensitive = true) const;
 
 	CsString SubString(cs_size_t start, cs_size_t length) const;
 
 	// 继承自Object的方法
-	CsObject *Boxing() const;
+	const CsObject *Boxing() const;
 	cs_uint ClassCode() const;
 	CsString ToString() const;
 	CsString Format() const;
 
-public:
-	enum { CLASSCODE = CORE_CLASSCODE_STRING, };
-
 private:
-	CsSharedPointer<CsString_Ex> m_pString_Ex;
+	cs_bool IsReference() const;
+	cs_void Free();
+	CsString &ToValue();
+	CsStringStore::TYPE GetTypeBySize(cs_size_t) const;
+
+	CsStringStore m_tStringStore;
 };
 
 CS_API CsString operator+(const CsString &s1, const CsString &s2);
-//CS_API cs_bool operator==(const CsString &s1, const CsString &s2);
 
 #endif // _CORE_STRING_H_

@@ -1,5 +1,5 @@
-﻿#ifndef _CSCORE_CSUDPSOCKET_PRIVATE_H_
-#define _CSCORE_CSUDPSOCKET_PRIVATE_H_
+﻿#ifndef _CORE_UDP_SOCKET_EX_H_
+#define _CORE_UDP_SOCKET_EX_H_
 
 #include "CsSocket_Ex.h"
 
@@ -15,4 +15,4 @@ public:
 	cs_int RecvFrom(cs_char *pBufData, cs_int nMaxLen, CsSockAddress_Ex *pPeer);
 };
 
-#endif // _CSCORE_CSUDPSOCKET_PRIVATE_H_
+#endif // _CORE_UDP_SOCKET_EX_H_

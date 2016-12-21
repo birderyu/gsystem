@@ -1,179 +1,74 @@
 #include "CsString.h"
-#include "CsString_Ex.h"
+#include "CsStringList.h"
+#include "CsCStringHelper.h"
 
 CsString::CsString()
-: m_pString_Ex(new CsString_Ex())
 {
-
+	m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+	m_tStringStore.m_sSmallStr.Initialize();
 }
 
-CsString::CsString(const cs_char cChar)
-: m_pString_Ex(new CsString_Ex(cChar))
+CsString::CsString(cs_char cChar)
 {
-
+	m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+	m_tStringStore.m_sSmallStr.Initialize(cChar);
 }
 
 CsString::CsString(const cs_char *pStr)
-: m_pString_Ex(new CsString_Ex(pStr))
 {
-
+	cs_size_t size = CsCStringHelper::Length(pStr);
+	if (size <= 0)
+	{
+		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+		m_tStringStore.m_sSmallStr.Initialize();
+	}
+	else if (size <= CsSmallStringStore::MAX_SIZE)
+	{
+		// 小字符串
+		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+		m_tStringStore.m_sSmallStr.Initialize(pStr, size);
+	}
+	else if (size <= CsNormalStringStore::MAX_SIZE)
+	{
+		// 普通字符串
+		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
+		m_tStringStore.m_sNormalStr.Initialize(pStr, size);
+	}
+	else
+	{
+		// 大字符串
+		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_BIG;
+		// TODO
+	}
 }
 
 CsString::CsString(const CsString &sStr)
-: m_pString_Ex(sStr.m_pString_Ex)
 {
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-}
-
-CsObject *CsString::Boxing() const
-{
-	return new CsString(*this);
-}
-
-cs_uint CsString::ClassCode() const
-{
-	return CsString::CLASSCODE;
-}
-
-CsString CsString::ToString() const
-{
-	return *this;
-}
-
-cs_bool CsString::operator == (const CsString &sStr) const
-{
-	return *m_pString_Ex == *sStr.m_pString_Ex;
-}
-
-CsString &CsString::operator+=(const CsString &sStr)
-{
-	if (m_pString_Ex.IsShared())
+	m_tStringStore.m_nType = sStr.m_tStringStore.m_nType;
+	switch (m_tStringStore.m_nType)
 	{
-		m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		m_tStringStore.m_sSmallStr.Initialize(sStr.m_tStringStore.m_sSmallStr);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		m_tStringStore.m_sNormalStr.Initialize(sStr.m_tStringStore.m_sNormalStr);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+		m_tStringStore.m_sSmallStr.Initialize();
+		break;
 	}
-	*m_pString_Ex += *sStr.m_pString_Ex;
-	return *this;
 }
 
-CsString &CsString::operator=(const CsString &sStr)
+CsString::~CsString()
 {
-	if (m_pString_Ex.IsShared())
-	{
-		//m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
-		// 由于下一步就要做拷贝操作，因此只需要重置一个空字符串即可
-		m_pString_Ex.Reset(new CsString_Ex());
-	}
-	*m_pString_Ex = *sStr.m_pString_Ex;
-	return *this;
-}
-
-cs_char CsString::operator[](cs_size_t id) const
-{
-	return m_pString_Ex->GetAt(id);
-}
-
-CsString CsString::FromNum(cs_small nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_small>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_usmall nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_usmall>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_short nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_short>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_ushort nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_ushort>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_int nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_int>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_uint nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_uint>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_long nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_long>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_ulong nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_ulong>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_longlong nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_longlong>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_ulonglong nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_ulonglong>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_float nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_float>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_double nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_double>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
-}
-
-CsString CsString::FromNum(cs_decimal nNum, cs_int nBase)
-{
-	CsString sStr;
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	CsString_Ex::FromNum<cs_decimal>(nNum, nBase, *sStr.m_pString_Ex);
-	return sStr;
+	Free();
 }
 
 CsString CsString::FromStdString(const std::string &sStr)
@@ -181,205 +76,346 @@ CsString CsString::FromStdString(const std::string &sStr)
 	return CsString(sStr.c_str());
 }
 
-cs_small CsString::ToSmall(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_small>(bIsOk);
-}
-
-cs_usmall CsString::ToUSmall(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_usmall>(bIsOk);
-}
-
-cs_short CsString::ToShort(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_short>(bIsOk);
-}
-
-cs_ushort CsString::ToUShort(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_ushort>(bIsOk);
-}
-
-cs_int CsString::ToInt(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_int>(bIsOk);
-}
-
-cs_uint CsString::ToUInt(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_uint>(bIsOk);
-}
-
-cs_long CsString::ToLong(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_long>(bIsOk);
-}
-
-cs_ulong CsString::ToULong(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_ulong>(bIsOk);
-}
-
-cs_longlong CsString::ToLongLong(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_longlong>(bIsOk);
-}
-
-cs_ulonglong CsString::ToULongLong(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_ulonglong>(bIsOk);
-}
-
-cs_float CsString::ToFloat(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_float>(bIsOk);
-}
-
-cs_double CsString::ToDouble(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_double>(bIsOk);
-}
-
-cs_decimal CsString::ToDecimal(cs_bool *bIsOk) const
-{
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->ToNum<cs_decimal>(bIsOk);
-}
-
 cs_bool CsString::IsEmpty() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-
-	return m_pString_Ex->IsEmpty();
+	return Size() == 0;
 }
 
 CsString CsString::Trim() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	sStr.m_pString_Ex->MakeTrim();
+	if (sStr.IsEmpty())
+	{
+		return sStr;
+	}
+
+	switch (sStr.m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+	{
+		sStr.m_tStringStore.m_sSmallStr.MakeTrim();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+	{
+		sStr.m_tStringStore.m_sNormalStr.MakeTrim();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
 	return sStr;
 }
 
 CsString CsString::TrimLeft() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	sStr.m_pString_Ex->MakeTrimLeft();
+	if (sStr.IsEmpty())
+	{
+		return sStr;
+	}
+
+	switch (sStr.m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+	{
+		sStr.m_tStringStore.m_sSmallStr.MakeTrimLeft();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+	{
+		sStr.m_tStringStore.m_sNormalStr.MakeTrimLeft();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
 	return sStr;
 }
 
 CsString CsString::TrimRight() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	sStr.m_pString_Ex->MakeTrimRight();
+	if (sStr.IsEmpty())
+	{
+		return sStr;
+	}
+
+	switch (sStr.m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+	{
+		sStr.m_tStringStore.m_sSmallStr.MakeTrimRight();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+	{
+		sStr.m_tStringStore.m_sNormalStr.MakeTrimRight();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+
 	return sStr;
 }
 
 CsString CsString::ToUpper() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	sStr.m_pString_Ex->MakeUpper();
+	if (sStr.IsEmpty())
+	{
+		return sStr;
+	}
+
+	switch (sStr.m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+	{
+		sStr.m_tStringStore.m_sSmallStr.MakeUpper();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+	{
+		sStr.m_tStringStore.m_sNormalStr.MakeUpper();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+
 	return sStr;
 }
 
 CsString CsString::ToLower() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
 	CsString sStr(*this);
-	CS_ASSERT(!sStr.m_pString_Ex.IsNull());
-	sStr.m_pString_Ex->MakeLower();
+	if (sStr.IsEmpty())
+	{
+		return sStr;
+	}
+
+	switch (sStr.m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+	{
+		sStr.m_tStringStore.m_sSmallStr.MakeLower();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+	{
+		sStr.m_tStringStore.m_sNormalStr.MakeLower();
+		return sStr;
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+
 	return sStr;
 }
 
 cs_cstring CsString::CString() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->CString();
+	if (IsEmpty())
+	{
+		return "";
+	}
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		return m_tStringStore.m_sSmallStr.CString();
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		return m_tStringStore.m_sNormalStr.CString();
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+	return "";
 }
 
 cs_size_t CsString::Size() const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->Length();
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		return m_tStringStore.m_sSmallStr.Size();
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		return m_tStringStore.m_sNormalStr.Size();
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+	return 0;
 }
 
-cs_char CsString::GetAt(cs_size_t id) const
+cs_char CsString::GetAt(cs_size_t pos) const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return m_pString_Ex->GetAt(id);
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		return m_tStringStore.m_sSmallStr.GetAt(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		return m_tStringStore.m_sNormalStr.GetAt(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
 }
 
 CsString &CsString::Replace(const CsString &from, const CsString &to, cs_bool bIsSensitive)
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	CS_ASSERT(!from.m_pString_Ex.IsNull());
-	CS_ASSERT(!to.m_pString_Ex.IsNull());
-
-	if (m_pString_Ex.IsShared())
-	{
-		m_pString_Ex.Reset(new CsString_Ex(*m_pString_Ex));
-	}
-
-	if (Size() <= 0 || from.Size() <= 0)
+	cs_size_t size = Size();
+	cs_size_t from_size = from.Size();
+	if (size <= 0 || from_size <= 0)
 	{
 		return *this;
 	}
 
 	cs_cstring cfrom = from.CString();
 	cs_cstring cto = to.CString();
-	cs_size_t to_len = to.Size();
+	cs_size_t to_size = to.Size();
+
 	if (!cfrom ||
-		(!cto && to_len >= 0))
+		(!cto && to_size >= 0))
 	{
 		return *this;
 	}
 
-	m_pString_Ex->Replace(cfrom, from.Size(), cto, to_len, bIsSensitive);
+	// 转换为值类型
+	ToValue();
+
+	// 预算一下替换过后的长度，长度按尽量可能大去计算
+	cs_size_t estimate_size = size;
+	if (from_size < to_size)
+	{
+		// 有可能会被扩容
+		estimate_size = size * to_size / from_size + 1;
+	}
+	CsStringStore::TYPE nEstimateType = GetTypeBySize(estimate_size);
+
+	if (nEstimateType == CsStringStore::STRING_STORE_TYPE_VALUE_SMALL)
+	{
+		// 替换之后为小字符串
+		cs_char cStr[CS_SMALL_STRING_MAX_SIZE];
+		cs_size_t out_len = 0;
+		if (!CsCStringHelper::Replace(CString(), size, cfrom, from_size, cto, to_size, bIsSensitive,
+			cStr, out_len))
+		{
+			return *this;
+		}
+		Free();
+		m_tStringStore.m_nType = nEstimateType;
+		m_tStringStore.m_sSmallStr.Initialize(cStr, out_len);
+		return *this;
+	}
+	if (nEstimateType != CsStringStore::STRING_STORE_TYPE_VALUE_BIG)
+	{
+		// 替换之后为普通字符串
+		cs_char *pStr = (cs_char*)CsMalloc((estimate_size + 1) * sizeof(cs_char));
+		cs_size_t out_len = 0;
+		if (!CsCStringHelper::Replace(CString(), size, cfrom, from_size, cto, to_size, bIsSensitive,
+			pStr, out_len))
+		{
+			CsFree(pStr);
+			return *this;
+		}
+		Free();
+		m_tStringStore.m_nType = nEstimateType;
+		m_tStringStore.m_sNormalStr.m_pStr = pStr;
+		m_tStringStore.m_sNormalStr.m_nSize = out_len;
+		return *this;
+	}
+	else
+	{
+		// 替换之后为大字符串
+		// TODO
+	}
 	return *this;
 }
 
 CsStringList CsString::Split(const CsString &sSep, cs_bool bIgnoreEmpty, cs_bool bIsSensitive) const
 {
+	// TODO
 	CsStringList t;
 	return t;
 }
 
-cs_int CsString::Find(cs_char c, cs_size_t start, cs_bool bIsSensitive) const
+cs_size_t CsString::Find(cs_char c, cs_size_t start, cs_bool bIsSensitive) const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return -1;
+	// TODO
+	return NULL_POS;
 }
 
-cs_int CsString::Find(const CsString &str, cs_size_t start, cs_bool bIsSensitive) const
+cs_size_t CsString::Find(const CsString &str, cs_size_t start, cs_bool bIsSensitive) const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return -1;
+	// TODO
+	return NULL_POS;
 }
 
 CsString CsString::SubString(cs_size_t start, cs_size_t length) const
 {
-	CS_ASSERT(!m_pString_Ex.IsNull());
-	return "";
+	return CsString();
 }
 
 cs_bool CsString::Equals(const CsString &str, cs_bool bIsSensitive) const
@@ -391,16 +427,3 @@ cs_bool CsString::Equals(const CsString &str, cs_bool bIsSensitive) const
 	return false;
 }
 
-CsString operator+(const CsString &s1, const CsString &s2)
-{
-	CsString sStr(s1);
-	sStr += s2;
-	return sStr;
-}
-
-/*
-cs_bool operator==(const CsString &s1, const CsString &s2)
-{
-	return s1.operator==(s2);
-}
-*/

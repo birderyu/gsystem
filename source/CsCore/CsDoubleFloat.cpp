@@ -78,7 +78,7 @@ CsDoubleFloat::CsDoubleFloat(const CsDoubleFloat &val)
 
 cs_uint CsDoubleFloat::ClassCode() const
 {
-	return CsDoubleFloat::CLASSCODE;
+	return CsDoubleFloat::CLASS_CODE;
 }
 
 cs_bool CsDoubleFloat::IsNaN() const

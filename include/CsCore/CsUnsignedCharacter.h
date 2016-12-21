@@ -7,7 +7,7 @@ class CS_API CsUnsignedCharacter
 	: public CsNumber<cs_uchar>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_UNSIGNED_CHARACTER, };
+	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_CHARACTER, };
 
 public:
 	CsUnsignedCharacter(cs_uchar val = '\0');

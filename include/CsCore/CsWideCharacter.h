@@ -7,7 +7,7 @@ class CS_API CsWideCharacter
 	: public CsPackage<cs_wchar>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_WIND_CHARACTER, };
+	enum { CLASS_CODE = CLASS_CODE_WIND_CHARACTER, };
 
 public:
 	CsWideCharacter(cs_wchar val);

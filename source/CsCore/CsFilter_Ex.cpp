@@ -1,5 +1,6 @@
 #include "CsFilter_Ex.h"
 #include "CsString.h"
+#include "CsStringList.h"
 #include "CsListStack.h"
 
 // 支持的联合类型，按照优先级排列

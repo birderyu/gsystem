@@ -7,7 +7,7 @@ class CS_API CsLongDoubleFloat
 	: public CsNumber<cs_longdouble>
 {
 public:
-	enum { CLASSCODE = CORE_CLASSCODE_LONG_DOUBLE_FLOAT, };
+	enum { CLASS_CODE = CLASS_CODE_LONG_DOUBLE_FLOAT, };
 
 public:
 	static cs_longdouble MaxValue();

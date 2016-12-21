@@ -6,9 +6,12 @@
 #include "CsArray.h"
 
 template <typename DataT, cs_size_t ARRAY_SIZE>
-class CsStaticArray
+class CsStaticArray final
 	: public CsArray<DataT>
 {
+public:
+	enum { CLASS_CODE = CLASS_CODE_STATIC_ARRAY, };
+
 public:
 	CsStaticArray();
 	CsStaticArray(const DataT &);
@@ -16,10 +19,16 @@ public:
 	cs_size_t Size() const;
 
 	DataT &GetAt(cs_size_t);
-	const DataT &GetAt(cs_size_t) const;
+	DataT  GetAt(cs_size_t) const;
 
 	DataT &operator[](cs_size_t);
-	const DataT &operator[](cs_size_t) const;
+	DataT  operator[](cs_size_t) const;
+
+	/// 
+	cs_uint ClassCode() const;
+	cs_bool Serializable() const;
+	template<typename ArchiveT> cs_bool Serialize(ArchiveT &) const;
+	template<typename ArchiveT> cs_bool Deserialize(ArchiveT &);
 
 private:
 	DataT m_pData[ARRAY_SIZE];

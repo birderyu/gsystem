@@ -1,5 +1,5 @@
-﻿#ifndef _CORE_SOCKETADDRESS_PRIVATE_H_
-#define _CORE_SOCKETADDRESS_PRIVATE_H_
+﻿#ifndef _CORE_SOCKETADDRESS_EX_H_
+#define _CORE_SOCKETADDRESS_EX_H_
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -56,4 +56,4 @@ private:
 	sockaddr_in m_tSocketAddr;
 };
 
-#endif // _CORE_SOCKETADDRESS_PRIVATE_H_
+#endif // _CORE_SOCKETADDRESS_EX_H_

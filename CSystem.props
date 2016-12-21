@@ -21,15 +21,18 @@
     <PRV_DIR>$(SolutionDir)\private\</PRV_DIR>
     <THD_DIR>$(SolutionDir)\thirds\</THD_DIR>
     <INC_DIRS>$(INC_DIR);$(INC_DIRS);</INC_DIRS>
-    <INC_DIRS>$(INC_DIR)CsCore\;$(PRV_DIR)CsCore\;$(THD_DIR)CsCore\;$(INC_DIRS);</INC_DIRS>
-    <THD_DIR>$(SolutionDir)\thirds\</THD_DIR>
-    <IncludePath>$(THD_DIR)include\;$(INC_DIRS);$(IncludePath);</IncludePath>
-    <LibraryPath>$(THD_DIR)lib\;$(LibraryPath)</LibraryPath>
+    <INC_DIRS>$(INC_DIR)CsCore\;$(INC_DIRS);</INC_DIRS>
+    <INC_DIRS>$(INC_DIR)CsGeometry\;$(INC_DIRS);</INC_DIRS>
+    <INC_DIRS>$(INC_DIR)CsDataTable\;$(INC_DIRS);</INC_DIRS>
+    <INC_DIRS>$(INC_DIR)CsFile\;$(INC_DIRS);</INC_DIRS>
+    <INC_DIRS>$(INC_DIR)CsSerialization\;$(INC_DIRS);</INC_DIRS>
+    <IncludePath>$(INC_DIRS);$(IncludePath);</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
     <ClCompile>
-      <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
 

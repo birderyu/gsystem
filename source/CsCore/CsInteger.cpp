@@ -2,12 +2,12 @@
 
 cs_int CsInteger::MaxValue()
 {
-	return 2147483647;
+	return CS_INT32_MAX;
 }
 
 cs_int CsInteger::MinValue()
 {
-	return -2147483647 - 1;
+	return CS_INT32_MIN;
 }
 
 CsInteger CsInteger::ValueOf(const CsString &str)
@@ -33,5 +33,5 @@ CsInteger::CsInteger(const CsInteger &val)
 
 cs_uint CsInteger::ClassCode() const
 {
-	return CsInteger::CLASSCODE;
+	return CsInteger::CLASS_CODE;
 }

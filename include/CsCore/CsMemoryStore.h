@@ -15,7 +15,7 @@ class CS_API CsMemoryStore
 	struct CsMemCell
 	{
 		//ÄÚ´æ¿é
-		CsBlock m_tBlock;
+		CsBlock<cs_byte> m_tBlock;
 
 		//¹â±ê
 		cs_size_t m_nCursor;
