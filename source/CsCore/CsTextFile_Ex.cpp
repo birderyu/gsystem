@@ -57,14 +57,15 @@ cs_bool CsTextFile_Ex::Read(cs_size_t size, CsString &str)
 	{
 		return false;
 	}
-	cs_cstring c = fgets(str.Cursor(old_size), size + 1, m_pFileStream);
-	if (c == NULL)
+
+	cs_size_t real_add_size = fread(str.Cursor(old_size), sizeof(cs_char), size, m_pFileStream);
+	if (real_add_size == 0)
 	{
 		str.Resize(old_size);
 		return false;
 	}
 
-	return true;
+	return str.Resize(old_size + real_add_size);
 }
 
 cs_bool CsTextFile_Ex::ReadAll(CsString &str)
@@ -110,12 +111,11 @@ cs_bool CsTextFile_Ex::Write(const CsString &str)
 	{
 		return false;
 	}
-
-	if (EOF == fputs(str.CString(), m_pFileStream))
+	if (0 == fwrite(str.CString(), sizeof(cs_char), str.Size() + 1, m_pFileStream))
 	{
 		return false;
 	}
-	return false;
+	return true;
 }
 
 cs_cstring CsTextFile_Ex::OpenMode() const

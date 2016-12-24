@@ -74,12 +74,39 @@ cs_bool CsBinaryFile_Ex::Read(cs_size_t size, CsBytes &bytes)
 
 cs_bool CsBinaryFile_Ex::ReadAll(CsBytes &bytes)
 {
-	if (EndOfFile() || !CanRead())
+	if (!Valid() || !CanRead())
 	{
 		return false;
 	}
-	// TODO
-	return false;
+
+	// 旧的文件游标备份
+	cs_long old_tell = Tell();
+
+	if (!Seek(0, CsFile::SEEK_MODE_END))
+	{
+		// 还原游标
+		Seek(old_tell, CsFile::SEEK_MODE_START);
+		return false;
+	}
+
+	cs_long all_size = Tell();
+	if (all_size < 0)
+	{
+		// 还原游标
+		Seek(old_tell, CsFile::SEEK_MODE_START);
+		return false;
+	}
+
+	// 将游标设置到初始位置
+	Rewind();
+	if (!Read(all_size, bytes))
+	{
+		// 还原游标
+		Seek(old_tell, CsFile::SEEK_MODE_START);
+		return false;
+	}
+
+	return true;
 }
 
 cs_bool CsBinaryFile_Ex::Write(const CsBytes &bytes)

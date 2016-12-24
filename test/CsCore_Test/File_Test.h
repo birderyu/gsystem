@@ -5,18 +5,22 @@
 
 cs_void TestTextFile()
 {
-	CsString sFileName("C:\\Users\\birde\\Desktop\\新建文本文档 (2).txt");
+	CsString sFileName("C:\\Users\\birde\\Desktop\\write.png");
 
-	CsTextFile tFile(sFileName);
+	CsBinaryFile tFile(sFileName);
 	tFile.Open(CsFile::ONLY_READ);
 
-	CsString str;
-	tFile.ReadAll(str);
+	CsBytes bytes;
+	tFile.ReadAll(bytes);
+
+	CsString sFileName2("C:\\Users\\birde\\Desktop\\write_copy.png");
+	CsBinaryFile tFile2(sFileName2);
+	tFile2.Open(CsFile::ONLY_WIRTE);
+	tFile2.Write(bytes);
 
 	tFile.Close();
+	tFile2.Close();
 
-	cs_size_t s = str.Size();
-	cs_cstring cs = str.CString();
 
 	cs_int stop = 1;
 	stop++;
