@@ -19,10 +19,13 @@ public:
 	cs_size_t Size() const;
 
 	DataT &GetAt(cs_size_t);
-	DataT  GetAt(cs_size_t) const;
+	const DataT &GetAt(cs_size_t) const;
 
 	DataT &operator[](cs_size_t);
-	DataT  operator[](cs_size_t) const;
+	const DataT &operator[](cs_size_t) const;
+
+	DataT *operator+=(cs_size_t);
+	const DataT *operator+=(cs_size_t) const;
 
 	/// 
 	cs_uint ClassCode() const;

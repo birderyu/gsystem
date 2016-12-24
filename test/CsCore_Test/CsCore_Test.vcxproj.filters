@@ -47,5 +47,14 @@
     <ClInclude Include="RBTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Array_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="File_Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

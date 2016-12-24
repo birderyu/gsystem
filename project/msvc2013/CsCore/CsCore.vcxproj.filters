@@ -76,12 +76,6 @@
     <Filter Include="头文件\Pattern">
       <UniqueIdentifier>{087959c5-fcd7-4766-9afa-ff103fa1e8d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\File">
-      <UniqueIdentifier>{d0951fd7-c85a-420b-b570-1e4a4f117f8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\File">
-      <UniqueIdentifier>{80c5c413-7397-48ce-9f11-6777a872ad36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Json">
       <UniqueIdentifier>{fb346320-596c-4403-942e-e4a5166dec78}</UniqueIdentifier>
     </Filter>
@@ -139,9 +133,6 @@
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsVariant.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsFilter.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsAtomic.h">
@@ -273,9 +264,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsGraph.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsClassCode.h">
-      <Filter>头文件\Global</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsSocket_Ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
@@ -289,9 +277,6 @@
       <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\CsCore\CsUdpSocket_Ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsFilter_Ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsPackage.h">
@@ -420,53 +405,35 @@
     <ClInclude Include="..\..\..\include\CsCore\CsSerialize.h">
       <Filter>头文件\Template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBytePool.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsDocument.h">
-      <Filter>头文件\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsFile.h">
-      <Filter>头文件\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMemoryFile.h">
-      <Filter>头文件\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsBinaryDocument_Ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsDocument_Ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsFile_Ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsMemoryFile_Ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\CsCore\CsTextDocument_Ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsJsonArray.h">
       <Filter>头文件\Json</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h">
       <Filter>头文件\Json</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsJsonDocument.h">
-      <Filter>头文件\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsTextDocument.h">
-      <Filter>头文件\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsBinaryDocument.h">
-      <Filter>头文件\File</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsStringBuffer.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsNew.h">
       <Filter>头文件\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsFile_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsBinaryFile_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsTextFile.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsBinaryFile.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsFile.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsTextFile_Ex.h">
+      <Filter>头文件\_private</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -489,9 +456,6 @@
       <Filter>源文件\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsVariant.cpp">
-      <Filter>源文件\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsFilter.cpp">
       <Filter>源文件\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsLock.cpp">
@@ -543,9 +507,6 @@
       <Filter>源文件\_private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsUdpSocket_Ex.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsFilter_Ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsBoolean.cpp">
@@ -647,32 +608,26 @@
     <ClCompile Include="..\..\..\source\CsCore\CsRegister.cpp">
       <Filter>源文件\Template</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsBinaryDocument_Ex.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsTextDocument_Ex.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsDocument_Ex.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsDocument.cpp">
-      <Filter>源文件\File</Filter>
+    <ClCompile Include="..\..\..\source\CsCore\CsStringBuffer.cpp">
+      <Filter>源文件\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsFile_Ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsFile.cpp">
-      <Filter>源文件\File</Filter>
+    <ClCompile Include="..\..\..\source\CsCore\CsBinaryFile_Ex.cpp">
+      <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsTextDocument.cpp">
-      <Filter>源文件\File</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsBinaryDocument.cpp">
-      <Filter>源文件\File</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CsCore\CsStringBuffer.cpp">
+    <ClCompile Include="..\..\..\source\CsCore\CsBinaryFile.cpp">
       <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsFile.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsTextFile.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsTextFile_Ex.cpp">
+      <Filter>源文件\_private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsDataTable\CsDataTable.h" />
+    <ClInclude Include="..\..\..\include\CsDataTable\CsFilter.h" />
     <ClInclude Include="..\..\..\include\CsDataTable\CsTableAction.h" />
     <ClInclude Include="..\..\..\include\CsDataTable\CsTableAttribute.h" />
     <ClInclude Include="..\..\..\include\CsDataTable\CsTableCell.h" />
@@ -27,11 +28,16 @@
     <ClInclude Include="..\..\..\include\CsDataTable\CsTableRows.h" />
     <ClInclude Include="..\..\..\include\CsDataTable\CsTableSpatialIndex.h" />
     <ClInclude Include="..\..\..\include\CsDataTable\CsDataView.h" />
+    <ClInclude Include="..\..\..\private\CsDataTable\CsFilter_Ex.h" />
     <ClInclude Include="..\..\..\private\CsDataTable\CsObjectTable_Ex.h" />
     <ClInclude Include="..\..\..\private\CsDataTable\CsSerialTable_Ex.h" />
     <ClInclude Include="..\..\..\private\CsDataTable\CsSimpleTable_Ex.h" />
     <ClInclude Include="..\..\..\private\CsDataTable\CsVariantTable_Ex.h" />
     <ClInclude Include="..\..\..\private\CsDataTable\CsVirtualTable_Ex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsDataTable\CsFilter.cpp" />
+    <ClCompile Include="..\..\..\source\CsDataTable\CsFilter_Ex.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{74598484-054A-44F3-A111-66DB314D98FC}</ProjectGuid>

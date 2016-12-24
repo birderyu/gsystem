@@ -21,7 +21,7 @@ public:
 	cs_bool SetAt(cs_size_t, const CsString &);
 	cs_bool RemoveAt(cs_size_t);
 
-	cs_size_t Length() const;
+	cs_size_t Size() const;
 
 	// 回收废弃不用的内存
 	// 视情况不同，会占用一定的时间

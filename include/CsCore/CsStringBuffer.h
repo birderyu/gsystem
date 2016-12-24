@@ -3,7 +3,7 @@
 
 #include "CsObject.h"
 #include "CsStructure.h"
-#include "CsBlock.h"
+#include "CsVector.h"
 #include "CsString.h"
 
 #define CS_STRING_BUFFER_DEFAULT_CAPACITY 2048
@@ -29,7 +29,7 @@ public:
 	CsStringBuffer &Append(const CsString &);
 
 private:
-	CsBlock<cs_char> m_tBlock;
+	CsVector<cs_char> m_tBlock;
 };
 
 #undef CS_STRING_BUFFER_DEFAULT_ADD_SIZE

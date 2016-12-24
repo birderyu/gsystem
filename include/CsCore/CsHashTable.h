@@ -55,7 +55,7 @@ public:
 		{
 			return m_nLength == 0;
 		}
-		cs_size_t Length() const
+		cs_size_t Size() const
 		{
 			return m_nLength;
 		}

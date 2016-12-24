@@ -308,7 +308,7 @@ inline cs_void CsSingleLinkedList<DataT>::SetAt(cs_size_t pos, const DataT &data
 }
 
 template<typename DataT>
-inline cs_size_t CsSingleLinkedList<DataT>::Find(const DataT &data) const
+inline cs_size_t CsSingleLinkedList<DataT>::IndexOf(const DataT &data) const
 {
 	CsSingleLinkedListNode<DataT> *pTmpNode = m_pHead;
 	for (cs_size_t i = 0; i < m_nLength; ++i)

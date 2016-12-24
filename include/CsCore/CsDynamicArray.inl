@@ -29,14 +29,14 @@ inline CsDynamicArray<DataT>::CsDynamicArray()
 }
 
 template <typename DataT>
-inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t len)
-: m_pData(NULL), m_nSize(len)
+inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t size)
+: m_pData(NULL), m_nSize(size)
 {
 	if (m_nSize <= 0)
 	{
 		return;
 	}
-	m_pData = (DataT *)CsMalloc(len * sizeof(DataT));
+	m_pData = (DataT *)CsMalloc(size * sizeof(DataT));
 	if (!m_pData)
 	{
 		m_nSize = 0;
@@ -45,14 +45,14 @@ inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t len)
 }
 
 template <typename DataT>
-inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t len, const DataT &t)
-: m_pData(NULL), m_nSize(len)
+inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t size, const DataT &data)
+: m_pData(NULL), m_nSize(size)
 {
 	if (m_nSize <= 0)
 	{
 		return;
 	}
-	m_pData = (DataT *)CsMalloc(len * sizeof(DataT));
+	m_pData = (DataT *)CsMalloc(size * sizeof(DataT));
 	if (!m_pData)
 	{
 		m_nSize = 0;
@@ -60,13 +60,13 @@ inline CsDynamicArray<DataT>::CsDynamicArray(cs_size_t len, const DataT &t)
 	}
 	for (cs_size_t i = 0; i < m_nSize; i++)
 	{
-		m_pData[i] = t;
+		m_pData[i] = data;
 	}
 }
 
 template <typename DataT>
 inline CsDynamicArray<DataT>::CsDynamicArray(const CsDynamicArray<DataT> &tArray)
-: m_pData(NULL), m_nSize(tArray.m_nLength)
+: m_pData(NULL), m_nSize(tArray.m_nSize)
 {
 	if (m_nSize <= 0)
 	{
@@ -85,9 +85,30 @@ inline CsDynamicArray<DataT>::CsDynamicArray(const CsDynamicArray<DataT> &tArray
 }
 
 template <typename DataT>
+inline CsDynamicArray<DataT>::CsDynamicArray(const CsArray<DataT> &array, cs_size_t start, cs_size_t size)
+: m_pData(NULL), m_nSize(size)
+{
+	if (size <= 0 || start >= array.Size())
+	{
+		m_nSize = 0;
+		return;
+	}
+	m_pData = (DataT *)CsMalloc(size * sizeof(DataT));
+	if (!m_pData)
+	{
+		m_nSize = 0;
+		throw std::bad_alloc();
+	}
+	for (cs_size_t i = 0; i < size; i++)
+	{
+		m_pData[i] = array[i + start];
+	}
+}
+
+template <typename DataT>
 inline CsDynamicArray<DataT>::~CsDynamicArray()
 {
-	Clear();
+	Dispose();
 }
 
 template <typename DataT>
@@ -104,24 +125,28 @@ inline cs_bool CsDynamicArray<DataT>::IsEmpty() const
 }
 
 template <typename DataT>
-inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t len)
+inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t size)
 {
-	m_nSize = len;
-	if (m_nSize <= 0)
+	if (m_nSize == size)
+	{
+		return true;
+	}
+
+	if (size <= 0)
 	{
 		// 直接清空数组
-		Clear();
+		Dispose();
 		return true;
 	}
 
 	if (!m_pData)
 	{
-		m_pData = (DataT *)CsMalloc(m_nSize * sizeof(DataT));
+		m_pData = (DataT *)CsMalloc(size * sizeof(DataT));
 	}
 	else
 	{
 		// 重新分配内存
-		m_pData = (DataT *)CsRealloc(m_pData, m_nSize * sizeof(DataT));
+		m_pData = (DataT *)CsRealloc(m_pData, size * sizeof(DataT));
 	}
 
 	if (!m_pData)
@@ -129,29 +154,34 @@ inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t len)
 		m_nSize = 0;
 		throw std::bad_alloc();
 	}
+
+	m_nSize = size;
 	return true;
 }
 
 template <typename DataT>
-inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t len, const DataT &t)
+inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t size, const DataT &data)
 {
-	cs_size_t old_len(m_nSize);
-	m_nSize = len;
-	if (m_nSize <= 0)
+	if (m_nSize == size)
+	{
+		return true;
+	}
+
+	if (size <= 0)
 	{
 		// 直接清空数组
-		Clear();
+		Dispose();
 		return true;
 	}
 
 	if (!m_pData)
 	{
-		m_pData = (DataT *)CsMalloc(m_nSize * sizeof(DataT));
+		m_pData = (DataT *)CsMalloc(size * sizeof(DataT));
 	}
 	else
 	{
 		// 重新分配内存
-		m_pData = (DataT *)CsRealloc(m_pData, m_nSize * sizeof(DataT));
+		m_pData = (DataT *)CsRealloc(m_pData, size * sizeof(DataT));
 	}
 
 	if (!m_pData)
@@ -159,15 +189,119 @@ inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t len, const DataT &t)
 		m_nSize = 0;
 		throw std::bad_alloc();
 	}
-	for (cs_size_t i = old_len; i < m_nSize; i++)
+
+	cs_size_t old_size(m_nSize);
+	m_nSize = size;
+	for (cs_size_t i = old_size; i < size; i++)
 	{
-		m_pData[i] = t;
+		m_pData[i] = data;
 	}
 	return true;
 }
 
 template <typename DataT>
-inline cs_void CsDynamicArray<DataT>::Clear()
+inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t new_size, cs_size_t start, cs_size_t size, cs_size_t new_start)
+{
+	if (new_size == m_nSize && start == 0 && size == m_nSize)
+	{
+		return true;
+	}
+	
+	if (new_size <= 0)
+	{
+		// 直接清空数组
+		Dispose();
+		return true;
+	}
+
+	cs_size_t old_size(m_nSize);
+	DataT *new_arr = (DataT *)CsMalloc(new_size * sizeof(DataT));
+	if (!new_arr)
+	{
+		m_nSize = 0;
+		throw std::bad_alloc();
+	}
+
+	if (m_pData && start < old_size)
+	{
+		// 拷贝旧内存到新的地址
+		cs_size_t real_size(size);
+		if (start + real_size > old_size)
+		{
+			real_size = old_size - start;
+		}
+		if (new_start + real_size > new_size)
+		{
+			real_size = new_size - new_start;
+		}
+		CsMemoryCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
+	}
+	if (m_pData)
+	{
+		CsFree(m_pData);
+	}
+	m_pData = new_arr;
+	m_nSize = new_size;
+	return true;
+}
+
+template <typename DataT>
+inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t new_size, cs_size_t start, cs_size_t size, cs_size_t new_start, const DataT &data)
+{
+	if (new_size == m_nSize && start == 0 && size == m_nSize)
+	{
+		return true;
+	}
+
+	if (new_size <= 0)
+	{
+		// 直接清空数组
+		Dispose();
+		return true;
+	}
+
+	cs_size_t old_size(m_nSize);
+	DataT *new_arr = (DataT *)CsMalloc(new_size * sizeof(DataT));
+	if (!new_arr)
+	{
+		m_nSize = 0;
+		throw std::bad_alloc();
+	}
+
+	if (m_pData && start < old_size)
+	{
+		// 拷贝旧内存到新的地址
+		cs_size_t real_size(size);
+		if (start + real_size > old_size)
+		{
+			real_size = old_size - start;
+		}
+		if (new_start + real_size > new_size)
+		{
+			real_size = new_size - new_start;
+		}
+		CsMemoryCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
+	}
+	if (m_pData)
+	{
+		CsFree(m_pData);
+	}
+
+	m_pData = new_arr;
+	m_nSize = new_size;
+	for (cs_size_t i = 0; i < new_start; i++)
+	{
+		m_pData[i] = data;
+	}
+	for (cs_size_t i = new_start + size; i < new_size; i++)
+	{
+		m_pData[i] = data;
+	}
+	return true;
+}
+
+template <typename DataT>
+inline cs_void CsDynamicArray<DataT>::Dispose()
 {
 	if (m_pData)
 	{
@@ -185,7 +319,7 @@ inline DataT &CsDynamicArray<DataT>::GetAt(cs_size_t pos)
 }
 
 template <typename DataT>
-inline DataT CsDynamicArray<DataT>::GetAt(cs_size_t pos) const
+inline const DataT &CsDynamicArray<DataT>::GetAt(cs_size_t pos) const
 {
 	CS_ASSERT(pos < m_nSize);
 	return *(m_pData + pos);
@@ -199,10 +333,22 @@ inline DataT &CsDynamicArray<DataT>::operator[](cs_size_t pos)
 }
 
 template <typename DataT>
-inline DataT CsDynamicArray<DataT>::operator[](cs_size_t pos) const
+inline const DataT &CsDynamicArray<DataT>::operator[](cs_size_t pos) const
 {
 	CS_ASSERT(pos < m_nSize);
 	return *(m_pData + pos);
+}
+
+template <typename DataT>
+inline DataT *CsDynamicArray<DataT>::operator+=(cs_size_t pos)
+{
+	return m_pData + pos;
+}
+
+template <typename DataT>
+inline const DataT *CsDynamicArray<DataT>::operator+=(cs_size_t pos) const
+{
+	return m_pData + pos;
 }
 
 template <typename DataT>
@@ -219,7 +365,7 @@ inline cs_bool CsDynamicArray<DataT>::RemoveAt(cs_size_t id)
 	}
 	if (len == 0)
 	{
-		Clear();
+		Dispose();
 		return true;
 	}
 	DataT *pData = (DataT *)CsMalloc(len * sizeof(DataT));
@@ -231,7 +377,7 @@ inline cs_bool CsDynamicArray<DataT>::RemoveAt(cs_size_t id)
 	{
 		if (CopyMemoryTo(id + 1, len - id, pData, id))
 		{
-			Clear();
+			Dispose();
 			m_pData = pData;
 			m_nSize = len;
 			return true;
@@ -251,7 +397,7 @@ inline CsDynamicArray<DataT> &CsDynamicArray<DataT>::operator=(const CsDynamicAr
 	}
 	if (arr.IsEmpty())
 	{
-		Clear();
+		Dispose();
 		return *this;
 	}
 	if (m_nSize != arr.m_nSize)
@@ -343,7 +489,7 @@ inline cs_bool CsDynamicArray<DataT>::Deserialize(ArchiveT &archive)
 	}
 	cs_size_t size = 0;
 	archive >> size;
-	Clear(); // 清空所有数据
+	Dispose(); // 清空所有数据
 	if (!Resize(size))
 	{
 		return false;

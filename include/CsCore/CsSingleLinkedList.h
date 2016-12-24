@@ -63,7 +63,7 @@ public:
 	cs_void SetAt(cs_size_t pos, const DataT &data);
 
 	// 不存在则返回NULL_POS
-	cs_size_t Find(const DataT &data) const; 
+	cs_size_t IndexOf(const DataT &data) const; 
 
 	// 不存在则返回NULL_POS，存在则返回首节点的位置
 	cs_size_t FindCircle() const;

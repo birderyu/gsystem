@@ -23,6 +23,11 @@ cs_char CsString::operator[](cs_size_t pos) const
 	return GetAt(pos);
 }
 
+cs_char &CsString::operator[](cs_size_t pos)
+{
+	return GetAt(pos);
+}
+
 CsString operator+(const CsString &s1, const CsString &s2)
 {
 	CsString sStr(s1);

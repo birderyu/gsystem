@@ -4,12 +4,12 @@
 
 #include "CsObject.h"
 #include "CsStructure.h"
-#include "CsBlock.h"
+#include "CsVector.h"
 
 #define CS_BYTES_DEFAULT_CAPACITY 1024
 #define CS_BYTES_DEFAULT_ADD_SIZE 512
 
-class CS_API CsBytes 
+class CS_API CsBytes final
 	: public CsListT<CsBytes>
 	, public CsObject
 {
@@ -20,10 +20,10 @@ public:
 	~CsBytes();
 
 	cs_bool Reserve(cs_size_t);
+	cs_bool Resize(cs_size_t);
 	cs_void Clear();
 	cs_void Dispose();
 
-	cs_bool Valid() const;
 	cs_bool IsEmpty() const;
 	cs_size_t Size() const;
 	cs_size_t Capacity() const;
@@ -33,11 +33,10 @@ public:
 	cs_byte &operator[](cs_size_t);
 	cs_byte  operator[](cs_size_t) const;
 
-	cs_bool ReadFrom(const cs_byte *pBuf, cs_size_t len);
-	cs_bool WriteTo(cs_size_t len, cs_byte *&pBuf);
-
-	cs_byte *Head() const;
-	cs_byte *Tail() const;
+	const cs_byte *Head() const;
+	cs_byte *Head();
+	const cs_byte *Tail() const;
+	cs_byte *Tail();
 
 	/// 写入二进制字节流
 	CsBytes &operator<<(cs_bool);
@@ -75,22 +74,11 @@ public:
 	CsBytes &operator>>(cs_float &);
 	CsBytes &operator>>(cs_double &);
 	CsBytes &operator>>(cs_decimal &);
-	CsBytes &operator>>(CsString &);
-
-	// 头指针，指向首元素，初始值为NULL_POS
-	cs_size_t m_nHeadCursor;
-	//cs_pointer m_nHeadCursor;
-
-	// 尾指针，指向末尾元素的下一位，初始值为NULL_POS
-	cs_size_t m_nTailCursor;
-	//cs_pointer m_nTailCursor;
 
 private:
 	// 每次增长时的步长单元
 	cs_size_t m_nAddSize;
-
-	// 内存块
-	CsBlock<cs_byte> m_tBlock;
+	CsVector<cs_byte> m_tBytes;
 };
 
 #undef CS_BYTES_DEFAULT_ADD_SIZE

@@ -62,7 +62,7 @@ public:
 	DataT& GetAt(cs_size_t pos);
 	DataT  GetAt(cs_size_t pos) const;
 	cs_void SetAt(cs_size_t pos, const DataT &data);
-	cs_size_t Find(const DataT &data) const;
+	cs_size_t IndexOf(const DataT &data) const;
 	cs_size_t FindCircle() const;
 	cs_size_t FindCross(const CsDoubleLinkedList &list);
 

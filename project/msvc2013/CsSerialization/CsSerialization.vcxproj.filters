@@ -25,46 +25,168 @@
     <Filter Include="头文件\_inline">
       <UniqueIdentifier>{db5f1c4b-0335-4e9a-87be-2a8f20ae2584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Input">
-      <UniqueIdentifier>{2eff983b-2668-448a-b632-0f8404f13acc}</UniqueIdentifier>
+    <Filter Include="头文件\Archive">
+      <UniqueIdentifier>{7409f7c2-4450-4696-8b5c-efb39cbfbd73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Output">
-      <UniqueIdentifier>{27e1715c-2b54-478a-8e5c-0236d343e7d4}</UniqueIdentifier>
+    <Filter Include="头文件\Stream">
+      <UniqueIdentifier>{cac8eabe-9fc9-4e95-99b9-5f1d17a1ec79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Stream">
+      <UniqueIdentifier>{f02896a2-ef75-49a1-bb4f-17cc685072ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Archive">
+      <UniqueIdentifier>{89f0e5af-6636-4ec5-bd30-8c8d140b8375}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsSerialization\CsArchive.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryInputArchive.h">
-      <Filter>头文件\Input</Filter>
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsSerialization\CsInputArchive.h">
-      <Filter>头文件\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryOutputArchive.h">
-      <Filter>头文件\Output</Filter>
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsSerialization\CsJsonInputArchive.h">
-      <Filter>头文件\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsSerialization\CsJsonOutputArchive.h">
-      <Filter>头文件\Output</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsSerialization\CsOutputArchive.h">
-      <Filter>头文件\Output</Filter>
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsSerialization\CsTextInputArchive.h">
-      <Filter>头文件\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsSerialization\CsTextOutputArchive.h">
-      <Filter>头文件\Output</Filter>
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsSerialization\CsXmlInputArchive.h">
-      <Filter>头文件\Input</Filter>
+      <Filter>头文件\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryOutputArchive.h">
+      <Filter>头文件\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsJsonOutputArchive.h">
+      <Filter>头文件\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsOutputArchive.h">
+      <Filter>头文件\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextOutputArchive.h">
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsSerialization\CsXmlOutputArchive.h">
-      <Filter>头文件\Output</Filter>
+      <Filter>头文件\Archive</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsFileStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBufferStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileBufferInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileBufferInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileBufferOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileBufferInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileBufferInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileBufferOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileInputOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileInputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileOutputStream.h">
+      <Filter>头文件\Stream</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsBinaryBufferStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsBinaryStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsBufferStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsFileStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsInputOutputStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsInputStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsOutputStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsTextBufferStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsTextStream.cpp">
+      <Filter>源文件\Stream</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

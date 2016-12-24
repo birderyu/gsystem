@@ -40,11 +40,11 @@ cs_bool CsFilter_Ex::CsFilterCell::SetFilter(const CsString &sFilter)
 		Release();
 	}
 	
-	cs_size_t len = m_tCompareSymbols.Length();
-	for (cs_size_t i = 0; i < len; i++)
+	cs_size_t size = m_tCompareSymbols.Size();
+	for (cs_size_t i = 0; i < size; i++)
 	{
 		CsStringList tFilterList = sFilter.Split(m_tCompareSymbols.GetAt(i));
-		if (tFilterList.Length() != 2)
+		if (tFilterList.Size() != 2)
 		{
 			continue;
 		}
@@ -207,7 +207,7 @@ CsString CsFilter_Ex::CsFilterData::ToString() const
 cs_bool CsFilter_Ex::CsFilterData::Release()
 {
 	m_emUnionType = UNION_TYPE_ERROR;
-	m_tChildren.Clear();
+	m_tChildren.Dispose();
 	m_tCell.Release();
 	return true;
 }
@@ -251,7 +251,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 	}
 
 	// 3.·Ö½â×Ö·û´®
-	cs_size_t nUnionCount = m_tUnionSymbols.Length();
+	cs_size_t nUnionCount = m_tUnionSymbols.Size();
 	cs_bool bHasBracket = false;
 	if (_sFilter.Find('(') != -1 && _sFilter.Find(')') != -1)
 	{
@@ -276,7 +276,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 			tFilterList = _sFilter.Split(sUnion, true);
 		}
 
-		cs_size_t nLenOfUnion = tFilterList.Length();
+		cs_size_t nLenOfUnion = tFilterList.Size();
 		if (nLenOfUnion == 1)
 		{
 			if (i == nUnionCount - 1)

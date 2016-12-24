@@ -23,14 +23,14 @@ inline cs_size_t CsStaticArray<DataT, ARRAY_SIZE>::Size() const
 }
 
 template <typename DataT, cs_size_t ARRAY_SIZE>
-inline DataT & CsStaticArray<DataT, ARRAY_SIZE>::GetAt(cs_size_t pos)
+inline DataT &CsStaticArray<DataT, ARRAY_SIZE>::GetAt(cs_size_t pos)
 {
 	CS_ASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
 }
 
 template <typename DataT, cs_size_t ARRAY_SIZE>
-inline DataT CsStaticArray<DataT, ARRAY_SIZE>::GetAt(cs_size_t pos) const
+inline const DataT &CsStaticArray<DataT, ARRAY_SIZE>::GetAt(cs_size_t pos) const
 {
 	CS_ASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
@@ -44,10 +44,22 @@ inline DataT &CsStaticArray<DataT, ARRAY_SIZE>::operator[](cs_size_t pos)
 }
 
 template <typename DataT, cs_size_t ARRAY_SIZE>
-inline DataT CsStaticArray<DataT, ARRAY_SIZE>::operator[](cs_size_t pos) const
+inline const DataT &CsStaticArray<DataT, ARRAY_SIZE>::operator[](cs_size_t pos) const
 {
 	CS_ASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
+}
+
+template <typename DataT, cs_size_t ARRAY_SIZE>
+inline DataT *CsStaticArray<DataT, ARRAY_SIZE>::operator+=(cs_size_t pos)
+{
+	return m_pData + pos;
+}
+
+template <typename DataT, cs_size_t ARRAY_SIZE>
+inline const DataT *CsStaticArray<DataT, ARRAY_SIZE>::operator+=(cs_size_t pos) const
+{
+	return m_pData + pos;
 }
 
 template <typename DataT, cs_size_t ARRAY_SIZE>

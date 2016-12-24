@@ -19,9 +19,10 @@ public:
 
 public:
 	CsDynamicArray();
-	CsDynamicArray(cs_size_t len);
-	CsDynamicArray(cs_size_t len, const DataT &t);
-	CsDynamicArray(const CsDynamicArray<DataT> &tArray);
+	CsDynamicArray(cs_size_t size);
+	CsDynamicArray(cs_size_t size, const DataT &data);
+	CsDynamicArray(const CsDynamicArray<DataT> &);
+	CsDynamicArray(const CsArray<DataT> &, cs_size_t start, cs_size_t size);
 	~CsDynamicArray();
 
 	// 获取数组的长度
@@ -31,21 +32,28 @@ public:
 	cs_bool IsEmpty() const;
 
 	// 重分配数组的长度，可能会造成内存泄漏
-	cs_bool Resize(cs_size_t len);
+	cs_bool Resize(cs_size_t new_size);
 
 	// 重分配数组的长度，并将多出来的元素赋默认值t，可能会造成内存泄漏
-	cs_bool Resize(cs_size_t len, const DataT &t);
+	cs_bool Resize(cs_size_t new_size, const DataT &data);
 
-	// 清空数组
-	cs_void Clear();
+	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第0位
+	cs_bool Resize(cs_size_t new_size, cs_size_t start, cs_size_t size, cs_size_t new_start = 0);
+	cs_bool Resize(cs_size_t new_size, cs_size_t start, cs_size_t size, cs_size_t new_start, const DataT &data);
+
+	// 销毁数组
+	cs_void Dispose();
 
 	DataT &GetAt(cs_size_t);
-	DataT  GetAt(cs_size_t) const;
+	const DataT &GetAt(cs_size_t) const;
 
 	// 通过下标访问和修改数组元素
 	DataT &operator[](cs_size_t);
-	DataT  operator[](cs_size_t) const;
+	const DataT &operator[](cs_size_t) const;
 	
+	DataT *operator+=(cs_size_t);
+	const DataT *operator+=(cs_size_t) const;
+
 	// 移除特定位置的元素
 	cs_bool RemoveAt(cs_size_t);
 

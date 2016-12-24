@@ -26,10 +26,10 @@ public:
 	cs_bool CreateFrom(const CsBlock<DataT> &tFrom, cs_size_t nFromStart, cs_size_t nFromLength);
 
 	DataT &GetAt(cs_size_t);
-	DataT  GetAt(cs_size_t) const;
+	const DataT &GetAt(cs_size_t) const;
 
 	DataT &operator[](cs_size_t);
-	DataT  operator[](cs_size_t) const;
+	const DataT &operator[](cs_size_t) const;
 
 private:
 	// Not Safe

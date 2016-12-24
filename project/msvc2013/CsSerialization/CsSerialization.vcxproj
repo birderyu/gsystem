@@ -12,16 +12,56 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsSerialization\CsArchive.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferInputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryBufferStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileBufferInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileBufferInputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileBufferOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileInputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryFileOutputStream.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryInputArchive.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryOutputArchive.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBinaryStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsBufferStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsFileStream.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsInputArchive.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsInputStream.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsJsonInputArchive.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsJsonOutputArchive.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsOutputArchive.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferInputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextBufferStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileBufferInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileBufferInputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileBufferOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileInputOutputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileInputStream.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextFileOutputStream.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsTextInputArchive.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsTextOutputArchive.h" />
+    <ClInclude Include="..\..\..\include\CsSerialization\CsTextStream.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsXmlInputArchive.h" />
     <ClInclude Include="..\..\..\include\CsSerialization\CsXmlOutputArchive.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsSerialization\CsBinaryBufferStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsBinaryStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsBufferStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsFileStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsInputOutputStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsInputStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsOutputStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsTextBufferStream.cpp" />
+    <ClCompile Include="..\..\..\source\CsSerialization\CsTextStream.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{08D9DEAA-06A7-44FF-80C7-AAD74E4C03EF}</ProjectGuid>

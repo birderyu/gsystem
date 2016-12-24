@@ -31,6 +31,9 @@
     <Filter Include="头文件\Attribute">
       <UniqueIdentifier>{fc17f780-5a0e-4fce-8869-111121ec9f80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Filter">
+      <UniqueIdentifier>{995294c8-5acb-476e-af37-fdd6857efbc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\private\CsDataTable\CsObjectTable_Ex.h">
@@ -96,5 +99,19 @@
     <ClInclude Include="..\..\..\include\CsDataTable\CsTableAttribute.h">
       <Filter>头文件\Attribute</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsDataTable\CsFilter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsDataTable\CsFilter_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsDataTable\CsFilter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsDataTable\CsFilter_Ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

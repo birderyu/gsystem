@@ -10,8 +10,10 @@ cs_void TestBytes()
 	cs_uint64 d = 444, _d;
 	CsString e = "123";
 	CsString _e;
-	bytes << a << b << c << d << e;
-	bytes >> _a >> _b >> _c >> _d >> _e;
+	bytes << a << b << c << d;
+	bytes >> _a >> _b >> _c >> _d;
+
+	cs_size_t size = bytes.Size();
 
 	int stop = 1;
 	stop++;

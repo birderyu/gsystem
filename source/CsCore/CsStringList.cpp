@@ -32,7 +32,7 @@ cs_bool CsStringList::Add(const CsString &str)
 	return true;
 }
 
-cs_size_t CsStringList::Length() const
+cs_size_t CsStringList::Size() const
 {
 	return 0;
 }

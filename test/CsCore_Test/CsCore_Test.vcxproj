@@ -90,8 +90,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Array_Test.h" />
     <ClInclude Include="BTree_Test.h" />
     <ClInclude Include="Bytes_Test.h" />
+    <ClInclude Include="File_Test.h" />
     <ClInclude Include="Hash_Test.h" />
     <ClInclude Include="List_Test.h" />
     <ClInclude Include="Map_Test.h" />
@@ -99,6 +101,7 @@
     <ClInclude Include="RBTree.h" />
     <ClInclude Include="SortStack.h" />
     <ClInclude Include="Sort_Test.h" />
+    <ClInclude Include="Vector_Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

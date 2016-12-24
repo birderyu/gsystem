@@ -7,6 +7,7 @@ class CS_API CsInputArchive
 	: public CsArchive
 {
 public:
+	CsInputArchive(CsFile &);
 	virtual ~CsInputArchive();
 
 public:

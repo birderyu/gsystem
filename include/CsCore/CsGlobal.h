@@ -5,6 +5,5 @@
 #include "CsType.h"
 #include "CsFunctor.h"
 #include "CsTraits.h"
-#include "CsClassCode.h"
 
 #endif // _CORE_GLOBAL_H_

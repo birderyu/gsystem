@@ -2,6 +2,8 @@
 #include "CsCStringHelper.h"
 #include "CsNew.h"
 
+//////////////////////////////////////////////////////////////////////////
+
 cs_bool CsSmallStringStore::Initialize()
 {
 	m_nSize = 0;
@@ -16,10 +18,10 @@ cs_bool CsSmallStringStore::Initialize(cs_char cChar)
 	return true;
 }
 
-cs_bool CsSmallStringStore::Initialize(const cs_char *pStr, cs_size_t len)
+cs_bool CsSmallStringStore::Initialize(const cs_char *pStr, cs_size_t size)
 {
-	cs_size_t real_len(len);
-	if (len > CsSmallStringStore::MAX_SIZE)
+	cs_size_t real_len(size);
+	if (size > CsSmallStringStore::MAX_SIZE)
 	{
 		real_len = CsSmallStringStore::MAX_SIZE;
 	}
@@ -51,7 +53,24 @@ cs_size_t CsSmallStringStore::Size() const
 
 cs_char CsSmallStringStore::GetAt(cs_size_t pos) const
 {
+	CS_ASSERT(pos < MAX_SIZE);
 	return m_cStr[pos];
+}
+
+cs_char &CsSmallStringStore::GetAt(cs_size_t pos)
+{
+	CS_ASSERT(pos < MAX_SIZE);
+	return m_cStr[pos];
+}
+
+const cs_char *CsSmallStringStore::Cursor(cs_size_t pos) const
+{
+	return m_cStr + pos;
+}
+
+cs_char *CsSmallStringStore::Cursor(cs_size_t pos)
+{
+	return m_cStr + pos;
 }
 
 cs_cstring CsSmallStringStore::CString() const
@@ -107,10 +126,35 @@ cs_bool CsSmallStringStore::SwitchToNormal(CsNormalStringStore &sStr) const
 	return sStr.Initialize(m_cStr, m_nSize);
 }
 
-cs_bool CsNormalStringStore::Initialize(const cs_char *pStr, cs_size_t len)
+//////////////////////////////////////////////////////////////////////////
+
+cs_bool CsNormalStringStore::Initialize(cs_size_t capacity)
 {
-	cs_size_t real_len(len);
-	if (len > CsNormalStringStore::MAX_SIZE)
+	m_nSize = 0;
+	if (capacity == 0)
+	{
+		m_pStr = NULL;
+		return true;
+	}
+
+	cs_size_t real_len(capacity);
+	if (capacity > CsNormalStringStore::MAX_SIZE)
+	{
+		real_len = CsNormalStringStore::MAX_SIZE;
+	}
+	
+	m_pStr = (cs_char*)CsMalloc((real_len + 1)* sizeof(cs_char));
+	if (!m_pStr)
+	{
+		return false;
+	}
+	return true;
+}
+
+cs_bool CsNormalStringStore::Initialize(const cs_char *pStr, cs_size_t size)
+{
+	cs_size_t real_len(size);
+	if (size > CsNormalStringStore::MAX_SIZE)
 	{
 		real_len = CsNormalStringStore::MAX_SIZE;
 	}
@@ -127,7 +171,7 @@ cs_bool CsNormalStringStore::Initialize(const cs_char *pStr, cs_size_t len)
 		return false;
 	}
 	m_pStr[real_len] = '\0';
-	m_nSize = static_cast<cs_uint16>(len);
+	m_nSize = static_cast<cs_uint16>(real_len);
 	return true;
 }
 
@@ -149,12 +193,49 @@ cs_bool CsNormalStringStore::Initialize(const CsNormalStringStore &sStr)
 	return true;
 }
 
-cs_size_t CsNormalStringStore::Size() const
+cs_bool CsNormalStringStore::CopyString(const cs_char *pStr, cs_size_t size)
 {
 	if (!m_pStr)
 	{
-		return 0;
+		return false;
 	}
+	if (!CsCStringHelper::Copy(pStr, size, m_pStr))
+	{
+		return false;
+	}
+	m_pStr[size] = '\0';
+	m_nSize = static_cast<cs_uint16>(size);
+	return true;
+}
+
+cs_bool CsNormalStringStore::Resize(cs_size_t size)
+{
+	if (!m_pStr)
+	{
+		return Initialize(size);
+	}
+	
+	cs_size_t real_len(size);
+	if (size > CsNormalStringStore::MAX_SIZE)
+	{
+		real_len = CsNormalStringStore::MAX_SIZE;
+	}
+	if (real_len > Size())
+	{
+		m_pStr = (cs_char*)CsRealloc(m_pStr, (real_len + 1)* sizeof(cs_char));
+		if (!m_pStr)
+		{
+			m_nSize = 0;
+			return false;
+		}
+	}
+	m_pStr[real_len] = '\0';
+	m_nSize = static_cast<cs_uint16>(real_len);
+	return true;
+}
+
+cs_size_t CsNormalStringStore::Size() const
+{
 	return m_nSize;
 }
 
@@ -169,15 +250,34 @@ cs_void CsNormalStringStore::Free()
 
 cs_char CsNormalStringStore::GetAt(cs_size_t pos) const
 {
-	if (!m_pStr)
-	{
-		return '\0';
-	}
+	CS_ASSERT(m_pStr);
 	return m_pStr[pos];
+}
+
+cs_char &CsNormalStringStore::GetAt(cs_size_t pos)
+{
+	CS_ASSERT(m_pStr);
+	return m_pStr[pos];
+}
+
+const cs_char *CsNormalStringStore::Cursor(cs_size_t pos) const
+{
+	CS_ASSERT(m_pStr);
+	return m_pStr + pos;
+}
+
+cs_char *CsNormalStringStore::Cursor(cs_size_t pos)
+{
+	CS_ASSERT(m_pStr);
+	return m_pStr + pos;
 }
 
 cs_cstring CsNormalStringStore::CString() const
 {
+	if (!m_pStr)
+	{
+		return "";
+	}
 	return m_pStr;
 }
 
@@ -253,6 +353,8 @@ cs_bool CsNormalStringStore::SwitchToSmall(CsSmallStringStore &sStr) const
 {
 	return sStr.Initialize(m_pStr, m_nSize);
 }
+
+//////////////////////////////////////////////////////////////////////////
 
 cs_void CsStringStore::Free(CsStringStore &tStrMem)
 {

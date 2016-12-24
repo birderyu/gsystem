@@ -38,7 +38,7 @@ template<typename DataT>
 inline cs_void CsArrayStack<DataT>::Dispose()
 {
 	m_TopCursor = NULL_POS;
-	m_tArray.Clear();
+	m_tArray.Dispose();
 }
 
 template<typename DataT>
@@ -77,7 +77,7 @@ template<typename DataT>
 inline cs_bool CsArrayStack<DataT>::Resize(cs_size_t capacity)
 {
 	m_TopCursor = NULL_POS;
-	m_tArray.Clear();
+	m_tArray.Dispose();
 	return m_tArray.Resize(capacity);
 }
 

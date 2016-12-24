@@ -7,7 +7,7 @@
 class CS_API CsGeometryFactory 
 	: public CsSingleton<CsGeometryFactory, CsMutex>
 {
-
+	
 };
 
 #endif // _CORE_GEOMETRY_FACTORY_H_

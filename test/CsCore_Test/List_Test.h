@@ -24,8 +24,8 @@ cs_void SingleLinkedListTest()
 
 	cs_int i6 = list.GetAt(6);
 
-	cs_int f10 = list.Find(10);
-	cs_int f11 = list.Find(11);
+	cs_int f10 = list.IndexOf(10);
+	cs_int f11 = list.IndexOf(11);
 
 	list.AddTail(0);
 
@@ -76,8 +76,8 @@ cs_void DoubleLinkedListTest()
 
 	cs_int i6 = list.GetAt(6);
 
-	cs_int f10 = list.Find(10);
-	cs_int f11 = list.Find(11);
+	cs_int f10 = list.IndexOf(10);
+	cs_int f11 = list.IndexOf(11);
 
 	list.RemoveHead();
 	list.RemoveTail();

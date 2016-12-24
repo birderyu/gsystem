@@ -349,7 +349,7 @@ inline cs_void CsDoubleLinkedList<DataT>::SetAt(cs_size_t pos, const DataT &data
 }
 
 template<typename DataT>
-inline cs_size_t CsDoubleLinkedList<DataT>::Find(const DataT &data) const
+inline cs_size_t CsDoubleLinkedList<DataT>::IndexOf(const DataT &data) const
 {
 	CsDoubleLinkedListNode<DataT> *pTmpNode = m_pHead;
 	for (cs_size_t i = 0; i < m_nSize; ++i)

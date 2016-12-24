@@ -302,6 +302,78 @@ cs_size_t CsString::Size() const
 	return 0;
 }
 
+cs_bool CsString::Resize(cs_size_t size)
+{
+	if (size == 0)
+	{
+		Free();
+	}
+
+	// 转换为值类型
+	ToValue();
+
+	// size相等则不做任何操作
+	if (size == Size())
+	{
+		return true;
+	}
+
+	// 判断Resize之后的类型
+	CsStringStore::TYPE emType = GetTypeBySize(size);
+	if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_SMALL)
+	{
+		// Resize之后应该为小字符串
+		if (!Switch(emType))
+		{
+			return false;
+		}
+		m_tStringStore.m_sSmallStr.m_nSize = size;
+		m_tStringStore.m_sSmallStr.m_cStr[size] = '\0';
+		return true;
+	}
+	else if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
+	{
+		// Resize之后应该为普通字符串
+		if (m_tStringStore.m_nType == CsStringStore::STRING_STORE_TYPE_VALUE_SMALL)
+		{
+			// 原本是小字符串
+			CsString str_copy(*this);
+			m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
+			if (!m_tStringStore.m_sNormalStr.Initialize(size))
+			{
+				// 开辟内存
+				return false;
+			}
+			if (!m_tStringStore.m_sNormalStr.CopyString(str_copy.CString(), str_copy.Size()))
+			{
+				// 拷贝原有字符串
+				return false;
+			}
+			// 改变Size
+			m_tStringStore.m_sNormalStr.m_pStr[size] = '\0';
+			m_tStringStore.m_sNormalStr.m_nSize = static_cast<cs_uint16>(size);
+			return true;
+		}
+		else if (m_tStringStore.m_nType == CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
+		{
+			// 原本是普通字符串
+			return m_tStringStore.m_sNormalStr.Resize(size);
+		}
+		else
+		{
+			// 原本是大字符串
+			// TODO
+		}
+	}
+	else
+	{
+		// CsStringStore::STRING_STORE_TYPE_VALUE_BIG
+		// Resize之后应该为大字符串
+		// TODO
+	}
+	return false;
+}
+
 cs_char CsString::GetAt(cs_size_t pos) const
 {
 	switch (m_tStringStore.m_nType)
@@ -321,6 +393,71 @@ cs_char CsString::GetAt(cs_size_t pos) const
 	default:
 		break;
 	}
+}
+
+cs_char &CsString::GetAt(cs_size_t pos)
+{
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		return m_tStringStore.m_sSmallStr.GetAt(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		return m_tStringStore.m_sNormalStr.GetAt(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+}
+
+const cs_char *CsString::Cursor(cs_size_t pos) const
+{
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		return m_tStringStore.m_sSmallStr.Cursor(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		return m_tStringStore.m_sNormalStr.Cursor(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+	return NULL;
+}
+
+cs_char *CsString::Cursor(cs_size_t pos)
+{
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		return m_tStringStore.m_sSmallStr.Cursor(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		return m_tStringStore.m_sNormalStr.Cursor(pos);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		break;
+	}
+	return NULL;
 }
 
 CsString &CsString::Replace(const CsString &from, const CsString &to, cs_bool bIsSensitive)
@@ -369,7 +506,7 @@ CsString &CsString::Replace(const CsString &from, const CsString &to, cs_bool bI
 		m_tStringStore.m_sSmallStr.Initialize(cStr, out_len);
 		return *this;
 	}
-	if (nEstimateType != CsStringStore::STRING_STORE_TYPE_VALUE_BIG)
+	else if (nEstimateType == CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
 	{
 		// 替换之后为普通字符串
 		cs_char *pStr = (cs_char*)CsMalloc((estimate_size + 1) * sizeof(cs_char));
@@ -388,6 +525,7 @@ CsString &CsString::Replace(const CsString &from, const CsString &to, cs_bool bI
 	}
 	else
 	{
+		// CsStringStore::STRING_STORE_TYPE_VALUE_BIG
 		// 替换之后为大字符串
 		// TODO
 	}
@@ -427,3 +565,66 @@ cs_bool CsString::Equals(const CsString &str, cs_bool bIsSensitive) const
 	return false;
 }
 
+cs_bool CsString::Switch(CsStringStore::TYPE emType)
+{
+	if (m_tStringStore.m_nType == emType)
+	{
+		return true;
+	}
+
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+	{
+		if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
+		{
+			CsString str_copy(*this);
+			Free();
+			m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
+			str_copy.m_tStringStore.m_sSmallStr.SwitchToNormal(m_tStringStore.m_sNormalStr);
+			return true;
+		}
+		else if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_BIG)
+		{
+			// TODO
+		}
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+	{
+		if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_SMALL)
+		{
+			// TODO
+			if (m_tStringStore.m_sNormalStr.CanSwithToSmall())
+			{
+				CsString str_copy(*this);
+				Free();
+				m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+				str_copy.m_tStringStore.m_sNormalStr.SwitchToSmall(m_tStringStore.m_sSmallStr);
+				return true;
+			}			
+		}
+		else if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_BIG)
+		{
+			// TODO
+		}
+	}
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+	{
+		if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_SMALL)
+		{
+			// TODO
+		}
+		else if (emType == CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
+		{
+			// TODO
+		}
+	}
+		break;
+	default:
+		break;
+	}
+
+	return false;
+}

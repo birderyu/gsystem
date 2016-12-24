@@ -33,7 +33,7 @@ public:
 	virtual DataT& GetAt(cs_size_t pos) = 0;
 	virtual DataT  GetAt(cs_size_t pos) const = 0;
 	virtual cs_void SetAt(cs_size_t pos, const DataT &data) = 0;
-	virtual cs_size_t Find(const DataT &data) const = 0;
+	virtual cs_size_t IndexOf(const DataT &data) const = 0;
 	virtual cs_size_t FindCircle() const = 0;
 	virtual DataT &operator[](cs_size_t id) = 0;
 	virtual DataT operator[](cs_size_t id) const = 0;

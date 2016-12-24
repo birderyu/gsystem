@@ -33,6 +33,10 @@
 #include "CsSingleton.h"
 #include "CsBinaryHeap.h"
 
+#include "Array_Test.h"
+#include "Vector_Test.h"
+#include "File_Test.h"
+
 void TestSharedPtr()
 {
 	CsSharedPointer<CsString> pstr(new CsString("123"));
@@ -75,9 +79,14 @@ void TestArray()
 	cs_int _nTime2 = (_nEndTime - _nMiddleTime); // time
 }
 
-
 int main(int argc, char *argv[])
 {
+	TestTextFile();
+
+	TestBytes();
+	//TestDynamicArray();
+	TestVector();
+
 	cs_int arr[5];
 	arr[0] = 12;
 	arr[1] = 21;

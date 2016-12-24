@@ -18,17 +18,23 @@ class CsSmallStringStore
 	friend class CsString;
 
 public:
-	static const cs_size_t MAX_SIZE = CS_SMALL_STRING_MAX_SIZE;
-	static const cs_size_t NULL_POS = CS_SMALL_STRING_MAX_SIZE + 1;
+	static const cs_size_t MAX_SIZE = CS_SMALL_STRING_MAX_SIZE - 1;
+	static const cs_size_t NULL_POS = CS_SMALL_STRING_MAX_SIZE;
 
 public:
 	cs_bool Initialize();
 	cs_bool Initialize(cs_char cChar);
-	cs_bool Initialize(const cs_char *pStr, cs_size_t len);
+	cs_bool Initialize(const cs_char *pStr, cs_size_t size);
 	cs_bool Initialize(const CsSmallStringStore &sStr);
 
 	cs_size_t Size() const;
+
 	cs_char GetAt(cs_size_t pos) const;
+	cs_char &GetAt(cs_size_t pos);
+
+	const cs_char *Cursor(cs_size_t pos) const;
+	cs_char *Cursor(cs_size_t pos);
+
 	cs_cstring CString() const;
 	cs_uint HashCode() const;
 
@@ -54,12 +60,23 @@ public:
 	static const cs_size_t NULL_POS = CS_UINT16_MAX;
 
 public:
-	cs_bool Initialize(const cs_char *pStr, cs_size_t len);
+	cs_bool Initialize(cs_size_t capacity); // 只分配内存，Size仍然为0
+	cs_bool Initialize(const cs_char *pStr, cs_size_t size);
 	cs_bool Initialize(const CsNormalStringStore &sStr);
+
+	// 注意，这里应该保证size小于m_pStr分配的内存
+	cs_bool CopyString(const cs_char *pStr, cs_size_t size);
+	cs_bool Resize(cs_size_t size);
 
 	cs_size_t Size() const;
 	cs_void Free();
+
 	cs_char GetAt(cs_size_t pos) const;
+	cs_char &GetAt(cs_size_t pos);
+
+	const cs_char *Cursor(cs_size_t pos) const;
+	cs_char *Cursor(cs_size_t pos);
+
 	cs_cstring CString() const;
 	cs_uint HashCode() const;
 

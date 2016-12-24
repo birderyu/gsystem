@@ -186,7 +186,7 @@ inline DataT &CsBlock<DataT>::GetAt(cs_size_t pos)
 }
 
 template<typename DataT>
-inline DataT CsBlock<DataT>::GetAt(cs_size_t pos) const
+inline const DataT &CsBlock<DataT>::GetAt(cs_size_t pos) const
 {
 	CS_ASSERT(pos < m_nSize);
 	return *(m_pMemory + pos);
@@ -200,7 +200,7 @@ inline DataT &CsBlock<DataT>::operator[](cs_size_t pos)
 }
 
 template<typename DataT>
-inline DataT CsBlock<DataT>::operator[](cs_size_t pos) const
+inline const DataT &CsBlock<DataT>::operator[](cs_size_t pos) const
 {
 	CS_ASSERT(pos < m_nSize);
 	return *(m_pMemory + pos);

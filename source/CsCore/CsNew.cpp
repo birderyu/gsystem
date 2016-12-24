@@ -25,3 +25,8 @@ cs_pointer CsMemoryCopy(cs_void *dst, const cs_void *src, cs_size_t size)
 {
 	return memcpy(dst, src, size);
 }
+
+cs_pointer CsMemoryMove(cs_void *dst, const cs_void *src, cs_size_t size)
+{
+	return memmove(dst, src, size);
+}

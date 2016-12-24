@@ -87,7 +87,14 @@ public:
 	~CsString();
 
 	cs_size_t Size() const;
-	cs_char GetAt(cs_size_t id) const;
+	cs_bool Resize(cs_size_t);
+
+	cs_char GetAt(cs_size_t) const;
+	cs_char &GetAt(cs_size_t);
+
+	const cs_char *Cursor(cs_size_t pos) const;
+	cs_char *Cursor(cs_size_t pos);
+
 	cs_bool Equals(const CsString &, cs_bool bIsSensitive = true) const;
 
 	friend CS_API CsString operator+(const CsString &s1, const CsString &s2);
@@ -96,7 +103,8 @@ public:
 	cs_bool operator == (const CsString &sStr) const;
 	CsString &operator=(const CsString &sStr);
 	CsString &operator+=(const CsString &sStr);
-	cs_char operator[](cs_size_t id) const;
+	cs_char operator[](cs_size_t) const;
+	cs_char &operator[](cs_size_t);
 
 	cs_small ToSmall(cs_bool *bIsOk = NULL) const;
 	cs_usmall ToUSmall(cs_bool *bIsOk = NULL) const;
@@ -142,6 +150,7 @@ private:
 	cs_void Free();
 	CsString &ToValue();
 	CsStringStore::TYPE GetTypeBySize(cs_size_t) const;
+	cs_bool Switch(CsStringStore::TYPE);
 
 	CsStringStore m_tStringStore;
 };
