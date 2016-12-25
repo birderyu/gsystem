@@ -79,6 +79,12 @@
     <Filter Include="头文件\Json">
       <UniqueIdentifier>{fb346320-596c-4403-942e-e4a5166dec78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Application">
+      <UniqueIdentifier>{5f98c0c4-ed1c-44ae-957d-3f3d2dcd45bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Xml">
+      <UniqueIdentifier>{e174cf53-bdb6-454f-918f-e15034a39c6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsDefine.h">
@@ -435,6 +441,18 @@
     <ClInclude Include="..\..\..\private\CsCore\CsTextFile_Ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h">
+      <Filter>头文件\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsArrayQueue.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsQueue.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">
@@ -701,6 +719,12 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\CsCore\CsBlock.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsArrayQueue.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsListQueue.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

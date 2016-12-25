@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsAmazing.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsArrayQueue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsArrayStack.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsAtomic.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsAvlTree.h" />
@@ -105,6 +106,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsFile.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsQueue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsRegister.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSerialize.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDate.h" />
@@ -273,11 +277,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\CsCore\CsArray.inl" />
+    <None Include="..\..\..\include\CsCore\CsArrayQueue.inl" />
     <None Include="..\..\..\include\CsCore\CsArrayStack.inl" />
     <None Include="..\..\..\include\CsCore\CsAtomic.inl" />
     <None Include="..\..\..\include\CsCore\CsBinaryHeap.inl" />
     <None Include="..\..\..\include\CsCore\CsBlock.inl" />
     <None Include="..\..\..\include\CsCore\CsLinkedList.inl" />
+    <None Include="..\..\..\include\CsCore\CsListQueue.inl" />
     <None Include="..\..\..\include\CsCore\CsLockGuard.inl" />
     <None Include="..\..\..\include\CsCore\CsBinarySortTree.inl" />
     <None Include="..\..\..\include\CsCore\CsBinaryTree.inl" />

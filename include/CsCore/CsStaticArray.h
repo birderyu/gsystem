@@ -17,6 +17,7 @@ public:
 	CsStaticArray(const DataT &);
 
 	cs_size_t Size() const;
+	cs_bool IsEmpty() const;
 
 	DataT &GetAt(cs_size_t);
 	const DataT &GetAt(cs_size_t) const;

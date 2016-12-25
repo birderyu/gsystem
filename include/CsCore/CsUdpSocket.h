@@ -3,7 +3,7 @@
 
 #include "CsSocket.h"
 
-class CS_API CsUdpSocket 
+class CS_API CsUdpSocket final
 	: public CsSocket
 {
 public:

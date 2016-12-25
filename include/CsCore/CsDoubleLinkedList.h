@@ -15,59 +15,79 @@
 #include "CsStructure.h"
 
 template<typename DataT>
-class CsDoubleLinkedList 
-	: public CsLinkedList<DataT>
+struct CsDoubleLinkedListNode
+	: public CsPreviousNextNodeT<CsDoubleLinkedListNode<DataT>>
+	, public CsDataNodeT<DataT>
+	, public CsNewT<CsDoubleLinkedListNode<DataT>>
 {
-	template<typename DataT>
-	struct CsDoubleLinkedListNode
-		: public CsDoubleLinkedListNodeT<CsDoubleLinkedListNode<DataT>>
-		, public CsDataNodeT<DataT>
-		, public CsNewT<CsDoubleLinkedListNode<DataT>>
+	CsDoubleLinkedListNode(const DataT &data = DataT(),
+		CsDoubleLinkedListNode<DataT> *previous = NULL,
+		CsDoubleLinkedListNode<DataT> *next = NULL)
+		: CsPreviousNextNodeT<CsDoubleLinkedListNode<DataT>>(previous, next)
+		, CsDataNodeT<DataT>(data)
 	{
-		CsDoubleLinkedListNode(const DataT &data = DataT(),
-			CsDoubleLinkedListNode<DataT> *previous = NULL,
-			CsDoubleLinkedListNode<DataT> *next = NULL)
-			: CsDoubleLinkedListNodeT<CsDoubleLinkedListNode<DataT>>(previous, next)
-			, CsDataNodeT<DataT>(data)
-		{
 
-		}
-	};
-	
-	typedef CsDoubleLinkedListNode<DataT> Node;
+	}
+};
 
+template<typename DataT, typename NodeT = CsDoubleLinkedListNode<DataT>>
+class CsDoubleLinkedList 
+	: public CsLinkedList<DataT, NodeT>
+{
 public:
 	CsDoubleLinkedList();
 	CsDoubleLinkedList(const DataT &data);
-	CsDoubleLinkedList(const CsDoubleLinkedList<DataT> &other);
-	CsDoubleLinkedList<DataT>& operator=(const CsDoubleLinkedList<DataT> &other);
+	CsDoubleLinkedList(const CsDoubleLinkedList<DataT, NodeT> &other);
+	CsDoubleLinkedList<DataT, NodeT> &operator=(const CsDoubleLinkedList<DataT, NodeT> &other);
 	~CsDoubleLinkedList();
 
 public:
-	cs_void Invert();
-	cs_bool IsEmpty() const;
 	cs_size_t Size() const;
+	cs_bool IsEmpty() const;
+	
+	cs_void Invert();
+
 	cs_bool InsertBefore(cs_size_t pos, const DataT &data);
+	cs_bool InsertBefore(NodeT *node, const DataT &data);
 	cs_bool InsertAfter(cs_size_t pos, const DataT &data);
+	cs_bool InsertAfter(NodeT *node, const DataT &data);
+
 	cs_bool AddHead(const DataT &data);
 	cs_bool AddTail(const DataT &data);
+
+	cs_void Remove(NodeT *node);
 	cs_void RemoveAt(cs_size_t pos);
 	cs_void RemoveHead();
 	cs_void RemoveTail();
 	cs_void RemoveAll();
-	DataT& GetTail();
-	DataT  GetTail() const;
-	DataT& GetHead();
-	DataT  GetHead() const;
-	DataT& GetAt(cs_size_t pos);
-	DataT  GetAt(cs_size_t pos) const;
-	cs_void SetAt(cs_size_t pos, const DataT &data);
-	cs_size_t IndexOf(const DataT &data) const;
-	cs_size_t FindCircle() const;
-	cs_size_t FindCross(const CsDoubleLinkedList &list);
 
-	DataT &operator[](cs_size_t id);
-	DataT operator[](cs_size_t id) const;
+	NodeT *GetHeadNode();
+	const NodeT *GetHeadNode() const;
+	NodeT *GetTailNode();
+	const NodeT *GetTailNode() const;
+	NodeT *GetNodeAt(cs_size_t pos);
+	const NodeT *GetNodeAt(cs_size_t pos) const;
+
+	DataT &GetTail();
+	const DataT &GetTail() const;
+	DataT &GetHead();
+	const DataT &GetHead() const;
+	DataT &GetAt(cs_size_t pos);
+	const DataT &GetAt(cs_size_t pos) const;
+	cs_void SetAt(cs_size_t pos, const DataT &data);
+
+	cs_size_t IndexOf(const DataT &data) const;
+	NodeT *Find(const DataT &data);
+	const NodeT *Find(const DataT &data) const;
+
+	cs_size_t IndexOfCircle() const;
+	NodeT *FindCircle();
+	const NodeT *FindCircle() const;
+
+	cs_size_t IndexOfCross(const CsLinkedList<DataT, NodeT> &);
+
+	DataT &operator[](cs_size_t pos);
+	const DataT &operator[](cs_size_t pos) const;
 
 protected:
 	cs_size_t m_nSize;

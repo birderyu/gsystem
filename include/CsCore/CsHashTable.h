@@ -12,7 +12,7 @@
 
 template<typename KeyT, typename ValueT>
 struct CsHashTableNode 
-	: public CsSingleLinkedListNodeT<CsHashTableNode<KeyT, ValueT>>
+	: public CsNextNodeT<CsHashTableNode<KeyT, ValueT>>
 	, public CsKeyValueNodeT<KeyT, ValueT>
 	, public CsNewT<CsHashTableNode<KeyT, ValueT>>
 {

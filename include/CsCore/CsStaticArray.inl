@@ -23,6 +23,12 @@ inline cs_size_t CsStaticArray<DataT, ARRAY_SIZE>::Size() const
 }
 
 template <typename DataT, cs_size_t ARRAY_SIZE>
+inline cs_bool CsStaticArray<DataT, ARRAY_SIZE>::IsEmpty() const
+{
+	return ARRAY_SIZE == 0;
+}
+
+template <typename DataT, cs_size_t ARRAY_SIZE>
 inline DataT &CsStaticArray<DataT, ARRAY_SIZE>::GetAt(cs_size_t pos)
 {
 	CS_ASSERT(pos < ARRAY_SIZE);

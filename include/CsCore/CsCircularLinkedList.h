@@ -14,17 +14,20 @@
 
 #include "CsSingleLinkedList.h" 
 
-template<typename DataT>
+template<typename DataT, typename NodeT = CsSingleLinkedListNode<DataT>>
 class CsCircularLinkedList 
-	: public CsSingleLinkedList<DataT>
+	: public CsSingleLinkedList<DataT, NodeT>
 {
 public:
 	CsCircularLinkedList();
 
 public:
-	DataT& GetNext();
+	Node *GetNext();
+	const Node *GetNext() const;
 	cs_void RemoveAt(cs_size_t pos);
 	cs_size_t GetCurrentIndex() const;
+	Node *GetCurrentNode();
+	const Node *GetCurrentNode() const;
 
 protected:
 	Node *m_pCursor;

@@ -1,9 +1,9 @@
-#ifndef _CORE_NODE_H_
-#define _CORE_NODE_H_
+#ifndef _CORE_STRUCTURE_H_
+#define _CORE_STRUCTURE_H_
 
 #include "CsGlobal.h"
 
-/// 一维链表通用模式定义
+/// 一维表通用模式定义
 template<typename ListT>
 struct CsListT
 {
@@ -11,23 +11,33 @@ struct CsListT
 	static const cs_size_t NULL_POS = CS_LIST_NULL_POS;
 };
 
+/// 二维表通用模式定义
+template<typename TableT>
+struct CsTableT
+{
+	static const cs_size_t MAX_ROW_SIZE = CS_LIST_MAX_SIZE;
+	static const cs_size_t NULL_ROW_POS = CS_LIST_NULL_POS;
+	static const cs_size_t MAX_COLUMN_SIZE = CS_LIST_MAX_SIZE;
+	static const cs_size_t NULL_COLUMN_POS = CS_LIST_NULL_POS;
+};
+
 /// 单向链表节点
 template<typename NodeT>
-struct CsSingleLinkedListNodeT
+struct CsNextNodeT
 {
 	NodeT *m_pNext;
 
-	CsSingleLinkedListNodeT(NodeT *);
+	CsNextNodeT(NodeT *);
 };
 
 /// 双向链表节点
 template<typename NodeT>
-struct CsDoubleLinkedListNodeT
+struct CsPreviousNextNodeT
 {
 	NodeT *m_pPrevious;
 	NodeT *m_pNext;
 
-	CsDoubleLinkedListNodeT(NodeT *previous, NodeT *next);
+	CsPreviousNextNodeT(NodeT *previous, NodeT *next);
 };
 
 /// 二叉树节点
@@ -70,6 +80,15 @@ struct CsDataNodeT
 	CsDataNodeT(const DataT &);
 };
 
+/// 单孩子节点
+template<typename NodeT>
+struct CsChildNodeT
+{
+	NodeT *m_pChild;
+
+	CsChildNodeT(const NodeT *);
+};
+
 /// 键值对节点
 template<typename KeyT, typename ValueT>
 struct CsKeyValueNodeT
@@ -82,4 +101,4 @@ struct CsKeyValueNodeT
 
 #include "CsStructure.inl"
 
-#endif // _CORE_NODE_H_
+#endif // _CORE_STRUCTURE_H_

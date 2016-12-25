@@ -29,7 +29,7 @@ cs_void SingleLinkedListTest()
 
 	list.AddTail(0);
 
-	cs_int fc = list.FindCircle();
+	cs_int fc = list.IndexOfCircle();
 
 	int stop = 1;
 	stop++;
@@ -43,12 +43,12 @@ cs_void CircularLinkedTest()
 	list.AddTail(3);
 	list.AddTail(4);
 
-	cs_int i1 = list.GetNext();
-	cs_int i2 = list.GetNext();
-	cs_int i3 = list.GetNext();
-	cs_int i4 = list.GetNext();
-	cs_int i5 = list.GetNext();
-	cs_int i6 = list.GetNext();
+	cs_int i1 = list.GetNext()->m_tData;
+	cs_int i2 = list.GetNext()->m_tData;
+	cs_int i3 = list.GetNext()->m_tData;
+	cs_int i4 = list.GetNext()->m_tData;
+	cs_int i5 = list.GetNext()->m_tData;
+	cs_int i6 = list.GetNext()->m_tData;
 
 	int stop = 1;
 	stop++;

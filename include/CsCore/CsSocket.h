@@ -1,7 +1,7 @@
 #ifndef _CORE_SOCKET_H_
 #define _CORE_SOCKET_H_
 
-#include "CsObject.h"
+#include "CsGlobal.h"
 
 class CsSocket_Ex;
 class CsSockAddress;
@@ -9,6 +9,7 @@ class CsSockAddress;
 class CS_API CsSocket 
 {
 public:
+	CsSocket(CsSocket_Ex *);
 	virtual ~CsSocket() = 0;
 
 	virtual cs_bool Open(cs_bool nResue = false) = 0;
@@ -27,7 +28,6 @@ public:
 	cs_bool GetLocalAddr(CsSockAddress &tSockAddr) const;
 
 protected:
-	CsSocket(CsSocket_Ex *);
 	CsSocket_Ex *m_pSocket_Ex;
 };
 

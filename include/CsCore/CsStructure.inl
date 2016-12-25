@@ -1,9 +1,9 @@
-#ifndef _CORE_NODE_INLINE_
-#define _CORE_NODE_INLINE_
+#ifndef _CORE_STRUCTURE_INLINE_
+#define _CORE_STRUCTURE_INLINE_
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-inline CsSingleLinkedListNodeT<NodeT>::CsSingleLinkedListNodeT(NodeT *next)
+inline CsNextNodeT<NodeT>::CsNextNodeT(NodeT *next)
 : m_pNext(next)
 {
 
@@ -11,7 +11,7 @@ inline CsSingleLinkedListNodeT<NodeT>::CsSingleLinkedListNodeT(NodeT *next)
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-inline CsDoubleLinkedListNodeT<NodeT>::CsDoubleLinkedListNodeT(NodeT *previous, NodeT *next)
+inline CsPreviousNextNodeT<NodeT>::CsPreviousNextNodeT(NodeT *previous, NodeT *next)
 : m_pPrevious(previous), m_pNext(next)
 {
 
@@ -174,6 +174,14 @@ inline CsDataNodeT<DataT>::CsDataNodeT(const DataT &data)
 }
 
 //////////////////////////////////////////////////////////////////////////
+template<typename NodeT>
+inline CsChildNodeT<NodeT>::CsChildNodeT(const NodeT *child)
+: m_pChild(child)
+{
+
+}
+
+//////////////////////////////////////////////////////////////////////////
 template<typename KeyT, typename ValueT>
 inline CsKeyValueNodeT<KeyT, ValueT>::CsKeyValueNodeT(const KeyT &key, const ValueT &value)
 : m_tKey(key)
@@ -182,4 +190,4 @@ inline CsKeyValueNodeT<KeyT, ValueT>::CsKeyValueNodeT(const KeyT &key, const Val
 
 }
 
-#endif // _CORE_NODE_INLINE_
+#endif // _CORE_STRUCTURE_INLINE_

@@ -5,7 +5,7 @@ template<typename KeyT, typename ValueT>
 inline CsHashTableNode<KeyT, ValueT>::CsHashTableNode(const KeyT &key,
 	const ValueT &value,
 	CsHashTableNode<KeyT, ValueT> *next)
-	: CsSingleLinkedListNodeT<CsHashTableNode<KeyT, ValueT>>(next)
+	: CsNextNodeT<CsHashTableNode<KeyT, ValueT>>(next)
 	, CsKeyValueNodeT<KeyT, ValueT>(key, value)
 {
 
