@@ -1,0 +1,4 @@
+#ifndef _CORE_LIST_QUEUE_INLINE_
+#define _CORE_LIST_QUEUE_INLINE_
+
+#endif // _CORE_LIST_QUEUE_INLINE_

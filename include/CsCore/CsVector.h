@@ -1,3 +1,4 @@
+// 使用动态数组实现
 #ifndef _CORE_VECTOR_H_
 #define _CORE_VECTOR_H_
 
@@ -89,13 +90,13 @@ public:
 	cs_bool IsEmpty() const;
 	cs_void Clear(); // 清空数组，不变销毁数据
 	cs_void Dispose(); // 销毁所有数据
-	cs_void Collect(); // 回收垃圾
+	//cs_void Collect(); // 回收垃圾
 
 	DataT &GetAt(cs_size_t);
-	DataT  GetAt(cs_size_t) const;
+	const DataT &GetAt(cs_size_t) const;
 
 	DataT &operator[](cs_size_t);
-	DataT  operator[](cs_size_t) const;
+	const DataT &operator[](cs_size_t) const;
 
 	cs_void PushBack(const DataT &data);
 	cs_void PushFront(const DataT &data);

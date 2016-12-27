@@ -453,6 +453,12 @@
     <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsXmlNode.h">
+      <Filter>头文件\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsFinal.h">
+      <Filter>头文件\Pattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">
@@ -725,6 +731,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\CsCore\CsListQueue.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsList.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

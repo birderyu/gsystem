@@ -51,29 +51,29 @@ public:
 	cs_bool InsertAfter(cs_size_t pos, const DataT &data);
 	cs_bool InsertAfter(NodeT *node, const DataT &data);
 
-	cs_bool AddHead(const DataT &data);
-	cs_bool AddTail(const DataT &data);
+	cs_bool AddFirst(const DataT &data);
+	cs_bool AddLast(const DataT &data);
 
 	cs_void Remove(NodeT *node);
 	virtual cs_void RemoveAt(cs_size_t pos);
-	cs_void RemoveHead();
-	cs_void RemoveTail();
+	cs_void RemoveFirst();
+	cs_void RemoveLast();
 	cs_void RemoveAll();
 
-	NodeT *GetHeadNode();
-	const NodeT *GetHeadNode() const;
-	NodeT *GetTailNode();
-	const NodeT *GetTailNode() const;
+	NodeT *GetFirstNode();
+	const NodeT *GetFirstNode() const;
+	NodeT *GetLastNode();
+	const NodeT *GetLastNode() const;
 	NodeT *GetNodeAt(cs_size_t pos);
 	const NodeT *GetNodeAt(cs_size_t pos) const;
 
-	DataT &GetTail();
-	const DataT &GetTail() const;
-	DataT &GetHead();
-	const DataT &GetHead() const;
-	DataT &GetAt(cs_size_t pos);
-	const DataT &GetAt(cs_size_t pos) const;
-	cs_void SetAt(cs_size_t pos, const DataT &data);
+	DataT &GetLastData();
+	const DataT &GetLastData() const;
+	DataT &GetFirstData();
+	const DataT &GetFirstData() const;
+	DataT &GetDataAt(cs_size_t pos);
+	const DataT &GetDataAt(cs_size_t pos) const;
+	cs_void SetDataAt(cs_size_t pos, const DataT &data);
 
 	// 不存在则返回NULL_POS
 	cs_size_t IndexOf(const DataT &data) const;
@@ -93,7 +93,7 @@ public:
 
 protected:
 	cs_size_t m_nSize;
-	Node *m_pHead;
+	Node *m_pFirst;
 };
 
 #include "CsSingleLinkedList.inl"

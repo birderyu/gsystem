@@ -43,7 +43,7 @@ inline cs_void CsListStack<DataT>::Dispose()
 template<typename DataT>
 inline cs_bool CsListStack<DataT>::Push(const DataT& data)
 {
-	return m_tList.AddHead(data);
+	return m_tList.AddFirst(data);
 }
 
 template<typename DataT>
@@ -59,7 +59,7 @@ inline cs_bool CsListStack<DataT>::Pop(DataT *data)
 		Top(*data);
 	}
 
-	m_tList.RemoveHead();
+	m_tList.RemoveFirst();
 	return true;
 }
 
@@ -71,7 +71,7 @@ inline cs_bool CsListStack<DataT>::Top(DataT &data) const
 		return false;
 	}
 
-	data = m_tList.GetHead();
+	data = m_tList.GetFirstData();
 	return true;
 }
 

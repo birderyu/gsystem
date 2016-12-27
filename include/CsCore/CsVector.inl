@@ -169,7 +169,7 @@ inline DataT &CsVector<DataT>::GetAt(cs_size_t pos)
 }
 
 template <typename DataT>
-inline DataT CsVector<DataT>::GetAt(cs_size_t pos) const
+inline const DataT &CsVector<DataT>::GetAt(cs_size_t pos) const
 {
 	CS_ASSERT(pos < Size());
 	cs_size_t real_pos = RealPos(pos);
@@ -187,7 +187,7 @@ inline DataT &CsVector<DataT>::operator[](cs_size_t pos)
 }
 
 template <typename DataT>
-inline DataT CsVector<DataT>::operator[](cs_size_t pos) const
+inline const DataT &CsVector<DataT>::operator[](cs_size_t pos) const
 {
 	CS_ASSERT(pos < Size());
 	cs_size_t real_pos = RealPos(pos);

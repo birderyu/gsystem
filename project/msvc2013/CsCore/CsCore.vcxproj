@@ -104,6 +104,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsCriticalSection.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsCStringHelper.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsFile.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsFinal.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsWeakPointer.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsWideCharacter.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsFunctor.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsXmlNode.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsBinaryFile_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsDateTime_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsFile_Ex.h" />
@@ -283,6 +285,7 @@
     <None Include="..\..\..\include\CsCore\CsBinaryHeap.inl" />
     <None Include="..\..\..\include\CsCore\CsBlock.inl" />
     <None Include="..\..\..\include\CsCore\CsLinkedList.inl" />
+    <None Include="..\..\..\include\CsCore\CsList.inl" />
     <None Include="..\..\..\include\CsCore\CsListQueue.inl" />
     <None Include="..\..\..\include\CsCore\CsLockGuard.inl" />
     <None Include="..\..\..\include\CsCore\CsBinarySortTree.inl" />

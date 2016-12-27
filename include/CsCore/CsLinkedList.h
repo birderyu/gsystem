@@ -30,33 +30,37 @@ public:
 	virtual cs_bool InsertAfter(cs_size_t pos, const DataT &data) = 0;
 	virtual cs_bool InsertAfter(NodeT *node, const DataT &data) = 0;
 
-	virtual cs_bool AddHead(const DataT &data) = 0;
-	virtual cs_bool AddTail(const DataT &data) = 0;
+	virtual cs_bool AddFirst(const DataT &data) = 0;
+	virtual cs_bool AddLast(const DataT &data) = 0;
 
 	virtual cs_void Remove(NodeT *node) = 0;
 	virtual cs_void RemoveAt(cs_size_t pos) = 0;
-	virtual cs_void RemoveHead() = 0;
-	virtual cs_void RemoveTail() = 0;
+	virtual cs_void RemoveFirst() = 0;
+	virtual cs_void RemoveLast() = 0;
 	virtual cs_void RemoveAll() = 0;
 
-	virtual NodeT *GetHeadNode() = 0;
-	virtual const NodeT *GetHeadNode() const = 0;
-	virtual NodeT *GetTailNode() = 0;
-	virtual const NodeT *GetTailNode() const = 0;
+	virtual NodeT *GetFirstNode() = 0;
+	virtual const NodeT *GetFirstNode() const = 0;
+	virtual NodeT *GetLastNode() = 0;
+	virtual const NodeT *GetLastNode() const = 0;
 	virtual NodeT *GetNodeAt(cs_size_t pos) = 0;
 	virtual const NodeT *GetNodeAt(cs_size_t pos) const = 0;
 
-	virtual DataT &GetTail() = 0;
-	virtual const DataT &GetTail() const = 0;
-	virtual DataT &GetHead() = 0;
-	virtual const DataT &GetHead() const = 0;
-	virtual DataT &GetAt(cs_size_t pos) = 0;
-	virtual const DataT &GetAt(cs_size_t pos) const = 0;
-	virtual cs_void SetAt(cs_size_t pos, const DataT &data) = 0;
+	virtual DataT &GetFirstData() = 0;
+	virtual const DataT &GetFirstData() const = 0;
+	virtual DataT &GetLastData() = 0;
+	virtual const DataT &GetLastData() const = 0;
+	virtual DataT &GetDataAt(cs_size_t pos) = 0;
+	virtual const DataT &GetDataAt(cs_size_t pos) const = 0;
+	virtual cs_void SetDataAt(cs_size_t pos, const DataT &data) = 0;
 
 	virtual cs_size_t IndexOf(const DataT &data) const = 0;
 	virtual NodeT *Find(const DataT &data) = 0;
 	virtual const NodeT *Find(const DataT &data) const = 0;
+
+	//virtual cs_bool Contains(const DataT &data) const = 0;
+	//virtual cs_size_t LastIndexOf(const DataT &data) const = 0;
+	//virtual cs_size_t CountOf(const DataT &data) const = 0;
 
 	virtual cs_size_t IndexOfCircle() const = 0;
 	virtual NodeT *FindCircle() = 0;

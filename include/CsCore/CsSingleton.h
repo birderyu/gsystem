@@ -1,5 +1,4 @@
 // 一个线程安全的单例模式基类
-
 #ifndef _CORE_SINGLETON_H_
 #define _CORE_SINGLETON_H_
 

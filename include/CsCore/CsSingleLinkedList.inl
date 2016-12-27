@@ -3,26 +3,26 @@
 
 template<typename DataT, typename NodeT>
 inline CsSingleLinkedList<DataT, NodeT>::CsSingleLinkedList()
-: m_nSize(0), m_pHead(NULL)
+: m_nSize(0), m_pFirst(NULL)
 {
 }
 
 template<typename DataT, typename NodeT>
 inline CsSingleLinkedList<DataT, NodeT>::CsSingleLinkedList(const DataT &data)
-: m_nSize(0), m_pHead(NULL)
+: m_nSize(0), m_pFirst(NULL)
 {
-	AddHead(data);
+	AddFirst(data);
 }
 
 template<typename DataT, typename NodeT>
 inline CsSingleLinkedList<DataT, NodeT>::CsSingleLinkedList(const CsSingleLinkedList<DataT, NodeT> &other)
-: m_nSize(0), m_pHead(NULL)
+: m_nSize(0), m_pFirst(NULL)
 {
 	if (other.m_nLength > 0)
 	{
 		for (cs_size_t i = 0; i < other.m_nLength; i++)
 		{
-			AddTail(other.GetAt(i));
+			AddLast(other.GetAt(i));
 		}
 	}
 }
@@ -44,7 +44,7 @@ inline CsSingleLinkedList<DataT, NodeT>& CsSingleLinkedList<DataT, NodeT>::opera
 	{
 		for (cs_size_t i = 0; i < other.m_nLength; i++)
 		{
-			AddTail(other.GetAt(i));
+			AddLast(other.GetAt(i));
 		}
 	}
 	return *this;
@@ -73,7 +73,7 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::Invert()
 {
 	if (m_nSize <= 1) return;
 
-	NodeT *cur_node = m_pHead, *pre_node = NULL, *next_node = m_pHead;
+	NodeT *cur_node = m_pFirst, *pre_node = NULL, *next_node = m_pFirst;
 	for (cs_size_t i = 1; i <= m_nSize; i++)
 	{
 		next_node = cur_node->m_pNext;
@@ -81,26 +81,26 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::Invert()
 		pre_node = cur_node;
 		cur_node = next_node;
 	}
-	m_pHead = pre_node;
+	m_pFirst = pre_node;
 	return;
 }
 
 template<typename DataT, typename NodeT>
-inline cs_bool CsSingleLinkedList<DataT, NodeT>::AddHead(const DataT &data)
+inline cs_bool CsSingleLinkedList<DataT, NodeT>::AddFirst(const DataT &data)
 {
 	NodeT *pNewNode = new NodeT(data);
 	if (!pNewNode)
 	{
 		return false;
 	}
-	pNewNode->m_pNext = m_pHead;
-	m_pHead = pNewNode;
+	pNewNode->m_pNext = m_pFirst;
+	m_pFirst = pNewNode;
 	++m_nSize;
 	return true;
 }
 
 template<typename DataT, typename NodeT>
-inline cs_bool CsSingleLinkedList<DataT, NodeT>::AddTail(const DataT &data)
+inline cs_bool CsSingleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
 {
 	return InsertAfter(m_nSize - 1, data);
 }
@@ -113,13 +113,13 @@ inline cs_bool CsSingleLinkedList<DataT, NodeT>::InsertBefore(cs_size_t pos, con
 		return false;
 	}
 
-	if (NULL == m_pHead || 0 == pos)
+	if (NULL == m_pFirst || 0 == pos)
 	{
-		return AddHead(data);
+		return AddFirst(data);
 	}
 
 	CS_ASSERT(pos < m_nSize);
-	NodeT *pTmpNode1 = m_pHead;
+	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = NULL;
 	for (cs_size_t i = 0; i < pos; ++i)
 	{
@@ -147,7 +147,7 @@ inline cs_bool CsSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const
 		return false;
 	}
 
-	NodeT *pTmpNode1 = m_pHead;
+	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = NULL;
 	while (pTmpNode1)
 	{
@@ -174,9 +174,9 @@ inline cs_bool CsSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const
 	{
 		pTmpNode2->m_pNext = pNewNode;
 	}
-	if (m_pHead == node)
+	if (m_pFirst == node)
 	{
-		m_pHead = pNewNode;
+		m_pFirst = pNewNode;
 	}
 	++m_nSize;
 	return true;
@@ -185,13 +185,13 @@ inline cs_bool CsSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const
 template<typename DataT, typename NodeT>
 inline cs_bool CsSingleLinkedList<DataT, NodeT>::InsertAfter(cs_size_t pos, const DataT &data)
 {
-	if (NULL == m_pHead)
+	if (NULL == m_pFirst)
 	{
-		return AddHead(data);
+		return AddFirst(data);
 	}
 
 	CS_ASSERT(pos < m_nSize);
-	NodeT *pTmpNode = m_pHead;
+	NodeT *pTmpNode = m_pFirst;
 	for (cs_size_t i = 0; i < pos; ++i)
 	{
 		pTmpNode = pTmpNode->m_pNext;
@@ -236,13 +236,13 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::Remove(NodeT *node)
 		return;
 	}
 
-	if (node == m_pHead)
+	if (node == m_pFirst)
 	{
-		RemoveHead();
+		RemoveFirst();
 		return;
 	}
 
-	NodeT *pTmpNode1 = m_pHead;
+	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = NULL;
 	while (pTmpNode1)
 	{
@@ -272,11 +272,11 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveAt(cs_size_t pos)
 
 	if (0 == pos)
 	{
-		RemoveHead();
+		RemoveFirst();
 		return;
 	}
 
-	NodeT *pTmpNode1 = m_pHead;
+	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = NULL;
 	for (cs_size_t i = 0; i < pos; ++i)
 	{
@@ -290,15 +290,15 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveAt(cs_size_t pos)
 }
 
 template<typename DataT, typename NodeT>
-inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveHead()
+inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveFirst()
 {
-	if (!m_pHead)
+	if (!m_pFirst)
 	{
 		return;
 	}
 
-	NodeT *pTmpNode = m_pHead;
-	m_pHead = m_pHead->m_pNext;
+	NodeT *pTmpNode = m_pFirst;
+	m_pFirst = m_pFirst->m_pNext;
 
 	delete pTmpNode;
 	--m_nSize;
@@ -306,7 +306,7 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveHead()
 }
 
 template<typename DataT, typename NodeT>
-inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveTail()
+inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveLast()
 {
 	CS_ASSERT(0 != m_nSize);
 	RemoveAt(m_nSize - 1);
@@ -323,31 +323,31 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::RemoveAll()
 	NodeT *pTmpNode = NULL;
 	for (cs_size_t i = 0; i < m_nSize; ++i)
 	{
-		pTmpNode = m_pHead->m_pNext;
-		delete m_pHead;
-		m_pHead = pTmpNode;
+		pTmpNode = m_pFirst->m_pNext;
+		delete m_pFirst;
+		m_pFirst = pTmpNode;
 	}
 
-	m_pHead = NULL;
+	m_pFirst = NULL;
 	m_nSize = 0;
 }
 
 template<typename DataT, typename NodeT>
-inline NodeT *CsSingleLinkedList<DataT, NodeT>::GetHeadNode()
+inline NodeT *CsSingleLinkedList<DataT, NodeT>::GetFirstNode()
 {
-	return m_pHead;
+	return m_pFirst;
 }
 
 template<typename DataT, typename NodeT>
-inline const NodeT *CsSingleLinkedList<DataT, NodeT>::GetHeadNode() const
+inline const NodeT *CsSingleLinkedList<DataT, NodeT>::GetFirstNode() const
 {
-	return m_pHead;
+	return m_pFirst;
 }
 
 template<typename DataT, typename NodeT>
-inline NodeT *CsSingleLinkedList<DataT, NodeT>::GetTailNode()
+inline NodeT *CsSingleLinkedList<DataT, NodeT>::GetLastNode()
 {
-	NodeT *pTmpNode1 = m_pHead;
+	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = NULL;
 	while (pTmpNode1)
 	{
@@ -358,9 +358,9 @@ inline NodeT *CsSingleLinkedList<DataT, NodeT>::GetTailNode()
 }
 
 template<typename DataT, typename NodeT>
-inline const NodeT *CsSingleLinkedList<DataT, NodeT>::GetTailNode() const
+inline const NodeT *CsSingleLinkedList<DataT, NodeT>::GetLastNode() const
 {
-	const NodeT *pTmpNode1 = m_pHead;
+	const NodeT *pTmpNode1 = m_pFirst;
 	const NodeT *pTmpNode2 = NULL;
 	while (pTmpNode1)
 	{
@@ -374,7 +374,7 @@ template<typename DataT, typename NodeT>
 inline NodeT *CsSingleLinkedList<DataT, NodeT>::GetNodeAt(cs_size_t pos)
 {
 	CS_ASSERT(pos < m_nSize);
-	NodeT *pTmpNode = m_pHead;
+	NodeT *pTmpNode = m_pFirst;
 	for (cs_size_t i = 0; i < pos; ++i)
 	{
 		pTmpNode = pTmpNode->m_pNext;
@@ -386,7 +386,7 @@ template<typename DataT, typename NodeT>
 inline const NodeT *CsSingleLinkedList<DataT, NodeT>::GetNodeAt(cs_size_t pos) const
 {
 	CS_ASSERT(pos < m_nSize);
-	const NodeT *pTmpNode = m_pHead;
+	const NodeT *pTmpNode = m_pFirst;
 	for (cs_size_t i = 0; i < pos; ++i)
 	{
 		pTmpNode = pTmpNode->m_pNext;
@@ -395,37 +395,37 @@ inline const NodeT *CsSingleLinkedList<DataT, NodeT>::GetNodeAt(cs_size_t pos) c
 }
 
 template<typename DataT, typename NodeT>
-inline DataT &CsSingleLinkedList<DataT, NodeT>::GetHead()
+inline DataT &CsSingleLinkedList<DataT, NodeT>::GetFirstData()
 {
-	CS_ASSERT(m_pHead);
-	return m_pHead->m_tData;
+	CS_ASSERT(m_pFirst);
+	return m_pFirst->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetHead() const
+inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetFirstData() const
 {
-	CS_ASSERT(m_pHead);
-	return m_pHead->m_tData;
+	CS_ASSERT(m_pFirst);
+	return m_pFirst->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline DataT &CsSingleLinkedList<DataT, NodeT>::GetTail()
+inline DataT &CsSingleLinkedList<DataT, NodeT>::GetLastData()
 {
-	NodeT *pTail = GetTailNode();
+	NodeT *pTail = GetLastNode();
 	CS_ASSERT(pTail);
 	return pTail->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetTail() const
+inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetLastData() const
 {
-	const NodeT *pTail = GetTailNode();
+	const NodeT *pTail = GetLastNode();
 	CS_ASSERT(pTail);
 	return pTail->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline DataT &CsSingleLinkedList<DataT, NodeT>::GetAt(cs_size_t pos)
+inline DataT &CsSingleLinkedList<DataT, NodeT>::GetDataAt(cs_size_t pos)
 {
 	NodeT *node = GetNodeAt(pos);
 	CS_ASSERT(node);
@@ -433,7 +433,7 @@ inline DataT &CsSingleLinkedList<DataT, NodeT>::GetAt(cs_size_t pos)
 }
 
 template<typename DataT, typename NodeT>
-inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetAt(cs_size_t pos) const
+inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetDataAt(cs_size_t pos) const
 {
 	const NodeT *node = GetNodeAt(pos);
 	CS_ASSERT(node);
@@ -441,10 +441,10 @@ inline const DataT &CsSingleLinkedList<DataT, NodeT>::GetAt(cs_size_t pos) const
 }
 
 template<typename DataT, typename NodeT>
-inline cs_void CsSingleLinkedList<DataT, NodeT>::SetAt(cs_size_t pos, const DataT &data)
+inline cs_void CsSingleLinkedList<DataT, NodeT>::SetDataAt(cs_size_t pos, const DataT &data)
 {
 	CS_ASSERT(pos < m_nSize);
-	NodeT *pTmpNode = m_pHead;
+	NodeT *pTmpNode = m_pFirst;
 	for (cs_size_t i = 0; i < pos; ++i)
 	{
 		pTmpNode = pTmpNode->m_pNext;
@@ -455,7 +455,7 @@ inline cs_void CsSingleLinkedList<DataT, NodeT>::SetAt(cs_size_t pos, const Data
 template<typename DataT, typename NodeT>
 inline cs_size_t CsSingleLinkedList<DataT, NodeT>::IndexOf(const DataT &data) const
 {
-	NodeT *pTmpNode = m_pHead;
+	NodeT *pTmpNode = m_pFirst;
 	for (cs_size_t i = 0; i < m_nSize; ++i)
 	{
 		if (data == pTmpNode->m_tData)
@@ -468,7 +468,7 @@ inline cs_size_t CsSingleLinkedList<DataT, NodeT>::IndexOf(const DataT &data) co
 template<typename DataT, typename NodeT>
 inline NodeT *CsSingleLinkedList<DataT, NodeT>::Find(const DataT &data)
 {
-	NodeT *pTmpNode = m_pHead;
+	NodeT *pTmpNode = m_pFirst;
 	while (pTmpNode)
 	{
 		if (data == pTmpNode->m_tData)
@@ -481,7 +481,7 @@ inline NodeT *CsSingleLinkedList<DataT, NodeT>::Find(const DataT &data)
 template<typename DataT, typename NodeT>
 inline const NodeT *CsSingleLinkedList<DataT, NodeT>::Find(const DataT &data) const
 {
-	const NodeT *pTmpNode = m_pHead;
+	const NodeT *pTmpNode = m_pFirst;
 	while (pTmpNode)
 	{
 		if (data == pTmpNode->m_tData)
@@ -499,8 +499,8 @@ inline cs_size_t CsSingleLinkedList<DataT, NodeT>::IndexOfCircle() const
 		return NULL_POS;
 	}
 
-	NodeT* p1 = m_pHead; // p1，步长为1
-	NodeT* p2 = m_pHead; // p2，步长为2
+	NodeT* p1 = m_pFirst; // p1，步长为1
+	NodeT* p2 = m_pFirst; // p2，步长为2
 
 	/*判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。*/
 	do
@@ -517,14 +517,14 @@ inline cs_size_t CsSingleLinkedList<DataT, NodeT>::IndexOfCircle() const
 	} while (p1 != p2);
 
 	/*求出环的起点节点，并将其返回*/
-	p2 = m_pHead;
+	p2 = m_pFirst;
 	while (p1 != p2)
 	{
 		p1 = p1->m_pNext;
 		p2 = p2->m_pNext;
 	}
 
-	p2 = m_pHead;
+	p2 = m_pFirst;
 	cs_size_t i = 0;
 	for (i = 0; i < m_nSize; i++)
 	{
@@ -542,8 +542,8 @@ inline NodeT *CsSingleLinkedList<DataT, NodeT>::FindCircle()
 		return NULL;
 	}
 
-	NodeT* p1 = m_pHead; // p1，步长为1
-	NodeT* p2 = m_pHead; // p2，步长为2
+	NodeT* p1 = m_pFirst; // p1，步长为1
+	NodeT* p2 = m_pFirst; // p2，步长为2
 
 	/*判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。*/
 	do
@@ -560,7 +560,7 @@ inline NodeT *CsSingleLinkedList<DataT, NodeT>::FindCircle()
 	} while (p1 != p2);
 
 	/*求出环的起点节点，并将其返回*/
-	p2 = m_pHead;
+	p2 = m_pFirst;
 	while (p1 != p2)
 	{
 		p1 = p1->m_pNext;
@@ -577,8 +577,8 @@ inline const NodeT *CsSingleLinkedList<DataT, NodeT>::FindCircle() const
 		return NULL;
 	}
 
-	const NodeT* p1 = m_pHead; // p1，步长为1
-	const NodeT* p2 = m_pHead; // p2，步长为2
+	const NodeT* p1 = m_pFirst; // p1，步长为1
+	const NodeT* p2 = m_pFirst; // p2，步长为2
 
 	/*判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。*/
 	do
@@ -595,7 +595,7 @@ inline const NodeT *CsSingleLinkedList<DataT, NodeT>::FindCircle() const
 	} while (p1 != p2);
 
 	/*求出环的起点节点，并将其返回*/
-	p2 = m_pHead;
+	p2 = m_pFirst;
 	while (p1 != p2)
 	{
 		p1 = p1->m_pNext;
@@ -619,13 +619,13 @@ inline cs_size_t CsSingleLinkedList<DataT, NodeT>::IndexOfCross(const CsLinkedLi
 	}
 
 	/*将第二个链表接在第一个链表后面*/
-	NodeT* pTail = m_pHead;
+	NodeT* pTail = m_pFirst;
 	for (cs_size_t i = 1; i < m_nSize; i++)
 	{
 		pTail = pTail->m_pNext;
 	}
 
-	pTail->m_pNext = const_cast<NodeT *>(list.GetHeadNode());
+	pTail->m_pNext = const_cast<NodeT *>(list.GetFirstNode());
 	m_nSize += list.Size();
 	cs_size_t i = IndexOfCircle();
 
@@ -637,13 +637,13 @@ inline cs_size_t CsSingleLinkedList<DataT, NodeT>::IndexOfCross(const CsLinkedLi
 template<typename DataT, typename NodeT>
 DataT &CsSingleLinkedList<DataT, NodeT>::operator[](cs_size_t pos)
 {
-	return GetAt(pos);
+	return GetDataAt(pos);
 }
 
 template<typename DataT, typename NodeT>
 const DataT &CsSingleLinkedList<DataT, NodeT>::operator[](cs_size_t pos) const
 {
-	return GetAt(pos);
+	return GetDataAt(pos);
 }
 
 #endif // _CORE_SINGLE_LINKED_LIST_INLINE_

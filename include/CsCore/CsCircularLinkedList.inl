@@ -14,7 +14,7 @@ inline typename CsLinkedList<DataT, NodeT>::Node *CsCircularLinkedList<DataT, No
 	CS_ASSERT(0 != m_nSize);
 
 	if ((NULL == m_pCursor) || (NULL == m_pCursor->m_pNext))
-		m_pCursor = m_pHead;
+		m_pCursor = m_pFirst;
 	else
 		m_pCursor = m_pCursor->m_pNext;
 
@@ -27,7 +27,7 @@ inline const typename CsLinkedList<DataT, NodeT>::Node *CsCircularLinkedList<Dat
 	CS_ASSERT(0 != m_nSize);
 
 	if ((NULL == m_pCursor) || (NULL == m_pCursor->m_pNext))
-		m_pCursor = m_pHead;
+		m_pCursor = m_pFirst;
 	else
 		m_pCursor = m_pCursor->m_pNext;
 
@@ -39,7 +39,7 @@ inline cs_size_t CsCircularLinkedList<DataT, NodeT>::GetCurrentIndex() const
 {
 	CS_ASSERT(0 != m_nSize);
 
-	NodeT *pTmpNode = m_pHead;
+	NodeT *pTmpNode = m_pFirst;
 	for (cs_size_t i = 0; i < m_nSize; ++i)
 	{
 		if (pTmpNode == m_pCursor)
@@ -67,10 +67,10 @@ inline cs_void CsCircularLinkedList<DataT, NodeT>::RemoveAt(cs_size_t pos)
 {
 	CS_ASSERT(pos < m_nSize);
 
-	NodeT *pTmpNode1 = m_pHead;
+	NodeT *pTmpNode1 = m_pFirst;
 	if (0 == pos)
 	{
-		m_pHead = m_pHead->m_pNext;
+		m_pFirst = m_pFirst->m_pNext;
 		m_pCursor = NULL;
 		delete pTmpNode1;
 		pTmpNode1 = NULL;
