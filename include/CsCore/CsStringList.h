@@ -2,7 +2,7 @@
 #define _CORE_STRING_LIST_H_
 
 #include "CsStringPool.h"
-#include <map>
+#include "CsMap.h"
 
 class CsString;
 
@@ -30,7 +30,7 @@ public:
 
 private:
 	CsStringPool m_tPool;
-	std::map<cs_size_t, cs_pointer> m_t; // <下标，指针>
+	CsMap<cs_size_t, cs_pointer> m_t; // <下标，指针>
 };
 
 #endif // _CORE_STRING_LIST_H_

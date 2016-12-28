@@ -100,7 +100,7 @@ public:
 	friend CS_API CsString operator+(const CsString &s1, const CsString &s2);
 
 	/// ‘ÀÀ„∑˚÷ÿ‘ÿ
-	cs_bool operator == (const CsString &sStr) const;
+	cs_bool operator==(const CsString &sStr) const;
 	CsString &operator=(const CsString &sStr);
 	CsString &operator+=(const CsString &sStr);
 	cs_char operator[](cs_size_t) const;

@@ -133,21 +133,6 @@ public:
 	**
 	** CsBinaryTree
 	**
-	** @name		operator=
-	** @brief		重载等号操作
-	** @param[in]	tree: 另一棵二叉树的引用
-	** @return		自己的引用
-	**
-	** 若自己已经包含了数据，则会先释放自己的资源，再做拷贝操作。
-	** 深拷贝（deep copy）。
-	**
-	****************************************************************************/
-	CsBinaryTree<NodeT>& operator=(const CsBinaryTree<NodeT> &tree);
-
-	/****************************************************************************
-	**
-	** CsBinaryTree
-	**
 	** @name		CopyFrom
 	** @brief		从另一棵树拷贝数据
 	** @param[in]	tree: 另一棵二叉树的引用
@@ -286,6 +271,21 @@ public:
 	cs_void PostOrderTraverse(funtype) const;
 
 public:
+	/****************************************************************************
+	**
+	** CsBinaryTree
+	**
+	** @name		operator=
+	** @brief		重载等号操作
+	** @param[in]	tree: 另一棵二叉树的引用
+	** @return		自己的引用
+	**
+	** 若自己已经包含了数据，则会先释放自己的资源，再做拷贝操作。
+	** 深拷贝（deep copy）。
+	**
+	****************************************************************************/
+	CsBinaryTree<NodeT> &operator=(const CsBinaryTree<NodeT> &tree);
+
 	//virtual CsObjectP Clone() const;
 	//virtual const CsObject *Boxing() const;
 	//virtual cs_bool Unboxing(const CsObject *);

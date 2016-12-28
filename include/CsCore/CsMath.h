@@ -1,5 +1,5 @@
-#ifndef _CORE_MATH_UTILITY_H_
-#define _CORE_MATH_UTILITY_H_
+#ifndef _CORE_MATH_H_
+#define _CORE_MATH_H_
 
 #include "CsGlobal.h"
 
@@ -30,6 +30,12 @@ public:
 	static cs_double Cs_Log10E;
 	static cs_double Cs_Ln2;
 	static cs_double Cs_Ln10;
+
+	template<typename ValueT>
+	static ValueT Max(const ValueT &v1, const ValueT &v2);
+
+	template<typename ValueT>
+	static ValueT Min(const ValueT &v1, const ValueT &v2);
 
 	/// 数字比较
 	static cs_bool Equals(cs_float v1, cs_float v2, cs_float precision);
@@ -71,4 +77,6 @@ private:
 	~CsMath() {}
 };
 
-#endif // _CORE_MATH_UTILITY_H_
+#include "CsMath.inl"
+
+#endif // _CORE_MATH_H_

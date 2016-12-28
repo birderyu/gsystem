@@ -459,6 +459,9 @@
     <ClInclude Include="..\..\..\include\CsCore\CsFinal.h">
       <Filter>头文件\Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsPath.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">
@@ -653,6 +656,9 @@
     <ClCompile Include="..\..\..\source\CsCore\CsTextFile_Ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsPath.cpp">
+      <Filter>源文件\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\CsCore\CsBinaryTree.inl">
@@ -734,6 +740,18 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\CsCore\CsList.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsOrderMap.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsOrderSet.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsMath.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\CsCore\CsRTree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

@@ -30,10 +30,11 @@ public:
 	class ConstIterator;
 	class Iterator 
 	{
+		friend class ConstIterator;
 	public:
 		inline Iterator() : m_pNode(NULL) {}
 		inline Iterator(CsListNode *node) : m_pNode(node) {}
-		inline Iterator(const Iterator &iter) : m_pNode(iter.m_pNode){}
+		inline Iterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
 		inline DataT &operator*() const { return m_pNode->m_tData; }
 		inline DataT *operator->() const { return &m_pNode->m_tData; }
@@ -45,6 +46,7 @@ public:
 				node = node->m_pNext;
 				i--;
 			}
+			CS_ASSERT(node);
 			return node->m_tData;
 		}
 		inline cs_bool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
@@ -59,13 +61,35 @@ public:
 		inline cs_bool operator<=(const ConstIterator &citer) const { return m_pNode <= citer.m_pNode; }
 		inline cs_bool operator>(const ConstIterator &citer) const { return m_pNode > citer.m_pNode; }
 		inline cs_bool operator>=(const ConstIterator &citer) const { return m_pNode >= citer.m_pNode; }
-		inline Iterator &operator++() { m_pNode = m_pNode->m_pNext; return *this; }
-		inline Iterator operator++(cs_int) { CsListNode *node = m_pNode; m_pNode = m_pNode->m_pNext; return node; }
-		inline Iterator &operator--() { m_pNode = m_pNode->m_pPrevious; return *this; }
-		inline Iterator operator--(cs_int) { CsListNode *node = m_pNode; m_pNode = m_pNode->m_pPrevious; return node; }
+		inline Iterator &operator++() 
+		{
+			CS_ASSERT(m_pNode);
+			m_pNode = m_pNode->m_pNext; 
+			return *this; 
+		}
+		inline Iterator operator++(cs_int)
+		{
+			CS_ASSERT(m_pNode);
+			CsListNode *node = m_pNode; 
+			m_pNode = m_pNode->m_pNext; 
+			return node; 
+		}
+		inline Iterator &operator--() 
+		{
+			CS_ASSERT(m_pNode);
+			m_pNode = m_pNode->m_pPrevious; 
+			return *this; 
+		}
+		inline Iterator operator--(cs_int) 
+		{
+			CS_ASSERT(m_pNode);
+			CsListNode *node = m_pNode; 
+			m_pNode = m_pNode->m_pPrevious; 
+			return node; 
+		}
 		inline Iterator &operator+=(cs_size_t i)
 		{
-			while (i)
+			while (i && m_pNode)
 			{
 				m_pNode = m_pNode->m_pNext;
 				i--;
@@ -74,7 +98,7 @@ public:
 		}
 		inline Iterator &operator-=(cs_size_t i) 
 		{ 
-			while (i)
+			while (i && m_pNode)
 			{
 				m_pNode = m_pNode->m_pPrevious;
 				i--;
@@ -139,23 +163,24 @@ public:
 
 	class ConstIterator
 	{
+		friend class Iterator;
 	public:
 		inline ConstIterator() : m_pNode(NULL) {}
-		inline ConstIterator(CsListNode *node) : m_pNode(node) {}
 		inline ConstIterator(const CsListNode *node) : m_pNode(const_cast<CsListNode*>(node)) {}
 		inline ConstIterator(const ConstIterator &citer) : m_pNode(iter.m_pNode) {}
-		inline ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
+		explicit inline ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
 		inline const DataT &operator*() const { return m_pNode->m_tData; }
 		inline const DataT *operator->() const { return &m_pNode->m_tData; }
 		inline const DataT &operator[](cs_size_t i) const
 		{
-			CsListNode *node = m_pNode;
+			const CsListNode *node = m_pNode;
 			while (node && i)
 			{
 				node = node->m_pNext;
 				i--;
 			}
+			CS_ASSERT(node);
 			return node->m_tData;
 		}
 		inline cs_bool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
@@ -164,13 +189,35 @@ public:
 		inline cs_bool operator<=(const ConstIterator &citer) const { return m_pNode <= citer.m_pNode; }
 		inline cs_bool operator>(const ConstIterator &citer) const { return m_pNode > citer.m_pNode; }
 		inline cs_bool operator>=(const ConstIterator &citer) const { return m_pNode >= citer.m_pNode; }
-		inline ConstIterator &operator++() { m_pNode = m_pNode->m_pNext; return *this; }
-		inline ConstIterator operator++(cs_int) { typename CsList<DataT>::Node *node = m_pNode; m_pNode = m_pNode->m_pNext; return node; }
-		inline ConstIterator &operator--() { m_pNode = m_pNode->m_pPrevious; return *this; }
-		inline ConstIterator operator--(cs_int) { typename CsList<DataT>::Node *node = m_pNode; m_pNode = m_pNode->m_pPrevious; return node; }
+		inline ConstIterator &operator++()
+		{
+			CS_ASSERT(m_pNode);
+			m_pNode = m_pNode->m_pNext;
+			return *this;
+		}
+		inline ConstIterator operator++(cs_int)
+		{
+			CS_ASSERT(m_pNode);
+			const CsListNode *node = m_pNode;
+			m_pNode = m_pNode->m_pNext;
+			return node;
+		}
+		inline ConstIterator &operator--()
+		{
+			CS_ASSERT(m_pNode);
+			m_pNode = m_pNode->m_pPrevious;
+			return *this;
+		}
+		inline ConstIterator operator--(cs_int)
+		{
+			CS_ASSERT(m_pNode);
+			const CsListNode *node = m_pNode;
+			m_pNode = m_pNode->m_pPrevious;
+			return node;
+		}
 		inline ConstIterator &operator+=(cs_size_t i)
 		{
-			while (i)
+			while (i && m_pNode)
 			{
 				m_pNode = m_pNode->m_pNext;
 				i--;
@@ -179,7 +226,7 @@ public:
 		}
 		inline ConstIterator &operator-=(cs_size_t i)
 		{
-			while (i)
+			while (i && m_pNode)
 			{
 				m_pNode = m_pNode->m_pPrevious;
 				i--;
@@ -188,7 +235,7 @@ public:
 		}
 		inline ConstIterator operator+(cs_size_t i) const
 		{
-			typename CsList<DataT>::Node *node = m_pNode;
+			const CsListNode *node = m_pNode;
 			while (node && i)
 			{
 				node = node->m_pNext;
@@ -198,7 +245,7 @@ public:
 		}
 		inline ConstIterator operator-(cs_size_t i) const
 		{
-			typename CsList<DataT>::Node *node = m_pNode;
+			const CsListNode *node = m_pNode;
 			while (node && i)
 			{
 				node = node->m_pPrevious;
@@ -206,19 +253,18 @@ public:
 			}
 			return ConstIterator(node);
 		}
-		inline cs_int operator-(const Iterator &iter) const
+		inline cs_int operator-(const ConstIterator &citer) const
 		{
-			typename CsList<DataT>::Node *pnode = m_pNode;
-			typename CsList<DataT>::Node *nnode = m_pNode;
-			cs_int i = 0;
-			cs_int j = 0;
+			const CsListNode *pnode = m_pNode;
+			const CsListNode *nnode = m_pNode;
+			cs_int i = 0, j = 0;
 			while (pnode && nnode)
 			{
-				if (pnode == iter.m_pNode)
+				if (pnode == citer.m_pNode)
 				{
 					return i;
 				}
-				if (nnode == iter.m_pNode)
+				if (nnode == citer.m_pNode)
 				{
 					return j;
 				}
@@ -239,7 +285,7 @@ public:
 		}
 
 	private:
-		CsListNode *m_pNode;
+		const CsListNode *m_pNode;
 	};
 
 	friend class Iterator;

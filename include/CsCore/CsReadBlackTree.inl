@@ -23,7 +23,7 @@ inline CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::~CsReadBlackTree()
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value)
+inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value, cs_bool *realInsert)
 {
 	NodeT *insert_point = NULL; // 插入位置的双亲节点
 	NodeT *node = m_pRoot;
@@ -41,6 +41,11 @@ inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT 
 		}
 		else
 		{
+			if (realInsert)
+			{
+				*realInsert = false;
+			}
+			insert_point->m_tValue = value;
 			return insert_point;
 		}
 	}
@@ -74,15 +79,24 @@ inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT 
 		// 插入修复
 		InsertFixUp(insert_node);
 	}
+
+	if (realInsert)
+	{
+		*realInsert = true;
+	}
 	return insert_node;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key)
+inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key, cs_bool *realDelete)
 {
 	NodeT* delete_point = Find(key);
 	if (!delete_point)
 	{
+		if (realDelete)
+		{
+			*realDelete = false;
+		}
 		return;
 	}
 	if (delete_point->m_pLeft && delete_point->m_pRight)
@@ -130,6 +144,11 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT
 		{
 			DeleteFixUp(delete_point_child);
 		}
+	}
+
+	if (realDelete)
+	{
+		*realDelete = true;
 	}
 	delete delete_point;
 }

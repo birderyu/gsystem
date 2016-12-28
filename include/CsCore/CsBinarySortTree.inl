@@ -21,57 +21,154 @@ inline CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::~CsBinarySortTree()
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key) const
+inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::FirstNode()
+{
+	if (!m_pRoot)
+	{
+		return NULL;
+	}
+	return m_pRoot->First();
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline const NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::FirstNode() const
+{
+	if (!m_pRoot)
+	{
+		return NULL;
+	}
+	return m_pRoot->First();
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode()
+{
+	if (!m_pRoot)
+	{
+		return NULL;
+	}
+	return m_pRoot->Last();
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline const NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode() const
+{
+	if (!m_pRoot)
+	{
+		return NULL;
+	}
+	return m_pRoot->Last();
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline cs_bool CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains(const KeyT &key) const
 {
 	NodeT *root = m_pRoot;
-	CS_ASSERT(root);
+	if (!root)
+	{
+		return false;
+	}
+
+	// 递归实现
+	//return Contains_Recursive(key, root);
+
+	// 非递归实现
+	return Contains_Unrecursive(key, root);
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key)
+{
+	NodeT *root = m_pRoot;
+	if (!root)
+	{
+		return NULL;
+	}
 
 	// 递归实现
 	//return Find_Recursive(key, root);
 
 	// 非递归实现
-	return Find(key, root);
+	return Find_Unrecursive(key, root);
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::FirstNode() const
+inline const NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key) const
 {
-	NodeT *root = m_pRoot;
-	CS_ASSERT(root);
-	return root->First();
+	const NodeT *root = m_pRoot;
+	if (!root)
+	{
+		return NULL;
+	}
+
+	// 递归实现
+	//return Find_Recursive(key, root);
+
+	// 非递归实现
+	return Find_Unrecursive(key, root);
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode() const
-{
-	NodeT *root = m_pRoot;
-	CS_ASSERT(root);
-	return root->Last();
-}
-
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value)
+inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value, cs_bool *realInsert)
 {
 	NodeT *node = NULL;
+	cs_bool _realInsert = false;
+
 	// 递归实现
-	//Insert_Recursive(key, value, m_pRoot, node);
+	//Insert_Recursive(key, value, m_pRoot, node, _realInsert);
+
 	// 非递归实现
-	Insert(key, value, m_pRoot, node);
+	Insert_Unrecursive(key, value, m_pRoot, node, _realInsert);
+
+	if (realInsert)
+	{
+		*realInsert = _realInsert;
+	}
 	return node;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key)
+inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key, cs_bool *realDelete)
 {
+	cs_bool _realDelete = false;
+
 	// 递归实现
-	//Delete_Recursive(key, m_pRoot);
+	//Delete_Recursive(key, m_pRoot, _realDelete);
 
 	// 非递归实现
-	Delete(key, m_pRoot);
+	Delete_Unrecursive(key, m_pRoot, _realDelete);
+
+	if (realDelete)
+	{
+		*realDelete = realDelete;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline cs_bool CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Unrecursive(const KeyT &key, NodeT *node) const
+{
+	while (node)
+	{
+		cs_int ret = m_fCompare(key, node->m_tKey);
+		if (ret < 0)
+		{
+			node = node->m_pLeft;
+		}
+		else if (ret > 0)
+		{
+			node = node->m_pRight;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key, NodeT *node) const
+inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(const KeyT &key, NodeT *node)
 {
 	while (node)
 	{
@@ -93,7 +190,29 @@ inline NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins)
+inline const NodeT* CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(const KeyT &key, const NodeT *node) const
+{
+	while (node)
+	{
+		cs_int ret = m_fCompare(key, node->m_tKey);
+		if (ret < 0)
+		{
+			node = node->m_pLeft;
+		}
+		else if (ret > 0)
+		{
+			node = node->m_pRight;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return node;
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, cs_bool &realInsert)
 {
 	NodeT* insert_point = NULL; // 插入位置的双亲节点
 	while (node)
@@ -110,7 +229,9 @@ inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const Key
 		}
 		else
 		{
-			node_ins = insert_point;
+			realInsert = false;
+			node->m_tValue = value;
+			node_ins = node;
 			return;
 		}
 	}
@@ -140,15 +261,17 @@ inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const Key
 		}
 		insert_node->m_pParent = insert_point;
 	}
+	realInsert = true;
 	node_ins = insert_node;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key, NodeT *node)
+inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Unrecursive(const KeyT &key, NodeT *node, cs_bool &realDelete)
 {
-	NodeT* delete_point = Find(key, node);
+	NodeT* delete_point = Find_Unrecursive(key, node);
 	if (!delete_point)
 	{
+		realDelete = false;
 		return;
 	}
 	if (delete_point->m_pLeft && delete_point->m_pRight)
@@ -189,7 +312,29 @@ inline cs_void CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(const Key
 			delete_point_parent->m_pRight = delete_point_child;
 		}
 	}
+
+	realDelete = true;
 	delete delete_point;
+}
+
+//////////////////////////////////////////////////////////////////////////
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline cs_bool CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Recursive(const KeyT &key, NodeT *node) const
+{
+	if (!node)
+	{
+		return false;
+	}
+	cs_int ret = m_fCompare(key, node->m_tKey);
+	if (ret < 0)
+	{
+		return Contains_Recursive(key, node->m_pLeft);
+	}
+	else if (ret > 0)
+	{
+		return Contains_Recursive(key, node->m_pRight);
+	}
+	return true;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
@@ -202,17 +347,17 @@ inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(co
 	cs_int ret = m_fCompare(key, node->m_tKey);
 	if (ret < 0)
 	{
-		return Find(key, node->m_pLeft);
+		return Find_Recursive(key, node->m_pLeft);
 	}
 	else if (ret > 0)
 	{
-		return Find(key, node->m_pRight);
+		return Find_Recursive(key, node->m_pRight);
 	}
 	return node;
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins)
+inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, cs_bool &realInsert)
 {
 	if (NULL == node)
 	{
@@ -230,6 +375,7 @@ inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(
 		{
 			m_pRoot = node;
 		}
+		realInsert = true;
 	}
 	else
 	{
@@ -255,6 +401,7 @@ inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(
 		else
 		{
 			// 相等，不做任何操作
+			realInsert = false;
 			node_ins = node;
 		}
 	}
@@ -262,7 +409,7 @@ inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Recursive(const KeyT &key, NodeT *node)
+inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Recursive(const KeyT &key, NodeT *node, cs_bool &realDelete)
 {
 	if (NULL == node)
 	{
@@ -320,6 +467,7 @@ inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Recursive(
 					pnode->m_pRight = node;
 				}
 			}
+			realDelete = true;
 			delete temp;
 		}
 	}

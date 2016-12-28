@@ -38,13 +38,6 @@ inline cs_void CsBinaryTree<NodeT>::SetRoot(NodeT *pNode)
 }
 
 template<typename NodeT>
-inline CsBinaryTree<NodeT>& CsBinaryTree<NodeT>::operator=(const CsBinaryTree<NodeT> &tTree)
-{
-	CopyFrom(tTree);
-	return *this;
-}
-
-template<typename NodeT>
 inline cs_void CsBinaryTree<NodeT>::CopyFrom(const CsBinaryTree<NodeT> &tTree)
 {
 	if (this == &tTree)
@@ -246,6 +239,13 @@ inline cs_size_t CsBinaryTree<NodeT>::Depth(const NodeT *node) const
 	}
 
 	return 0;
+}
+
+template<typename NodeT>
+inline CsBinaryTree<NodeT>& CsBinaryTree<NodeT>::operator=(const CsBinaryTree<NodeT> &tTree)
+{
+	CopyFrom(tTree);
+	return *this;
 }
 
 #endif // _CORE_BINARY_TREE_INLINE_H_

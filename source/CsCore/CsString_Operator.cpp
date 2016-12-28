@@ -1,6 +1,6 @@
 #include "CsString.h"
 
-cs_bool CsString::operator == (const CsString &sStr) const
+cs_bool CsString::operator==(const CsString &sStr) const
 {
 	// TODO
 	return false;
@@ -14,7 +14,32 @@ CsString &CsString::operator+=(const CsString &sStr)
 
 CsString &CsString::operator=(const CsString &sStr)
 {
-	// TODO
+	if (this == &sStr)
+	{
+		return *this;
+	}
+
+	Free();
+	m_tStringStore.m_nType = sStr.m_tStringStore.m_nType;
+	switch (m_tStringStore.m_nType)
+	{
+	case CsStringStore::STRING_STORE_TYPE_VALUE_SMALL:
+		m_tStringStore.m_sSmallStr.Initialize(sStr.m_tStringStore.m_sSmallStr);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
+		m_tStringStore.m_sNormalStr.Initialize(sStr.m_tStringStore.m_sNormalStr);
+		break;
+	case CsStringStore::STRING_STORE_TYPE_VALUE_BIG:
+		// TODO
+		break;
+	case CsStringStore::STRING_STORE_TYPE_REFERENCE:
+		// TODO
+		break;
+	default:
+		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+		m_tStringStore.m_sSmallStr.Initialize();
+		break;
+	}
 	return *this;
 }
 

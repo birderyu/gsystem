@@ -8,8 +8,8 @@ CsStringPool::CsStringPool(cs_size_t nInitSzie, cs_size_t nMaxSize)
 
 cs_pointer CsStringPool::Alloc(cs_size_t size)
 {
-	std::map<cs_size_t, std::vector<cs_ptr_addr>>::const_iterator citer = m_tRecycle.find(size);
-	if (citer != m_tRecycle.cend())
+	CsMap<cs_size_t, CsVector<cs_ptr_addr>>::ConstIterator citer = m_tRecycle.ConstFind(size);
+	if (citer != m_tRecycle.ConstEnd())
 	{
 		// 从内存回收站中获取一块内存（TODO）
 	}

@@ -36,6 +36,9 @@
 #include "Array_Test.h"
 #include "Vector_Test.h"
 #include "File_Test.h"
+#include "Map_Test.h"
+#include "Set_Test.h"
+//#include "CsRTree.h"
 
 void TestSharedPtr()
 {
@@ -81,6 +84,9 @@ void TestArray()
 
 int main(int argc, char *argv[])
 {
+	SetTest();
+	TestMap();
+
 	ListTest();
 
 	TestTextFile();

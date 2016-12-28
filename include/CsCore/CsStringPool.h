@@ -15,9 +15,8 @@
 
 #include "CsGlobal.h"
 #include "CsMemoryStore.h"
-
-#include <vector>
-#include <map>
+#include "CsVector.h"
+#include "CsMap.h"
 
 /****************************************************************************
 **
@@ -65,7 +64,7 @@ public:
 
 private:
 	/// ªÿ ’’æ
-	std::map<cs_size_t, std::vector<cs_ptr_addr>> m_tRecycle;
+	CsMap<cs_size_t, CsVector<cs_ptr_addr>> m_tRecycle;
 	CsMemoryStore m_tStore;
 };
 

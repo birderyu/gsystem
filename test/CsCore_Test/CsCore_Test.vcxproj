@@ -99,6 +99,7 @@
     <ClInclude Include="Map_Test.h" />
     <ClInclude Include="MemPool_Test.h" />
     <ClInclude Include="RBTree.h" />
+    <ClInclude Include="Set_Test.h" />
     <ClInclude Include="SortStack.h" />
     <ClInclude Include="Sort_Test.h" />
     <ClInclude Include="Vector_Test.h" />

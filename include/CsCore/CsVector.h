@@ -12,8 +12,10 @@ class CsVector final
 	, public CsObject
 {
 public:
+	class ConstIterator;
 	class Iterator
 	{
+		friend class ConstIterator;
 	public:
 		inline Iterator() : m_pData(NULL) {}
 		inline Iterator(DataT *data) : m_pData(data) {}
@@ -45,6 +47,7 @@ public:
 
 	class ConstIterator
 	{
+		friend class Iterator;
 	public:
 		inline ConstIterator() : m_pData(NULL) {}
 		inline ConstIterator(const DataT *data) : m_pData(data) {}

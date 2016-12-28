@@ -2,11 +2,11 @@
 #include "CsString.h"
 #include "CsCStringHelper.h"
 
-CsString CsStringList::GetAt(cs_size_t id, CS_STRING_TYPE emStrType) const
+CsString CsStringList::GetAt(cs_size_t pos, CS_STRING_TYPE emStrType) const
 {
 	if (emStrType == STRING_TYPE_VALUE)
 	{
-		return CsString((cs_char*)(m_t.find(id)->second));
+		return CsString((cs_char*)(m_t.Find(pos).Value()));
 	}
 	else
 	{
@@ -28,7 +28,7 @@ cs_bool CsStringList::Add(const CsString &str)
 		return false;
 	}
 	CsCStringHelper::Copy(str.CString(), str.Size() + 1, ptr);
-	m_t.insert(std::pair<cs_size_t, cs_pointer>(m_t.size(), ptr));
+	m_t.Insert(m_t.Size(), ptr);
 	return true;
 }
 

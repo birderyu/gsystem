@@ -99,6 +99,12 @@ struct CsKeyValueNodeT
 	CsKeyValueNodeT(const KeyT &key, const ValueT &value);
 };
 
+// ÑÆ½Úµã
+struct CsDummyNodeT
+{
+
+};
+
 #include "CsStructure.inl"
 
 #endif // _CORE_STRUCTURE_H_

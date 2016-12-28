@@ -109,6 +109,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsPath.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsQueue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsRegister.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSerialize.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="..\..\..\source\CsCore\CsNew.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsObject.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsMemoryStore.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsPath.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsRegister.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsSemaphore_Win32.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsShortInteger.cpp" />
@@ -295,7 +297,11 @@
     <None Include="..\..\..\include\CsCore\CsDynamicArray.inl" />
     <None Include="..\..\..\include\CsCore\CsHashTable.inl" />
     <None Include="..\..\..\include\CsCore\CsListStack.inl" />
+    <None Include="..\..\..\include\CsCore\CsMath.inl" />
     <None Include="..\..\..\include\CsCore\CsNew.inl" />
+    <None Include="..\..\..\include\CsCore\CsOrderMap.inl" />
+    <None Include="..\..\..\include\CsCore\CsOrderSet.inl" />
+    <None Include="..\..\..\include\CsCore\CsRTree.inl" />
     <None Include="..\..\..\include\CsCore\CsSort.inl" />
     <None Include="..\..\..\include\CsCore\CsStructure.inl" />
     <None Include="..\..\..\include\CsCore\CsPackage.inl" />

@@ -41,25 +41,34 @@ class CsBinarySortTree
 {
 public:
 	virtual ~CsBinarySortTree();
-	NodeT *Find(const KeyT &key) const;
-	NodeT *FirstNode() const;
-	NodeT *LastNode() const;
 
-	virtual NodeT *Insert(const KeyT &key, const ValueT &value);
-	virtual cs_void Delete(const KeyT &key);
+	NodeT *FirstNode();
+	const NodeT *FirstNode() const;
+	NodeT *LastNode();
+	const NodeT *LastNode() const;
+
+	cs_bool Contains(const KeyT &key) const;
+	NodeT *Find(const KeyT &key);
+	const NodeT *Find(const KeyT &key) const;
+	virtual NodeT *Insert(const KeyT &key, const ValueT &value, cs_bool *realInsert = NULL);
+	virtual cs_void Delete(const KeyT &key, cs_bool *realDelete = NULL);
 
 protected:
 	// 非递归实现
-	NodeT *Find(const KeyT &key, NodeT *node) const;
-	cs_void Insert(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins);
-	cs_void Delete(const KeyT &key, NodeT *node);
+	cs_bool Contains_Unrecursive(const KeyT &key, NodeT *node) const;
+	NodeT *Find_Unrecursive(const KeyT &key, NodeT *node);
+	const NodeT *Find_Unrecursive(const KeyT &key, const NodeT *node) const;
+	cs_void Insert_Unrecursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, cs_bool &realInsert);
+	cs_void Delete_Unrecursive(const KeyT &key, NodeT *node, cs_bool &realDelete);
 
 	// 递归实现（不推荐使用）
 	// 对于Insert和Delete操作，其返回值只是作为递归传递参数，并非实际需要的返回值
+	cs_bool Contains_Recursive(const KeyT &key, NodeT *node) const;
 	NodeT *Find_Recursive(const KeyT &key, NodeT *node) const;
-	NodeT *Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins);
-	NodeT *Delete_Recursive(const KeyT &key, NodeT *node);
+	NodeT *Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, cs_bool &realInsert);
+	NodeT *Delete_Recursive(const KeyT &key, NodeT *node, cs_bool &realDelete);
 
+	// 交换两个节点
 	cs_bool SwitchNode(NodeT *node1, NodeT *node2);
 
 protected:
