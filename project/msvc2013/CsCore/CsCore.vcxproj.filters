@@ -363,9 +363,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsLongDoubleFloat.h">
       <Filter>头文件\Package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsMatrix.h">
-      <Filter>头文件\Structure</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsStringList.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>

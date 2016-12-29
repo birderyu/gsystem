@@ -122,7 +122,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsLongDoubleFloat.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDoubleFloat.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsDoubleLinkedList.h" />
-    <ClInclude Include="..\..\..\include\CsCore\CsMatrix.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsStringStore.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsStructure.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsSingleFloat.h" />
