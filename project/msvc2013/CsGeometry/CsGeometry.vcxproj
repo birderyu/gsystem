@@ -12,11 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinate.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinateSequence.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsCurve.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsEnvelope.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryBulider.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCollection.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCore.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryFactory.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryPool.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsLine.h" />
@@ -30,6 +32,10 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsRing.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsSurface.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsTriangle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate.cpp" />
+    <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83739D3A-0014-4C50-93DC-13D96F6886CB}</ProjectGuid>
@@ -79,6 +85,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>CsPrecompiler.h</PrecompiledHeaderFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -86,6 +93,9 @@
       <ImportLibrary>$(ImportFolder)\$(TargetName).lib</ImportLibrary>
       <ProgramDatabaseFile>$(SymbolFolder)\$(TargetName).pdb</ProgramDatabaseFile>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

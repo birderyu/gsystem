@@ -7,7 +7,7 @@
   
 	<ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>CS_CORE_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CS_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
 		<Link>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>

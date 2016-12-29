@@ -64,7 +64,8 @@ protected:
 	// 递归实现（不推荐使用）
 	// 对于Insert和Delete操作，其返回值只是作为递归传递参数，并非实际需要的返回值
 	cs_bool Contains_Recursive(const KeyT &key, NodeT *node) const;
-	NodeT *Find_Recursive(const KeyT &key, NodeT *node) const;
+	NodeT *Find_Recursive(const KeyT &key, NodeT *node);
+	const NodeT *Find_Recursive(const KeyT &key, const NodeT *node) const;
 	NodeT *Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, cs_bool &realInsert);
 	NodeT *Delete_Recursive(const KeyT &key, NodeT *node, cs_bool &realDelete);
 

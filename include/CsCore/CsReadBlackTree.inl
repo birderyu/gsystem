@@ -1,29 +1,34 @@
 #ifndef _CORE_RED_BLACK_TREE_INLINE_
 #define _CORE_RED_BLACK_TREE_INLINE_
 
-template<typename KeyT, typename ValueT>
-inline CsReadBlackTreeNode<KeyT, ValueT>::CsReadBlackTreeNode(
+#define CS_RED_BLACK_TREE_NODE_TEMPLATE	template<typename KeyT, typename ValueT>
+#define CS_RED_BLACK_TREE_NODE_QUAL		CsReadBlackTreeNode<KeyT, ValueT>
+#define CS_RED_BLACK_TREE_TEMPLATE		template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+#define CS_RED_BLACK_TREE_QUAL			CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>
+
+CS_RED_BLACK_TREE_NODE_TEMPLATE
+inline CS_RED_BLACK_TREE_NODE_QUAL::CsReadBlackTreeNode(
 	const KeyT &key,
 	const ValueT &value,
-	CsReadBlackTreeNode<KeyT, ValueT> *parent,
-	CsReadBlackTreeNode<KeyT, ValueT> *left,
-	CsReadBlackTreeNode<KeyT, ValueT> *right,
+	CS_RED_BLACK_TREE_NODE_QUAL *parent,
+	CS_RED_BLACK_TREE_NODE_QUAL *left,
+	CS_RED_BLACK_TREE_NODE_QUAL *right,
 	cs_small color)
-	: CsBinaryTreeNodeT<CsReadBlackTreeNode<KeyT, ValueT>>(parent, left, right)
+	: CsBinaryTreeNodeT<CS_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
 	, CsKeyValueNodeT<KeyT, ValueT>(key, value)
 	, m_nColor(color)
 {
 
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::~CsReadBlackTree()
+CS_RED_BLACK_TREE_TEMPLATE
+inline CS_RED_BLACK_TREE_QUAL::~CsReadBlackTree()
 {
 
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value, cs_bool *realInsert)
+CS_RED_BLACK_TREE_TEMPLATE
+inline NodeT *CS_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &value, cs_bool *realInsert)
 {
 	NodeT *insert_point = NULL; // 插入位置的双亲节点
 	NodeT *node = m_pRoot;
@@ -87,8 +92,8 @@ inline NodeT *CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT 
 	return insert_node;
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key, cs_bool *realDelete)
+CS_RED_BLACK_TREE_TEMPLATE
+inline cs_void CS_RED_BLACK_TREE_QUAL::Delete(const KeyT &key, cs_bool *realDelete)
 {
 	NodeT* delete_point = Find(key);
 	if (!delete_point)
@@ -153,8 +158,8 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT
 	delete delete_point;
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::InsertFixUp(NodeT *node)
+CS_RED_BLACK_TREE_TEMPLATE
+inline cs_void CS_RED_BLACK_TREE_QUAL::InsertFixUp(NodeT *node)
 {
 	while (node->m_pParent &&
 		node->m_pParent->m_nColor == CS_RED_BLACK_TREE_NODE_RED)
@@ -213,8 +218,8 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::InsertFixUp(NodeT
 	m_pRoot->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::DeleteFixUp(NodeT *node)
+CS_RED_BLACK_TREE_TEMPLATE
+inline cs_void CS_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
 {
 	while (node != m_pRoot && node->m_nColor == CS_RED_BLACK_TREE_NODE_BLACK)
 	{
@@ -289,8 +294,8 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::DeleteFixUp(NodeT
 	node->m_nColor = CS_RED_BLACK_TREE_NODE_BLACK;    //并改为黑色。
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::RotateLeft(NodeT *node)
+CS_RED_BLACK_TREE_TEMPLATE
+inline cs_void CS_RED_BLACK_TREE_QUAL::RotateLeft(NodeT *node)
 {
 	if (!node || !node->m_pRight)
 	{
@@ -323,8 +328,8 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::RotateLeft(NodeT 
 	lower_right->m_pLeft = node;
 }
 
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::RotateRight(NodeT *node)
+CS_RED_BLACK_TREE_TEMPLATE
+inline cs_void CS_RED_BLACK_TREE_QUAL::RotateRight(NodeT *node)
 {
 	if (!node || !node->m_pLeft)
 	{
@@ -356,5 +361,10 @@ inline cs_void CsReadBlackTree<KeyT, ValueT, CompareT, NodeT>::RotateRight(NodeT
 	node->m_pParent = lower_left;
 	lower_left->m_pRight = node;
 }
+
+#undef CS_RED_BLACK_TREE_QUAL
+#undef CS_RED_BLACK_TREE_TEMPLATE	
+#undef CS_RED_BLACK_TREE_NODE_QUAL	
+#undef CS_RED_BLACK_TREE_NODE_TEMPLATE
 
 #endif // _CORE_RED_BLACK_TREE_INLINE_

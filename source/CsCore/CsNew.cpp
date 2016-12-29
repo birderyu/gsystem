@@ -21,12 +21,17 @@ cs_void CsFree(cs_pointer pfree)
 	dlfree(pfree);
 }
 
-cs_pointer CsMemoryCopy(cs_void *dst, const cs_void *src, cs_size_t size)
+cs_pointer CsMemCopy(cs_void *dst, const cs_void *src, cs_size_t size)
 {
 	return memcpy(dst, src, size);
 }
 
-cs_pointer CsMemoryMove(cs_void *dst, const cs_void *src, cs_size_t size)
+cs_pointer CsMemMove(cs_void *dst, const cs_void *src, cs_size_t size)
 {
 	return memmove(dst, src, size);
+}
+
+CS_API cs_pointer CsMemSet(cs_void *dst, cs_byte value, cs_size_t size)
+{
+	return memset(dst, (cs_int)value, size);
 }

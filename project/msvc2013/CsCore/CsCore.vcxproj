@@ -109,6 +109,8 @@
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsMultiMap.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsOrderMultiMap.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsPath.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsQueue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsRegister.h" />
@@ -185,6 +187,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsTraits.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsType.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUdpSocket.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsUnorderMultiMap.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUnorderSet.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUnsignedCharacter.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsUnsignedInteger.h" />

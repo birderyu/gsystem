@@ -37,7 +37,7 @@ inline CsBlock<DataT>::CsBlock(const CsBlock<DataT> &tBlock)
 	{
 		return;
 	}
-	CsMemoryCopy(m_pMemory, tBlock.m_pMemory, m_nSize * sizeof(DataT));
+	CsMemCopy(m_pMemory, tBlock.m_pMemory, m_nSize * sizeof(DataT));
 }
 
 template<typename DataT>
@@ -127,7 +127,7 @@ inline cs_bool CsBlock<DataT>::Resize(cs_size_t nSize, cs_size_t nStart, cs_size
 		{
 			nRealLength = m_nSize - nStart;
 		}
-		CsMemoryCopy(pMemory, m_pMemory + nStart, nRealLength * sizeof(DataT));
+		CsMemCopy(pMemory, m_pMemory + nStart, nRealLength * sizeof(DataT));
 	}
 	if (m_pMemory)
 	{
@@ -174,7 +174,7 @@ inline cs_bool CsBlock<DataT>::CreateFrom(const CsBlock<DataT> &tFrom, cs_size_t
 	{
 		return false;
 	}
-	CsMemoryCopy(m_pMemory, tFrom.Cursor(nFromStart), nFromLength * sizeof(DataT));
+	CsMemCopy(m_pMemory, tFrom.Cursor(nFromStart), nFromLength * sizeof(DataT));
 	return true;
 }
 

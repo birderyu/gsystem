@@ -28,7 +28,7 @@
 #	define CS_DECLARE_NOTHROW  throw()
 #endif
 
-#  if defined (CS_CORE_BUILD_DLL)
+#  if defined (CS_BUILD_DLL)
 #    define CNOVA_EXPORT CS_DECL_EXPORT
 #  else 
 #    define CNOVA_EXPORT CS_DECL_IMPORT

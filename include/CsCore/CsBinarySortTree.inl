@@ -338,7 +338,26 @@ inline cs_bool CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Recursi
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, NodeT *node) const
+inline NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, NodeT *node)
+{
+	if (!node)
+	{
+		return NULL;
+	}
+	cs_int ret = m_fCompare(key, node->m_tKey);
+	if (ret < 0)
+	{
+		return Find_Recursive(key, node->m_pLeft);
+	}
+	else if (ret > 0)
+	{
+		return Find_Recursive(key, node->m_pRight);
+	}
+	return node;
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+inline const NodeT *CsBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, const NodeT *node) const
 {
 	if (!node)
 	{

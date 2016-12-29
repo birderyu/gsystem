@@ -17,6 +17,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsSerialization", "project\msvc2013\CsSerialization\CsSerialization.vcxproj", "{08D9DEAA-06A7-44FF-80C7-AAD74E4C03EF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsGeometry", "project\msvc2013\CsGeometry\CsGeometry.vcxproj", "{83739D3A-0014-4C50-93DC-13D96F6886CB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsDataTable", "project\msvc2013\CsDataTable\CsDataTable.vcxproj", "{74598484-054A-44F3-A111-66DB314D98FC}"
 EndProject

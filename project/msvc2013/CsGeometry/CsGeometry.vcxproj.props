@@ -7,10 +7,10 @@
   
 	<ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CS_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
 		<Link>
-			<AdditionalDependencies>CsCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>CsCored.lib;%(AdditionalDependencies)</AdditionalDependencies>
 		</Link>
 	</ItemDefinitionGroup>
 

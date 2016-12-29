@@ -114,7 +114,7 @@ CsBytes &CsBytes::operator<<(cs_bool val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -134,7 +134,7 @@ CsBytes &CsBytes::operator<<(cs_char val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -154,7 +154,7 @@ CsBytes &CsBytes::operator<<(cs_schar val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -174,7 +174,7 @@ CsBytes &CsBytes::operator<<(cs_uchar val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -194,7 +194,7 @@ CsBytes &CsBytes::operator<<(cs_wchar val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -214,7 +214,7 @@ CsBytes &CsBytes::operator<<(cs_short val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -234,7 +234,7 @@ CsBytes &CsBytes::operator<<(cs_ushort val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -254,7 +254,7 @@ CsBytes &CsBytes::operator<<(cs_int val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -274,7 +274,7 @@ CsBytes &CsBytes::operator<<(cs_uint val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -294,7 +294,7 @@ CsBytes &CsBytes::operator<<(cs_long val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -314,7 +314,7 @@ CsBytes &CsBytes::operator<<(cs_ulong val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -334,7 +334,7 @@ CsBytes &CsBytes::operator<<(cs_longlong val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -354,7 +354,7 @@ CsBytes &CsBytes::operator<<(cs_ulonglong val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -374,7 +374,7 @@ CsBytes &CsBytes::operator<<(cs_float val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -394,7 +394,7 @@ CsBytes &CsBytes::operator<<(cs_double val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -414,7 +414,7 @@ CsBytes &CsBytes::operator<<(cs_decimal val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), &val, value_size);
+	CsMemCopy(m_tBytes.Tail(), &val, value_size);
 	Resize(new_size);
 	return *this;
 }
@@ -438,7 +438,7 @@ CsBytes &CsBytes::operator<<(const CsString &val)
 			return *this;
 		}
 	}
-	CsMemoryCopy(m_tBytes.Tail(), val.CString(), sizeof(cs_char) * (str_len + 1));
+	CsMemCopy(m_tBytes.Tail(), val.CString(), sizeof(cs_char) * (str_len + 1));
 	Resize(new_size);
 	return *this;
 }
@@ -451,7 +451,7 @@ CsBytes &CsBytes::operator>>(cs_bool &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -468,7 +468,7 @@ CsBytes &CsBytes::operator>>(cs_char &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -485,7 +485,7 @@ CsBytes &CsBytes::operator>>(cs_schar &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -502,7 +502,7 @@ CsBytes &CsBytes::operator>>(cs_uchar &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -519,7 +519,7 @@ CsBytes &CsBytes::operator>>(cs_wchar &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -536,7 +536,7 @@ CsBytes &CsBytes::operator>>(cs_short &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -553,7 +553,7 @@ CsBytes &CsBytes::operator>>(cs_ushort &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -570,7 +570,7 @@ CsBytes &CsBytes::operator>>(cs_int &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -587,7 +587,7 @@ CsBytes &CsBytes::operator>>(cs_uint &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -604,7 +604,7 @@ CsBytes &CsBytes::operator>>(cs_long &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -621,7 +621,7 @@ CsBytes &CsBytes::operator>>(cs_ulong &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -638,7 +638,7 @@ CsBytes &CsBytes::operator>>(cs_longlong &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -655,7 +655,7 @@ CsBytes &CsBytes::operator>>(cs_ulonglong &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -672,7 +672,7 @@ CsBytes &CsBytes::operator>>(cs_float &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -689,7 +689,7 @@ CsBytes &CsBytes::operator>>(cs_double &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN
@@ -706,7 +706,7 @@ CsBytes &CsBytes::operator>>(cs_decimal &val)
 	{
 		return *this;
 	}
-	CsMemoryCopy(&val, m_tBytes.Head(), value_size);
+	CsMemCopy(&val, m_tBytes.Head(), value_size);
 	m_tBytes.PopFront(value_size);
 
 #ifdef CS_LITTLE_ENDIAN

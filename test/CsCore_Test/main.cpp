@@ -82,6 +82,12 @@ void TestArray()
 	cs_int _nTime2 = (_nEndTime - _nMiddleTime); // time
 }
 
+class CSAAA
+	: public CsObject
+{
+
+};
+
 int main(int argc, char *argv[])
 {
 	SetTest();

@@ -11,8 +11,8 @@
 **
 ****************************************************************************/
 
-#ifndef _CORE_GEOMETRY_H_
-#define _CORE_GEOMETRY_H_
+#ifndef _GEOMETRY_GEOMETRY_H_
+#define _GEOMETRY_GEOMETRY_H_
 
 #include "CsObject.h"
 
@@ -55,4 +55,4 @@ public:
 	virtual cs_uint Dimension() const;
 };
 
-#endif // _CORE_GEOMETRY_H_
+#endif // _GEOMETRY_GEOMETRY_H_

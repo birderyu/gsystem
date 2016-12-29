@@ -462,6 +462,15 @@
     <ClInclude Include="..\..\..\include\CsCore\CsPath.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsMultiMap.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsOrderMultiMap.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsUnorderMultiMap.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">

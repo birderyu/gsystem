@@ -30,7 +30,7 @@ cs_size_t CsCStringHelper::Length(const cs_char *c_str)
 
 cs_bool CsCStringHelper::Copy(const cs_char *src, cs_size_t len, cs_char *dest)
 {
-	CsMemoryCopy(dest, src, len);
+	CsMemCopy(dest, src, len);
 	return true;
 }
 

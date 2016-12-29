@@ -234,7 +234,7 @@ inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t new_size, cs_size_t start
 		{
 			real_size = new_size - new_start;
 		}
-		CsMemoryCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
+		CsMemCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
 	}
 	if (m_pData)
 	{
@@ -280,7 +280,7 @@ inline cs_bool CsDynamicArray<DataT>::Resize(cs_size_t new_size, cs_size_t start
 		{
 			real_size = new_size - new_start;
 		}
-		CsMemoryCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
+		CsMemCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
 	}
 	if (m_pData)
 	{
@@ -516,7 +516,7 @@ inline cs_bool CsDynamicArray<DataT>::CopyMemoryFrom(cs_size_t first, cs_size_t 
 	{
 		return false;
 	}
-	CsMemoryCopy(m_pData + first, pData + start, sizeof(DataT)* len);
+	CsMemCopy(m_pData + first, pData + start, sizeof(DataT)* len);
 	return true;
 }
 
@@ -529,7 +529,7 @@ inline cs_bool CsDynamicArray<DataT>::CopyMemoryTo(cs_size_t start, cs_size_t le
 	{
 		return false;
 	}
-	CsMemoryCopy(pData + first, m_pData + start, sizeof(DataT)* len);
+	CsMemCopy(pData + first, m_pData + start, sizeof(DataT)* len);
 	return true;
 }
 
