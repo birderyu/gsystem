@@ -34,6 +34,7 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsTriangle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\CsCore\CsCoordinateSequence.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope.cpp" />
   </ItemGroup>

@@ -141,6 +141,8 @@ public:
 	DataT *Tail();
 	const DataT *Tail() const;
 
+	cs_void MemCopyFrom(const CsVector<DataT> &);
+
 private:
 	cs_size_t RealPos(cs_size_t pos) const;
 	cs_bool Valid() const;

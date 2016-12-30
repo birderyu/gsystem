@@ -31,9 +31,6 @@
     <Filter Include="头文件\3D">
       <UniqueIdentifier>{35d43664-92eb-4386-ba94-c0e415b2408b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\SpatialIndex">
-      <UniqueIdentifier>{10e1a6ec-7112-4e05-b52a-2ca6be3b6d06}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinate.h">
@@ -105,6 +102,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsGeometry\CsCoordinate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsCoordinateSequence.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
