@@ -1,5 +1,5 @@
-#ifndef _CSCORE_CSUDPSOCKET_H_
-#define _CSCORE_CSUDPSOCKET_H_
+#ifndef _CORE_UDPSOCKET_H_
+#define _CORE_UDPSOCKET_H_
 
 #include "CsSocket.h"
 
@@ -17,4 +17,4 @@ public:
 	cs_int RecvFrom(cs_char *pBufData, cs_int nMaxLen, CsSockAddress &tPeer);
 };
 
-#endif // _CSCORE_CSUDPSOCKET_H_
+#endif // _CORE_UDPSOCKET_H_

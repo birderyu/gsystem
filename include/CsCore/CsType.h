@@ -61,6 +61,6 @@ typedef cs_ulonglong	cs_uint64;
 // 指针地址
 typedef cs_uint32 cs_ptr_addr;
 
-typedef cs_uint cs_size_t;
+typedef size_t cs_size_t;
 
 #endif // _CORE_TYPE_H_

@@ -14,7 +14,7 @@ class CsOrderSet
 public:
 	struct CsOrderSetNode
 		: public CsBinaryTreeNodeT<CsOrderSetNode>
-		, public CsKeyValueNodeT<KeyT, CsDummyNodeT>
+		, public CsPairNodeT<KeyT, CsDummyNodeT>
 		, public CsNewT<CsOrderSetNode>
 	{
 		cs_small m_nColor;
@@ -27,7 +27,7 @@ public:
 			CsOrderSetNode *right = NULL,
 			cs_small color = CS_ORDER_SET_NODE_RED)
 			: CsBinaryTreeNodeT<CsOrderSetNode>(parent, left, right)
-			, CsKeyValueNodeT<KeyT, CsDummyNodeT>(key, value)
+			, CsPairNodeT<KeyT, CsDummyNodeT>(key, value)
 			, m_nColor(color)
 		{
 

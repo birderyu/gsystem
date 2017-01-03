@@ -1,5 +1,5 @@
-#ifndef _CSCORE_CSTCPSOCKET_H_
-#define _CSCORE_CSTCPSOCKET_H_
+#ifndef _CORE_TCPSOCKET_H_
+#define _CORE_TCPSOCKET_H_
 
 #include "CsSocket.h"
 
@@ -25,4 +25,4 @@ public:
 	cs_int Recv(cs_char *pBufData, cs_int nDataLen, cs_int nWaitAll = 0);
 };
 
-#endif // _CSCORE_CSTCPSOCKET_PRIVATE_H_
+#endif // _CORE_TCPSOCKET_H_

@@ -9,7 +9,7 @@ inline CsBinarySortTreeNode<KeyT, ValueT>::CsBinarySortTreeNode(
 	CsBinarySortTreeNode<KeyT, ValueT> *left,
 	CsBinarySortTreeNode<KeyT, ValueT> *right)
 	: CsBinaryTreeNodeT<CsBinarySortTreeNode<KeyT, ValueT>>(parent, left, right)
-	, CsKeyValueNodeT<KeyT, ValueT>(key, value)
+	, CsPairNodeT<KeyT, ValueT>(key, value)
 {
 
 }

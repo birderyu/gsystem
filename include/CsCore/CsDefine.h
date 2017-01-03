@@ -1,10 +1,60 @@
+/****************************************************************************
+**
+** CNova: A quick, micro library of C++
+**
+** @file	CsDefine.h
+** @brief	全局宏定义
+** @author	Birderyu
+** @contact	https://github.com/birderyu
+** @date	2015-12-31
+** @version	1.0
+**
+** 全局宏定义了一些全局的宏常量，并根据不同操作系统和不同编译器做出相应的调整。
+**
+****************************************************************************/
+
 #ifndef _CORE_DEFINE_H_
 #define _CORE_DEFINE_H_
 
-#if defined(_MSC_VER)
-#	define CS_DECL_EXPORT __declspec(dllexport)
-#	define CS_DECL_IMPORT __declspec(dllimport)
+/****************************************************************************
+**
+** CsDefine.h
+** 操作系统
+**
+****************************************************************************/
+#if defined (_WIN32) || defined(_WIN64)
+# define CS_SYSTEM_WINDOWS
+#endif // _WIN32 or _WIN64
+
+#ifdef _LINUX
+# define CS_COMPILER_LINUX
+#endif // _LINUX
+
+/****************************************************************************
+**
+** CsDefine.h
+** 编译器
+** CS_COMPILER_MSVC: MSVC++
+** CS_COMPILER_GCC: GCC
+**
+****************************************************************************/
+#ifdef _MSC_VER
+# define CS_COMPILER_MSVC
 #endif // _MSC_VER
+
+#ifdef __GNUC__
+# define CS_COMPILER_GCC
+#endif // __GNUC__
+
+#ifdef CS_COMPILER_MSVC
+#	ifdef CS_BUILD_DLL
+#		define CS_API __declspec(dllexport)
+#	else	 
+#		define CS_API __declspec(dllimport)
+#	endif
+#else
+#	define CS_API
+#endif // CS_COMPILER_MSVC
 
 #ifndef NULL
 #	define NULL	0
@@ -28,18 +78,11 @@
 #	define CS_DECLARE_NOTHROW  throw()
 #endif
 
-#  if defined (CS_BUILD_DLL)
-#    define CNOVA_EXPORT CS_DECL_EXPORT
-#  else 
-#    define CNOVA_EXPORT CS_DECL_IMPORT
-#  endif 
-#define CS_API CNOVA_EXPORT
-
 #if defined(_DEBUG)
 #	include <assert.h>  
 #	define CS_ASSERT(e) assert(e)
 #else
-#	define CS_ASSERT(e) do { } while ((false) && (e))
+#	define CS_ASSERT(e) do { } while ((cs_false) && (e))
 #endif // 
 
 #if defined (i386) || defined (__i386__) || defined (_M_IX86) || \

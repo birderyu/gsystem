@@ -91,12 +91,12 @@ struct CsChildNodeT
 
 /// 键值对节点
 template<typename KeyT, typename ValueT>
-struct CsKeyValueNodeT
+struct CsPairNodeT
 {
 	KeyT m_tKey;
 	ValueT m_tValue;
 
-	CsKeyValueNodeT(const KeyT &key, const ValueT &value);
+	CsPairNodeT(const KeyT &key, const ValueT &value);
 };
 
 // 哑节点

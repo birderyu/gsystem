@@ -183,7 +183,7 @@ inline CsChildNodeT<NodeT>::CsChildNodeT(const NodeT *child)
 
 //////////////////////////////////////////////////////////////////////////
 template<typename KeyT, typename ValueT>
-inline CsKeyValueNodeT<KeyT, ValueT>::CsKeyValueNodeT(const KeyT &key, const ValueT &value)
+inline CsPairNodeT<KeyT, ValueT>::CsPairNodeT(const KeyT &key, const ValueT &value)
 : m_tKey(key)
 , m_tValue(value)
 {

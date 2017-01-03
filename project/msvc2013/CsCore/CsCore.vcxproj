@@ -106,6 +106,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsFile.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsFinal.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonArray.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsJsonPair.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h" />

@@ -25,11 +25,17 @@
     <Filter Include="头文件\_inline">
       <UniqueIdentifier>{db5f1c4b-0335-4e9a-87be-2a8f20ae2584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\2D">
-      <UniqueIdentifier>{b37fc661-7637-41d4-af4d-8fed599ac549}</UniqueIdentifier>
+    <Filter Include="头文件\Store">
+      <UniqueIdentifier>{b51b8e48-9dfa-46cd-94c5-a38a59225eec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\3D">
+    <Filter Include="头文件\Interface">
+      <UniqueIdentifier>{da9769b3-c699-4aa5-97c4-f5f6c3e12a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Interface\3D">
       <UniqueIdentifier>{35d43664-92eb-4386-ba94-c0e415b2408b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Interface\2D">
+      <UniqueIdentifier>{b37fc661-7637-41d4-af4d-8fed599ac549}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,9 +43,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsEnvelope.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryBulider.h">
@@ -55,46 +58,52 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsCurve.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsLine.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsMultiPoint.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsPath.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolygon.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsRectangle.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsRing.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsSurface.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsTriangle.h">
-      <Filter>头文件\2D</Filter>
+      <Filter>头文件\Interface\2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint3D.h">
-      <Filter>头文件\3D</Filter>
+      <Filter>头文件\Interface\3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinateSequence.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCore.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint2D_Store.h">
+      <Filter>头文件\Store</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

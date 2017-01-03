@@ -88,7 +88,6 @@ typedef CsSharedPointer<CsObject> CsObjectP;
 ** @class		CsObject
 ** @brief		基础对象类型
 ** @module		CsCore
-** @property	CLASSCODE
 **
 ** 基础对象类型是所有资源对象的基类型，对于非资源型对象或内核对象，则不推荐继承该类。
 **
@@ -117,7 +116,7 @@ public:
 	**
 	** @name	Clone
 	** @brief	拷贝出一个新的实例
-	** @return	拷贝的新实例，是一个共享指针（CsSharedPointer）
+	** @return	{CsObjectP} 拷贝的新实例，是一个共享指针（CsSharedPointer）
 	** @exception
 	** @see		CsSharedPointer<T>
 	** @see		CsObjectP
@@ -131,7 +130,7 @@ public:
 	**
 	** @name	Boxing
 	** @brief	封箱
-	** @return	对当前对象的封箱
+	** @return	{const CsObject *} 对当前对象的封箱
 	**
 	** 封箱操作是将当前对象转换为基础类型的方法，并非创建出新的实例。
 	**
@@ -144,13 +143,13 @@ public:
 	**
 	** @name		Unboxing
 	** @brief		拆箱
-	** @param[in]	基础对象的指针
-	** @return		拆箱操作是否成功
+	** @param[in]	obj {const CsObject *} 基础对象的指针
+	** @return		{cs_bool} 拆箱操作是否成功
 	**
 	** 将一个基础对象的指针拆箱到当前类。
 	**
 	****************************************************************************/
-	virtual cs_bool Unboxing(const CsObject *);
+	virtual cs_bool Unboxing(const CsObject *obj);
 
 	/****************************************************************************
 	**
@@ -158,7 +157,7 @@ public:
 	**
 	** @name	ToString
 	** @brief	将当期对象转换为字符串
-	** @return	转换成的字符串类型（CsString）
+	** @return	{CsString} 转换成的字符串类型（CsString）
 	** @see		CsString
 	**
 	****************************************************************************/
@@ -170,7 +169,7 @@ public:
 	**
 	** @name	ClassCode
 	** @brief	获取当前对象的类序列号（ClassCode）
-	** @return	类序列号
+	** @return	{cs_uint} 类序列号
 	**
 	****************************************************************************/
 	virtual cs_uint ClassCode() const;
@@ -181,7 +180,7 @@ public:
 	**
 	** @name	ClassCode
 	** @brief	获取当前对象的哈希码（HashCode）
-	** @return	哈希码值
+	** @return	{cs_uint}哈希码值
 	**
 	****************************************************************************/
 	virtual cs_uint HashCode() const;
@@ -192,11 +191,11 @@ public:
 	**
 	** @name		Equals
 	** @brief		判断对象是否值相等
-	** @param[in]	基础对象的指针
-	** @return		若相等，则返回true，否则返回false
+	** @param[in]	obj {const CsObject *} 基础对象的指针
+	** @return		{cs_bool} 若相等，则返回true，否则返回false
 	**
 	****************************************************************************/
-	virtual cs_bool Equals(const CsObject *) const;
+	virtual cs_bool Equals(const CsObject *obj) const;
 
 	/****************************************************************************
 	**
@@ -204,7 +203,7 @@ public:
 	**
 	** @name	Serializable
 	** @brief	当前对象是否支持序列化
-	** @return	若支持序列化，则返回true，否则返回false
+	** @return	{cs_bool} 若支持序列化，则返回true，否则返回false
 	**
 	** 若对象支持序列化，则应提供序列化（Serialize）和反序列化（Deserialize）的方法，
 	** 这两个方法是模板方法（template），需要传入序列化的档案类（ArchiveT），并需要
@@ -219,14 +218,14 @@ public:
 	**
 	** @name		Serialize
 	** @brief		序列化
-	** @param[out]	归档类
-	** @return		序列化是否成功
+	** @param[out]	archive {ArchiveT &} 归档类
+	** @return		{cs_bool} 序列化是否成功
 	** @see			CsArchive
 	**
 	** 将当前对象的数据序列化到档案中，需要序列化模块CsSerialization的支持
 	**
 	****************************************************************************/
-	//template<typename ArchiveT> cs_bool Serialize(ArchiveT &) const;
+	//template<typename ArchiveT> cs_bool Serialize(ArchiveT &archive) const;
 
 	/****************************************************************************
 	**
@@ -234,14 +233,14 @@ public:
 	**
 	** @name		Deserialize
 	** @brief		反序列化
-	** @param[in]	归档类
-	** @return		反序列化是否成功
+	** @param[in]	archive {ArchiveT &} 归档类
+	** @return		{cs_bool} 反序列化是否成功
 	** @see			CsArchive
 	**
 	** 将档案反序列化为当前对象的数据，需要序列化模块CsSerialization的支持
 	**
 	****************************************************************************/
-	//template<typename ArchiveT> cs_bool Deserialize(ArchiveT &);
+	//template<typename ArchiveT> cs_bool Deserialize(ArchiveT &archive);
 };
 
 #endif // _CORE_OBJECT_H_

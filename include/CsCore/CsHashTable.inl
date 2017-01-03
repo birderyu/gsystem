@@ -11,7 +11,7 @@ inline CS_HASH_TABLE_NODE_QUAL::CsHashTableNode(const KeyT &key,
 	const ValueT &value,
 	CS_HASH_TABLE_NODE_QUAL *next)
 	: CsNextNodeT<CS_HASH_TABLE_NODE_QUAL>(next)
-	, CsKeyValueNodeT<KeyT, ValueT>(key, value)
+	, CsPairNodeT<KeyT, ValueT>(key, value)
 {
 
 }

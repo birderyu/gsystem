@@ -15,7 +15,7 @@ class CsOrderMap
 public:
 	struct CsOrderMapNode
 		: public CsBinaryTreeNodeT<CsOrderMapNode>
-		, public CsKeyValueNodeT<KeyT, ValueT>
+		, public CsPairNodeT<KeyT, ValueT>
 		, public CsNewT<CsOrderMapNode>
 	{
 		cs_small m_nColor;
@@ -28,7 +28,7 @@ public:
 			CsOrderMapNode *right = NULL,
 			cs_small color = CS_ORDER_MAP_NODE_RED)
 			: CsBinaryTreeNodeT<CsOrderMapNode>(parent, left, right)
-			, CsKeyValueNodeT<KeyT, ValueT>(key, value)
+			, CsPairNodeT<KeyT, ValueT>(key, value)
 			, m_nColor(color)
 		{
 

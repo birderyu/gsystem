@@ -1,6 +1,8 @@
 #ifndef _GEOMETRY_GEOMETRY_CORE_H_
 #define _GEOMETRY_GEOMETRY_CORE_H_
 
+#include "CsGlobal.h"
+
 #define CS_GEOMETRY_COORDINATE_HAS_Z
 
 #ifdef CS_GEOMETRY_COORDINATE_HAS_Z

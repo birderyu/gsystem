@@ -22,7 +22,7 @@
 template<typename KeyT, typename ValueT>
 struct CsBinarySortTreeNode 
 	: public CsBinaryTreeNodeT<CsBinarySortTreeNode<KeyT, ValueT>>
-	, public CsKeyValueNodeT<KeyT, ValueT>
+	, public CsPairNodeT<KeyT, ValueT>
 	, public CsNewT<CsBinarySortTreeNode<KeyT, ValueT>>
 {
 	CsBinarySortTreeNode(

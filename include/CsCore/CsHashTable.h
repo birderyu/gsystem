@@ -14,7 +14,7 @@
 template<typename KeyT, typename ValueT>
 struct CsHashTableNode 
 	: public CsNextNodeT<CsHashTableNode<KeyT, ValueT>>
-	, public CsKeyValueNodeT<KeyT, ValueT>
+	, public CsPairNodeT<KeyT, ValueT>
 	, public CsNewT<CsHashTableNode<KeyT, ValueT>>
 {
 	CsHashTableNode(const KeyT &key = KeyT(),

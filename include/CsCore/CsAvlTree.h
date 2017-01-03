@@ -8,7 +8,7 @@
 template<typename KeyT, typename ValueT>
 struct CsAvlTreeNode
 	: public CsBinaryTreeNodeT<CsAvlTreeNode<KeyT, ValueT>>
-	, public CsKeyValueNodeT<KeyT, ValueT>
+	, public CsPairNodeT<KeyT, ValueT>
 	, public CsNewT<CsAvlTreeNode<KeyT, ValueT>>
 {
 	CsAvlTreeNode(

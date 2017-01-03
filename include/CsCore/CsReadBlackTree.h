@@ -26,7 +26,7 @@
 template<typename KeyT, typename ValueT>
 struct CsReadBlackTreeNode 
 	: public CsBinaryTreeNodeT<CsReadBlackTreeNode<KeyT, ValueT>>
-	, public CsKeyValueNodeT<KeyT, ValueT>
+	, public CsPairNodeT<KeyT, ValueT>
 	, public CsNewT<CsReadBlackTreeNode<KeyT, ValueT>>
 {
 	cs_small m_nColor;

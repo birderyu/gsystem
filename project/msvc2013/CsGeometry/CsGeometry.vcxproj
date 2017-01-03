@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsPath.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint3D.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint2D_Store.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolygon.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsRectangle.h" />

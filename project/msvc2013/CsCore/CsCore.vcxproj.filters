@@ -387,9 +387,6 @@
     <ClInclude Include="..\..\..\include\CsCore\CsSingleton.h">
       <Filter>头文件\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsCore\CsStructure.h">
-      <Filter>头文件\Template</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsStringStore.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
@@ -467,6 +464,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsCore\CsUnorderMultiMap.h">
       <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsJsonPair.h">
+      <Filter>头文件\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsStructure.h">
+      <Filter>头文件\Structure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

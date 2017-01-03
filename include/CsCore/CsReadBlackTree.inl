@@ -15,7 +15,7 @@ inline CS_RED_BLACK_TREE_NODE_QUAL::CsReadBlackTreeNode(
 	CS_RED_BLACK_TREE_NODE_QUAL *right,
 	cs_small color)
 	: CsBinaryTreeNodeT<CS_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
-	, CsKeyValueNodeT<KeyT, ValueT>(key, value)
+	, CsPairNodeT<KeyT, ValueT>(key, value)
 	, m_nColor(color)
 {
 

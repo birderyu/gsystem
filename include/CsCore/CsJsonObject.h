@@ -1,3 +1,8 @@
+// JSON 对象
+// JSON 对象在花括号中书写：
+// 对象可以包含多个名称 / 值对：
+// { "firstName": "John", "lastName": "Doe" }
+
 #ifndef _CORE_JSON_OBJECT_H_
 #define _CORE_JSON_OBJECT_H_
 
