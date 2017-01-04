@@ -12,7 +12,6 @@
 #include "Bytes_Test.h"
 #include <windows.h>
 #include "CsSingleLinkedList.h"
-#include "CsFilter.h"
 
 #include <atomic>
 #include "CsAtomic.h"

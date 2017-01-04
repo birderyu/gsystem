@@ -20,6 +20,8 @@
 **
 ** CsDefine.h
 ** 操作系统
+** CS_SYSTEM_WINDOWS: Windows
+** CS_COMPILER_LINUX: Linux
 **
 ****************************************************************************/
 #if defined (_WIN32) || defined(_WIN64)
@@ -46,15 +48,38 @@
 # define CS_COMPILER_GCC
 #endif // __GNUC__
 
+#ifdef CS_SYSTEM_WINDOWS
+#	ifdef _WIN64
+#		define CS_64_BIT
+#	else
+#		define CS_32_BIT
+#	endif // _WIN64
+#endif // CS_SYSTEM_WINDOWS
+
+// 定义API
+#ifdef _DLL
+#	define CS_BUILD_DLL
+#endif
+
 #ifdef CS_COMPILER_MSVC
 #	ifdef CS_BUILD_DLL
 #		define CS_API __declspec(dllexport)
 #	else	 
 #		define CS_API __declspec(dllimport)
-#	endif
+#	endif // CS_BUILD_DLL
 #else
 #	define CS_API
 #endif // CS_COMPILER_MSVC
+
+
+#define CS_OFFSET(type, member) ((cs_size_t)&(((type *)0)->member))
+typedef struct dummy
+{
+	void *p;
+	unsigned char slot;
+}dummy_t;
+#define CS_IS_X86_64 (CS_OFFSET(dummy_t, slot) == 8) //在64位系统下，指针寻址8个字节大小的地址空间
+#define CS_IS_X86_32 (CS_OFFSET(dummy_t, slot) == 4) //在32位系统下，指针寻址4个字节大小的地址空间
 
 #ifndef NULL
 #	define NULL	0

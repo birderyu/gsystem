@@ -1,16 +1,16 @@
 #include "CsCoordinate.h"
 #include "CsNew.h"
 
-#ifdef CS_GEOMETRY_COORDINATE_HAS_Z
+#ifdef CS_GEOMETRY_HAS_Z
 #	define CS_COORDINATE_X m_tCoord[0]
 #	define CS_COORDINATE_Y m_tCoord[1]
 #	define CS_COORDINATE_Z m_tCoord[2]
-#else // !CS_GEOMETRY_COORDINATE_HAS_Z
+#else // !CS_GEOMETRY_HAS_Z
 cs_real _cs_coordinate_z_ = 0;
 #	define CS_COORDINATE_X m_tCoord[0]
 #	define CS_COORDINATE_Y m_tCoord[1]
 #	define CS_COORDINATE_Z _cs_coordinate_z_
-#endif // CS_GEOMETRY_COORDINATE_HAS_Z
+#endif // CS_GEOMETRY_HAS_Z
 
 CsCoordinate::CsCoordinate()
 {

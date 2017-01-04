@@ -36,9 +36,9 @@ cs_uint CsObject::HashCode() const
 	return 0;
 }
 
-cs_bool CsObject::Equals(const CsObject *) const
+cs_bool CsObject::Equals(const CsObject *obj) const
 {
-	return false;
+	return this == obj;
 }
 
 cs_bool CsObject::Serializable() const

@@ -69,14 +69,13 @@ public:
 	template<typename ArchiveT> cs_bool Serialize(ArchiveT &) const;
 	template<typename ArchiveT> cs_bool Deserialize(ArchiveT &);
 
-private:
 	// 注意：以下两个方法，只拷贝内存，即浅拷贝
 	// 从pData的start位开始，拷贝len长度的内存到first位
-	cs_bool CopyMemoryFrom(cs_size_t first, cs_size_t len,
+	cs_bool CopyMemoryFrom(cs_size_t first, cs_size_t size,
 		const DataT *pData, cs_size_t start = 0);
 
 	// 从start位开始，拷贝len长度的内存到pData的first位
-	cs_bool CopyMemoryTo(cs_size_t start, cs_size_t len,
+	cs_bool CopyMemoryTo(cs_size_t start, cs_size_t size,
 		DataT *pData, cs_size_t first = 0) const;
 
 private:

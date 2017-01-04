@@ -3,7 +3,7 @@
 #include "CsCoordinateSequence.h"
 #include "CsNew.h"
 
-#ifdef CS_GEOMETRY_COORDINATE_HAS_Z
+#ifdef CS_GEOMETRY_HAS_Z
 #	define CS_ENVELOPE_MIN_X	m_tCoords[0]
 #	define CS_ENVELOPE_MIN_Y	m_tCoords[1]
 #	define CS_ENVELOPE_MIN_Z	m_tCoords[2]
@@ -16,7 +16,7 @@
 #	define CS_ENVELOPE_LENGTH	(m_tCoords[3] - m_tCoords[0])
 #	define CS_ENVELOPE_WIDTH	(m_tCoords[4] - m_tCoords[1])
 #	define CS_ENVELOPE_HEIGHT	(m_tCoords[5] - m_tCoords[2])
-#else // !CS_GEOMETRY_COORDINATE_HAS_Z
+#else // !CS_GEOMETRY_HAS_Z
 cs_real _cs_envelope_min_max_z_ = 0;
 cs_real _cs_envelope_center_z_ = 0;
 cs_real _cs_envelope_height_ = 0;
@@ -32,7 +32,7 @@ cs_real _cs_envelope_height_ = 0;
 #	define CS_ENVELOPE_LENGTH	(m_tCoords[1] - m_tCoords[0])
 #	define CS_ENVELOPE_WIDTH	(m_tCoords[3] - m_tCoords[2])
 #	define CS_ENVELOPE_HEIGHT	0
-#endif // CS_GEOMETRY_COORDINATE_HAS_Z
+#endif // CS_GEOMETRY_HAS_Z
 
 CsEnvelope::CsEnvelope()
 {

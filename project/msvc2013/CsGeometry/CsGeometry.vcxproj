@@ -18,7 +18,7 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryBulider.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCollection.h" />
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCore.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryGlobal.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryFactory.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryPool.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsLine.h" />
@@ -26,11 +26,13 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsPath.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint3D.h" />
-    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint2D_Store.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint_Store.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolygon.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline_Store.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsRectangle.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsRing.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsSegment_Store.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsSurface.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsTriangle.h" />
   </ItemGroup>

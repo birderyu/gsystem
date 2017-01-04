@@ -180,7 +180,7 @@ public:
 	**
 	** @name	ClassCode
 	** @brief	获取当前对象的哈希码（HashCode）
-	** @return	{cs_uint}哈希码值
+	** @return	{cs_uint} 哈希码值
 	**
 	****************************************************************************/
 	virtual cs_uint HashCode() const;

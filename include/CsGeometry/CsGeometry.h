@@ -35,12 +35,7 @@ class CS_API CsGeometry
 	: public CsObject
 {
 public:
-	enum 
-	{ 
-		CLASS_CODE = CLASS_CODE_GEOMETRY,
-		DIMENSION_2 = 2,
-		DIMENSION_3 = 3
-	};
+	enum { CLASS_CODE = CLASS_CODE_GEOMETRY, };
 
 public:
 	virtual ~CsGeometry() = 0;

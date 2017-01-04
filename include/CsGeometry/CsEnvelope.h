@@ -4,7 +4,7 @@
 // 注意：坐标结构中存储了Z值，对于仅用于二维的数据场景，会有大量的数据冗余
 // 因此，该结构只能作为一个传输结构，不能作为存储结构。
 
-#include "CsGeometryCore.h"
+#include "CsGeometryGlobal.h"
 #include "CsObject.h"
 
 class CsCoordinate;

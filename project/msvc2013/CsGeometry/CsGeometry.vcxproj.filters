@@ -96,14 +96,20 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinateSequence.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCore.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h">
       <Filter>头文件\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint2D_Store.h">
+    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint_Store.h">
       <Filter>头文件\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline_Store.h">
+      <Filter>头文件\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsSegment_Store.h">
+      <Filter>头文件\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryGlobal.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

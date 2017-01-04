@@ -1,7 +1,7 @@
 #ifndef _GEOMETRY_COORDINATE_H_
 #define _GEOMETRY_COORDINATE_H_
 
-#include "CsGeometryCore.h"
+#include "CsGeometryGlobal.h"
 #include "CsObject.h"
 
 class CS_API CsCoordinate
