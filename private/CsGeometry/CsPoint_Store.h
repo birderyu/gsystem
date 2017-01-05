@@ -3,12 +3,15 @@
 
 #include "CsGeometryGlobal.h"
 
-class CsPoint_Store_2D
+class CsCoordinate;
+
+class CsPoint2D_Store
 {
 public:
-	cs_bool Initialize();
-	cs_bool Initialize(cs_real x, cs_real y);
-	cs_bool Initialize(const CsPoint_Store_2D &);
+	cs_void Initialize();
+	cs_void Initialize(cs_real x, cs_real y);
+	cs_void Initialize(const CsCoordinate &c);
+	cs_void Initialize(const CsPoint2D_Store &p_s);
 
 	cs_real &X();
 	cs_real  X() const;

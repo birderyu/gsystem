@@ -5,6 +5,16 @@ CsCoordinateSequence::CsCoordinateSequence()
 
 }
 
+CsCoordinateSequence::CsCoordinateSequence(cs_real x, cs_real y)
+{
+
+}
+
+CsCoordinateSequence::CsCoordinateSequence(cs_real x, cs_real y, cs_real z)
+{
+
+}
+
 CsCoordinateSequence::CsCoordinateSequence(const CsCoordinate &c)
 {
 

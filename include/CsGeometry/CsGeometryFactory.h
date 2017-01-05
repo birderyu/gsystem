@@ -1,13 +1,13 @@
-#ifndef _CORE_GEOMETRY_FACTORY_H_
-#define _CORE_GEOMETRY_FACTORY_H_
+#ifndef _GEOMETRY_GEOMETRY_FACTORY_H_
+#define _GEOMETRY_GEOMETRY_FACTORY_H_
 
 #include "CsGeometry.h"
-#include "CsSingleton.h"
+#include "CsPoint.h"
 
 class CS_API CsGeometryFactory 
-	: public CsSingleton<CsGeometryFactory, CsMutex>
 {
-	
+public:
+	CsPointP CreatePoint(cs_real x, cs_real y) const;
 };
 
-#endif // _CORE_GEOMETRY_FACTORY_H_
+#endif // _GEOMETRY_GEOMETRY_FACTORY_H_

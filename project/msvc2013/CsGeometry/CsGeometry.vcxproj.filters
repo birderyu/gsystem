@@ -25,9 +25,6 @@
     <Filter Include="头文件\_inline">
       <UniqueIdentifier>{db5f1c4b-0335-4e9a-87be-2a8f20ae2584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Store">
-      <UniqueIdentifier>{b51b8e48-9dfa-46cd-94c5-a38a59225eec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Interface">
       <UniqueIdentifier>{da9769b3-c699-4aa5-97c4-f5f6c3e12a7e}</UniqueIdentifier>
     </Filter>
@@ -37,18 +34,30 @@
     <Filter Include="头文件\Interface\2D">
       <UniqueIdentifier>{b37fc661-7637-41d4-af4d-8fed599ac549}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\_private\Implement">
+      <UniqueIdentifier>{004fc2f7-0742-4dab-a05d-d5f7439aebb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\_private\Store">
+      <UniqueIdentifier>{b51b8e48-9dfa-46cd-94c5-a38a59225eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\_private\Implement">
+      <UniqueIdentifier>{1ef18bd4-b111-4afa-94ec-e2932e1810b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Interface">
+      <UniqueIdentifier>{1d25ee34-fb82-42b6-8d66-e309ec27b584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Interface\2D">
+      <UniqueIdentifier>{a14a816a-ceac-450b-8ced-db7fb9472ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\_private\Store">
+      <UniqueIdentifier>{d001da59-b6bd-48b4-b132-69c8f151257a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsEnvelope.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryBulider.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCollection.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryFactory.h">
@@ -99,17 +108,32 @@
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h">
       <Filter>头文件\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint_Store.h">
-      <Filter>头文件\Store</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline_Store.h">
-      <Filter>头文件\Store</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\CsGeometry\CsSegment_Store.h">
-      <Filter>头文件\Store</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryGlobal.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsGeometry\CsPoint_Impl.h">
+      <Filter>头文件\_private\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsGeometry\CsPoint_Store.h">
+      <Filter>头文件\_private\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsGeometry\CsPolygon_Store.h">
+      <Filter>头文件\_private\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsGeometry\CsPolyline_Store.h">
+      <Filter>头文件\_private\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\CsGeometry\CsSegment_Store.h">
+      <Filter>头文件\_private\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryConvert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCollection.h">
+      <Filter>头文件\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +145,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsCoordinateSequence.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsPoint_Impl.cpp">
+      <Filter>源文件\_private\Implement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsGeometry.cpp">
+      <Filter>源文件\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsPoint.cpp">
+      <Filter>源文件\Interface\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsGeometryFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsGeometry\CsPoint_Store.cpp">
+      <Filter>源文件\_private\Store</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

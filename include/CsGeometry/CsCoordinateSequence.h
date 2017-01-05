@@ -9,6 +9,8 @@ class CS_API CsCoordinateSequence
 {
 public:
 	CsCoordinateSequence();
+	CsCoordinateSequence(cs_real x, cs_real y);
+	CsCoordinateSequence(cs_real x, cs_real y, cs_real z);
 	CsCoordinateSequence(const CsCoordinate &);
 	CsCoordinateSequence(const CsVector<CsCoordinate> &);
 	CsCoordinateSequence(const CsVector<cs_real> &);
