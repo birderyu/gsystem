@@ -85,6 +85,9 @@
     <Filter Include="头文件\Xml">
       <UniqueIdentifier>{e174cf53-bdb6-454f-918f-e15034a39c6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Json">
+      <UniqueIdentifier>{5cda6b33-c129-4dff-9d2c-4735aed3fff3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\CsCore\CsDefine.h">
@@ -667,6 +670,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsPath.cpp">
       <Filter>源文件\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonObject.cpp">
+      <Filter>源文件\Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

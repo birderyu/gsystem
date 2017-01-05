@@ -24,19 +24,26 @@
 #ifndef _CORE_JSON_VALUE_H_
 #define _CORE_JSON_VALUE_H_
 
-#include "CsJsonObject.h"
-#include "CsVariant.h"
+#include "CsObject.h"
 
 class CS_API CsJsonValue
-	: public CsJsonObject
+	: public CsObject
 {
 public:
-	CsJsonValue();
-	CsJsonValue(const CsString &);
-	CsJsonValue(const CsJsonValue &);
+	enum JSON_VALUE_TYPE
+	{
+		JSON_VALUE_TYPE_NULL,
+		JSON_VALUE_TYPE_BOOLEAN,
+		JSON_VALUE_TYPE_INTEGER,
+		JSON_VALUE_TYPE_FLOAT,
+		JSON_VALUE_TYPE_STRING,
+		JSON_VALUE_TYPE_ARRAY,
+		JSON_VALUE_TYPE_OBJECT,
+	};
 
-private:
-	CsVariant m_tVariant;
+public:
+	virtual ~CsJsonValue();
+	virtual JSON_VALUE_TYPE Type() const;
 };
 
 #endif // _CORE_JSON_VALUE_H_

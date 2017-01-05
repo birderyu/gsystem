@@ -1,7 +1,14 @@
 #include "CsGeometryFactory.h"
 #include "CsPoint_Impl.h"
 
-CsPointP CsGeometryFactory::CreatePoint(cs_real x, cs_real y) const
+CsGeometryP CsGeometryFactory::CreatePoint2D(cs_real x, cs_real y) const
 {
-	return CsPointP(new CsPoint_Impl(this, x, y));
+	return CsGeometryP(new CsPoint_Impl<2>(this, x, y));
 }
+
+#ifdef CS_GEOMETRY_HAS_Z
+CsGeometryP CsGeometryFactory::CreatePoint3D(cs_real x, cs_real y, cs_real z) const
+{
+	return CsGeometryP(new CsPoint_Impl<3>(this, x, y, z));
+}
+#endif

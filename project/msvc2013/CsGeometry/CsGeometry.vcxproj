@@ -11,33 +11,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\CsGeometry\CsBody.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinate.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsCoordinateSequence.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsCurve.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsEnvelope.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometry.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryCollection.h" />
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryConvert.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryHelper.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryGlobal.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryFactory.h" />
-    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryHelper.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryInterface.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsGeometryPool.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsLine.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsMultiPoint.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPath.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPoint.h" />
-    <ClInclude Include="..\..\..\include\CsGeometry\CsPoint3D.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolygon.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsPolyline.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsRectangle.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsRing.h" />
+    <ClInclude Include="..\..\..\include\CsGeometry\CsSegment.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsSurface.h" />
     <ClInclude Include="..\..\..\include\CsGeometry\CsTriangle.h" />
+    <ClInclude Include="..\..\..\private\CsGeometry\CsDoubleCoordinates.h" />
+    <ClInclude Include="..\..\..\private\CsGeometry\CsMulitCoordinates.h" />
     <ClInclude Include="..\..\..\private\CsGeometry\CsPoint_Impl.h" />
-    <ClInclude Include="..\..\..\private\CsGeometry\CsPoint_Store.h" />
-    <ClInclude Include="..\..\..\private\CsGeometry\CsPolygon_Store.h" />
-    <ClInclude Include="..\..\..\private\CsGeometry\CsPolyline_Store.h" />
-    <ClInclude Include="..\..\..\private\CsGeometry\CsSegment_Store.h" />
+    <ClInclude Include="..\..\..\private\CsGeometry\CsSinglePoint_Store.h" />
+    <ClInclude Include="..\..\..\private\CsGeometry\CsSingleCoordinateWithLength.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsCoordinateSequence.cpp" />
@@ -45,9 +46,13 @@
     <ClCompile Include="..\..\..\source\CsGeometry\CsEnvelope.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsGeometry.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsGeometryFactory.cpp" />
+    <ClCompile Include="..\..\..\source\CsGeometry\CsGeometryGlobal.cpp" />
     <ClCompile Include="..\..\..\source\CsGeometry\CsPoint.cpp" />
-    <ClCompile Include="..\..\..\source\CsGeometry\CsPoint_Impl.cpp" />
-    <ClCompile Include="..\..\..\source\CsGeometry\CsPoint_Store.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\CsGeometry\CsGeometryHelper.inl" />
+    <None Include="..\..\..\include\CsGeometry\CsSinglePoint_Store.inl" />
+    <None Include="..\..\..\private\CsGeometry\CsPoint_Impl.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83739D3A-0014-4C50-93DC-13D96F6886CB}</ProjectGuid>

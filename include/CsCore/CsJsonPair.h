@@ -19,4 +19,14 @@
 #ifndef _CORE_JSON_PAIR_H_
 #define _CORE_JSON_PAIR_H_
 
+#include "CsString.h"
+#include "CsJsonValue.h"
+
+class CsJsonPair
+{
+private:
+	CsString m_sKey;
+	CsJsonValue *m_pValue;
+};
+
 #endif // _CORE_JSON_PAIR_H_

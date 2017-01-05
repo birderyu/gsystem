@@ -20,30 +20,28 @@
 #define _CORE_JSON_OBJECT_H_
 
 #include "CsObject.h"
-#include "CsStructure.h"
+#include "CsMap.h"
 
-// 一个Json对象
+class CsJsonPair;
+
 class CS_API CsJsonObject
-	: public CsPreviousNextNodeT<CsJsonObject>
-	, public CsChildNodeT<CsJsonObject>
-	, public CsNewT<CsJsonObject>
+	: public CsNewT<CsJsonObject>
 	, public CsObject
 {
 public:
-	enum TYPE
-	{
-		JSON_OBJECT,	// 容器
-		JSON_VALUE,		// 键值对
-		JSON_ARRAY,		// 数组
-	};
-
-public:
 	CsJsonObject();
-	CsJsonObject(const CsJsonObject &);
+	CsJsonObject(const CsString &jsonStr);
+	CsJsonObject(const CsJsonObject &jsonObj);
+	~CsJsonObject();
 
-	virtual ~CsJsonObject();
+	cs_void Valid() const;
 
-	virtual TYPE Type();
+	// 字符串解析，cursor为游标
+	cs_bool Parse(const CsString &jsonStr, cs_size_t cursor = 0);
+
+private:
+	//CsMap<CsString, CsJsonPair*> m_tJsonPairs;
+	cs_bool m_bValid;
 };
 
 #endif // _CORE_JSON_OBJECT_H_

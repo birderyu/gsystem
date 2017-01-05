@@ -297,6 +297,7 @@
     <ClCompile Include="..\..\..\source\CsCore\CsDateTime_Ex.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsFile.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsFile_Ex.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonObject.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsLongDoubleFloat.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsDoubleFloat.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp" />

@@ -71,7 +71,6 @@
 #	define CS_API
 #endif // CS_COMPILER_MSVC
 
-
 #define CS_OFFSET(type, member) ((cs_size_t)&(((type *)0)->member))
 typedef struct dummy
 {

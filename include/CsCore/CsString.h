@@ -89,13 +89,16 @@ public:
 	cs_size_t Size() const;
 	cs_bool Resize(cs_size_t);
 
-	cs_char GetAt(cs_size_t) const;
-	cs_char &GetAt(cs_size_t);
+	cs_char GetAt(cs_size_t pos) const;
+	cs_char &GetAt(cs_size_t pos);
 
 	const cs_char *Cursor(cs_size_t pos) const;
 	cs_char *Cursor(cs_size_t pos);
 
 	cs_bool Equals(const CsString &, cs_bool bIsSensitive = true) const;
+
+	cs_bool StartWith(cs_char c) const;
+	cs_bool EndWith(cs_char c) const;
 
 	friend CS_API CsString operator+(const CsString &s1, const CsString &s2);
 

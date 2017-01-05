@@ -2,8 +2,8 @@
 #define _CORE_REFERENCE_COUNTER_INLINE_
 
 template <typename ClassT, typename LockT>
-inline CsReferenceCounter<ClassT, LockT>::CsReferenceCounter(ClassT *ptr)
-: m_pPointer(ptr), m_nCount(1)
+inline CsReferenceCounter<ClassT, LockT>::CsReferenceCounter(ClassT *ptr, cs_size_t count)
+: m_pPointer(ptr), m_nCount(count)
 {
 
 }
@@ -15,9 +15,9 @@ inline CsReferenceCounter<ClassT, LockT>::~CsReferenceCounter()
 }
 
 template <typename ClassT, typename LockT>
-inline cs_void CsReferenceCounter<ClassT, LockT>::Add()
+inline cs_size_t CsReferenceCounter<ClassT, LockT>::Add()
 {
-	++m_nCount;
+	return ++m_nCount;
 }
 
 template <typename ClassT, typename LockT>
@@ -34,7 +34,13 @@ inline cs_size_t CsReferenceCounter<ClassT, LockT>::Count() const
 }
 
 template <typename ClassT, typename LockT>
-inline ClassT * CsReferenceCounter<ClassT, LockT>::Pointer() const
+inline ClassT * CsReferenceCounter<ClassT, LockT>::Pointer()
+{
+	return m_pPointer;
+}
+
+template <typename ClassT, typename LockT>
+inline const ClassT *CsReferenceCounter<ClassT, LockT>::Pointer() const
 {
 	return m_pPointer;
 }

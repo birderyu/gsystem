@@ -9,7 +9,7 @@
 cs_real _cs_coordinate_z_ = 0;
 #	define CS_COORDINATE_X m_tCoord[0]
 #	define CS_COORDINATE_Y m_tCoord[1]
-#	define CS_COORDINATE_Z _cs_coordinate_z_
+#	define CS_COORDINATE_Z CsGeometryGlobal::_g_n_coordinate_z_
 #endif // CS_GEOMETRY_HAS_Z
 
 CsCoordinate::CsCoordinate()
@@ -29,6 +29,12 @@ CsCoordinate::CsCoordinate(cs_real x, cs_real y, cs_real z)
 	CS_COORDINATE_X = x;
 	CS_COORDINATE_Y = y;
 	CS_COORDINATE_Z = z;
+}
+
+CsCoordinate::CsCoordinate(const cs_real *p_c, cs_size_t size)
+{
+	cs_size_t real_size = size < CS_COORDINATE_SIZE ? size : CS_COORDINATE_SIZE;
+	CsMemCopy(m_tCoord, p_c, sizeof(cs_real)* real_size);
 }
 
 CsCoordinate::CsCoordinate(const CsCoordinate &coord)
@@ -84,6 +90,11 @@ cs_void CsCoordinate::SetZ(cs_real z)
 cs_uint CsCoordinate::Dimension() const
 {
 	return CS_COORDINATE_SIZE;
+}
+
+const cs_real * CsCoordinate::Cursor() const
+{
+	return m_tCoord;
 }
 
 #undef CS_COORDINATE_Z

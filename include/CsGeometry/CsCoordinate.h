@@ -13,6 +13,7 @@ public:
 	CsCoordinate();
 	CsCoordinate(cs_real x, cs_real y);
 	CsCoordinate(cs_real x, cs_real y, cs_real z);
+	CsCoordinate(const cs_real *p_c, cs_size_t size);
 	CsCoordinate(const CsCoordinate &coord);
 
 	cs_real &X();
@@ -27,6 +28,8 @@ public:
 	cs_void SetZ(cs_real);
 
 	cs_uint Dimension() const;
+
+	const cs_real *Cursor() const;
 
 private:
 	cs_real m_tCoord[CS_COORDINATE_SIZE];

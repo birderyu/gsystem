@@ -14,6 +14,7 @@
 #ifndef _GEOMETRY_GEOMETRY_H_
 #define _GEOMETRY_GEOMETRY_H_
 
+#include "CsGeometryGlobal.h"
 #include "CsObject.h"
 
 class CsGeometry;
@@ -103,39 +104,6 @@ public:
 	**
 	** CsGeometry
 	**
-	** @name	Length
-	** @brief	获取当前几何对象的长度
-	** @return	{cs_real} 长度值，默认单位为米
-	**
-	****************************************************************************/
-	virtual cs_real Length() const = 0;
-
-	/****************************************************************************
-	**
-	** CsGeometry
-	**
-	** @name	Area
-	** @brief	获取当前几何对象的面积
-	** @return	{cs_real} 面积值，默认单位为平方米
-	**
-	****************************************************************************/
-	virtual cs_real Area() const = 0;
-
-	/****************************************************************************
-	**
-	** CsGeometry
-	**
-	** @name	Volume
-	** @brief	获取当前几何对象的体积
-	** @return	{cs_real} 体积值，默认单位为立方米
-	**
-	****************************************************************************/
-	virtual cs_real Volume() const = 0;
-
-	/****************************************************************************
-	**
-	** CsGeometry
-	**
 	** @name	Envelope
 	** @brief	获取当前几何对象的外包
 	** @return	{CsEnvelope} 外包
@@ -155,16 +123,24 @@ public:
 	**
 	****************************************************************************/
 	virtual CsCoordinateSequence CoordinateSequence() const = 0;
-		
+	
+	//virtual cs_bool IsEmpty() const = 0;
+	//virtual cs_bool IsSimple() const = 0;
+	//virtual cs_bool Clear() = 0;
+	//virtual CsGeometryP Flatten() const = 0; // 从三维变成二维
+
 	//virtual cs_real Distance(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Touches(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Intersects(const CsGeometry &geo) const = 0;
+	//virtual cs_bool Disjoint(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Crosses(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Within(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Contains(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Overlaps(const CsGeometry &geo) const = 0;
 	//virtual cs_bool Covers(const CsGeometry &geo) const = 0;
 	//virtual cs_bool CoveredBy(const CsGeometry &geo) const = 0;
+
+	//virtual CsGeometryP Buffer() const = 0;
 	//virtual CsGeometryP Intersection(const CsGeometry &geo) const = 0;
 	//virtual CsGeometryP Union(const CsGeometry &geo) const = 0;
 	//virtual CsGeometryP Difference(const CsGeometry &geo) const = 0;

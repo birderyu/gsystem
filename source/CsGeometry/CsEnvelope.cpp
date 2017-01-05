@@ -17,15 +17,12 @@
 #	define CS_ENVELOPE_WIDTH	(m_tCoords[4] - m_tCoords[1])
 #	define CS_ENVELOPE_HEIGHT	(m_tCoords[5] - m_tCoords[2])
 #else // !CS_GEOMETRY_HAS_Z
-cs_real _cs_envelope_min_max_z_ = 0;
-cs_real _cs_envelope_center_z_ = 0;
-cs_real _cs_envelope_height_ = 0;
 #	define CS_ENVELOPE_MIN_X	m_tCoords[0]
 #	define CS_ENVELOPE_MIN_Y	m_tCoords[1]
-#	define CS_ENVELOPE_MIN_Z	_cs_envelope_min_max_z_
+#	define CS_ENVELOPE_MIN_Z	CsGeometryGlobal::_g_n_coordinate_z_
 #	define CS_ENVELOPE_MAX_X	m_tCoords[2]
 #	define CS_ENVELOPE_MAX_Y	m_tCoords[3]
-#	define CS_ENVELOPE_MAX_Z	_cs_envelope_min_max_z_
+#	define CS_ENVELOPE_MAX_Z	CsGeometryGlobal::_g_n_coordinate_z_
 #	define CS_ENVELOPE_CENTER_X ((m_tCoords[0] + m_tCoords[1]) / 2.0)
 #	define CS_ENVELOPE_CENTER_Y ((m_tCoords[2] + m_tCoords[3]) / 2.0)
 #	define CS_ENVELOPE_CENTER_Z 0

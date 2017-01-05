@@ -628,3 +628,13 @@ cs_bool CsString::Switch(CsStringStore::TYPE emType)
 
 	return false;
 }
+
+cs_bool CsString::StartWith(cs_char c) const
+{
+	return GetAt(0) == c;
+}
+
+cs_bool CsString::EndWith(cs_char c) const
+{
+	return GetAt(Size() - 1) == c;
+}
