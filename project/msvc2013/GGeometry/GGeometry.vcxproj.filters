@@ -42,123 +42,123 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\GGeometry\CsCoordinate.h">
+    <ClInclude Include="..\..\..\include\GGeometry\gcoordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsEnvelope.h">
+    <ClInclude Include="..\..\..\include\GGeometry\gcoordinatesequence.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometryFactory.h">
+    <ClInclude Include="..\..\..\include\GGeometry\genvelope.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometryPool.h">
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryfactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsCoordinateSequence.h">
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryglobal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometry.h">
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometry.h">
       <Filter>头文件\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometryGlobal.h">
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryhelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GGeometry\CsPoint_Impl.h">
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryinterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometrypool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gbody.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gcurve.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometrycollection.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gline.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gmultipoint.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gpath.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gpoint.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gpolygon.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gpolyline.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\grectangle.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gring.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gsegment.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gsurface.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gtriangle.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GGeometry\gpoint_impl.h">
       <Filter>头文件\_private\Implement</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometryCollection.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsTriangle.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsCurve.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsLine.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsMultiPoint.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsPath.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsPoint.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsPolygon.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsPolyline.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsRectangle.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsRing.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsSegment.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsSurface.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\GGeometry\CsDoubleCoordinates.h">
+    <ClInclude Include="..\..\..\private\GGeometry\gsinglepoint_store.h">
       <Filter>头文件\_private\Store</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GGeometry\CsSingleCoordinateWithLength.h">
+    <ClInclude Include="..\..\..\private\GGeometry\gmultipoint_store.h">
       <Filter>头文件\_private\Store</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GGeometry\CsMulitCoordinates.h">
+    <ClInclude Include="..\..\..\private\GGeometry\gdoublepoint_store.h">
       <Filter>头文件\_private\Store</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GGeometry\CsSinglePoint_Store.h">
+    <ClInclude Include="..\..\..\private\GGeometry\gsinglepointwithlength_store.h">
       <Filter>头文件\_private\Store</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsBody.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometryInterface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\CsGeometryHelper.h">
-      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GGeometry\CsEnvelope.cpp">
+    <ClCompile Include="..\..\..\source\GGeometry\gcoordinate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\CsCoordinate.cpp">
+    <ClCompile Include="..\..\..\source\GGeometry\gcoordinatesequence.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\CsGeometry.cpp">
+    <ClCompile Include="..\..\..\source\GGeometry\genvelope.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GGeometry\ggeometryfactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GGeometry\ggeometryglobal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GGeometry\ggeometry.cpp">
       <Filter>源文件\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\CsPoint.cpp">
+    <ClCompile Include="..\..\..\source\GGeometry\gpoint.cpp">
       <Filter>源文件\Interface\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\CsGeometryFactory.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\CsGeometryGlobal.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\CsCoordinateSequence.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\include\GGeometry\CsSinglePoint_Store.inl">
-      <Filter>头文件\_private\Store</Filter>
+    <None Include="..\..\..\include\GGeometry\ggeometryhelper.inl">
+      <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\private\GGeometry\CsPoint_Impl.inl">
+    <None Include="..\..\..\private\GGeometry\gpoint_impl.inl">
       <Filter>头文件\_private\Implement</Filter>
     </None>
-    <None Include="..\..\..\include\GGeometry\CsGeometryHelper.inl">
-      <Filter>头文件\_inline</Filter>
+    <None Include="..\..\..\include\GGeometry\gsinglepoint_store.inl">
+      <Filter>头文件\_private\Store</Filter>
     </None>
   </ItemGroup>
 </Project>

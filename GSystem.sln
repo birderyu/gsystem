@@ -10,14 +10,30 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GCore", "project\msvc2013\GCore\GCore.vcxproj", "{248D9550-B9EC-4A1C-B914-9E17B2483266}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDataTable", "project\msvc2013\GDataTable\GDataTable.vcxproj", "{74598484-054A-44F3-A111-66DB314D98FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{83739D3A-0014-4C50-93DC-13D96F6886CB} = {83739D3A-0014-4C50-93DC-13D96F6886CB}
+		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GGeometry", "project\msvc2013\GGeometry\GGeometry.vcxproj", "{83739D3A-0014-4C50-93DC-13D96F6886CB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GSerialization", "project\msvc2013\GSerialization\GSerialization.vcxproj", "{08D9DEAA-06A7-44FF-80C7-AAD74E4C03EF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GCore_Test", "test\GCore_Test\GCore_Test.vcxproj", "{E65C8832-92BC-4757-93E6-C1186200CC81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GGeometry_Test", "test\GGeometry_Test\GGeometry_Test.vcxproj", "{9FFA9D50-1F12-4E95-8E8E-0AA479D96105}"
+	ProjectSection(ProjectDependencies) = postProject
+		{83739D3A-0014-4C50-93DC-13D96F6886CB} = {83739D3A-0014-4C50-93DC-13D96F6886CB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

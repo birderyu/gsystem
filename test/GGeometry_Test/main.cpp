@@ -1,11 +1,11 @@
-#include "CsGeometryFactory.h"
-#include "CsGeometryHelper.h"
+#include "ggeometryfactory.h"
+#include "ggeometryhelper.h"
 
 int main(int argc, char *argv[])
 {
-	CsGeometryFactory factory;
-	CsGeometryP geo = factory.CreatePoint3D(1, 2, 3);
-	CsPointP poi = CsGeometryHelper::ConvertTo<CsPoint>(geo);
+	GGeometryFactory factory;
+	GGeometryP geo = factory.CreatePoint3D(1, 2, 3);
+	GPointP poi = GGeometryHelper::ConvertTo<GPoint>(geo);
 
 	greal x = poi->X();
 	greal y = poi->Y();
