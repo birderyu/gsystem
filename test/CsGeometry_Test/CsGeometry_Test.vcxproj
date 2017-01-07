@@ -14,7 +14,7 @@
     <ProjectGuid>{9FFA9D50-1F12-4E95-8E8E-0AA479D96105}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>CsGeometry_Test</ProjectName>
+    <ProjectName>GGeometry_Test</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

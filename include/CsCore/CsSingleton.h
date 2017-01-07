@@ -17,7 +17,7 @@ public:
 			{
 				m_pInstance = new ClassT;
 				m_pInstance->Initialize();
-				CsCallAtExit(Destroy);
+				CS_CALL_AT_EXIT(Destroy);
 			}
 			return *m_pInstance;
 		}

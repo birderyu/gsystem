@@ -22,7 +22,7 @@
     <ProjectGuid>{248D9550-B9EC-4A1C-B914-9E17B2483266}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>CsCore</ProjectName>
+    <ProjectName>GCore</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -178,6 +178,7 @@
     <ClInclude Include="..\..\..\include\CsCore\CsJsonArray.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonPair.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonObject.h" />
+    <ClInclude Include="..\..\..\include\CsCore\CsJsonParserMessage.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsJsonValue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsListQueue.h" />
     <ClInclude Include="..\..\..\include\CsCore\CsMultiMap.h" />
@@ -275,6 +276,7 @@
     <ClInclude Include="..\..\..\private\CsCore\CsDateTime_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsFile_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsGlobal_Ex.h" />
+    <ClInclude Include="..\..\..\private\CsCore\CsJsonParser_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsSockAddress_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsSocket_Ex.h" />
     <ClInclude Include="..\..\..\private\CsCore\CsStringList_Ex.h" />
@@ -297,7 +299,10 @@
     <ClCompile Include="..\..\..\source\CsCore\CsDateTime_Ex.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsFile.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsFile_Ex.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonArray.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsJsonObject.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonPair.cpp" />
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonValue.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsLongDoubleFloat.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsDoubleFloat.cpp" />
     <ClCompile Include="..\..\..\source\CsCore\CsEndian.cpp" />

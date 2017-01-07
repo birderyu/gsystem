@@ -23,7 +23,7 @@ int strncasecmp(const cs_char *s1, cs_char *s2, /*register*/ cs_int n)
 #endif
 
 
-cs_size_t CsCStringHelper::Length(const cs_char *c_str)
+cs_size_t CsCStringHelper::Size(const cs_char *c_str)
 {
 	return strlen(c_str);
 }

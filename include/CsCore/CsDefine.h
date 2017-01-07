@@ -154,6 +154,32 @@ extern "C"{
 }
 #endif
 
-#define CsCallAtExit atexit
+// 
+#ifndef CS_INTERFACE
+#	define CS_INTERFACE	struct
+#endif // !CS_INTERFACE
+
+// 字符处理
+#define CS_UCHAR(c)				((cs_uchar)(c))
+#define CS_CHAR_IS_ASCII(c)		(isascii(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_ALNUM(c)		(isalnum(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_ALPHA(c)		(isalpha(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_BLANK(c)		(isblank(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_CNTRL(c)		(iscntrl(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_DIGIT(c)		(isdigit(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_DIGIT_X(c)	(isxdigit(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_GRAPH(c)		(isgraph(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_LOWER(c)		(islower(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_PRINT(c)		(isprint(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_PUNCT(c)		(ispunct(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_SPACE(c)		(isspace(CS_UCHAR(c)) != 0)
+#define CS_CHAR_IS_UPPER(c)		(isupper(CS_UCHAR(c)) != 0)
+#define CS_CHAR_TO_LOWER(c)		tolower(CS_UCHAR(c))
+#define CS_CHAR_TO_UPPER(c)		toupper(CS_UCHAR(c))
+
+// 常用函数
+#define CS_CALL_AT_EXIT atexit
+#define CS_MAX(a,b)  (((a) > (b)) ? (a) : (b))
+#define CS_MIN(a,b)  (((a) < (b)) ? (a) : (b))
 
 #endif // _CORE_DEFINE_H_

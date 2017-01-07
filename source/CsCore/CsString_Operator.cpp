@@ -53,9 +53,33 @@ cs_char &CsString::operator[](cs_size_t pos)
 	return GetAt(pos);
 }
 
+cs_bool CsString::operator<(const CsString &)
+{
+	// TODO
+	return false;
+}
+
+cs_bool CsString::operator>(const CsString &)
+{
+	// TODO
+	return false;
+}
+
 CsString operator+(const CsString &s1, const CsString &s2)
 {
 	CsString sStr(s1);
 	sStr += s2;
 	return sStr;
+}
+
+cs_bool operator>(const CsString &s1, const CsString &s2)
+{
+	// TODO
+	return false;
+}
+
+cs_bool operator<(const CsString &s1, const CsString &s2)
+{
+	// TODO
+	return false;
 }

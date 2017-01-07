@@ -20,6 +20,7 @@
 #define _CORE_JSON_OBJECT_H_
 
 #include "CsObject.h"
+#include "CsString.h"
 #include "CsMap.h"
 
 class CsJsonPair;
@@ -34,13 +35,13 @@ public:
 	CsJsonObject(const CsJsonObject &jsonObj);
 	~CsJsonObject();
 
-	cs_void Valid() const;
+	cs_bool Valid() const;
 
 	// 字符串解析，cursor为游标
-	cs_bool Parse(const CsString &jsonStr, cs_size_t cursor = 0);
+	cs_bool Parse(const CsString &jsonStr, cs_size_t cursor = 0, CsString *s_error = NULL);
 
 private:
-	//CsMap<CsString, CsJsonPair*> m_tJsonPairs;
+	CsMap<CsString, CsJsonPair*> m_tJsonPairs;
 	cs_bool m_bValid;
 };
 

@@ -20,31 +20,31 @@ class CS_API CsCStringHelper
 {
 public:
 	// 不包含'\0'的长度
-	static cs_size_t Length(const cs_char *c_str);
+	static cs_size_t Size(const cs_char *c_str);
 
-	// len = strlen(src) + 1（末尾的'\0'）
-	static cs_bool Copy(const cs_char *src, cs_size_t len, cs_char *dest);
+	// size = strlen(src) + 1（末尾的'\0'）
+	static cs_bool Copy(const cs_char *src, cs_size_t size, cs_char *dest);
 
-	static cs_bool Trim(const cs_char *c_str, cs_size_t len, 
+	static cs_bool Trim(const cs_char *c_str, cs_size_t size,
 		cs_char *c_str_out, cs_size_t &len_out);
-	static cs_bool TrimLeft(const cs_char *c_str, cs_size_t len,
+	static cs_bool TrimLeft(const cs_char *c_str, cs_size_t size,
 		cs_char *c_str_out, cs_size_t &len_out);
-	static cs_bool TrimRight(const cs_char *c_str, cs_size_t len,
+	static cs_bool TrimRight(const cs_char *c_str, cs_size_t size,
 		cs_char *c_str_out, cs_size_t &len_out);
 
-	static cs_bool MakeTrim(cs_char *c_str, cs_size_t len, cs_size_t &len_out);
-	static cs_bool MakeTrimLeft(cs_char *c_str, cs_size_t len, cs_size_t &len_out);
-	static cs_bool MakeTrimRight(cs_char *c_str, cs_size_t len, cs_size_t &len_out);
+	static cs_bool MakeTrim(cs_char *c_str, cs_size_t size, cs_size_t &len_out);
+	static cs_bool MakeTrimLeft(cs_char *c_str, cs_size_t size, cs_size_t &len_out);
+	static cs_bool MakeTrimRight(cs_char *c_str, cs_size_t size, cs_size_t &len_out);
 
-	static cs_bool MakeUpper(cs_char *c_str, cs_size_t len);
-	static cs_bool MakeLower(cs_char *c_str, cs_size_t len);
+	static cs_bool MakeUpper(cs_char *c_str, cs_size_t size);
+	static cs_bool MakeLower(cs_char *c_str, cs_size_t size);
 
 	// 注意：当返回值为false时，表示未做任何替换，此时c_str_out和out_len里的值可能是无效的
-	static cs_bool Replace(const cs_char *c_str, cs_size_t len, 
-		const cs_char *from, cs_size_t from_len,
-		const cs_char *to, cs_size_t to_len,
+	static cs_bool Replace(const cs_char *c_str, cs_size_t size,
+		const cs_char *from, cs_size_t from_size,
+		const cs_char *to, cs_size_t to_size,
 		cs_bool bIsSensitive,
-		cs_char *c_str_out, cs_size_t &out_len);
+		cs_char *c_str_out, cs_size_t &out_size);
 };
 
 #endif // _CORE_C_STRING_HELPER_H_

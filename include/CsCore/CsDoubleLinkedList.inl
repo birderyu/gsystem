@@ -44,7 +44,7 @@ inline CsDoubleLinkedList<DataT, NodeT>& CsDoubleLinkedList<DataT, NodeT>::opera
 	{
 		for (cs_size_t i = 0; i < other.m_nSize; i++)
 		{
-			AddLast(other.GetAt(i));
+			AddLast(other.GetDataAt(i));
 		}
 	}
 	return *this;

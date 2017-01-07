@@ -24,6 +24,17 @@
 
 class CsJsonPair
 {
+public:
+	CsJsonPair();
+	~CsJsonPair();
+	cs_bool Valid() const;
+	CsString &Key();
+	const CsString &Key() const;
+	CsJsonValue *Value();
+	const CsJsonValue *Value() const;
+
+	cs_bool Parse(const CsString &jsonStr, cs_size_t cursor = 0, CsString *s_error = NULL);
+	
 private:
 	CsString m_sKey;
 	CsJsonValue *m_pValue;

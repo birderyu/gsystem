@@ -43,7 +43,7 @@
     <ProjectGuid>{74598484-054A-44F3-A111-66DB314D98FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>CsDataTable</ProjectName>
+    <ProjectName>GDataTable</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

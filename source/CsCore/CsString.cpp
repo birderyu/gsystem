@@ -16,7 +16,7 @@ CsString::CsString(cs_char cChar)
 
 CsString::CsString(const cs_char *pStr)
 {
-	cs_size_t size = CsCStringHelper::Length(pStr);
+	cs_size_t size = CsCStringHelper::Size(pStr);
 	if (size <= 0)
 	{
 		m_tStringStore.m_nType = CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;

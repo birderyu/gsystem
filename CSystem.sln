@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{9D2D3F2E-D963-4289-8DE4-F13A91D849BA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GSystem", "GSystem", "{9D2D3F2E-D963-4289-8DE4-F13A91D849BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{11BB7215-A054-4ADC-9A4F-E6739D7622B5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GTest", "GTest", "{11BB7215-A054-4ADC-9A4F-E6739D7622B5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CsCore_Test", "test\CsCore_Test\CsCore_Test.vcxproj", "{E65C8832-92BC-4757-93E6-C1186200CC81}"
 	ProjectSection(ProjectDependencies) = postProject

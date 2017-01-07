@@ -27,8 +27,9 @@
 #ifndef _CORE_JSON_ARRAY_H_
 #define _CORE_JSON_ARRAY_H_
 
-#include "CsJsonValue.h"
 #include "CsList.h"
+
+class CsJsonValue;
 
 class CS_API CsJsonArray
 {
@@ -37,8 +38,10 @@ public:
 	CsJsonArray(const CsString &);
 	CsJsonArray(const CsJsonArray &);
 
+	cs_bool Parse(const CsString &jsonStr, cs_size_t cursor = 0, CsString *s_error = NULL);
+
 private:
-	CsList<CsJsonValue> m_tList;
+	CsList<CsJsonValue*> m_tList;
 };
 
 #endif // _CORE_JSON_ARRAY_H_

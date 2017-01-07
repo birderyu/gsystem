@@ -89,6 +89,9 @@ class CSAAA
 
 int main(int argc, char *argv[])
 {
+	cs_char c = 'b';
+	cs_bool b = CS_CHAR_IS_SPACE(c);
+
 	SetTest();
 	TestMap();
 

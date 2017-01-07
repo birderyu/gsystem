@@ -474,6 +474,12 @@
     <ClInclude Include="..\..\..\include\CsCore\CsStructure.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\private\CsCore\CsJsonParser_Ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CsCore\CsJsonParserMessage.h">
+      <Filter>源文件\Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CsCore\CsSocket.cpp">
@@ -672,6 +678,15 @@
       <Filter>源文件\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CsCore\CsJsonObject.cpp">
+      <Filter>源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonPair.cpp">
+      <Filter>源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonValue.cpp">
+      <Filter>源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CsCore\CsJsonArray.cpp">
       <Filter>源文件\Json</Filter>
     </ClCompile>
   </ItemGroup>
