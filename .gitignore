@@ -1,8 +1,3 @@
-lib/CsCored.lib
-lib/CsGeometryd.lib
-bin/CsCored.dll
-bin/CsGeometryd.dll
-bin/CsCore_Testd.exe
 *.ilk
 *.obj
 *.exp
@@ -14,7 +9,14 @@ bin/CsCore_Testd.exe
 *.user
 *.suo
 *.opensdf
-.vscode/.BROWSE.VC.DB
 *.DB-wal
-lib/CsCore_Testd.lib
 *.DB-shm
+lib/GCored.lib
+lib/GGeometryd.lib
+bin/GCored.dll
+bin/GGeometryd.dll
+lib/CsCore_Testd.lib
+bin/GCore_Testd.exe
+bin/GGeometryd_Testd.lib
+bin/GGeometryd_Testd.exe
+.vscode/.BROWSE.VC.DB
