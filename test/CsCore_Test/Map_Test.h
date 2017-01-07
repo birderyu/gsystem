@@ -1,12 +1,12 @@
 //#include "CsMap.h"
-#include "CsGlobal.h"
-#include "CsOrderMap.h"
-#include "CsString.h"
+#include "gglobal.h"
+#include "gordermap.h"
+#include "gstring.h"
 #include <iostream>
 
-cs_void TestMap()
+gvoid TestMap()
 {
-	CsOrderMap<cs_int, CsString> map;
+	GOrderMap<gint, GString> map;
 
 	map.Insert(1, "1");
 	map.Insert(2, "2");
@@ -15,13 +15,13 @@ cs_void TestMap()
 	map.Insert(5, "100");
 	map[6] = "6";
 
-	CsOrderMap<cs_int, CsString>::ConstIterator _citer = map.ConstFind(-10);
+	GOrderMap<gint, GString>::ConstIterator _citer = map.ConstFind(-10);
 	std::cout << _citer.Key() << " " << _citer.Value().CString() << std::endl;
 
-	CsOrderMap<cs_int, CsString> _map;
+	GOrderMap<gint, GString> _map;
 	_map = map;
 	std::cout << "size: " << _map.Size() << std::endl;
-	for (CsOrderMap<cs_int, CsString>::ConstIterator citer = _map.ConstBegin();
+	for (GOrderMap<gint, GString>::ConstIterator citer = _map.ConstBegin();
 		citer != _map.ConstEnd(); citer++)
 	{
 		std::cout << citer.Key() << " " << citer.Value().CString() << std::endl;

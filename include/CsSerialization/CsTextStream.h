@@ -3,16 +3,16 @@
 #define _CORE_TEXT_STREAM_H_
 
 #include "CsStream.h"
-#include "CsString.h"
+#include "gstring.h"
 
-class CS_API CsTextStream
+class GAPI CsTextStream
 	: virtual public CsStream
 {
 public:
 	virtual ~CsTextStream() = 0;
-	cs_bool IsBinary() const;
+	gbool IsBinary() const;
 
-	virtual CsString ToString() const = 0;
+	virtual GString ToString() const = 0;
 };
 
 #endif // _CORE_TEXT_STREAM_H_

@@ -13,15 +13,15 @@ public:
 	CsDataTable &Table();
 	const CsDataTable &Table() const;
 
-	cs_size_t Count() const;
+	gsize Count() const;
 
-	CsTableRow operator[](cs_size_t) const;
+	CsTableRow operator[](gsize) const;
 
 	CsTableRow Append();
-	CsTableRows Append(cs_size_t);
-	cs_bool Remove(const CsTableRow &);
-	cs_bool RemoveAt(cs_size_t);
-	cs_bool Clear();
+	CsTableRows Append(gsize);
+	gbool Remove(const CsTableRow &);
+	gbool RemoveAt(gsize);
+	gbool Clear();
 
 	CsTableRows &operator=(const CsTableRows &);
 };

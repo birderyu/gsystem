@@ -10,7 +10,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
 		<Link>
-			<AdditionalDependencies>CsCored.lib;CsGeometryd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>GCored.lib;GGeometryd.lib;%(AdditionalDependencies)</AdditionalDependencies>
 		</Link>
 	</ItemDefinitionGroup>
 

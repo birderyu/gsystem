@@ -1,6 +1,6 @@
-#include "CsMemoryPool.h"
+#include "gmemorypool.h"
 
-cs_void TestMemPool()
+gvoid TestMemPool()
 {
 	int stop = 1;
 	stop++;

@@ -4,7 +4,7 @@
 #include "CsBinaryBufferStream.h"
 #include "CsInputStream.h"
 
-class CS_API CsBinaryBufferInputStream
+class GAPI CsBinaryBufferInputStream
 	: virtual public CsBinaryBufferStream
 	, virtual public CsInputStream
 {

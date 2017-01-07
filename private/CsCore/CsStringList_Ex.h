@@ -3,7 +3,7 @@
 
 #include "CsGlobal_Ex.h"
 
-class CsStringList_Ex :public CsNewT<CsStringList_Ex>
+class CsStringList_Ex :public GNewT<CsStringList_Ex>
 {
 public:
 

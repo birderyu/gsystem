@@ -3,16 +3,16 @@
 #define _CORE_BINARY_STREAM_H_
 
 #include "CsStream.h"
-#include "CsBytes.h"
+#include "gbytes.h"
 
-class CS_API CsBinaryStream
+class GAPI CsBinaryStream
 	: virtual public CsStream
 {
 public:
 	virtual ~CsBinaryStream() = 0;
-	cs_bool IsBinary() const;
+	gbool IsBinary() const;
 
-	virtual CsBytes ToBytes() const = 0;
+	virtual GBytes ToBytes() const = 0;
 };
 
 #endif // _CORE_BINARY_STREAM_H_

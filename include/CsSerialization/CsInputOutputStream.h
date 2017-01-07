@@ -5,7 +5,7 @@
 #include "CsInputStream.h"
 #include "CsOutputStream.h"
 
-class CS_API CsInputOutputStream
+class GAPI CsInputOutputStream
 	: virtual public CsInputStream
 	, virtual public CsOutputStream
 {

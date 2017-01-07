@@ -1,13 +1,13 @@
-#include "CsSingleLinkedList.h"
-#include "CsCircularLinkedList.h"
-#include "CsDoubleLinkedList.h"
-#include "CsList.h"
+#include "gsinglelinkedlist.h"
+#include "gcircularlinkedlist.h"
+#include "gdoublelinkedlist.h"
+#include "glist.h"
 
 #include <iostream>
 
-cs_void SingleLinkedListTest()
+gvoid SingleLinkedListTest()
 {
-	CsSingleLinkedList<cs_int> list;
+	GSingleLinkedList<gint> list;
 	list.AddLast(1);
 	list.AddLast(2);
 	list.AddLast(3);
@@ -17,49 +17,49 @@ cs_void SingleLinkedListTest()
 	list.AddFirst(-1);
 	list.AddFirst(-2);
 
-	cs_int h = list.GetFirstData();
-	cs_int t = list.GetFirstData();
+	gint h = list.GetFirstData();
+	gint t = list.GetFirstData();
 
-	cs_int i1 = list.GetDataAt(1);
-	cs_int i5 = list.GetDataAt(5);
+	gint i1 = list.GetDataAt(1);
+	gint i5 = list.GetDataAt(5);
 
 	list.InsertAfter(5, 10);
 
-	cs_int i6 = list.GetDataAt(6);
+	gint i6 = list.GetDataAt(6);
 
-	cs_int f10 = list.IndexOf(10);
-	cs_int f11 = list.IndexOf(11);
+	gint f10 = list.IndexOf(10);
+	gint f11 = list.IndexOf(11);
 
 	list.AddLast(0);
 
-	cs_int fc = list.IndexOfCircle();
+	gint fc = list.IndexOfCircle();
 
 	int stop = 1;
 	stop++;
 }
 
-cs_void CircularLinkedTest()
+gvoid CircularLinkedTest()
 {
-	CsCircularLinkedList<cs_int> list;
+	GCircularLinkedList<gint> list;
 	list.AddLast(1);
 	list.AddLast(2);
 	list.AddLast(3);
 	list.AddLast(4);
 
-	cs_int i1 = list.GetNext()->m_tData;
-	cs_int i2 = list.GetNext()->m_tData;
-	cs_int i3 = list.GetNext()->m_tData;
-	cs_int i4 = list.GetNext()->m_tData;
-	cs_int i5 = list.GetNext()->m_tData;
-	cs_int i6 = list.GetNext()->m_tData;
+	gint i1 = list.GetNext()->m_tData;
+	gint i2 = list.GetNext()->m_tData;
+	gint i3 = list.GetNext()->m_tData;
+	gint i4 = list.GetNext()->m_tData;
+	gint i5 = list.GetNext()->m_tData;
+	gint i6 = list.GetNext()->m_tData;
 
 	int stop = 1;
 	stop++;
 }
 
-cs_void DoubleLinkedListTest()
+gvoid DoubleLinkedListTest()
 {
-	CsDoubleLinkedList<cs_int> list;
+	GDoubleLinkedList<gint> list;
 	list.AddLast(1);
 	list.AddLast(2);
 	list.AddLast(3);
@@ -69,18 +69,18 @@ cs_void DoubleLinkedListTest()
 	list.AddFirst(-1);
 	list.AddFirst(-2);
 
-	cs_int h = list.GetFirstData();
-	cs_int t = list.GetLastData();
+	gint h = list.GetFirstData();
+	gint t = list.GetLastData();
 
-	cs_int i1 = list.GetDataAt(1);
-	cs_int i5 = list.GetDataAt(5);
+	gint i1 = list.GetDataAt(1);
+	gint i5 = list.GetDataAt(5);
 
 	list.InsertAfter(5, 10);
 
-	cs_int i6 = list.GetDataAt(6);
+	gint i6 = list.GetDataAt(6);
 
-	cs_int f10 = list.IndexOf(10);
-	cs_int f11 = list.IndexOf(11);
+	gint f10 = list.IndexOf(10);
+	gint f11 = list.IndexOf(11);
 
 	list.RemoveFirst();
 	list.RemoveLast();
@@ -89,9 +89,9 @@ cs_void DoubleLinkedListTest()
 	stop++;
 }
 
-cs_void ListTest()
+gvoid ListTest()
 {
-	CsList<cs_int> datas;
+	GList<gint> datas;
 	datas.PushBack(1);
 	datas.PushBack(2);
 	datas.PushBack(3);
@@ -99,7 +99,7 @@ cs_void ListTest()
 	datas.PushFront(0);
 	datas.PushFront(-1);
 
-	for (CsList<cs_int>::ConstIterator citer = datas.ConstBegin();
+	for (GList<gint>::ConstIterator citer = datas.ConstBegin();
 		citer != datas.ConstEnd(); citer++)
 	{
 		std::cout << *citer << std::endl;
@@ -111,13 +111,13 @@ cs_void ListTest()
 	datas.PopBack();
 	datas.PopFront();
 
-	for (CsList<cs_int>::ConstIterator citer = datas.ConstBegin();
+	for (GList<gint>::ConstIterator citer = datas.ConstBegin();
 		citer != datas.ConstEnd(); citer++)
 	{
 		std::cout << *citer << std::endl;
 	}
 
-	cs_int stop = 1;
+	gint stop = 1;
 	stop++;
 
 }

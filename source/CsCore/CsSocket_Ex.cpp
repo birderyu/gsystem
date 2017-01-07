@@ -1,5 +1,5 @@
 #include "CsSocket_Ex.h"
-#include "CsSocket.h"
+#include "gsocket.h"
 #include "CsSockAddress_Ex.h"
 
 #ifdef _WIN32
@@ -36,11 +36,11 @@ CsSocket_Ex::~CsSocket_Ex()
 
 }
 
-cs_bool CsSocket_Ex::SetRecvTimeout(cs_int nMsecs)
+gbool CsSocket_Ex::SetRecvTimeout(gint nMsecs)
 {
 #ifdef _WIN32
 	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(cs_char*)&nMsecs, sizeof(cs_int)) < 0)
+		(gchar*)&nMsecs, sizeof(gint)) < 0)
 	{
 		return  false;
 	}
@@ -50,7 +50,7 @@ cs_bool CsSocket_Ex::SetRecvTimeout(cs_int nMsecs)
 	tTimeValue.tv_sec = nMsecs / 1000;
 	tTimeValue.tv_usec = nMsecs % 1000 * 1000;
 	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(cs_char*)&tTimeValue, sizeof(timeval)) < 0)
+		(gchar*)&tTimeValue, sizeof(timeval)) < 0)
 	{
 		return false;
 	}
@@ -58,13 +58,13 @@ cs_bool CsSocket_Ex::SetRecvTimeout(cs_int nMsecs)
 #endif
 }
 
-cs_int CsSocket_Ex::GetRecvTimeout() const
+gint CsSocket_Ex::GetRecvTimeout() const
 {
 #ifdef _WIN32
-	cs_int nArgs = 0;
-	socklen_t tArgsLen = sizeof(cs_int);
+	gint nArgs = 0;
+	socklen_t tArgsLen = sizeof(gint);
 	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(cs_char*)&nArgs, &tArgsLen) < 0)
+		(gchar*)&nArgs, &tArgsLen) < 0)
 	{
 		return  -1;
 	}
@@ -73,7 +73,7 @@ cs_int CsSocket_Ex::GetRecvTimeout() const
 	timeval tTimeValue;
 	socklen_t tTimeValueLen = sizeof(tTimeValue);
 	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(cs_char*)&tTimeValue, &tTimeValueLen) < 0)
+		(gchar*)&tTimeValue, &tTimeValueLen) < 0)
 	{
 		return  -1;
 	}
@@ -81,11 +81,11 @@ cs_int CsSocket_Ex::GetRecvTimeout() const
 #endif
 }
 
-cs_bool CsSocket_Ex::SetSendTimeout(cs_int nMsecs)
+gbool CsSocket_Ex::SetSendTimeout(gint nMsecs)
 {
 #ifdef _WIN32
 	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(cs_char*)&nMsecs, sizeof(cs_int)) < 0)
+		(gchar*)&nMsecs, sizeof(gint)) < 0)
 	{
 		return  false;
 	}
@@ -95,7 +95,7 @@ cs_bool CsSocket_Ex::SetSendTimeout(cs_int nMsecs)
 	tTimeValue.tv_sec = nMsecs / 1000;
 	tTimeValue.tv_usec = nMsecs % 1000 * 1000;
 	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(cs_char*)&tTimeValue, sizeof(timeval)) < 0)
+		(gchar*)&tTimeValue, sizeof(timeval)) < 0)
 	{
 		return false;
 	}
@@ -103,13 +103,13 @@ cs_bool CsSocket_Ex::SetSendTimeout(cs_int nMsecs)
 #endif
 }
 
-cs_int CsSocket_Ex::GetSendTimeout() const
+gint CsSocket_Ex::GetSendTimeout() const
 {
 #ifdef _WIN32
-	cs_int nArgs = 0;
-	socklen_t tArgsLen = sizeof(cs_int);
+	gint nArgs = 0;
+	socklen_t tArgsLen = sizeof(gint);
 	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(cs_char*)&nArgs, &tArgsLen) < 0)
+		(gchar*)&nArgs, &tArgsLen) < 0)
 	{
 		return  -1;
 	}
@@ -118,7 +118,7 @@ cs_int CsSocket_Ex::GetSendTimeout() const
 	timeval tTimeValue;
 	socklen_t tTimeValueLen = sizeof(tTimeValue);
 	if (CsGetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(cs_char*)&tTimeValue, &tTimeValueLen) < 0)
+		(gchar*)&tTimeValue, &tTimeValueLen) < 0)
 	{
 		return  -1;
 	}
@@ -126,9 +126,9 @@ cs_int CsSocket_Ex::GetSendTimeout() const
 #endif
 }
 
-cs_bool CsSocket_Ex::SetReuseAddress(cs_bool nResue)
+gbool CsSocket_Ex::SetReuseAddress(gbool nResue)
 {
-	cs_int nOpt = nResue ? 1 : 0;
+	gint nOpt = nResue ? 1 : 0;
 	socklen_t nLen = sizeof(nOpt);
 	if (CsSetSocketOpt(m_hSocket, SOL_SOCKET, SO_REUSEADDR,
 		(char*)&nOpt, nLen) < 0)
@@ -138,7 +138,7 @@ cs_bool CsSocket_Ex::SetReuseAddress(cs_bool nResue)
 	return true;
 }
 
-cs_bool CsSocket_Ex::GetPeerAddr(CsSockAddress_Ex *pSockAddr) const
+gbool CsSocket_Ex::GetPeerAddr(CsSockAddress_Ex *pSockAddr) const
 {
 	if (!pSockAddr)
 	{
@@ -152,7 +152,7 @@ cs_bool CsSocket_Ex::GetPeerAddr(CsSockAddress_Ex *pSockAddr) const
 	return true;
 }
 
-cs_bool CsSocket_Ex::GetLocalAddr(CsSockAddress_Ex *pSockAddr) const
+gbool CsSocket_Ex::GetLocalAddr(CsSockAddress_Ex *pSockAddr) const
 {
 	if (!pSockAddr)
 	{

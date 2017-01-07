@@ -1,11 +1,11 @@
 #include "CsFile_Ex.h"
-#include "CsString.h"
-#include "CsFile.h"
+#include "gstring.h"
+#include "gfile.h"
 
-CsFile_Ex::CsFile_Ex(const CsString &sFileName)
+CsFile_Ex::CsFile_Ex(const GString &sFileName)
 : m_sFileName(sFileName)
 , m_pFileStream(NULL)
-, m_nOpenMode(CsFile::NO_OPEN)
+, m_nOpenMode(GFile::NO_OPEN)
 {
 
 }
@@ -15,12 +15,12 @@ CsFile_Ex::~CsFile_Ex()
 	Close();
 }
 
-cs_bool CsFile_Ex::Valid() const
+gbool CsFile_Ex::Valid() const
 {
 	return m_pFileStream != NULL;
 }
 
-cs_bool CsFile_Ex::EndOfFile() const
+gbool CsFile_Ex::EndOfFile() const
 {
 	if (!m_pFileStream)
 	{
@@ -29,31 +29,31 @@ cs_bool CsFile_Ex::EndOfFile() const
 	return feof(m_pFileStream);
 }
 
-const CsString &CsFile_Ex::FileName() const
+const GString &CsFile_Ex::FileName() const
 {
 	return m_sFileName;
 }
 
-CsString &CsFile_Ex::FileName()
+GString &CsFile_Ex::FileName()
 {
 	return m_sFileName;
 }
 
-cs_void CsFile_Ex::SetFileName(const CsString &sFileName)
+gvoid CsFile_Ex::SetFileName(const GString &sFileName)
 {
 	m_sFileName = sFileName;
 }
 
-cs_bool CsFile_Ex::Open(cs_byte nOpenMode)
+gbool CsFile_Ex::Open(gbyte nOpenMode)
 {
 	if (m_sFileName.IsEmpty() || 
-		nOpenMode == CsFile::NO_OPEN)
+		nOpenMode == GFile::NO_OPEN)
 	{
 		return false;
 	}
 	
 	m_nOpenMode = nOpenMode;
-	cs_cstring open_mode = OpenMode();
+	gcstring open_mode = OpenMode();
 	if (!open_mode)
 	{
 		return false;
@@ -73,7 +73,7 @@ cs_bool CsFile_Ex::Open(cs_byte nOpenMode)
 	return true;
 }
 
-cs_void CsFile_Ex::Flush()
+gvoid CsFile_Ex::Flush()
 {
 	if (m_pFileStream)
 	{
@@ -81,7 +81,7 @@ cs_void CsFile_Ex::Flush()
 	}
 }
 
-cs_void CsFile_Ex::Close()
+gvoid CsFile_Ex::Close()
 {
 	if (m_pFileStream)
 	{
@@ -90,7 +90,7 @@ cs_void CsFile_Ex::Close()
 	}
 }
 
-cs_bool CsFile_Ex::Seek(cs_long offset, cs_byte mode)
+gbool CsFile_Ex::Seek(glong offset, gbyte mode)
 {
 	if (!Valid())
 	{
@@ -98,13 +98,13 @@ cs_bool CsFile_Ex::Seek(cs_long offset, cs_byte mode)
 	}
 	switch (mode)
 	{
-	case CsFile::SEEK_MODE_START:
+	case GFile::SEEK_MODE_START:
 		return fseek(m_pFileStream, offset, SEEK_SET) == 0;
 		break;
-	case CsFile::SEEK_MODE_CURRENT:
+	case GFile::SEEK_MODE_CURRENT:
 		return fseek(m_pFileStream, offset, SEEK_CUR) == 0;
 		break;
-	case CsFile::SEEK_MODE_END:
+	case GFile::SEEK_MODE_END:
 		return fseek(m_pFileStream, offset, SEEK_END) == 0;
 		break;
 	default:
@@ -113,7 +113,7 @@ cs_bool CsFile_Ex::Seek(cs_long offset, cs_byte mode)
 	return false;
 }
 
-cs_long CsFile_Ex::Tell() const
+glong CsFile_Ex::Tell() const
 {
 	if (!Valid())
 	{
@@ -122,7 +122,7 @@ cs_long CsFile_Ex::Tell() const
 	return ftell(m_pFileStream);
 }
 
-cs_void CsFile_Ex::Rewind()
+gvoid CsFile_Ex::Rewind()
 {
 	if (Valid())
 	{
@@ -130,20 +130,20 @@ cs_void CsFile_Ex::Rewind()
 	}
 }
 
-cs_bool CsFile_Ex::CanRead() const
+gbool CsFile_Ex::CanRead() const
 {
-	if (m_nOpenMode == CsFile::NO_OPEN ||
-		m_nOpenMode == CsFile::ONLY_WIRTE)
+	if (m_nOpenMode == GFile::NO_OPEN ||
+		m_nOpenMode == GFile::ONLY_WIRTE)
 	{
 		return false;
 	}
 	return true;
 }
 
-cs_bool CsFile_Ex::CanWrite() const
+gbool CsFile_Ex::CanWrite() const
 {
-	if (m_nOpenMode == CsFile::NO_OPEN ||
-		m_nOpenMode == CsFile::ONLY_READ)
+	if (m_nOpenMode == GFile::NO_OPEN ||
+		m_nOpenMode == GFile::ONLY_READ)
 	{
 		return false;
 	}

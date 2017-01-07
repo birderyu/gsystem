@@ -1,64 +1,64 @@
 #ifndef _SERIALIZATION_ARCHIVE_H_
 #define _SERIALIZATION_ARCHIVE_H_
 
-#include "CsGlobal.h"
+#include "gglobal.h"
 
 class CsStream;
 
-class CS_API CsArchive
+class GAPI CsArchive
 {
 public:
 	// 根据流创建一个档案
 	CsArchive(CsStream &);
 	virtual ~CsArchive();
 
-	virtual cs_bool Input() const = 0;
-	virtual cs_bool Output() const = 0;
+	virtual gbool Input() const = 0;
+	virtual gbool Output() const = 0;
 
 	// 二进制 or 文本
-	virtual cs_bool IsBinary() const = 0;
+	virtual gbool IsBinary() const = 0;
 
 	// 将缓冲区中的文件放入
-	virtual cs_void Flush() = 0;
-	virtual cs_void Close() = 0;
-	virtual cs_void Abort() = 0;
+	virtual gvoid Flush() = 0;
+	virtual gvoid Close() = 0;
+	virtual gvoid Abort() = 0;
 
-	virtual cs_void PushCode(cs_uint) = 0;
-	virtual cs_uint PopCode() = 0;
+	virtual gvoid PushCode(guint) = 0;
+	virtual guint PopCode() = 0;
 
-	virtual CsArchive &operator<<(cs_bool) = 0;
-	virtual CsArchive &operator<<(cs_char) = 0;
-	virtual CsArchive &operator<<(cs_schar) = 0;
-	virtual CsArchive &operator<<(cs_uchar) = 0;
-	virtual CsArchive &operator<<(cs_wchar) = 0;
-	virtual CsArchive &operator<<(cs_short) = 0;
-	virtual CsArchive &operator<<(cs_ushort) = 0;
-	virtual CsArchive &operator<<(cs_int) = 0;
-	virtual CsArchive &operator<<(cs_uint) = 0;
-	virtual CsArchive &operator<<(cs_long) = 0;
-	virtual CsArchive &operator<<(cs_ulong) = 0;
-	virtual CsArchive &operator<<(cs_longlong) = 0;
-	virtual CsArchive &operator<<(cs_ulonglong) = 0;
-	virtual CsArchive &operator<<(cs_float) = 0;
-	virtual CsArchive &operator<<(cs_double) = 0;
-	virtual CsArchive &operator<<(cs_decimal) = 0;
+	virtual CsArchive &operator<<(gbool) = 0;
+	virtual CsArchive &operator<<(gchar) = 0;
+	virtual CsArchive &operator<<(gschar) = 0;
+	virtual CsArchive &operator<<(guchar) = 0;
+	virtual CsArchive &operator<<(gwchar) = 0;
+	virtual CsArchive &operator<<(gshort) = 0;
+	virtual CsArchive &operator<<(gushort) = 0;
+	virtual CsArchive &operator<<(gint) = 0;
+	virtual CsArchive &operator<<(guint) = 0;
+	virtual CsArchive &operator<<(glong) = 0;
+	virtual CsArchive &operator<<(gulong) = 0;
+	virtual CsArchive &operator<<(glonglong) = 0;
+	virtual CsArchive &operator<<(gulonglong) = 0;
+	virtual CsArchive &operator<<(gfloat) = 0;
+	virtual CsArchive &operator<<(gdouble) = 0;
+	virtual CsArchive &operator<<(gdecimal) = 0;
 
-	virtual CsArchive &operator>>(cs_bool &) = 0;
-	virtual CsArchive &operator>>(cs_char &) = 0;
-	virtual CsArchive &operator>>(cs_schar &) = 0;
-	virtual CsArchive &operator>>(cs_uchar &) = 0;
-	virtual CsArchive &operator>>(cs_wchar &) = 0;
-	virtual CsArchive &operator>>(cs_short &) = 0;
-	virtual CsArchive &operator>>(cs_ushort &) = 0;
-	virtual CsArchive &operator>>(cs_int &) = 0;
-	virtual CsArchive &operator>>(cs_uint &) = 0;
-	virtual CsArchive &operator>>(cs_long &) = 0;
-	virtual CsArchive &operator>>(cs_ulong &) = 0;
-	virtual CsArchive &operator>>(cs_longlong &) = 0;
-	virtual CsArchive &operator>>(cs_ulonglong &) = 0;
-	virtual CsArchive &operator>>(cs_float &) = 0;
-	virtual CsArchive &operator>>(cs_double &) = 0;
-	virtual CsArchive &operator>>(cs_decimal &) = 0;
+	virtual CsArchive &operator>>(gbool &) = 0;
+	virtual CsArchive &operator>>(gchar &) = 0;
+	virtual CsArchive &operator>>(gschar &) = 0;
+	virtual CsArchive &operator>>(guchar &) = 0;
+	virtual CsArchive &operator>>(gwchar &) = 0;
+	virtual CsArchive &operator>>(gshort &) = 0;
+	virtual CsArchive &operator>>(gushort &) = 0;
+	virtual CsArchive &operator>>(gint &) = 0;
+	virtual CsArchive &operator>>(guint &) = 0;
+	virtual CsArchive &operator>>(glong &) = 0;
+	virtual CsArchive &operator>>(gulong &) = 0;
+	virtual CsArchive &operator>>(glonglong &) = 0;
+	virtual CsArchive &operator>>(gulonglong &) = 0;
+	virtual CsArchive &operator>>(gfloat &) = 0;
+	virtual CsArchive &operator>>(gdouble &) = 0;
+	virtual CsArchive &operator>>(gdecimal &) = 0;
 
 private:
 	CsArchive(const CsArchive &);

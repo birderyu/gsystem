@@ -3,20 +3,20 @@
 
 #include "CsGlobal_Ex.h"
 
-class CsDateTime;
-class CsDate;
-class CsTime;
+class GDateTime;
+class GDate;
+class GTime;
 
 class CsDateTime_Ex
 {
 public:
-	static cs_bool GetNow(CsDateTime &dt);
-	static cs_bool GetNow(CsDate &d);
-	static cs_bool GetNow(CsTime &t);
+	static gbool GetNow(GDateTime &dt);
+	static gbool GetNow(GDate &d);
+	static gbool GetNow(GTime &t);
 
 private:
-	static cs_bool GetNow(cs_uint &y, cs_uint &m, cs_uint &d, cs_uint &dofw,
-		cs_uint &h, cs_uint &mm, cs_uint &s, cs_uint &ms);
+	static gbool GetNow(guint &y, guint &m, guint &d, guint &dofw,
+		guint &h, guint &mm, guint &s, guint &ms);
 };
 
 #endif // _CORE_DATETIME_PRIVATE_H

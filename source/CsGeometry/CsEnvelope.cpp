@@ -1,7 +1,7 @@
 #include "CsEnvelope.h"
 #include "CsCoordinate.h"
 #include "CsCoordinateSequence.h"
-#include "CsNew.h"
+#include "gnew.h"
 
 #ifdef CS_GEOMETRY_HAS_Z
 #	define CS_ENVELOPE_MIN_X	m_tCoords[0]
@@ -33,24 +33,24 @@
 
 CsEnvelope::CsEnvelope()
 {
-	CsMemSet(m_tCoords, 0, sizeof(cs_real)* CS_ENVELOPE_SIZE);
+	GMemSet(m_tCoords, 0, sizeof(greal)* CS_ENVELOPE_SIZE);
 }
 
-CsEnvelope::CsEnvelope(cs_real x, cs_real y)
+CsEnvelope::CsEnvelope(greal x, greal y)
 {
 	CS_ENVELOPE_MIN_X = CS_ENVELOPE_MAX_X = x;
 	CS_ENVELOPE_MIN_Y = CS_ENVELOPE_MAX_Y = y;
 	CS_ENVELOPE_MIN_Z = CS_ENVELOPE_MAX_Z = 0;
 }
 
-CsEnvelope::CsEnvelope(cs_real x, cs_real y, cs_real z)
+CsEnvelope::CsEnvelope(greal x, greal y, greal z)
 {
 	CS_ENVELOPE_MIN_X = CS_ENVELOPE_MAX_X = x;
 	CS_ENVELOPE_MIN_Y = CS_ENVELOPE_MAX_Y = y;
 	CS_ENVELOPE_MIN_Z = CS_ENVELOPE_MAX_Z = z;
 }
 
-CsEnvelope::CsEnvelope(cs_real min_x, cs_real min_y, cs_real max_x, cs_real max_y)
+CsEnvelope::CsEnvelope(greal min_x, greal min_y, greal max_x, greal max_y)
 {
 	CS_ENVELOPE_MIN_X = min_x < max_x ? min_x : max_x;
 	CS_ENVELOPE_MIN_Y = min_y < max_y ? min_y : max_y;
@@ -59,7 +59,7 @@ CsEnvelope::CsEnvelope(cs_real min_x, cs_real min_y, cs_real max_x, cs_real max_
 	CS_ENVELOPE_MIN_Z = CS_ENVELOPE_MAX_Z = 0;
 }
 
-CsEnvelope::CsEnvelope(cs_real min_x, cs_real min_y, cs_real min_z, cs_real max_x, cs_real max_y, cs_real max_z)
+CsEnvelope::CsEnvelope(greal min_x, greal min_y, greal min_z, greal max_x, greal max_y, greal max_z)
 {
 	CS_ENVELOPE_MIN_X = min_x < max_x ? min_x : max_x;
 	CS_ENVELOPE_MIN_Y = min_y < max_y ? min_y : max_y;
@@ -86,7 +86,7 @@ CsEnvelope::CsEnvelope(const CsCoordinateSequence &)
 
 CsEnvelope::CsEnvelope(const CsEnvelope &env)
 {
-	CsMemCopy(m_tCoords, env.m_tCoords, sizeof(cs_real)* CS_ENVELOPE_SIZE);
+	GMemCopy(m_tCoords, env.m_tCoords, sizeof(greal)* CS_ENVELOPE_SIZE);
 }
 
 CsCoordinate CsEnvelope::Min() const
@@ -104,159 +104,159 @@ CsCoordinate CsEnvelope::Center() const
 	return CsCoordinate(CS_ENVELOPE_CENTER_X, CS_ENVELOPE_CENTER_Y, CS_ENVELOPE_CENTER_Z);
 }
 
-cs_real CsEnvelope::MinX() const
+greal CsEnvelope::MinX() const
 {
 	return CS_ENVELOPE_MIN_X;
 }
-cs_real CsEnvelope::MinY() const
+greal CsEnvelope::MinY() const
 {
 	return CS_ENVELOPE_MIN_Y;
 }
 
-cs_real CsEnvelope::MinZ() const
+greal CsEnvelope::MinZ() const
 {
 	return CS_ENVELOPE_MIN_Z;
 }
 
-cs_real CsEnvelope::MaxX() const
+greal CsEnvelope::MaxX() const
 {
 	return CS_ENVELOPE_MAX_X;
 }
 
-cs_real CsEnvelope::MaxY() const
+greal CsEnvelope::MaxY() const
 {
 	return CS_ENVELOPE_MAX_Y;
 }
 
-cs_real CsEnvelope::MaxZ() const
+greal CsEnvelope::MaxZ() const
 {
 	return CS_ENVELOPE_MAX_Z;
 }
 
-cs_real CsEnvelope::CenterX() const
+greal CsEnvelope::CenterX() const
 {
 	return CS_ENVELOPE_CENTER_X;
 }
 
-cs_real CsEnvelope::CenterY() const
+greal CsEnvelope::CenterY() const
 {
 	return CS_ENVELOPE_CENTER_Y;
 }
 
-cs_real CsEnvelope::CenterZ() const
+greal CsEnvelope::CenterZ() const
 {
 	return CS_ENVELOPE_CENTER_Z;
 }
 
-cs_real CsEnvelope::Length() const
+greal CsEnvelope::Length() const
 {
 	return CS_ENVELOPE_LENGTH;
 }
 
-cs_real CsEnvelope::Width() const
+greal CsEnvelope::Width() const
 {
 	return CS_ENVELOPE_WIDTH;
 }
 
-cs_real CsEnvelope::Height() const
+greal CsEnvelope::Height() const
 {
 	return CS_ENVELOPE_HEIGHT;
 }
 
-cs_void CsEnvelope::SetMin(const CsCoordinate &c)
+gvoid CsEnvelope::SetMin(const CsCoordinate &c)
 {
 	CS_ENVELOPE_MIN_X = c.X();
 	CS_ENVELOPE_MIN_Y = c.Y();
 	CS_ENVELOPE_MIN_Z = c.Z();
 }
 
-cs_void CsEnvelope::SetMax(const CsCoordinate &c)
+gvoid CsEnvelope::SetMax(const CsCoordinate &c)
 {
 	CS_ENVELOPE_MAX_X = c.X();
 	CS_ENVELOPE_MAX_Y = c.Y();
 	CS_ENVELOPE_MAX_Z = c.Z();
 }
 
-cs_void CsEnvelope::SetCenter(const CsCoordinate &c)
+gvoid CsEnvelope::SetCenter(const CsCoordinate &c)
 {
 	SetCenterX(c.X());
 	SetCenterY(c.Y());
 	SetCenterZ(c.Z());
 }
 
-cs_void CsEnvelope::SetMinX(cs_real min_x)
+gvoid CsEnvelope::SetMinX(greal min_x)
 {
 	CS_ENVELOPE_MIN_X = min_x;
 }
 
-cs_void CsEnvelope::SetMinY(cs_real min_y)
+gvoid CsEnvelope::SetMinY(greal min_y)
 {
 	CS_ENVELOPE_MIN_Y = min_y;
 }
 
-cs_void CsEnvelope::SetMinZ(cs_real min_z)
+gvoid CsEnvelope::SetMinZ(greal min_z)
 {
 	CS_ENVELOPE_MIN_Z = min_z;
 }
 
-cs_void CsEnvelope::SetMaxX(cs_real max_x)
+gvoid CsEnvelope::SetMaxX(greal max_x)
 {
 	CS_ENVELOPE_MAX_X = max_x;
 }
 
-cs_void CsEnvelope::SetMaxY(cs_real max_y)
+gvoid CsEnvelope::SetMaxY(greal max_y)
 {
 	CS_ENVELOPE_MAX_Y = max_y;
 }
 
-cs_void CsEnvelope::SetMaxZ(cs_real max_z)
+gvoid CsEnvelope::SetMaxZ(greal max_z)
 {
 	CS_ENVELOPE_MAX_Z = max_z;
 }
 
-cs_void CsEnvelope::SetCenterX(cs_real c_x)
+gvoid CsEnvelope::SetCenterX(greal c_x)
 {
-	cs_real length = CS_ENVELOPE_LENGTH;
+	greal length = CS_ENVELOPE_LENGTH;
 	CS_ENVELOPE_MAX_X = c_x + length / 2.0;
 	CS_ENVELOPE_MIN_X = c_x - length / 2.0;
 }
 
-cs_void CsEnvelope::SetCenterY(cs_real c_y)
+gvoid CsEnvelope::SetCenterY(greal c_y)
 {
-	cs_real width = CS_ENVELOPE_WIDTH;
+	greal width = CS_ENVELOPE_WIDTH;
 	CS_ENVELOPE_MAX_Y = c_y + width / 2.0;
 	CS_ENVELOPE_MIN_Y = c_y - width / 2.0;
 }
 
-cs_void CsEnvelope::SetCenterZ(cs_real c_z)
+gvoid CsEnvelope::SetCenterZ(greal c_z)
 {
-	cs_real height = CS_ENVELOPE_HEIGHT;
+	greal height = CS_ENVELOPE_HEIGHT;
 	CS_ENVELOPE_MAX_Z = c_z + height / 2.0;
 	CS_ENVELOPE_MIN_Z = c_z - height / 2.0;
 }
 
-cs_void CsEnvelope::SetLength(cs_real l)
+gvoid CsEnvelope::SetLength(greal l)
 {
-	cs_real center_x = CS_ENVELOPE_CENTER_X;
+	greal center_x = CS_ENVELOPE_CENTER_X;
 	CS_ENVELOPE_MAX_X = center_x + l / 2.0;
 	CS_ENVELOPE_MIN_X = center_x - l / 2.0;
 }
 
-cs_void CsEnvelope::SetWidth(cs_real w)
+gvoid CsEnvelope::SetWidth(greal w)
 {
-	cs_real center_y = CS_ENVELOPE_CENTER_X;
+	greal center_y = CS_ENVELOPE_CENTER_X;
 	CS_ENVELOPE_MAX_Y = center_y + w / 2.0;
 	CS_ENVELOPE_MIN_Y = center_y - w / 2.0;
 }
 
-cs_void CsEnvelope::SetHeight(cs_real h)
+gvoid CsEnvelope::SetHeight(greal h)
 {
-	cs_real center_z = CS_ENVELOPE_CENTER_X;
+	greal center_z = CS_ENVELOPE_CENTER_X;
 	CS_ENVELOPE_MAX_Y = center_z + h / 2.0;
 	CS_ENVELOPE_MIN_Y = center_z - h / 2.0;
 }
 
-cs_uint CsEnvelope::Dimension() const
+guint CsEnvelope::Dimension() const
 {
 	return CS_ENVELOPE_SIZE / 2;
 }

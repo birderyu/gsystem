@@ -1,7 +1,7 @@
 #ifndef _GEOMETRY_GEOMETRY_GLOBAL_H_
 #define _GEOMETRY_GEOMETRY_GLOBAL_H_
 
-#include "CsGlobal.h"
+#include "gglobal.h"
 
 #define CS_GEOMETRY_HAS_Z
 
@@ -76,9 +76,9 @@ enum CS_GEOMETRY_TYPE
 
 struct CsGeometryGlobal
 {
-	static cs_real _g_n_coordinate_x_;
-	static cs_real _g_n_coordinate_y_;
-	static cs_real _g_n_coordinate_z_;
+	static greal _g_n_coordinate_x_;
+	static greal _g_n_coordinate_y_;
+	static greal _g_n_coordinate_z_;
 };
 
 #endif // _GEOMETRY_GEOMETRY_GLOBAL_H_

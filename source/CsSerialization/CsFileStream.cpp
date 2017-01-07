@@ -1,6 +1,6 @@
 #include "CsFileStream.h"
 
-CsFileStream::CsFileStream(CsFile &file)
+CsFileStream::CsFileStream(GFile &file)
 : m_rFile(file)
 {
 
@@ -11,7 +11,7 @@ CsFileStream::~CsFileStream()
 
 }
 
-cs_bool CsFileStream::HasFile() const
+gbool CsFileStream::HasFile() const
 {
 	return true;
 }

@@ -1,8 +1,8 @@
 #ifndef _CORE_TABLE_GLOBAL_H_
 #define _CORE_TABLE_GLOBAL_H_
 
-#include "CsObject.h"
-#include "CsVariant.h"
+#include "gobject.h"
+#include "gvariant.h"
 #include "CsTableAction.h"
 
 class CsSizeTypeArray;

@@ -18,7 +18,7 @@ typedef SOCKET TSocket;
 #include <unistd.h>
 #include <sys/time.h>
 #include <fcntl.h>
-typedef cs_int TSocket;
+typedef gint TSocket;
 #define CsOpenSocket		socket
 #define CsCloseSocket		close
 #define CsControlSocketIO	ioctl
@@ -36,7 +36,7 @@ typedef cs_int TSocket;
 
 #include "CsGlobal_Ex.h"
 
-class CsString;
+class GString;
 
 class CsSockAddress_Ex
 {
@@ -46,11 +46,11 @@ class CsSockAddress_Ex
 
 public:
 	CsSockAddress_Ex();
-	CsSockAddress_Ex(const CsString &sIP, cs_ushort nPort);
+	CsSockAddress_Ex(const GString &sIP, gushort nPort);
 
-	cs_void SetIP(const CsString &sIP);
-	cs_void SetIP(cs_uint nIP);
-	cs_void SetPortID(cs_ushort nPort);
+	gvoid SetIP(const GString &sIP);
+	gvoid SetIP(guint nIP);
+	gvoid SetPortID(gushort nPort);
 
 private:
 	sockaddr_in m_tSocketAddr;

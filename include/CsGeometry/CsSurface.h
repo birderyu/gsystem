@@ -3,7 +3,7 @@
 
 #include "CsGeometry.h"
 
-class CS_API CsSurface
+class GAPI CsSurface
 	: virtual public CsGeometry
 {
 public:
@@ -16,7 +16,7 @@ public:
 	** @return	{cs_real} 面积值，默认单位为平方米
 	**
 	****************************************************************************/
-	virtual cs_real Area() const = 0;
+	virtual greal Area() const = 0;
 };
 
 #endif // _GEOMETRY_SURFACE_H_

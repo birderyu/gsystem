@@ -3,15 +3,15 @@
 
 #include "CsGeometryInterface.h"
 
-class CS_API CsGeometryHelper
+class GAPI CsGeometryHelper
 {
 public:
-	template<typename GeometryT> static CsSharedPointer<GeometryT> ConvertTo(CsGeometryP &geo);
-	template<typename GeometryT> static CsSharedPointer<GeometryT> ConvertTo(CsPointP &point);
+	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(CsGeometryP &geo);
+	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(CsPointP &point);
 
 private:
 	template<typename GeometryT_Src, typename GeometryT_Dst>
-	static CsSharedPointer<GeometryT_Dst> ConvertSrcToDst(CsSharedPointer<GeometryT_Src> &geo);
+	static GSharedPointer<GeometryT_Dst> ConvertSrcToDst(GSharedPointer<GeometryT_Src> &geo);
 };
 
 #include "CsGeometryHelper.inl"

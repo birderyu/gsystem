@@ -12,19 +12,19 @@ class CsTextFile_Ex
 	: public CsFile_Ex
 {
 public:
-	CsTextFile_Ex(const CsString &sFileName);
+	CsTextFile_Ex(const GString &sFileName);
 
-	cs_byte Format() const;
+	gbyte Format() const;
 
-	cs_bool GetChar(cs_uchar &);
-	cs_bool PutChar(cs_uchar);
+	gbool GetChar(guchar &);
+	gbool PutChar(guchar);
 
-	cs_bool Read(cs_size_t size, CsString &);
-	cs_bool ReadAll(CsString &);
-	cs_bool Write(const CsString &);
+	gbool Read(gsize size, GString &);
+	gbool ReadAll(GString &);
+	gbool Write(const GString &);
 
 protected:
-	cs_cstring OpenMode() const;
+	gcstring OpenMode() const;
 };
 
 #endif // _CORE_TEXT_DOCUMENT_EX_H_

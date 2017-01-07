@@ -3,11 +3,11 @@
 
 #include "CsArchive.h"
 
-class CS_API CsOutputArchive
+class GAPI CsOutputArchive
 	: public CsArchive
 {
 public:
-	CsOutputArchive(CsFile &);
+	CsOutputArchive(GFile &);
 };
 
 #endif // _CORE_OUTPUT_ARCHIVE_H_

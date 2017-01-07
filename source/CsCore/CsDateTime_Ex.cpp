@@ -1,35 +1,35 @@
 #include "CsDateTime_Ex.h"
-#include "CsDateTime.h"
+#include "gdatetime.h"
 #include <time.h>
 #ifdef WIN32
 #include <windows.h>
 #endif
 
-cs_bool CsDateTime_Ex::GetNow(CsDateTime &dt)
+gbool CsDateTime_Ex::GetNow(GDateTime &dt)
 {
 	return false;
 }
 
-cs_bool CsDateTime_Ex::GetNow(CsDate &d)
+gbool CsDateTime_Ex::GetNow(GDate &d)
 {
 	return false;
 }
 
-cs_bool CsDateTime_Ex::GetNow(CsTime &t)
+gbool CsDateTime_Ex::GetNow(GTime &t)
 {
 	return false;
 }
 
-cs_bool CsDateTime_Ex::GetNow(cs_uint &y, cs_uint &m, cs_uint &d, cs_uint &dofw,
-	cs_uint &h, cs_uint &mm, cs_uint &s, cs_uint &ms)
+gbool CsDateTime_Ex::GetNow(guint &y, guint &m, guint &d, guint &dofw,
+	guint &h, guint &mm, guint &s, guint &ms)
 {
-	cs_uint intertimep;
-	cs_ushort  msecp;
+	guint intertimep;
+	gushort  msecp;
 	struct tm breakuptime;
 	time_t tmptime;
 
 #ifdef WIN32
-	intertimep = (cs_uint)time(NULL);
+	intertimep = (guint)time(NULL);
 	SYSTEMTIME cursystimep;
 	GetSystemTime(&cursystimep);
 	msecp = cursystimep.wMilliseconds;
@@ -44,8 +44,8 @@ cs_bool CsDateTime_Ex::GetNow(cs_uint &y, cs_uint &m, cs_uint &d, cs_uint &dofw,
 #else
 	struct timeval  tmptimeval;
 	gettimeofday(&tmptimeval, NULL);
-	intertimep = (cs_uint)tmptimeval.tv_sec;
-	msecp = (cs_short)(tmptimeval.tv_usec / 1000);
+	intertimep = (guint)tmptimeval.tv_sec;
+	msecp = (gshort)(tmptimeval.tv_usec / 1000);
 	tmptime = (time_t)intertimep;
 	struct tm  * ptm = localtime_r((time_t *)&tmptime, (tm *)&breakuptime);
 	if (ptm == NULL)

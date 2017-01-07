@@ -3,26 +3,26 @@
 
 #include "CsFile_Ex.h"
 
-class CsBytes;
+class GBytes;
 
 class CsBinaryFile_Ex
 	: public CsFile_Ex
 {
 public:
-	CsBinaryFile_Ex(const CsString &sFileName);
+	CsBinaryFile_Ex(const GString &sFileName);
 	virtual ~CsBinaryFile_Ex();
 
-	cs_byte Format() const;
+	gbyte Format() const;
 
-	cs_bool GetByte(cs_byte &);
-	cs_bool PutByte(cs_byte);
+	gbool GetByte(gbyte &);
+	gbool PutByte(gbyte);
 
-	cs_bool Read(cs_size_t size, CsBytes &);
-	cs_bool ReadAll(CsBytes &);
-	cs_bool Write(const CsBytes &);
+	gbool Read(gsize size, GBytes &);
+	gbool ReadAll(GBytes &);
+	gbool Write(const GBytes &);
 
 protected:
-	cs_cstring OpenMode() const;
+	gcstring OpenMode() const;
 };
 
 #endif // _CORE_BINARY_FILE_EX_H_

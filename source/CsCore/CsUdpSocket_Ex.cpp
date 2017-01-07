@@ -1,9 +1,9 @@
 #include "CsUdpSocket_Ex.h"
 
-cs_bool CsUdpSocket_Ex::Open(cs_bool nResue)
+gbool CsUdpSocket_Ex::Open(gbool nResue)
 {
 	m_hSocket = CsOpenSocket(AF_INET, SOCK_DGRAM, 0);
-	if ((cs_int)m_hSocket < 0)
+	if ((gint)m_hSocket < 0)
 	{
 		return false;
 	}
@@ -11,7 +11,7 @@ cs_bool CsUdpSocket_Ex::Open(cs_bool nResue)
 	return true;
 }
 
-cs_bool CsUdpSocket_Ex::Open(CsSockAddress_Ex *pSockAddr, cs_bool nResue)
+gbool CsUdpSocket_Ex::Open(CsSockAddress_Ex *pSockAddr, gbool nResue)
 {
 	if (!pSockAddr)
 	{
@@ -30,9 +30,9 @@ cs_bool CsUdpSocket_Ex::Open(CsSockAddress_Ex *pSockAddr, cs_bool nResue)
 	return true;
 }
 
-cs_void CsUdpSocket_Ex::Close()
+gvoid CsUdpSocket_Ex::Close()
 {
-	if ((cs_int)m_hSocket >= 0)
+	if ((gint)m_hSocket >= 0)
 	{
 		shutdown(m_hSocket, 2);
 		CsCloseSocket(m_hSocket);
@@ -40,14 +40,14 @@ cs_void CsUdpSocket_Ex::Close()
 	}
 }
 
-cs_bool CsUdpSocket_Ex::SendTo(const cs_char *pBufData, cs_int nLen, CsSockAddress_Ex *pPeer)
+gbool CsUdpSocket_Ex::SendTo(const gchar *pBufData, gint nLen, CsSockAddress_Ex *pPeer)
 {
 	if (!pPeer)
 	{
 		return false;
 	}
-	cs_int nAddrLen = sizeof(sockaddr_in);
-	cs_int nRet = CsSendToSocket(m_hSocket, pBufData,
+	gint nAddrLen = sizeof(sockaddr_in);
+	gint nRet = CsSendToSocket(m_hSocket, pBufData,
 		nLen, 0, (sockaddr*)&(pPeer->m_tSocketAddr), nAddrLen);
 	if (nRet < 0)
 	{
@@ -56,14 +56,14 @@ cs_bool CsUdpSocket_Ex::SendTo(const cs_char *pBufData, cs_int nLen, CsSockAddre
 	return true;
 }
 
-cs_int CsUdpSocket_Ex::RecvFrom(cs_char *pBufData, cs_int nMaxLen, CsSockAddress_Ex *pPeer)
+gint CsUdpSocket_Ex::RecvFrom(gchar *pBufData, gint nMaxLen, CsSockAddress_Ex *pPeer)
 {
 	if (!pPeer)
 	{
 		return -1;
 	}
-	cs_int nAddrLen = sizeof(sockaddr_in);
-	cs_int n = CsRecvFromSocket(m_hSocket, pBufData,
+	gint nAddrLen = sizeof(sockaddr_in);
+	gint n = CsRecvFromSocket(m_hSocket, pBufData,
 		nMaxLen, 0, (sockaddr*)&(pPeer->m_tSocketAddr), &nAddrLen);
 	if (n < 0)
 	{

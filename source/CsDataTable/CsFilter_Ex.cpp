@@ -1,15 +1,15 @@
 #include "CsFilter_Ex.h"
-#include "CsString.h"
-#include "CsStringList.h"
-#include "CsListStack.h"
+#include "gstring.h"
+#include "gstringlist.h"
+#include "gliststack.h"
 
 // 支持的联合类型，按照优先级排列
-CsStringList CsFilter_Ex::m_tUnionSymbols;
-cs_bool CsFilter_Ex::m_bInitializeUnionSymbols = false;
+GStringList CsFilter_Ex::m_tUnionSymbols;
+gbool CsFilter_Ex::m_bInitializeUnionSymbols = false;
 
 // 支持的比较类型，按优先级排列
-CsStringList CsFilter_Ex::m_tCompareSymbols;
-cs_bool CsFilter_Ex::m_bInitializeCompareSymbols = false;
+GStringList CsFilter_Ex::m_tCompareSymbols;
+gbool CsFilter_Ex::m_bInitializeCompareSymbols = false;
 
 //////////////////////////////////////////////////////////////////////////
 // CsFilterCell
@@ -33,17 +33,17 @@ CsFilter_Ex::CsFilterCell::~CsFilterCell()
 
 }
 
-cs_bool CsFilter_Ex::CsFilterCell::SetFilter(const CsString &sFilter)
+gbool CsFilter_Ex::CsFilterCell::SetFilter(const GString &sFilter)
 {
 	if (IsValid())
 	{
 		Release();
 	}
 	
-	cs_size_t size = m_tCompareSymbols.Size();
-	for (cs_size_t i = 0; i < size; i++)
+	gsize size = m_tCompareSymbols.Size();
+	for (gsize i = 0; i < size; i++)
 	{
-		CsStringList tFilterList = sFilter.Split(m_tCompareSymbols.GetAt(i));
+		GStringList tFilterList = sFilter.Split(m_tCompareSymbols.GetAt(i));
 		if (tFilterList.Size() != 2)
 		{
 			continue;
@@ -59,26 +59,26 @@ cs_bool CsFilter_Ex::CsFilterCell::SetFilter(const CsString &sFilter)
 	return false;
 }
 
-cs_bool CsFilter_Ex::CsFilterCell::IsValid() const
+gbool CsFilter_Ex::CsFilterCell::IsValid() const
 {
 	return m_emCompareType != COMPARE_TYPE_ERROR
 		&& !m_sFieldName.IsEmpty()
 		&& m_tFieldValue.IsValid();
 }
 
-cs_bool CsFilter_Ex::CsFilterCell::Release()
+gbool CsFilter_Ex::CsFilterCell::Release()
 {
 	m_emCompareType = COMPARE_TYPE_ERROR;
 	return true;
 }
 
-CsString CsFilter_Ex::CsFilterCell::ToString() const
+GString CsFilter_Ex::CsFilterCell::ToString() const
 {
 	if (!IsValid())
 	{
 		return "";
 	}
-	CsString sCompare;
+	GString sCompare;
 	if (!CsFilterParse::GetCompareString(m_emCompareType, sCompare))
 	{
 		return "";
@@ -120,7 +120,7 @@ CsFilter_Ex::CsFilterData::CsFilterData(const CsFilterData &tData)
 	}
 }
 
-cs_bool CsFilter_Ex::CsFilterData::SetFilter(const CsString &sFilter)
+gbool CsFilter_Ex::CsFilterData::SetFilter(const GString &sFilter)
 {
 	if (IsValid())
 	{
@@ -129,7 +129,7 @@ cs_bool CsFilter_Ex::CsFilterData::SetFilter(const CsString &sFilter)
 	return CsFilterParse::ParseFilter(sFilter, m_emUnionType, m_tChildren, m_tCell);
 }
 
-cs_bool CsFilter_Ex::CsFilterData::IsValid() const
+gbool CsFilter_Ex::CsFilterData::IsValid() const
 {
 	switch (m_emUnionType)
 	{
@@ -141,12 +141,12 @@ cs_bool CsFilter_Ex::CsFilterData::IsValid() const
 		break;
 	default:
 	{
-		cs_size_t len = m_tChildren.Size();
+		gsize len = m_tChildren.Size();
 		if (len == 0)
 		{
 			return false;
 		}
-		for (cs_size_t i = 0; i < len; i++)
+		for (gsize i = 0; i < len; i++)
 		{
 			if (!m_tChildren[i].IsValid())
 			{
@@ -160,7 +160,7 @@ cs_bool CsFilter_Ex::CsFilterData::IsValid() const
 	return false;
 }
 
-CsString CsFilter_Ex::CsFilterData::ToString() const
+GString CsFilter_Ex::CsFilterData::ToString() const
 {
 	if (!IsValid())
 	{
@@ -172,14 +172,14 @@ CsString CsFilter_Ex::CsFilterData::ToString() const
 	}
 	else
 	{
-		CsString sResult = "";
-		cs_size_t len = m_tChildren.Size();
-		cs_bool bNeedBracket = false;
+		GString sResult = "";
+		gsize len = m_tChildren.Size();
+		gbool bNeedBracket = false;
 		if (len > 0)
 		{
 			bNeedBracket = true;
 		}
-		for (cs_size_t i = 0; i < len; i++)
+		for (gsize i = 0; i < len; i++)
 		{
 			if (bNeedBracket)
 			{
@@ -192,7 +192,7 @@ CsString CsFilter_Ex::CsFilterData::ToString() const
 			}
 			if (i != len - 1)
 			{
-				CsString sUnion;
+				GString sUnion;
 				if (CsFilterParse::GetUnionString(m_emUnionType, sUnion))
 				{
 					sResult += sUnion;
@@ -204,7 +204,7 @@ CsString CsFilter_Ex::CsFilterData::ToString() const
 	return "";
 }
 
-cs_bool CsFilter_Ex::CsFilterData::Release()
+gbool CsFilter_Ex::CsFilterData::Release()
 {
 	m_emUnionType = UNION_TYPE_ERROR;
 	m_tChildren.Dispose();
@@ -233,8 +233,8 @@ CsFilter_Ex::CsFilterData &CsFilter_Ex::CsFilterData::operator = (const CsFilter
 //////////////////////////////////////////////////////////////////////////
 // CsFilterParse
 //////////////////////////////////////////////////////////////////////////
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNION_TYPE &emUnionType, 
-	CsDynamicArray<CsFilterData> &tData, CsFilterCell &tCell)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter(const GString &sFilter, CS_UNION_TYPE &emUnionType, 
+	GDynamicArray<CsFilterData> &tData, CsFilterCell &tCell)
 {
 	// 1.判断括号是否合法
 	if (!ParseFilter_IsBracketLegal(sFilter))
@@ -242,7 +242,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 		return false;
 	}
 
-	CsString _sFilter(sFilter);
+	GString _sFilter(sFilter);
 	// 2.预处理字符串（替换无法识别的字符+去除两边无效的括号）
 	if (!ParseFilter_PreParseFilter(_sFilter)
 		|| !ParseFilter_TrimBracket(_sFilter))
@@ -251,17 +251,17 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 	}
 
 	// 3.分解字符串
-	cs_size_t nUnionCount = m_tUnionSymbols.Size();
-	cs_bool bHasBracket = false;
+	gsize nUnionCount = m_tUnionSymbols.Size();
+	gbool bHasBracket = false;
 	if (_sFilter.Find('(') != -1 && _sFilter.Find(')') != -1)
 	{
 		bHasBracket = true;
 	}
 
-	for (cs_size_t i = 0; i < nUnionCount; i++)
+	for (gsize i = 0; i < nUnionCount; i++)
 	{
-		CsString sUnion = m_tUnionSymbols.GetAt(i);
-		CsStringList tFilterList;
+		GString sUnion = m_tUnionSymbols.GetAt(i);
+		GStringList tFilterList;
 		if (bHasBracket)
 		{
 			// 有括号
@@ -276,7 +276,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 			tFilterList = _sFilter.Split(sUnion, true);
 		}
 
-		cs_size_t nLenOfUnion = tFilterList.Size();
+		gsize nLenOfUnion = tFilterList.Size();
 		if (nLenOfUnion == 1)
 		{
 			if (i == nUnionCount - 1)
@@ -299,7 +299,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 			{
 				return false;
 			}
-			for (cs_size_t i = 0; i < nLenOfUnion; i++)
+			for (gsize i = 0; i < nLenOfUnion; i++)
 			{
 				if (!tData[i].SetFilter(tFilterList.GetAt(i)))
 				{
@@ -313,7 +313,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter(const CsString &sFilter, CS_UNIO
 	return true;
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_PreParseFilter(CsString &sFilter)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter_PreParseFilter(GString &sFilter)
 {
 	if (sFilter.IsEmpty())
 	{
@@ -323,7 +323,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_PreParseFilter(CsString &sFilter
 	return !sFilter.IsEmpty();
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_ParseUnionType(const CsString &sUnion, CS_UNION_TYPE &emUnionType)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter_ParseUnionType(const GString &sUnion, CS_UNION_TYPE &emUnionType)
 {
 	if (sUnion == " AND ")
 	{
@@ -340,12 +340,12 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_ParseUnionType(const CsString &s
 	return false;
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const CsString &sFilter)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const GString &sFilter)
 {
-	cs_size_t length = sFilter.Size();
-	CsListStack<cs_char> stack;
+	gsize length = sFilter.Size();
+	GListStack<gchar> stack;
 
-	for (cs_size_t i = 0; i < length; i++)
+	for (gsize i = 0; i < length; i++)
 	{
 		if (sFilter[i] == '(')
 		{
@@ -362,7 +362,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const CsString &s
 	return stack.IsEmpty();
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(CsString &sFilter)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(GString &sFilter)
 {
 	if (sFilter[0] == '(' && sFilter[sFilter.Size() - 1] == ')')
 	{
@@ -376,14 +376,14 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(CsString &sFilter)
 	}
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const CsString &sFilter, const CsString &sUnion, CsStringList &tFilterList)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringList &tFilterList)
 {
-	cs_size_t length = sFilter.Size();
-	CsListStack<cs_char> stack;
-	cs_size_t cursor = 0;
-	for (cs_size_t i = 0; i < length; i++)
+	gsize length = sFilter.Size();
+	GListStack<gchar> stack;
+	gsize cursor = 0;
+	for (gsize i = 0; i < length; i++)
 	{
-		cs_int id = sFilter.Find(sUnion, i);
+		gint id = sFilter.Find(sUnion, i);
 		if (id < 0)
 		{
 			tFilterList.Add(sFilter.SubString(i, length - i));
@@ -411,7 +411,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const C
 	return true;
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::GetUnionString(CS_UNION_TYPE emUnionType, CsString &sUnion)
+gbool CsFilter_Ex::CsFilterParse::GetUnionString(CS_UNION_TYPE emUnionType, GString &sUnion)
 {
 	switch (emUnionType)
 	{
@@ -435,7 +435,7 @@ cs_bool CsFilter_Ex::CsFilterParse::GetUnionString(CS_UNION_TYPE emUnionType, Cs
 	return false;
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_ParseCompareType(const CsString &sCompare, CS_COMPARE_TYPE &emCompareType)
+gbool CsFilter_Ex::CsFilterParse::ParseFilter_ParseCompareType(const GString &sCompare, CS_COMPARE_TYPE &emCompareType)
 {
 	if (sCompare == " LIKE ")
 	{
@@ -476,7 +476,7 @@ cs_bool CsFilter_Ex::CsFilterParse::ParseFilter_ParseCompareType(const CsString 
 	return false;
 }
 
-cs_bool CsFilter_Ex::CsFilterParse::GetCompareString(CS_COMPARE_TYPE emCompareType, CsString &sCompare)
+gbool CsFilter_Ex::CsFilterParse::GetCompareString(CS_COMPARE_TYPE emCompareType, GString &sCompare)
 {
 	switch (emCompareType)
 	{
@@ -520,7 +520,7 @@ cs_bool CsFilter_Ex::CsFilterParse::GetCompareString(CS_COMPARE_TYPE emCompareTy
 //////////////////////////////////////////////////////////////////////////
 // CsFilter_Private
 //////////////////////////////////////////////////////////////////////////
-CsFilter_Ex::CsFilter_Ex(const CsString &sFilter)
+CsFilter_Ex::CsFilter_Ex(const GString &sFilter)
 {
 	Initialize();
 	if (!sFilter.IsEmpty())
@@ -540,13 +540,13 @@ CsFilter_Ex::~CsFilter_Ex()
 	Release();
 }
 
-cs_bool CsFilter_Ex::SetFilter(const CsString &sFilter)
+gbool CsFilter_Ex::SetFilter(const GString &sFilter)
 {
 	if (IsValid())
 	{
 		Release();
 	}
-	cs_bool bRet = m_tFilterData.SetFilter(sFilter);
+	gbool bRet = m_tFilterData.SetFilter(sFilter);
 	if (!bRet)
 	{
 		Release();
@@ -560,32 +560,32 @@ CsFilter_Ex &CsFilter_Ex::operator = (const CsFilter_Ex &tFilter)
 	return *this;
 }
 
-cs_bool CsFilter_Ex::IsValid() const
+gbool CsFilter_Ex::IsValid() const
 {
 	return m_tFilterData.IsValid();
 }
 
-CsString CsFilter_Ex::ToString() const
+GString CsFilter_Ex::ToString() const
 {
 	return m_tFilterData.ToString();
 }
 
-cs_bool CsFilter_Ex::Initialize()
+gbool CsFilter_Ex::Initialize()
 {
 	if (!m_bInitializeUnionSymbols)
 	{
-		m_tUnionSymbols = CsString(" AND ; OR ").Split(";");
+		m_tUnionSymbols = GString(" AND ; OR ").Split(";");
 		m_bInitializeUnionSymbols = true;
 	}
 	if (!m_bInitializeCompareSymbols)
 	{
-		m_tCompareSymbols = CsString(" LIKE ; != ; >= ; <= ; = ; > ; < ").Split(";");
+		m_tCompareSymbols = GString(" LIKE ; != ; >= ; <= ; = ; > ; < ").Split(";");
 		m_bInitializeCompareSymbols = true;
 	}
 	return true;
 }
 
-cs_bool CsFilter_Ex::Release()
+gbool CsFilter_Ex::Release()
 {
 	return m_tFilterData.Release();
 }

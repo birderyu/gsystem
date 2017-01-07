@@ -1,32 +1,32 @@
 #include <iostream>
-#include "CsBinaryTree.h"
-#include "CsBinarySortTree.h"
-#include "CsReadBlackTree.h"
+#include "gbinarytree.h"
+#include "gbinarysorttree.h"
+#include "greadblacktree.h"
 
 template<class T>
 struct NoLessF
-	: public CsBinaryF<T, T, cs_bool>
+	: public GBinaryF<T, T, gbool>
 {
-	cs_bool operator()(const T &left, const T &right) const
+	gbool operator()(const T &left, const T &right) const
 	{
-		CsLessThanF<T> fCompare;
+		GLessThanF<T> fCompare;
 		return !fCompare(left, right);
 	}
 };
 
 template<class T>
 struct NoCompareF
-	: public CsBinaryF<T, T, cs_int>
+	: public GBinaryF<T, T, gint>
 {
-	cs_int operator()(const T &left, const T &right) const
+	gint operator()(const T &left, const T &right) const
 	{
-		CsCompareToF<T> fCompare;
+		GCompareToF<T> fCompare;
 		return 0 - fCompare(left, right);
 	}
 };
 
-cs_size_t read_node_count = 0;
-cs_void Visit(const CsReadBlackTreeNode<cs_int, cs_byte> &node)
+gsize read_node_count = 0;
+gvoid Visit(const GReadBlackTreeNode<gint, gbyte> &node)
 {
 	if (node.m_nColor == 0)
 	{
@@ -45,16 +45,16 @@ cs_void Visit(const CsReadBlackTreeNode<cs_int, cs_byte> &node)
 	
 }
 
-cs_void TestBSTree()
+gvoid TestBSTree()
 {
-	CsReadBlackTree<cs_int, cs_byte> bstree;
+	GReadBlackTree<gint, gbyte> bstree;
 	
-	for (cs_size_t i = 0; i < 10000000; i++)
+	for (gsize i = 0; i < 10000000; i++)
 	{
 		bstree.Insert(10000000 - i, 'a');
 	}
 
-	for (cs_size_t i = 0; i < 10000000; i++)
+	for (gsize i = 0; i < 10000000; i++)
 	{
 		bstree.Delete(i);
 	}
@@ -64,13 +64,13 @@ cs_void TestBSTree()
 	
 	//bstree2.PostOrderTraverse(Visit);
 
-	cs_size_t nc = bstree.NodeCount();
-	cs_size_t lc = bstree.LeafCount();
-	cs_size_t d = bstree.Depth();
+	gsize nc = bstree.NodeCount();
+	gsize lc = bstree.LeafCount();
+	gsize d = bstree.Depth();
 
 	//bstree.InOrderTraverse(Visit);
 	bstree.InOrderTraverse(Visit);
 	
-	cs_int stop = 1;
+	gint stop = 1;
 	stop++;
 }

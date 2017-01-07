@@ -7,12 +7,12 @@ class CsUdpSocket_Ex
 	: public CsSocket_Ex
 {
 public:
-	cs_bool Open(cs_bool nResue);
-	cs_bool Open(CsSockAddress_Ex *pSockAddr, cs_bool nResue);
-	cs_void Close();
+	gbool Open(gbool nResue);
+	gbool Open(CsSockAddress_Ex *pSockAddr, gbool nResue);
+	gvoid Close();
 
-	cs_bool SendTo(const cs_char *pBufData, cs_int nLen, CsSockAddress_Ex *pPeer);
-	cs_int RecvFrom(cs_char *pBufData, cs_int nMaxLen, CsSockAddress_Ex *pPeer);
+	gbool SendTo(const gchar *pBufData, gint nLen, CsSockAddress_Ex *pPeer);
+	gint RecvFrom(gchar *pBufData, gint nMaxLen, CsSockAddress_Ex *pPeer);
 };
 
 #endif // _CORE_UDP_SOCKET_EX_H_

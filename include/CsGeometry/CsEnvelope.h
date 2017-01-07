@@ -6,20 +6,20 @@
 // 因此，该结构只能作为一个传输结构，不能作为存储结构。
 
 #include "CsGeometryGlobal.h"
-#include "CsObject.h"
+#include "gobject.h"
 
 class CsCoordinate;
 class CsCoordinateSequence;
 
-class CS_API CsEnvelope
-	: public CsObject
+class GAPI CsEnvelope
+	: public GObject
 {
 public:
 	CsEnvelope();
-	CsEnvelope(cs_real x, cs_real y);
-	CsEnvelope(cs_real x, cs_real y, cs_real z);
-	CsEnvelope(cs_real min_x, cs_real min_y, cs_real max_x, cs_real max_y);
-	CsEnvelope(cs_real min_x, cs_real min_y, cs_real min_z, cs_real max_x, cs_real max_y, cs_real max_z);
+	CsEnvelope(greal x, greal y);
+	CsEnvelope(greal x, greal y, greal z);
+	CsEnvelope(greal min_x, greal min_y, greal max_x, greal max_y);
+	CsEnvelope(greal min_x, greal min_y, greal min_z, greal max_x, greal max_y, greal max_z);
 	CsEnvelope(const CsCoordinate &min_c, const CsCoordinate &max_c);
 	CsEnvelope(const CsCoordinateSequence &);
 	CsEnvelope(const CsEnvelope &);
@@ -28,47 +28,47 @@ public:
 	CsCoordinate Max() const;
 	CsCoordinate Center() const;
 
-	cs_real MinX() const;
-	cs_real MinY() const;
-	cs_real MinZ() const;
+	greal MinX() const;
+	greal MinY() const;
+	greal MinZ() const;
 
-	cs_real MaxX() const;
-	cs_real MaxY() const;
-	cs_real MaxZ() const;
+	greal MaxX() const;
+	greal MaxY() const;
+	greal MaxZ() const;
 
-	cs_real CenterX() const;
-	cs_real CenterY() const;
-	cs_real CenterZ() const;
+	greal CenterX() const;
+	greal CenterY() const;
+	greal CenterZ() const;
 
-	cs_real Length() const;
-	cs_real Width() const;
-	cs_real Height() const;
+	greal Length() const;
+	greal Width() const;
+	greal Height() const;
 
-	cs_void SetMin(const CsCoordinate &);
-	cs_void SetMax(const CsCoordinate &);
-	cs_void SetCenter(const CsCoordinate &);
+	gvoid SetMin(const CsCoordinate &);
+	gvoid SetMax(const CsCoordinate &);
+	gvoid SetCenter(const CsCoordinate &);
 
-	cs_void SetMinX(cs_real);
-	cs_void SetMinY(cs_real);
-	cs_void SetMinZ(cs_real);
+	gvoid SetMinX(greal);
+	gvoid SetMinY(greal);
+	gvoid SetMinZ(greal);
 
-	cs_void SetMaxX(cs_real);
-	cs_void SetMaxY(cs_real);
-	cs_void SetMaxZ(cs_real);
+	gvoid SetMaxX(greal);
+	gvoid SetMaxY(greal);
+	gvoid SetMaxZ(greal);
 
-	cs_void SetCenterX(cs_real);
-	cs_void SetCenterY(cs_real);
-	cs_void SetCenterZ(cs_real);
+	gvoid SetCenterX(greal);
+	gvoid SetCenterY(greal);
+	gvoid SetCenterZ(greal);
 
-	cs_void SetLength(cs_real);
-	cs_void SetWidth(cs_real);
-	cs_void SetHeight(cs_real);
+	gvoid SetLength(greal);
+	gvoid SetWidth(greal);
+	gvoid SetHeight(greal);
 
-	cs_uint Dimension() const;
+	guint Dimension() const;
 
 private:
 	// MinX, MinY(, MinZ), MaxX, MaxY(, MaxZ)
-	cs_real m_tCoords[CS_ENVELOPE_SIZE];
+	greal m_tCoords[CS_ENVELOPE_SIZE];
 };
 
 #endif // _GEOMETRY_ENVELOPE_H_

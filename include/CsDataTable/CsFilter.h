@@ -1,22 +1,22 @@
 #ifndef _CORE_FILTER_H_
 #define _CORE_FILTER_H_
 
-#include "CsObject.h"
-#include "CsString.h"
+#include "gobject.h"
+#include "gstring.h"
 
 class CsFilter_Ex;
 
-class CS_API CsFilter 
-	: public CsObject
+class GAPI CsFilter 
+	: public GObject
 {
 public:
-	CsFilter(const CsString &sFilter = "");
+	CsFilter(const GString &sFilter = "");
 	CsFilter(const CsFilter &tFilter);
 	~CsFilter();
 
-	cs_bool SetFilter(const CsString &sFilter);
-	cs_bool IsValid() const;
-	CsString ToString() const;
+	gbool SetFilter(const GString &sFilter);
+	gbool IsValid() const;
+	GString ToString() const;
 
 	virtual CsFilter &operator=(const CsFilter &tFilter);
 

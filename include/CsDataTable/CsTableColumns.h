@@ -13,10 +13,10 @@ public:
 	TableT &Table();
 	const TableT &Table() const;
 
-	cs_size_t Count() const;
+	gsize Count() const;
 
-	CsTableColumn<TableT> operator[](cs_size_t) const;
-	CsTableColumn<TableT> operator[](const CsString &) const;
+	CsTableColumn<TableT> operator[](gsize) const;
+	CsTableColumn<TableT> operator[](const GString &) const;
 
 private:
 	TableT &m_tTable;

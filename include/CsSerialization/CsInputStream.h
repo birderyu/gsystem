@@ -4,29 +4,29 @@
 
 #include "CsStream.h"
 
-class CS_API CsInputStream
+class GAPI CsInputStream
 	: virtual public CsStream
 {
 public:
 	virtual ~CsInputStream() = 0;
-	cs_bool IsInput() const;
+	gbool IsInput() const;
 
-	virtual CsInputStream &operator<<(cs_bool) = 0;
-	virtual CsInputStream &operator<<(cs_char) = 0;
-	virtual CsInputStream &operator<<(cs_schar) = 0;
-	virtual CsInputStream &operator<<(cs_uchar) = 0;
-	virtual CsInputStream &operator<<(cs_wchar) = 0;
-	virtual CsInputStream &operator<<(cs_short) = 0;
-	virtual CsInputStream &operator<<(cs_ushort) = 0;
-	virtual CsInputStream &operator<<(cs_int) = 0;
-	virtual CsInputStream &operator<<(cs_uint) = 0;
-	virtual CsInputStream &operator<<(cs_long) = 0;
-	virtual CsInputStream &operator<<(cs_ulong) = 0;
-	virtual CsInputStream &operator<<(cs_longlong) = 0;
-	virtual CsInputStream &operator<<(cs_ulonglong) = 0;
-	virtual CsInputStream &operator<<(cs_float) = 0;
-	virtual CsInputStream &operator<<(cs_double) = 0;
-	virtual CsInputStream &operator<<(cs_decimal) = 0;
+	virtual CsInputStream &operator<<(gbool) = 0;
+	virtual CsInputStream &operator<<(gchar) = 0;
+	virtual CsInputStream &operator<<(gschar) = 0;
+	virtual CsInputStream &operator<<(guchar) = 0;
+	virtual CsInputStream &operator<<(gwchar) = 0;
+	virtual CsInputStream &operator<<(gshort) = 0;
+	virtual CsInputStream &operator<<(gushort) = 0;
+	virtual CsInputStream &operator<<(gint) = 0;
+	virtual CsInputStream &operator<<(guint) = 0;
+	virtual CsInputStream &operator<<(glong) = 0;
+	virtual CsInputStream &operator<<(gulong) = 0;
+	virtual CsInputStream &operator<<(glonglong) = 0;
+	virtual CsInputStream &operator<<(gulonglong) = 0;
+	virtual CsInputStream &operator<<(gfloat) = 0;
+	virtual CsInputStream &operator<<(gdouble) = 0;
+	virtual CsInputStream &operator<<(gdecimal) = 0;
 };
 
 #endif // _CORE_INPUT_STREAM_H_

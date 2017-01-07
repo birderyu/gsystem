@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** CNova: A quick, micro library of C++
+** GNova: A quick, micro library of C++
 **
 ** @file	CsGeometry.h
 ** @brief	基础几何接口的定义
@@ -15,14 +15,14 @@
 #define _GEOMETRY_GEOMETRY_H_
 
 #include "CsGeometryGlobal.h"
-#include "CsObject.h"
+#include "gobject.h"
 
 class CsGeometry;
 class CsGeometryFactory;
 class CsEnvelope;
 class CsCoordinate;
 class CsCoordinateSequence;
-typedef CsSharedPointer<CsGeometry> CsGeometryP;
+typedef GSharedPointer<CsGeometry> CsGeometryP;
 
 /****************************************************************************
 **
@@ -35,8 +35,8 @@ typedef CsSharedPointer<CsGeometry> CsGeometryP;
 ** 基础几何类型是所有几何对象接口的基类，采用要素模型的思想进行了一层接口封装。
 **
 ****************************************************************************/
-class CS_API CsGeometry 
-	: public CsObject
+class GAPI CsGeometry 
+	: public GObject
 {
 public:
 	enum { CLASS_CODE = CLASS_CODE_GEOMETRY, };
@@ -74,7 +74,7 @@ public:
 	** @return	{cs_bool} 有效则返回true，否则返回false
 	**
 	****************************************************************************/
-	virtual cs_bool Valid() const = 0;
+	virtual gbool Valid() const = 0;
 
 	/****************************************************************************
 	**
@@ -86,7 +86,7 @@ public:
 	** @see		{CS_GEOMETRY_TYPE}
 	**
 	****************************************************************************/
-	virtual cs_int GeometryType() const = 0;
+	virtual gint GeometryType() const = 0;
 
 	/****************************************************************************
 	**
@@ -98,7 +98,7 @@ public:
 	** @see		{CS_GEOMETRY_DIMENSION}
 	**
 	****************************************************************************/
-	virtual cs_uint Dimension() const = 0;
+	virtual guint Dimension() const = 0;
 
 	/****************************************************************************
 	**

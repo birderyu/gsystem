@@ -1,10 +1,10 @@
 #include "CsTcpSocket_Ex.h"
-#include "CsTcpSocket.h"
+#include "gtcpsocket.h"
 
-cs_bool CsTcpSocket_Ex::Open(cs_bool nResue)
+gbool CsTcpSocket_Ex::Open(gbool nResue)
 {
 	m_hSocket = CsOpenSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	if ((cs_int)m_hSocket < 0)
+	if ((gint)m_hSocket < 0)
 	{
 		return false;
 	}
@@ -12,7 +12,7 @@ cs_bool CsTcpSocket_Ex::Open(cs_bool nResue)
 	return true;
 }
 
-cs_bool CsTcpSocket_Ex::Open(CsSockAddress_Ex *pSockAddr, cs_bool nResue)
+gbool CsTcpSocket_Ex::Open(CsSockAddress_Ex *pSockAddr, gbool nResue)
 {
 	if (!pSockAddr)
 	{
@@ -31,9 +31,9 @@ cs_bool CsTcpSocket_Ex::Open(CsSockAddress_Ex *pSockAddr, cs_bool nResue)
 	return true;
 }
 
-cs_void CsTcpSocket_Ex::Close()
+gvoid CsTcpSocket_Ex::Close()
 {
-	if ((cs_int)m_hSocket >= 0)
+	if ((gint)m_hSocket >= 0)
 	{
 		shutdown(m_hSocket, 2);
 		CsCloseSocket(m_hSocket);
@@ -41,7 +41,7 @@ cs_void CsTcpSocket_Ex::Close()
 	}
 }
 
-cs_bool CsTcpSocket_Ex::Listen(cs_int nBackLog)
+gbool CsTcpSocket_Ex::Listen(gint nBackLog)
 {
 	if (CsListenSocket(m_hSocket, nBackLog) < 0)
 	{
@@ -50,7 +50,7 @@ cs_bool CsTcpSocket_Ex::Listen(cs_int nBackLog)
 	return true;
 }
 
-cs_bool CsTcpSocket_Ex::Accept(CsTcpSocket_Ex *pPeer)
+gbool CsTcpSocket_Ex::Accept(CsTcpSocket_Ex *pPeer)
 {
 	if (!pPeer)
 	{
@@ -75,7 +75,7 @@ cs_bool CsTcpSocket_Ex::Accept(CsTcpSocket_Ex *pPeer)
 	return true;
 }
 
-cs_bool CsTcpSocket_Ex::Connect(CsSockAddress_Ex *pSockAddr)
+gbool CsTcpSocket_Ex::Connect(CsSockAddress_Ex *pSockAddr)
 {
 	if (!pSockAddr)
 	{
@@ -88,12 +88,12 @@ cs_bool CsTcpSocket_Ex::Connect(CsSockAddress_Ex *pSockAddr)
 	return true;
 }
 
-cs_int CsTcpSocket_Ex::Send(const cs_char *pBufData, cs_int nDataLen)
+gint CsTcpSocket_Ex::Send(const gchar *pBufData, gint nDataLen)
 {
 	return CsSendSocket(m_hSocket, pBufData, nDataLen, 0);
 }
 
-cs_int CsTcpSocket_Ex::Recv(cs_char *pBufData, cs_int nDataLen, cs_int nWaitAll)
+gint CsTcpSocket_Ex::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
 {
 	int nFlags = nWaitAll ? MSG_WAITALL : 0;
 	return CsRecvSocket(m_hSocket, pBufData, nDataLen, nFlags);

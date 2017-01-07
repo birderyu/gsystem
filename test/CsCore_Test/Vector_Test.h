@@ -1,8 +1,8 @@
-#include "CsVector.h"
+#include "gvector.h"
 
-cs_void TestVector()
+gvoid TestVector()
 {
-	CsVector<cs_int> arr(5);
+	GVector<gint> arr(5);
 	arr.Reserve(10);
 	arr[0] = 1;
 	arr[1] = 2;
@@ -13,27 +13,27 @@ cs_void TestVector()
 	arr.PushBack(6);
 	arr.PushFront(0);
 
-	CsVector<cs_int> _arr(arr);
+	GVector<gint> _arr(arr);
 	_arr.Append(7);
 	_arr.PopFront();
 	_arr.PopFront();
 	_arr.PopBack();
 	
 
-	cs_int first = _arr.First();
-	cs_int last = _arr.Last();
+	gint first = _arr.First();
+	gint last = _arr.Last();
 
-	cs_bool b1 = _arr.StartWith(0);
-	cs_bool b2 = _arr.EndWith(7);
+	gbool b1 = _arr.StartWith(0);
+	gbool b2 = _arr.EndWith(7);
 
-	CsVector<cs_int> __arr(_arr);
-	for (CsVector<cs_int>::ConstIterator citer = __arr.ConstBegin();
+	GVector<gint> __arr(_arr);
+	for (GVector<gint>::ConstIterator citer = __arr.ConstBegin();
 		citer != __arr.ConstEnd(); citer++)
 	{
 		std::cout << *citer << std::endl;
 	}
 	std::cout << std::endl;
 	
-	cs_int stop = 1;
+	gint stop = 1;
 	stop++;
 }

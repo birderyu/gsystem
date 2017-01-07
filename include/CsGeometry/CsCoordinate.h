@@ -2,37 +2,37 @@
 #define _GEOMETRY_COORDINATE_H_
 
 #include "CsGeometryGlobal.h"
-#include "CsObject.h"
+#include "gobject.h"
 
-class CS_API CsCoordinate
-	: public CsObject
+class GAPI CsCoordinate
+	: public GObject
 {
 	friend class CsEnvelope;
 
 public:
 	CsCoordinate();
-	CsCoordinate(cs_real x, cs_real y);
-	CsCoordinate(cs_real x, cs_real y, cs_real z);
-	CsCoordinate(const cs_real *p_c, cs_size_t size);
+	CsCoordinate(greal x, greal y);
+	CsCoordinate(greal x, greal y, greal z);
+	CsCoordinate(const greal *p_c, gsize size);
 	CsCoordinate(const CsCoordinate &coord);
 
-	cs_real &X();
-	cs_real  X() const;
-	cs_real &Y();
-	cs_real  Y() const;
-	cs_real &Z();
-	cs_real  Z() const;
+	greal &X();
+	greal  X() const;
+	greal &Y();
+	greal  Y() const;
+	greal &Z();
+	greal  Z() const;
 
-	cs_void SetX(cs_real);
-	cs_void SetY(cs_real);
-	cs_void SetZ(cs_real);
+	gvoid SetX(greal);
+	gvoid SetY(greal);
+	gvoid SetZ(greal);
 
-	cs_uint Dimension() const;
+	guint Dimension() const;
 
-	const cs_real *Cursor() const;
+	const greal *Cursor() const;
 
 private:
-	cs_real m_tCoord[CS_COORDINATE_SIZE];
+	greal m_tCoord[CS_COORDINATE_SIZE];
 };
 
 #endif // _GEOMETRY_COORDINATE_EX_H_

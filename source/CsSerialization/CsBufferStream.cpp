@@ -5,7 +5,7 @@ CsBufferStream::~CsBufferStream()
 
 }
 
-cs_bool CsBufferStream::HasBuffer() const
+gbool CsBufferStream::HasBuffer() const
 {
 	return true;
 }

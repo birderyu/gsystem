@@ -1,8 +1,8 @@
 #ifndef _CORE_FILTER_EX_H_
 #define _CORE_FILTER_EX_H_
 
-#include "CsDynamicArray.h"
-#include "CsVariant.h"
+#include "gdynamicarray.h"
+#include "gvariant.h"
 
 class CsFilter_Ex
 {
@@ -36,15 +36,15 @@ private:
 		CsFilterCell();
 		CsFilterCell(const CsFilterCell &tCell);
 		virtual ~CsFilterCell();
-		cs_bool SetFilter(const CsString &sFilter);
-		cs_bool IsValid() const;
-		cs_bool Release();
-		CsString ToString() const;
+		gbool SetFilter(const GString &sFilter);
+		gbool IsValid() const;
+		gbool Release();
+		GString ToString() const;
 		CsFilterCell &operator=(const CsFilterCell &tCell);
 
 	private:		
-		CsString m_sFieldName;
-		CsVariant m_tFieldValue;
+		GString m_sFieldName;
+		GVariant m_tFieldValue;
 		CS_COMPARE_TYPE m_emCompareType;
 	};
 
@@ -52,14 +52,14 @@ private:
 	{
 		CsFilterData();
 		CsFilterData(const CsFilterData &tData);
-		cs_bool SetFilter(const CsString &sFilter);
-		cs_bool IsValid() const;
-		CsString ToString() const;
-		cs_bool Release();
+		gbool SetFilter(const GString &sFilter);
+		gbool IsValid() const;
+		GString ToString() const;
+		gbool Release();
 		CsFilterData &operator=(const CsFilterData &tData);
 
 	private:
-		CsDynamicArray<CsFilterData> m_tChildren;
+		GDynamicArray<CsFilterData> m_tChildren;
 		CsFilterCell m_tCell;
 		CS_UNION_TYPE m_emUnionType;
 	};
@@ -67,49 +67,49 @@ private:
 	struct CsFilterParse
 	{
 		// 解析过滤器字符串
-		static cs_bool ParseFilter(const CsString &sFilter, CS_UNION_TYPE &emUnionType, 
-			CsDynamicArray<CsFilterData> &tData, CsFilterCell &tCell);
+		static gbool ParseFilter(const GString &sFilter, CS_UNION_TYPE &emUnionType, 
+			GDynamicArray<CsFilterData> &tData, CsFilterCell &tCell);
 
 		// 解析过滤器字符串：预处理字符串，如"OID = 1; NAME = 'ABC'"，改为"OID = 1 AND NAME = ABC"
-		static cs_bool ParseFilter_PreParseFilter(CsString &sFilter);
+		static gbool ParseFilter_PreParseFilter(GString &sFilter);
 		// 解析过滤器字符串：根据联合的符号，获取联合的枚举值
-		static cs_bool ParseFilter_ParseUnionType(const CsString &sUnion, CS_UNION_TYPE &emUnionType);
+		static gbool ParseFilter_ParseUnionType(const GString &sUnion, CS_UNION_TYPE &emUnionType);
 		// 解析过滤器字符串：判断括号是否合法
-		static cs_bool ParseFilter_IsBracketLegal(const CsString &sFilter);
+		static gbool ParseFilter_IsBracketLegal(const GString &sFilter);
 		// 解析过滤器字符串：移除起始无效的括号，如"(OID = 1 AND TYPE = 2)"，变为"OID = 1 AND TYPE = 2"
-		static cs_bool ParseFilter_TrimBracket(CsString &sFilter);
+		static gbool ParseFilter_TrimBracket(GString &sFilter);
 		// 解析过滤器字符串：指定联合符号去分解括号
 		// 只分解第一级括号
 		// 如"(OID = 1 OR TYPE = 2) AND (NAME = ABC AND (CITY = 'BJ' OR SIZE = 100))"
 		// 变为"(OID = 1 OR TYPE = 2)" 和 "(NAME = ABC AND (CITY = 'BJ' OR SIZE = 100))"
-		static cs_bool ParseFilter_BreakUpBracketOnOneLevel(const CsString &sFilter, const CsString &sUnion, CsStringList &tFilterList);
+		static gbool ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringList &tFilterList);
 		// 
-		static cs_bool ParseFilter_ParseCompareType(const CsString &sCompare, CS_COMPARE_TYPE &emCompareType);
-		static cs_bool GetCompareString(CS_COMPARE_TYPE emCompareType, CsString &sCompare);
-		static cs_bool GetUnionString(CS_UNION_TYPE emUnionType, CsString &sUnion);
+		static gbool ParseFilter_ParseCompareType(const GString &sCompare, CS_COMPARE_TYPE &emCompareType);
+		static gbool GetCompareString(CS_COMPARE_TYPE emCompareType, GString &sCompare);
+		static gbool GetUnionString(CS_UNION_TYPE emUnionType, GString &sUnion);
 	};
 
 public:
-	CsFilter_Ex(const CsString &sFilter);
+	CsFilter_Ex(const GString &sFilter);
 	CsFilter_Ex(const CsFilter_Ex &tFilter);
 	virtual ~CsFilter_Ex();
-	virtual cs_bool SetFilter(const CsString &sFilter);
+	virtual gbool SetFilter(const GString &sFilter);
 	virtual CsFilter_Ex &operator=(const CsFilter_Ex &tFilter);
 
-	cs_bool IsValid() const;
-	CsString ToString() const;
+	gbool IsValid() const;
+	GString ToString() const;
 
 private:
-	cs_bool Initialize();
-	cs_bool Release();
+	gbool Initialize();
+	gbool Release();
 	CsFilterData m_tFilterData;
 
 private:
-	static CsStringList m_tUnionSymbols;
-	static cs_bool m_bInitializeUnionSymbols;
+	static GStringList m_tUnionSymbols;
+	static gbool m_bInitializeUnionSymbols;
 
-	static CsStringList m_tCompareSymbols;
-	static cs_bool m_bInitializeCompareSymbols;
+	static GStringList m_tCompareSymbols;
+	static gbool m_bInitializeCompareSymbols;
 };
 
 #endif // _CORE_FILTER_EX_H_

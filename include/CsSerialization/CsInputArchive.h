@@ -3,30 +3,30 @@
 
 #include "CsArchive.h"
 
-class CS_API CsInputArchive
+class GAPI CsInputArchive
 	: public CsArchive
 {
 public:
-	CsInputArchive(CsFile &);
+	CsInputArchive(GFile &);
 	virtual ~CsInputArchive();
 
 public:
-	CsArchive &operator>>(cs_bool &);
-	CsArchive &operator>>(cs_char &);
-	CsArchive &operator>>(cs_schar &);
-	CsArchive &operator>>(cs_uchar &);
-	CsArchive &operator>>(cs_wchar &);
-	CsArchive &operator>>(cs_short &);
-	CsArchive &operator>>(cs_ushort &);
-	CsArchive &operator>>(cs_int &);
-	CsArchive &operator>>(cs_uint &);
-	CsArchive &operator>>(cs_long &);
-	CsArchive &operator>>(cs_ulong &);
-	CsArchive &operator>>(cs_longlong &);
-	CsArchive &operator>>(cs_ulonglong &);
-	CsArchive &operator>>(cs_float &);
-	CsArchive &operator>>(cs_double &);
-	CsArchive &operator>>(cs_decimal &);
+	CsArchive &operator>>(gbool &);
+	CsArchive &operator>>(gchar &);
+	CsArchive &operator>>(gschar &);
+	CsArchive &operator>>(guchar &);
+	CsArchive &operator>>(gwchar &);
+	CsArchive &operator>>(gshort &);
+	CsArchive &operator>>(gushort &);
+	CsArchive &operator>>(gint &);
+	CsArchive &operator>>(guint &);
+	CsArchive &operator>>(glong &);
+	CsArchive &operator>>(gulong &);
+	CsArchive &operator>>(glonglong &);
+	CsArchive &operator>>(gulonglong &);
+	CsArchive &operator>>(gfloat &);
+	CsArchive &operator>>(gdouble &);
+	CsArchive &operator>>(gdecimal &);
 };
 
 CsArchive::TYPE CsInputArchive::Type()
@@ -34,82 +34,82 @@ CsArchive::TYPE CsInputArchive::Type()
 	return CsArchive::ARCHIVE_TYPE_INPUT;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_bool &)
+CsArchive &CsInputArchive::operator>>(gbool &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_char &)
+CsArchive &CsInputArchive::operator>>(gchar &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_schar &)
+CsArchive &CsInputArchive::operator>>(gschar &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_uchar &)
+CsArchive &CsInputArchive::operator>>(guchar &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_wchar &)
+CsArchive &CsInputArchive::operator>>(gwchar &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_short &)
+CsArchive &CsInputArchive::operator>>(gshort &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_ushort &)
+CsArchive &CsInputArchive::operator>>(gushort &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_int &)
+CsArchive &CsInputArchive::operator>>(gint &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_uint &)
+CsArchive &CsInputArchive::operator>>(guint &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_long &)
+CsArchive &CsInputArchive::operator>>(glong &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_ulong &)
+CsArchive &CsInputArchive::operator>>(gulong &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_longlong &)
+CsArchive &CsInputArchive::operator>>(glonglong &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_ulonglong &)
+CsArchive &CsInputArchive::operator>>(gulonglong &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_float &)
+CsArchive &CsInputArchive::operator>>(gfloat &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_double &)
+CsArchive &CsInputArchive::operator>>(gdouble &)
 {
 	return *this;
 }
 
-CsArchive &CsInputArchive::operator>>(cs_decimal &)
+CsArchive &CsInputArchive::operator>>(gdecimal &)
 {
 	return *this;
 }

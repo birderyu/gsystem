@@ -2,16 +2,16 @@
 #define _CORE_OUTPUT_BINARY_ARCHIVE_H_
 
 #include "CsOutputArchive.h"
-#include "CsBytes.h"
+#include "gbytes.h"
 
 class CsBinaryOutputArchive
 	: public CsOutputArchive
 {
 public:
-	CsBinaryOutputArchive(CsFile &);
+	CsBinaryOutputArchive(GFile &);
 
 private:
-	CsBytes m_tBuffer;
+	GBytes m_tBuffer;
 };
 
 #endif // _CORE_OUTPUT_BINARY_ARCHIVE_H_

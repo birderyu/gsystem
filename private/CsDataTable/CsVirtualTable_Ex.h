@@ -2,90 +2,90 @@
 #ifndef _CORE_TABLE_EX_H_
 #define _CORE_TABLE_EX_H_
 
-#include "CsGlobal.h"
-#include "CsString.h"
+#include "gglobal.h"
+#include "gstring.h"
 #include "CsTableGlobal.h"
 
-class CS_API CsVirtualTable
+class GAPI CsVirtualTable
 {
 public:
 	virtual ~CsVirtualTable() = 0;
 
 public:
 	// 用户权限
-	virtual cs_bool CanEditStructure() const = 0;	// 是否支持编辑表结构
-	virtual cs_bool CanEditData() const = 0;		// 是否支持编辑表数据
-	virtual cs_bool CanRollBack() const = 0;		// 是否支持回滚
+	virtual gbool CanEditStructure() const = 0;	// 是否支持编辑表结构
+	virtual gbool CanEditData() const = 0;		// 是否支持编辑表数据
+	virtual gbool CanRollBack() const = 0;		// 是否支持回滚
 
 public:
 	// 元信息获取
-	virtual CsString GetTableName() const = 0;
-	virtual cs_size_t GetFieldCount() const = 0;
-	virtual CS_TABLE_FIELD_TYPE GetFieldType(cs_size_t) const = 0;
-	virtual CsString GetFieldName(cs_size_t) const = 0;
-	virtual CsString GetFieldText(cs_size_t) const = 0;
-	virtual cs_size_t GertFieldLength() const = 0;
-	virtual cs_int GetFieldID(const CsString &) const = 0;
-	virtual cs_size_t GetRecordCount() const = 0;
-	virtual cs_bool HasGeometry() const = 0;
-	virtual cs_size_t GetGeometryFieldID() const = 0;
+	virtual GString GetTableName() const = 0;
+	virtual gsize GetFieldCount() const = 0;
+	virtual CS_TABLE_FIELD_TYPE GetFieldType(gsize) const = 0;
+	virtual GString GetFieldName(gsize) const = 0;
+	virtual GString GetFieldText(gsize) const = 0;
+	virtual gsize GertFieldLength() const = 0;
+	virtual gint GetFieldID(const GString &) const = 0;
+	virtual gsize GetRecordCount() const = 0;
+	virtual gbool HasGeometry() const = 0;
+	virtual gsize GetGeometryFieldID() const = 0;
 
 public:
 	// 表结构编辑
-	virtual cs_bool SetTableName(const CsString &) = 0;
+	virtual gbool SetTableName(const GString &) = 0;
 
-	virtual cs_bool StartEditStructure() = 0;
-	virtual cs_bool SetFieldCount(cs_size_t) = 0;
-	virtual cs_bool SetFieldType(cs_size_t, CS_TABLE_FIELD_TYPE) const = 0;
-	virtual cs_bool SetFieldName(cs_size_t, const CsString &) = 0;
-	virtual cs_bool SetFieldAlias(cs_size_t, const CsString &) = 0;
-	virtual cs_bool SertFieldLength(cs_size_t, cs_size_t) = 0;
-	virtual cs_bool EndEditStructure(cs_bool) = 0;
+	virtual gbool StartEditStructure() = 0;
+	virtual gbool SetFieldCount(gsize) = 0;
+	virtual gbool SetFieldType(gsize, CS_TABLE_FIELD_TYPE) const = 0;
+	virtual gbool SetFieldName(gsize, const GString &) = 0;
+	virtual gbool SetFieldAlias(gsize, const GString &) = 0;
+	virtual gbool SertFieldLength(gsize, gsize) = 0;
+	virtual gbool EndEditStructure(gbool) = 0;
 
 public:
 	// 数据访问
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_bool &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_char &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_schar &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_uchar &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_wchar &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col,  cs_short &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_ushort &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_int &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_uint &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_long &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_ulong &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_longlong &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_ulonglong &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_float &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_double &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, cs_decimal &) const = 0;
-	virtual cs_bool GetValue(cs_size_t row, cs_size_t col, CsString &) const = 0;
-	virtual CsVariant GetValue(cs_size_t row, cs_size_t col) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gbool &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gchar &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gschar &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, guchar &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gwchar &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col,  gshort &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gushort &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gint &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, guint &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, glong &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gulong &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, glonglong &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gulonglong &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gfloat &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gdouble &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, gdecimal &) const = 0;
+	virtual gbool GetValue(gsize row, gsize col, GString &) const = 0;
+	virtual GVariant GetValue(gsize row, gsize col) const = 0;
 
 public:
 	// 数据编辑
-	virtual cs_bool StartEditData() = 0;
-	virtual cs_bool SetRecordCount(cs_size_t) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_bool) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_char) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_schar) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_uchar) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_wchar) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_short) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_ushort) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_int) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_uint) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_long) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_ulong) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_longlong) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_ulonglong) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_float) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_double) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, cs_decimal) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, const CsString &) = 0;
-	virtual cs_bool SetValue(cs_size_t row, cs_size_t col, const CsVariant &) = 0;
-	virtual cs_bool EndEditData(cs_bool) = 0;
+	virtual gbool StartEditData() = 0;
+	virtual gbool SetRecordCount(gsize) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gbool) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gchar) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gschar) = 0;
+	virtual gbool SetValue(gsize row, gsize col, guchar) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gwchar) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gshort) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gushort) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gint) = 0;
+	virtual gbool SetValue(gsize row, gsize col, guint) = 0;
+	virtual gbool SetValue(gsize row, gsize col, glong) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gulong) = 0;
+	virtual gbool SetValue(gsize row, gsize col, glonglong) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gulonglong) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gfloat) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gdouble) = 0;
+	virtual gbool SetValue(gsize row, gsize col, gdecimal) = 0;
+	virtual gbool SetValue(gsize row, gsize col, const GString &) = 0;
+	virtual gbool SetValue(gsize row, gsize col, const GVariant &) = 0;
+	virtual gbool EndEditData(gbool) = 0;
 };
 
 #endif //_CORE_TABLE_EX_H_

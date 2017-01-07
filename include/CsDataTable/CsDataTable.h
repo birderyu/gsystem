@@ -7,7 +7,7 @@
 
 class CsVirtualTable;
 
-class CS_API CsDataTable
+class GAPI CsDataTable
 {
 public:
 	CsDataTable();
@@ -21,51 +21,51 @@ public:
 	CsTableRows<CsDataTable> Rows() const;
 	CsTableColumns<CsDataTable> Columns() const;
 
-	CsTableField<CsDataTable> FieldAt(cs_size_t) const;
-	CsTableRow<CsDataTable> RowAt(cs_size_t) const;
-	CsTableColumn<CsDataTable> ColumnAt(cs_size_t) const;
+	CsTableField<CsDataTable> FieldAt(gsize) const;
+	CsTableRow<CsDataTable> RowAt(gsize) const;
+	CsTableColumn<CsDataTable> ColumnAt(gsize) const;
 
-	CsTableRow<CsDataTable> operator[](cs_size_t) const;
+	CsTableRow<CsDataTable> operator[](gsize) const;
 
 public:
 	// ¿ìËÙ²Ù×÷
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_bool &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_char &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_schar &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_uchar &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_wchar &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_short &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_ushort &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_int &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_uint &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_long &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_ulong &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_longlong &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_ulonglong &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_float &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_double &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, cs_decimal &) const;
-	cs_bool GetValue(cs_size_t row, cs_size_t col, CsString &) const;
-	CsVariant GetValue(cs_size_t row, cs_size_t col) const;
+	gbool GetValue(gsize row, gsize col, gbool &) const;
+	gbool GetValue(gsize row, gsize col, gchar &) const;
+	gbool GetValue(gsize row, gsize col, gschar &) const;
+	gbool GetValue(gsize row, gsize col, guchar &) const;
+	gbool GetValue(gsize row, gsize col, gwchar &) const;
+	gbool GetValue(gsize row, gsize col, gshort &) const;
+	gbool GetValue(gsize row, gsize col, gushort &) const;
+	gbool GetValue(gsize row, gsize col, gint &) const;
+	gbool GetValue(gsize row, gsize col, guint &) const;
+	gbool GetValue(gsize row, gsize col, glong &) const;
+	gbool GetValue(gsize row, gsize col, gulong &) const;
+	gbool GetValue(gsize row, gsize col, glonglong &) const;
+	gbool GetValue(gsize row, gsize col, gulonglong &) const;
+	gbool GetValue(gsize row, gsize col, gfloat &) const;
+	gbool GetValue(gsize row, gsize col, gdouble &) const;
+	gbool GetValue(gsize row, gsize col, gdecimal &) const;
+	gbool GetValue(gsize row, gsize col, GString &) const;
+	GVariant GetValue(gsize row, gsize col) const;
 
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_bool);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_char);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_schar);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_uchar);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_wchar);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_short);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_ushort);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_int);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_uint);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_long);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_ulong);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_longlong);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_ulonglong);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_float);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_double);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, cs_decimal);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, const CsString &);
-	cs_bool SetValue(cs_size_t row, cs_size_t col, const CsVariant &);
+	gbool SetValue(gsize row, gsize col, gbool);
+	gbool SetValue(gsize row, gsize col, gchar);
+	gbool SetValue(gsize row, gsize col, gschar);
+	gbool SetValue(gsize row, gsize col, guchar);
+	gbool SetValue(gsize row, gsize col, gwchar);
+	gbool SetValue(gsize row, gsize col, gshort);
+	gbool SetValue(gsize row, gsize col, gushort);
+	gbool SetValue(gsize row, gsize col, gint);
+	gbool SetValue(gsize row, gsize col, guint);
+	gbool SetValue(gsize row, gsize col, glong);
+	gbool SetValue(gsize row, gsize col, gulong);
+	gbool SetValue(gsize row, gsize col, glonglong);
+	gbool SetValue(gsize row, gsize col, gulonglong);
+	gbool SetValue(gsize row, gsize col, gfloat);
+	gbool SetValue(gsize row, gsize col, gdouble);
+	gbool SetValue(gsize row, gsize col, gdecimal);
+	gbool SetValue(gsize row, gsize col, const GString &);
+	gbool SetValue(gsize row, gsize col, const GVariant &);
 
 public:
 	enum { CLASS_CODE = CLASS_CODE_TABLE, };

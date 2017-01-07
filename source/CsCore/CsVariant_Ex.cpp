@@ -1,6 +1,6 @@
 #include "CsVariant_Ex.h"
-#include "CsString.h"
-#include "CsNumber.h"
+#include "gstring.h"
+#include "gnumber.h"
 
 CsVariant_Ex::CsVariant_Ex()
 : m_nType(VARIANT_TYPE_ILLEGAL)
@@ -9,133 +9,133 @@ CsVariant_Ex::CsVariant_Ex()
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_bool bValue)
+CsVariant_Ex::CsVariant_Ex(gbool bValue)
 : m_nType(VARIANT_TYPE_BOOL)
 , m_bVal(bValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_char cValue)
+CsVariant_Ex::CsVariant_Ex(gchar cValue)
 : m_nType(VARIANT_TYPE_CHAR)
 , m_cVal(cValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_schar cValue)
+CsVariant_Ex::CsVariant_Ex(gschar cValue)
 : m_nType(VARIANT_TYPE_SCHAR)
 , m_scVal(cValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_uchar cValue)
+CsVariant_Ex::CsVariant_Ex(guchar cValue)
 : m_nType(VARIANT_TYPE_UCHAR)
 , m_ucVal(cValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_wchar cValue)
+CsVariant_Ex::CsVariant_Ex(gwchar cValue)
 : m_nType(VARIANT_TYPE_WCHAR)
 , m_wcVal(cValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_short nValue)
+CsVariant_Ex::CsVariant_Ex(gshort nValue)
 : m_nType(VARIANT_TYPE_SHORT)
 , m_sVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_ushort nValue)
+CsVariant_Ex::CsVariant_Ex(gushort nValue)
 : m_nType(VARIANT_TYPE_USHORT)
 , m_usVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_int nValue)
+CsVariant_Ex::CsVariant_Ex(gint nValue)
 : m_nType(VARIANT_TYPE_INT)
 , m_iVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_uint nValue)
+CsVariant_Ex::CsVariant_Ex(guint nValue)
 : m_nType(VARIANT_TYPE_UINT)
 , m_uiVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_long nValue)
+CsVariant_Ex::CsVariant_Ex(glong nValue)
 : m_nType(VARIANT_TYPE_LONG)
 , m_lVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_ulong nValue)
+CsVariant_Ex::CsVariant_Ex(gulong nValue)
 : m_nType(VARIANT_TYPE_ULONG)
 , m_ulVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_longlong nValue)
+CsVariant_Ex::CsVariant_Ex(glonglong nValue)
 : m_nType(VARIANT_TYPE_LONGLONG)
 , m_llVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_ulonglong nValue)
+CsVariant_Ex::CsVariant_Ex(gulonglong nValue)
 : m_nType(VARIANT_TYPE_ULONGLONG)
 , m_ullVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_float nValue)
+CsVariant_Ex::CsVariant_Ex(gfloat nValue)
 : m_nType(VARIANT_TYPE_FLOAT)
 , m_fVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_double nValue)
+CsVariant_Ex::CsVariant_Ex(gdouble nValue)
 : m_nType(VARIANT_TYPE_DOUBLE)
 , m_dVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(cs_decimal nValue)
+CsVariant_Ex::CsVariant_Ex(gdecimal nValue)
 : m_nType(VARIANT_TYPE_DECIMAL)
 , m_decVal(nValue)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(const CsString &sValue)
+CsVariant_Ex::CsVariant_Ex(const GString &sValue)
 : m_nType(VARIANT_TYPE_STRING)
-, m_pVal(new CsString(sValue))
+, m_pVal(new GString(sValue))
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(const CsObject &tValue)
+CsVariant_Ex::CsVariant_Ex(const GObject &tValue)
 : m_nType(VARIANT_TYPE_OBJECT)
 , m_pVal(NULL)
 {
 
 }
 
-CsVariant_Ex::CsVariant_Ex(const cs_pointer pValue)
+CsVariant_Ex::CsVariant_Ex(const gpointer pValue)
 : m_nType(VARIANT_TYPE_POINTER)
 , m_pVal(pValue)
 {
@@ -195,7 +195,7 @@ CsVariant_Ex::CsVariant_Ex(const CsVariant_Ex &tOther)
 	{
 		if (tOther.m_pVal)
 		{
-			m_pVal = new CsString(*(CsString*)tOther.m_pVal);
+			m_pVal = new GString(*(GString*)tOther.m_pVal);
 		}
 	}
 		break;
@@ -220,12 +220,12 @@ CsVariant_Ex::~CsVariant_Ex()
 	ClearMemery();
 }
 
-CS_VARIANT_TYPE CsVariant_Ex::GetVariantType() const
+G_VARIANT_TYPE CsVariant_Ex::GetVariantType() const
 {
-	return static_cast<CS_VARIANT_TYPE>(m_nType);
+	return static_cast<G_VARIANT_TYPE>(m_nType);
 }
 
-cs_pointer CsVariant_Ex::GetPoiter() const
+gpointer CsVariant_Ex::GetPoiter() const
 {
 	if (m_nType == VARIANT_TYPE_POINTER)
 	{
@@ -234,133 +234,133 @@ cs_pointer CsVariant_Ex::GetPoiter() const
 	return NULL;
 }
 
-cs_void CsVariant_Ex::SetPoiter(const cs_pointer pValue)
+gvoid CsVariant_Ex::SetPoiter(const gpointer pValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_POINTER;
 	m_pVal = pValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_bool bValue)
+gvoid CsVariant_Ex::SetValue(gbool bValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_BOOL;
 	m_bVal = bValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_char cValue)
+gvoid CsVariant_Ex::SetValue(gchar cValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_CHAR;
 	m_cVal = cValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_uchar cValue)
+gvoid CsVariant_Ex::SetValue(guchar cValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_USHORT;
 	m_ucVal = cValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_wchar cValue)
+gvoid CsVariant_Ex::SetValue(gwchar cValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_WCHAR;
 	m_wcVal = cValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_short nValue)
+gvoid CsVariant_Ex::SetValue(gshort nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_SHORT;
 	m_sVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_ushort nValue)
+gvoid CsVariant_Ex::SetValue(gushort nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_USHORT;
 	m_usVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_int nValue)
+gvoid CsVariant_Ex::SetValue(gint nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_INT;
 	m_iVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_uint nValue)
+gvoid CsVariant_Ex::SetValue(guint nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_UINT;
 	m_uiVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_long nValue)
+gvoid CsVariant_Ex::SetValue(glong nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_LONG;
 	m_lVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_ulong nValue)
+gvoid CsVariant_Ex::SetValue(gulong nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_ULONG;
 	m_ulVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_longlong nValue)
+gvoid CsVariant_Ex::SetValue(glonglong nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_LONGLONG;
 	m_llVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_ulonglong nValue)
+gvoid CsVariant_Ex::SetValue(gulonglong nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_ULONGLONG;
 	m_ullVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_float nValue)
+gvoid CsVariant_Ex::SetValue(gfloat nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_FLOAT;
 	m_fVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(cs_double nValue)
+gvoid CsVariant_Ex::SetValue(gdouble nValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_DOUBLE;
 	m_dVal = nValue;
 }
 
-cs_void CsVariant_Ex::SetValue(const CsString &sValue)
+gvoid CsVariant_Ex::SetValue(const GString &sValue)
 {
 	if (m_nType == VARIANT_TYPE_STRING && m_pVal)
 	{
-		CsString &sStr = *(CsString*)m_pVal;
+		GString &sStr = *(GString*)m_pVal;
 		sStr = sValue;
 	}
 	else
 	{
 		m_nType = VARIANT_TYPE_STRING;
-		m_pVal = new CsString(sValue);
+		m_pVal = new GString(sValue);
 	}
 }
 
-cs_void CsVariant_Ex::SetValue(const CsObject &tValue)
+gvoid CsVariant_Ex::SetValue(const GObject &tValue)
 {
 	ClearMemery();
 	m_nType = VARIANT_TYPE_OBJECT;
 	//m_pVal = tValue.Clone();
 }
 
-cs_bool CsVariant_Ex::ToBool(const cs_bool bDefValue) const
+gbool CsVariant_Ex::ToBool(const gbool bDefValue) const
 {
 	switch (m_nType)
 	{
@@ -392,7 +392,7 @@ cs_bool CsVariant_Ex::ToBool(const cs_bool bDefValue) const
 	{
 		if (m_pVal)
 		{
-			CsString sStr = static_cast<CsString*>(m_pVal)->ToUpper();
+			GString sStr = static_cast<GString*>(m_pVal)->ToUpper();
 			if (sStr == "TRUE")
 			{
 				return true;
@@ -405,7 +405,7 @@ cs_bool CsVariant_Ex::ToBool(const cs_bool bDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_bool, CsBoolean>(CLASS_CODE_BOOLEAN, bDefValue);
+		return ToNumber<gbool, GBoolean>(CLASS_CODE_BOOLEAN, bDefValue);
 		break;
 	default:
 		break;
@@ -413,7 +413,7 @@ cs_bool CsVariant_Ex::ToBool(const cs_bool bDefValue) const
 	return bDefValue;
 }
 
-cs_char CsVariant_Ex::ToChar(const cs_char cDefValue) const
+gchar CsVariant_Ex::ToChar(const gchar cDefValue) const
 {
 	switch (m_nType)
 	{
@@ -424,34 +424,34 @@ cs_char CsVariant_Ex::ToChar(const cs_char cDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_char>(m_ucVal);
+		return static_cast<gchar>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_char>(m_wcVal);
+		return static_cast<gchar>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_char>(m_sVal);
+		return static_cast<gchar>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_char>(m_usVal);
+		return static_cast<gchar>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_char>(m_iVal);
+		return static_cast<gchar>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_char>(m_uiVal);
+		return static_cast<gchar>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_char>(m_lVal);
+		return static_cast<gchar>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_char>(m_ulVal);
+		return static_cast<gchar>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_char>(m_llVal);
+		return static_cast<gchar>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_char>(m_ullVal);
+		return static_cast<gchar>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_char>(m_fVal);
+		return static_cast<gchar>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_char>(m_dVal);
+		return static_cast<gchar>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			CsString *pStr = static_cast<CsString*>(m_pVal);
+			GString *pStr = static_cast<GString*>(m_pVal);
 			if (!pStr->IsEmpty())
 			{
 				return pStr->CString()[0];
@@ -460,14 +460,14 @@ cs_char CsVariant_Ex::ToChar(const cs_char cDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_char, CsChar>(CLASS_CODE_CHARACTER, cDefValue);
+		return ToNumber<gchar, GChar>(CLASS_CODE_CHARACTER, cDefValue);
 	default:
 		break;
 	}
 	return cDefValue;
 }
 
-cs_uchar CsVariant_Ex::ToUChar(const cs_uchar cDefValue) const
+guchar CsVariant_Ex::ToUChar(const guchar cDefValue) const
 {
 	switch (m_nType)
 	{
@@ -478,43 +478,43 @@ cs_uchar CsVariant_Ex::ToUChar(const cs_uchar cDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_uchar>(m_cVal);
+		return static_cast<guchar>(m_cVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_uchar>(m_wcVal);
+		return static_cast<guchar>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_uchar>(m_sVal);
+		return static_cast<guchar>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_uchar>(m_usVal);
+		return static_cast<guchar>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_uchar>(m_iVal);
+		return static_cast<guchar>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_uchar>(m_uiVal);
+		return static_cast<guchar>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_uchar>(m_lVal);
+		return static_cast<guchar>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_uchar>(m_ulVal);
+		return static_cast<guchar>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_uchar>(m_llVal);
+		return static_cast<guchar>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_uchar>(m_ullVal);
+		return static_cast<guchar>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_uchar>(m_fVal);
+		return static_cast<guchar>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_uchar>(m_dVal);
+		return static_cast<guchar>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			CsString *pStr = static_cast<CsString*>(m_pVal);
+			GString *pStr = static_cast<GString*>(m_pVal);
 			if (!pStr->IsEmpty())
 			{
-				return static_cast<cs_uchar>(pStr->CString()[0]);
+				return static_cast<guchar>(pStr->CString()[0]);
 			}
 		}
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_uchar, CsUChar>(CLASS_CODE_UNSIGNED_CHARACTER, cDefValue);
+		return ToNumber<guchar, CsUChar>(CLASS_CODE_UNSIGNED_CHARACTER, cDefValue);
 		break;
 	default:
 		break;
@@ -522,7 +522,7 @@ cs_uchar CsVariant_Ex::ToUChar(const cs_uchar cDefValue) const
 	return cDefValue;
 }
 
-cs_wchar CsVariant_Ex::ToWChar(const cs_wchar cDefValue) const
+gwchar CsVariant_Ex::ToWChar(const gwchar cDefValue) const
 {
 	switch (m_nType)
 	{
@@ -537,39 +537,39 @@ cs_wchar CsVariant_Ex::ToWChar(const cs_wchar cDefValue) const
 	case VARIANT_TYPE_UCHAR:
 		return m_ucVal;
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_wchar>(m_sVal);
+		return static_cast<gwchar>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_wchar>(m_usVal);
+		return static_cast<gwchar>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_wchar>(m_iVal);
+		return static_cast<gwchar>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_wchar>(m_uiVal);
+		return static_cast<gwchar>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_wchar>(m_lVal);
+		return static_cast<gwchar>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_wchar>(m_ulVal);
+		return static_cast<gwchar>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_wchar>(m_llVal);
+		return static_cast<gwchar>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_wchar>(m_ullVal);
+		return static_cast<gwchar>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_wchar>(m_fVal);
+		return static_cast<gwchar>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_wchar>(m_dVal);
+		return static_cast<gwchar>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			CsString *pStr = static_cast<CsString*>(m_pVal);
+			GString *pStr = static_cast<GString*>(m_pVal);
 			if (!pStr->IsEmpty())
 			{
-				return static_cast<cs_wchar>(pStr->CString()[0]);
+				return static_cast<gwchar>(pStr->CString()[0]);
 			}
 		}
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_wchar, CsWChar>(CLASS_CODE_WIND_CHARACTER, cDefValue);
+		return ToNumber<gwchar, GWChar>(CLASS_CODE_WIND_CHARACTER, cDefValue);
 		break;
 	default:
 		break;
@@ -577,19 +577,19 @@ cs_wchar CsVariant_Ex::ToWChar(const cs_wchar cDefValue) const
 	return cDefValue;
 }
 
-cs_small CsVariant_Ex::ToSmall(const cs_small nDefValue) const
+gsmall CsVariant_Ex::ToSmall(const gsmall nDefValue) const
 {
 	// TODO
 	return 0;
 }
 
-cs_usmall CsVariant_Ex::ToUSmall(const cs_usmall nDefValue) const
+gusmall CsVariant_Ex::ToUSmall(const gusmall nDefValue) const
 {
 	// TODO
 	return 0;
 }
 
-cs_short CsVariant_Ex::ToShort(const cs_short nDefValue) const
+gshort CsVariant_Ex::ToShort(const gshort nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -600,35 +600,35 @@ cs_short CsVariant_Ex::ToShort(const cs_short nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_short>(m_cVal);
+		return static_cast<gshort>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_short>(m_ucVal);
+		return static_cast<gshort>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_short>(m_wcVal);
+		return static_cast<gshort>(m_wcVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_short>(m_usVal);
+		return static_cast<gshort>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_short>(m_iVal);
+		return static_cast<gshort>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_short>(m_uiVal);
+		return static_cast<gshort>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_short>(m_lVal);
+		return static_cast<gshort>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_short>(m_ulVal);
+		return static_cast<gshort>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_short>(m_llVal);
+		return static_cast<gshort>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_short>(m_ullVal);
+		return static_cast<gshort>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_short>(m_fVal);
+		return static_cast<gshort>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_short>(m_dVal);
+		return static_cast<gshort>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_short nValue = static_cast<CsString*>(m_pVal)->ToShort(&bIsOK);
+			gbool bIsOK = false;
+			gshort nValue = static_cast<GString*>(m_pVal)->ToShort(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -637,7 +637,7 @@ cs_short CsVariant_Ex::ToShort(const cs_short nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_short, CsShort>(CLASS_CODE_SHORT_INTEGER, nDefValue);
+		return ToNumber<gshort, GShort>(CLASS_CODE_SHORT_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -645,7 +645,7 @@ cs_short CsVariant_Ex::ToShort(const cs_short nDefValue) const
 	return nDefValue;
 }
 
-cs_ushort CsVariant_Ex::ToUShort(const cs_ushort nDefValue) const
+gushort CsVariant_Ex::ToUShort(const gushort nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -656,35 +656,35 @@ cs_ushort CsVariant_Ex::ToUShort(const cs_ushort nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_ushort>(m_cVal);
+		return static_cast<gushort>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_ushort>(m_ucVal);
+		return static_cast<gushort>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_ushort>(m_wcVal);
+		return static_cast<gushort>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_ushort>(m_sVal);
+		return static_cast<gushort>(m_sVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_ushort>(m_iVal);
+		return static_cast<gushort>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_ushort>(m_uiVal);
+		return static_cast<gushort>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_ushort>(m_lVal);
+		return static_cast<gushort>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_ushort>(m_ulVal);
+		return static_cast<gushort>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_ushort>(m_llVal);
+		return static_cast<gushort>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_ushort>(m_ullVal);
+		return static_cast<gushort>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_ushort>(m_fVal);
+		return static_cast<gushort>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_ushort>(m_dVal);
+		return static_cast<gushort>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_ushort nValue = static_cast<CsString*>(m_pVal)->ToUShort(&bIsOK);
+			gbool bIsOK = false;
+			gushort nValue = static_cast<GString*>(m_pVal)->ToUShort(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -693,7 +693,7 @@ cs_ushort CsVariant_Ex::ToUShort(const cs_ushort nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_ushort, CsUShort>(CLASS_CODE_UNSIGNED_SHORT_INTEGER, nDefValue);
+		return ToNumber<gushort, GUShort>(CLASS_CODE_UNSIGNED_SHORT_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -701,7 +701,7 @@ cs_ushort CsVariant_Ex::ToUShort(const cs_ushort nDefValue) const
 	return nDefValue;
 }
 
-cs_int CsVariant_Ex::ToInt(const cs_int nDefValue) const
+gint CsVariant_Ex::ToInt(const gint nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -712,35 +712,35 @@ cs_int CsVariant_Ex::ToInt(const cs_int nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_int>(m_cVal);
+		return static_cast<gint>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_int>(m_ucVal);
+		return static_cast<gint>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_int>(m_wcVal);
+		return static_cast<gint>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_int>(m_sVal);
+		return static_cast<gint>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_int>(m_usVal);
+		return static_cast<gint>(m_usVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_int>(m_uiVal);
+		return static_cast<gint>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_int>(m_lVal);
+		return static_cast<gint>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_int>(m_ulVal);
+		return static_cast<gint>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_int>(m_llVal);
+		return static_cast<gint>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_int>(m_ullVal);
+		return static_cast<gint>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_int>(m_fVal);
+		return static_cast<gint>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_int>(m_dVal);
+		return static_cast<gint>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_int nValue = static_cast<CsString*>(m_pVal)->ToInt(&bIsOK);
+			gbool bIsOK = false;
+			gint nValue = static_cast<GString*>(m_pVal)->ToInt(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -749,7 +749,7 @@ cs_int CsVariant_Ex::ToInt(const cs_int nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_int, CsInteger>(CLASS_CODE_INTEGER, nDefValue);
+		return ToNumber<gint, GInteger>(CLASS_CODE_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -757,7 +757,7 @@ cs_int CsVariant_Ex::ToInt(const cs_int nDefValue) const
 	return nDefValue;
 }
 
-cs_uint CsVariant_Ex::ToUInt(const cs_uint nDefValue) const
+guint CsVariant_Ex::ToUInt(const guint nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -768,35 +768,35 @@ cs_uint CsVariant_Ex::ToUInt(const cs_uint nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_uint>(m_cVal);
+		return static_cast<guint>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_uint>(m_ucVal);
+		return static_cast<guint>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_uint>(m_wcVal);
+		return static_cast<guint>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_uint>(m_sVal);
+		return static_cast<guint>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_uint>(m_usVal);
+		return static_cast<guint>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_uint>(m_iVal);
+		return static_cast<guint>(m_iVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_uint>(m_lVal);
+		return static_cast<guint>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_uint>(m_ulVal);
+		return static_cast<guint>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_uint>(m_llVal);
+		return static_cast<guint>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_uint>(m_ullVal);
+		return static_cast<guint>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_uint>(m_fVal);
+		return static_cast<guint>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_uint>(m_dVal);
+		return static_cast<guint>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_uint nValue = static_cast<CsString*>(m_pVal)->ToUInt(&bIsOK);
+			gbool bIsOK = false;
+			guint nValue = static_cast<GString*>(m_pVal)->ToUInt(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -805,7 +805,7 @@ cs_uint CsVariant_Ex::ToUInt(const cs_uint nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_uint, CsUInteger>(CLASS_CODE_UNSIGNED_INTEGER, nDefValue);
+		return ToNumber<guint, GUInteger>(CLASS_CODE_UNSIGNED_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -813,7 +813,7 @@ cs_uint CsVariant_Ex::ToUInt(const cs_uint nDefValue) const
 	return nDefValue;
 }
 
-cs_long CsVariant_Ex::ToLong(const cs_long nDefValue) const
+glong CsVariant_Ex::ToLong(const glong nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -824,35 +824,35 @@ cs_long CsVariant_Ex::ToLong(const cs_long nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_long>(m_cVal);
+		return static_cast<glong>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_long>(m_ucVal);
+		return static_cast<glong>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_long>(m_wcVal);
+		return static_cast<glong>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_long>(m_sVal);
+		return static_cast<glong>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_long>(m_usVal);
+		return static_cast<glong>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_long>(m_iVal);
+		return static_cast<glong>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_long>(m_uiVal);
+		return static_cast<glong>(m_uiVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_long>(m_ulVal);
+		return static_cast<glong>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_long>(m_llVal);
+		return static_cast<glong>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_long>(m_ullVal);
+		return static_cast<glong>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_long>(m_fVal);
+		return static_cast<glong>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_long>(m_dVal);
+		return static_cast<glong>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_long nValue = static_cast<CsString*>(m_pVal)->ToLong(&bIsOK);
+			gbool bIsOK = false;
+			glong nValue = static_cast<GString*>(m_pVal)->ToLong(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -861,7 +861,7 @@ cs_long CsVariant_Ex::ToLong(const cs_long nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_long, CsLong>(CLASS_CODE_LONG_INTEGER, nDefValue);
+		return ToNumber<glong, GLong>(CLASS_CODE_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -869,7 +869,7 @@ cs_long CsVariant_Ex::ToLong(const cs_long nDefValue) const
 	return nDefValue;
 }
 
-cs_ulong CsVariant_Ex::ToULong(const cs_ulong nDefValue) const
+gulong CsVariant_Ex::ToULong(const gulong nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -880,35 +880,35 @@ cs_ulong CsVariant_Ex::ToULong(const cs_ulong nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_ulong>(m_cVal);
+		return static_cast<gulong>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_ulong>(m_ucVal);
+		return static_cast<gulong>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_ulong>(m_wcVal);
+		return static_cast<gulong>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_ulong>(m_sVal);
+		return static_cast<gulong>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_ulong>(m_usVal);
+		return static_cast<gulong>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_ulong>(m_iVal);
+		return static_cast<gulong>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_ulong>(m_uiVal);
+		return static_cast<gulong>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_ulong>(m_lVal);
+		return static_cast<gulong>(m_lVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_ulong>(m_llVal);
+		return static_cast<gulong>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_ulong>(m_ullVal);
+		return static_cast<gulong>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_ulong>(m_fVal);
+		return static_cast<gulong>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_ulong>(m_dVal);
+		return static_cast<gulong>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_ulong nValue = static_cast<CsString*>(m_pVal)->ToULong(&bIsOK);
+			gbool bIsOK = false;
+			gulong nValue = static_cast<GString*>(m_pVal)->ToULong(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -917,7 +917,7 @@ cs_ulong CsVariant_Ex::ToULong(const cs_ulong nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_ulong, CsULong>(CLASS_CODE_UNSIGNED_LONG_INTEGER, nDefValue);
+		return ToNumber<gulong, GULong>(CLASS_CODE_UNSIGNED_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -925,7 +925,7 @@ cs_ulong CsVariant_Ex::ToULong(const cs_ulong nDefValue) const
 	return nDefValue;
 }
 
-cs_longlong CsVariant_Ex::ToLongLong(const cs_longlong nDefValue) const
+glonglong CsVariant_Ex::ToLongLong(const glonglong nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -936,35 +936,35 @@ cs_longlong CsVariant_Ex::ToLongLong(const cs_longlong nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_longlong>(m_cVal);
+		return static_cast<glonglong>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_longlong>(m_ucVal);
+		return static_cast<glonglong>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_longlong>(m_wcVal);
+		return static_cast<glonglong>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_longlong>(m_sVal);
+		return static_cast<glonglong>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_longlong>(m_usVal);
+		return static_cast<glonglong>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_longlong>(m_iVal);
+		return static_cast<glonglong>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_longlong>(m_uiVal);
+		return static_cast<glonglong>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_longlong>(m_lVal);
+		return static_cast<glonglong>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_longlong>(m_ulVal);
+		return static_cast<glonglong>(m_ulVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_longlong>(m_ullVal);
+		return static_cast<glonglong>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_longlong>(m_fVal);
+		return static_cast<glonglong>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_ulong>(m_dVal);
+		return static_cast<gulong>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_longlong nValue = static_cast<CsString*>(m_pVal)->ToLongLong(&bIsOK);
+			gbool bIsOK = false;
+			glonglong nValue = static_cast<GString*>(m_pVal)->ToLongLong(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -973,7 +973,7 @@ cs_longlong CsVariant_Ex::ToLongLong(const cs_longlong nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_longlong, CsLongLong>(CLASS_CODE_LONG_LONG_INTEGER, nDefValue);
+		return ToNumber<glonglong, GLongLong>(CLASS_CODE_LONG_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -981,7 +981,7 @@ cs_longlong CsVariant_Ex::ToLongLong(const cs_longlong nDefValue) const
 	return nDefValue;
 }
 
-cs_ulonglong CsVariant_Ex::ToULongLong(const cs_ulonglong nDefValue) const
+gulonglong CsVariant_Ex::ToULongLong(const gulonglong nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -992,35 +992,35 @@ cs_ulonglong CsVariant_Ex::ToULongLong(const cs_ulonglong nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_ulonglong>(m_cVal);
+		return static_cast<gulonglong>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_ulonglong>(m_ucVal);
+		return static_cast<gulonglong>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_ulonglong>(m_wcVal);
+		return static_cast<gulonglong>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_ulonglong>(m_sVal);
+		return static_cast<gulonglong>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_ulonglong>(m_usVal);
+		return static_cast<gulonglong>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_ulonglong>(m_iVal);
+		return static_cast<gulonglong>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_ulonglong>(m_uiVal);
+		return static_cast<gulonglong>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_ulonglong>(m_lVal);
+		return static_cast<gulonglong>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_ulonglong>(m_ulVal);
+		return static_cast<gulonglong>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_ulonglong>(m_llVal);
+		return static_cast<gulonglong>(m_llVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_ulonglong>(m_fVal);
+		return static_cast<gulonglong>(m_fVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_ulonglong>(m_dVal);
+		return static_cast<gulonglong>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_ulonglong nValue = static_cast<CsString*>(m_pVal)->ToULongLong(&bIsOK);
+			gbool bIsOK = false;
+			gulonglong nValue = static_cast<GString*>(m_pVal)->ToULongLong(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -1029,7 +1029,7 @@ cs_ulonglong CsVariant_Ex::ToULongLong(const cs_ulonglong nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_ulonglong, CsULongLong>(CLASS_CODE_UNSIGNED_LONG_LONG_INTEGER, nDefValue);
+		return ToNumber<gulonglong, GULongLong>(CLASS_CODE_UNSIGNED_LONG_LONG_INTEGER, nDefValue);
 		break;
 	default:
 		break;
@@ -1037,7 +1037,7 @@ cs_ulonglong CsVariant_Ex::ToULongLong(const cs_ulonglong nDefValue) const
 	return nDefValue;
 }
 
-cs_float CsVariant_Ex::ToFloat(const cs_float nDefValue) const
+gfloat CsVariant_Ex::ToFloat(const gfloat nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -1048,35 +1048,35 @@ cs_float CsVariant_Ex::ToFloat(const cs_float nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_float>(m_cVal);
+		return static_cast<gfloat>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_float>(m_ucVal);
+		return static_cast<gfloat>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_float>(m_wcVal);
+		return static_cast<gfloat>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_float>(m_sVal);
+		return static_cast<gfloat>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_float>(m_usVal);
+		return static_cast<gfloat>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_float>(m_iVal);
+		return static_cast<gfloat>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_float>(m_uiVal);
+		return static_cast<gfloat>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_float>(m_lVal);
+		return static_cast<gfloat>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_float>(m_ulVal);
+		return static_cast<gfloat>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_float>(m_llVal);
+		return static_cast<gfloat>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_float>(m_ullVal);
+		return static_cast<gfloat>(m_ullVal);
 	case VARIANT_TYPE_DOUBLE:
-		return static_cast<cs_float>(m_dVal);
+		return static_cast<gfloat>(m_dVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_float nValue = static_cast<CsString*>(m_pVal)->ToFloat(&bIsOK);
+			gbool bIsOK = false;
+			gfloat nValue = static_cast<GString*>(m_pVal)->ToFloat(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -1085,7 +1085,7 @@ cs_float CsVariant_Ex::ToFloat(const cs_float nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_float, CsFloat>(CLASS_CODE_SINGLE_FLOAT, nDefValue);
+		return ToNumber<gfloat, CsFloat>(CLASS_CODE_SINGLE_FLOAT, nDefValue);
 		break;
 	default:
 		break;
@@ -1093,7 +1093,7 @@ cs_float CsVariant_Ex::ToFloat(const cs_float nDefValue) const
 	return nDefValue;
 }
 
-cs_double CsVariant_Ex::ToDouble(const cs_double nDefValue) const
+gdouble CsVariant_Ex::ToDouble(const gdouble nDefValue) const
 {
 	switch (m_nType)
 	{
@@ -1104,35 +1104,35 @@ cs_double CsVariant_Ex::ToDouble(const cs_double nDefValue) const
 		else return 0;
 		break;
 	case VARIANT_TYPE_CHAR:
-		return static_cast<cs_double>(m_cVal);
+		return static_cast<gdouble>(m_cVal);
 	case VARIANT_TYPE_UCHAR:
-		return static_cast<cs_double>(m_ucVal);
+		return static_cast<gdouble>(m_ucVal);
 	case VARIANT_TYPE_WCHAR:
-		return static_cast<cs_double>(m_wcVal);
+		return static_cast<gdouble>(m_wcVal);
 	case VARIANT_TYPE_SHORT:
-		return static_cast<cs_double>(m_sVal);
+		return static_cast<gdouble>(m_sVal);
 	case VARIANT_TYPE_USHORT:
-		return static_cast<cs_double>(m_usVal);
+		return static_cast<gdouble>(m_usVal);
 	case VARIANT_TYPE_INT:
-		return static_cast<cs_double>(m_iVal);
+		return static_cast<gdouble>(m_iVal);
 	case VARIANT_TYPE_UINT:
-		return static_cast<cs_double>(m_uiVal);
+		return static_cast<gdouble>(m_uiVal);
 	case VARIANT_TYPE_LONG:
-		return static_cast<cs_double>(m_lVal);
+		return static_cast<gdouble>(m_lVal);
 	case VARIANT_TYPE_ULONG:
-		return static_cast<cs_double>(m_ulVal);
+		return static_cast<gdouble>(m_ulVal);
 	case VARIANT_TYPE_LONGLONG:
-		return static_cast<cs_double>(m_llVal);
+		return static_cast<gdouble>(m_llVal);
 	case VARIANT_TYPE_ULONGLONG:
-		return static_cast<cs_double>(m_ullVal);
+		return static_cast<gdouble>(m_ullVal);
 	case VARIANT_TYPE_FLOAT:
-		return static_cast<cs_double>(m_fVal);
+		return static_cast<gdouble>(m_fVal);
 	case VARIANT_TYPE_STRING:
 	{
 		if (m_pVal)
 		{
-			cs_bool bIsOK = false;
-			cs_double nValue = static_cast<CsString*>(m_pVal)->ToDouble(&bIsOK);
+			gbool bIsOK = false;
+			gdouble nValue = static_cast<GString*>(m_pVal)->ToDouble(&bIsOK);
 			if (bIsOK)
 			{
 				return nValue;
@@ -1141,7 +1141,7 @@ cs_double CsVariant_Ex::ToDouble(const cs_double nDefValue) const
 	}
 		break;
 	case VARIANT_TYPE_OBJECT:
-		return ToNumber<cs_double, CsDoubleFloat>(CLASS_CODE_DOUBLE_FLOAT, nDefValue);
+		return ToNumber<gdouble, GDoubleFloat>(CLASS_CODE_DOUBLE_FLOAT, nDefValue);
 		break;
 	default:
 		break;
@@ -1149,7 +1149,7 @@ cs_double CsVariant_Ex::ToDouble(const cs_double nDefValue) const
 	return nDefValue;
 }
 
-CsString CsVariant_Ex::ToString(const CsString &sDefValue) const
+GString CsVariant_Ex::ToString(const GString &sDefValue) const
 {
 	switch (m_nType)
 	{
@@ -1157,7 +1157,7 @@ CsString CsVariant_Ex::ToString(const CsString &sDefValue) const
 	{
 		if (m_pVal)
 		{
-			return *(CsString*)m_pVal;
+			return *(GString*)m_pVal;
 		}
 	}
 		break;
@@ -1175,40 +1175,40 @@ CsString CsVariant_Ex::ToString(const CsString &sDefValue) const
 		return m_wcVal;
 		break;
 	case VARIANT_TYPE_SHORT:
-		return CsString::FromNum(m_sVal);
+		return GString::FromNum(m_sVal);
 		break;
 	case VARIANT_TYPE_USHORT:
-		return CsString::FromNum(m_usVal);
+		return GString::FromNum(m_usVal);
 		break;
 	case VARIANT_TYPE_INT:
-		return CsString::FromNum(m_iVal);
+		return GString::FromNum(m_iVal);
 		break;
 	case VARIANT_TYPE_UINT:
-		return CsString::FromNum(m_uiVal);
+		return GString::FromNum(m_uiVal);
 		break;
 	case VARIANT_TYPE_LONG:
-		return CsString::FromNum(m_lVal);
+		return GString::FromNum(m_lVal);
 		break;
 	case VARIANT_TYPE_ULONG:
-		return CsString::FromNum(m_ulVal);
+		return GString::FromNum(m_ulVal);
 		break;
 	case VARIANT_TYPE_LONGLONG:
-		return CsString::FromNum(m_llVal);
+		return GString::FromNum(m_llVal);
 		break;
 	case VARIANT_TYPE_ULONGLONG:
-		return CsString::FromNum(m_ullVal);
+		return GString::FromNum(m_ullVal);
 		break;
 	case VARIANT_TYPE_FLOAT:
-		return CsString::FromNum(m_fVal);
+		return GString::FromNum(m_fVal);
 		break;
 	case VARIANT_TYPE_DOUBLE:
-		return CsString::FromNum(m_dVal);
+		return GString::FromNum(m_dVal);
 		break;
 	case VARIANT_TYPE_OBJECT:
 	{
 		if (m_pVal)
 		{
-			CsObject *pObjcet = static_cast<CsObject*>(m_pVal);
+			GObject *pObjcet = static_cast<GObject*>(m_pVal);
 			return pObjcet->ToString();
 		}
 	}
@@ -1221,7 +1221,7 @@ CsString CsVariant_Ex::ToString(const CsString &sDefValue) const
 	return sDefValue;
 }
 
-CsObject *CsVariant_Ex::ToObject() const
+GObject *CsVariant_Ex::ToObject() const
 {
 	/*
 	switch (m_emType)
@@ -1293,7 +1293,7 @@ CsObject *CsVariant_Ex::ToObject() const
 	return NULL;
 }
 
-cs_bool CsVariant_Ex::IsValid() const
+gbool CsVariant_Ex::IsValid() const
 {
 	if (m_nType == VARIANT_TYPE_ILLEGAL)
 	{
@@ -1361,7 +1361,7 @@ CsVariant_Ex &CsVariant_Ex::operator = (const CsVariant_Ex &var)
 	{
 		if (var.m_pVal)
 		{
-			m_pVal = new CsString(*(CsString*)var.m_pVal);
+			m_pVal = new GString(*(GString*)var.m_pVal);
 		}
 	}
 		break;
@@ -1390,12 +1390,12 @@ void CsVariant_Ex::ClearMemery()
 	}
 	if (m_nType == VARIANT_TYPE_STRING)
 	{
-		CsString *pString = static_cast<CsString*>(m_pVal);
+		GString *pString = static_cast<GString*>(m_pVal);
 		delete pString;
 	}
 	else if (m_nType == VARIANT_TYPE_OBJECT)
 	{
-		CsObject *pObject = static_cast<CsObject*>(m_pVal);
+		GObject *pObject = static_cast<GObject*>(m_pVal);
 		delete pObject;
 	}
 	m_pVal = NULL;

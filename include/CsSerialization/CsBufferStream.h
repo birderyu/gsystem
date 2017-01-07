@@ -4,12 +4,12 @@
 
 #include "CsStream.h"
 
-class CS_API CsBufferStream
+class GAPI CsBufferStream
 	: virtual public CsStream
 {
 public:
 	virtual ~CsBufferStream() = 0;
-	cs_bool HasBuffer() const;
+	gbool HasBuffer() const;
 };
 
 #endif // _CORE_BUFFER_STREAM_H_

@@ -3,14 +3,14 @@
 
 #include "CsTableGlobal.h"
 
-class CS_API CsTableField
+class GAPI CsTableField
 {
 public:
-	CsTableField(CsDataTable &, cs_size_t column);
+	CsTableField(CsDataTable &, gsize column);
 	CsTableField(const CsTableField &);
 
-	cs_size_t FieldID() const;
-	CsString FieldName() const;
+	gsize FieldID() const;
+	GString FieldName() const;
 };
 
 #endif // _CORE_TABLE_FIELD_H_

@@ -1,8 +1,8 @@
-#include "CsString.h"
+#include "gstring.h"
 #include <sstream>
 
 template <typename T>
-CsString _FromNum(T nNum, cs_int nBase)
+GString _FromNum(T nNum, gint nBase)
 {
 	std::ostringstream oss;
 	if (nBase == 2)
@@ -26,11 +26,11 @@ CsString _FromNum(T nNum, cs_int nBase)
 		oss << std::dec;
 	}
 	oss << nNum;
-	return CsString(oss.str().c_str());
+	return GString(oss.str().c_str());
 }
 
 template <typename T>
-T _ToNum(const CsString &str, cs_bool *isok)
+T _ToNum(const GString &str, gbool *isok)
 {
 	std::istringstream iss(str.CString());
 	T nNum;
@@ -43,132 +43,132 @@ T _ToNum(const CsString &str, cs_bool *isok)
 	return nNum;
 }
 
-CsString CsString::FromNum(cs_small nNum, cs_int nBase)
+GString GString::FromNum(gsmall nNum, gint nBase)
 {
-	return _FromNum<cs_small>(nNum, nBase);
+	return _FromNum<gsmall>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_usmall nNum, cs_int nBase)
+GString GString::FromNum(gusmall nNum, gint nBase)
 {
-	return _FromNum<cs_usmall>(nNum, nBase);
+	return _FromNum<gusmall>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_short nNum, cs_int nBase)
+GString GString::FromNum(gshort nNum, gint nBase)
 {
-	return _FromNum<cs_short>(nNum, nBase);
+	return _FromNum<gshort>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_ushort nNum, cs_int nBase)
+GString GString::FromNum(gushort nNum, gint nBase)
 {
-	return _FromNum<cs_ushort>(nNum, nBase);
+	return _FromNum<gushort>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_int nNum, cs_int nBase)
+GString GString::FromNum(gint nNum, gint nBase)
 {
-	return _FromNum<cs_int>(nNum, nBase);
+	return _FromNum<gint>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_uint nNum, cs_int nBase)
+GString GString::FromNum(guint nNum, gint nBase)
 {
-	return _FromNum<cs_uint>(nNum, nBase);
+	return _FromNum<guint>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_long nNum, cs_int nBase)
+GString GString::FromNum(glong nNum, gint nBase)
 {
-	return _FromNum<cs_long>(nNum, nBase);
+	return _FromNum<glong>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_ulong nNum, cs_int nBase)
+GString GString::FromNum(gulong nNum, gint nBase)
 {
-	return _FromNum<cs_ulong>(nNum, nBase);
+	return _FromNum<gulong>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_longlong nNum, cs_int nBase)
+GString GString::FromNum(glonglong nNum, gint nBase)
 {
-	return _FromNum<cs_longlong>(nNum, nBase);
+	return _FromNum<glonglong>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_ulonglong nNum, cs_int nBase)
+GString GString::FromNum(gulonglong nNum, gint nBase)
 {
-	return _FromNum<cs_ulonglong>(nNum, nBase);
+	return _FromNum<gulonglong>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_float nNum, cs_int nBase)
+GString GString::FromNum(gfloat nNum, gint nBase)
 {
-	return _FromNum<cs_float>(nNum, nBase);
+	return _FromNum<gfloat>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_double nNum, cs_int nBase)
+GString GString::FromNum(gdouble nNum, gint nBase)
 {
-	return _FromNum<cs_double>(nNum, nBase);
+	return _FromNum<gdouble>(nNum, nBase);
 }
 
-CsString CsString::FromNum(cs_decimal nNum, cs_int nBase)
+GString GString::FromNum(gdecimal nNum, gint nBase)
 {
-	return _FromNum<cs_decimal>(nNum, nBase);
+	return _FromNum<gdecimal>(nNum, nBase);
 }
 
-cs_small CsString::ToSmall(cs_bool *bIsOk) const
+gsmall GString::ToSmall(gbool *bIsOk) const
 {
-	return _ToNum<cs_small>(*this, bIsOk);
+	return _ToNum<gsmall>(*this, bIsOk);
 }
 
-cs_usmall CsString::ToUSmall(cs_bool *bIsOk) const
+gusmall GString::ToUSmall(gbool *bIsOk) const
 {
-	return _ToNum<cs_usmall>(*this, bIsOk);
+	return _ToNum<gusmall>(*this, bIsOk);
 }
 
-cs_short CsString::ToShort(cs_bool *bIsOk) const
+gshort GString::ToShort(gbool *bIsOk) const
 {
-	return _ToNum<cs_short>(*this, bIsOk);
+	return _ToNum<gshort>(*this, bIsOk);
 }
 
-cs_ushort CsString::ToUShort(cs_bool *bIsOk) const
+gushort GString::ToUShort(gbool *bIsOk) const
 {
-	return _ToNum<cs_ushort>(*this, bIsOk);
+	return _ToNum<gushort>(*this, bIsOk);
 }
 
-cs_int CsString::ToInt(cs_bool *bIsOk) const
+gint GString::ToInt(gbool *bIsOk) const
 {
-	return _ToNum<cs_int>(*this, bIsOk);
+	return _ToNum<gint>(*this, bIsOk);
 }
 
-cs_uint CsString::ToUInt(cs_bool *bIsOk) const
+guint GString::ToUInt(gbool *bIsOk) const
 {
-	return _ToNum<cs_uint>(*this, bIsOk);
+	return _ToNum<guint>(*this, bIsOk);
 }
 
-cs_long CsString::ToLong(cs_bool *bIsOk) const
+glong GString::ToLong(gbool *bIsOk) const
 {
-	return _ToNum<cs_long>(*this, bIsOk);
+	return _ToNum<glong>(*this, bIsOk);
 }
 
-cs_ulong CsString::ToULong(cs_bool *bIsOk) const
+gulong GString::ToULong(gbool *bIsOk) const
 {
-	return _ToNum<cs_ulong>(*this, bIsOk);
+	return _ToNum<gulong>(*this, bIsOk);
 }
 
-cs_longlong CsString::ToLongLong(cs_bool *bIsOk) const
+glonglong GString::ToLongLong(gbool *bIsOk) const
 {
-	return _ToNum<cs_longlong>(*this, bIsOk);
+	return _ToNum<glonglong>(*this, bIsOk);
 }
 
-cs_ulonglong CsString::ToULongLong(cs_bool *bIsOk) const
+gulonglong GString::ToULongLong(gbool *bIsOk) const
 {
-	return _ToNum<cs_ulonglong>(*this, bIsOk);
+	return _ToNum<gulonglong>(*this, bIsOk);
 }
 
-cs_float CsString::ToFloat(cs_bool *bIsOk) const
+gfloat GString::ToFloat(gbool *bIsOk) const
 {
-	return _ToNum<cs_float>(*this, bIsOk);
+	return _ToNum<gfloat>(*this, bIsOk);
 }
 
-cs_double CsString::ToDouble(cs_bool *bIsOk) const
+gdouble GString::ToDouble(gbool *bIsOk) const
 {
-	return _ToNum<cs_double>(*this, bIsOk);
+	return _ToNum<gdouble>(*this, bIsOk);
 }
 
-cs_decimal CsString::ToDecimal(cs_bool *bIsOk) const
+gdecimal GString::ToDecimal(gbool *bIsOk) const
 {
-	return _ToNum<cs_decimal>(*this, bIsOk);
+	return _ToNum<gdecimal>(*this, bIsOk);
 }

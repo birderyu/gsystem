@@ -1,16 +1,16 @@
-#include "CsString.h"
+#include "gstring.h"
 
-const CsObject *CsString::Boxing() const
+const GObject *GString::Boxing() const
 {
 	return this;
 }
 
-cs_uint CsString::ClassCode() const
+guint GString::ClassCode() const
 {
-	return CsString::CLASS_CODE;
+	return GString::CLASS_CODE;
 }
 
-CsString CsString::ToString() const
+GString GString::ToString() const
 {
 	return *this;
 }

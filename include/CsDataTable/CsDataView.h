@@ -9,7 +9,7 @@
 class CsDataTable;
 class CsVirtualTable;
 
-class CS_API CsDataView
+class GAPI CsDataView
 	: CsTableActionT<CsDataView>
 {
 public:

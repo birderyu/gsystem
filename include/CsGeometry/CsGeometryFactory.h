@@ -3,13 +3,13 @@
 
 #include "CsGeometry.h"
 
-class CS_API CsGeometryFactory 
+class GAPI CsGeometryFactory 
 {
 public:
-	CsGeometryP CreatePoint2D(cs_real x, cs_real y) const;
+	CsGeometryP CreatePoint2D(greal x, greal y) const;
 
 #ifdef CS_GEOMETRY_HAS_Z
-	CsGeometryP CreatePoint3D(cs_real x, cs_real y, cs_real z) const;
+	CsGeometryP CreatePoint3D(greal x, greal y, greal z) const;
 #endif
 };
 

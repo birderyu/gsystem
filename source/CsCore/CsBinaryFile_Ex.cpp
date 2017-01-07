@@ -1,10 +1,10 @@
 #include "CsBinaryFile_Ex.h"
-#include "CsFile.h"
-#include "CsBytes.h"
+#include "gfile.h"
+#include "gbytes.h"
 
 #define CS_BINARY_DOCUMNET_BUFFER_SIZE 4096
 
-CsBinaryFile_Ex::CsBinaryFile_Ex(const CsString &sFileName)
+CsBinaryFile_Ex::CsBinaryFile_Ex(const GString &sFileName)
 : CsFile_Ex(sFileName)
 {
 
@@ -15,29 +15,29 @@ CsBinaryFile_Ex::~CsBinaryFile_Ex()
 
 }
 
-cs_byte CsBinaryFile_Ex::Format() const
+gbyte CsBinaryFile_Ex::Format() const
 {
-	return CsFile::BINARY_FILE;
+	return GFile::BINARY_FILE;
 }
 
-cs_bool CsBinaryFile_Ex::GetByte(cs_byte &b)
+gbool CsBinaryFile_Ex::GetByte(gbyte &b)
 {
 	if (EndOfFile() || !CanRead())
 	{
 		return false;
 	}
 
-	cs_int ib = fgetc(m_pFileStream);
+	gint ib = fgetc(m_pFileStream);
 	if (EOF == ib)
 	{
 		return false;
 	}
 
-	b = static_cast<cs_byte>(ib);
+	b = static_cast<gbyte>(ib);
 	return true;
 }
 
-cs_bool CsBinaryFile_Ex::PutByte(cs_byte b)
+gbool CsBinaryFile_Ex::PutByte(gbyte b)
 {
 	if (!Valid() || !CanWrite())
 	{
@@ -51,20 +51,20 @@ cs_bool CsBinaryFile_Ex::PutByte(cs_byte b)
 	return false;
 }
 
-cs_bool CsBinaryFile_Ex::Read(cs_size_t size, CsBytes &bytes)
+gbool CsBinaryFile_Ex::Read(gsize size, GBytes &bytes)
 {
 	if (EndOfFile() || !CanRead() || size <= 0)
 	{
 		return false;
 	}
-	cs_size_t bytes_old_size = bytes.Size();
-	cs_size_t bytes_new_size = bytes_old_size + size;
+	gsize bytes_old_size = bytes.Size();
+	gsize bytes_new_size = bytes_old_size + size;
 	if (bytes_new_size > bytes.Capacity())
 	{
 		bytes.Reserve(bytes_new_size);
 	}
 
-	cs_size_t real_bytes_new_size = fread(bytes.Tail(), sizeof(cs_byte), size, m_pFileStream);
+	gsize real_bytes_new_size = fread(bytes.Tail(), sizeof(gbyte), size, m_pFileStream);
 	if (real_bytes_new_size == 0)
 	{
 		return false;
@@ -72,7 +72,7 @@ cs_bool CsBinaryFile_Ex::Read(cs_size_t size, CsBytes &bytes)
 	return bytes.Resize(bytes_old_size + real_bytes_new_size);
 }
 
-cs_bool CsBinaryFile_Ex::ReadAll(CsBytes &bytes)
+gbool CsBinaryFile_Ex::ReadAll(GBytes &bytes)
 {
 	if (!Valid() || !CanRead())
 	{
@@ -80,20 +80,20 @@ cs_bool CsBinaryFile_Ex::ReadAll(CsBytes &bytes)
 	}
 
 	// 旧的文件游标备份
-	cs_long old_tell = Tell();
+	glong old_tell = Tell();
 
-	if (!Seek(0, CsFile::SEEK_MODE_END))
+	if (!Seek(0, GFile::SEEK_MODE_END))
 	{
 		// 还原游标
-		Seek(old_tell, CsFile::SEEK_MODE_START);
+		Seek(old_tell, GFile::SEEK_MODE_START);
 		return false;
 	}
 
-	cs_long all_size = Tell();
+	glong all_size = Tell();
 	if (all_size < 0)
 	{
 		// 还原游标
-		Seek(old_tell, CsFile::SEEK_MODE_START);
+		Seek(old_tell, GFile::SEEK_MODE_START);
 		return false;
 	}
 
@@ -102,39 +102,39 @@ cs_bool CsBinaryFile_Ex::ReadAll(CsBytes &bytes)
 	if (!Read(all_size, bytes))
 	{
 		// 还原游标
-		Seek(old_tell, CsFile::SEEK_MODE_START);
+		Seek(old_tell, GFile::SEEK_MODE_START);
 		return false;
 	}
 
 	return true;
 }
 
-cs_bool CsBinaryFile_Ex::Write(const CsBytes &bytes)
+gbool CsBinaryFile_Ex::Write(const GBytes &bytes)
 {
 	if (!Valid() || !CanWrite())
 	{
 		return false;
 	}
-	if (0 == fwrite(bytes.Head(), sizeof(cs_byte), bytes.Size(), m_pFileStream))
+	if (0 == fwrite(bytes.Head(), sizeof(gbyte), bytes.Size(), m_pFileStream))
 	{
 		return false;
 	}
 	return true;
 }
 
-cs_cstring CsBinaryFile_Ex::OpenMode() const
+gcstring CsBinaryFile_Ex::OpenMode() const
 {
 	switch(m_nOpenMode)
 	{
-		case CsFile::NO_OPEN:
+		case GFile::NO_OPEN:
 			return NULL;
-		case CsFile::ONLY_READ:
+		case GFile::ONLY_READ:
 			return "rb";
-		case CsFile::ONLY_WIRTE:
+		case GFile::ONLY_WIRTE:
 			return "wb";
-		case CsFile::READ_WIRTE:
+		case GFile::READ_WIRTE:
 			return "rb+";
-		case CsFile::APPEND:
+		case GFile::APPEND:
 			return "ab";
 		default:
 			break;

@@ -1,11 +1,11 @@
-#include "CsString.h"
+#include "gstring.h"
 
-cs_void CsString::Free()
+gvoid GString::Free()
 {
-	CsStringStore::Free(m_tStringStore);
+	GStringStore::Free(m_tStringStore);
 }
 
-CsString &CsString::ToValue()
+GString &GString::ToValue()
 {
 	if (IsReference())
 	{
@@ -15,25 +15,25 @@ CsString &CsString::ToValue()
 	return *this;
 }
 
-cs_bool CsString::IsReference() const
+gbool GString::IsReference() const
 {
-	return m_tStringStore.m_nType == CsStringStore::STRING_STORE_TYPE_REFERENCE;
+	return m_tStringStore.m_nType == GStringStore::STRING_STORE_TYPE_REFERENCE;
 }
 
-CsStringStore::TYPE CsString::GetTypeBySize(cs_size_t size) const
+GStringStore::TYPE GString::GetTypeBySize(gsize size) const
 {
-	if (size <= CsSmallStringStore::MAX_SIZE)
+	if (size <= GSmallStringStore::MAX_SIZE)
 	{
 		// Ð¡×Ö·û´®
-		return CsStringStore::STRING_STORE_TYPE_VALUE_SMALL;
+		return GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
 	}
 
-	if (size <= CsNormalStringStore::MAX_SIZE)
+	if (size <= GNormalStringStore::MAX_SIZE)
 	{
 		// ÆÕÍ¨×Ö·û´®
-		return CsStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
+		return GStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
 	}
 
 	// ´ó×Ö·û´®
-	return CsStringStore::STRING_STORE_TYPE_VALUE_BIG;
+	return GStringStore::STRING_STORE_TYPE_VALUE_BIG;
 }

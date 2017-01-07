@@ -7,26 +7,26 @@ template<typename TableT>
 class CsTableRow
 {
 public:
-	CsTableRow(TableT &, cs_size_t row);
+	CsTableRow(TableT &, gsize row);
 	CsTableRow(const CsTableRow<TableT> &);
 
 	TableT &Table();
 	const TableT &Table() const;
 
-	CsTableField<TableT> Field(cs_size_t) const;
-	CsTableField<TableT> Field(const CsString &) const;
-	cs_size_t RowID() const;
+	CsTableField<TableT> Field(gsize) const;
+	CsTableField<TableT> Field(const GString &) const;
+	gsize RowID() const;
 
-	CsTableCell<TableT> operator[](cs_size_t) const;
-	CsTableCell<TableT> operator[](const CsString &) const;
+	CsTableCell<TableT> operator[](gsize) const;
+	CsTableCell<TableT> operator[](const GString &) const;
 
 private:
 	TableT &m_tTable;
-	cs_size_t m_nRowID;
+	gsize m_nRowID;
 };
 
 template<typename TableT>
-CsTableRow<TableT>::CsTableRow(TableT &table, cs_size_t row)
+CsTableRow<TableT>::CsTableRow(TableT &table, gsize row)
 : m_tTable(table), m_nRowID(row)
 {
 
@@ -52,31 +52,31 @@ const TableT &CsTableRow<TableT>::Table() const
 }
 
 template<typename TableT>
-CsTableField<TableT> CsTableRow<TableT>::Field(cs_size_t field) const
+CsTableField<TableT> CsTableRow<TableT>::Field(gsize field) const
 {
 	return CsTableField<TableT>(m_tTable, field);
 }
 
 template<typename TableT>
-CsTableField<TableT> CsTableRow<TableT>::Field(const CsString &sFieldName) const
+CsTableField<TableT> CsTableRow<TableT>::Field(const GString &sFieldName) const
 {
 	return CsTableField<TableT>(m_tTable, m_tTable.GetFieldID(sFieldName));
 }
 
 template<typename TableT>
-cs_size_t CsTableRow<TableT>::RowID() const
+gsize CsTableRow<TableT>::RowID() const
 {
 	return m_nRowID;
 }
 
 template<typename TableT>
-CsTableCell<TableT> CsTableRow<TableT>::operator[](cs_size_t column) const
+CsTableCell<TableT> CsTableRow<TableT>::operator[](gsize column) const
 {
 	return CsTableCell<TableT>(m_tTable, m_nRowID, column);
 }
 
 template<typename TableT>
-CsTableCell<TableT> CsTableRow<TableT>::operator[](const CsString &sFieldName) const
+CsTableCell<TableT> CsTableRow<TableT>::operator[](const GString &sFieldName) const
 {
 	return CsTableCell<TableT>(m_tTable, m_nRowID, m_tTable.GetFieldID(sFieldName));
 }

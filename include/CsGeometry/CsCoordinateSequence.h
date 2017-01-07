@@ -1,34 +1,34 @@
 #ifndef _GEOMETRY_COORDINATE_SEQUENCE_H_
 #define _GEOMETRY_COORDINATE_SEQUENCE_H_
 
-#include "CsObject.h"
-#include "CsVector.h"
+#include "gobject.h"
+#include "gvector.h"
 #include "CsCoordinate.h"
 
-class CS_API CsCoordinateSequence
+class GAPI CsCoordinateSequence
 {
 public:
 	CsCoordinateSequence();
-	CsCoordinateSequence(cs_real x, cs_real y);
-	CsCoordinateSequence(cs_real x, cs_real y, cs_real z);
+	CsCoordinateSequence(greal x, greal y);
+	CsCoordinateSequence(greal x, greal y, greal z);
 	CsCoordinateSequence(const CsCoordinate &);
-	CsCoordinateSequence(const CsVector<CsCoordinate> &);
-	CsCoordinateSequence(const CsVector<cs_real> &);
+	CsCoordinateSequence(const GVector<CsCoordinate> &);
+	CsCoordinateSequence(const GVector<greal> &);
 	CsCoordinateSequence(const CsCoordinateSequence &);
 
-	CsCoordinate GetAt(cs_size_t pos) const;
-	CsCoordinate operator[](cs_size_t pos) const;
-	cs_void SetAt(cs_size_t pos, const CsCoordinate &);
+	CsCoordinate GetAt(gsize pos) const;
+	CsCoordinate operator[](gsize pos) const;
+	gvoid SetAt(gsize pos, const CsCoordinate &);
 
-	cs_real GetXAt(cs_size_t pos) const;
-	cs_real &GetXAt(cs_size_t pos);
-	cs_real GetYAt(cs_size_t pos) const;
-	cs_real &GetYAt(cs_size_t pos);
-	cs_real GetZAt(cs_size_t pos) const;
-	cs_real &GetZAt(cs_size_t pos);
+	greal GetXAt(gsize pos) const;
+	greal &GetXAt(gsize pos);
+	greal GetYAt(gsize pos) const;
+	greal &GetYAt(gsize pos);
+	greal GetZAt(gsize pos) const;
+	greal &GetZAt(gsize pos);
 
 private:
-	CsVector<cs_real> m_tCoords;
+	GVector<greal> m_tCoords;
 };
 
 #endif // _GEOMETRY_COORDINATE_SEQUENCE_H_

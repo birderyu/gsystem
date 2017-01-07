@@ -9,16 +9,16 @@ public:
 	CsSocket_Ex();
 	virtual ~CsSocket_Ex() = 0;
 
-	cs_bool SetRecvTimeout(cs_int nMsecs);
-	cs_int  GetRecvTimeout() const;
+	gbool SetRecvTimeout(gint nMsecs);
+	gint  GetRecvTimeout() const;
 
-	cs_bool SetSendTimeout(cs_int nMsecs);
-	cs_int  GetSendTimeout() const;
+	gbool SetSendTimeout(gint nMsecs);
+	gint  GetSendTimeout() const;
 
-	cs_bool SetReuseAddress(cs_bool nResue);
+	gbool SetReuseAddress(gbool nResue);
 
-	cs_bool GetPeerAddr(CsSockAddress_Ex *pSockAddr) const;
-	cs_bool GetLocalAddr(CsSockAddress_Ex *pSockAddr) const;
+	gbool GetPeerAddr(CsSockAddress_Ex *pSockAddr) const;
+	gbool GetLocalAddr(CsSockAddress_Ex *pSockAddr) const;
 
 protected:
 	// 套接字的句柄

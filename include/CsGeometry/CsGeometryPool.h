@@ -4,9 +4,9 @@
 #ifndef _GEOMETRY_GEOMETRY_POOL_H_
 #define _GEOMETRY_GEOMETRY_POOL_H_
 
-#include "CsGlobal.h"
+#include "gglobal.h"
 
-class CS_API CsGeometryPool
+class GAPI CsGeometryPool
 {
 
 };

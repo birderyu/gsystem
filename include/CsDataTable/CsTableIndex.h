@@ -1,13 +1,13 @@
 #ifndef _CORE_INDEX_H_
 #define _CORE_INDEX_H_
 
-#include "CsObject.h"
+#include "gobject.h"
 
 class CsFilter;
 
 template<typename TableT>
-class CS_API CsTableIndex
-	: public CsObject
+class GAPI CsTableIndex
+	: public GObject
 {
 public:
 	enum TYPE
@@ -23,23 +23,23 @@ public:
 		friend class CsTableIndex;
 	public:
 		CsCursor();
-		cs_size_t Size() const;
+		gsize Size() const;
 
 	public:
 		CsCursor &Next();
 
 	private:
 		TableT *m_tTable;
-		cs_size_t m_nCursor;
+		gsize m_nCursor;
 		// 行号的集合
 	};
 
 public:
-	virtual cs_bool Valid() const = 0;
-	virtual cs_void Rebulid() = 0;
-	virtual cs_small IndexType() = 0;
-	virtual cs_bool Search(const CsFilter &, CsCursor &) = 0;
-	virtual cs_bool Sync();
+	virtual gbool Valid() const = 0;
+	virtual gvoid Rebulid() = 0;
+	virtual gsmall IndexType() = 0;
+	virtual gbool Search(const CsFilter &, CsCursor &) = 0;
+	virtual gbool Sync();
 
 private:
 	TableT &m_tTable;

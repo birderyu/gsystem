@@ -5,7 +5,7 @@ CsTextStream::~CsTextStream()
 
 }
 
-cs_bool CsTextStream::IsBinary() const
+gbool CsTextStream::IsBinary() const
 {
 	return false;
 }

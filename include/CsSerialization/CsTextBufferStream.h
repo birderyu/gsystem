@@ -5,7 +5,7 @@
 #include "CsTextStream.h"
 #include "CsBufferStream.h"
 
-class CS_API CsTextBufferStream
+class GAPI CsTextBufferStream
 	: virtual public CsTextStream
 	, virtual public CsBufferStream
 {

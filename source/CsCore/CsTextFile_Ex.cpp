@@ -1,37 +1,37 @@
 #include "CsTextFile_Ex.h"
-#include "CsTextFile.h"
+#include "gtextfile.h"
 
 #define CS_TEXT_DOCUMNET_BUFFER_SIZE 4096
 
-CsTextFile_Ex::CsTextFile_Ex(const CsString &sFileName)
+CsTextFile_Ex::CsTextFile_Ex(const GString &sFileName)
 : CsFile_Ex(sFileName)
 {
 
 }
 
-cs_byte CsTextFile_Ex::Format() const
+gbyte CsTextFile_Ex::Format() const
 {
-	return CsFile::TEXT_FILE;
+	return GFile::TEXT_FILE;
 }
 
-cs_bool CsTextFile_Ex::GetChar(cs_uchar &c)
+gbool CsTextFile_Ex::GetChar(guchar &c)
 {
 	if (EndOfFile() || !CanRead())
 	{
 		return false;
 	}
 
-	cs_int ic = fgetc(m_pFileStream);
+	gint ic = fgetc(m_pFileStream);
 	if (EOF == ic)
 	{
 		return false;
 	}
 
-	c = static_cast<cs_uchar>(ic);
+	c = static_cast<guchar>(ic);
 	return true;
 }
 
-cs_bool CsTextFile_Ex::PutChar(cs_uchar c)
+gbool CsTextFile_Ex::PutChar(guchar c)
 {
 	if (!Valid() || !CanWrite())
 	{
@@ -45,20 +45,20 @@ cs_bool CsTextFile_Ex::PutChar(cs_uchar c)
 	return false;
 }
 
-cs_bool CsTextFile_Ex::Read(cs_size_t size, CsString &str)
+gbool CsTextFile_Ex::Read(gsize size, GString &str)
 {
 	if (EndOfFile() || !CanRead() || size <= 0)
 	{
 		return false;
 	}
 
-	cs_size_t old_size = str.Size();
+	gsize old_size = str.Size();
 	if (!str.Resize(old_size + size))
 	{
 		return false;
 	}
 
-	cs_size_t real_add_size = fread(str.Cursor(old_size), sizeof(cs_char), size, m_pFileStream);
+	gsize real_add_size = fread(str.Cursor(old_size), sizeof(gchar), size, m_pFileStream);
 	if (real_add_size == 0)
 	{
 		str.Resize(old_size);
@@ -68,7 +68,7 @@ cs_bool CsTextFile_Ex::Read(cs_size_t size, CsString &str)
 	return str.Resize(old_size + real_add_size);
 }
 
-cs_bool CsTextFile_Ex::ReadAll(CsString &str)
+gbool CsTextFile_Ex::ReadAll(GString &str)
 {
 	if (!Valid() || !CanRead())
 	{
@@ -76,20 +76,20 @@ cs_bool CsTextFile_Ex::ReadAll(CsString &str)
 	}
 
 	// 旧的文件游标备份
-	cs_long old_tell = Tell();
+	glong old_tell = Tell();
 
-	if (!Seek(0, CsFile::SEEK_MODE_END))
+	if (!Seek(0, GFile::SEEK_MODE_END))
 	{
 		// 还原游标
-		Seek(old_tell, CsFile::SEEK_MODE_START);
+		Seek(old_tell, GFile::SEEK_MODE_START);
 		return false;
 	}
 
-	cs_long all_size = Tell();
+	glong all_size = Tell();
 	if (all_size < 0)
 	{
 		// 还原游标
-		Seek(old_tell, CsFile::SEEK_MODE_START);
+		Seek(old_tell, GFile::SEEK_MODE_START);
 		return false;
 	}
 
@@ -98,39 +98,39 @@ cs_bool CsTextFile_Ex::ReadAll(CsString &str)
 	if (!Read(all_size, str))
 	{
 		// 还原游标
-		Seek(old_tell, CsFile::SEEK_MODE_START);
+		Seek(old_tell, GFile::SEEK_MODE_START);
 		return false;
 	}
 
 	return true;
 }
 
-cs_bool CsTextFile_Ex::Write(const CsString &str)
+gbool CsTextFile_Ex::Write(const GString &str)
 {
 	if (!Valid() || !CanWrite())
 	{
 		return false;
 	}
-	if (0 == fwrite(str.CString(), sizeof(cs_char), str.Size() + 1, m_pFileStream))
+	if (0 == fwrite(str.CString(), sizeof(gchar), str.Size() + 1, m_pFileStream))
 	{
 		return false;
 	}
 	return true;
 }
 
-cs_cstring CsTextFile_Ex::OpenMode() const
+gcstring CsTextFile_Ex::OpenMode() const
 {
 	switch (m_nOpenMode)
 	{
-	case CsFile::NO_OPEN:
+	case GFile::NO_OPEN:
 		return NULL;
-	case CsFile::ONLY_READ:
+	case GFile::ONLY_READ:
 		return "rt";
-	case CsFile::ONLY_WIRTE:
+	case GFile::ONLY_WIRTE:
 		return "wt";
-	case CsFile::READ_WIRTE:
+	case GFile::READ_WIRTE:
 		return "rt+";
-	case CsFile::APPEND:
+	case GFile::APPEND:
 		return "at";
 	default:
 		break;

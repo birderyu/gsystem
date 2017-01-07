@@ -1,7 +1,7 @@
 #ifndef _CORE_DATA_INDEX_H_
 #define _CORE_DATA_INDEX_H_
 
-#include "CsObject.h"
+#include "gobject.h"
 
 class CsFilter;
 
@@ -19,16 +19,16 @@ public:
 public:
 	virtual ~CsTableDataIndex();
 
-	cs_bool Valid() const;
+	gbool Valid() const;
 
 	// ËÑË÷
-	cs_bool Search(const CsFilter &sFilter) const;
+	gbool Search(const CsFilter &sFilter) const;
 
-	cs_bool Add();
-	cs_bool Remove();
+	gbool Add();
+	gbool Remove();
 
 	// ÖØ¹¹Ë÷Òý
-	cs_bool Rebulid();
+	gbool Rebulid();
 };
 
 #endif // _CORE_TABLE_INDEX_H_

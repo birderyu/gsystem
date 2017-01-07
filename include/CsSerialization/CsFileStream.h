@@ -4,18 +4,18 @@
 
 #include "CsStream.h"
 
-class CsFile;
+class GFile;
 
-class CS_API CsFileStream
+class GAPI CsFileStream
 	: virtual public CsStream
 {
 public:
-	CsFileStream(CsFile &file);
+	CsFileStream(GFile &file);
 	virtual ~CsFileStream() = 0;
-	cs_bool HasFile() const;
+	gbool HasFile() const;
 
 private:
-	CsFile &m_rFile;
+	GFile &m_rFile;
 };
 
 #endif // _CORE_FILE_STREAM_H_

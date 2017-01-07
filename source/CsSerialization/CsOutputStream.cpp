@@ -5,7 +5,7 @@ CsOutputStream::~CsOutputStream()
 
 }
 
-cs_bool CsOutputStream::IsOutput() const
+gbool CsOutputStream::IsOutput() const
 {
 	return true;
 }

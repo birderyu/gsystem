@@ -7,7 +7,7 @@ template<typename TableT>
 class CsTableCell
 {
 public:
-	CsTableCell(TableT &, cs_size_t row, cs_size_t column);
+	CsTableCell(TableT &, gsize row, gsize column);
 	CsTableCell(const CsTableCell<TableT> &);
 
 	TableT &Table();
@@ -17,75 +17,75 @@ public:
 	CsTableRow<TableT> Row() const;
 	CsTableColumn<TableT> Column() const;
 
-	cs_size_t FieldID() const;
-	cs_size_t RowID() const;
-	cs_size_t ColumnID() const;
+	gsize FieldID() const;
+	gsize RowID() const;
+	gsize ColumnID() const;
 
-	cs_bool GetValue(cs_bool &) const;
-	cs_bool GetValue(cs_char &) const;
-	cs_bool GetValue(cs_schar &) const;
-	cs_bool GetValue(cs_uchar &) const;
-	cs_bool GetValue(cs_wchar &) const;
-	cs_bool GetValue(cs_short &) const;
-	cs_bool GetValue(cs_ushort &) const;
-	cs_bool GetValue(cs_int &) const;
-	cs_bool GetValue(cs_uint &) const;
-	cs_bool GetValue(cs_long &) const;
-	cs_bool GetValue(cs_ulong &) const;
-	cs_bool GetValue(cs_longlong &) const;
-	cs_bool GetValue(cs_ulonglong &) const;
-	cs_bool GetValue(cs_float &) const;
-	cs_bool GetValue(cs_double &) const;
-	cs_bool GetValue(cs_decimal &) const;
-	cs_bool GetValue(CsString &) const;
-	CsVariant GetValue() const;
+	gbool GetValue(gbool &) const;
+	gbool GetValue(gchar &) const;
+	gbool GetValue(gschar &) const;
+	gbool GetValue(guchar &) const;
+	gbool GetValue(gwchar &) const;
+	gbool GetValue(gshort &) const;
+	gbool GetValue(gushort &) const;
+	gbool GetValue(gint &) const;
+	gbool GetValue(guint &) const;
+	gbool GetValue(glong &) const;
+	gbool GetValue(gulong &) const;
+	gbool GetValue(glonglong &) const;
+	gbool GetValue(gulonglong &) const;
+	gbool GetValue(gfloat &) const;
+	gbool GetValue(gdouble &) const;
+	gbool GetValue(gdecimal &) const;
+	gbool GetValue(GString &) const;
+	GVariant GetValue() const;
 
-	cs_bool SetValue(cs_bool);
-	cs_bool SetValue(cs_char);
-	cs_bool SetValue(cs_schar);
-	cs_bool SetValue(cs_uchar);
-	cs_bool SetValue(cs_wchar);
-	cs_bool SetValue(cs_short);
-	cs_bool SetValue(cs_ushort);
-	cs_bool SetValue(cs_int);
-	cs_bool SetValue(cs_uint);
-	cs_bool SetValue(cs_long);
-	cs_bool SetValue(cs_ulong);
-	cs_bool SetValue(cs_longlong);
-	cs_bool SetValue(cs_ulonglong);
-	cs_bool SetValue(cs_float);
-	cs_bool SetValue(cs_double);
-	cs_bool SetValue(cs_decimal);
-	cs_bool SetValue(const CsString &);
-	cs_bool SetValue(const CsVariant &);
+	gbool SetValue(gbool);
+	gbool SetValue(gchar);
+	gbool SetValue(gschar);
+	gbool SetValue(guchar);
+	gbool SetValue(gwchar);
+	gbool SetValue(gshort);
+	gbool SetValue(gushort);
+	gbool SetValue(gint);
+	gbool SetValue(guint);
+	gbool SetValue(glong);
+	gbool SetValue(gulong);
+	gbool SetValue(glonglong);
+	gbool SetValue(gulonglong);
+	gbool SetValue(gfloat);
+	gbool SetValue(gdouble);
+	gbool SetValue(gdecimal);
+	gbool SetValue(const GString &);
+	gbool SetValue(const GVariant &);
 
-	cs_bool operator=(cs_bool);
-	cs_bool operator=(cs_char);
-	cs_bool operator=(cs_schar);
-	cs_bool operator=(cs_uchar);
-	cs_bool operator=(cs_wchar);
-	cs_bool operator=(cs_short);
-	cs_bool operator=(cs_ushort);
-	cs_bool operator=(cs_int);
-	cs_bool operator=(cs_uint);
-	cs_bool operator=(cs_long);
-	cs_bool operator=(cs_ulong);
-	cs_bool operator=(cs_longlong);
-	cs_bool operator=(cs_ulonglong);
-	cs_bool operator=(cs_float);
-	cs_bool operator=(cs_double);
-	cs_bool operator=(cs_decimal);
-	cs_bool operator=(const CsString &);
-	cs_bool operator=(const CsVariant &);
+	gbool operator=(gbool);
+	gbool operator=(gchar);
+	gbool operator=(gschar);
+	gbool operator=(guchar);
+	gbool operator=(gwchar);
+	gbool operator=(gshort);
+	gbool operator=(gushort);
+	gbool operator=(gint);
+	gbool operator=(guint);
+	gbool operator=(glong);
+	gbool operator=(gulong);
+	gbool operator=(glonglong);
+	gbool operator=(gulonglong);
+	gbool operator=(gfloat);
+	gbool operator=(gdouble);
+	gbool operator=(gdecimal);
+	gbool operator=(const GString &);
+	gbool operator=(const GVariant &);
 
 private:
 	TableT &m_tTable;
-	cs_size_t m_nRowID;
-	cs_size_t m_nColumnID;
+	gsize m_nRowID;
+	gsize m_nColumnID;
 };
 
 template<typename TableT>
-CsTableCell<TableT>::CsTableCell(TableT &table, cs_size_t row, cs_size_t column)
+CsTableCell<TableT>::CsTableCell(TableT &table, gsize row, gsize column)
 : m_tTable(table), m_nRowID(row), m_nColumnID(column)
 {
 
@@ -129,344 +129,344 @@ CsTableColumn<TableT> CsTableCell<TableT>::Column() const
 }
 
 template<typename TableT>
-cs_size_t CsTableCell<TableT>::FieldID() const
+gsize CsTableCell<TableT>::FieldID() const
 {
 	return m_nColumnID;
 }
 
 
 template<typename TableT>
-cs_size_t CsTableCell<TableT>::RowID() const
+gsize CsTableCell<TableT>::RowID() const
 {
 	return m_nRowID;
 }
 
 template<typename TableT>
-cs_size_t CsTableCell<TableT>::ColumnID() const
+gsize CsTableCell<TableT>::ColumnID() const
 {
 	return m_nColumnID;
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_bool &val) const
+gbool CsTableCell<TableT>::GetValue(gbool &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_char &val) const
+gbool CsTableCell<TableT>::GetValue(gchar &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_schar &val) const
+gbool CsTableCell<TableT>::GetValue(gschar &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_uchar &val) const
+gbool CsTableCell<TableT>::GetValue(guchar &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_wchar &val) const
+gbool CsTableCell<TableT>::GetValue(gwchar &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_short &val) const
+gbool CsTableCell<TableT>::GetValue(gshort &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_ushort &val) const
+gbool CsTableCell<TableT>::GetValue(gushort &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_int &val) const
+gbool CsTableCell<TableT>::GetValue(gint &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_uint &val) const
+gbool CsTableCell<TableT>::GetValue(guint &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_long &val) const
+gbool CsTableCell<TableT>::GetValue(glong &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_ulong &val) const
+gbool CsTableCell<TableT>::GetValue(gulong &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_longlong &val) const
+gbool CsTableCell<TableT>::GetValue(glonglong &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_ulonglong &val) const
+gbool CsTableCell<TableT>::GetValue(gulonglong &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_float &val) const
+gbool CsTableCell<TableT>::GetValue(gfloat &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_double &val) const
+gbool CsTableCell<TableT>::GetValue(gdouble &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(cs_decimal &val) const
+gbool CsTableCell<TableT>::GetValue(gdecimal &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::GetValue(CsString &val) const
+gbool CsTableCell<TableT>::GetValue(GString &val) const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-CsVariant CsTableCell<TableT>::GetValue() const
+GVariant CsTableCell<TableT>::GetValue() const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_bool val)
+gbool CsTableCell<TableT>::SetValue(gbool val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_char val)
+gbool CsTableCell<TableT>::SetValue(gchar val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_schar val)
+gbool CsTableCell<TableT>::SetValue(gschar val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_uchar val)
+gbool CsTableCell<TableT>::SetValue(guchar val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_wchar val)
+gbool CsTableCell<TableT>::SetValue(gwchar val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_short val)
+gbool CsTableCell<TableT>::SetValue(gshort val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_ushort val)
+gbool CsTableCell<TableT>::SetValue(gushort val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_int val)
+gbool CsTableCell<TableT>::SetValue(gint val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_uint val)
+gbool CsTableCell<TableT>::SetValue(guint val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_long val)
+gbool CsTableCell<TableT>::SetValue(glong val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_ulong val)
+gbool CsTableCell<TableT>::SetValue(gulong val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_longlong val)
+gbool CsTableCell<TableT>::SetValue(glonglong val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_ulonglong val)
+gbool CsTableCell<TableT>::SetValue(gulonglong val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_float val)
+gbool CsTableCell<TableT>::SetValue(gfloat val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_double val)
+gbool CsTableCell<TableT>::SetValue(gdouble val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(cs_decimal val)
+gbool CsTableCell<TableT>::SetValue(gdecimal val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(const CsString &val)
+gbool CsTableCell<TableT>::SetValue(const GString &val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::SetValue(const CsVariant &val)
+gbool CsTableCell<TableT>::SetValue(const GVariant &val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_bool val)
+gbool CsTableCell<TableT>::operator=(gbool val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_char val)
+gbool CsTableCell<TableT>::operator=(gchar val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_schar val)
+gbool CsTableCell<TableT>::operator=(gschar val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_uchar val)
+gbool CsTableCell<TableT>::operator=(guchar val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_wchar val)
+gbool CsTableCell<TableT>::operator=(gwchar val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_short val)
+gbool CsTableCell<TableT>::operator=(gshort val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_ushort val)
+gbool CsTableCell<TableT>::operator=(gushort val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_int val)
+gbool CsTableCell<TableT>::operator=(gint val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_uint val)
+gbool CsTableCell<TableT>::operator=(guint val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_long val)
+gbool CsTableCell<TableT>::operator=(glong val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_ulong val)
+gbool CsTableCell<TableT>::operator=(gulong val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_longlong val)
+gbool CsTableCell<TableT>::operator=(glonglong val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_ulonglong val)
+gbool CsTableCell<TableT>::operator=(gulonglong val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_float val)
+gbool CsTableCell<TableT>::operator=(gfloat val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_double val)
+gbool CsTableCell<TableT>::operator=(gdouble val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(cs_decimal val)
+gbool CsTableCell<TableT>::operator=(gdecimal val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(const CsString &val)
+gbool CsTableCell<TableT>::operator=(const GString &val)
 {
 	return SetValue(val);
 }
 
 template<typename TableT>
-cs_bool CsTableCell<TableT>::operator=(const CsVariant &val)
+gbool CsTableCell<TableT>::operator=(const GVariant &val)
 {
 	return SetValue(val);
 }

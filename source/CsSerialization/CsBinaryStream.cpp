@@ -5,7 +5,7 @@ CsBinaryStream::~CsBinaryStream()
 
 }
 
-cs_bool CsBinaryStream::IsBinary() const
+gbool CsBinaryStream::IsBinary() const
 {
 	return true;
 }

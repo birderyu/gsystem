@@ -3,7 +3,7 @@
 
 #include "CsGeometry.h"
 
-class CS_API CsBody
+class GAPI CsBody
 	: virtual public CsGeometry
 {
 public:
@@ -16,7 +16,7 @@ public:
 	** @return	{cs_real} 体积值，默认单位为立方米
 	**
 	****************************************************************************/
-	virtual cs_real Volume() const = 0;
+	virtual greal Volume() const = 0;
 };
 
 #endif // _GEOMETRY_BODY_H_

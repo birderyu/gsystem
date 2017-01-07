@@ -5,7 +5,7 @@ CsInputStream::~CsInputStream()
 	
 }
 
-cs_bool CsInputStream::IsInput() const
+gbool CsInputStream::IsInput() const
 {
 	return true;
 }

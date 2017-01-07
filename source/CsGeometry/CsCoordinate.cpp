@@ -1,12 +1,12 @@
 #include "CsCoordinate.h"
-#include "CsNew.h"
+#include "gnew.h"
 
 #ifdef CS_GEOMETRY_HAS_Z
 #	define CS_COORDINATE_X m_tCoord[0]
 #	define CS_COORDINATE_Y m_tCoord[1]
 #	define CS_COORDINATE_Z m_tCoord[2]
 #else // !CS_GEOMETRY_HAS_Z
-cs_real _cs_coordinate_z_ = 0;
+greal _cs_coordinate_z_ = 0;
 #	define CS_COORDINATE_X m_tCoord[0]
 #	define CS_COORDINATE_Y m_tCoord[1]
 #	define CS_COORDINATE_Z CsGeometryGlobal::_g_n_coordinate_z_
@@ -14,85 +14,85 @@ cs_real _cs_coordinate_z_ = 0;
 
 CsCoordinate::CsCoordinate()
 {
-	CsMemSet(m_tCoord, 0, sizeof(cs_real)* CS_COORDINATE_SIZE);
+	GMemSet(m_tCoord, 0, sizeof(greal)* CS_COORDINATE_SIZE);
 }
 
-CsCoordinate::CsCoordinate(cs_real x, cs_real y)
+CsCoordinate::CsCoordinate(greal x, greal y)
 {
 	CS_COORDINATE_X = x;
 	CS_COORDINATE_Y = y;
 	CS_COORDINATE_Z = 0;
 }
 
-CsCoordinate::CsCoordinate(cs_real x, cs_real y, cs_real z)
+CsCoordinate::CsCoordinate(greal x, greal y, greal z)
 {
 	CS_COORDINATE_X = x;
 	CS_COORDINATE_Y = y;
 	CS_COORDINATE_Z = z;
 }
 
-CsCoordinate::CsCoordinate(const cs_real *p_c, cs_size_t size)
+CsCoordinate::CsCoordinate(const greal *p_c, gsize size)
 {
-	cs_size_t real_size = size < CS_COORDINATE_SIZE ? size : CS_COORDINATE_SIZE;
-	CsMemCopy(m_tCoord, p_c, sizeof(cs_real)* real_size);
+	gsize real_size = size < CS_COORDINATE_SIZE ? size : CS_COORDINATE_SIZE;
+	GMemCopy(m_tCoord, p_c, sizeof(greal)* real_size);
 }
 
 CsCoordinate::CsCoordinate(const CsCoordinate &coord)
 {
-	CsMemCopy(m_tCoord, coord.m_tCoord, sizeof(cs_real)* CS_COORDINATE_SIZE);
+	GMemCopy(m_tCoord, coord.m_tCoord, sizeof(greal)* CS_COORDINATE_SIZE);
 }
 
-cs_real &CsCoordinate::X()
+greal &CsCoordinate::X()
 {
 	return CS_COORDINATE_X;
 }
 
-cs_real CsCoordinate::X() const
+greal CsCoordinate::X() const
 {
 	return CS_COORDINATE_X;
 }
 
-cs_real &CsCoordinate::Y()
+greal &CsCoordinate::Y()
 {
 	return CS_COORDINATE_Y;
 }
 
-cs_real CsCoordinate::Y() const
+greal CsCoordinate::Y() const
 {
 	return CS_COORDINATE_Y;
 }
 
-cs_real &CsCoordinate::Z()
+greal &CsCoordinate::Z()
 {
 	return CS_COORDINATE_Z;
 }
 
-cs_real CsCoordinate::Z() const
+greal CsCoordinate::Z() const
 {
 	return CS_COORDINATE_Z;
 }
 
-cs_void CsCoordinate::SetX(cs_real x)
+gvoid CsCoordinate::SetX(greal x)
 {
 	CS_COORDINATE_X = x;
 }
 
-cs_void CsCoordinate::SetY(cs_real y)
+gvoid CsCoordinate::SetY(greal y)
 {
 	CS_COORDINATE_Y = y;
 }
 
-cs_void CsCoordinate::SetZ(cs_real z)
+gvoid CsCoordinate::SetZ(greal z)
 {
 	CS_COORDINATE_Z = z;
 }
 
-cs_uint CsCoordinate::Dimension() const
+guint CsCoordinate::Dimension() const
 {
 	return CS_COORDINATE_SIZE;
 }
 
-const cs_real * CsCoordinate::Cursor() const
+const greal * CsCoordinate::Cursor() const
 {
 	return m_tCoord;
 }

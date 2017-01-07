@@ -6,34 +6,34 @@
 #include "CsEnvelope.h"
 #include "CsCoordinateSequence.h"
 
-template<cs_size_t DIMENSION>
+template<gsize DIMENSION>
 class CsPoint_Impl
 	: virtual public CsPoint
 {
 public:
 	CsPoint_Impl(const CsGeometryFactory *factory);
-	CsPoint_Impl(const CsGeometryFactory *factory, cs_real x);
-	CsPoint_Impl(const CsGeometryFactory *factory, cs_real x, cs_real y);
-	CsPoint_Impl(const CsGeometryFactory *factory, cs_real x, cs_real y, cs_real z);
+	CsPoint_Impl(const CsGeometryFactory *factory, greal x);
+	CsPoint_Impl(const CsGeometryFactory *factory, greal x, greal y);
+	CsPoint_Impl(const CsGeometryFactory *factory, greal x, greal y, greal z);
 	CsPoint_Impl(const CsGeometryFactory *factory, const CsCoordinate &c);
 	CsPoint_Impl(const CsPoint_Impl<DIMENSION> &p);
 
 	const CsGeometryFactory *GeometryFactory() const;
-	cs_bool Valid() const;
-	cs_int GeometryType() const;
-	cs_uint Dimension() const;
+	gbool Valid() const;
+	gint GeometryType() const;
+	guint Dimension() const;
 	CsEnvelope Envelope() const;
 	CsCoordinateSequence CoordinateSequence() const;
 
-	cs_real &X();
-	cs_real  X() const;
-	cs_real &Y();
-	cs_real  Y() const;
-	cs_real &Z();
-	cs_real  Z() const;
-	cs_void SetX(cs_real x);
-	cs_void SetY(cs_real y);
-	cs_void SetZ(cs_real z);
+	greal &X();
+	greal  X() const;
+	greal &Y();
+	greal  Y() const;
+	greal &Z();
+	greal  Z() const;
+	gvoid SetX(greal x);
+	gvoid SetY(greal y);
+	gvoid SetZ(greal z);
 
 private:
 	CsSinglePoint_Store<DIMENSION> m_tStore;

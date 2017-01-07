@@ -3,7 +3,7 @@
 
 #include "CsGeometry.h"
 
-class CS_API CsGeometryCollection
+class GAPI CsGeometryCollection
 	: public CsGeometry
 {
 public:
@@ -18,11 +18,11 @@ public:
 	** @return	{cs_size_t} ÊýÁ¿
 	**
 	****************************************************************************/
-	virtual cs_size_t Size() const = 0;
+	virtual gsize Size() const = 0;
 
-	virtual CsGeometryP GetAt(cs_size_t pos) = 0;
-	virtual const CsGeometryP GetAt(cs_size_t pos) const = 0;
-	virtual cs_void SetAt(cs_size_t pos, const CsGeometryP &geo) = 0;
+	virtual CsGeometryP GetAt(gsize pos) = 0;
+	virtual const CsGeometryP GetAt(gsize pos) const = 0;
+	virtual gvoid SetAt(gsize pos, const CsGeometryP &geo) = 0;
 };
 
 #endif // _GEOMETRY_GEOMETRY_COLLECTION_H_

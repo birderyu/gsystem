@@ -3,40 +3,40 @@
 
 #include "CsGeometryGlobal.h"
 #include "CsCoordinate.h"
-#include "CsBytes.h"
+#include "gbytes.h"
 
-template<cs_size_t DIMENSION>
+template<gsize DIMENSION>
 class CsSinglePoint_Store
 {
 public:
 	enum { COORD_VALUE_SIZE = DIMENSION, };
 
 public:
-	cs_void Initialize();
-	cs_void Initialize(cs_real x);
-	cs_void Initialize(cs_real x, cs_real y);
-	cs_void Initialize(cs_real x, cs_real y, cs_real z);
-	cs_void Initialize(const CsCoordinate &c);
-	cs_void Initialize(const CsSinglePoint_Store<DIMENSION> &p_s);
+	gvoid Initialize();
+	gvoid Initialize(greal x);
+	gvoid Initialize(greal x, greal y);
+	gvoid Initialize(greal x, greal y, greal z);
+	gvoid Initialize(const CsCoordinate &c);
+	gvoid Initialize(const CsSinglePoint_Store<DIMENSION> &p_s);
 
-	cs_real &X();
-	cs_real  X() const;
-	cs_real &Y();
-	cs_real  Y() const;
-	cs_real &Z();
-	cs_real  Z() const;
+	greal &X();
+	greal  X() const;
+	greal &Y();
+	greal  Y() const;
+	greal &Z();
+	greal  Z() const;
 	CsCoordinate Coordinate() const;
 
-	cs_void SetX(cs_real x);
-	cs_void SetY(cs_real y);
-	cs_void SetZ(cs_real z);
-	cs_void SetCoordinate(const CsCoordinate &c);
+	gvoid SetX(greal x);
+	gvoid SetY(greal y);
+	gvoid SetZ(greal z);
+	gvoid SetCoordinate(const CsCoordinate &c);
 
 	//cs_void Import(const CsBytes &byte);
 	//cs_void Export(CsBytes &byte) const;
 
 private:
-	cs_real m_aCoord[COORD_VALUE_SIZE];
+	greal m_aCoord[COORD_VALUE_SIZE];
 };
 
 #include "CsSinglePoint_Store.inl"

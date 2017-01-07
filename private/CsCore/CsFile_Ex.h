@@ -1,42 +1,42 @@
 #ifndef _CORE_FILE_EX_H_
 #define _CORE_FILE_EX_H_
 
-#include "CsString.h"
+#include "gstring.h"
 #include <stdio.h>
 
 class CsFile_Ex
-	: public CsNewT<CsFile_Ex>
+	: public GNewT<CsFile_Ex>
 {
 public:
-	CsFile_Ex(const CsString &sFileName);
+	CsFile_Ex(const GString &sFileName);
 	virtual ~CsFile_Ex();
 
-	cs_bool Valid() const;
-	cs_bool EndOfFile() const;
+	gbool Valid() const;
+	gbool EndOfFile() const;
 
-	virtual cs_byte Format() const = 0;
+	virtual gbyte Format() const = 0;
 
-	const CsString &FileName() const;
-	CsString &FileName();
-	cs_void SetFileName(const CsString &);
+	const GString &FileName() const;
+	GString &FileName();
+	gvoid SetFileName(const GString &);
 
-	cs_bool Open(cs_byte nOpenMode);
-	cs_void Flush();
-	cs_void Close();
+	gbool Open(gbyte nOpenMode);
+	gvoid Flush();
+	gvoid Close();
 
-	cs_bool Seek(cs_long offset, cs_byte mode);
-	cs_long Tell() const;
-	cs_void Rewind();
-
-protected:
-	cs_bool CanRead() const;
-	cs_bool CanWrite() const;
-	virtual cs_cstring OpenMode() const = 0;
+	gbool Seek(glong offset, gbyte mode);
+	glong Tell() const;
+	gvoid Rewind();
 
 protected:
-	CsString m_sFileName;
+	gbool CanRead() const;
+	gbool CanWrite() const;
+	virtual gcstring OpenMode() const = 0;
+
+protected:
+	GString m_sFileName;
 	FILE *m_pFileStream;
-	cs_byte m_nOpenMode;
+	gbyte m_nOpenMode;
 };
 
 #endif // _CORE_FILE_EX_H_

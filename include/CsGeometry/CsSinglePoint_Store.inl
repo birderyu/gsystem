@@ -1,168 +1,168 @@
 #ifndef _GEOMETRY_SINGLE_POINT_STORE_INLINE_
 #define _GEOMETRY_SINGLE_POINT_STORE_INLINE_
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::Initialize()
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::Initialize()
 {
-	CsMemSet(m_aCoord, 0, sizeof(cs_real)* DIMENSION);
+	GMemSet(m_aCoord, 0, sizeof(greal)* DIMENSION);
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::Initialize(cs_real x)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::Initialize(greal x)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = 0;
 	m_aCoord[2] = 0;
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::Initialize(cs_real x, cs_real y)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::Initialize(greal x, greal y)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
 	m_aCoord[2] = 0;
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::Initialize(cs_real x, cs_real y, cs_real z)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::Initialize(greal x, greal y, greal z)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
 	m_aCoord[2] = z;
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::Initialize(const CsCoordinate &c)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::Initialize(const CsCoordinate &c)
 {
-	cs_size_t real_size = DIMENSION < CS_COORDINATE_SIZE ? DIMENSION : CS_COORDINATE_SIZE;
-	CsMemCopy(m_aCoord, c.Cursor(), sizeof(cs_real)* real_size);
+	gsize real_size = DIMENSION < CS_COORDINATE_SIZE ? DIMENSION : CS_COORDINATE_SIZE;
+	GMemCopy(m_aCoord, c.Cursor(), sizeof(greal)* real_size);
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::Initialize(const CsSinglePoint_Store<DIMENSION> &p_s)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::Initialize(const CsSinglePoint_Store<DIMENSION> &p_s)
 {
-	CsMemCopy(m_aCoord, p_s.m_aCoord, sizeof(cs_real)* DIMENSION);
+	GMemCopy(m_aCoord, p_s.m_aCoord, sizeof(greal)* DIMENSION);
 }
 
-template<cs_size_t DIMENSION>
-inline cs_real &CsSinglePoint_Store<DIMENSION>::X()
-{
-	return m_aCoord[0];
-}
-
-template<cs_size_t DIMENSION>
-inline cs_real CsSinglePoint_Store<DIMENSION>::X() const
+template<gsize DIMENSION>
+inline greal &CsSinglePoint_Store<DIMENSION>::X()
 {
 	return m_aCoord[0];
 }
 
-template<cs_size_t DIMENSION>
-inline cs_real &CsSinglePoint_Store<DIMENSION>::Y()
+template<gsize DIMENSION>
+inline greal CsSinglePoint_Store<DIMENSION>::X() const
+{
+	return m_aCoord[0];
+}
+
+template<gsize DIMENSION>
+inline greal &CsSinglePoint_Store<DIMENSION>::Y()
 {
 	return m_aCoord[1];
 }
 
-template<cs_size_t DIMENSION>
-inline cs_real CsSinglePoint_Store<DIMENSION>::Y() const
+template<gsize DIMENSION>
+inline greal CsSinglePoint_Store<DIMENSION>::Y() const
 {
 	return m_aCoord[1];
 }
 
-template<cs_size_t DIMENSION>
-inline cs_real &CsSinglePoint_Store<DIMENSION>::Z()
+template<gsize DIMENSION>
+inline greal &CsSinglePoint_Store<DIMENSION>::Z()
 {
 	return m_aCoord[2];
 }
 
-template<cs_size_t DIMENSION>
-inline cs_real CsSinglePoint_Store<DIMENSION>::Z() const
+template<gsize DIMENSION>
+inline greal CsSinglePoint_Store<DIMENSION>::Z() const
 {
 	return m_aCoord[2];
 }
 
-template<cs_size_t DIMENSION>
+template<gsize DIMENSION>
 inline CsCoordinate CsSinglePoint_Store<DIMENSION>::Coordinate() const
 {
 	return CsCoordinate(m_aCoord, DIMENSION);
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::SetX(cs_real x)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::SetX(greal x)
 {
 	m_aCoord[0] = x;
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::SetY(cs_real y)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::SetY(greal y)
 {
 	m_aCoord[1] = y;
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::SetZ(cs_real z)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::SetZ(greal z)
 {
 	m_aCoord[2] = z;
 }
 
-template<cs_size_t DIMENSION>
-inline cs_void CsSinglePoint_Store<DIMENSION>::SetCoordinate(const CsCoordinate &c)
+template<gsize DIMENSION>
+inline gvoid CsSinglePoint_Store<DIMENSION>::SetCoordinate(const CsCoordinate &c)
 {
-	cs_size_t real_size = DIMENSION < CS_COORDINATE_SIZE ? DIMENSION : CS_COORDINATE_SIZE;
-	CsMemCopy(m_aCoord, c.Cursor(), sizeof(cs_real)* real_size);
+	gsize real_size = DIMENSION < CS_COORDINATE_SIZE ? DIMENSION : CS_COORDINATE_SIZE;
+	GMemCopy(m_aCoord, c.Cursor(), sizeof(greal)* real_size);
 }
 
 //////////////////////////////////////////////////////////////////////////
 
 template<>
-inline cs_void CsSinglePoint_Store<1>::Initialize(cs_real x)
+inline gvoid CsSinglePoint_Store<1>::Initialize(greal x)
 {
 	m_aCoord[0] = x;
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<1>::Initialize(cs_real x, cs_real y)
+inline gvoid CsSinglePoint_Store<1>::Initialize(greal x, greal y)
 {
 	m_aCoord[0] = x;
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<1>::Initialize(cs_real x, cs_real y, cs_real z)
+inline gvoid CsSinglePoint_Store<1>::Initialize(greal x, greal y, greal z)
 {
 	m_aCoord[0] = x;
 }
 
 template<>
-inline cs_real &CsSinglePoint_Store<1>::Y()
+inline greal &CsSinglePoint_Store<1>::Y()
 {
 	return CsGeometryGlobal::_g_n_coordinate_y_;
 }
 
 template<>
-inline cs_real CsSinglePoint_Store<1>::Y() const
+inline greal CsSinglePoint_Store<1>::Y() const
 {
 	return CsGeometryGlobal::_g_n_coordinate_y_;
 }
 
 template<>
-inline cs_real &CsSinglePoint_Store<1>::Z()
+inline greal &CsSinglePoint_Store<1>::Z()
 {
 	return CsGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline cs_real CsSinglePoint_Store<1>::Z() const
+inline greal CsSinglePoint_Store<1>::Z() const
 {
 	return CsGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<1>::SetY(cs_real y)
+inline gvoid CsSinglePoint_Store<1>::SetY(greal y)
 {
 	
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<1>::SetZ(cs_real z)
+inline gvoid CsSinglePoint_Store<1>::SetZ(greal z)
 {
 	
 }
@@ -170,40 +170,40 @@ inline cs_void CsSinglePoint_Store<1>::SetZ(cs_real z)
 //////////////////////////////////////////////////////////////////////////
 
 template<>
-inline cs_void CsSinglePoint_Store<2>::Initialize(cs_real x)
+inline gvoid CsSinglePoint_Store<2>::Initialize(greal x)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = 0;
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<2>::Initialize(cs_real x, cs_real y)
+inline gvoid CsSinglePoint_Store<2>::Initialize(greal x, greal y)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<2>::Initialize(cs_real x, cs_real y, cs_real z)
+inline gvoid CsSinglePoint_Store<2>::Initialize(greal x, greal y, greal z)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
 }
 
 template<>
-inline cs_real &CsSinglePoint_Store<2>::Z()
+inline greal &CsSinglePoint_Store<2>::Z()
 {
 	return CsGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline cs_real CsSinglePoint_Store<2>::Z() const
+inline greal CsSinglePoint_Store<2>::Z() const
 {
 	return CsGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline cs_void CsSinglePoint_Store<2>::SetZ(cs_real z)
+inline gvoid CsSinglePoint_Store<2>::SetZ(greal z)
 {
 
 }
