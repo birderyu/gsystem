@@ -8,9 +8,13 @@
 *.sdf
 *.user
 *.suo
+*.bsc
+*.sbr
 *.opensdf
 *.DB-wal
 *.DB-shm
+*.db
+*.opendb
 lib/GCored.lib
 bin/GCored.dll
 lib/GCore.lib
@@ -31,9 +35,9 @@ lib/GCore_Testd.lib
 bin/GCore_Testd.exe
 lib/GCore_Test.lib
 bin/GCore_Test.exe
-bin/GGeometry_Testd.lib
+lib/GGeometry_Testd.lib
 bin/GGeometry_Testd.exe
-bin/GGeometry_Test.lib
+lib/GGeometry_Test.lib
 bin/GGeometry_Test.exe
 lib/GDataTable_Testd.lib
 bin/GDataTable_Testd.exe
@@ -43,4 +47,3 @@ lib/GSerialization_Testd.lib
 bin/GSerialization_Testd.exe
 lib/GSerialization_Test.lib
 bin/GSerialization_Test.exe
-.vscode/.BROWSE.VC.DB
