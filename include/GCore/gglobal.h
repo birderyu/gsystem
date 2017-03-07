@@ -4,7 +4,7 @@
 **
 ** @file	gglobal.h
 ** @brief	全局包含文件
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2015-12-31
 ** @version	1.0
@@ -17,6 +17,6 @@
 #include "gdefine.h"
 #include "gtype.h"
 #include "gfunctor.h"
-#include "gtraits.h"
+#include "gutility.h"
 
 #endif // _CORE_GLOBAL_H_

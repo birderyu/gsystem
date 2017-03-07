@@ -2,52 +2,58 @@
 #define _CORE_LIST_STACK_INLINE_
 
 template<typename DataT>
-inline GListStack<DataT>::GListStack() :m_tList()
+GINLINE GListStack<DataT>::GListStack() :m_tList()
 {
 }
 
 template<typename DataT>
-inline GListStack<DataT>::GListStack(const DataT &data) : m_tList(data)
+GINLINE GListStack<DataT>::GListStack(const DataT &data) : m_tList(data)
 {
 }
 
 template<typename DataT>
-inline GListStack<DataT>::~GListStack()
+GINLINE GListStack<DataT>::~GListStack()
 {
 }
 
 template<typename DataT>
-inline gbool GListStack<DataT>::IsEmpty() const
+GINLINE gbool GListStack<DataT>::IsEmpty() const
 {
 	return m_tList.IsEmpty();
 }
 
 template<typename DataT>
-inline void GListStack<DataT>::Clear()
+GINLINE void GListStack<DataT>::Clear()
 {
 	m_tList.RemoveAll();
 }
 
 template<typename DataT>
-inline gsize GListStack<DataT>::Size() const
+GINLINE gsize GListStack<DataT>::Size() const
 {
 	return m_tList.Size();
 }
 
 template<typename DataT>
-inline gvoid GListStack<DataT>::Dispose()
+GINLINE gvoid GListStack<DataT>::Dispose()
 {
 	m_tList.RemoveAll();
 }
 
 template<typename DataT>
-inline gbool GListStack<DataT>::Push(const DataT& data)
+GINLINE gbool GListStack<DataT>::Push(const DataT& data)
 {
 	return m_tList.AddFirst(data);
 }
 
 template<typename DataT>
-inline gbool GListStack<DataT>::Pop(DataT *data)
+GINLINE gbool GListStack<DataT>::Push(DataT &&data)
+{
+	return m_tList.AddFirst(GForward<DataT>(data));
+}
+
+template<typename DataT>
+GINLINE gbool GListStack<DataT>::Pop(DataT *data)
 {
 	if (IsEmpty())
 	{
@@ -56,7 +62,7 @@ inline gbool GListStack<DataT>::Pop(DataT *data)
 
 	if (data)
 	{
-		Top(*data);
+		*data = GMove(m_tList.GetFirstData());
 	}
 
 	m_tList.RemoveFirst();
@@ -64,15 +70,27 @@ inline gbool GListStack<DataT>::Pop(DataT *data)
 }
 
 template<typename DataT>
-inline gbool GListStack<DataT>::Top(DataT &data) const
+GINLINE const DataT &GListStack<DataT>::Top() const
 {
-	if (IsEmpty())
-	{
-		return false;
-	}
+	return m_tList.GetFirstData();
+}
 
-	data = m_tList.GetFirstData();
-	return true;
+template<typename DataT>
+GINLINE DataT &GListStack<DataT>::Top()
+{
+	return m_tList.GetFirstData();
+}
+
+template<typename DataT>
+GINLINE const DataT &GListStack<DataT>::Bottom() const
+{
+	return m_tList.GetLastData();
+}
+
+template<typename DataT>
+GINLINE DataT &GListStack<DataT>::Bottom()
+{
+	return m_tList.GetLastData();
 }
 
 #endif // _CORE_LIST_STACK_INLINE_

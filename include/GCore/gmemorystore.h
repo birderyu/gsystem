@@ -15,7 +15,7 @@ class GAPI GMemoryStore
 	struct GMemCell
 	{
 		//ÄÚ´æ¿é
-		GBlock<gbyte> m_tBlock;
+		GBlock m_tBlock;
 
 		//¹â±ê
 		gsize m_nCursor;

@@ -1,13 +1,8 @@
 #include "gvoidlock.h"
 
-gbool GVoidLock::Lock()
+gvoid GVoidLock::Lock()
 {
-	return true;
-}
-
-gbool GVoidLock::Trylock()
-{
-	return true;
+	return;
 }
 
 gvoid GVoidLock::Unlock()

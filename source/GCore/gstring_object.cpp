@@ -2,7 +2,7 @@
 
 const GObject *GString::Boxing() const
 {
-	return this;
+	return dynamic_cast<const GObject *>(this);
 }
 
 guint GString::ClassCode() const
@@ -12,5 +12,5 @@ guint GString::ClassCode() const
 
 GString GString::ToString() const
 {
-	return *this;
+	return GString(m_tString);
 }

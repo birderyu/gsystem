@@ -1,80 +1,17 @@
 #include "gthread.h"
-#include "gnew.h"
 
 #ifdef G_SYSTEM_WINDOWS
+
+#	ifndef WIN32_LEAN_AND_MEAN
+#		define WIN32_LEAN_AND_MEAN
+#	endif
 
 #include <windows.h>
 #include <process.h>
 
-/// Win32½ø³ÌÊµÀý¾ä±ú
-struct GThread_Handle 
-	: public GNewT<GThread_Handle>
-{
-	HANDLE m_hThread;
-};
+#else // !G_SYSTEM_WINDOWS
 
-guint WINAPI ThreadProc4Win32(gpointer pParam)
-{
-	if (!pParam)
-	{
-		return 0;
-	}
-	GThread* pThread = (GThread*)pParam;
-	pThread->Run();
-	return 0;
-}
-
-GThread::GThread()
-:m_pHandle(NULL)
-{
-
-}
-
-GThread::~GThread()
-{
-	if (m_pHandle)
-	{
-		Stop(0);
-		GThread_Handle *pHandle = (GThread_Handle*)m_pHandle;
-		delete pHandle;
-		m_pHandle = NULL;
-	}
-}
-
-gint GThread::Start()
-{
-	GThread_Handle* pHandle = new GThread_Handle;
-	if (!pHandle)
-	{
-		return -1;
-	}
-
-	m_pHandle = pHandle;
-	guint nThreadAddr;
-	pHandle->m_hThread = (HANDLE)_beginthreadex(NULL, 0, ThreadProc4Win32, this, 0, &nThreadAddr);
-	if (pHandle->m_hThread == NULL)
-	{
-		delete pHandle;
-		pHandle = NULL;
-		return -1;
-	}
-	return 0;
-}
-
-gvoid GThread::Stop(gulong nMsecs)
-{
-	GThread_Handle *pHandle = (GThread_Handle*)m_pHandle;
-	if (!pHandle)
-	{
-		return;
-	}
-	if (WAIT_OBJECT_0 != WaitForSingleObject(pHandle->m_hThread, nMsecs))
-	{
-		TerminateThread(pHandle->m_hThread, 0);
-	}
-	CloseHandle(pHandle->m_hThread);
-	pHandle->m_hThread = NULL;
-}
+#endif // G_SYSTEM_WINDOWS
 
 gvoid GThread::Sleep(gulong nSecs)
 {
@@ -86,15 +23,51 @@ gvoid GThread::MSleep(gulong nMsecs)
 	::Sleep(nMsecs);
 }
 
-gvoid GThread::Join(GThread *pThread)
+gvoid GThread::Join(GRunnable &thread)
 {
-	GThread_Handle* pHandle = (GThread_Handle*)pThread->m_pHandle;
-	if (pHandle)
+#ifdef G_SYSTEM_WINDOWS
+	HANDLE thread_handle = (HANDLE)thread.m_pHandle;
+	if (thread_handle)
 	{
-		WaitForSingleObject(pHandle->m_hThread, INFINITE);
-		delete pHandle;
-		pThread->m_pHandle = NULL;
+		WaitForSingleObject(thread_handle, INFINITE);
+		thread.m_pHandle = GNULL;
 	}
-}
+#else // !G_SYSTEM_WINDOWS
 
 #endif // G_SYSTEM_WINDOWS
+}
+
+GThread::GThread()
+{
+
+}
+
+GThread::GThread(GThread &&thread)
+{
+	
+}
+
+GThread::~GThread()
+{
+
+}
+
+GThread &GThread::operator==(GThread &&thread)
+{
+	return *this;
+}
+
+gbool GThread::Start()
+{
+	return GRunnable::Start();
+}
+
+gvoid GThread::Stop(gulong msecs)
+{
+	GRunnable::Stop();
+}
+
+gint GThread::Run()
+{
+	return 0;
+}

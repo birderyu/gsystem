@@ -1,46 +1,46 @@
 #ifndef _CORE_REFERENCE_COUNTER_INLINE_
 #define _CORE_REFERENCE_COUNTER_INLINE_
 
-template <typename ClassT, typename LockT>
-inline GReferenceCounter<ClassT, LockT>::GReferenceCounter(ClassT *ptr, gsize count)
+template <typename ClassT>
+GINLINE GReferenceCounter<ClassT>::GReferenceCounter(ClassT *ptr, gsize count)
 : m_pPointer(ptr), m_nCount(count)
 {
 
 }
 
-template <typename ClassT, typename LockT>
-inline GReferenceCounter<ClassT, LockT>::~GReferenceCounter()
+template <typename ClassT>
+GINLINE GReferenceCounter<ClassT>::~GReferenceCounter()
 {
 	delete m_pPointer;
 }
 
-template <typename ClassT, typename LockT>
-inline gsize GReferenceCounter<ClassT, LockT>::Add()
+template <typename ClassT>
+GINLINE gsize GReferenceCounter<ClassT>::Add()
 {
-	return ++m_nCount;
+	return GAtom::IncrementAndFetch(&m_nCount);
 }
 
-template <typename ClassT, typename LockT>
-inline gvoid GReferenceCounter<ClassT, LockT>::Release()
+template <typename ClassT>
+GINLINE gvoid GReferenceCounter<ClassT>::Release()
 {
-	if (--m_nCount == 0)
+	if (GAtom::DecrementAndFetch(&m_nCount) == 0)
 		delete this;
 }
 
-template <typename ClassT, typename LockT>
-inline gsize GReferenceCounter<ClassT, LockT>::Count() const
+template <typename ClassT>
+GINLINE gsize GReferenceCounter<ClassT>::Count() const
 {
-	return m_nCount.GetValue();
+	return GAtom::GetValue(&m_nCount);
 }
 
-template <typename ClassT, typename LockT>
-inline ClassT * GReferenceCounter<ClassT, LockT>::Pointer()
+template <typename ClassT>
+GINLINE ClassT * GReferenceCounter<ClassT>::Pointer()
 {
 	return m_pPointer;
 }
 
-template <typename ClassT, typename LockT>
-inline const ClassT *GReferenceCounter<ClassT, LockT>::Pointer() const
+template <typename ClassT>
+GINLINE const ClassT *GReferenceCounter<ClassT>::Pointer() const
 {
 	return m_pPointer;
 }

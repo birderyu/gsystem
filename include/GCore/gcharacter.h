@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+G_BEGIN_NAMESPACE
+
 class GAPI GCharacter 
 	: public GPackage<gchar>
 {
@@ -17,5 +19,7 @@ public:
 };
 
 typedef GCharacter GChar;
+
+G_END_NAMESPACE
 
 #endif // _CORE_CHARACTER_H_

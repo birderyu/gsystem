@@ -12,7 +12,8 @@ inline GStaticArray<DataT, ARRAY_SIZE>::GStaticArray(const DataT &data)
 {
 	for (gsize i = 0; i < ARRAY_SIZE; i++)
 	{
-		m_pData[i] = data;
+		// ·ÅÖÃ¹¹Ôì
+		new(m_pData + i)DataT(data);
 	}
 }
 

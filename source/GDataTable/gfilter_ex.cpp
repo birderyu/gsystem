@@ -12,15 +12,15 @@ GStringList GFilter_Ex::m_tCompareSymbols;
 gbool GFilter_Ex::m_bInitializeCompareSymbols = false;
 
 //////////////////////////////////////////////////////////////////////////
-// CsFilterCell
+// GFilterCell
 //////////////////////////////////////////////////////////////////////////
-GFilter_Ex::CsFilterCell::CsFilterCell()
+GFilter_Ex::GFilterCell::GFilterCell()
 :m_emCompareType(COMPARE_TYPE_ERROR)
 {
 	
 }
 
-GFilter_Ex::CsFilterCell::CsFilterCell(const CsFilterCell &tCell)
+GFilter_Ex::GFilterCell::GFilterCell(const GFilterCell &tCell)
 : m_emCompareType(tCell.m_emCompareType)
 , m_sFieldName(tCell.m_sFieldName)
 , m_tFieldValue(tCell.m_tFieldValue)
@@ -28,12 +28,12 @@ GFilter_Ex::CsFilterCell::CsFilterCell(const CsFilterCell &tCell)
 
 }
 
-GFilter_Ex::CsFilterCell::~CsFilterCell()
+GFilter_Ex::GFilterCell::~GFilterCell()
 {
 
 }
 
-gbool GFilter_Ex::CsFilterCell::SetFilter(const GString &sFilter)
+gbool GFilter_Ex::GFilterCell::SetFilter(const GString &sFilter)
 {
 	if (IsValid())
 	{
@@ -49,7 +49,7 @@ gbool GFilter_Ex::CsFilterCell::SetFilter(const GString &sFilter)
 			continue;
 		}
 		m_sFieldName = tFilterList.GetAt(0);
-		if (!CsFilterParse::ParseFilter_ParseCompareType(m_tCompareSymbols.GetAt(i), m_emCompareType))
+		if (!GFilterParse::ParseFilter_ParseCompareType(m_tCompareSymbols.GetAt(i), m_emCompareType))
 		{
 			return false;
 		}
@@ -59,34 +59,34 @@ gbool GFilter_Ex::CsFilterCell::SetFilter(const GString &sFilter)
 	return false;
 }
 
-gbool GFilter_Ex::CsFilterCell::IsValid() const
+gbool GFilter_Ex::GFilterCell::IsValid() const
 {
 	return m_emCompareType != COMPARE_TYPE_ERROR
 		&& !m_sFieldName.IsEmpty()
-		&& m_tFieldValue.IsValid();
+		&& m_tFieldValue.Valid();
 }
 
-gbool GFilter_Ex::CsFilterCell::Release()
+gbool GFilter_Ex::GFilterCell::Release()
 {
 	m_emCompareType = COMPARE_TYPE_ERROR;
 	return true;
 }
 
-GString GFilter_Ex::CsFilterCell::ToString() const
+GString GFilter_Ex::GFilterCell::ToString() const
 {
 	if (!IsValid())
 	{
 		return "";
 	}
 	GString sCompare;
-	if (!CsFilterParse::GetCompareString(m_emCompareType, sCompare))
+	if (!GFilterParse::GetCompareString(m_emCompareType, sCompare))
 	{
 		return "";
 	}
 	return m_sFieldName + sCompare + m_tFieldValue.ToString();
 }
 
-GFilter_Ex::CsFilterCell &GFilter_Ex::CsFilterCell::operator=(const CsFilterCell &tCell)
+GFilter_Ex::GFilterCell &GFilter_Ex::GFilterCell::operator=(const GFilterCell &tCell)
 {
 	m_sFieldName = tCell.m_sFieldName;
 	m_tFieldValue = tCell.m_tFieldValue;
@@ -95,15 +95,15 @@ GFilter_Ex::CsFilterCell &GFilter_Ex::CsFilterCell::operator=(const CsFilterCell
 }
 
 //////////////////////////////////////////////////////////////////////////
-// CsFilterData
+// GFilterData
 //////////////////////////////////////////////////////////////////////////
-GFilter_Ex::CsFilterData::CsFilterData()
+GFilter_Ex::GFilterData::GFilterData()
 : m_emUnionType(UNION_TYPE_ERROR)
 {
 
 }
 
-GFilter_Ex::CsFilterData::CsFilterData(const CsFilterData &tData)
+GFilter_Ex::GFilterData::GFilterData(const GFilterData &tData)
 : m_emUnionType(tData.m_emUnionType)
 {
 	if (m_emUnionType == UNION_TYPE_ERROR)
@@ -120,16 +120,16 @@ GFilter_Ex::CsFilterData::CsFilterData(const CsFilterData &tData)
 	}
 }
 
-gbool GFilter_Ex::CsFilterData::SetFilter(const GString &sFilter)
+gbool GFilter_Ex::GFilterData::SetFilter(const GString &sFilter)
 {
 	if (IsValid())
 	{
 		Release();
 	}
-	return CsFilterParse::ParseFilter(sFilter, m_emUnionType, m_tChildren, m_tCell);
+	return GFilterParse::ParseFilter(sFilter, m_emUnionType, m_tChildren, m_tCell);
 }
 
-gbool GFilter_Ex::CsFilterData::IsValid() const
+gbool GFilter_Ex::GFilterData::IsValid() const
 {
 	switch (m_emUnionType)
 	{
@@ -160,7 +160,7 @@ gbool GFilter_Ex::CsFilterData::IsValid() const
 	return false;
 }
 
-GString GFilter_Ex::CsFilterData::ToString() const
+GString GFilter_Ex::GFilterData::ToString() const
 {
 	if (!IsValid())
 	{
@@ -193,7 +193,7 @@ GString GFilter_Ex::CsFilterData::ToString() const
 			if (i != len - 1)
 			{
 				GString sUnion;
-				if (CsFilterParse::GetUnionString(m_emUnionType, sUnion))
+				if (GFilterParse::GetUnionString(m_emUnionType, sUnion))
 				{
 					sResult += sUnion;
 				}
@@ -204,7 +204,7 @@ GString GFilter_Ex::CsFilterData::ToString() const
 	return "";
 }
 
-gbool GFilter_Ex::CsFilterData::Release()
+gbool GFilter_Ex::GFilterData::Release()
 {
 	m_emUnionType = UNION_TYPE_ERROR;
 	m_tChildren.Dispose();
@@ -212,7 +212,7 @@ gbool GFilter_Ex::CsFilterData::Release()
 	return true;
 }
 
-GFilter_Ex::CsFilterData &GFilter_Ex::CsFilterData::operator = (const CsFilterData &tData)
+GFilter_Ex::GFilterData &GFilter_Ex::GFilterData::operator = (const GFilterData &tData)
 {
 	m_emUnionType = tData.m_emUnionType;
 	if (m_emUnionType == UNION_TYPE_ERROR)
@@ -231,10 +231,10 @@ GFilter_Ex::CsFilterData &GFilter_Ex::CsFilterData::operator = (const CsFilterDa
 }
 
 //////////////////////////////////////////////////////////////////////////
-// CsFilterParse
+// GFilterParse
 //////////////////////////////////////////////////////////////////////////
-gbool GFilter_Ex::CsFilterParse::ParseFilter(const GString &sFilter, CS_UNION_TYPE &emUnionType, 
-	GDynamicArray<CsFilterData> &tData, CsFilterCell &tCell)
+gbool GFilter_Ex::GFilterParse::ParseFilter(const GString &sFilter, G_UNION_TYPE &emUnionType, 
+	GDynamicArray<GFilterData> &tData, GFilterCell &tCell)
 {
 	// 1.≈–∂œ¿®∫≈ «∑Ò∫œ∑®
 	if (!ParseFilter_IsBracketLegal(sFilter))
@@ -313,7 +313,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter(const GString &sFilter, CS_UNION_TY
 	return true;
 }
 
-gbool GFilter_Ex::CsFilterParse::ParseFilter_PreParseFilter(GString &sFilter)
+gbool GFilter_Ex::GFilterParse::ParseFilter_PreParseFilter(GString &sFilter)
 {
 	if (sFilter.IsEmpty())
 	{
@@ -323,7 +323,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter_PreParseFilter(GString &sFilter)
 	return !sFilter.IsEmpty();
 }
 
-gbool GFilter_Ex::CsFilterParse::ParseFilter_ParseUnionType(const GString &sUnion, CS_UNION_TYPE &emUnionType)
+gbool GFilter_Ex::GFilterParse::ParseFilter_ParseUnionType(const GString &sUnion, G_UNION_TYPE &emUnionType)
 {
 	if (sUnion == " AND ")
 	{
@@ -340,7 +340,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter_ParseUnionType(const GString &sUnio
 	return false;
 }
 
-gbool GFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const GString &sFilter)
+gbool GFilter_Ex::GFilterParse::ParseFilter_IsBracketLegal(const GString &sFilter)
 {
 	gsize length = sFilter.Size();
 	GListStack<gchar> stack;
@@ -362,7 +362,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter_IsBracketLegal(const GString &sFilt
 	return stack.IsEmpty();
 }
 
-gbool GFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(GString &sFilter)
+gbool GFilter_Ex::GFilterParse::ParseFilter_TrimBracket(GString &sFilter)
 {
 	if (sFilter[0] == '(' && sFilter[sFilter.Size() - 1] == ')')
 	{
@@ -376,7 +376,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter_TrimBracket(GString &sFilter)
 	}
 }
 
-gbool GFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringList &tFilterList)
+gbool GFilter_Ex::GFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringList &tFilterList)
 {
 	gsize length = sFilter.Size();
 	GListStack<gchar> stack;
@@ -411,7 +411,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const GStr
 	return true;
 }
 
-gbool GFilter_Ex::CsFilterParse::GetUnionString(CS_UNION_TYPE emUnionType, GString &sUnion)
+gbool GFilter_Ex::GFilterParse::GetUnionString(G_UNION_TYPE emUnionType, GString &sUnion)
 {
 	switch (emUnionType)
 	{
@@ -435,7 +435,7 @@ gbool GFilter_Ex::CsFilterParse::GetUnionString(CS_UNION_TYPE emUnionType, GStri
 	return false;
 }
 
-gbool GFilter_Ex::CsFilterParse::ParseFilter_ParseCompareType(const GString &sCompare, CS_COMPARE_TYPE &emCompareType)
+gbool GFilter_Ex::GFilterParse::ParseFilter_ParseCompareType(const GString &sCompare, G_COMPARE_TYPE &emCompareType)
 {
 	if (sCompare == " LIKE ")
 	{
@@ -476,7 +476,7 @@ gbool GFilter_Ex::CsFilterParse::ParseFilter_ParseCompareType(const GString &sCo
 	return false;
 }
 
-gbool GFilter_Ex::CsFilterParse::GetCompareString(CS_COMPARE_TYPE emCompareType, GString &sCompare)
+gbool GFilter_Ex::GFilterParse::GetCompareString(G_COMPARE_TYPE emCompareType, GString &sCompare)
 {
 	switch (emCompareType)
 	{
@@ -518,7 +518,7 @@ gbool GFilter_Ex::CsFilterParse::GetCompareString(CS_COMPARE_TYPE emCompareType,
 }
 
 //////////////////////////////////////////////////////////////////////////
-// CsFilter_Private
+// GFilter_Ex
 //////////////////////////////////////////////////////////////////////////
 GFilter_Ex::GFilter_Ex(const GString &sFilter)
 {

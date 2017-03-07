@@ -2,7 +2,7 @@
 #define _CORE_LINKED_LIST_INLINE_
 
 template<typename DataT, typename NodeT>
-inline guint GLinkedList<DataT, NodeT>::ClassCode() const
+GINLINE guint GLinkedList<DataT, NodeT>::ClassCode() const
 {
 	return GLinkedList<DataT, NodeT>::CLASS_CODE;
 }

@@ -7,8 +7,9 @@ template<typename TableT>
 class GTableFields
 {
 public:
-	GTableFields(GDataTable &, CsSizeTypeArray *columns = NULL);
-	GTableFields(const GTableFields &);
+	GTableFields(GDataTable &, GSizeArray *columns = GNULL);
+	GTableFields(const GTableFields<TableT> &);
+	GTableFields(GTableFields<TableT> &&);
 
 	GDataTable &Table();
 	const GDataTable &Table() const;

@@ -308,10 +308,10 @@ bool GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>::In
 		newRoot->m_level = (*a_root)->m_level + 1;
 		branch.m_rect = NodeCover(*a_root);
 		branch.m_child = *a_root;
-		AddBranch(&branch, newRoot, NULL);
+		AddBranch(&branch, newRoot, GNULL);
 		branch.m_rect = NodeCover(newNode);
 		branch.m_child = newNode;
-		AddBranch(&branch, newRoot, NULL);
+		AddBranch(&branch, newRoot, GNULL);
 		*a_root = newRoot;
 		return true;
 	}
@@ -664,11 +664,11 @@ void GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>::Lo
 
 		if (a_parVars->m_partition[index] == 0)
 		{
-			AddBranch(&a_parVars->m_branchBuf[index], a_nodeA, NULL);
+			AddBranch(&a_parVars->m_branchBuf[index], a_nodeA, GNULL);
 		}
 		else if (a_parVars->m_partition[index] == 1)
 		{
-			AddBranch(&a_parVars->m_branchBuf[index], a_nodeB, NULL);
+			AddBranch(&a_parVars->m_branchBuf[index], a_nodeB, GNULL);
 		}
 	}
 }
@@ -754,7 +754,7 @@ bool GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>::Re
 	GASSERT(*a_root);
 
 	Node* tempNode;
-	ListNode* reInsertList = NULL;
+	ListNode* reInsertList = GNULL;
 
 	if (!RemoveRectRec(a_rect, a_id, *a_root, &reInsertList))
 	{

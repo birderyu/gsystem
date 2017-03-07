@@ -58,9 +58,11 @@ struct GBinaryTreeNodeT
 
 	// 中序遍历的前驱节点
 	const NodeT *Next() const;
+	NodeT *Next();
 
 	// 中序遍历的后继节点
 	const NodeT *Previous() const;
+	NodeT *Previous();
 
 	// 中序遍历的首节点
 	const NodeT *First() const;
@@ -97,6 +99,7 @@ struct GPairNodeT
 	ValueT m_tValue;
 
 	GPairNodeT(const KeyT &key, const ValueT &value);
+	GPairNodeT(const KeyT &key, ValueT &&value);
 };
 
 // 哑节点

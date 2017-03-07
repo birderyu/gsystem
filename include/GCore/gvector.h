@@ -8,8 +8,9 @@
 
 template <typename DataT>
 class GVector final
-	: GListT<GVector<DataT>>
-	, public GObject
+	: virtual public GListT<GVector<DataT>>
+	, virtual public GArray<DataT>
+	, virtual public GObject
 {
 public:
 	class ConstIterator;
@@ -17,7 +18,7 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		inline Iterator() : m_pData(NULL) {}
+		inline Iterator() : m_pData(GNULL) {}
 		inline Iterator(DataT *data) : m_pData(data) {}
 		inline explicit Iterator(const Iterator &iter) : m_pData(iter.m_pData) {}
 
@@ -49,7 +50,7 @@ public:
 	{
 		friend class Iterator;
 	public:
-		inline ConstIterator() : m_pData(NULL) {}
+		inline ConstIterator() : m_pData(GNULL) {}
 		inline ConstIterator(const DataT *data) : m_pData(data) {}
 		inline explicit ConstIterator(const Iterator &iter) : m_pData(iter.m_pData) {}
 
@@ -81,10 +82,19 @@ public:
 	friend class ConstIterator;
 
 public:
+	static const gsize MAX_SIZE = GListT<GVector<DataT>>::MAX_SIZE;
+	static const gsize NULL_POS = GListT<GVector<DataT>>::NULL_POS;
+
+public:
 	GVector();
 	explicit GVector(gsize size);
 	explicit GVector(gsize size, const DataT &data);
 	GVector(const GVector<DataT> &);
+	GVector(GVector<DataT> &&);
+
+	GVector<DataT> &operator=(const GVector<DataT> &);
+	GVector<DataT> &operator=(GVector<DataT> &&);
+
 	gbool Reserve(gsize);
 	gbool Resize(gsize);
 
@@ -98,18 +108,29 @@ public:
 	DataT &GetAt(gsize);
 	const DataT &GetAt(gsize) const;
 
+	DataT *CursorAt(gsize);
+	const DataT *CursorAt(gsize) const;
+
 	DataT &operator[](gsize);
 	const DataT &operator[](gsize) const;
 
 	gvoid PushBack(const DataT &data);
-	gvoid PushFront(const DataT &data);
-	gvoid PopBack(DataT *data = NULL);
-	gvoid PopBack(gsize size); // 从队尾除去size个元素
-	gvoid PopFront(DataT *data = NULL);
-	gvoid PopFront(gsize size); // 从队首除去size个元素
+	gvoid PushBack(DataT &&data);
 
-	gvoid	Append(const DataT &);
-	gvoid	Append(const GVector<DataT> &);
+	gvoid PushFront(const DataT &data);
+	gvoid PushFront(DataT &&data);
+
+	gvoid PopBack(DataT *data = GNULL);
+	gvoid PopBack(gsize size); // 从队尾除去size个元素，这些元素会全部被析构
+
+	gvoid PopFront(DataT *data = GNULL);
+	gvoid PopFront(gsize size); // 从队首除去size个元素，这些元素会全部被析构
+
+	gvoid Append(const DataT &data);
+	gvoid Append(DataT &&data);
+
+	gvoid Append(const GVector<DataT> &arr);
+	gvoid Append(GVector<DataT> &&arr);
 
 	Iterator Begin();
 	ConstIterator Begin() const;

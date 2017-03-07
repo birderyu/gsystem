@@ -1,5 +1,6 @@
 #include "gobject.h"
 #include "gstring.h"
+#include "gbytes.h"
 
 GObject::~GObject()
 {
@@ -23,7 +24,12 @@ gbool GObject::Unboxing(const GObject *)
 
 GString GObject::ToString() const
 {
-	return "This is an object.";
+	return GString();
+}
+
+GBytes GObject::ToBytes() const
+{
+	return GBytes();
 }
 
 guint GObject::ClassCode() const

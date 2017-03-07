@@ -1,17 +1,13 @@
 #include "gmutex.h"
 
 #ifdef G_SYSTEM_WINDOWS
-
+#	ifndef WIN32_LEAN_AND_MEAN
+#		define WIN32_LEAN_AND_MEAN
+#	endif
 #include <windows.h>
 
-/// Win32»¥³âÁ¿ÊµÀý¾ä±ú
-struct GMutex_Handle
-{
-	HANDLE m_hMutex;
-};
-
 GMutex::GMutex()
-: m_pHandle(NULL)
+: m_pHandle(GNULL)
 {
 	Initialize();
 }
@@ -21,26 +17,28 @@ GMutex::~GMutex()
 	Release();
 }
 
-gbool GMutex::Lock()
+gvoid GMutex::Lock()
 {
-	GMutex_Handle *pHandle = static_cast<GMutex_Handle*>(m_pHandle);
-	if (!pHandle) return false;
-
-	WaitForSingleObject(pHandle->m_hMutex, INFINITE);
-	return true;
+	if (!m_pHandle)
+	{
+		return;
+	}
+	WaitForSingleObject((HANDLE)m_pHandle, INFINITE);
 }
 
 gbool GMutex::Trylock()
 {
-	GMutex_Handle *pHandle = static_cast<GMutex_Handle*>(m_pHandle);
-	if (!pHandle) return false;
+	if (!m_pHandle)
+	{
+		return false;
+	}
 
-	DWORD nRet = WaitForSingleObject(pHandle->m_hMutex, 1);
-	if (nRet == WAIT_OBJECT_0)
+	DWORD ret = WaitForSingleObject((HANDLE)m_pHandle, 1);
+	if (ret == WAIT_OBJECT_0)
 	{
 		return true; // success
 	}
-	if (nRet == WAIT_TIMEOUT)
+	if (ret == WAIT_TIMEOUT)
 	{
 		return false; // timeout
 	}
@@ -49,42 +47,26 @@ gbool GMutex::Trylock()
 
 gvoid GMutex::Unlock()
 {
-	GMutex_Handle *pHandle = static_cast<GMutex_Handle*>(m_pHandle);
-	if (!pHandle) return;
-
-	ReleaseMutex(pHandle->m_hMutex);
+	if (!m_pHandle)
+	{
+		return;
+	}
+	ReleaseMutex((HANDLE)m_pHandle);
 }
 
 gbool GMutex::Initialize()
 {
-	if (!m_pHandle)
+	m_pHandle = CreateMutex(GNULL, false, GNULL);
+	if (m_pHandle == GNULL)
 	{
-		return true;
-	}
-	GMutex_Handle *pHandle = new GMutex_Handle;
-	if (!pHandle) return false;
-	m_pHandle = pHandle;
-
-	pHandle->m_hMutex = CreateMutex(NULL, true, NULL);
-	if (pHandle->m_hMutex == NULL)
-	{
-		delete pHandle;
-		pHandle = NULL;
 		return false;
 	}
-
-	ReleaseMutex(pHandle->m_hMutex);
 	return true;
 }
 
 gvoid GMutex::Release()
 {
-	if (m_pHandle)
-	{
-		GMutex_Handle *pHandle = static_cast<GMutex_Handle*>(m_pHandle);
-		delete pHandle;
-		m_pHandle = NULL;
-	}
+	m_pHandle = GNULL;
 }
 
 #endif // G_SYSTEM_WINDOWS

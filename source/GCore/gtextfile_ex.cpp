@@ -53,19 +53,17 @@ gbool GTextFile_Ex::Read(gsize size, GString &str)
 	}
 
 	gsize old_size = str.Size();
-	if (!str.Resize(old_size + size))
-	{
-		return false;
-	}
+	str.Resize(old_size + size);
 
-	gsize real_add_size = fread(str.Cursor(old_size), sizeof(gchar), size, m_pFileStream);
+	gsize real_add_size = fread(str.CursorAt(old_size), sizeof(gchar), size, m_pFileStream);
 	if (real_add_size == 0)
 	{
 		str.Resize(old_size);
 		return false;
 	}
 
-	return str.Resize(old_size + real_add_size);
+	str.Resize(old_size + real_add_size);
+	return true;
 }
 
 gbool GTextFile_Ex::ReadAll(GString &str)
@@ -123,7 +121,7 @@ gcstring GTextFile_Ex::OpenMode() const
 	switch (m_nOpenMode)
 	{
 	case GFile::NO_OPEN:
-		return NULL;
+		return GNULL;
 	case GFile::ONLY_READ:
 		return "rt";
 	case GFile::ONLY_WIRTE:
@@ -135,7 +133,7 @@ gcstring GTextFile_Ex::OpenMode() const
 	default:
 		break;
 	}
-	return NULL;
+	return GNULL;
 }
 
 #undef G_TEXT_DOCUMNET_BUFFER_SIZE

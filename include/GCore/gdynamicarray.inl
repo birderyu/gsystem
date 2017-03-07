@@ -2,130 +2,86 @@
 #define _CORE_DYNAMIC_ARRAY_INLINE_
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::ArrayCopy(const GDynamicArray<DataT> &src, gsize start, gsize len,
-	GDynamicArray<DataT> &dst, gsize first)
-{
-	if (len + start > src.Size())
-	{
-		return false;
-	}
-	if (len + first > dst.Size())
-	{
-		dst.Resize(len + first);
-	}
-	//return src.CopyMemTo(dst.GetData() + first, start, len);
-	for (gsize i = start, gsize j = first;
-		i < len + start; i++, j++)
-	{
-		dst[j] = src[i];
-	}
-}
-
-template <typename DataT>
-inline GDynamicArray<DataT>::GDynamicArray()
-: m_pData(NULL), m_nSize(0)
+GINLINE GDynamicArray<DataT>::GDynamicArray()
+: m_pData(GNULL), m_nSize(0)
 {
 
 }
 
 template <typename DataT>
-inline GDynamicArray<DataT>::GDynamicArray(gsize size)
-: m_pData(NULL), m_nSize(size)
+GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size)
+: m_pData(GNULL), m_nSize(size)
 {
 	if (m_nSize <= 0)
 	{
 		return;
 	}
-	m_pData = (DataT *)GMalloc(size * sizeof(DataT));
-	if (!m_pData)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
+	m_pData = GArray<DataT>::CreateArray(m_nSize);
 }
 
 template <typename DataT>
-inline GDynamicArray<DataT>::GDynamicArray(gsize size, const DataT &data)
-: m_pData(NULL), m_nSize(size)
+GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size, const DataT &data)
+: m_pData(GNULL), m_nSize(size)
 {
 	if (m_nSize <= 0)
 	{
 		return;
 	}
-	m_pData = (DataT *)GMalloc(size * sizeof(DataT));
-	if (!m_pData)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
-	for (gsize i = 0; i < m_nSize; i++)
-	{
-		m_pData[i] = data;
-	}
+	m_pData = GArray<DataT>::CreateArray(m_nSize, data);
 }
 
 template <typename DataT>
-inline GDynamicArray<DataT>::GDynamicArray(const GDynamicArray<DataT> &tArray)
-: m_pData(NULL), m_nSize(tArray.m_nSize)
+GINLINE GDynamicArray<DataT>::GDynamicArray(const GDynamicArray<DataT> &array)
+: m_pData(GNULL), m_nSize(array.m_nSize)
 {
 	if (m_nSize <= 0)
 	{
 		return;
 	}
-	m_pData = (DataT *)GMalloc(m_nSize * sizeof(DataT));
-	if (!m_pData)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
-	for (gsize i = 0; i < m_nSize; i++)
-	{
-		m_pData[i] = tArray[i];
-	}
+	m_pData = GArray<DataT>::CreateArray(array.m_pData, 0, array.m_nSize);
 }
 
 template <typename DataT>
-inline GDynamicArray<DataT>::GDynamicArray(const GArray<DataT> &array, gsize start, gsize size)
-: m_pData(NULL), m_nSize(size)
+GINLINE GDynamicArray<DataT>::GDynamicArray(GDynamicArray<DataT> &&arr)
+: m_pData(arr.m_pData), m_nSize(arr.m_nSize)
+{
+	arr.m_pData = GNULL;
+	arr.m_nSize = 0;
+}
+
+template <typename DataT>
+GINLINE GDynamicArray<DataT>::GDynamicArray(const GArray<DataT> &array, gsize start, gsize size)
+: m_pData(GNULL), m_nSize(size)
 {
 	if (size <= 0 || start >= array.Size())
 	{
 		m_nSize = 0;
 		return;
 	}
-	m_pData = (DataT *)GMalloc(size * sizeof(DataT));
-	if (!m_pData)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
-	for (gsize i = 0; i < size; i++)
-	{
-		m_pData[i] = array[i + start];
-	}
+	m_pData = GArray<DataT>::CreateArray(&array[0], start, size);
 }
 
 template <typename DataT>
-inline GDynamicArray<DataT>::~GDynamicArray()
+GINLINE GDynamicArray<DataT>::~GDynamicArray()
 {
 	Dispose();
 }
 
 template <typename DataT>
-inline gsize GDynamicArray<DataT>::Size() const
+GINLINE gsize GDynamicArray<DataT>::Size() const
 {
 	return m_nSize;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::IsEmpty() const
+GINLINE gbool GDynamicArray<DataT>::IsEmpty() const
 {
-	return m_pData == NULL
+	return m_pData == GNULL
 		|| m_nSize <= 0;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::Resize(gsize size)
+GINLINE gbool GDynamicArray<DataT>::Resize(gsize size)
 {
 	if (m_nSize == size)
 	{
@@ -139,28 +95,15 @@ inline gbool GDynamicArray<DataT>::Resize(gsize size)
 		return true;
 	}
 
-	if (!m_pData)
-	{
-		m_pData = (DataT *)GMalloc(size * sizeof(DataT));
-	}
-	else
-	{
-		// 重新分配内存
-		m_pData = (DataT *)GRealloc(m_pData, size * sizeof(DataT));
-	}
-
-	if (!m_pData)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
+	// 当数组不存在时，会构建新的数组
+	m_pData = GArray<DataT>::ResizeArray(m_pData, m_nSize, size);
 
 	m_nSize = size;
 	return true;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
+GINLINE gbool GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
 {
 	if (m_nSize == size)
 	{
@@ -174,33 +117,14 @@ inline gbool GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
 		return true;
 	}
 
-	if (!m_pData)
-	{
-		m_pData = (DataT *)GMalloc(size * sizeof(DataT));
-	}
-	else
-	{
-		// 重新分配内存
-		m_pData = (DataT *)GRealloc(m_pData, size * sizeof(DataT));
-	}
+	m_pData = GArray<DataT>::ResizeArray(m_pData, m_nSize, size, data);
 
-	if (!m_pData)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
-
-	gsize old_size(m_nSize);
 	m_nSize = size;
-	for (gsize i = old_size; i < size; i++)
-	{
-		m_pData[i] = data;
-	}
 	return true;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start)
+GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start)
 {
 	if (new_size == m_nSize && start == 0 && size == m_nSize)
 	{
@@ -214,39 +138,15 @@ inline gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize siz
 		return true;
 	}
 
-	gsize old_size(m_nSize);
-	DataT *new_arr = (DataT *)GMalloc(new_size * sizeof(DataT));
-	if (!new_arr)
-	{
-		m_nSize = 0;
-		throw std::bad_alloc();
-	}
+	// 重新分配内存
+	m_pData = GArray<DataT>::ResizeArray(m_pData, start, size, new_size, new_start);
 
-	if (m_pData && start < old_size)
-	{
-		// 拷贝旧内存到新的地址
-		gsize real_size(size);
-		if (start + real_size > old_size)
-		{
-			real_size = old_size - start;
-		}
-		if (new_start + real_size > new_size)
-		{
-			real_size = new_size - new_start;
-		}
-		GMemCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
-	}
-	if (m_pData)
-	{
-		GFree(m_pData);
-	}
-	m_pData = new_arr;
 	m_nSize = new_size;
 	return true;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data)
+GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data)
 {
 	if (new_size == m_nSize && start == 0 && size == m_nSize)
 	{
@@ -260,136 +160,96 @@ inline gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize siz
 		return true;
 	}
 
-	gsize old_size(m_nSize);
-	DataT *new_arr = (DataT *)GMalloc(new_size * sizeof(DataT));
-	if (!new_arr)
+	if (!m_pData)
 	{
-		m_nSize = 0;
-		throw std::bad_alloc();
+		m_pData = GArray<DataT>::CreateArray(new_start, data);
 	}
-
-	if (m_pData && start < old_size)
+	else
 	{
-		// 拷贝旧内存到新的地址
-		gsize real_size(size);
-		if (start + real_size > old_size)
-		{
-			real_size = old_size - start;
-		}
-		if (new_start + real_size > new_size)
-		{
-			real_size = new_size - new_start;
-		}
-		GMemCopy(new_arr + new_start, m_pData + start, real_size * sizeof(DataT));
+		// 重新分配内存
+		m_pData = GArray<DataT>::ResizeArray(m_pData, start, size, new_size, new_start);
 	}
-	if (m_pData)
-	{
-		GFree(m_pData);
-	}
-
-	m_pData = new_arr;
 	m_nSize = new_size;
-	for (gsize i = 0; i < new_start; i++)
-	{
-		m_pData[i] = data;
-	}
-	for (gsize i = new_start + size; i < new_size; i++)
-	{
-		m_pData[i] = data;
-	}
 	return true;
 }
 
 template <typename DataT>
-inline gvoid GDynamicArray<DataT>::Dispose()
+gvoid GDynamicArray<DataT>::Clear()
 {
-	if (m_pData)
-	{
-		GFree(m_pData);
-		m_pData = NULL;
-	}
+	GArray<DataT>::ClearArray(m_pData, m_nSize);
+}
+
+template <typename DataT>
+GINLINE gvoid GDynamicArray<DataT>::Dispose()
+{
+	GArray<DataT>::DestoryArray(m_pData, m_nSize);
+	m_pData = GNULL;
 	m_nSize = 0;
 }
 
 template <typename DataT>
-inline DataT &GDynamicArray<DataT>::GetAt(gsize pos)
+GINLINE DataT &GDynamicArray<DataT>::GetAt(gsize pos)
 {
 	GASSERT(pos < m_nSize);
 	return *(m_pData + pos);
 }
 
 template <typename DataT>
-inline const DataT &GDynamicArray<DataT>::GetAt(gsize pos) const
+GINLINE const DataT &GDynamicArray<DataT>::GetAt(gsize pos) const
 {
 	GASSERT(pos < m_nSize);
 	return *(m_pData + pos);
 }
 
 template <typename DataT>
-inline DataT &GDynamicArray<DataT>::operator[](gsize pos)
-{
-	GASSERT(pos < m_nSize);
-	return *(m_pData + pos);
-}
-
-template <typename DataT>
-inline const DataT &GDynamicArray<DataT>::operator[](gsize pos) const
-{
-	GASSERT(pos < m_nSize);
-	return *(m_pData + pos);
-}
-
-template <typename DataT>
-inline DataT *GDynamicArray<DataT>::operator+=(gsize pos)
+GINLINE DataT *GDynamicArray<DataT>::CursorAt(gsize pos)
 {
 	return m_pData + pos;
 }
 
 template <typename DataT>
-inline const DataT *GDynamicArray<DataT>::operator+=(gsize pos) const
+GINLINE const DataT *GDynamicArray<DataT>::CursorAt(gsize pos) const
 {
 	return m_pData + pos;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::RemoveAt(gsize id)
+GINLINE DataT &GDynamicArray<DataT>::operator[](gsize pos)
 {
-	if (IsEmpty())
+	GASSERT(pos < m_nSize);
+	return *(m_pData + pos);
+}
+
+template <typename DataT>
+GINLINE const DataT &GDynamicArray<DataT>::operator[](gsize pos) const
+{
+	GASSERT(pos < m_nSize);
+	return *(m_pData + pos);
+}
+
+template <typename DataT>
+GINLINE gbool GDynamicArray<DataT>::RemoveAt(gsize pos)
+{
+	if (0 == m_nSize)
 	{
 		return false;
 	}
-	gsize len = m_nSize - 1;
-	if (len < id)
+	if (1 == m_nSize)
 	{
-		return false;
-	}
-	if (len == 0)
-	{
-		Dispose();
-		return true;
-	}
-	DataT *pData = (DataT *)GMalloc(len * sizeof(DataT));
-	if (!pData)
-	{
-		return false;
-	}
-	if (CopyMemoryTo(0, id, pData, 0))
-	{
-		if (CopyMemoryTo(id + 1, len - id, pData, id))
+		if (0 == pos)
 		{
 			Dispose();
-			m_pData = pData;
-			m_nSize = len;
 			return true;
 		}
+		return false;
 	}
-	GFree(pData);
-	pData = NULL;
+	m_pData = GArray<DataT>::RemoveArrayElementAt(m_pData, m_nSize, pos);
+	m_nSize--;
 	return false;
 }
 
 template <typename DataT>
-inline GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(const GDynamicArray<DataT> &arr)
+GINLINE GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(const GDynamicArray<DataT> &arr)
 {
 	if (this == &arr)
 	{
@@ -400,19 +260,23 @@ inline GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(const GDynamicArray
 		Dispose();
 		return *this;
 	}
-	if (m_nSize != arr.m_nSize)
+	m_pData = GArray<DataT>::CopyArrayFrom(m_pData, m_nSize, arr.m_pData, arr.m_nSize);
+	m_nSize = arr.m_nSize;
+	return *this;
+}
+
+template <typename DataT>
+GINLINE GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(GDynamicArray<DataT> &&arr)
+{
+	if (this == &arr)
 	{
-		m_pData = (DataT *)GMalloc(arr.m_nSize * sizeof(DataT));
-		if (!m_pData)
-		{
-			throw std::bad_alloc();
-		}
-		m_nSize = arr.m_nSize;
+		return *this;
 	}
-	for (gsize i = 0; i < m_nSize; i++)
-	{
-		m_pData[i] = arr.m_pData[i];
-	}
+	Dispose();
+	m_pData = arr.m_pData;
+	m_nSize = arr.m_nSize;
+	arr.m_pData = GNULL;
+	arr.m_nSize = 0;
 	return *this;
 }
 
@@ -439,20 +303,20 @@ gbool GDynamicArray<DataT>::operator==(const GDynamicArray<DataT> &arr)
 }
 
 template <typename DataT>
-inline guint GDynamicArray<DataT>::ClassCode() const
+GINLINE guint GDynamicArray<DataT>::ClassCode() const
 {
 	return GDynamicArray<DataT>::CLASS_CODE;
 }
 
 template <typename DataT>
-inline gbool GDynamicArray<DataT>::Serializable() const
+GINLINE gbool GDynamicArray<DataT>::Serializable() const
 {
 	return true;
 }
 
 template <typename DataT>
 template<typename ArchiveT> 
-inline gbool GDynamicArray<DataT>::Serialize(ArchiveT &archive) const
+GINLINE gbool GDynamicArray<DataT>::Serialize(ArchiveT &archive) const
 {
 	if (!archive.Input())
 	{
@@ -477,7 +341,7 @@ inline gbool GDynamicArray<DataT>::Serialize(ArchiveT &archive) const
 
 template <typename DataT>
 template<typename ArchiveT> 
-inline gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
+GINLINE gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
 {
 	if (!archive.Output())
 	{
@@ -504,32 +368,6 @@ inline gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
 		}
 	}
 
-	return true;
-}
-
-template <typename DataT>
-inline gbool GDynamicArray<DataT>::CopyMemoryFrom(gsize first, gsize len,
-	const DataT *pData, gsize start)
-{
-	if (!pData || !m_pData
-		|| first >= m_nSize || len + first > m_nSize)
-	{
-		return false;
-	}
-	GMemCopy(m_pData + first, pData + start, sizeof(DataT)* len);
-	return true;
-}
-
-template <typename DataT>
-inline gbool GDynamicArray<DataT>::CopyMemoryTo(gsize start, gsize len,
-	DataT *pData, gsize first = 0) const
-{
-	if (!pData || !m_pData
-		|| start >= m_nSize || len + start > m_nSize)
-	{
-		return false;
-	}
-	GMemCopy(pData + first, m_pData + start, sizeof(DataT)* len);
 	return true;
 }
 

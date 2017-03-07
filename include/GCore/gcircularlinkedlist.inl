@@ -2,18 +2,18 @@
 #define _CORE_CIRCULAR_LINKED_LIST_INLINE_
 
 template<typename DataT, typename NodeT>
-inline GCircularLinkedList<DataT, NodeT>::GCircularLinkedList()
-: m_pCursor(NULL)
+GINLINE GCircularLinkedList<DataT, NodeT>::GCircularLinkedList()
+: m_pCursor(GNULL)
 {
 
 }
 
 template<typename DataT, typename NodeT>
-inline typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetNext()
+GINLINE typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetNext()
 {
 	GASSERT(0 != m_nSize);
 
-	if ((NULL == m_pCursor) || (NULL == m_pCursor->m_pNext))
+	if ((GNULL == m_pCursor) || (GNULL == m_pCursor->m_pNext))
 		m_pCursor = m_pFirst;
 	else
 		m_pCursor = m_pCursor->m_pNext;
@@ -22,11 +22,11 @@ inline typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, Node
 }
 
 template<typename DataT, typename NodeT>
-inline const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetNext() const
+GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetNext() const
 {
 	GASSERT(0 != m_nSize);
 
-	if ((NULL == m_pCursor) || (NULL == m_pCursor->m_pNext))
+	if ((GNULL == m_pCursor) || (GNULL == m_pCursor->m_pNext))
 		m_pCursor = m_pFirst;
 	else
 		m_pCursor = m_pCursor->m_pNext;
@@ -35,7 +35,7 @@ inline const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT
 }
 
 template<typename DataT, typename NodeT>
-inline gsize GCircularLinkedList<DataT, NodeT>::GetCurrentIndex() const
+GINLINE gsize GCircularLinkedList<DataT, NodeT>::GetCurrentIndex() const
 {
 	GASSERT(0 != m_nSize);
 
@@ -51,19 +51,19 @@ inline gsize GCircularLinkedList<DataT, NodeT>::GetCurrentIndex() const
 }
 
 template<typename DataT, typename NodeT>
-inline typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetCurrentNode()
+GINLINE typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetCurrentNode()
 {
 	return m_pCursor;
 }
 
 template<typename DataT, typename NodeT>
-inline const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetCurrentNode() const
+GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetCurrentNode() const
 {
 	return m_pCursor;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
+GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 {
 	GASSERT(pos < m_nSize);
 
@@ -71,9 +71,9 @@ inline gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 	if (0 == pos)
 	{
 		m_pFirst = m_pFirst->m_pNext;
-		m_pCursor = NULL;
+		m_pCursor = GNULL;
 		delete pTmpNode1;
-		pTmpNode1 = NULL;
+		pTmpNode1 = GNULL;
 		--m_nSize;
 		return;
 	}
@@ -88,7 +88,7 @@ inline gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 
 	m_pCursor = pTmpNode2;
 	delete pTmpNode1;
-	pTmpNode1 = NULL;
+	pTmpNode1 = GNULL;
 	--m_nSize;
 	return;
 }

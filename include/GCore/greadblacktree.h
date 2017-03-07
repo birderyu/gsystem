@@ -4,7 +4,7 @@
 **
 ** @file	greadblacktree.h
 ** @brief	该文件包含了红黑树的定义及实现
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2016-08-17
 ** @version	1.0
@@ -34,9 +34,16 @@ struct GReadBlackTreeNode
 	GReadBlackTreeNode(
 		const KeyT &key = KeyT(),
 		const ValueT &value = ValueT(),
-		GReadBlackTreeNode<KeyT, ValueT> *parent = NULL,
-		GReadBlackTreeNode<KeyT, ValueT> *left = NULL,
-		GReadBlackTreeNode<KeyT, ValueT> *right = NULL,
+		GReadBlackTreeNode<KeyT, ValueT> *parent = GNULL,
+		GReadBlackTreeNode<KeyT, ValueT> *left = GNULL,
+		GReadBlackTreeNode<KeyT, ValueT> *right = GNULL,
+		gsmall color = G_RED_BLACK_TREE_NODE_RED);
+
+	GReadBlackTreeNode(
+		const KeyT &key, ValueT &&value,
+		GReadBlackTreeNode<KeyT, ValueT> *parent = GNULL,
+		GReadBlackTreeNode<KeyT, ValueT> *left = GNULL,
+		GReadBlackTreeNode<KeyT, ValueT> *right = GNULL,
 		gsmall color = G_RED_BLACK_TREE_NODE_RED);
 };
 
@@ -70,10 +77,12 @@ public:
 	virtual ~GReadBlackTree();
 
 	/// 插入一个数据
-	virtual NodeT *Insert(const KeyT &key, const ValueT &value, gbool *realInsert = NULL);
+	virtual NodeT *Insert(const KeyT &key, const ValueT &value, gbool *realInsert = GNULL);
+	virtual NodeT *Insert(const KeyT &key, ValueT &&value, gbool *realInsert = GNULL);
 
 	/// 删除一个数据
-	virtual gvoid Delete(const KeyT &key, gbool *realDelete = NULL);
+	virtual gvoid Delete(const KeyT &key, gbool *realDelete = GNULL);
+	virtual gvoid Delete(NodeT *node, gbool *realDelete = GNULL);
 
 protected:
 	// 插入修复

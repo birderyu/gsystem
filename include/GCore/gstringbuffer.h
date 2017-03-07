@@ -14,8 +14,8 @@ class GAPI GStringBuffer
 	, public GObject
 {
 public:
-	GStringBuffer(gsize nCapacity = G_STRING_BUFFER_DEFAULT_CAPACITY,
-		gsize nAddSize = G_STRING_BUFFER_DEFAULT_ADD_SIZE);
+	GStringBuffer(gsize capacity = G_STRING_BUFFER_DEFAULT_CAPACITY,
+		gsize add_size = G_STRING_BUFFER_DEFAULT_ADD_SIZE);
 	GStringBuffer(const GString &);
 	GStringBuffer(const GStringBuffer &);
 	~GStringBuffer();

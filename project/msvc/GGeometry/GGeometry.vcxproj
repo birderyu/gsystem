@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\GGeometry\gbody.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gcoordinate.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gcoordinatesequence.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gcurve.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\genvelope.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometry.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometrycollection.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryhelper.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryglobal.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryfactory.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometryinterface.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeometrypool.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gline.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gmultipoint.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gpath.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gpoint.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gpolygon.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gpolyline.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\grectangle.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gring.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gsegment.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gsurface.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gtriangle.h" />
+    <ClInclude Include="..\..\..\private\GGeometry\gdoublepoint_store.h" />
+    <ClInclude Include="..\..\..\private\GGeometry\gmultipoint_store.h" />
+    <ClInclude Include="..\..\..\private\GGeometry\gpoint_impl.h" />
+    <ClInclude Include="..\..\..\private\GGeometry\gsinglepoint_store.h" />
+    <ClInclude Include="..\..\..\private\GGeometry\gsinglepointwithlength_store.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\GGeometry\gcoordinate.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\gcoordinatesequence.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\genvelope.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\ggeometry.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\ggeometryfactory.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\ggeometryglobal.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\gpoint.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\GGeometry\ggeometryhelper.inl" />
+    <None Include="..\..\..\include\GGeometry\gsinglepoint_store.inl" />
+    <None Include="..\..\..\private\GGeometry\gpoint_impl.inl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{83739D3A-0014-4C50-93DC-13D96F6886CB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CBase</RootNamespace>
+    <ProjectName>GGeometry</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(BinaryFolder)</OutDir>
+    <IntDir>$(ObjectFolder)$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)$(Suffix)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>gprecompiler.h</PrecompiledHeaderFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(ImportFolder)\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(SymbolFolder)\$(TargetName).pdb</ProgramDatabaseFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

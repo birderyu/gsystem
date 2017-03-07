@@ -18,7 +18,7 @@ gbool GTcpSocket_Ex::Open(GSockAddress_Ex *pSockAddr, gbool nResue)
 	{
 		return false;
 	}
-	if (Open(nResue) < 0)
+	if (!Open(nResue))
 	{
 		return false;
 	}

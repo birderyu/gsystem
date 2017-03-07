@@ -2,7 +2,7 @@
 **
 ** GNova: A quick, micro library of C++
 **
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @file	gstringpool.h
 ** @date	2016-12-03

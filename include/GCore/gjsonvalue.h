@@ -4,11 +4,10 @@
 **
 ** @file	gjsonvalue.h
 ** @brief	Json值类型的定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2017-1-3
 ** @version	1.0
-** @see		GJsonValue
 **
 ** Json值可以是:
 ** 数字：Number，包括整型（Integer）和浮点型（Float）
@@ -24,10 +23,15 @@
 #define _CORE_JSON_VALUE_H_
 
 #include "gobject.h"
-#include "gvariant.h"
+#include "gvariety.h"
 
+G_BEGIN_NAMESPACE
+class GJsonObject;
 class GJsonArray;
-class GJsonArray;
+class GJsonParserMessage;
+G_END_NAMESPACE
+
+G_BEGIN_NAMESPACE
 
 class GAPI GJsonValue
 	: public GObject
@@ -35,6 +39,7 @@ class GAPI GJsonValue
 public:
 	enum JSON_VALUE_TYPE
 	{
+		JSON_VALUE_TYPE_ILLEGAL = 0,
 		JSON_VALUE_TYPE_NULL,
 		JSON_VALUE_TYPE_BOOLEAN,
 		JSON_VALUE_TYPE_NUMBER,
@@ -44,15 +49,28 @@ public:
 	};
 
 public:
-	//GJsonValue();
-	//~GJsonValue();
+	GJsonValue();
+	~GJsonValue();
+
+	gbool Valid();
+	GString ToString() const;
 
 	//JSON_VALUE_TYPE Type() const;
-	gbool Parse(const GString &jsonStr, gsize cursor = 0, GString *s_error = NULL);
+	gbool Parse(const GString &jsonStr, gsize *cursor = GNULL, GJsonParserMessage *msg = GNULL);
 
 private:
-	GVariant m_tValue;
+	gbool Parse_Number(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
+	gbool Parse_Boolean(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
+	gbool Parse_String(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
+	gbool Parse_Array(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
+	gbool Parse_Object(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
+	gbool Parse_Null(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
+
+	gvoid Dispose();
+	GVariety m_tValue;
 	gbyte m_nType;
 };
+
+G_END_NAMESPACE
 
 #endif // _CORE_JSON_VALUE_H_

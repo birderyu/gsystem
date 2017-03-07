@@ -1,0 +1,111 @@
+
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup Condition="'$(SolutionDriver)' == ''" >
+    <SolutionDriver>$([System.IO.Path]::GetPathRoot($(SolutionDir)))</SolutionDriver>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SolutionPrefix)' == ''">
+    <SolutionPrefix>$(SolutionDir)$(SolutionName)</SolutionPrefix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CommonPrefix)' == ''">
+    <CommonPrefix>$(ProjectDir)$(TargetOutput).Common</CommonPrefix>
+  </PropertyGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)Project\*.props" Condition="Exists('$(SolutionDir)Project')" />
+    <Import Project="$(SolutionPrefix).props" Condition="Exists('$(SolutionPrefix).props')" />
+    <Import Project="$(CommonPrefix).props" Condition="Exists('$(CommonPrefix).props')" />
+    <Import Project="$(ProjectPath).props" Condition="Exists('$(ProjectPath).props')" />
+  </ImportGroup>
+
+  <PropertyGroup>
+    <SingleFolder Condition="'$(SingleFolder)' == ''">false</SingleFolder>
+    <OutputFolder Condition="'$(OutputFolder)' == ''">$(SolutionDir)Outputs\</OutputFolder>
+    <OutputFolder Condition="!HasTrailingSlash('$(OutputFolder)')">$(OutputFolder)\</OutputFolder>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ObjectFolder Condition="'$(ObjectFolder)' == ''">$(OutputFolder)\Objects\</ObjectFolder>
+    <ObjectFolder Condition="!HasTrailingSlash('$(ObjectFolder)')">$(ObjectFolder)\</ObjectFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SingleFolder)' == 'false'">
+    <ImportFolder Condition="'$(ImportFolder)' == ''">$(OutputFolder)Library\</ImportFolder>
+    <SymbolFolder Condition="'$(SymbolFolder)' == ''">$(OutputFolder)Symbol\</SymbolFolder>
+    <BinaryFolder Condition="'$(BinaryFolder)' == ''">$(OutputFolder)Binary</BinaryFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SingleFolder)' != 'false'">
+    <ImportFolder Condition="'$(ImportFolder)' == ''">$(OutputFolder)</ImportFolder>
+    <SymbolFolder Condition="'$(SymbolFolder)' == ''">$(OutputFolder)</SymbolFolder>
+    <BinaryFolder Condition="'$(BinaryFolder)' == ''">$(OutputFolder)</BinaryFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="Exists('$(ImportFolder)')">
+    <LibraryPath>$(ImportFolder);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SuffixCharSet Condition="'$(CharacterSet)' == 'Unicode'">U</SuffixCharSet>
+    <SuffixCharSet Condition="'$(CharacterSet)' != 'Unicode'">M</SuffixCharSet>
+    <SuffixRelease Condition="'$(Configuration)' == 'Debug'">D</SuffixRelease>
+    <SuffixRelease Condition="'$(Configuration)' != 'Debug'">R</SuffixRelease>
+    <SuffixMachine>$(PlatformArchitecture)</SuffixMachine>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetOutput Condition="'$(TargetOutput)' == ''">$(TargetName)</TargetOutput>
+    <TargetSuffix>$(SuffixCharSet)$(SuffixRelease)$(SuffixMachine)</TargetSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'StaticLibrary'">
+    <TargetSuffix Condition="'$(StaticOutput)' == 'true'">$(TargetSuffix)_S</TargetSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigurationType)' != 'StaticLibrary'">
+    <OutDir Condition="'$(SingleFolder)' == 'false'">$(BinaryFolder).$(TargetSuffix)\</OutDir>
+    <OutDir Condition="'$(SingleFolder)' != 'false'">$(BinaryFolder)\</OutDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IntDir>$(ObjectFolder)$(TargetSuffix).$(ConfigurationType)\$(TargetOutput)\</IntDir>
+    <OutputName>$(TargetOutput)$(TargetSuffix)</OutputName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'StaticLibrary'">
+    <OutDir>$(ImportFolder)</OutDir>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile Condition="'$(ConfigurationType)' == 'StaticLibrary'">
+      <ProgramDataBaseFileName>$(SymbolFolder)\Compiler\$(OutputName).2010.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+
+    <ClCompile Condition="'%(ClCompile.DebugInformationFormat)' == ''">
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+
+    <Link>
+      <ProgramDatabaseFile>$(SymbolFolder)\Debuger\$(OutputName).2010.pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(ImportFolder)\$(OutputName).lib</ImportLibrary>
+    </Link>
+
+    <Link Condition="Exists('$(SymbolFolder)\Publish\')">
+      <StripPrivateSymbols>$(SymbolFolder)\Publish\$(OutputName).2010.pdb</StripPrivateSymbols>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup Condition="'$(TargetName)' == '$(ProjectName)'">
+    <TargetName Condition="'$(TargetOutput)' != ''">$(TargetOutput)</TargetName>
+    <TargetName Condition="'$(SingleFolder)' != 'false'">$(OutputName)</TargetName>
+    <TargetName Condition="'$(ConfigurationType)' == 'StaticLibrary'">$(OutputName)</TargetName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+      <OutputPath Condition="'$(OutputPath)' != '$(OutDir)'">$(OutDir)</OutputPath>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\_private">
+      <UniqueIdentifier>{9f46160c-c248-41bd-9865-308a6251fa33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\_private">
+      <UniqueIdentifier>{763a9b99-6529-4a8d-ab9c-91b2699e2847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\_thirds">
+      <UniqueIdentifier>{8d5ca92e-1cdb-46a2-a647-2ef02cae0979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\_inline">
+      <UniqueIdentifier>{db5f1c4b-0335-4e9a-87be-2a8f20ae2584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Index">
+      <UniqueIdentifier>{c48e8908-6633-4bc8-a656-0c3018777684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Attribute">
+      <UniqueIdentifier>{fc17f780-5a0e-4fce-8869-111121ec9f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Filter">
+      <UniqueIdentifier>{995294c8-5acb-476e-af37-fdd6857efbc8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\GDataTable\gdatatable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gdataview.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtableaction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtableglobal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtabledataIndex.h">
+      <Filter>头文件\Index</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtableindex.h">
+      <Filter>头文件\Index</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablespatialindex.h">
+      <Filter>头文件\Index</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gfilter.h">
+      <Filter>头文件\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtableattribute.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablecell.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablecolumn.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablecolumns.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablefield.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablefields.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtableobject.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablerow.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gtablerows.h">
+      <Filter>头文件\Attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gfilter_ex.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gvirtualtable.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gvarianttable.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gsimpletable.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gserialtable.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gobjecttable.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gmetatable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GDataTable\gmemorytable.h">
+      <Filter>头文件\_private</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\GDataTable\gfilter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GDataTable\gfilter_ex.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GDataTable\gmemorytable.cpp">
+      <Filter>源文件\_private</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

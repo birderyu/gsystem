@@ -3,6 +3,7 @@
 
 #include "gglobal.h"
 
+/// 基本内置类型的Hash算法
 GAPI guint GHashing(gbool);
 GAPI guint GHashing(gchar);
 GAPI guint GHashing(gschar);
@@ -171,6 +172,15 @@ template<>
 struct GHashF<gdecimal>
 {
 	guint operator()(const gdecimal &v) const
+	{
+		return GHashing(v);
+	}
+};
+
+template<typename T>
+struct GHashF<T*>
+{
+	guint operator()(const T *v) const
 	{
 		return GHashing(v);
 	}

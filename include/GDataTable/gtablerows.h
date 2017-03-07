@@ -7,8 +7,9 @@ template<typename TableT>
 class GTableRows
 {
 public:
-	GTableRows(GDataTable &, CsSizeTypeArray *rows = NULL);
-	GTableRows(const GTableRows &);
+	GTableRows(GDataTable &, GSizeArray *rows = GNULL);
+	GTableRows(const GTableRows<TableT> &);
+	GTableRows(GTableRows<TableT> &&);
 
 	GDataTable &Table();
 	const GDataTable &Table() const;

@@ -2,35 +2,64 @@
 #define _CORE_DOUBLE_LINKED_LIST_INLINE_
 
 template<typename DataT, typename NodeT>
-inline GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList()
-: m_nSize(0), m_pFirst(NULL), m_pLast(NULL)
+GINLINE GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList()
+: m_nSize(0), m_pFirst(GNULL), m_pLast(GNULL)
 {
 }
 
 template<typename DataT, typename NodeT>
-inline GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList(const DataT &data)
-: m_nSize(0), m_pFirst(NULL), m_pLast(NULL)
+GINLINE GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList(const DataT &data)
+: m_nSize(0), m_pFirst(GNULL), m_pLast(GNULL)
 {
 	AddFirst(data);
 }
 
 template<typename DataT, typename NodeT>
-inline GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList(const GDoubleLinkedList<DataT, NodeT> &other)
-: m_nSize(0), m_pFirst(NULL), m_pLast(NULL)
+GINLINE GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList(DataT &&data)
+: m_nSize(0), m_pFirst(GNULL), m_pLast(GNULL)
 {
-	if (other.m_nSize > 0)
+	AddFirst(GForward<DataT>(data));
+}
+
+template<typename DataT, typename NodeT>
+GINLINE GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList(const GDoubleLinkedList<DataT, NodeT> &list)
+: m_nSize(0), m_pFirst(GNULL), m_pLast(GNULL)
+{
+	NodeT *node = list.m_pFirst;
+	if (GNULL == node)
 	{
-		for (gsize i = 0; i < other.m_nSize; i++)
-		{
-			AddLast(other.GetAt(i));
-		}
+		return;
+	}
+
+	NodeT *new_node = new NodeT(node->m_tData);
+	m_pFirst = m_pLast = new_node;
+	m_nSize = 1;
+	node = node->m_pNext;
+	while (node)
+	{
+		new_node->m_pNext = new NodeT(node->m_tData);
+		m_pLast = new_node;
+
+		new_node = new_node->m_pNext;
+		node = node->m_pNext;
+
+		m_nSize++;
 	}
 }
 
 template<typename DataT, typename NodeT>
-inline GDoubleLinkedList<DataT, NodeT>& GDoubleLinkedList<DataT, NodeT>::operator=(const GDoubleLinkedList<DataT, NodeT> &other)
+GINLINE GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList(GDoubleLinkedList<DataT, NodeT> &&list)
+: m_nSize(list.m_nSize), m_pFirst(list.m_pFirst), m_pLast(list.m_pLast)
 {
-	if (this == &other)
+	list.m_nSize = 0;
+	list.m_pFirst = GNULL;
+	list.m_pLast = GNULL;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE GDoubleLinkedList<DataT, NodeT>& GDoubleLinkedList<DataT, NodeT>::operator=(const GDoubleLinkedList<DataT, NodeT> &list)
+{
+	if (this == &list)
 	{
 		return *this;
 	}
@@ -40,40 +69,74 @@ inline GDoubleLinkedList<DataT, NodeT>& GDoubleLinkedList<DataT, NodeT>::operato
 		RemoveAll();
 	}
 
-	if (other.m_nSize > 0)
+	NodeT *node = list.m_pFirst;
+	if (GNULL == node)
 	{
-		for (gsize i = 0; i < other.m_nSize; i++)
-		{
-			AddLast(other.GetDataAt(i));
-		}
+		return *this;
+	}
+
+	NodeT *new_node = new NodeT(node->m_tData);
+	m_pFirst = m_pLast = new_node;
+	m_nSize = 1;
+	node = node->m_pNext;
+	while (node)
+	{
+		new_node->m_pNext = new NodeT(node->m_tData);
+		m_pLast = new_node;
+
+		new_node = new_node->m_pNext;
+		node = node->m_pNext;
+
+		m_nSize++;
 	}
 	return *this;
 }
 
 template<typename DataT, typename NodeT>
-inline GDoubleLinkedList<DataT, NodeT>::~GDoubleLinkedList()
+GINLINE GDoubleLinkedList<DataT, NodeT>& GDoubleLinkedList<DataT, NodeT>::operator=(GDoubleLinkedList<DataT, NodeT> &&list)
+{
+	if (this == &list)
+	{
+		return *this;
+	}
+
+	if (!IsEmpty())
+	{
+		RemoveAll();
+	}
+
+	m_nSize = list.m_nSize;
+	m_pFirst = list.m_pFirst;
+	m_pLast = list.m_pLast;
+	list.m_nSize = 0;
+	list.m_pFirst = list.m_pLast = GNULL;
+	return *this;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE GDoubleLinkedList<DataT, NodeT>::~GDoubleLinkedList()
 {
 	RemoveAll();
 }
 
 template<typename DataT, typename NodeT>
-inline gsize GDoubleLinkedList<DataT, NodeT>::Size() const
+GINLINE gsize GDoubleLinkedList<DataT, NodeT>::Size() const
 {
 	return m_nSize;
 }
 
 template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::IsEmpty() const
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::IsEmpty() const
 {
 	return 0 == m_nSize;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::Invert()
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::Invert()
 {
 	if (m_nSize <= 1) return;
 
-	NodeT *tmpNod = NULL, *curNod = m_pFirst, *nextNod = NULL;
+	NodeT *tmpNod = GNULL, *curNod = m_pFirst, *nextNod = GNULL;
 	for (gsize i = 1; i <= m_nSize; i++)
 	{
 		nextNod = curNod->m_pNext;
@@ -90,9 +153,9 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::Invert()
 }
 
 template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const DataT &data)
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const DataT &data)
 {
-	if (NULL == m_pFirst || 0 == pos)
+	if (GNULL == m_pFirst || 0 == pos)
 	{
 		return AddFirst(data);
 	}
@@ -115,7 +178,7 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const Data
 	pTmpNode->m_pPrevious->m_pNext = pNewNode;
 	pTmpNode->m_pPrevious = pNewNode;
 
-	if (NULL == pNewNode->m_pNext)
+	if (GNULL == pNewNode->m_pNext)
 	{
 		m_pLast = pNewNode;
 	}
@@ -125,7 +188,42 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const Data
 }
 
 template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, DataT &&data)
+{
+	if (GNULL == m_pFirst || 0 == pos)
+	{
+		return AddFirst(GForward<DataT>(data));
+	}
+
+	GASSERT(pos < m_nSize);
+	NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+
+	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	if (!pNewNode)
+	{
+		return false;
+	}
+	pNewNode->m_pNext = pTmpNode;
+	pNewNode->m_pPrevious = pTmpNode->m_pPrevious;
+
+	pTmpNode->m_pPrevious->m_pNext = pNewNode;
+	pTmpNode->m_pPrevious = pNewNode;
+
+	if (GNULL == pNewNode->m_pNext)
+	{
+		m_pLast = pNewNode;
+	}
+
+	++m_nSize;
+	return true;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
 {
 	if (!node || !m_pFirst || !m_pLast)
 	{
@@ -154,9 +252,38 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const Da
 }
 
 template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const DataT &data)
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &&data)
 {
-	if (NULL == m_pFirst)
+	if (!node || !m_pFirst || !m_pLast)
+	{
+		return false;
+	}
+
+	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	if (!pNewNode)
+	{
+		return false;
+	}
+
+	pNewNode->m_pPrevious = node->m_pPrevious;
+	if (node->m_pPrevious)
+	{
+		node->m_pPrevious->m_pNext = pNewNode;
+	}
+	pNewNode->m_pNext = node;
+	node->m_pPrevious = pNewNode;
+	if (m_pFirst == node)
+	{
+		m_pFirst = pNewNode;
+	}
+	++m_nSize;
+	return true;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const DataT &data)
+{
+	if (GNULL == m_pFirst)
 	{
 		return AddFirst(data);
 	}
@@ -178,7 +305,7 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const DataT
 	pNewNode->m_pPrevious = pTmpNode;
 	pTmpNode->m_pNext = pNewNode;
 
-	if (NULL == pNewNode->m_pNext)
+	if (GNULL == pNewNode->m_pNext)
 	{
 		m_pLast = pNewNode;
 	}
@@ -192,7 +319,45 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const DataT
 }
 
 template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, const DataT &data)
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, DataT &&data)
+{
+	if (GNULL == m_pFirst)
+	{
+		return AddFirst(GForward<DataT>(data));
+	}
+
+	GASSERT(pos < m_nSize);
+	NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+
+	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	if (!pNewNode)
+	{
+		return false;
+	}
+
+	pNewNode->m_pNext = pTmpNode->m_pNext;
+	pNewNode->m_pPrevious = pTmpNode;
+	pTmpNode->m_pNext = pNewNode;
+
+	if (GNULL == pNewNode->m_pNext)
+	{
+		m_pLast = pNewNode;
+	}
+	else
+	{
+		pNewNode->m_pNext->m_pPrevious = pNewNode;
+	}
+
+	++m_nSize;
+	return true;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, const DataT &data)
 {
 	if (!node || !m_pFirst || !m_pLast)
 	{
@@ -221,38 +386,27 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, const Dat
 }
 
 template<typename DataT, typename NodeT>
-inline DataT& GDoubleLinkedList<DataT, NodeT>::GetDataAt(gsize pos)
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, DataT &&data)
 {
-	NodeT *node = GetNodeAt(pos);
-	GASSERT(node);
-	return node->m_tData;
-}
+	if (!node || !m_pFirst || !m_pLast)
+	{
+		return false;
+	}
 
-template<typename DataT, typename NodeT>
-inline const DataT &GDoubleLinkedList<DataT, NodeT>::GetDataAt(gsize pos) const
-{
-	const NodeT *node = GetNodeAt(pos);
-	GASSERT(node);
-	return node->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::AddFirst(const DataT &data)
-{
-	NodeT *pNewNode = new NodeT(data);
+	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
 	if (!pNewNode)
 	{
 		return false;
 	}
 
-	pNewNode->m_pPrevious = NULL;
-	pNewNode->m_pNext = m_pFirst;
-	if (NULL != m_pFirst)
+	pNewNode->m_pNext = node->m_pNext;
+	if (node->m_pNext)
 	{
-		m_pFirst->m_pPrevious = pNewNode;
+		node->m_pNext->m_pPrevious = pNewNode;
 	}
-	m_pFirst = pNewNode;
-	if (NULL == m_pLast)
+	pNewNode->m_pPrevious = node;
+	node->m_pNext = pNewNode;
+	if (m_pLast == node)
 	{
 		m_pLast = pNewNode;
 	}
@@ -261,7 +415,23 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::AddFirst(const DataT &data)
 }
 
 template<typename DataT, typename NodeT>
-inline gbool GDoubleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
+GINLINE DataT& GDoubleLinkedList<DataT, NodeT>::GetDataAt(gsize pos)
+{
+	NodeT *node = GetNodeAt(pos);
+	GASSERT(node);
+	return node->m_tData;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE const DataT &GDoubleLinkedList<DataT, NodeT>::GetDataAt(gsize pos) const
+{
+	const NodeT *node = GetNodeAt(pos);
+	GASSERT(node);
+	return node->m_tData;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::AddFirst(const DataT &data)
 {
 	NodeT *pNewNode = new NodeT(data);
 	if (!pNewNode)
@@ -269,14 +439,62 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
 		return false;
 	}
 
-	pNewNode->m_pNext = NULL;
+	pNewNode->m_pPrevious = GNULL;
+	pNewNode->m_pNext = m_pFirst;
+	if (GNULL != m_pFirst)
+	{
+		m_pFirst->m_pPrevious = pNewNode;
+	}
+	m_pFirst = pNewNode;
+	if (GNULL == m_pLast)
+	{
+		m_pLast = pNewNode;
+	}
+	++m_nSize;
+	return true;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::AddFirst(DataT &&data)
+{
+	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	if (!pNewNode)
+	{
+		return false;
+	}
+
+	pNewNode->m_pPrevious = GNULL;
+	pNewNode->m_pNext = m_pFirst;
+	if (GNULL != m_pFirst)
+	{
+		m_pFirst->m_pPrevious = pNewNode;
+	}
+	m_pFirst = pNewNode;
+	if (GNULL == m_pLast)
+	{
+		m_pLast = pNewNode;
+	}
+	++m_nSize;
+	return true;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
+{
+	NodeT *pNewNode = new NodeT(data);
+	if (!pNewNode)
+	{
+		return false;
+	}
+
+	pNewNode->m_pNext = GNULL;
 	pNewNode->m_pPrevious = m_pLast;
-	if (NULL != m_pLast)
+	if (GNULL != m_pLast)
 	{
 		m_pLast->m_pNext = pNewNode;
 	}
 	m_pLast = pNewNode;
-	if (NULL == m_pFirst)
+	if (GNULL == m_pFirst)
 	{
 		m_pFirst = pNewNode;
 	}
@@ -285,31 +503,55 @@ inline gbool GDoubleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
 }
 
 template<typename DataT, typename NodeT>
-inline NodeT *GDoubleLinkedList<DataT, NodeT>::GetFirstNode()
+GINLINE gbool GDoubleLinkedList<DataT, NodeT>::AddLast(DataT &&data)
+{
+	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	if (!pNewNode)
+	{
+		return false;
+	}
+
+	pNewNode->m_pNext = GNULL;
+	pNewNode->m_pPrevious = m_pLast;
+	if (GNULL != m_pLast)
+	{
+		m_pLast->m_pNext = pNewNode;
+	}
+	m_pLast = pNewNode;
+	if (GNULL == m_pFirst)
+	{
+		m_pFirst = pNewNode;
+	}
+	++m_nSize;
+	return true;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE NodeT *GDoubleLinkedList<DataT, NodeT>::GetFirstNode()
 {
 	return m_pFirst;
 }
 
 template<typename DataT, typename NodeT>
-inline const NodeT *GDoubleLinkedList<DataT, NodeT>::GetFirstNode() const
+GINLINE const NodeT *GDoubleLinkedList<DataT, NodeT>::GetFirstNode() const
 {
 	return m_pFirst;
 }
 
 template<typename DataT, typename NodeT>
-inline NodeT *GDoubleLinkedList<DataT, NodeT>::GetLastNode()
+GINLINE NodeT *GDoubleLinkedList<DataT, NodeT>::GetLastNode()
 {
 	return m_pLast;
 }
 
 template<typename DataT, typename NodeT>
-inline const NodeT *GDoubleLinkedList<DataT, NodeT>::GetLastNode() const
+GINLINE const NodeT *GDoubleLinkedList<DataT, NodeT>::GetLastNode() const
 {
 	return m_pLast;
 }
 
 template<typename DataT, typename NodeT>
-inline NodeT *GDoubleLinkedList<DataT, NodeT>::GetNodeAt(gsize pos)
+GINLINE NodeT *GDoubleLinkedList<DataT, NodeT>::GetNodeAt(gsize pos)
 {
 	GASSERT(pos < m_nSize);
 	NodeT *pTmpNode = m_pFirst;
@@ -321,7 +563,7 @@ inline NodeT *GDoubleLinkedList<DataT, NodeT>::GetNodeAt(gsize pos)
 }
 
 template<typename DataT, typename NodeT>
-inline const NodeT *GDoubleLinkedList<DataT, NodeT>::GetNodeAt(gsize pos) const
+GINLINE const NodeT *GDoubleLinkedList<DataT, NodeT>::GetNodeAt(gsize pos) const
 {
 	GASSERT(pos < m_nSize);
 	const NodeT *pTmpNode = m_pFirst;
@@ -333,35 +575,35 @@ inline const NodeT *GDoubleLinkedList<DataT, NodeT>::GetNodeAt(gsize pos) const
 }
 
 template<typename DataT, typename NodeT>
-inline DataT &GDoubleLinkedList<DataT, NodeT>::GetFirstData()
+GINLINE DataT &GDoubleLinkedList<DataT, NodeT>::GetFirstData()
 {
 	GASSERT(m_pFirst);
 	return m_pFirst->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline const DataT &GDoubleLinkedList<DataT, NodeT>::GetFirstData() const
+GINLINE const DataT &GDoubleLinkedList<DataT, NodeT>::GetFirstData() const
 {
 	GASSERT(m_pFirst);
 	return m_pFirst->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline DataT &GDoubleLinkedList<DataT, NodeT>::GetLastData()
+GINLINE DataT &GDoubleLinkedList<DataT, NodeT>::GetLastData()
 {
 	GASSERT(m_pLast);
 	return m_pLast->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline const DataT &GDoubleLinkedList<DataT, NodeT>::GetLastData() const
+GINLINE const DataT &GDoubleLinkedList<DataT, NodeT>::GetLastData() const
 {
 	GASSERT(m_pLast);
 	return m_pLast->m_tData;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::Remove(NodeT *node)
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::Remove(const NodeT *node)
 {
 	if (!node)
 	{
@@ -374,7 +616,7 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::Remove(NodeT *node)
 	}
 	else
 	{
-		m_pFirst = NULL;
+		m_pFirst = GNULL;
 	}
 
 	if (node->m_pNext)
@@ -383,7 +625,7 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::Remove(NodeT *node)
 	}
 	else
 	{
-		m_pLast = NULL;
+		m_pLast = GNULL;
 	}
 
 	delete node;
@@ -391,7 +633,7 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::Remove(NodeT *node)
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 {
 	GASSERT(pos < m_nSize);
 
@@ -426,14 +668,14 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 	}
 
 	delete pTmpNode;
-	pTmpNode = NULL;
+	pTmpNode = GNULL;
 
 	--m_nSize;
 	return;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveFirst()
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::RemoveFirst()
 {
 	if (!m_pFirst)
 	{
@@ -445,20 +687,20 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveFirst()
 	m_pFirst = m_pFirst->m_pNext;
 	if (m_pFirst)
 	{
-		m_pFirst->m_pPrevious = NULL;
+		m_pFirst->m_pPrevious = GNULL;
 	}
 	else
 	{
-		m_pLast = NULL;
+		m_pLast = GNULL;
 	}
 
 	delete pTmpNode;
-	pTmpNode = NULL;
+	pTmpNode = GNULL;
 	--m_nSize;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveLast()
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::RemoveLast()
 {
 	if (!m_pLast)
 	{
@@ -469,41 +711,37 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveLast()
 	m_pLast = m_pLast->m_pPrevious;
 	if (m_pLast)
 	{
-		m_pLast->m_pNext = NULL;
+		m_pLast->m_pNext = GNULL;
 	}
 	else
 	{
-		m_pFirst = NULL;
+		m_pFirst = GNULL;
 	}
 
 	delete pTmpNode;
-	pTmpNode = NULL;
+	pTmpNode = GNULL;
 	--m_nSize;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::RemoveAll()
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::RemoveAll()
 {
-	if (m_nSize <= 0)
+	NodeT *node = m_pFirst;
+	NodeT *next_node = GNULL;
+	while (node)
 	{
-		return;
+		next_node = node->m_pNext;
+		delete node;
+		node = next_node;
 	}
 
-	NodeT *pTmpNode = NULL;
-	for (gsize i = 0; i < m_nSize; ++i)
-	{
-		pTmpNode = m_pFirst->m_pNext;
-		delete m_pFirst;
-		m_pFirst = pTmpNode;
-	}
-
-	m_pFirst = NULL;
-	m_pLast = NULL;
+	m_pFirst = GNULL;
+	m_pLast = GNULL;
 	m_nSize = 0;
 }
 
 template<typename DataT, typename NodeT>
-inline gvoid GDoubleLinkedList<DataT, NodeT>::SetDataAt(gsize pos, const DataT &data)
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::SetDataAt(gsize pos, const DataT &data)
 {
 	GASSERT(pos < m_nSize);
 	NodeT *pTmpNode = m_pFirst;
@@ -515,7 +753,19 @@ inline gvoid GDoubleLinkedList<DataT, NodeT>::SetDataAt(gsize pos, const DataT &
 }
 
 template<typename DataT, typename NodeT>
-inline gsize GDoubleLinkedList<DataT, NodeT>::IndexOf(const DataT &data) const
+GINLINE gvoid GDoubleLinkedList<DataT, NodeT>::SetDataAt(gsize pos, DataT &&data)
+{
+	GASSERT(pos < m_nSize);
+	NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+	pTmpNode->m_tData = GForward<DataT>(data);
+}
+
+template<typename DataT, typename NodeT>
+GINLINE gsize GDoubleLinkedList<DataT, NodeT>::IndexOf(const DataT &data) const
 {
 	NodeT *pTmpNode = m_pFirst;
 	for (gsize i = 0; i < m_nSize; i++)
@@ -528,7 +778,7 @@ inline gsize GDoubleLinkedList<DataT, NodeT>::IndexOf(const DataT &data) const
 }
 
 template<typename DataT, typename NodeT>
-inline NodeT *GDoubleLinkedList<DataT, NodeT>::Find(const DataT &data)
+GINLINE NodeT *GDoubleLinkedList<DataT, NodeT>::Find(const DataT &data)
 {
 	NodeT *pTmpNode = m_pFirst;
 	while (pTmpNode)
@@ -541,7 +791,7 @@ inline NodeT *GDoubleLinkedList<DataT, NodeT>::Find(const DataT &data)
 }
 
 template<typename DataT, typename NodeT>
-inline const NodeT *GDoubleLinkedList<DataT, NodeT>::Find(const DataT &data) const
+GINLINE const NodeT *GDoubleLinkedList<DataT, NodeT>::Find(const DataT &data) const
 {
 	const NodeT *pTmpNode = m_pFirst;
 	while (pTmpNode)
@@ -554,7 +804,7 @@ inline const NodeT *GDoubleLinkedList<DataT, NodeT>::Find(const DataT &data) con
 }
 
 template<typename DataT, typename NodeT>
-inline gsize GDoubleLinkedList<DataT, NodeT>::IndexOfCircle() const
+GINLINE gsize GDoubleLinkedList<DataT, NodeT>::IndexOfCircle() const
 {
 	if (0 == m_nSize)
 	{
@@ -567,7 +817,7 @@ inline gsize GDoubleLinkedList<DataT, NodeT>::IndexOfCircle() const
 	// 判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。
 	do
 	{
-		if (p1 != NULL && p2 != NULL && p2->m_pNext != NULL)
+		if (p1 != GNULL && p2 != GNULL && p2->m_pNext != GNULL)
 		{
 			p1 = p1->m_pNext;
 			p2 = p2->m_pNext->m_pNext;
@@ -601,7 +851,7 @@ NodeT *GDoubleLinkedList<DataT, NodeT>::FindCircle()
 {
 	if (0 == m_nSize)
 	{
-		return NULL;
+		return GNULL;
 	}
 
 	NodeT* p1 = m_pFirst;
@@ -610,14 +860,14 @@ NodeT *GDoubleLinkedList<DataT, NodeT>::FindCircle()
 	// 判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。
 	do
 	{
-		if (p1 != NULL && p2 != NULL && p2->m_pNext != NULL)
+		if (p1 != GNULL && p2 != GNULL && p2->m_pNext != GNULL)
 		{
 			p1 = p1->m_pNext;
 			p2 = p2->m_pNext->m_pNext;
 		}
 		else
 		{
-			return NULL;
+			return GNULL;
 		}
 	} while (p1 != p2);
 
@@ -636,7 +886,7 @@ const NodeT *GDoubleLinkedList<DataT, NodeT>::FindCircle() const
 {
 	if (0 == m_nSize)
 	{
-		return NULL;
+		return GNULL;
 	}
 
 	const NodeT* p1 = m_pFirst;
@@ -645,14 +895,14 @@ const NodeT *GDoubleLinkedList<DataT, NodeT>::FindCircle() const
 	// 判断链表是否有环，当p1=p2时说明链表有环，程序跳出循环。如果p2一直走到链表尽头则说明没有环。
 	do
 	{
-		if (p1 != NULL && p2 != NULL && p2->m_pNext != NULL)
+		if (p1 != GNULL && p2 != GNULL && p2->m_pNext != GNULL)
 		{
 			p1 = p1->m_pNext;
 			p2 = p2->m_pNext->m_pNext;
 		}
 		else
 		{
-			return NULL;
+			return GNULL;
 		}
 	} while (p1 != p2);
 
@@ -667,7 +917,7 @@ const NodeT *GDoubleLinkedList<DataT, NodeT>::FindCircle() const
 }
 
 template<typename DataT, typename NodeT>
-inline gsize GDoubleLinkedList<DataT, NodeT>::IndexOfCross(const GLinkedList<DataT, NodeT> &list)
+GINLINE gsize GDoubleLinkedList<DataT, NodeT>::IndexOfCross(const GLinkedList<DataT, NodeT> &list)
 {
 	if (0 == m_nSize || 0 == list.Size())
 	{
@@ -686,21 +936,74 @@ inline gsize GDoubleLinkedList<DataT, NodeT>::IndexOfCross(const GLinkedList<Dat
 
 	gsize i = IndexOfCircle();
 
-	m_pLast->m_pNext = NULL;
+	m_pLast->m_pNext = GNULL;
 	m_nSize -= list.Size();
 	return i;
 }
 
 template<typename DataT, typename NodeT>
-inline DataT &GDoubleLinkedList<DataT, NodeT>::operator[](gsize pos)
+GINLINE DataT &GDoubleLinkedList<DataT, NodeT>::operator[](gsize pos)
 {
 	return GetDataAt(pos);
 }
 
 template<typename DataT, typename NodeT>
-inline const DataT &GDoubleLinkedList<DataT, NodeT>::operator[](gsize pos) const
+GINLINE const DataT &GDoubleLinkedList<DataT, NodeT>::operator[](gsize pos) const
 {
 	return GetDataAt(pos);
+}
+
+template<typename DataT, typename NodeT>
+GINLINE GLinkedList<DataT, NodeT> &GDoubleLinkedList<DataT, NodeT>::operator+=(const GDoubleLinkedList<DataT, NodeT> &list)
+{
+	if (list.IsEmpty())
+	{
+		return *this;
+	}
+
+	if (IsEmpty())
+	{
+		// 直接调用拷贝运算符
+		return this->operator=(list);
+	}
+
+	NodeT *new_node = GNULL;
+	const NodeT *node = list.m_pLast;
+	while (node)
+	{
+		new_node = new NodeT(node->m_tData);
+		m_pLast->m_pNext = new_node;
+		m_pLast = new_node;
+
+		node = node->m_pNext;
+		m_nSize++;
+	}
+	return *this;
+}
+
+template<typename DataT, typename NodeT>
+GINLINE GLinkedList<DataT, NodeT> &GDoubleLinkedList<DataT, NodeT>::operator+=(GDoubleLinkedList<DataT, NodeT> &&list)
+{
+	if (list.IsEmpty())
+	{
+		return *this;
+	}
+
+	if (IsEmpty())
+	{
+		// 直接调用移动运算符
+		return this->operator=(GForward<GDoubleLinkedList<DataT, NodeT>>(list));
+	}
+
+	// 将list衔接到当且链表的后面
+	m_nSize += list.m_nSize;
+	m_pLast->m_pNext = list.m_pFirst;
+	m_pLast = list.m_pLast;
+
+	list.m_nSize = 0;
+	list.m_pFirst = GNULL;
+	list.m_pLast = GNULL;
+	return *this;
 }
 
 #endif // _CORE_DOUBLE_LINKED_LIST_INLINE_

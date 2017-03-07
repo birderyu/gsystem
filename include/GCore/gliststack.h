@@ -3,7 +3,7 @@
 #define _CORE_LIST_STACK_H_
 
 #include "gstack.h"
-#include "gsinglelinkedlist.h"
+#include "gdoublelinkedlist.h"
 
 template<typename DataT>
 class GListStack 
@@ -19,12 +19,19 @@ public:
 	gvoid Clear();//清空。     
 	gsize Size() const;
 	gvoid Dispose();
-	gbool Push(const DataT& data);
-	gbool Pop(DataT *data = NULL);
-	gbool Top(DataT &data) const;
+
+	gbool Push(const DataT &data);
+	gbool Push(DataT &&data);
+
+	gbool Pop(DataT *data = GNULL);
+
+	const DataT &Top() const;
+	DataT &Top();
+	const DataT &Bottom() const;
+	DataT &Bottom();
 
 private:
-	GSingleLinkedList<DataT> m_tList;
+	GDoubleLinkedList<DataT> m_tList;
 };
 
 #include "gliststack.inl"

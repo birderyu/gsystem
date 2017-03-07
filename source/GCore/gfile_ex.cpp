@@ -4,7 +4,7 @@
 
 GFile_Ex::GFile_Ex(const GString &sFileName)
 : m_sFileName(sFileName)
-, m_pFileStream(NULL)
+, m_pFileStream(GNULL)
 , m_nOpenMode(GFile::NO_OPEN)
 {
 
@@ -17,7 +17,7 @@ GFile_Ex::~GFile_Ex()
 
 gbool GFile_Ex::Valid() const
 {
-	return m_pFileStream != NULL;
+	return m_pFileStream != GNULL;
 }
 
 gbool GFile_Ex::EndOfFile() const
@@ -26,7 +26,7 @@ gbool GFile_Ex::EndOfFile() const
 	{
 		return true;
 	}
-	return feof(m_pFileStream);
+	return feof(m_pFileStream) != 0;
 }
 
 const GString &GFile_Ex::FileName() const
@@ -59,7 +59,7 @@ gbool GFile_Ex::Open(gbyte nOpenMode)
 		return false;
 	}
 
-	FILE *new_file_stream = NULL;
+	FILE *new_file_stream = GNULL;
 	errno_t errno;
 	errno = fopen_s(&new_file_stream, m_sFileName.CString(), open_mode);
 	if (!new_file_stream || errno != 0)

@@ -80,3 +80,13 @@ gvoid GFile::Rewind()
 	GASSERT(m_pFileEx);
 	m_pFileEx->Rewind();
 }
+
+gsize GFile::Size() const
+{
+	glong size = Tell();
+	if (size < 0)
+	{
+		return 0;
+	}
+	return static_cast<gsize>(size);
+}

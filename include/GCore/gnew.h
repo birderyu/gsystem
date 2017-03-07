@@ -2,16 +2,11 @@
 #define _CORE_NEW_H_
 
 #include <new>
+#include "gmemory.h"
 #include "gmemorypool.h"
 #include "glockguard.h"
 
-GAPI gpointer	GMalloc(gsize size);
-GAPI gpointer	GCalloc(gsize n, gsize size);
-GAPI gpointer	GRealloc(gpointer oldptr, gsize newsize);
-GAPI gvoid		GFree(gpointer);
-GAPI gpointer	GMemCopy(gvoid *dst, const gvoid *src, gsize size);
-GAPI gpointer	GMemMove(gvoid *dst, const gvoid *src, gsize size);
-GAPI gpointer	GMemSet(gvoid *dst, gbyte value, gsize size);
+G_BEGIN_NAMESPACE
 
 // NewHandler
 class GNewHander
@@ -37,8 +32,8 @@ template<typename ClassT>
 class GNewT
 {
 public:
-	static gpointer operator new(gsize) throw(std::bad_alloc);
-	static gvoid operator delete(gpointer);
+	static gpointer operator new(gsize) noexcept(false);
+	static gvoid operator delete(gpointer) noexcept;
 };
 
 // 线程不安全
@@ -48,11 +43,11 @@ template<typename ClassT>
 class GNewInPoolT
 {
 public:
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
-	static GMemoryPool pool;
+	static GMemoryPool<sizeof(ClassT)> pool;
 };
 
 // 线程不安全
@@ -62,8 +57,8 @@ template<typename ClassT>
 class GNewWithHandlerT
 {
 public:
-	static std::new_handler set_new_handler(std::new_handler p) throw();
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static std::new_handler set_new_handler(std::new_handler p);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
@@ -77,13 +72,13 @@ template<typename ClassT>
 class GNewInPoolWithHandlerT
 {
 public:
-	static std::new_handler set_new_handler(std::new_handler p) throw();
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static std::new_handler set_new_handler(std::new_handler p);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
 	static std::new_handler currentHandler;
-	static GMemoryPool pool;
+	static GMemoryPool<sizeof(ClassT)> pool;
 };
 
 // 线程安全
@@ -93,7 +88,7 @@ template<typename ClassT, typename LockT>
 class GSafeNewT
 {
 public:
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
@@ -107,8 +102,8 @@ template<typename ClassT, typename LockT>
 class GSafeNewWithHandlerT
 {
 public:
-	static std::new_handler set_new_handler(std::new_handler p) throw();
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static std::new_handler set_new_handler(std::new_handler p);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
@@ -123,11 +118,11 @@ template<typename ClassT, typename LockT>
 class GSafeNewInPoolT
 {
 public:
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
-	static GMemoryPool pool;
+	static GMemoryPool<sizeof(ClassT)> pool;
 	static LockT lock;
 };
 
@@ -138,16 +133,18 @@ template<typename ClassT, typename LockT>
 class GSafeNewInPoolWithHandlerT
 {
 public:
-	static std::new_handler set_new_handler(std::new_handler p) throw();
-	static gpointer operator new(gsize) throw(std::bad_alloc);
+	static std::new_handler set_new_handler(std::new_handler p);
+	static gpointer operator new(gsize);
 	static gvoid operator delete(gpointer);
 
 private:
 	static std::new_handler currentHandler;
-	static GMemoryPool pool;
+	static GMemoryPool<sizeof(ClassT)> pool;
 	static LockT lock;
 };
 
 #include "gnew.inl"
+
+G_END_NAMESPACE
 
 #endif // _CORE_NEW_H_

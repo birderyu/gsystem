@@ -2,9 +2,9 @@
 **
 ** GNova: A quick, micro library of C++
 **
-** @file	gssonarray.h
+** @file	gjsonarray.h
 ** @brief	Json数组类型的定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2017-1-3
 ** @version	1.0
@@ -29,19 +29,31 @@
 
 #include "glist.h"
 
+G_BEGIN_NAMESPACE
 class GJsonValue;
+class GJsonParserMessage;
+G_END_NAMESPACE
+
+G_BEGIN_NAMESPACE
 
 class GAPI GJsonArray
+	: public GObject
 {
 public:
 	GJsonArray();
-	GJsonArray(const GString &);
-	GJsonArray(const GJsonArray &);
+	~GJsonArray();
 
-	gbool Parse(const GString &jsonStr, gsize cursor = 0, GString *s_error = NULL);
+	gbool Valid() const;
+
+	GString ToString() const;
+
+	gbool Parse(const GString &jsonStr, gsize *cursor = GNULL, GJsonParserMessage *msg = GNULL);
 
 private:
-	GList<GJsonValue*> m_tList;
+	gvoid Dispose();
+	GList<GJsonValue*> m_tJsonValues;
 };
+
+G_END_NAMESPACE
 
 #endif // _CORE_JSON_ARRAY_H_

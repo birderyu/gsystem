@@ -1,18 +1,19 @@
 #include "gcriticalsection.h"
 
 #ifdef G_SYSTEM_WINDOWS
+#	ifndef WIN32_LEAN_AND_MEAN
+#		define WIN32_LEAN_AND_MEAN
+#	endif
 #include <windows.h>
 
-/// Win32ÁÙ½çÇøÊµÀý¾ä±ú
-struct GCriticalSection_Handle
-{
-	CRITICAL_SECTION m_tCriticalSection;
-};
-
 GCriticalSection::GCriticalSection()
-:m_pHandle(NULL)
 {
-	Initialize();
+	Initialize(false, 0);
+}
+
+GCriticalSection::GCriticalSection(gbool spin, gsize spin_count)
+{
+	Initialize(spin, spin_count);
 }
 
 GCriticalSection::~GCriticalSection()
@@ -20,49 +21,31 @@ GCriticalSection::~GCriticalSection()
 	Release();
 }
 
-gbool GCriticalSection::Lock()
+gvoid GCriticalSection::Lock()
 {
-	GCriticalSection_Handle *pHandle = static_cast<GCriticalSection_Handle*>(m_pHandle);
-	if (!pHandle) return false;
-
-	
-	return true;
-}
-
-gbool GCriticalSection::Trylock()
-{
-	return false;
+	EnterCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
 gvoid GCriticalSection::Unlock()
 {
-
+	LeaveCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
-gint GCriticalSection::Initialize()
+gvoid GCriticalSection::Initialize(gbool spin, gsize spin_count)
 {
-	if (!m_pHandle)
+	if (spin)
 	{
-		return 0;
+		InitializeCriticalSectionAndSpinCount((CRITICAL_SECTION*)m_pHandle, spin_count);
 	}
-	GCriticalSection_Handle *pHandle = new GCriticalSection_Handle;
-	if (!pHandle) return -1;
-	m_pHandle = pHandle;
-
-	InitializeCriticalSection(&pHandle->m_tCriticalSection);
-
-	//ReleaseMutex(pHandle->m_hMutex);
-	return 0;
+	else
+	{
+		InitializeCriticalSection((CRITICAL_SECTION*)m_pHandle);
+	}
 }
 
 gvoid GCriticalSection::Release()
 {
-	if (m_pHandle)
-	{
-		GCriticalSection_Handle *pHandle = static_cast<GCriticalSection_Handle*>(m_pHandle);
-		delete pHandle;
-		m_pHandle = NULL;
-	}
+	DeleteCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
 #endif // G_SYSTEM_WINDOWS

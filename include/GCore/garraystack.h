@@ -13,8 +13,10 @@ class GArrayStack
 {
 public:
 	GArrayStack(gsize capacity = G_STACK_DEFAULT_CAPACITY);
-	GArrayStack(const GArrayStack<DataT>& other);
-	GArrayStack<DataT>& operator=(const GArrayStack<DataT>& other);
+	GArrayStack(const GArrayStack<DataT> &stack);
+	GArrayStack(GArrayStack<DataT> &&stack);
+	GArrayStack<DataT>& operator=(const GArrayStack<DataT> &stack);
+	GArrayStack<DataT>& operator=(GArrayStack<DataT> &&stack);
 	~GArrayStack();
 
 public:
@@ -23,9 +25,13 @@ public:
 	gsize Size() const;
 	gbool IsFull() const;
 	gbool Resize(gsize capacity);
-	gbool Push(const DataT& data);
-	gbool Pop(DataT *data = NULL);
-	gbool Top(DataT &data) const;
+	gbool Push(const DataT &data);
+	gbool Push(DataT &&data);
+	gbool Pop(DataT *data = GNULL);
+	const DataT &Top() const;
+	DataT &Top();
+	const DataT &Bottom() const;
+	DataT &Bottom();
 
 	// Ïú»ÙÕ»
 	gvoid Dispose();

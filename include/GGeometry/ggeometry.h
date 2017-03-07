@@ -4,7 +4,7 @@
 **
 ** @file	ggeometry.h
 ** @brief	基础几何接口的定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2015-12-31
 ** @version	1.0

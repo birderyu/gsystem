@@ -8,7 +8,8 @@ class GTableField
 {
 public:
 	GTableField(GDataTable &, gsize column);
-	GTableField(const GTableField &);
+	GTableField(const GTableField<TableT> &);
+	GTableField(GTableField<TableT> &&);
 
 	gsize FieldID() const;
 	GString FieldName() const;

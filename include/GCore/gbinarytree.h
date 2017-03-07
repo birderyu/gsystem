@@ -4,7 +4,7 @@
 **
 ** @file	gbinarytree.h
 ** @brief	该文件包含了二叉树节点的定义、二叉树的定义及实现
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2016-08-07
 ** @version	1.0
@@ -18,6 +18,7 @@
 
 #include "gobject.h"
 #include "gstructure.h"
+#include "glist.h"
 
 /****************************************************************************
 **
@@ -48,9 +49,9 @@ struct GBinaryTreeNode
 	** @param[in]	right:	右孩子节点，默认为NULL
 	**
 	****************************************************************************/
-	GBinaryTreeNode(GBinaryTreeNode *parent = NULL, 
-		GBinaryTreeNode *left = NULL, 
-		GBinaryTreeNode *right = NULL);
+	GBinaryTreeNode(GBinaryTreeNode *parent = GNULL, 
+		GBinaryTreeNode *left = GNULL, 
+		GBinaryTreeNode *right = GNULL);
 };
 
 /****************************************************************************
@@ -78,6 +79,8 @@ public:
 
 public:
 	typedef NodeT Node;
+	typedef GList<NodeT *> Nodes;
+	typedef GList<const NodeT *> ConstNodes;
 
 	/****************************************************************************
 	**
@@ -87,7 +90,7 @@ public:
 	** @brief	访问节点的函数指针的定义
 	**
 	****************************************************************************/
-	typedef gvoid(*funtype)(const Node&);
+	typedef gvoid(*funtype)(const NodeT &node);
 
 public:
 	/****************************************************************************
@@ -101,7 +104,7 @@ public:
 	** 默认情况下构造一棵空树
 	**
 	****************************************************************************/
-	GBinaryTree(NodeT *root = NULL);
+	GBinaryTree(NodeT *root = GNULL);
 
 	/****************************************************************************
 	**
@@ -109,12 +112,21 @@ public:
 	**
 	** @name		GBinaryTree
 	** @brief		拷贝构造函数（copy constructor）
-	** @param[in]	tree: 另一棵二叉树的引用
-	**
-	** 深拷贝（deep copy）。
+	** @param[in]	tree {const GBinaryTree<NodeT> &tree} 另一棵二叉树的引用
 	**
 	****************************************************************************/
 	GBinaryTree(const GBinaryTree<NodeT> &tree);
+
+	/****************************************************************************
+	**
+	** GBinaryTree
+	**
+	** @name		GBinaryTree
+	** @brief		移动构造函数（move constructor）
+	** @param[in]	tree {GBinaryTree<NodeT> &&} 另一棵二叉树的引用（右值引用）
+	**
+	****************************************************************************/
+	GBinaryTree(GBinaryTree<NodeT> &&tree);
 
 	/****************************************************************************
 	**
@@ -160,13 +172,13 @@ public:
 	**
 	** GBinaryTree
 	**
-	** @name		Destroy
+	** @name		Dispose
 	** @brief		销毁树
 	**
 	** 释放所有资源。
 	**
 	****************************************************************************/
-	gvoid Destroy();
+	gvoid Dispose();
 
 public:
 	/****************************************************************************
@@ -189,7 +201,7 @@ public:
 	** @return	根节点的指针
 	**
 	****************************************************************************/
-	NodeT * Root() const;
+	NodeT *Root() const;
 
 	/****************************************************************************
 	**
@@ -246,7 +258,7 @@ public:
 	** @param[in]	访问节点的函数指针
 	**
 	****************************************************************************/
-	gvoid PreOrderTraverse(funtype) const;
+	template<typename VisitorT> gvoid PreOrderTraverse(VisitorT &visitor) const;
 
 	/****************************************************************************
 	**
@@ -257,7 +269,7 @@ public:
 	** @param[in]	访问节点的函数指针
 	**
 	****************************************************************************/
-	gvoid InOrderTraverse(funtype) const;
+	template<typename VisitorT> gvoid InOrderTraverse(VisitorT &visitor) const;
 
 	/****************************************************************************
 	**
@@ -268,7 +280,7 @@ public:
 	** @param[in]	访问节点的函数指针
 	**
 	****************************************************************************/
-	gvoid PostOrderTraverse(funtype) const;
+	template<typename VisitorT> gvoid PostOrderTraverse(VisitorT &visitor) const;
 
 public:
 	/****************************************************************************
@@ -276,15 +288,52 @@ public:
 	** GBinaryTree
 	**
 	** @name		operator=
-	** @brief		重载等号操作
+	** @brief		拷贝操作符
 	** @param[in]	tree: 另一棵二叉树的引用
 	** @return		自己的引用
 	**
-	** 若自己已经包含了数据，则会先释放自己的资源，再做拷贝操作。
-	** 深拷贝（deep copy）。
-	**
 	****************************************************************************/
 	GBinaryTree<NodeT> &operator=(const GBinaryTree<NodeT> &tree);
+
+	/****************************************************************************
+	**
+	** GBinaryTree
+	**
+	** @name		operator=
+	** @brief		移动操作符
+	** @param[in]	tree: 另一棵二叉树的引用
+	** @return		自己的引用
+	**
+	****************************************************************************/
+	GBinaryTree<NodeT> &operator=(GBinaryTree<NodeT> &&tree);
+
+	/****************************************************************************
+	**
+	** GBinaryTree
+	**
+	** @name		operator==
+	** @brief		等号运算符
+	** @param[in]	tree: 另一棵二叉树的引用
+	** @return		若两个树相等，则返回true，否则返回false
+	**
+	** 满足以下条件的两棵树完全相等：
+	** 1）两棵树的分布完全一致，且相同位置上的节点都相等（Equals）；
+	** 2）空树与空树相等。
+	**
+	****************************************************************************/
+	gbool operator==(const GBinaryTree<NodeT> &tree) const;
+
+	/****************************************************************************
+	**
+	** GBinaryTree
+	**
+	** @name		operator!=
+	** @brief		不等号运算符
+	** @param[in]	tree: 另一棵二叉树的引用
+	** @return		若两个树不相等，则返回true，否则返回false
+	**
+	****************************************************************************/
+	gbool operator!=(const GBinaryTree<NodeT> &tree) const;
 
 protected:
 	/****************************************************************************
@@ -320,7 +369,7 @@ protected:
 	** @param[in]	fVisit:	访问节点的函数指针
 	**
 	****************************************************************************/
-	gvoid PreOrderTraverse(const NodeT *node, funtype fVisit) const;
+	template<typename VisitorT> gvoid PreOrderTraverse(const NodeT *node, VisitorT &visitor) const;
 
 	/****************************************************************************
 	**
@@ -332,7 +381,7 @@ protected:
 	** @param[in]	fVisit:	访问节点的函数指针
 	**
 	****************************************************************************/
-	gvoid InOrderTraverse(const NodeT *node, funtype fVisit) const;
+	template<typename VisitorT> gvoid InOrderTraverse(const NodeT *node, VisitorT &visitor) const;
 
 	/****************************************************************************
 	**
@@ -344,7 +393,7 @@ protected:
 	** @param[in]	fVisit:	访问节点的函数指针
 	**
 	****************************************************************************/
-	gvoid PostOrderTraverse(const NodeT *node, funtype fVisit) const;
+	template<typename VisitorT> gvoid PostOrderTraverse(const NodeT *node, VisitorT &visitor) const;
 
 	/****************************************************************************
 	**
@@ -381,6 +430,9 @@ protected:
 	**
 	****************************************************************************/
 	gsize Depth(const NodeT *) const;
+
+	gbool TreeEquals(const NodeT *node1, const NodeT *node2) const;
+	virtual gbool NodeEquals(const NodeT *node1, const NodeT *node2) const;
 
 protected:
 	NodeT *m_pRoot;

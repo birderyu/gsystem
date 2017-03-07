@@ -4,7 +4,7 @@
 **
 ** @file	gdefine.h
 ** @brief	全局宏定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2015-12-31
 ** @version	1.0
@@ -20,8 +20,8 @@
 **
 ** gdefine.h
 ** 操作系统
-** G_SYSTEM_WINDOWS: Windows
-** G_COMPILER_LINUX: Linux
+** G_SYSTEM_WINDOWS:	Windows
+** G_SYSTEM_LINUX:		Linux
 **
 ****************************************************************************/
 #if defined (_WIN32) || defined(_WIN64)
@@ -36,12 +36,12 @@
 **
 ** gdefine.h
 ** 编译器
-** G_COMPILER_MSVC: MSVC++
+** G_COMPILER_MSVC: MSVC
 ** G_COMPILER_GCC: GCC
 **
 ****************************************************************************/
 #ifdef _MSC_VER
-# define G_COMPILER_MSVC
+# define G_COMPILER_MSVC _MSC_VER
 #endif // _MSC_VER
 
 #ifdef __GNUC__
@@ -71,36 +71,23 @@
 #	define GAPI
 #endif // G_COMPILER_MSVC
 
-#define GOFFSET(type, member) ((gsize)&(((type *)0)->member))
-typedef struct dummy
+#define GOFFSET(type, member) ((size_t)&(((type *)0)->member))
+struct gdummy
 {
 	void *p;
 	unsigned char slot;
-}dummy_t;
-#define G_X86_64 (GOFFSET(dummy_t, slot) == 8) //在64位系统下，指针寻址8个字节大小的地址空间
-#define G_X86_32 (GOFFSET(dummy_t, slot) == 4) //在32位系统下，指针寻址4个字节大小的地址空间
-
-#ifndef NULL
-#	define NULL	0
-#endif // !NULL
+};
+#define G_X86_64 (GOFFSET(gdummy, slot) == 8) //在64位系统下，指针寻址8个字节大小的地址空间
+#define G_X86_32 (GOFFSET(gdummy, slot) == 4) //在32位系统下，指针寻址4个字节大小的地址空间
 
 //#if __cplusplus >= 201103L
-#	define G_CPP_11
+#	define G_CXX_11
 //#endif
 
-#ifndef G_CPP_11
-#	define nullptr NULL
-#	define override
-#	define constexpr
-#	define final
-#endif // for C++11
+#define GNULL nullptr
 
-#define G_BEGIN_NAMESPACE namespace GNova {
-#define G_END_NAMESPACE }
-
-#ifdef __cplusplus
-#	define G_DECLARE_NOTHROW  throw()
-#endif
+#define G_BEGIN_NAMESPACE	//namespace GNova {
+#define G_END_NAMESPACE		//}
 
 #ifdef _DEBUG
 #	define GDEBUG
@@ -125,7 +112,7 @@ typedef struct dummy
 #	define G_BYTE_ORDER G_BIG_ENDIAN
 #endif
 
-#define G_POINTER_ADDRESS_SIZE	4
+#define G_POINTER_ADDRESS_SIZE	sizeof(gvoid*)
 
 #define G_INT8_MAX		0x7f
 #define G_INT8_MIN		(-0x80)
@@ -158,6 +145,9 @@ extern "C"{
 }
 #endif
 
+#define G_HAS_WCHAR
+#define G_HAS_DECIMAL
+
 // 
 #ifndef GINTERFACE
 #	define GINTERFACE	struct
@@ -189,5 +179,9 @@ extern "C"{
 #define G_CALL_AT_EXIT atexit
 #define G_MAX(a,b)  (((a) > (b)) ? (a) : (b))
 #define G_MIN(a,b)  (((a) < (b)) ? (a) : (b))
+
+#define G_DATE_SIZE			8
+#define G_TIME_SIZE			8
+#define G_DATE_TIME_SIZE	(G_DATE_SIZE + G_TIME_SIZE)
 
 #endif // _CORE_DEFINE_H_

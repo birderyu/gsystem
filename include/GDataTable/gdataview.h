@@ -13,12 +13,12 @@ class GAPI GDataView
 	: GTableActionT<GDataView>
 {
 public:
-	GDataView(GDataTable &, CsSizeTypeArray *rows, CsSizeTypeArray *columns);
+	GDataView(GDataTable &, GSizeArray *rows, GSizeArray *columns);
 
 private:
 	GVirtualTable *m_pVirtualTable;
-	CsSizeTypeArray *m_pRows;
-	CsSizeTypeArray *m_pColumns;
+	GSizeArray *m_pRows;
+	GSizeArray *m_pColumns;
 };
 
 #endif // _CORE_TABLE_VIEW_H_

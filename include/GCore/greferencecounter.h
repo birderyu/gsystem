@@ -2,17 +2,17 @@
 #ifndef _CORE_REFERENCE_COUNTER_H_
 #define _CORE_REFERENCE_COUNTER_H_
 
-#include "gatomic.h"
 #include "gnew.h"
+#include "gatom.h"
 
-template <typename ClassT, typename LockT = GMutex>
+template <typename ClassT>
 class GReferenceCounter 
-	: public GNewT<GReferenceCounter<ClassT, LockT>>
+	: public GNewT<GReferenceCounter<ClassT>>
 {
 public:
 	// count: 初始引用计数，默认为1
 	GReferenceCounter(ClassT *ptr, gsize count = 1);
-	virtual ~GReferenceCounter();
+	~GReferenceCounter();
 	gsize Add();
 	gvoid Release();
 	gsize Count() const;
@@ -20,7 +20,7 @@ public:
 	const ClassT *Pointer() const;
 
 private:
-	GAtomic<gsize, LockT> m_nCount;
+	gsize m_nCount;
 	ClassT *m_pPointer;
 };
 

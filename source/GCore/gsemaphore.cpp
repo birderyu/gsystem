@@ -1,17 +1,21 @@
 #include "gsemaphore.h"
+#include "gnew.h"
 
 #ifdef G_SYSTEM_WINDOWS
-
+#	ifndef WIN32_LEAN_AND_MEAN
+#		define WIN32_LEAN_AND_MEAN
+#	endif
 #include <windows.h>
 
 /// Win32ÐÅºÅÁ¿ÊµÀý¾ä±ú
 struct GSemaphoreHandle
+	: public GNewT<GSemaphoreHandle>
 {
 	HANDLE m_hSemaphore;
 };
 
 GSemaphore::GSemaphore(gint nInitialValue)
-:m_pHandle(NULL)
+:m_pHandle(GNULL)
 {
 	Initialize(nInitialValue);
 }
@@ -22,34 +26,34 @@ GSemaphore::~GSemaphore()
 	{
 		GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
 		delete pHandle;
-		m_pHandle = NULL;
+		m_pHandle = GNULL;
 	}
 }
 
-gint GSemaphore::Wait()
+gbool GSemaphore::Wait()
 {
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
-	if (!pHandle) return -1;
+	if (!pHandle) return false;
 
 	WaitForSingleObject(pHandle->m_hSemaphore, INFINITE);
-	return 0;
+	return true;
 }
 
-gint GSemaphore::Wait(gulong nMsecs)
+gbool GSemaphore::Wait(gulong nMsecs)
 {
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
-	if (!pHandle) return -1;
+	if (!pHandle) return false;
 
 	DWORD nRet = WaitForSingleObject(pHandle->m_hSemaphore, nMsecs);
 	if (nRet == WAIT_OBJECT_0)
 	{
-		return 0; // success
+		return true; // success
 	}
 	if (nRet == WAIT_TIMEOUT)
 	{
-		return -1; // timeout
+		return false; // timeout
 	}
-	return -1;
+	return false;
 }
 
 void GSemaphore::Post()
@@ -57,7 +61,7 @@ void GSemaphore::Post()
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
 	if (!pHandle) return;
 
-	ReleaseSemaphore(pHandle->m_hSemaphore, 1, NULL);
+	ReleaseSemaphore(pHandle->m_hSemaphore, 1, GNULL);
 }
 
 gint GSemaphore::Initialize(gint nInitialValue)
@@ -66,11 +70,11 @@ gint GSemaphore::Initialize(gint nInitialValue)
 	if (!pHandle) return -1;
 	m_pHandle = pHandle;
 
-	pHandle->m_hSemaphore = CreateSemaphore(NULL, nInitialValue, 5000, NULL);
-	if (pHandle->m_hSemaphore == NULL)
+	pHandle->m_hSemaphore = CreateSemaphore(GNULL, nInitialValue, 5000, GNULL);
+	if (pHandle->m_hSemaphore == GNULL)
 	{
 		delete pHandle;
-		m_pHandle = NULL;
+		m_pHandle = GNULL;
 		return -1;
 	}
 

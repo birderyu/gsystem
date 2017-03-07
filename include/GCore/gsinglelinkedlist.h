@@ -3,7 +3,7 @@
 /// 
 ///  单向链表的定义及实现
 /// 
-/// @author  Birderyu
+/// @author  birderyu
 /// @version 1.0
 /// @date    2016-08-07
 /////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ struct GSingleLinkedListNode
 	, public GNewT<GSingleLinkedListNode<DataT>>
 {
 	GSingleLinkedListNode(const DataT &data = DataT(),
-		GSingleLinkedListNode<DataT> *next = NULL)
+		GSingleLinkedListNode<DataT> *next = GNULL)
 		: GNextNodeT<GSingleLinkedListNode<DataT>>(next)
 		, GDataNodeT<DataT>(data)
 	{
@@ -36,8 +36,11 @@ class GSingleLinkedList
 public:
 	GSingleLinkedList();
 	GSingleLinkedList(const DataT &data);
-	GSingleLinkedList(const GSingleLinkedList<DataT, NodeT> &other);
-	GSingleLinkedList<DataT, NodeT>& operator=(const GSingleLinkedList<DataT, NodeT> &other);
+	GSingleLinkedList(DataT &&data);
+	GSingleLinkedList(const GSingleLinkedList<DataT, NodeT> &list);
+	GSingleLinkedList(GSingleLinkedList<DataT, NodeT> &&list);
+	GSingleLinkedList<DataT, NodeT>& operator=(const GSingleLinkedList<DataT, NodeT> &list);
+	GSingleLinkedList<DataT, NodeT>& operator=(GSingleLinkedList<DataT, NodeT> &&list);
 	virtual ~GSingleLinkedList();
 
 public:
@@ -47,14 +50,24 @@ public:
 	gvoid Invert();
 
 	gbool InsertBefore(gsize pos, const DataT &data);
+	gbool InsertBefore(gsize pos, DataT &&data);
+
 	gbool InsertBefore(NodeT *node, const DataT &data);
+	gbool InsertBefore(NodeT *node, DataT &&data);
+
 	gbool InsertAfter(gsize pos, const DataT &data);
+	gbool InsertAfter(gsize pos, DataT &&data);
+
 	gbool InsertAfter(NodeT *node, const DataT &data);
+	gbool InsertAfter(NodeT *node, DataT &&data);
 
 	gbool AddFirst(const DataT &data);
-	gbool AddLast(const DataT &data);
+	gbool AddFirst(DataT &&data);
 
-	gvoid Remove(NodeT *node);
+	gbool AddLast(const DataT &data);
+	gbool AddLast(DataT &&data);
+
+	gvoid Remove(const NodeT *node);
 	virtual gvoid RemoveAt(gsize pos);
 	gvoid RemoveFirst();
 	gvoid RemoveLast();
@@ -73,7 +86,9 @@ public:
 	const DataT &GetFirstData() const;
 	DataT &GetDataAt(gsize pos);
 	const DataT &GetDataAt(gsize pos) const;
+
 	gvoid SetDataAt(gsize pos, const DataT &data);
+	gvoid SetDataAt(gsize pos, DataT &&data);
 
 	// 不存在则返回NULL_POS
 	gsize IndexOf(const DataT &data) const;

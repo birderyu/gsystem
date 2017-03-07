@@ -14,9 +14,9 @@ struct GAvlTreeNode
 	GAvlTreeNode(
 		const KeyT &key = KeyT(),
 		const ValueT &value = ValueT(),
-		GAvlTreeNode<KeyT, ValueT> *parent = NULL,
-		GAvlTreeNode<KeyT, ValueT> *left = NULL,
-		GAvlTreeNode<KeyT, ValueT> *right = NULL);
+		GAvlTreeNode<KeyT, ValueT> *parent = GNULL,
+		GAvlTreeNode<KeyT, ValueT> *left = GNULL,
+		GAvlTreeNode<KeyT, ValueT> *right = GNULL);
 };
 
 template < typename KeyT, typename ValueT,

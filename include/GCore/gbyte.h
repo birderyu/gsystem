@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+G_BEGIN_NAMESPACE
+
 class GAPI GByte 
 	: public GPackage<gbyte>
 {
@@ -15,5 +17,7 @@ public:
 
 	guint ClassCode() const;
 };
+
+G_END_NAMESPACE
 
 #endif // _CORE_BYTE_H_

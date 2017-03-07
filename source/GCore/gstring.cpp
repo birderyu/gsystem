@@ -4,254 +4,127 @@
 
 GString::GString()
 {
-	m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-	m_tStringStore.m_sSmallStr.Initialize();
+	
 }
 
-GString::GString(gchar cChar)
+GString::GString(gchar c)
+	: m_tString(1)
 {
-	m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-	m_tStringStore.m_sSmallStr.Initialize(cChar);
+	m_tString.Resize(1);
+	m_tString[0] = c;
 }
 
-GString::GString(const gchar *pStr)
+GString::GString(const gchar *str)
 {
-	gsize size = GCStringHelper::Size(pStr);
-	if (size <= 0)
-	{
-		m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-		m_tStringStore.m_sSmallStr.Initialize();
-	}
-	else if (size <= GSmallStringStore::MAX_SIZE)
-	{
-		// 小字符串
-		m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-		m_tStringStore.m_sSmallStr.Initialize(pStr, size);
-	}
-	else if (size <= GNormalStringStore::MAX_SIZE)
-	{
-		// 普通字符串
-		m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
-		m_tStringStore.m_sNormalStr.Initialize(pStr, size);
-	}
-	else
-	{
-		// 大字符串
-		m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_BIG;
-		// TODO
-	}
+	gsize size = GCStringHelper::Size(str);
+	m_tString.Resize(size);
+	GCStringHelper::Copy(str, size, m_tString.Start());
 }
 
-GString::GString(const GString &sStr)
+GString::GString(const gchar *str, gsize size)
+	: m_tString(str, size)
 {
-	m_tStringStore.m_nType = sStr.m_tStringStore.m_nType;
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		m_tStringStore.m_sSmallStr.Initialize(sStr.m_tStringStore.m_sSmallStr);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		m_tStringStore.m_sNormalStr.Initialize(sStr.m_tStringStore.m_sNormalStr);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-		m_tStringStore.m_sSmallStr.Initialize();
-		break;
-	}
+	
 }
 
-GString::~GString()
+GString::GString(const GString &str)
+	: m_tString(str.m_tString)
 {
-	Free();
+	
 }
 
-GString GString::FromStdString(const std::string &sStr)
+GString::GString(GString &&str)
+	: m_tString(GMove(str.m_tString))
 {
-	return GString(sStr.c_str());
+	
+}
+
+GString::GString(const GStringData &str)
+	: m_tString(str)
+{
+
+}
+
+GString::GString(GStringData &&str)
+	: m_tString(GForward<GStringData>(str))
+{
+
 }
 
 gbool GString::IsEmpty() const
 {
-	return Size() == 0;
+	return m_tString.IsEmpty();
 }
 
 GString GString::Trim() const
 {
-	GString sStr(*this);
-	if (sStr.IsEmpty())
+	gsize new_size = Size();
+	if (0 == new_size)
 	{
-		return sStr;
+		return GString();
 	}
 
-	switch (sStr.m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-	{
-		sStr.m_tStringStore.m_sSmallStr.MakeTrim();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-	{
-		sStr.m_tStringStore.m_sNormalStr.MakeTrim();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-	return sStr;
+	GStringData str(new_size);
+	str.Reserve(new_size);
+	GCStringHelper::Trim(m_tString.Start(), new_size, str.Start(), new_size);
+	str.Resize(new_size);
+	return str;
 }
 
 GString GString::TrimLeft() const
 {
-	GString sStr(*this);
-	if (sStr.IsEmpty())
+	gsize new_size = Size();
+	if (0 == new_size)
 	{
-		return sStr;
+		return GString();
 	}
 
-	switch (sStr.m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-	{
-		sStr.m_tStringStore.m_sSmallStr.MakeTrimLeft();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-	{
-		sStr.m_tStringStore.m_sNormalStr.MakeTrimLeft();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-	return sStr;
+	GStringData str(new_size);
+	str.Reserve(new_size);
+	GCStringHelper::TrimLeft(m_tString.Start(), new_size, str.Start(), new_size);
+	str.Resize(new_size);
+	return str;
 }
 
 GString GString::TrimRight() const
 {
-	GString sStr(*this);
-	if (sStr.IsEmpty())
+	gsize new_size = Size();
+	if (0 == new_size)
 	{
-		return sStr;
+		return GString();
 	}
 
-	switch (sStr.m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-	{
-		sStr.m_tStringStore.m_sSmallStr.MakeTrimRight();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-	{
-		sStr.m_tStringStore.m_sNormalStr.MakeTrimRight();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-
-	return sStr;
+	GStringData str(new_size);
+	str.Reserve(new_size);
+	GCStringHelper::TrimRight(m_tString.Start(), new_size, str.Start(), new_size);
+	str.Resize(new_size);
+	return str;
 }
 
 GString GString::ToUpper() const
 {
-	GString sStr(*this);
-	if (sStr.IsEmpty())
+	gsize new_size = Size();
+	if (0 == new_size)
 	{
-		return sStr;
+		return GString();
 	}
 
-	switch (sStr.m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-	{
-		sStr.m_tStringStore.m_sSmallStr.MakeUpper();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-	{
-		sStr.m_tStringStore.m_sNormalStr.MakeUpper();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-
-	return sStr;
+	GString str(*this);
+	GCStringHelper::MakeUpper(str.m_tString.Start(), new_size);
+	return str;
 }
 
 GString GString::ToLower() const
 {
-	GString sStr(*this);
-	if (sStr.IsEmpty())
+	gsize new_size = Size();
+	if (0 == new_size)
 	{
-		return sStr;
+		return GString();
 	}
 
-	switch (sStr.m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-	{
-		sStr.m_tStringStore.m_sSmallStr.MakeLower();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-	{
-		sStr.m_tStringStore.m_sNormalStr.MakeLower();
-		return sStr;
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-
-	return sStr;
+	GString str(*this);
+	GCStringHelper::MakeLower(str.m_tString.Start(), new_size);
+	return str;
 }
 
 gcstring GString::CString() const
@@ -260,208 +133,47 @@ gcstring GString::CString() const
 	{
 		return "";
 	}
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		return m_tStringStore.m_sSmallStr.CString();
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		return m_tStringStore.m_sNormalStr.CString();
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-	return "";
+	return m_tString.Start();
 }
 
 gsize GString::Size() const
 {
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		return m_tStringStore.m_sSmallStr.Size();
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		return m_tStringStore.m_sNormalStr.Size();
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-	return 0;
+	return m_tString.Size();
 }
 
-gbool GString::Resize(gsize size)
+gvoid GString::Resize(gsize size)
 {
-	if (size == 0)
-	{
-		Free();
-	}
-
-	// 转换为值类型
-	ToValue();
-
-	// size相等则不做任何操作
-	if (size == Size())
-	{
-		return true;
-	}
-
-	// 判断Resize之后的类型
-	GStringStore::TYPE emType = GetTypeBySize(size);
-	if (emType == GStringStore::STRING_STORE_TYPE_VALUE_SMALL)
-	{
-		// Resize之后应该为小字符串
-		if (!Switch(emType))
-		{
-			return false;
-		}
-		m_tStringStore.m_sSmallStr.m_nSize = size;
-		m_tStringStore.m_sSmallStr.m_cStr[size] = '\0';
-		return true;
-	}
-	else if (emType == GStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
-	{
-		// Resize之后应该为普通字符串
-		if (m_tStringStore.m_nType == GStringStore::STRING_STORE_TYPE_VALUE_SMALL)
-		{
-			// 原本是小字符串
-			GString str_copy(*this);
-			m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
-			if (!m_tStringStore.m_sNormalStr.Initialize(size))
-			{
-				// 开辟内存
-				return false;
-			}
-			if (!m_tStringStore.m_sNormalStr.CopyString(str_copy.CString(), str_copy.Size()))
-			{
-				// 拷贝原有字符串
-				return false;
-			}
-			// 改变Size
-			m_tStringStore.m_sNormalStr.m_pStr[size] = '\0';
-			m_tStringStore.m_sNormalStr.m_nSize = static_cast<guint16>(size);
-			return true;
-		}
-		else if (m_tStringStore.m_nType == GStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
-		{
-			// 原本是普通字符串
-			return m_tStringStore.m_sNormalStr.Resize(size);
-		}
-		else
-		{
-			// 原本是大字符串
-			// TODO
-		}
-	}
-	else
-	{
-		// GStringStore::STRING_STORE_TYPE_VALUE_BIG
-		// Resize之后应该为大字符串
-		// TODO
-	}
-	return false;
+	m_tString.Resize(size);
 }
 
-gchar GString::GetAt(gsize pos) const
+gvoid GString::Reserve(gsize capacity)
 {
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		return m_tStringStore.m_sSmallStr.GetAt(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		return m_tStringStore.m_sNormalStr.GetAt(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
+	m_tString.Reserve(capacity);
 }
 
 gchar &GString::GetAt(gsize pos)
 {
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		return m_tStringStore.m_sSmallStr.GetAt(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		return m_tStringStore.m_sNormalStr.GetAt(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
+	return m_tString.GetAt(pos);
 }
 
-const gchar *GString::Cursor(gsize pos) const
+const gchar &GString::GetAt(gsize pos) const
 {
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		return m_tStringStore.m_sSmallStr.Cursor(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		return m_tStringStore.m_sNormalStr.Cursor(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-	return NULL;
+	return m_tString.GetAt(pos);
 }
 
-gchar *GString::Cursor(gsize pos)
+gchar *GString::CursorAt(gsize pos)
 {
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		return m_tStringStore.m_sSmallStr.Cursor(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		return m_tStringStore.m_sNormalStr.Cursor(pos);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		break;
-	}
-	return NULL;
+	return m_tString.CursorAt(pos);
+}
+
+const gchar *GString::CursorAt(gsize pos) const
+{
+	return m_tString.CursorAt(pos);
 }
 
 GString &GString::Replace(const GString &from, const GString &to, gbool bIsSensitive)
 {
+	/*
 	gsize size = Size();
 	gsize from_size = from.Size();
 	if (size <= 0 || from_size <= 0)
@@ -473,15 +185,6 @@ GString &GString::Replace(const GString &from, const GString &to, gbool bIsSensi
 	gcstring cto = to.CString();
 	gsize to_size = to.Size();
 
-	if (!cfrom ||
-		(!cto && to_size >= 0))
-	{
-		return *this;
-	}
-
-	// 转换为值类型
-	ToValue();
-
 	// 预算一下替换过后的长度，长度按尽量可能大去计算
 	gsize estimate_size = size;
 	if (from_size < to_size)
@@ -489,6 +192,9 @@ GString &GString::Replace(const GString &from, const GString &to, gbool bIsSensi
 		// 有可能会被扩容
 		estimate_size = size * to_size / from_size + 1;
 	}
+
+	// 转换为值类型
+	ToValue();
 	GStringStore::TYPE nEstimateType = GetTypeBySize(estimate_size);
 
 	if (nEstimateType == GStringStore::STRING_STORE_TYPE_VALUE_SMALL)
@@ -529,6 +235,7 @@ GString &GString::Replace(const GString &from, const GString &to, gbool bIsSensi
 		// 替换之后为大字符串
 		// TODO
 	}
+	*/
 	return *this;
 }
 
@@ -551,9 +258,14 @@ gsize GString::Find(const GString &str, gsize start, gbool bIsSensitive) const
 	return NULL_POS;
 }
 
-GString GString::SubString(gsize start, gsize length) const
+GString GString::SubString(gsize start, gsize size) const
 {
-	return GString();
+	if (start >= Size() || start == NULL_POS ||
+		size == 0 || size == MAX_SIZE)
+	{
+		return GString();
+	}
+	return GString(&m_tString[start], size);
 }
 
 gbool GString::Equals(const GString &str, gbool bIsSensitive) const
@@ -565,76 +277,22 @@ gbool GString::Equals(const GString &str, gbool bIsSensitive) const
 	return false;
 }
 
-gbool GString::Switch(GStringStore::TYPE emType)
-{
-	if (m_tStringStore.m_nType == emType)
-	{
-		return true;
-	}
-
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-	{
-		if (emType == GStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
-		{
-			GString str_copy(*this);
-			Free();
-			m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_NORMAL;
-			str_copy.m_tStringStore.m_sSmallStr.SwitchToNormal(m_tStringStore.m_sNormalStr);
-			return true;
-		}
-		else if (emType == GStringStore::STRING_STORE_TYPE_VALUE_BIG)
-		{
-			// TODO
-		}
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-	{
-		if (emType == GStringStore::STRING_STORE_TYPE_VALUE_SMALL)
-		{
-			// TODO
-			if (m_tStringStore.m_sNormalStr.CanSwithToSmall())
-			{
-				GString str_copy(*this);
-				Free();
-				m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-				str_copy.m_tStringStore.m_sNormalStr.SwitchToSmall(m_tStringStore.m_sSmallStr);
-				return true;
-			}			
-		}
-		else if (emType == GStringStore::STRING_STORE_TYPE_VALUE_BIG)
-		{
-			// TODO
-		}
-	}
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-	{
-		if (emType == GStringStore::STRING_STORE_TYPE_VALUE_SMALL)
-		{
-			// TODO
-		}
-		else if (emType == GStringStore::STRING_STORE_TYPE_VALUE_NORMAL)
-		{
-			// TODO
-		}
-	}
-		break;
-	default:
-		break;
-	}
-
-	return false;
-}
-
 gbool GString::StartWith(gchar c) const
 {
-	return GetAt(0) == c;
+	return m_tString[0] == c;
 }
 
 gbool GString::EndWith(gchar c) const
 {
-	return GetAt(Size() - 1) == c;
+	return m_tString[m_tString.Size() - 1] == c;
+}
+
+gvoid GString::Append(const GString &str)
+{
+	m_tString.Append(str.m_tString);
+}
+
+gvoid GString::Append(GString &&str)
+{
+	m_tString.Append(GMove(str.m_tString));
 }

@@ -1,48 +1,55 @@
+// GBlock是一个byte数组
+// 当Block无法分配内存时，会跑出一个异常
+
 #ifndef _CORE_BLOCK_H_
 #define _CORE_BLOCK_H_
 
 #include "gglobal.h"
-#include "gnew.h"
 #include "gstructure.h"
 
-template<typename DataT>
-class GBlock
-	: public GListT<GBlock<DataT>>
+class GAPI GBlock
+	: public GListT<GBlock>
 {
 public:
 	// 单位：字节
 	GBlock(gsize nSize = 0);
-	GBlock(const GBlock<DataT> &);
+	GBlock(const GBlock &);
+	GBlock(GBlock &&);
 	~GBlock();
-
-	gbool Valid() const;
+	
 	gsize Size() const;	// 内存总长度
-	DataT *Cursor(gsize nCursor) const;
+	gbyte *CursorAt(gsize nCursor);
+	const gbyte *CursorAt(gsize nCursor) const;
 
-	gbool Resize(gsize nSize);
-	gbool Resize(gsize nSize, gsize nStart, gsize nLength);
+	gvoid Resize(gsize nSize);
 
-	gbool CreateFrom(const GBlock<DataT> &tFrom);
-	gbool CreateFrom(const GBlock<DataT> &tFrom, gsize nFromStart, gsize nFromLength);
+	gbyte &GetAt(gsize);
+	const gbyte &GetAt(gsize) const;
 
-	DataT &GetAt(gsize);
-	const DataT &GetAt(gsize) const;
-
-	DataT &operator[](gsize);
-	const DataT &operator[](gsize) const;
+	gbyte &operator[](gsize);
+	const gbyte &operator[](gsize) const;
 
 private:
 	// Not Safe
-	GBlock(DataT *, gsize, gbool bAutoRelease = false);
+	GBlock(gbyte *, gsize, gbool bAutoRelease = false);
 
-	gbool Initialize();
+	gbool Valid() const;
+
+	gvoid Initialize();
 	gvoid Free();
 
-	DataT *m_pMemory;
+	// 数组的长度
 	gsize m_nSize;
-	gbool m_bAutoRelease;
-};
 
-#include "gblock.inl"
+	// 第一位存储AutoRelease
+	// 第二位存储是否是指针类型：0，非指针；1，指针
+	gbyte m_tConfig[2];
+
+	union
+	{
+		gbyte m_tBlock[G_POINTER_ADDRESS_SIZE];
+		gbyte *m_pBlock;
+	};
+};
 
 #endif // _CORE_BLOCK_H_

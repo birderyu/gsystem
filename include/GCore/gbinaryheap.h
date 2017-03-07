@@ -21,6 +21,10 @@ public:
 	GBinaryHeap(DataT *arr, gsize arr_len, 
 		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
 	GBinaryHeap(const GBinaryHeap<DataT, CompareT> &heap);
+	GBinaryHeap(GBinaryHeap<DataT, CompareT> &&heap);
+
+	GBinaryHeap<DataT, CompareT> &operator=(const GBinaryHeap<DataT, CompareT> &heap);
+	GBinaryHeap<DataT, CompareT> &operator=(GBinaryHeap<DataT, CompareT> &&heap);
 
 	gvoid Append(const GArray<DataT> &arr);
 	gvoid Append(const GArray<DataT> &arr, gsize start, gsize size);
@@ -39,7 +43,7 @@ public:
 	gbool Reserve(gsize);
 
 	gvoid Insert(const DataT &data);
-	gbool Pop(DataT *data = NULL);
+	gbool Pop(DataT *data = GNULL);
 	gbool Top(DataT &data) const;
 
 	gvoid Output() const;

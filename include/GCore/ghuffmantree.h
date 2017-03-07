@@ -4,7 +4,7 @@
 **
 ** @file	ghuffmantree.h
 ** @brief	¹þ·òÂüÊ÷µÄ¶¨Òå
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2016-12-5
 ** @version	0.1
@@ -25,9 +25,9 @@ class GHuffmanTreeNode
 {
 	GHuffmanTreeNode(
 		const DataT &data = DataT(),
-		GReadBlackTreeNode<DataT> *parent = NULL,
-		GReadBlackTreeNode<DataT> *left = NULL,
-		GReadBlackTreeNode<DataT> *right = NULL)
+		GReadBlackTreeNode<DataT> *parent = GNULL,
+		GReadBlackTreeNode<DataT> *left = GNULL,
+		GReadBlackTreeNode<DataT> *right = GNULL)
 		: GBinaryTreeNodeT<GHuffmanTreeNode<DataT>>(parent, left, right)
 		, GDataNodeT<DataT>(data)
 	{

@@ -7,8 +7,9 @@ template<typename TableT>
 class GTableColumns
 {
 public:
-	GTableColumns(TableT &, CsSizeTypeArray *columns = NULL);
-	GTableColumns(const GTableColumns &);
+	GTableColumns(TableT &, GSizeArray *columns = GNULL);
+	GTableColumns(const GTableColumns<TableT> &);
+	GTableColumns(GTableColumns<TableT> &&);
 
 	TableT &Table();
 	const TableT &Table() const;
@@ -20,7 +21,7 @@ public:
 
 private:
 	TableT &m_tTable;
-	CsSizeTypeArray *m_pColumns;
+	GSizeArray *m_pColumns;
 };
 
 #endif // _CORE_TABLE_COLUMNS_H_

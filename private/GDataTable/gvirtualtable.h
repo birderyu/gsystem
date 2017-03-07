@@ -4,9 +4,32 @@
 
 #include "GCore/gglobal.h"
 #include "GCore/gstring.h"
+#include "GGeometry/ggeometry.h"
 #include "gtableglobal.h"
 
-class GAPI GVirtualTable
+// 光标
+class GVirtualCursor
+{
+public:
+	gbool HasNext() const;
+	gvoid Next(); // 光标后移
+
+	gvoid SetValue();
+	gbool GetValue() const;
+};
+
+// 元数据
+class GVirtualMeta
+{
+public:
+	GVirtualMeta();
+
+private:
+	GString m_sTableName;
+};
+
+// 表
+class GVirtualTable
 {
 public:
 	virtual ~GVirtualTable() = 0;
@@ -19,28 +42,28 @@ public:
 
 public:
 	// 元信息获取
-	virtual GString GetTableName() const = 0;
-	virtual gsize GetFieldCount() const = 0;
-	virtual G_TABLE_FIELD_TYPE GetFieldType(gsize) const = 0;
-	virtual GString GetFieldName(gsize) const = 0;
-	virtual GString GetFieldText(gsize) const = 0;
-	virtual gsize GertFieldLength() const = 0;
-	virtual gint GetFieldID(const GString &) const = 0;
-	virtual gsize GetRecordCount() const = 0;
-	virtual gbool HasGeometry() const = 0;
-	virtual gsize GetGeometryFieldID() const = 0;
+	virtual GString				TableName() const = 0;
+	virtual gsize				FieldCount() const = 0;
+	virtual G_TABLE_FIELD_TYPE	FieldType(gsize) const = 0;
+	virtual GString				FieldName(gsize) const = 0;
+	virtual GString				FieldText(gsize) const = 0;
+	virtual gsize				FieldSize() const = 0;
+	virtual gsize				FieldID(const GString &) const = 0;
+	virtual gsize				RecordCount() const = 0;
+	virtual gbool				HasGeometry() const = 0;
+	virtual gsize				GeometryFieldID() const = 0;
+	virtual GString				GeometryFieldName() const = 0;
 
 public:
 	// 表结构编辑
-	virtual gbool SetTableName(const GString &) = 0;
-
-	virtual gbool StartEditStructure() = 0;
-	virtual gbool SetFieldCount(gsize) = 0;
-	virtual gbool SetFieldType(gsize, G_TABLE_FIELD_TYPE) const = 0;
-	virtual gbool SetFieldName(gsize, const GString &) = 0;
-	virtual gbool SetFieldAlias(gsize, const GString &) = 0;
-	virtual gbool SertFieldLength(gsize, gsize) = 0;
-	virtual gbool EndEditStructure(gbool) = 0;
+	virtual gvoid SetTableName(const GString &) = 0;
+	virtual gvoid StartEditStructure() = 0;
+	virtual gvoid SetFieldCount(gsize) = 0;
+	virtual gvoid SetFieldType(gsize, G_TABLE_FIELD_TYPE) = 0;
+	virtual gvoid SetFieldName(gsize, const GString &) = 0;
+	virtual gvoid SetFieldText(gsize, const GString &) = 0;
+	virtual gvoid SertFieldLength(gsize, gsize) = 0;
+	virtual gvoid EndEditStructure(gbool) = 0;
 
 public:
 	// 数据访问
@@ -61,7 +84,8 @@ public:
 	virtual gbool GetValue(gsize row, gsize col, gdouble &) const = 0;
 	virtual gbool GetValue(gsize row, gsize col, gdecimal &) const = 0;
 	virtual gbool GetValue(gsize row, gsize col, GString &) const = 0;
-	virtual GVariant GetValue(gsize row, gsize col) const = 0;
+	virtual GVariety GetValue(gsize row, gsize col) const = 0;
+	virtual GGeometryP GetGeometry(gsize row, gsize col) const = 0;
 
 public:
 	// 数据编辑
@@ -84,8 +108,12 @@ public:
 	virtual gbool SetValue(gsize row, gsize col, gdouble) = 0;
 	virtual gbool SetValue(gsize row, gsize col, gdecimal) = 0;
 	virtual gbool SetValue(gsize row, gsize col, const GString &) = 0;
-	virtual gbool SetValue(gsize row, gsize col, const GVariant &) = 0;
+	virtual gbool SetValue(gsize row, gsize col, const GVariety &) = 0;
+	virtual gbool SetGeometry(gsize row, gsize col, const GGeometryP &) = 0;
 	virtual gbool EndEditData(gbool) = 0;
+
+private:
+	GVirtualMeta *m_pMeta;
 };
 
 #endif //_CORE_TABLE_EX_H_

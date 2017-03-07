@@ -8,8 +8,7 @@ class GAPI GLock
 {
 public:
 	virtual ~GLock() = 0;
-	virtual gbool Lock() = 0;
-	virtual gbool Trylock() = 0;
+	virtual gvoid Lock() = 0;
 	virtual gvoid Unlock() = 0;
 };
 

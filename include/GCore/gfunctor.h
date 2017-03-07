@@ -8,7 +8,7 @@ template<typename ArgType,
 	typename ResultType>
 struct GUnaryF
 {
-
+	
 };
 
 /// 二元函数
@@ -56,6 +56,30 @@ struct GGreaterThanF
 	}
 };
 
+/// 二元函数：小于等于
+/// 小于等于应返回两个状态：小于等于、大于
+template<typename ArgType = void>
+struct GGreaterThanOrEqualToF
+	: public GBinaryF<ArgType, ArgType, gbool>
+{
+	gbool operator()(const ArgType &left, const ArgType &right) const
+	{
+		return (left >= right);
+	}
+};
+
+/// 二元函数：大于等于
+/// 小于等于应返回两个状态：大于等于、小于
+template<typename ArgType = void>
+struct GLessThanOrEqualToF
+	: public GBinaryF<ArgType, ArgType, gbool>
+{
+	gbool operator()(const ArgType &left, const ArgType &right) const
+	{
+		return (left <= right);
+	}
+};
+
 /// 二元函数：比较
 /// 比较应该返回三个状态：大于、等于、小于
 template<typename ArgType = void>
@@ -76,6 +100,60 @@ struct GCompareToF
 		{
 			return 0;
 		}
+	}
+};
+
+/// 三元函数
+template<typename Arg1Type,
+	typename Arg2Type,
+	typename Arg3Type,
+	typename ResultType>
+struct GTernaryF
+{
+
+};
+
+/// 三元函数：左开右开区间
+template<typename ArgType = void>
+struct GLeftOpenRightOpenF
+	: public GTernaryF<ArgType, ArgType, ArgType, gbool>
+{
+	gbool operator()(const ArgType &key, const ArgType &left, const ArgType &right) const
+	{
+		return key > left && key < right;
+	}
+};
+
+/// 三元函数：左闭右闭区间
+template<typename ArgType = void>
+struct GLeftClosedRightClosedF
+	: public GTernaryF<ArgType, ArgType, ArgType, gbool>
+{
+	gbool operator()(const ArgType &key, const ArgType &left, const ArgType &right) const
+	{
+		return key >= left && key <= right;
+	}
+};
+
+/// 三元函数：左开右闭区间
+template<typename ArgType = void>
+struct GLeftOpenRightClosedF
+	: public GTernaryF<ArgType, ArgType, ArgType, gbool>
+{
+	gbool operator()(const ArgType &key, const ArgType &left, const ArgType &right) const
+	{
+		return key > left && key <= right;
+	}
+};
+
+/// 三元函数：左闭右开区间
+template<typename ArgType = void>
+struct GLeftClosedRightOpenF
+	: public GTernaryF<ArgType, ArgType, ArgType, gbool>
+{
+	gbool operator()(const ArgType &key, const ArgType &left, const ArgType &right) const
+	{
+		return key >= left && key < right;
 	}
 };
 

@@ -2,7 +2,7 @@
 **
 ** GNova: A quick, micro library of C++
 **
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @file	gstring.h
 ** @date	2016-12-03
@@ -13,10 +13,9 @@
 #ifndef _CORE_STRING_H_
 #define _CORE_STRING_H_
 
-#include "gobject.h"
 #include "gstructure.h"
-#include "gstringstore.h"
-#include <string>
+#include "gobject.h"
+#include "gseries.h"
 
 class GStringList;
 
@@ -31,120 +30,119 @@ class GStringList;
 ****************************************************************************/
 class GAPI GString final 
 	: public GListT<GString>
-	, public GObject
+	, virtual public GArray<gchar>
+	, virtual public GObject
 {
-public:
+	friend class GVariety;
+	friend GAPI GString operator+(const GString &s1, const GString &s2);
+	friend GAPI gbool operator==(const GString &s1, const GString &s2);
+	friend GAPI gbool operator!=(const GString &s1, const GString &s2);
+	friend GAPI gbool operator>(const GString &s1, const GString &s2);
+	friend GAPI gbool operator>=(const GString &s1, const GString &s2);
+	friend GAPI gbool operator<(const GString &s1, const GString &s2);
+	friend GAPI gbool operator<=(const GString &s1, const GString &s2);
+
+public: // 常量定义
 	enum { CLASS_CODE = CLASS_CODE_STRING, };
-public:
-	static GString FromNum(gsmall nNum, gint nBase = 10);
-	static GString FromNum(gusmall nNum, gint nBase = 10);
-	static GString FromNum(gshort nNum, gint nBase = 10);
-	static GString FromNum(gushort nNum, gint nBase = 10);
-	static GString FromNum(gint nNum, gint nBase = 10);
-	static GString FromNum(guint nNum, gint nBase = 10);
-	static GString FromNum(glong nNum, gint nBase = 10);
-	static GString FromNum(gulong nNum, gint nBase = 10);
-	static GString FromNum(glonglong nNum, gint nBase = 10);
-	static GString FromNum(gulonglong nNum, gint nBase = 10);
-	static GString FromNum(gfloat nNum, gint nBase = 10);
-	static GString FromNum(gdouble nNum, gint nBase = 10);
-	static GString FromNum(gdecimal nNum, gint nBase = 10);
+	static const gsize MAX_SIZE = GListT<GString>::MAX_SIZE;
+	static const gsize NULL_POS = GListT<GString>::NULL_POS;
 
-	static GString FromStdString(const std::string &sStr);
+public: // 静态方法
+	static GString Number(gsmall num, gint nBase = 10);
+	static GString Number(gusmall num, gint nBase = 10);
+	static GString Number(gshort num, gint nBase = 10);
+	static GString Number(gushort num, gint nBase = 10);
+	static GString Number(gint num, gint nBase = 10);
+	static GString Number(guint num, gint nBase = 10);
+	static GString Number(glong num, gint nBase = 10);
+	static GString Number(gulong num, gint nBase = 10);
+	static GString Number(glonglong num, gint nBase = 10);
+	static GString Number(gulonglong num, gint nBase = 10);
+	static GString Number(gfloat num, gint nBase = 10);
+	static GString Number(gdouble num, gint nBase = 10);
+	static GString Number(gdecimal num, gint nBase = 10);
 
-public:
-	/****************************************************************************
-	**
-	** GString
-	**
-	** @name	GString
-	** @brief	构造函数（constructor）
-	**
-	****************************************************************************/
+public: // 构造方法
 	GString();
-	GString(gchar cChar);
-	GString(const gchar *pStr);
-	GString(const GString &sStr);
-	~GString();
+	GString(gchar c);
+	GString(const gchar *str);
+	GString(const GString &str);
+	GString(GString &&str);
 
+public: // Array行为
 	gsize Size() const;
-	gbool Resize(gsize);
-
-	gchar GetAt(gsize pos) const;
+	gbool IsEmpty() const;
 	gchar &GetAt(gsize pos);
-
-	const gchar *Cursor(gsize pos) const;
-	gchar *Cursor(gsize pos);
-
-	gbool Equals(const GString &, gbool bIsSensitive = true) const;
-
+	const gchar &GetAt(gsize pos) const;
+	gchar *CursorAt(gsize);
+	const gchar *CursorAt(gsize) const;
+	gvoid Resize(gsize size);
+	gvoid Reserve(gsize size);
 	gbool StartWith(gchar c) const;
 	gbool EndWith(gchar c) const;
+	gvoid Append(const GString &str);
+	gvoid Append(GString &&str);
 
-	friend GAPI GString operator+(const GString &s1, const GString &s2);
-	friend GAPI gbool operator>(const GString &s1, const GString &s2);
-	friend GAPI gbool operator<(const GString &s1, const GString &s2);
-
-	/// 运算符重载
-	gbool operator==(const GString &sStr) const;
-	GString &operator=(const GString &sStr);
-	GString &operator+=(const GString &sStr);
-	gchar operator[](gsize) const;
-	gchar &operator[](gsize);
-	gbool operator<(const GString &);
-	gbool operator>(const GString &);
-
-	gsmall ToSmall(gbool *bIsOk = NULL) const;
-	gusmall ToUSmall(gbool *bIsOk = NULL) const;
-	gshort ToShort(gbool *bIsOk = NULL) const;
-	gushort ToUShort(gbool *bIsOk = NULL) const;
-	gint ToInt(gbool *bIsOk = NULL) const;
-	guint ToUInt(gbool *bIsOk = NULL) const;
-	glong ToLong(gbool *bIsOk = NULL) const;
-	gulong ToULong(gbool *bIsOk = NULL) const;
-	glonglong ToLongLong(gbool *bIsOk = NULL) const;
-	gulonglong ToULongLong(gbool *bIsOk = NULL) const;
-	gfloat ToFloat(gbool *bIsOk = NULL) const;
-	gdouble ToDouble(gbool *bIsOk = NULL) const;
-	gdecimal ToDecimal(gbool *bIsOk = NULL) const;
-
-	gbool IsEmpty() const;
-
+public: // 字符串行为
+	gbool Equals(const GString &, gbool bIsSensitive = true) const;
 	GString Trim() const;
 	GString TrimLeft() const;
 	GString TrimRight() const;
-
 	GString ToUpper() const;
 	GString ToLower() const;
 	gcstring CString() const;
 	GString &Replace(const GString &from, const GString &to, gbool bIsSensitive = true);
- 
-	// bIgnoreEmpty：是否忽略空格
-	// bIsSensitive：大小写是否敏感
+	// bIgnoreEmpty：是否忽略空格; bIsSensitive：大小写是否敏感
 	GStringList Split(const GString &sSep, gbool bIgnoreEmpty = false, gbool bIsSensitive = true) const;
 	gsize Find(gchar c, gsize start = 0, gbool bIsSensitive = true) const;
 	gsize Find(const GString &str, gsize start = 0, gbool bIsSensitive = true) const;
-
 	GString SubString(gsize start, gsize length) const;
 
-	// 继承自Object的方法
+public: // 数字转换
+	gsmall ToSmall(gbool *bIsOk = GNULL) const;
+	gusmall ToUSmall(gbool *bIsOk = GNULL) const;
+	gshort ToShort(gbool *bIsOk = GNULL) const;
+	gushort ToUShort(gbool *bIsOk = GNULL) const;
+	gint ToInt(gbool *bIsOk = GNULL) const;
+	guint ToUInt(gbool *bIsOk = GNULL) const;
+	glong ToLong(gbool *bIsOk = GNULL) const;
+	gulong ToULong(gbool *bIsOk = GNULL) const;
+	glonglong ToLongLong(gbool *bIsOk = GNULL) const;
+	gulonglong ToULongLong(gbool *bIsOk = GNULL) const;
+	gfloat ToFloat(gbool *bIsOk = GNULL) const;
+	gdouble ToDouble(gbool *bIsOk = GNULL) const;
+	glongdouble ToLongDouble(gbool *bIsOk = GNULL) const;
+
+public: // Object
 	const GObject *Boxing() const;
 	guint ClassCode() const;
 	GString ToString() const;
-	GString Format() const;
 
-private:
-	gbool IsReference() const;
-	gvoid Free();
-	GString &ToValue();
-	GStringStore::TYPE GetTypeBySize(gsize) const;
-	gbool Switch(GStringStore::TYPE);
+public: // 运算符重载
+	GString &operator=(const GString &str);
+	GString &operator=(GString &&sStr);
+	GString &operator+=(const GString &sStr);
+	const gchar &operator[](gsize) const;
+	gchar &operator[](gsize);
 
-	GStringStore m_tStringStore;
+private: // 私有方法
+	GString(const gchar *pStr, gsize size);
+	GString(const GStringData &str);
+	GString(GStringData &&str);
+
+private: // 私有成员
+	GStringData m_tString;
 };
 
+/// 运算符
 GAPI GString operator+(const GString &s1, const GString &s2);
+GAPI gbool operator==(const GString &s1, const GString &s2);
+GAPI gbool operator!=(const GString &s1, const GString &s2);
 GAPI gbool operator>(const GString &s1, const GString &s2);
+GAPI gbool operator>=(const GString &s1, const GString &s2);
 GAPI gbool operator<(const GString &s1, const GString &s2);
+GAPI gbool operator<=(const GString &s1, const GString &s2);
+
+typedef GString GAString;
 
 #endif // _CORE_STRING_H_

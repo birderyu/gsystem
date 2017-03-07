@@ -1,7 +1,4 @@
-
 #include "dlmalloc.h" 
-
-/*------------------------------ internal #includes ---------------------- */
 
 #ifdef WIN32
 #pragma warning( disable : 4146 ) /* no "unsigned" warnings */

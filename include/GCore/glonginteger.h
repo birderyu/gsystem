@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+G_BEGIN_NAMESPACE
+
 class GAPI GLongInteger 
 	: public GNumber<glong>
 {
@@ -23,5 +25,7 @@ public:
 
 typedef GLongInteger GLongInt;
 typedef GLongInteger GLong;
+
+G_END_NAMESPACE
 
 #endif // _CORE_LONG_INTEGER_H_

@@ -7,6 +7,8 @@
 #include "gstring.h"
 #include "gunordermap.h"
 
+G_BEGIN_NAMESPACE
+
 class GAPI GRegister
 	: public GSingleton<GRegister, GMutex>
 {
@@ -19,6 +21,6 @@ private:
 	GUnorderMap<guint, GString> m_tClassCode_ClassName;
 };
 
-class GString;
+G_END_NAMESPACE
 
 #endif // _CORE_REGISTER_H_

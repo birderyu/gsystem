@@ -61,7 +61,7 @@ GLongDoubleFloat GLongDoubleFloat::ValueOf(const GString &str)
 	{
 		return GLongDoubleFloat();
 	}
-	return GLongDoubleFloat(str.ToDecimal());
+	return GLongDoubleFloat(str.ToLongDouble());
 }
 
 GLongDoubleFloat::GLongDoubleFloat(glongdouble val)

@@ -3,7 +3,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-inline GNextNodeT<NodeT>::GNextNodeT(NodeT *next)
+GINLINE GNextNodeT<NodeT>::GNextNodeT(NodeT *next)
 : m_pNext(next)
 {
 
@@ -11,7 +11,7 @@ inline GNextNodeT<NodeT>::GNextNodeT(NodeT *next)
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-inline GPreviousNextNodeT<NodeT>::GPreviousNextNodeT(NodeT *previous, NodeT *next)
+GINLINE GPreviousNextNodeT<NodeT>::GPreviousNextNodeT(NodeT *previous, NodeT *next)
 : m_pPrevious(previous), m_pNext(next)
 {
 
@@ -19,36 +19,36 @@ inline GPreviousNextNodeT<NodeT>::GPreviousNextNodeT(NodeT *previous, NodeT *nex
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-inline GBinaryTreeNodeT<NodeT>::GBinaryTreeNodeT(NodeT *parent, NodeT *left, NodeT *right)
+GINLINE GBinaryTreeNodeT<NodeT>::GBinaryTreeNodeT(NodeT *parent, NodeT *left, NodeT *right)
 : m_pParent(parent), m_pLeft(left), m_pRight(left)
 {
 
 }
 
 template<typename NodeT>
-inline const NodeT *GBinaryTreeNodeT<NodeT>::LeftSibling() const
+GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::LeftSibling() const
 {
 	if (m_pParent)
 	{
 		return m_pParent->m_pLeft;
 	}
-	return NULL;
+	return GNULL;
 }
 
 template<typename NodeT>
-inline const NodeT *GBinaryTreeNodeT<NodeT>::RightSibling() const
+GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::RightSibling() const
 {
 	if (m_pParent)
 	{
 		return m_pParent->m_pRight;
 	}
-	return NULL;
+	return GNULL;
 }
 
 template<typename NodeT>
-inline const NodeT *GBinaryTreeNodeT<NodeT>::Next() const
+GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Next() const
 {
-	const NodeT *node = NULL;
+	const NodeT *node = GNULL;
 	if (m_pRight)
 	{
 		node = m_pRight;
@@ -61,9 +61,39 @@ inline const NodeT *GBinaryTreeNodeT<NodeT>::Next() const
 	{
 		if (!m_pParent)
 		{
-			return NULL;
+			return GNULL;
 		}
 		node = (const NodeT *)this;
+		const NodeT *pnode = node->m_pParent;
+		while (pnode && node == pnode->m_pRight)
+		{
+			node = pnode;
+			pnode = node->m_pParent;
+		}
+		node = pnode;
+	}
+	return node;
+}
+
+template<typename NodeT>
+GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Next()
+{
+	NodeT *node = GNULL;
+	if (m_pRight)
+	{
+		node = m_pRight;
+		while (node->m_pLeft)
+		{
+			node = node->m_pLeft;
+		}
+	}
+	else
+	{
+		if (!m_pParent)
+		{
+			return GNULL;
+		}
+		node = (NodeT *)this;
 		NodeT *pnode = node->m_pParent;
 		while (pnode && node == pnode->m_pRight)
 		{
@@ -76,9 +106,9 @@ inline const NodeT *GBinaryTreeNodeT<NodeT>::Next() const
 }
 
 template<typename NodeT>
-inline const NodeT *GBinaryTreeNodeT<NodeT>::Previous() const
+GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Previous() const
 {
-	const NodeT *node = NULL;
+	const NodeT *node = GNULL;
 	if (m_pLeft)
 	{
 		node = m_pLeft;
@@ -91,9 +121,39 @@ inline const NodeT *GBinaryTreeNodeT<NodeT>::Previous() const
 	{
 		if (!m_pParent)
 		{
-			return NULL;
+			return GNULL;
 		}
 		node = (const NodeT *)this;
+		const NodeT *pnode = node->m_pParent;
+		while (pnode && node == pnode->m_pLeft)
+		{
+			node = pnode;
+			pnode = node->m_pParent;
+		}
+		node = pnode;
+	}
+	return node;
+}
+
+template<typename NodeT>
+GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Previous()
+{
+	NodeT *node = GNULL;
+	if (m_pLeft)
+	{
+		node = m_pLeft;
+		while (node->m_pRight)
+		{
+			node = node->m_pRight;
+		}
+	}
+	else
+	{
+		if (!m_pParent)
+		{
+			return GNULL;
+		}
+		node = (NodeT *)this;
 		NodeT *pnode = node->m_pParent;
 		while (pnode && node == pnode->m_pLeft)
 		{
@@ -106,7 +166,7 @@ inline const NodeT *GBinaryTreeNodeT<NodeT>::Previous() const
 }
 
 template<typename NodeT>
-inline const NodeT *GBinaryTreeNodeT<NodeT>::First() const
+GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::First() const
 {
 	if (!m_pLeft)
 	{
@@ -121,7 +181,7 @@ inline const NodeT *GBinaryTreeNodeT<NodeT>::First() const
 }
 
 template<typename NodeT>
-inline NodeT *GBinaryTreeNodeT<NodeT>::First()
+GINLINE NodeT *GBinaryTreeNodeT<NodeT>::First()
 {
 	if (!m_pLeft)
 	{
@@ -136,7 +196,7 @@ inline NodeT *GBinaryTreeNodeT<NodeT>::First()
 }
 
 template<typename NodeT>
-inline const NodeT *GBinaryTreeNodeT<NodeT>::Last() const
+GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Last() const
 {
 	if (!m_pRight)
 	{
@@ -151,7 +211,7 @@ inline const NodeT *GBinaryTreeNodeT<NodeT>::Last() const
 }
 
 template<typename NodeT>
-inline NodeT *GBinaryTreeNodeT<NodeT>::Last()
+GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Last()
 {
 	if (!m_pRight)
 	{
@@ -167,7 +227,7 @@ inline NodeT *GBinaryTreeNodeT<NodeT>::Last()
 
 //////////////////////////////////////////////////////////////////////////
 template<typename DataT>
-inline GDataNodeT<DataT>::GDataNodeT(const DataT &data)
+GINLINE GDataNodeT<DataT>::GDataNodeT(const DataT &data)
 : m_tData(data)
 {
 
@@ -175,7 +235,7 @@ inline GDataNodeT<DataT>::GDataNodeT(const DataT &data)
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-inline GChildNodeT<NodeT>::GChildNodeT(const NodeT *child)
+GINLINE GChildNodeT<NodeT>::GChildNodeT(const NodeT *child)
 : m_pChild(child)
 {
 
@@ -183,9 +243,17 @@ inline GChildNodeT<NodeT>::GChildNodeT(const NodeT *child)
 
 //////////////////////////////////////////////////////////////////////////
 template<typename KeyT, typename ValueT>
-inline GPairNodeT<KeyT, ValueT>::GPairNodeT(const KeyT &key, const ValueT &value)
-: m_tKey(key)
-, m_tValue(value)
+GINLINE GPairNodeT<KeyT, ValueT>::GPairNodeT(const KeyT &key, const ValueT &value)
+	: m_tKey(key)
+	, m_tValue(value)
+{
+
+}
+
+template<typename KeyT, typename ValueT>
+GINLINE GPairNodeT<KeyT, ValueT>::GPairNodeT(const KeyT &key, ValueT &&value)
+	: m_tKey(key)
+	, m_tValue(GForward<ValueT>(value))
 {
 
 }

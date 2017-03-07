@@ -3,10 +3,12 @@
 
 #include "gobject.h"
 
+template<typename NodeT, typename EdgeT>
 class GGraph
 {
 public:
 	GGraph(gsize vcount);
+	gvoid AddEdge(const EdgeT &edge);
 };
 
 typedef struct graph *Graph;

@@ -4,6 +4,7 @@
 
 #include "gbinarystream.h"
 #include "gbufferstream.h"
+#include "GCore/gbytebuffer.h"
 
 class GAPI GBinaryBufferStream
 	: virtual public GBinaryStream
@@ -13,7 +14,7 @@ public:
 	virtual ~GBinaryBufferStream() = 0;
 
 private:
-	GBytes m_tBuffer;
+	GByteBuffer m_tBuffer;
 };
 
 #endif // _CORE_BINARY_STREAM_H_

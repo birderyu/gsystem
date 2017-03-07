@@ -3,7 +3,7 @@ template <typename T>
 class LinkQueue
 {
 public:
-	LinkQueue() : phead(NULL), pend(NULL), count(0){
+	LinkQueue() : phead(GNULL), pend(GNULL), count(0){
 		phead = new Node<T>();
 		pend = phead;
 		count = 0;

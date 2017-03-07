@@ -1,26 +1,39 @@
-/// 二进制字节流
+/// 字节数组 byte array（bytes）
 #ifndef _CORE_BYTES_H_
 #define _CORE_BYTES_H_
 
 #include "gobject.h"
 #include "gstructure.h"
-#include "gvector.h"
+#include "gseries.h"
 
-#define G_BYTES_DEFAULT_CAPACITY 1024
-#define G_BYTES_DEFAULT_ADD_SIZE 512
+class GByteBuffer;
 
 class GAPI GBytes final
 	: public GListT<GBytes>
+	, public GArray<gbyte>
 	, public GObject
 {
-public:
-	GBytes(gsize nCapacity = G_BYTES_DEFAULT_CAPACITY,
-		gsize nAddSize = G_BYTES_DEFAULT_ADD_SIZE);
-	GBytes(const GBytes &tBytes);
-	~GBytes();
+	friend class GByteBuffer;
 
-	gbool Reserve(gsize);
-	gbool Resize(gsize);
+public:
+	/// 将一个算数类型值转换成字节数组，返回该值所占的字节数
+	/// 字节数组是大端的，可以直接用于网络字节序
+	template<typename T> static gsize ArithmeticToBytes(const T *val, gbyte *bytes);
+
+	/// 将一个字节数组转换成算数类型值，返回该值所占的字节数
+	/// 字节数组是大端的
+	template<typename T> static gsize BytesToArithmetic(const gbyte *bytes, T *val);
+
+public:
+	GBytes();
+	GBytes(const gbyte *bytes, gsize size);
+	GBytes(const GBytes &bytes);
+	GBytes(GBytes &&bytes);
+	explicit GBytes(const GByteBuffer &bytes);
+	explicit GBytes(GByteBuffer &&bytes);
+
+	gvoid Reserve(gsize capacity);
+	gvoid Resize(gsize size);
 	gvoid Clear();
 	gvoid Dispose();
 
@@ -29,59 +42,26 @@ public:
 	gsize Capacity() const;
 
 	gbyte &GetAt(gsize);
-	gbyte  GetAt(gsize) const;
-	gbyte &operator[](gsize);
-	gbyte  operator[](gsize) const;
+	const gbyte &GetAt(gsize) const;
+	gbyte *CursorAt(gsize pos);
+	const gbyte *CursorAt(gsize pos) const;
 
 	const gbyte *Head() const;
 	gbyte *Head();
 	const gbyte *Tail() const;
 	gbyte *Tail();
 
-	/// 写入二进制字节流
-	GBytes &operator<<(gbool);
-	GBytes &operator<<(gchar);
-	GBytes &operator<<(gschar);
-	GBytes &operator<<(guchar);
-	GBytes &operator<<(gwchar);
-	GBytes &operator<<(gshort);
-	GBytes &operator<<(gushort);
-	GBytes &operator<<(gint);
-	GBytes &operator<<(guint);
-	GBytes &operator<<(glong);
-	GBytes &operator<<(gulong);
-	GBytes &operator<<(glonglong);
-	GBytes &operator<<(gulonglong);
-	GBytes &operator<<(gfloat);
-	GBytes &operator<<(gdouble);
-	GBytes &operator<<(gdecimal);
-	GBytes &operator<<(const GString &);
-
-	/// 从二进制字节流中写出
-	GBytes &operator>>(gbool &);
-	GBytes &operator>>(gchar &);
-	GBytes &operator>>(gschar &);
-	GBytes &operator>>(guchar &);
-	GBytes &operator>>(gwchar &);
-	GBytes &operator>>(gshort &);
-	GBytes &operator>>(gushort &);
-	GBytes &operator>>(gint &);
-	GBytes &operator>>(guint &);
-	GBytes &operator>>(glong &);
-	GBytes &operator>>(gulong &);
-	GBytes &operator>>(glonglong &);
-	GBytes &operator>>(gulonglong &);
-	GBytes &operator>>(gfloat &);
-	GBytes &operator>>(gdouble &);
-	GBytes &operator>>(gdecimal &);
+	GBytes &operator=(const GBytes &bytes);
+	GBytes &operator=(GBytes &&bytes);
+	GBytes &operator=(const GByteBuffer &bytes);
+	GBytes &operator=(GByteBuffer &&bytes);
+	gbyte &operator[](gsize);
+	const gbyte &operator[](gsize) const;
 
 private:
-	// 每次增长时的步长单元
-	gsize m_nAddSize;
-	GVector<gbyte> m_tBytes;
+	GBytesData m_tBytes;
 };
 
-#undef G_BYTES_DEFAULT_ADD_SIZE
-#undef G_BYTES_DEFAULT_CAPACITY
+#include "gbytes.inl"
 
 #endif // _CORE_BYTES_H_

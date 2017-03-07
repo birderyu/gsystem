@@ -1,58 +1,58 @@
 #include "gendian.h"
 
-void GEndian::ToBigEndianBytes(guint16 nValue, gbyte nData[])
+void GEndian::ToBigEndianBytes(guint16 val, gbyte bytes[])
 {
-	nData[0] = (gbyte)(nValue >> 8);
-	nData[1] = (gbyte)(nValue);
+	bytes[0] = (gbyte)(val >> 8);
+	bytes[1] = (gbyte)(val);
 }
 
-void GEndian::ToBigEndianBytes(guint32 nValue, gbyte nData[])
+void GEndian::ToBigEndianBytes(guint32 val, gbyte bytes[])
 {
-	nData[0] = (gbyte)(nValue >> 24);
-	nData[1] = (gbyte)(nValue >> 16);
-	nData[2] = (gbyte)(nValue >> 8);
-	nData[3] = (gbyte)(nValue);
+	bytes[0] = (gbyte)(val >> 24);
+	bytes[1] = (gbyte)(val >> 16);
+	bytes[2] = (gbyte)(val >> 8);
+	bytes[3] = (gbyte)(val);
 }
 
-void GEndian::ToBigEndianBytes(guint64 nValue, gbyte nData[])
+void GEndian::ToBigEndianBytes(guint64 val, gbyte bytes[])
 {
-	nData[0] = (gbyte)(nValue >> 56);
-	nData[1] = (gbyte)(nValue >> 48);
-	nData[2] = (gbyte)(nValue >> 40);
-	nData[3] = (gbyte)(nValue >> 32);
-	nData[4] = (gbyte)(nValue >> 24);
-	nData[5] = (gbyte)(nValue >> 16);
-	nData[6] = (gbyte)(nValue >> 8);
-	nData[7] = (gbyte)(nValue);
+	bytes[0] = (gbyte)(val >> 56);
+	bytes[1] = (gbyte)(val >> 48);
+	bytes[2] = (gbyte)(val >> 40);
+	bytes[3] = (gbyte)(val >> 32);
+	bytes[4] = (gbyte)(val >> 24);
+	bytes[5] = (gbyte)(val >> 16);
+	bytes[6] = (gbyte)(val >> 8);
+	bytes[7] = (gbyte)(val);
 }
 
-void GEndian::ToBigEndianNumber(gbyte nData[], guint16 &nValue)
+void GEndian::ToBigEndianNumber(gbyte bytes[], guint16 &val)
 {
-	nValue = 0;
-	nValue += (nData[0] << 8);
-	nValue += (nData[1]);
+	val = 0;
+	val += (bytes[0] << 8);
+	val += (bytes[1]);
 }
 
-void GEndian::ToBigEndianNumber(gbyte nData[], guint32 &nValue)
+void GEndian::ToBigEndianNumber(gbyte bytes[], guint32 &val)
 {
-	nValue = 0;
-	nValue += (nData[0] << 24);
-	nValue += (nData[1] << 16);
-	nValue += (nData[2] << 8);
-	nValue += (nData[3]);
+	val = 0;
+	val += (bytes[0] << 24);
+	val += (bytes[1] << 16);
+	val += (bytes[2] << 8);
+	val += (bytes[3]);
 }
 
-void GEndian::ToBigEndianNumber(gbyte nData[], guint64 &nValue)
+void GEndian::ToBigEndianNumber(gbyte bytes[], guint64 &val)
 {
-	nValue = 0;
-	nValue += (nData[0] << 56);
-	nValue += (nData[1] << 48);
-	nValue += (nData[2] << 40);
-	nValue += (nData[3] << 32);
-	nValue += (nData[4] << 24);
-	nValue += (nData[5] << 16);
-	nValue += (nData[6] << 8);
-	nValue += (nData[7]);
+	val = 0;
+	val += (bytes[0] << 56);
+	val += (bytes[1] << 48);
+	val += (bytes[2] << 40);
+	val += (bytes[3] << 32);
+	val += (bytes[4] << 24);
+	val += (bytes[5] << 16);
+	val += (bytes[6] << 8);
+	val += (bytes[7]);
 }
 
 gbool GEndian::Swap(gbool val)
@@ -130,59 +130,59 @@ gdecimal GEndian::Swap(gdecimal val)
 	return val;
 }
 
-void GEndian::ToLittleEndianBytes(guint16 nValue, gbyte nData[])
+void GEndian::ToLittleEndianBytes(guint16 val, gbyte bytes[])
 {
-	nData[0] = (gbyte)(nValue);
-	nData[1] = (gbyte)(nValue >> 8);
+	bytes[0] = (gbyte)(val);
+	bytes[1] = (gbyte)(val >> 8);
 }
 
-void GEndian::ToLittleEndianBytes(guint32 nValue, gbyte nData[])
+void GEndian::ToLittleEndianBytes(guint32 val, gbyte bytes[])
 {
-	nData[0] = (gbyte)(nValue);
-	nData[1] = (gbyte)(nValue >> 8);
-	nData[2] = (gbyte)(nValue >> 16);
-	nData[3] = (gbyte)(nValue >> 24);
+	bytes[0] = (gbyte)(val);
+	bytes[1] = (gbyte)(val >> 8);
+	bytes[2] = (gbyte)(val >> 16);
+	bytes[3] = (gbyte)(val >> 24);
 }
 
-void GEndian::ToLittleEndianBytes(guint64 nValue, gbyte nData[])
+void GEndian::ToLittleEndianBytes(guint64 val, gbyte bytes[])
 {
-	nData[0] = (gbyte)(nValue);
-	nData[1] = (gbyte)(nValue >> 8);
-	nData[2] = (gbyte)(nValue >> 16);
-	nData[3] = (gbyte)(nValue >> 24); 
-	nData[4] = (gbyte)(nValue >> 32);
-	nData[5] = (gbyte)(nValue >> 40);
-	nData[6] = (gbyte)(nValue >> 48);
-	nData[7] = (gbyte)(nValue >> 56);
+	bytes[0] = (gbyte)(val);
+	bytes[1] = (gbyte)(val >> 8);
+	bytes[2] = (gbyte)(val >> 16);
+	bytes[3] = (gbyte)(val >> 24); 
+	bytes[4] = (gbyte)(val >> 32);
+	bytes[5] = (gbyte)(val >> 40);
+	bytes[6] = (gbyte)(val >> 48);
+	bytes[7] = (gbyte)(val >> 56);
 }
 
-void GEndian::ToLittleEndianNumber(gbyte nData[], guint16 &nValue)
+void GEndian::ToLittleEndianNumber(gbyte bytes[], guint16 &val)
 {
-	nValue = 0;
-	nValue += (nData[0]);
-	nValue += (nData[1] << 8);
+	val = 0;
+	val += (bytes[0]);
+	val += (bytes[1] << 8);
 }
 
-void GEndian::ToLittleEndianNumber(gbyte nData[], guint32 &nValue)
+void GEndian::ToLittleEndianNumber(gbyte bytes[], guint32 &val)
 {
-	nValue = 0;
-	nValue += (nData[0]);
-	nValue += (nData[1] << 8);
-	nValue += (nData[2] << 16);
-	nValue += (nData[3] << 24);
+	val = 0;
+	val += (bytes[0]);
+	val += (bytes[1] << 8);
+	val += (bytes[2] << 16);
+	val += (bytes[3] << 24);
 }
 
-void GEndian::ToLittleEndianNumber(gbyte nData[], guint64 &nValue)
+void GEndian::ToLittleEndianNumber(gbyte bytes[], guint64 &val)
 {
-	nValue = 0;
-	nValue += (nData[0]);
-	nValue += (nData[1] << 8);
-	nValue += (nData[2] << 16);
-	nValue += (nData[3] << 24);
-	nValue += (nData[4] << 32);
-	nValue += (nData[5] << 40);
-	nValue += (nData[6] << 48);
-	nValue += (nData[7] << 56);
+	val = 0;
+	val += (bytes[0]);
+	val += (bytes[1] << 8);
+	val += (bytes[2] << 16);
+	val += (bytes[3] << 24);
+	val += (bytes[4] << 32);
+	val += (bytes[5] << 40);
+	val += (bytes[6] << 48);
+	val += (bytes[7] << 56);
 }
 
 GEndian::GEndian()

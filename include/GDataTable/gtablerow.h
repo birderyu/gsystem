@@ -13,8 +13,8 @@ public:
 	TableT &Table();
 	const TableT &Table() const;
 
-	GTableField<TableT> Field(gsize) const;
-	GTableField<TableT> Field(const GString &) const;
+	GTableField<TableT> Field(gsize field) const;
+	GTableField<TableT> Field(const GString &field) const;
 	gsize RowID() const;
 
 	GTableCell<TableT> operator[](gsize) const;

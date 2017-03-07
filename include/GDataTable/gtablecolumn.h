@@ -9,6 +9,7 @@ class GTableColumn
 public:
 	GTableColumn(TableT &, gsize column);
 	GTableColumn(const GTableColumn &);
+	GTableColumn(GTableColumn &&);
 
 	TableT &Table();
 	const TableT &Table() const;
@@ -20,7 +21,7 @@ public:
 	GTableCell<TableT> operator[](gsize) const;
 
 private:
-	TableT &m_tTable;
+	TableT *m_pTable;
 	gsize m_nColumnID;
 };
 

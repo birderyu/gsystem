@@ -1,5 +1,5 @@
-#ifndef _CORE_ENDIAN_UTILITY_H_
-#define _CORE_ENDIAN_UTILITY_H_
+#ifndef _CORE_ENDIAN_H_
+#define _CORE_ENDIAN_H_
 
 #include "gglobal.h"
 
@@ -64,4 +64,6 @@ private:
 	~GEndian();
 };
 
-#endif // _CORE_ENDIAN_UTILITY_H_
+#include "gendian.inl"
+
+#endif // _CORE_ENDIAN_H_

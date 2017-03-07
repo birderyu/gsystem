@@ -1,85 +1,101 @@
 #include "gstring.h"
+#include "gcstringhelper.h"
 
-gbool GString::operator==(const GString &sStr) const
+GString &GString::operator=(const GString &str)
 {
-	// TODO
-	return false;
-}
-
-GString &GString::operator+=(const GString &sStr)
-{
-	// TODO
-	return *this;
-}
-
-GString &GString::operator=(const GString &sStr)
-{
-	if (this == &sStr)
+	if (this == &str)
 	{
 		return *this;
 	}
 
-	Free();
-	m_tStringStore.m_nType = sStr.m_tStringStore.m_nType;
-	switch (m_tStringStore.m_nType)
-	{
-	case GStringStore::STRING_STORE_TYPE_VALUE_SMALL:
-		m_tStringStore.m_sSmallStr.Initialize(sStr.m_tStringStore.m_sSmallStr);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_NORMAL:
-		m_tStringStore.m_sNormalStr.Initialize(sStr.m_tStringStore.m_sNormalStr);
-		break;
-	case GStringStore::STRING_STORE_TYPE_VALUE_BIG:
-		// TODO
-		break;
-	case GStringStore::STRING_STORE_TYPE_REFERENCE:
-		// TODO
-		break;
-	default:
-		m_tStringStore.m_nType = GStringStore::STRING_STORE_TYPE_VALUE_SMALL;
-		m_tStringStore.m_sSmallStr.Initialize();
-		break;
-	}
+	m_tString = str.m_tString;
 	return *this;
 }
 
-gchar GString::operator[](gsize pos) const
+GString &GString::operator=(GString &&str)
 {
-	return GetAt(pos);
+	if (this == &str)
+	{
+		return *this;
+	}
+
+	m_tString = GMove(str.m_tString);
+	return *this;
+}
+
+GString &GString::operator+=(const GString &str)
+{
+	Append(str);
+	return *this;
+}
+
+const gchar &GString::operator[](gsize pos) const
+{
+	return m_tString[pos];
 }
 
 gchar &GString::operator[](gsize pos)
 {
-	return GetAt(pos);
-}
-
-gbool GString::operator<(const GString &)
-{
-	// TODO
-	return false;
-}
-
-gbool GString::operator>(const GString &)
-{
-	// TODO
-	return false;
+	return m_tString[pos];
 }
 
 GString operator+(const GString &s1, const GString &s2)
 {
-	GString sStr(s1);
-	sStr += s2;
-	return sStr;
+	gsize size1 = s1.Size();
+	gsize size2 = s2.Size();
+	GStringData str(size1 + size2);
+	GCStringHelper::Copy(s1.m_tString.Start(), size1, str.Start());
+	GCStringHelper::Copy(s2.m_tString.Start(), size2, str.CursorAt(size1));
+	str.Resize(size1 + size2);
+	return GString(GMove(str));
+}
+
+gbool operator==(const GString &s1, const GString &s2)
+{
+	if (&s1 == &s2)
+	{
+		return true;
+	}
+	return strcmp(s1.CString(), s2.CString()) == 0;
+}
+
+gbool operator!=(const GString &s1, const GString &s2)
+{
+	return !(s1 == s2);
 }
 
 gbool operator>(const GString &s1, const GString &s2)
 {
-	// TODO
-	return false;
+	if (&s1 == &s2)
+	{
+		return false;
+	}
+	return strcmp(s1.CString(), s2.CString()) > 0;
+}
+
+gbool operator>=(const GString &s1, const GString &s2)
+{
+	if (&s1 == &s2)
+	{
+		return true;
+	}
+	return strcmp(s1.CString(), s2.CString()) >= 0;
 }
 
 gbool operator<(const GString &s1, const GString &s2)
 {
-	// TODO
-	return false;
+	if (&s1 == &s2)
+	{
+		return false;
+	}
+	return strcmp(s1.CString(), s2.CString()) < 0;
+}
+
+gbool operator<=(const GString &s1, const GString &s2)
+{
+	if (&s1 == &s2)
+	{
+		return true;
+	}
+	return strcmp(s1.CString(), s2.CString()) <= 0;
 }

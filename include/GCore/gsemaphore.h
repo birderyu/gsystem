@@ -9,8 +9,8 @@ class GAPI GSemaphore
 public:
 	GSemaphore(gint nInitialValue = 1);
 	~GSemaphore();
-	gint Wait();
-	gint Wait(gulong nMsecs);
+	gbool Wait();
+	gbool Wait(gulong nMsecs);
 	gvoid Post();
 
 private:

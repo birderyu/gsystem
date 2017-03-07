@@ -1,68 +1,89 @@
-/*队列的抽象数据类型*/
-template <typename T>
-class ArrayQueue
+// 使用数组实现的队列
+#ifndef _CORE_ARRAY_QUEUE_H_
+#define _CORE_ARRAY_QUEUE_H_
+
+#include "gqueue.h"
+#include "gdynamicarray.h"
+
+#define G_QUEUE_DEFAULT_CAPACITY 1024
+
+template <typename DataT>
+class GArrayQueue
+	: public GQueue<DataT>
 {
 public:
 	//构造函数
-	ArrayQueue(int s) : maxsize(s), begin(0), end(0), array(NULL) {
-		array = new T[maxsize];
+	GArrayQueue(gsize capacity)
+		: m_nFront(0)
+		, m_nRear(0)
+		, m_tArray(capacity)
+	{
+		
 	}
 	//析构函数
-	~ArrayQueue()
+	~GArrayQueue()
 	{
-		delete[]array;
+		
 	}
 
+	gvoid Clear();
+	gvoid Dispose();
 
-	T front();          //对首元素
+	DataT front();          //队首元素
 	bool pop();         //出对
 	bool push(T t);     //入队
-	bool isEmpty();     //判空
-	int size();         //队列的大小
+	gbool IsEmpty() const;
+	int Size();         //队列的大小
+
 private:
-	int begin;      //对首元素
-	int end;        //对尾
-	T *array;       //数组
-	int maxsize;    //容量
+	gsize m_nFront; // 队首
+	gsize m_nRear;	// 队尾
+	GDynamicArray<DataT> m_tArray;
 };
 
-template <typename T>
-T ArrayQueue<T>::front()
+#include "garrayqueue.inl"
+
+#undef G_QUEUE_DEFAULT_CAPACITY
+
+template <typename DataT>
+DataT GArrayQueue<DataT>::front()
 {
-	if (begin != end)
-		return array[begin];
+	if (m_nFront != m_nRear)
+		return m_tArray[m_nFront];
 };
 
-template <typename T>
-bool ArrayQueue<T>::pop()
+template <typename DataT>
+bool GArrayQueue<DataT>::pop()
 {
-	if (begin == end)
+	if (m_nFront == m_nRear)
 		return false;
-	begin = (begin + 1) % maxsize;
+	m_nFront = (m_nFront + 1) % maxsize;
 	return true;
 };
 
-template <typename T>
-bool ArrayQueue<T>::push(T t)
+template <typename DataT>
+bool GArrayQueue<DataT>::push(T t)
 {
-	if ((end + 1) % maxsize == begin)
+	if ((m_nRear + 1) % maxsize == m_nFront)
 		return false;
-	array[end] = t;
-	end = (end + 1) % maxsize;
+	m_tArray[m_nRear] = t;
+	m_nRear = (m_nRear + 1) % maxsize;
 	return true;
 };
 
-template <typename T>
-bool ArrayQueue<T>::isEmpty()
+template <typename DataT>
+gbool GArrayQueue<DataT>::IsEmpty() const
 {
-	if (begin == end)
+	if (m_nFront == m_nRear)
 		return true;
 	else
 		return false;
 };
 
-template <typename T>
-int ArrayQueue<T>::size()
+template <typename DataT>
+int GArrayQueue<DataT>::Size()
 {
-	return (end - begin + maxsize) % maxsize;
+	return (m_nRear - m_nFront + maxsize) % maxsize;
 };
+
+#endif // _CORE_ARRAY_QUEUE_H_

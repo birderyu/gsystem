@@ -4,7 +4,7 @@
 **
 ** @file	gsocket.h
 ** @brief	套接字类型的定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2015-12-31
 ** @version	1.0
@@ -17,8 +17,12 @@
 
 #include "gglobal.h"
 
+G_BEGIN_NAMESPACE
 class GSocket_Ex;
 class GSockAddress;
+G_END_NAMESPACE
+
+G_BEGIN_NAMESPACE
 
 /****************************************************************************
 **
@@ -32,7 +36,7 @@ class GSockAddress;
 ** GTcpSocket {@see GTcpSocket} 和GUdpSocket {@see GUdpSocket}。
 **
 ****************************************************************************/
-class GAPI GSocket 
+class GAPI GSocket
 {
 public:
 	/****************************************************************************
@@ -52,10 +56,10 @@ public:
 	virtual gvoid Close() = 0;
 
 	gbool SetRecvTimeout(gint nMsecs);
-	gint	GetRecvTimeout() const;
+	gint GetRecvTimeout() const;
 
 	gbool SetSendTimeout(gint nMsecs);
-	gint	GetSendTimeout() const;
+	gint GetSendTimeout() const;
 
 	gbool SetReuseAddress(gbool nResue);
 
@@ -65,5 +69,7 @@ public:
 protected:
 	GSocket_Ex *m_pSocket_Ex;
 };
+
+G_END_NAMESPACE
 
 #endif // _CORE_SOCKET_H_

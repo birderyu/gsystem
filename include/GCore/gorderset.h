@@ -22,12 +22,25 @@ public:
 		GOrderSetNode(
 			const KeyT &key = KeyT(),
 			const GDummyNodeT &value = GDummyNodeT(),
-			GOrderSetNode *parent = NULL,
-			GOrderSetNode *left = NULL,
-			GOrderSetNode *right = NULL,
+			GOrderSetNode *parent = GNULL,
+			GOrderSetNode *left = GNULL,
+			GOrderSetNode *right = GNULL,
 			gsmall color = G_ORDER_SET_NODE_RED)
 			: GBinaryTreeNodeT<GOrderSetNode>(parent, left, right)
 			, GPairNodeT<KeyT, GDummyNodeT>(key, value)
+			, m_nColor(color)
+		{
+
+		}
+
+		GOrderSetNode(
+			const KeyT &key, GDummyNodeT &&value,
+			GOrderSetNode *parent = GNULL,
+			GOrderSetNode *left = GNULL,
+			GOrderSetNode *right = GNULL,
+			gsmall color = G_ORDER_SET_NODE_RED)
+			: GBinaryTreeNodeT<GOrderSetNode>(parent, left, right)
+			, GPairNodeT<KeyT, GDummyNodeT>(key, GForward<GDummyNodeT>(value))
 			, m_nColor(color)
 		{
 
@@ -41,41 +54,60 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		Iterator() : m_pNode(NULL) {}
-		Iterator(GOrderSetNode *node = NULL) : m_pNode(node) {}
+		Iterator() : m_pNode(GNULL) {}
+		Iterator(GOrderSetNode *node) : m_pNode(node) {}
 		Iterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
+		Iterator(Iterator &&iter) : m_pNode(iter.m_pNode) { iter.m_pNode = GNULL; }
 
-		inline const KeyT &operator*() const { GASSERT(m_pNode); return m_pNode->m_tKey; }
-		inline const KeyT *operator->() const { GASSERT(m_pNode); return &m_pNode->m_tKey; }
-
-		inline gbool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
-		inline gbool operator!=(const Iterator &iter) const { return m_pNode != iter.m_pNode; }
-		inline Iterator &operator++()
+		GINLINE Iterator &operator=(const Iterator &iter) const
+		{
+			if (this == &iter)
+			{
+				return *this;
+			}
+			m_pNode = iter.m_pNode;
+			return *this;
+		}
+		GINLINE Iterator &operator=(Iterator &&iter) const
+		{
+			if (this == &iter)
+			{
+				return *this;
+			}
+			m_pNode = iter.m_pNode;
+			iter.m_pNode = GNULL;
+			return *this;
+		}
+		GINLINE const KeyT &operator*() const { GASSERT(m_pNode); return m_pNode->m_tKey; }
+		GINLINE const KeyT *operator->() const { GASSERT(m_pNode); return &m_pNode->m_tKey; }
+		GINLINE gbool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
+		GINLINE gbool operator!=(const Iterator &iter) const { return m_pNode != iter.m_pNode; }
+		GINLINE Iterator &operator++()
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->Next();
 			return *this;
 		}
-		inline Iterator operator++(gint)
+		GINLINE Iterator operator++(gint)
 		{
 			GASSERT(m_pNode);
 			GOrderSetNode *node = m_pNode;
 			m_pNode = m_pNode->Next();
 			return Iterator(node);
 		}
-		inline Iterator &operator--()
+		GINLINE Iterator &operator--()
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->Previous();
 			return *this;
 		}
-		inline Iterator operator--(gint) {
+		GINLINE Iterator operator--(gint) {
 			GASSERT(m_pNode);
 			GOrderSetNode *node = m_pNode;
 			m_pNode = m_pNode->Previous();
 			return Iterator(node);
 		}
-		inline Iterator operator+(gint i) const
+		GINLINE Iterator operator+(gint i) const
 		{
 			GOrderSetNode *node = m_pNode;
 			if (i > 0)
@@ -94,8 +126,8 @@ public:
 			}
 			return Iterator(node);
 		}
-		inline Iterator operator-(gint i) const { return operator+(-i); }
-		inline Iterator &operator+=(gint i)
+		GINLINE Iterator operator-(gint i) const { return operator+(-i); }
+		GINLINE Iterator &operator+=(gint i)
 		{
 			if (i > 0)
 			{
@@ -113,10 +145,29 @@ public:
 			}
 			return *this;
 		}
-		inline Iterator &operator-=(gint i) { return operator+=(-i); }
-		inline gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
-		inline gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
-
+		GINLINE Iterator &operator-=(gint i) { return operator+=(-i); }
+		GINLINE gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
+		GINLINE gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
+		GINLINE Iterator Next() const
+		{
+			GASSERT(m_pNode);
+			return Iterator(m_pNode->Next());
+		}
+		GINLINE Iterator Previous() const
+		{
+			GASSERT(m_pNode);
+			return Iterator(m_pNode->Previous());
+		}
+		GINLINE gbool HasNext() const
+		{
+			return GNULL != m_pNode
+				&& GNULL != m_pNode->Next();
+		}
+		GINLINE gbool HasPrevious() const
+		{
+			return GNULL != m_pNode
+				&& GNULL != m_pNode->Previous();
+		}
 	private:
 		GOrderSetNode *m_pNode;
 	};
@@ -126,42 +177,62 @@ public:
 	{
 		friend class Iterator;
 	public:
-		inline ConstIterator() : m_pNode(0) { }
-		inline ConstIterator(const GOrderSetNode *node) : m_pNode(node) {}
-		inline ConstIterator(const ConstIterator &citer) : m_pNode(citer.m_pNode) {}
-		explicit inline ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
+		GINLINE ConstIterator() : m_pNode(GNULL) { }
+		GINLINE ConstIterator(const GOrderSetNode *node) : m_pNode(node) {}
+		GINLINE ConstIterator(const ConstIterator &citer) : m_pNode(citer.m_pNode) {}
+		GINLINE ConstIterator(ConstIterator &&citer) : m_pNode(citer.m_pNode) { citer.m_pNode = GNULL; }
+		explicit GINLINE ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
+		explicit GINLINE ConstIterator(Iterator &&iter) : m_pNode(iter.m_pNode) { iter.m_pNode = GNULL; }
 
-		inline const KeyT &operator*() const { GASSERT(m_pNode); return m_pNode->m_tKey; }
-		inline const KeyT *operator->() const { GASSERT(m_pNode); return &m_pNode->m_tKey; }
-
-		inline gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
-		inline gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
-		inline ConstIterator &operator++()
+		GINLINE ConstIterator &operator=(const ConstIterator &citer) const
+		{
+			if (this == &citer)
+			{
+				return *this;
+			}
+			m_pNode = citer.m_pNode;
+			return *this;
+		}
+		GINLINE ConstIterator &operator=(ConstIterator &&citer) const
+		{
+			if (this == &citer)
+			{
+				return *this;
+			}
+			m_pNode = citer.m_pNode;
+			citer.m_pNode = GNULL;
+			return *this;
+		}
+		GINLINE const KeyT &operator*() const { GASSERT(m_pNode); return m_pNode->m_tKey; }
+		GINLINE const KeyT *operator->() const { GASSERT(m_pNode); return &m_pNode->m_tKey; }
+		GINLINE gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
+		GINLINE gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
+		GINLINE ConstIterator &operator++()
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->Next();
 			return *this;
 		}
-		inline ConstIterator operator++(gint)
+		GINLINE ConstIterator operator++(gint)
 		{
 			GASSERT(m_pNode);
 			const GOrderSetNode *node = m_pNode;
 			m_pNode = m_pNode->Next();
 			return ConstIterator(node);
 		}
-		inline ConstIterator &operator--()
+		GINLINE ConstIterator &operator--()
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->Previous();
 			return *this;
 		}
-		inline ConstIterator operator--(gint) {
+		GINLINE ConstIterator operator--(gint) {
 			GASSERT(m_pNode);
 			const GOrderSetNode *node = m_pNode;
 			m_pNode = m_pNode->Previous();
 			return ConstIterator(node);
 		}
-		inline ConstIterator operator+(gint i) const
+		GINLINE ConstIterator operator+(gint i) const
 		{
 			const GOrderSetNode *node = m_pNode;
 			if (i > 0)
@@ -180,8 +251,8 @@ public:
 			}
 			return ConstIterator(node);
 		}
-		inline ConstIterator operator-(gint i) const { return operator+(-i); }
-		inline ConstIterator &operator+=(gint i)
+		GINLINE ConstIterator operator-(gint i) const { return operator+(-i); }
+		GINLINE ConstIterator &operator+=(gint i)
 		{
 			if (i > 0)
 			{
@@ -199,9 +270,29 @@ public:
 			}
 			return *this;
 		}
-		inline ConstIterator &operator-=(gint i) { return operator+=(-i); }
-		inline gbool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
-		inline gbool operator!=(const Iterator &iter) const { return m_pNode != iter.m_pNode; }
+		GINLINE ConstIterator &operator-=(gint i) { return operator+=(-i); }
+		GINLINE gbool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
+		GINLINE gbool operator!=(const Iterator &iter) const { return m_pNode != iter.m_pNode; }
+		GINLINE ConstIterator Next() const
+		{
+			GASSERT(m_pNode);
+			return ConstIterator(m_pNode->Next());
+		}
+		GINLINE ConstIterator Previous() const
+		{
+			GASSERT(m_pNode);
+			return ConstIterator(m_pNode->Previous());
+		}
+		GINLINE gbool HasNext() const
+		{
+			return GNULL != m_pNode
+				&& GNULL != m_pNode->Next();
+		}
+		GINLINE gbool HasPrevious() const
+		{
+			return GNULL != m_pNode
+				&& GNULL != m_pNode->Previous();
+		}
 
 	private:
 		const GOrderSetNode *m_pNode;
@@ -211,6 +302,7 @@ public:
 public:
 	GOrderSet();
 	GOrderSet(const GOrderSet<KeyT, CompareT> &);
+	GOrderSet(GOrderSet<KeyT, CompareT> &&);
 
 	gsize Size() const;
 	gbool IsEmpty() const;
@@ -262,6 +354,7 @@ public:
 	GOrderSet<KeyT, CompareT> &operator<<(const KeyT &);
 
 	GOrderSet<KeyT, CompareT> &operator=(const GOrderSet<KeyT, CompareT> &);
+	GOrderSet<KeyT, CompareT> &operator=(GOrderSet<KeyT, CompareT> &&);
 
 private:
 	GReadBlackTree<KeyT, GDummyNodeT, CompareT, GOrderSetNode> m_tTree;

@@ -18,15 +18,15 @@ public:
 	};
 
 	// ½á¹û¼¯
-	class CsCursor
+	class GCursor
 	{
 		friend class GTableIndex;
 	public:
-		CsCursor();
+		GCursor();
 		gsize Size() const;
 
 	public:
-		CsCursor &Next();
+		GCursor &Next();
 
 	private:
 		TableT *m_tTable;
@@ -38,7 +38,7 @@ public:
 	virtual gbool Valid() const = 0;
 	virtual gvoid Rebulid() = 0;
 	virtual gsmall IndexType() = 0;
-	virtual gbool Search(const GFilter &, CsCursor &) = 0;
+	virtual gbool Search(const GFilter &, GCursor &) = 0;
 	virtual gbool Sync();
 
 private:

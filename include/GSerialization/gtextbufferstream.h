@@ -13,7 +13,7 @@ public:
 	virtual ~GTextBufferStream() = 0;
 
 private:
-	//CsStringBuffer m_tBuffer;
+	//GStringBuffer m_tBuffer;
 };
 
 #endif // _CORE_BINARY_STREAM_H_

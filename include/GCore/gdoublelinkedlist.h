@@ -3,7 +3,7 @@
 /// 
 ///  双向链表的定义及实现
 /// 
-/// @author  Birderyu
+/// @author  birderyu
 /// @version 1.0
 /// @date    2016-08-07
 /////////////////////////////////////////////////////////////////////////////////
@@ -21,8 +21,8 @@ struct GDoubleLinkedListNode
 	, public GNewT<GDoubleLinkedListNode<DataT>>
 {
 	GDoubleLinkedListNode(const DataT &data = DataT(),
-		GDoubleLinkedListNode<DataT> *previous = NULL,
-		GDoubleLinkedListNode<DataT> *next = NULL)
+		GDoubleLinkedListNode<DataT> *previous = GNULL,
+		GDoubleLinkedListNode<DataT> *next = GNULL)
 		: GPreviousNextNodeT<GDoubleLinkedListNode<DataT>>(previous, next)
 		, GDataNodeT<DataT>(data)
 	{
@@ -37,8 +37,11 @@ class GDoubleLinkedList
 public:
 	GDoubleLinkedList();
 	GDoubleLinkedList(const DataT &data);
-	GDoubleLinkedList(const GDoubleLinkedList<DataT, NodeT> &other);
-	GDoubleLinkedList<DataT, NodeT> &operator=(const GDoubleLinkedList<DataT, NodeT> &other);
+	GDoubleLinkedList(DataT &&data);
+	GDoubleLinkedList(const GDoubleLinkedList<DataT, NodeT> &list);
+	GDoubleLinkedList(GDoubleLinkedList<DataT, NodeT> &&list);
+	GDoubleLinkedList<DataT, NodeT> &operator=(const GDoubleLinkedList<DataT, NodeT> &list);
+	GDoubleLinkedList<DataT, NodeT> &operator=(GDoubleLinkedList<DataT, NodeT> &&list);
 	~GDoubleLinkedList();
 
 public:
@@ -48,14 +51,24 @@ public:
 	gvoid Invert();
 
 	gbool InsertBefore(gsize pos, const DataT &data);
+	gbool InsertBefore(gsize pos, DataT &&data);
+
 	gbool InsertBefore(NodeT *node, const DataT &data);
+	gbool InsertBefore(NodeT *node, DataT &&data);
+
 	gbool InsertAfter(gsize pos, const DataT &data);
+	gbool InsertAfter(gsize pos, DataT &&data);
+
 	gbool InsertAfter(NodeT *node, const DataT &data);
+	gbool InsertAfter(NodeT *node, DataT &&data);
 
 	gbool AddFirst(const DataT &data);
-	gbool AddLast(const DataT &data);
+	gbool AddFirst(DataT &&data);
 
-	gvoid Remove(NodeT *node);
+	gbool AddLast(const DataT &data);
+	gbool AddLast(DataT &&data);
+
+	gvoid Remove(const NodeT *node);
 	gvoid RemoveAt(gsize pos);
 	gvoid RemoveFirst();
 	gvoid RemoveLast();
@@ -74,7 +87,9 @@ public:
 	const DataT &GetLastData() const;
 	DataT &GetDataAt(gsize pos);
 	const DataT &GetDataAt(gsize pos) const;
+
 	gvoid SetDataAt(gsize pos, const DataT &data);
+	gvoid SetDataAt(gsize pos, DataT &&data);
 
 	gsize IndexOf(const DataT &data) const;
 	NodeT *Find(const DataT &data);
@@ -88,6 +103,9 @@ public:
 
 	DataT &operator[](gsize pos);
 	const DataT &operator[](gsize pos) const;
+
+	GLinkedList<DataT, NodeT> &operator+=(const GDoubleLinkedList<DataT, NodeT> &list);
+	GLinkedList<DataT, NodeT> &operator+=(GDoubleLinkedList<DataT, NodeT> &&list);
 
 protected:
 	gsize m_nSize;

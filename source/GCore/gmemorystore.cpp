@@ -1,7 +1,7 @@
 #include "gmemorystore.h"
 
 GMemoryStore::GMemCell::GMemCell(gsize nSize)
-: m_tBlock(nSize), m_nCursor(0), m_pNext(NULL)
+: m_tBlock(nSize), m_nCursor(0), m_pNext(GNULL)
 {
 
 }
@@ -15,7 +15,7 @@ GMemoryStore::GMemCell::~GMemCell()
 }
 
 GMemoryStore::GMemoryStore(gsize nInitSzie, gsize nGrowSize)
-: m_nInitSize(nInitSzie), m_nGrowSize(nGrowSize), m_pList(NULL)
+: m_nInitSize(nInitSzie), m_nGrowSize(nGrowSize), m_pList(GNULL)
 {
 
 }
@@ -30,7 +30,7 @@ GMemoryStore::~GMemoryStore()
 
 gpointer GMemoryStore::Alloc(gsize nSize)
 {
-	GMemCell* pBlock = NULL;
+	GMemCell* pBlock = GNULL;
 	if (!m_pList)
 	{
 		// ³õÊ¼»¯
@@ -65,7 +65,7 @@ gpointer GMemoryStore::Alloc(gsize nSize)
 		}
 	}
 
-	gpointer pPtr = pBlock->m_tBlock.Cursor(pBlock->m_nCursor);
+	gpointer pPtr = pBlock->m_tBlock.CursorAt(pBlock->m_nCursor);
 	if (pPtr)
 	{
 		pBlock->m_nCursor += nSize;

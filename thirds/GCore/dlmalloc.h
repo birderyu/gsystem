@@ -1,4 +1,4 @@
-
+#pragma once
 
 #define USE_DL_PREFIX
 /*
@@ -1130,11 +1130,3 @@ int mspace_mallopt(int, int);
 #ifdef __cplusplus
 };  /* end of extern "C" */
 #endif /* __cplusplus */
-
-/*
-  ========================================================================
-  To make a fully customizable malloc.h header file, cut everything
-  above this line, put into file malloc.h, edit to suit, and #include it
-  on the next line, as well as in programs that use this malloc.
-  ========================================================================
-*/

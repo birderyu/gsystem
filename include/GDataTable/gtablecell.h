@@ -38,7 +38,7 @@ public:
 	gbool GetValue(gdouble &) const;
 	gbool GetValue(gdecimal &) const;
 	gbool GetValue(GString &) const;
-	GVariant GetValue() const;
+	GVariety GetValue() const;
 
 	gbool SetValue(gbool);
 	gbool SetValue(gchar);
@@ -57,7 +57,7 @@ public:
 	gbool SetValue(gdouble);
 	gbool SetValue(gdecimal);
 	gbool SetValue(const GString &);
-	gbool SetValue(const GVariant &);
+	gbool SetValue(const GVariety &);
 
 	gbool operator=(gbool);
 	gbool operator=(gchar);
@@ -76,7 +76,7 @@ public:
 	gbool operator=(gdouble);
 	gbool operator=(gdecimal);
 	gbool operator=(const GString &);
-	gbool operator=(const GVariant &);
+	gbool operator=(const GVariety &);
 
 private:
 	TableT &m_tTable;
@@ -250,7 +250,7 @@ gbool GTableCell<TableT>::GetValue(GString &val) const
 }
 
 template<typename TableT>
-GVariant GTableCell<TableT>::GetValue() const
+GVariety GTableCell<TableT>::GetValue() const
 {
 	return m_tTable.GetValue(m_nRowID, m_nColumnID);
 }
@@ -358,7 +358,7 @@ gbool GTableCell<TableT>::SetValue(const GString &val)
 }
 
 template<typename TableT>
-gbool GTableCell<TableT>::SetValue(const GVariant &val)
+gbool GTableCell<TableT>::SetValue(const GVariety &val)
 {
 	return m_tTable.SetValue(m_nRowID, m_nColumnID, val);
 }
@@ -466,7 +466,7 @@ gbool GTableCell<TableT>::operator=(const GString &val)
 }
 
 template<typename TableT>
-gbool GTableCell<TableT>::operator=(const GVariant &val)
+gbool GTableCell<TableT>::operator=(const GVariety &val)
 {
 	return SetValue(val);
 }

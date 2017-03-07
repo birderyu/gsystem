@@ -3,8 +3,7 @@
 
 #include "gdefine.h"
 
-#define G_HAS_WCHAR
-#define G_HAS_DECIMAL
+G_BEGIN_NAMESPACE
 
 typedef	void			gvoid;
 typedef	void*			gpointer;
@@ -30,14 +29,10 @@ typedef float				gfloat;
 typedef double				gdouble;
 
 #ifdef G_SYSTEM_WINDOWS
-#	define G_HAS_LONG_LONG
-#	define G_HAS_LONG_DOUBLE
 	typedef __int64				glonglong;
 	typedef unsigned __int64	gulonglong;
 	typedef long double			glongdouble;
 #else // !G_SYSTEM_WINDOWS
-#	define G_HAS_LONG_LONG
-#	define G_HAS_LONG_DOUBLE
 	typedef long long			glonglong;
 	typedef unsigned long long	gulonglong;
 	typedef long double			glongdouble;
@@ -47,10 +42,11 @@ typedef double				gdouble;
 	typedef glongdouble		gdecimal;
 #endif // G_HAS_DECIMAL
 
-typedef	guchar		gbyte;
-typedef	gushort		gword;
 typedef gschar		gsmall;
 typedef guchar		gusmall;
+typedef	gsmall		gbyte;
+typedef	gushort		gword;
+
 
 // 实数类型
 #ifdef G_REAL_USE_FLOAT
@@ -68,8 +64,10 @@ typedef guint		guint32;
 typedef glonglong	gint64;
 typedef gulonglong	guint64;
 
-typedef gulong gaddress;
-typedef size_t gsize;
-typedef time_t gtime;
+typedef ptrdiff_t	gaddress;
+typedef size_t		gsize;
+typedef time_t		gtime;		// 时间戳类型
+
+G_END_NAMESPACE
 
 #endif // _CORE_TYPE_H_

@@ -7,7 +7,7 @@
 #define G_RED_BLACK_TREE_QUAL			GReadBlackTree<KeyT, ValueT, CompareT, NodeT>
 
 G_RED_BLACK_TREE_NODE_TEMPLATE
-inline G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
+GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
 	const KeyT &key,
 	const ValueT &value,
 	G_RED_BLACK_TREE_NODE_QUAL *parent,
@@ -21,16 +21,30 @@ inline G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
 
 }
 
-G_RED_BLACK_TREE_TEMPLATE
-inline G_RED_BLACK_TREE_QUAL::~GReadBlackTree()
+G_RED_BLACK_TREE_NODE_TEMPLATE
+GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
+	const KeyT &key, ValueT &&value,
+	G_RED_BLACK_TREE_NODE_QUAL *parent,
+	G_RED_BLACK_TREE_NODE_QUAL *left,
+	G_RED_BLACK_TREE_NODE_QUAL *right,
+	gsmall color)
+	: GBinaryTreeNodeT<G_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
+	, GPairNodeT<KeyT, ValueT>(key, GForward<ValueT>(value))
+	, m_nColor(color)
 {
 
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-inline NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &value, gbool *realInsert)
+GINLINE G_RED_BLACK_TREE_QUAL::~GReadBlackTree()
 {
-	NodeT *insert_point = NULL; // 插入位置的双亲节点
+
+}
+
+G_RED_BLACK_TREE_TEMPLATE
+GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &value, gbool *realInsert)
+{
+	NodeT *insert_point = GNULL; // 插入位置的双亲节点
 	NodeT *node = m_pRoot;
 	while (node)
 	{
@@ -93,9 +107,80 @@ inline NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &value
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-inline gvoid G_RED_BLACK_TREE_QUAL::Delete(const KeyT &key, gbool *realDelete)
+GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, ValueT &&value, gbool *realInsert)
+{
+	NodeT *insert_point = GNULL; // 插入位置的双亲节点
+	NodeT *node = m_pRoot;
+	while (node)
+	{
+		insert_point = node;
+		gint ret = m_fCompare(key, node->m_tKey);
+		if (ret < 0)
+		{
+			node = node->m_pLeft;
+		}
+		else if (ret > 0)
+		{
+			node = node->m_pRight;
+		}
+		else
+		{
+			if (realInsert)
+			{
+				*realInsert = false;
+			}
+			insert_point->m_tValue = GForward<ValueT>(value);
+			return insert_point;
+		}
+	}
+
+	// 新增插入节点
+	NodeT* insert_node = new NodeT(key, GForward<ValueT>(value));
+	if (!insert_point)
+	{
+		//插入的是一颗空树
+		m_pRoot = insert_node;
+		insert_node->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;
+	}
+	else
+	{
+		// 找到具体的插入位置
+		gint ret = m_fCompare(key, insert_point->m_tKey);
+		if (ret < 0)
+		{
+			insert_point->m_pLeft = insert_node;
+		}
+		else if (ret > 0)
+		{
+			insert_point->m_pRight = insert_node;
+		}
+		else
+		{
+			// 处理数据相同的情况
+		}
+		insert_node->m_pParent = insert_point;
+
+		// 插入修复
+		InsertFixUp(insert_node);
+	}
+
+	if (realInsert)
+	{
+		*realInsert = true;
+	}
+	return insert_node;
+}
+
+G_RED_BLACK_TREE_TEMPLATE
+GINLINE gvoid G_RED_BLACK_TREE_QUAL::Delete(const KeyT &key, gbool *realDelete)
 {
 	NodeT* delete_point = Find(key);
+	Delete(delete_point, realDelete);
+}
+
+G_RED_BLACK_TREE_TEMPLATE
+GINLINE gvoid G_RED_BLACK_TREE_QUAL::Delete(NodeT *delete_point, gbool *realDelete)
+{
 	if (!delete_point)
 	{
 		if (realDelete)
@@ -111,7 +196,7 @@ inline gvoid G_RED_BLACK_TREE_QUAL::Delete(const KeyT &key, gbool *realDelete)
 		SwitchNode(delete_point, successor);
 	}
 
-	NodeT *delete_point_child = NULL;
+	NodeT *delete_point_child = GNULL;
 	if (!delete_point->m_pLeft)
 	{
 		delete_point_child = delete_point->m_pRight;
@@ -159,7 +244,7 @@ inline gvoid G_RED_BLACK_TREE_QUAL::Delete(const KeyT &key, gbool *realDelete)
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-inline gvoid G_RED_BLACK_TREE_QUAL::InsertFixUp(NodeT *node)
+GINLINE gvoid G_RED_BLACK_TREE_QUAL::InsertFixUp(NodeT *node)
 {
 	while (node->m_pParent &&
 		node->m_pParent->m_nColor == G_RED_BLACK_TREE_NODE_RED)
@@ -219,7 +304,7 @@ inline gvoid G_RED_BLACK_TREE_QUAL::InsertFixUp(NodeT *node)
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-inline gvoid G_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
+GINLINE gvoid G_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
 {
 	while (node != m_pRoot && node->m_nColor == G_RED_BLACK_TREE_NODE_BLACK)
 	{
@@ -295,7 +380,7 @@ inline gvoid G_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-inline gvoid G_RED_BLACK_TREE_QUAL::RotateLeft(NodeT *node)
+GINLINE gvoid G_RED_BLACK_TREE_QUAL::RotateLeft(NodeT *node)
 {
 	if (!node || !node->m_pRight)
 	{
@@ -329,7 +414,7 @@ inline gvoid G_RED_BLACK_TREE_QUAL::RotateLeft(NodeT *node)
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-inline gvoid G_RED_BLACK_TREE_QUAL::RotateRight(NodeT *node)
+GINLINE gvoid G_RED_BLACK_TREE_QUAL::RotateRight(NodeT *node)
 {
 	if (!node || !node->m_pLeft)
 	{

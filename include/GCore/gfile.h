@@ -51,6 +51,9 @@ public:
 	glong Tell() const; // 负值则表示获取位置失败
 	gvoid Rewind();
 
+	// 获取文件的大小，单位，字节
+	gsize Size() const;
+
 protected:
 	GFile_Ex *m_pFileEx;
 };

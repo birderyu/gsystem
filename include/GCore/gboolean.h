@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+G_BEGIN_NAMESPACE
+
 class GAPI GBoolean 
 	: public GPackage<gbool>
 {
@@ -20,5 +22,7 @@ public:
 };
 
 typedef GBoolean GBool;
+
+G_END_NAMESPACE
 
 #endif // _CORE_BOOLEAN_H_

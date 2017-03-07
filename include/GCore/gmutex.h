@@ -10,14 +10,17 @@ class GAPI GMutex final
 public:
 	GMutex();
 	~GMutex();
-	gbool Lock();
+	gvoid Lock();
 	gbool Trylock();
 	gvoid Unlock();
 
 private:
 	gbool Initialize();
 	gvoid Release();
+
+#ifdef G_SYSTEM_WINDOWS
 	gpointer m_pHandle;
+#endif // G_SYSTEM_WINDOWS
 };
 
 #endif // _CORE_MUTEX_H_

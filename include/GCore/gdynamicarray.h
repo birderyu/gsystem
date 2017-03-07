@@ -1,5 +1,4 @@
 // 动态数组
-
 #ifndef _CORE_DYNAMIC_ARRAY_H_
 #define _CORE_DYNAMIC_ARRAY_H_
 
@@ -13,16 +12,12 @@ public:
 	enum { CLASS_CODE = CLASS_CODE_DYNAMIC_ARRAY, };
 
 public:
-	// 从src的start位开始，拷贝len个元素，到dst的first位
-	static gbool ArrayCopy(const GDynamicArray<DataT> &src, gsize start, gsize len,
-		GDynamicArray<DataT> &dst, gsize first = 0);
-
-public:
 	GDynamicArray();
 	GDynamicArray(gsize size);
 	GDynamicArray(gsize size, const DataT &data);
-	GDynamicArray(const GDynamicArray<DataT> &);
-	GDynamicArray(const GArray<DataT> &, gsize start, gsize size);
+	GDynamicArray(const GDynamicArray<DataT> &arr);
+	GDynamicArray(GDynamicArray<DataT> &&arr);
+	GDynamicArray(const GArray<DataT> &arr, gsize start, gsize size);
 	~GDynamicArray();
 
 	// 获取数组的长度
@@ -41,24 +36,28 @@ public:
 	gbool Resize(gsize new_size, gsize start, gsize size, gsize new_start = 0);
 	gbool Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data);
 
+	// 清空数组，不释放内存
+	gvoid Clear();
+
 	// 销毁数组
 	gvoid Dispose();
 
 	DataT &GetAt(gsize);
 	const DataT &GetAt(gsize) const;
 
+	DataT *CursorAt(gsize);
+	const DataT *CursorAt(gsize) const;
+
 	// 通过下标访问和修改数组元素
 	DataT &operator[](gsize);
 	const DataT &operator[](gsize) const;
 	
-	DataT *operator+=(gsize);
-	const DataT *operator+=(gsize) const;
-
 	// 移除特定位置的元素
 	gbool RemoveAt(gsize);
 
-	// 拷贝
+	// 拷贝和移动
 	GDynamicArray<DataT> &operator=(const GDynamicArray<DataT> &);
+	GDynamicArray<DataT> &operator=(GDynamicArray<DataT> &&);
 
 	// 相等
 	gbool operator==(const GDynamicArray<DataT> &);
@@ -68,15 +67,6 @@ public:
 	gbool Serializable() const;
 	template<typename ArchiveT> gbool Serialize(ArchiveT &) const;
 	template<typename ArchiveT> gbool Deserialize(ArchiveT &);
-
-	// 注意：以下两个方法，只拷贝内存，即浅拷贝
-	// 从pData的start位开始，拷贝len长度的内存到first位
-	gbool CopyMemoryFrom(gsize first, gsize size,
-		const DataT *pData, gsize start = 0);
-
-	// 从start位开始，拷贝len长度的内存到pData的first位
-	gbool CopyMemoryTo(gsize start, gsize size,
-		DataT *pData, gsize first = 0) const;
 
 private:
 	DataT *m_pData;

@@ -16,8 +16,8 @@ public:
 		, public GNewT<GListNode>
 	{
 		GListNode(const DataT &data = DataT(),
-			GListNode *previous = NULL,
-			GListNode *next = NULL)
+			GListNode *previous = GNULL,
+			GListNode *next = GNULL)
 			: GPreviousNextNodeT<GListNode>(previous, next)
 			, GDataNodeT<DataT>(data)
 		{
@@ -32,7 +32,7 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		inline Iterator() : m_pNode(NULL) {}
+		inline Iterator() : m_pNode(GNULL) {}
 		inline Iterator(GListNode *node) : m_pNode(node) {}
 		inline Iterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
@@ -165,7 +165,7 @@ public:
 	{
 		friend class Iterator;
 	public:
-		inline ConstIterator() : m_pNode(NULL) {}
+		inline ConstIterator() : m_pNode(GNULL) {}
 		inline ConstIterator(const GListNode *node) : m_pNode(const_cast<GListNode*>(node)) {}
 		inline ConstIterator(const ConstIterator &citer) : m_pNode(iter.m_pNode) {}
 		explicit inline ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
@@ -294,7 +294,11 @@ public:
 public:
 	GList();
 	explicit GList(gsize size, const DataT &data = DataT());
-	GList(const GList<DataT> &);
+	GList(const GList<DataT> &list);
+	GList(GList<DataT> &&list);
+
+	GList<DataT> &operator=(const GList<DataT> &list);
+	GList<DataT> &operator=(GList<DataT> &&list);
 
 	gbool Resize(gsize);
 	gsize Size() const;
@@ -308,12 +312,19 @@ public:
 	const DataT &operator[](gsize) const;
 
 	gvoid PushBack(const DataT &data);
+	gvoid PushBack(DataT &&data);
+
 	gvoid PushFront(const DataT &data);
+	gvoid PushFront(DataT &&data);
+
 	gvoid PopBack();
 	gvoid PopFront();
 
-	gvoid	Append(const DataT &);
-	gvoid	Append(const GList<DataT> &);
+	gvoid Append(const DataT &data);
+	gvoid Append(DataT &&data);
+
+	gvoid Append(const GList<DataT> &);
+	gvoid Append(GList<DataT> &&);
 
 	Iterator Begin();
 	ConstIterator Begin() const;

@@ -1,0 +1,4 @@
+#ifndef _CORE_VARIANT_INLINE_
+#define _CORE_VARIANT_INLINE_
+
+#endif // _CORE_VARIANT_INLINE_

@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+G_BEGIN_NAMESPACE
+
 class GAPI GInteger 
 	: public GNumber<gint>
 {
@@ -27,5 +29,7 @@ public:
 typedef GInteger GInt;
 typedef GInteger GInteger32;
 typedef GInteger GInt32;
+
+G_END_NAMESPACE
 
 #endif // _CORE_INTEGER_H_

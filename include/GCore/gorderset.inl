@@ -2,59 +2,66 @@
 #define _CORE_ORDER_SET_INLINE_
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT>::GOrderSet()
+GINLINE GOrderSet<KeyT, CompareT>::GOrderSet()
 {
 
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT>::GOrderSet(const GOrderSet<KeyT, CompareT> &set)
-: m_tTree(set.m_tTree), m_nSize(set.m_nSize)
+GINLINE GOrderSet<KeyT, CompareT>::GOrderSet(const GOrderSet<KeyT, CompareT> &set)
+	: m_tTree(set.m_tTree), m_nSize(set.m_nSize)
 {
 
 }
 
 template < typename KeyT, typename CompareT>
-inline gsize GOrderSet<KeyT, CompareT>::Size() const
+GINLINE GOrderSet<KeyT, CompareT>::GOrderSet(GOrderSet<KeyT, CompareT> &&set)
+	: m_tTree(GMove(set.m_tTree)), m_nSize(set.m_nSize)
+{
+	set.m_nSize = 0;
+}
+
+template < typename KeyT, typename CompareT>
+GINLINE gsize GOrderSet<KeyT, CompareT>::Size() const
 {
 	return m_nSize;
 }
 
 template < typename KeyT, typename CompareT>
-inline gbool GOrderSet<KeyT, CompareT>::IsEmpty() const
+GINLINE gbool GOrderSet<KeyT, CompareT>::IsEmpty() const
 {
 	return m_nSize == 0;
 }
 
 template < typename KeyT, typename CompareT>
-inline gvoid GOrderSet<KeyT, CompareT>::Clear()
+GINLINE gvoid GOrderSet<KeyT, CompareT>::Clear()
 {
-	m_tTree.Destroy();
+	m_tTree.Dispose();
 	m_nSize = 0;
 }
 
 template < typename KeyT, typename CompareT>
-inline gbool GOrderSet<KeyT, CompareT>::Contains(const KeyT &key) const
+GINLINE gbool GOrderSet<KeyT, CompareT>::Contains(const KeyT &key) const
 {
 	return m_tTree.Contains(key);
 }
 
 template < typename KeyT, typename CompareT>
-inline const KeyT &GOrderSet<KeyT, CompareT>::First() const
+GINLINE const KeyT &GOrderSet<KeyT, CompareT>::First() const
 {
 	GASSERT(!IsEmpty());
 	return m_tTree.FirstNode()->m_tKey;
 }
 
 template < typename KeyT, typename CompareT>
-inline const KeyT &GOrderSet<KeyT, CompareT>::Last() const
+GINLINE const KeyT &GOrderSet<KeyT, CompareT>::Last() const
 {
 	GASSERT(!IsEmpty());
 	return m_tTree.LastNode()->m_tKey;
 }
 
 template < typename KeyT, typename CompareT>
-inline gvoid GOrderSet<KeyT, CompareT>::Remove(const KeyT &key)
+GINLINE gvoid GOrderSet<KeyT, CompareT>::Remove(const KeyT &key)
 {
 	gbool real_remove = false;
 	m_tTree.Delete(key, &real_remove);
@@ -65,61 +72,61 @@ inline gvoid GOrderSet<KeyT, CompareT>::Remove(const KeyT &key)
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Begin()
+GINLINE typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Begin()
 {
 	return GOrderSet<KeyT, CompareT>::Iterator(m_tTree.FirstNode());
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::Begin() const
+GINLINE typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::Begin() const
 {
 	return GOrderSet<KeyT, CompareT>::ConstIterator(m_tTree.FirstNode());
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::ConstBegin() const
+GINLINE typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::ConstBegin() const
 {
 	return GOrderSet<KeyT, CompareT>::ConstIterator(m_tTree.FirstNode());
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::End()
+GINLINE typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::End()
 {
 	return GOrderSet<KeyT, CompareT>::Iterator();
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::End() const
+GINLINE typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::End() const
 {
 	return GOrderSet<KeyT, CompareT>::ConstIterator();
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::ConstEnd() const
+GINLINE typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::ConstEnd() const
 {
 	return GOrderSet<KeyT, CompareT>::ConstIterator();
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Find(const KeyT &key)
+GINLINE typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Find(const KeyT &key)
 {
 	return GOrderSet<KeyT, CompareT>::Iterator(m_tTree.Find(key));
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::Find(const KeyT &key) const
+GINLINE typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::Find(const KeyT &key) const
 {
 	return GOrderSet<KeyT, CompareT>::Iterator(m_tTree.Find(key));
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::ConstFind(const KeyT &key) const
+GINLINE typename GOrderSet<KeyT, CompareT>::ConstIterator GOrderSet<KeyT, CompareT>::ConstFind(const KeyT &key) const
 {
 	return GOrderSet<KeyT, CompareT>::ConstIterator(m_tTree.Find(key));
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Insert(const KeyT &key)
+GINLINE typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Insert(const KeyT &key)
 {
 	gbool real_insert = false;
 	GOrderSetNode *node = m_tTree.Insert(key, GDummyNodeT(), &real_insert);
@@ -131,21 +138,26 @@ inline typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::I
 }
 
 template < typename KeyT, typename CompareT>
-inline typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Erase(const Iterator &iter)
+GINLINE typename GOrderSet<KeyT, CompareT>::Iterator GOrderSet<KeyT, CompareT>::Erase(const Iterator &iter)
 {
-	// TODO
-	return GOrderSet<KeyT, CompareT>::Iterator();
+	Iterator next_iter = iter + 1;
+	gbool real_remove = false;
+	m_tTree.Delete(iter.m_pNode, &real_remove);
+	if (real_remove)
+	{
+		m_nSize--;
+	}
+	return next_iter;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::Intersect(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::Intersect(const GOrderSet<KeyT, CompareT> &set)
 {
-	GOrderSet<KeyT, CompareT> set_copy(*this);
-	Clear();
+	GOrderSet<KeyT, CompareT> set_move(GMove(*this));
 	for (GOrderSet<KeyT, CompareT>::ConstIterator citer = set.ConstBegin();
 		citer != set.ConstEnd(); citer++)
 	{
-		if (set_copy.Contains(*citer))
+		if (set_move.Contains(*citer))
 		{
 			Insert(*citer)
 		}
@@ -154,7 +166,7 @@ inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::Intersect(const GOr
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::Unite(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::Unite(const GOrderSet<KeyT, CompareT> &set)
 {
 	for (GOrderSet<KeyT, CompareT>::ConstIterator citer = set.ConstBegin();
 		citer != set.ConstEnd(); citer++)
@@ -165,35 +177,42 @@ inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::Unite(const GOrderS
 }
 
 template < typename KeyT, typename CompareT>
-inline gbool GOrderSet<KeyT, CompareT>::operator==(const GOrderSet<KeyT, CompareT> &set) const
+GINLINE gbool GOrderSet<KeyT, CompareT>::operator==(const GOrderSet<KeyT, CompareT> &set) const
 {
-	// TODO
-	return false;
+	return m_nSize == set.m_nSize
+		&& m_tTree == set.m_tTree;
 }
 
 template < typename KeyT, typename CompareT>
-inline gbool GOrderSet<KeyT, CompareT>::operator!=(const GOrderSet<KeyT, CompareT> &set) const
+GINLINE gbool GOrderSet<KeyT, CompareT>::operator!=(const GOrderSet<KeyT, CompareT> &set) const
 {
-	// TODO
-	return false;
+	return m_nSize != set.m_nSize
+		|| m_tTree != set.m_tTree;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator&(const GOrderSet<KeyT, CompareT> &set) const
+GINLINE GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator&(const GOrderSet<KeyT, CompareT> &set) const
 {
-	GOrderSet<KeyT, CompareT> set_copy(*this);
-	set_copy.Intersect(set);
+	GOrderSet<KeyT, CompareT> set_copy;
+	for (GOrderSet<KeyT, CompareT>::ConstIterator citer = set.ConstBegin();
+		citer != set.ConstEnd(); citer++)
+	{
+		if (Contains(*citer))
+		{
+			set_copy.Insert(*citer)
+		}
+	}
 	return set_copy;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator&=(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator&=(const GOrderSet<KeyT, CompareT> &set)
 {
 	return Intersect(set);
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator&=(const KeyT &key)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator&=(const KeyT &key)
 {
 	if (!Contains(key))
 	{
@@ -209,7 +228,7 @@ inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator&=(const Ke
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator|(const GOrderSet<KeyT, CompareT> &set) const
+GINLINE GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator|(const GOrderSet<KeyT, CompareT> &set) const
 {
 	GOrderSet<KeyT, CompareT> set_copy(*this);
 	set_copy.Unite(set);
@@ -217,20 +236,20 @@ inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator|(const GOrd
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator|=(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator|=(const GOrderSet<KeyT, CompareT> &set)
 {
 	return Unite(set);
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator|=(const KeyT &key)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator|=(const KeyT &key)
 {
 	Insert(key);
 	return *this;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator+(const GOrderSet<KeyT, CompareT> &set) const
+GINLINE GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator+(const GOrderSet<KeyT, CompareT> &set) const
 {
 	GOrderSet<KeyT, CompareT> set_copy(*this);
 	set_copy.Unite(set);
@@ -238,20 +257,20 @@ inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator+(const GOrd
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator+=(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator+=(const GOrderSet<KeyT, CompareT> &set)
 {
 	return Unite(set);
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator+=(const KeyT &key)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator+=(const KeyT &key)
 {
 	Insert(key);
 	return *this;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator-(const GOrderSet<KeyT, CompareT> &set) const
+GINLINE GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator-(const GOrderSet<KeyT, CompareT> &set) const
 {
 	GOrderSet<KeyT, CompareT> set_copy(*this);
 	for (GOrderSet<KeyT, CompareT>::ConstIterator citer = set.ConstBegin();
@@ -263,7 +282,7 @@ inline GOrderSet<KeyT, CompareT> GOrderSet<KeyT, CompareT>::operator-(const GOrd
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator-=(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator-=(const GOrderSet<KeyT, CompareT> &set)
 {
 	for (GOrderSet<KeyT, CompareT>::ConstIterator citer = set.ConstBegin();
 		citer != set.ConstEnd(); citer++)
@@ -274,14 +293,14 @@ inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator-=(const GO
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator-=(const KeyT &key)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator-=(const KeyT &key)
 {
 	Remove(key);
 	return *this;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator>>(KeyT &key)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator>>(KeyT &key)
 {
 	key = Last();
 	Remove(key);
@@ -289,17 +308,34 @@ inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator>>(KeyT &ke
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator<<(const KeyT &key)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator<<(const KeyT &key)
 {
 	Insert(key);
 	return *this;
 }
 
 template < typename KeyT, typename CompareT>
-inline GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator=(const GOrderSet<KeyT, CompareT> &set)
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator=(const GOrderSet<KeyT, CompareT> &set)
 {
+	if (this == &set)
+	{
+		return *this;
+	}
 	m_nSize = set.m_nSize;
 	m_tTree = set.m_tTree;
+	return *this;
+}
+
+template < typename KeyT, typename CompareT>
+GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator=(GOrderSet<KeyT, CompareT> &&set)
+{
+	if (this == &set)
+	{
+		return *this;
+	}
+	m_nSize = set.m_nSize;
+	m_tTree = GMove(set.m_tTree);
+	set.m_nSize = 0;
 	return *this;
 }
 

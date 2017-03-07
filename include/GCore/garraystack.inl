@@ -2,59 +2,82 @@
 #define _CORE_ARRAY_STACK_INLINE_
 
 template<typename DataT>
-inline GArrayStack<DataT>::GArrayStack(gsize capacity)
-: m_TopCursor(NULL_POS)
+GINLINE GArrayStack<DataT>::GArrayStack(gsize capacity)
+: m_TopCursor(NULL_POS), m_tArray(capacity)
 {
-	m_tArray.Resize(capacity);
+	
 }
 
 template<typename DataT>
-inline GArrayStack<DataT>::GArrayStack(const GArrayStack<DataT> &other)
-: m_TopCursor(other.m_TopCursor)
-, m_tArray(other.m_tArray)
+GINLINE GArrayStack<DataT>::GArrayStack(const GArrayStack<DataT> &stack)
+: m_TopCursor(stack.m_TopCursor)
+, m_tArray(stack.m_tArray)
 {
-
+	
 }
 
 template<typename DataT>
-inline GArrayStack<DataT>& GArrayStack<DataT>::operator=(const GArrayStack<DataT>& other)
+GINLINE GArrayStack<DataT>::GArrayStack(GArrayStack<DataT> &&stack)
+: m_TopCursor(stack.m_TopCursor)
+, m_tArray(GMove(stack.m_tArray))
 {
-	if (this == &other)
+	stack.m_TopCursor = NULL_POS;
+}
+
+template<typename DataT>
+GINLINE GArrayStack<DataT>& GArrayStack<DataT>::operator=(const GArrayStack<DataT> &stack)
+{
+	if (this == &stack)
 	{
 		return *this;
 	}
-	m_TopCursor = other.m_TopCursor;
-	m_tArray = other.m_tArray;
+	m_tArray = stack.m_tArray;
+	m_TopCursor = stack.m_TopCursor;
 	return *this;
 }
 
 template<typename DataT>
-inline GArrayStack<DataT>::~GArrayStack()
+GINLINE GArrayStack<DataT>& GArrayStack<DataT>::operator=(GArrayStack<DataT> &&stack)
+{
+	if (this == &stack)
+	{
+		return *this;
+	}
+	// 不需要再调用Dispose，因为GDynamicArray的移动操作符已经处理了原数据的销毁
+	m_tArray = GMove(stack.m_tArray);
+	m_TopCursor = stack.m_TopCursor;
+	stack.m_TopCursor = NULL_POS;
+	return *this;
+}
+
+template<typename DataT>
+GINLINE GArrayStack<DataT>::~GArrayStack()
 {
 	Dispose();
 }
 
 template<typename DataT>
-inline gvoid GArrayStack<DataT>::Dispose()
+GINLINE gvoid GArrayStack<DataT>::Dispose()
 {
 	m_TopCursor = NULL_POS;
 	m_tArray.Dispose();
 }
 
 template<typename DataT>
-inline gbool GArrayStack<DataT>::IsEmpty() const
+GINLINE gbool GArrayStack<DataT>::IsEmpty() const
 {
 	return NULL_POS == m_TopCursor;
 }
 
 template<typename DataT>
-inline gvoid GArrayStack<DataT>::Clear()
+GINLINE gvoid GArrayStack<DataT>::Clear()
 {
+	m_tArray.Clear();
 	m_TopCursor = NULL_POS;
 }
 
 template<typename DataT>
-inline gsize GArrayStack<DataT>::Size() const
+GINLINE gsize GArrayStack<DataT>::Size() const
 {
 	if (m_TopCursor == NULL_POS)
 	{
@@ -64,7 +87,7 @@ inline gsize GArrayStack<DataT>::Size() const
 }
 
 template<typename DataT>
-inline gbool GArrayStack<DataT>::IsFull() const
+GINLINE gbool GArrayStack<DataT>::IsFull() const
 {
 	if (m_TopCursor == NULL_POS)
 	{
@@ -74,7 +97,7 @@ inline gbool GArrayStack<DataT>::IsFull() const
 }
 
 template<typename DataT>
-inline gbool GArrayStack<DataT>::Resize(gsize capacity)
+GINLINE gbool GArrayStack<DataT>::Resize(gsize capacity)
 {
 	m_TopCursor = NULL_POS;
 	m_tArray.Dispose();
@@ -82,7 +105,7 @@ inline gbool GArrayStack<DataT>::Resize(gsize capacity)
 }
 
 template<typename DataT>
-inline gbool GArrayStack<DataT>::Push(const DataT& data)
+GINLINE gbool GArrayStack<DataT>::Push(const DataT &data)
 {
 	if (IsFull())
 	{
@@ -100,8 +123,28 @@ inline gbool GArrayStack<DataT>::Push(const DataT& data)
 	return true;
 }
 
+
 template<typename DataT>
-inline gbool GArrayStack<DataT>::Pop(DataT* data = NULL)
+GINLINE gbool GArrayStack<DataT>::Push(DataT &&data)
+{
+	if (IsFull())
+	{
+		return false;
+	}
+	if (m_TopCursor == NULL_POS)
+	{
+		m_TopCursor = 0;
+		m_tArray[m_TopCursor] = GForward<DataT>(data);
+	}
+	else
+	{
+		m_tArray[++m_TopCursor] = GForward<DataT>(data);
+	}
+	return true;
+}
+
+template<typename DataT>
+GINLINE gbool GArrayStack<DataT>::Pop(DataT* data = GNULL)
 {
 	if (IsEmpty())
 	{
@@ -109,8 +152,13 @@ inline gbool GArrayStack<DataT>::Pop(DataT* data = NULL)
 	}
 	if (data)
 	{
-		*data = m_tArray[m_TopCursor];
+		// 将元素移走，而非拷贝
+		*data = GMove(m_tArray[m_TopCursor]);
 	}
+	// 销毁元素
+	GDestruct(&m_tArray[m_TopCursor]);
+
+	// 游标前移
 	if (m_TopCursor == 0)
 	{
 		m_TopCursor = NULL_POS;
@@ -123,14 +171,27 @@ inline gbool GArrayStack<DataT>::Pop(DataT* data = NULL)
 }
 
 template<typename DataT>
-inline gbool GArrayStack<DataT>::Top(DataT &data) const
+GINLINE const DataT &GArrayStack<DataT>::Top() const
 {
-	if (IsEmpty())
-	{
-		return false;
-	}
-	data = m_tArray[m_TopCursor];
-	return true;
+	return m_tArray[m_TopCursor];
+}
+
+template<typename DataT>
+GINLINE DataT &GArrayStack<DataT>::Top()
+{
+	return m_tArray[m_TopCursor];
+}
+
+template<typename DataT>
+GINLINE const DataT &GArrayStack<DataT>::Bottom() const
+{
+	return m_tArray[0];
+}
+
+template<typename DataT>
+GINLINE DataT &GArrayStack<DataT>::Bottom()
+{
+	return m_tArray[0];
 }
 
 #endif // _CORE_ARRAY_STACK_INLINE_

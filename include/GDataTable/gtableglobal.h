@@ -2,10 +2,9 @@
 #define _CORE_TABLE_GLOBAL_H_
 
 #include "GCore/gobject.h"
-#include "GCore/gvariant.h"
+#include "GCore/gvariety.h"
+#include "GCore/gdynamicarray.h"
 #include "gtableaction.h"
-
-class CsSizeTypeArray;
 
 class GDataTable;
 class GDataView;
@@ -45,9 +44,13 @@ enum G_TABLE_FIELD_TYPE
 	TABLE_FIELD_TYPE_ULONGLONG,
 	TABLE_FIELD_TYPE_FLOAT,
 	TABLE_FIELD_TYPE_DOUBLE,
-	TABLE_FIELD_TYPE_DECIMAL,
+	TABLE_FIELD_TYPE_LONGDOUBLE,
+	TABLE_FIELD_TYPE_DATETIME,	// 日期类
+	TABLE_FIELD_TYPE_BYTES,		// 字节数组
 	TABLE_FIELD_TYPE_STRING,	// 字符串
+	TABLE_FIELD_TYPE_WSTRING,	// 宽字符串
 	TABLE_FIELD_TYPE_GEOMETRY,	// 几何字段
+	TABLE_FIELD_TYPE_OBJECT,	// Object对象
 };
 
 // 表索引类型

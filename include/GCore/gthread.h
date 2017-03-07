@@ -1,46 +1,48 @@
-/////////////////////////////////////////////////////////////////////////////////
-/// @brief 线程类的定义
-/// 
-///  该文件中包含了线程类GThread的定义
-/// 
-/// @author  Birderyu
-/// @version 1.0
-/// @date    2016-02-05
-/////////////////////////////////////////////////////////////////////////////////
-
 #ifndef _CORE_THREAD_H_
 #define _CORE_THREAD_H_
 
 #include "gglobal.h"
+#include "grunnable.h"
+#include "gnocopyable.h"
 
-/// 线程类
-class GAPI GThread
+class GRunnable;
+
+class GAPI GThread final
+	: public GRunnable
+	, private GNocopyable
 {
 public:
+	/// �õ�ǰ�߳�˯�ߣ���λ����
+	static gvoid Sleep(gulong secs);
+
+	/// �õ�ǰ�߳�˯�ߣ���λ������
+	static gvoid MSleep(gulong msecs);
+
+	/// ����ָ�����߳�
+	static gvoid Join(GRunnable &thread);
+
+public:
 	GThread();
-	virtual ~GThread();
 
-	/// 创建线程并启动
-	virtual gint Start();
+	template<typename _Fn,
+		typename... _Args,
+		class = typename GEnableIf<
+		!GIsSame<typename GDecay<_Fn>::Type, GThread>::value>::Type>
+	GThread(_Fn&& _Fx, _Args&&... _Ax);
+	GThread(GThread &&thread);
+	~GThread();
 
-	/// 终止一个线程
-	virtual gvoid Stop(gulong nMsecs = 0);
+	GThread &operator==(GThread &&thread);
 
-	/// 让当前线程睡眠，单位：秒
-	static gvoid Sleep(gulong nSecs);
+	/// ִ�����
+	gvoid Bind();
 
-	/// 让当前线程睡眠，单位：毫秒
-	static gvoid MSleep(gulong nMsecs);
-
-	/// 回收指定的线程
-	static gvoid Join(GThread *pThread);
-
-	/// 线程体主函数
-	virtual gint Run() = 0;
+public:
+	gbool Start();
+	gvoid Stop(gulong msecs = 0);
 
 private:
-	/// 当前线程体的句柄，在不同的操作系统下使用不同的结构
-	gpointer m_pHandle;
+	gint Run();
 };
 
 #endif // _CORE_THREAD_H_

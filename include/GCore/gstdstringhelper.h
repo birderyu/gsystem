@@ -24,7 +24,7 @@ public:
 	static std::string FromNum(T nNum, gint nBase = 10);
 
 	template <typename T>
-	static T ToNum(const std::string &str, gbool *bIsOk = NULL);
+	static T ToNum(const std::string &str, gbool *bIsOk = GNULL);
 };
 
 template <typename T>

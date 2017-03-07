@@ -8,8 +8,7 @@ class GAPI GVoidLock final
 	: public GLock
 {
 public:
-	gbool Lock();
-	gbool Trylock();
+	gvoid Lock();
 	gvoid Unlock();
 };
 

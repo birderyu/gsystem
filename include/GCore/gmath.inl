@@ -2,13 +2,13 @@
 #define _CORE_MATH_INLINE_
 
 template<typename ValueT>
-inline ValueT GMath::Max(const ValueT &v1, const ValueT &v2)
+GINLINE ValueT GMath::Max(const ValueT &v1, const ValueT &v2)
 {
 	return v1 > v2 ? v1 : v2;
 }
 
 template<typename ValueT>
-inline ValueT GMath::Min(const ValueT &v1, const ValueT &v2)
+GINLINE ValueT GMath::Min(const ValueT &v1, const ValueT &v2)
 {
 	return v1 < v2 ? v1 : v2;
 }

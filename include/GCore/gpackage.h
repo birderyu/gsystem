@@ -4,7 +4,7 @@
 **
 ** @file	gpackage.h
 ** @brief	基础类型封装类的定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2015-12-31
 ** @version	1.0
@@ -23,7 +23,7 @@ class GPackage
 	: public GObject
 {
 public:
-	typedef typename GTraits<ValueT>::ParameterType ValueType;
+	typedef typename GTypeTraits<ValueT>::ParameterType ValueType;
 
 public:
 	enum { CLASS_CODE = CLASS_CODE_PACKAGE, };

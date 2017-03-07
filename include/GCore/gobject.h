@@ -4,7 +4,7 @@
 **
 ** @file	gobject.h
 ** @brief	基础对象类型的定义
-** @author	Birderyu
+** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2015-12-31
 ** @version	1.0
@@ -17,6 +17,15 @@
 
 #include "gglobal.h"
 #include "gsharedpointer.h"
+
+G_BEGIN_NAMESPACE
+class GObject;
+class GString;
+class GBytes;
+typedef GSharedPointer<GObject> GObjectP;
+G_END_NAMESPACE
+
+G_BEGIN_NAMESPACE
 
 // 类序列号
 enum G_CLASS_CODE
@@ -73,13 +82,11 @@ enum G_CLASS_CODE
 	CLASS_CODE_TABLE,						// Table
 	CLASS_CODE_FILE,						// File
 
+	CLASS_CODE_DATE_TIME,					// DateTime
 	CLASS_CODE_DATE,						// Date
+	CLASS_CODE_TIME,						// Time
 	CLASS_CODE_GEOMETRY,
 };
-
-class GObject;
-class GString;
-typedef GSharedPointer<GObject> GObjectP;
 
 /****************************************************************************
 **
@@ -90,6 +97,9 @@ typedef GSharedPointer<GObject> GObjectP;
 ** @module		GCore
 **
 ** 基础对象类型是所有资源对象的基类型，对于非资源型对象或内核对象，则不推荐继承该类。
+** 认为该类的派生一般具有以下特性：
+** 1）可复制，可移动：具有复制构造函数、复制运算符、移动构造函数、移动运算符
+** 2）可以转换为字节串和字符串
 **
 ****************************************************************************/
 class GAPI GObject
@@ -162,6 +172,24 @@ public:
 	**
 	****************************************************************************/
 	virtual GString ToString() const;
+
+	/****************************************************************************
+	**
+	** GObject
+	**
+	** @name	ToBytes
+	** @brief	将当期对象转换为二进制数组
+	** @return	{GBytes} 转换成的二进制数组类型（GBytes）
+	** @see		GBytes
+	**
+	****************************************************************************/
+	virtual GBytes ToBytes() const;
+
+	/*
+	virtual gbool FromString(const GString &str);
+	virtual GBytes ToBytes() const;
+	virtual gbool FromBytes(const GBytes &bytes);
+	*/
 
 	/****************************************************************************
 	**
@@ -242,5 +270,7 @@ public:
 	****************************************************************************/
 	//template<typename ArchiveT> gbool Deserialize(ArchiveT &archive);
 };
+
+G_END_NAMESPACE
 
 #endif // _CORE_OBJECT_H_

@@ -69,7 +69,8 @@ gbool GBinaryFile_Ex::Read(gsize size, GBytes &bytes)
 	{
 		return false;
 	}
-	return bytes.Resize(bytes_old_size + real_bytes_new_size);
+	bytes.Resize(bytes_old_size + real_bytes_new_size);
+	return true;
 }
 
 gbool GBinaryFile_Ex::ReadAll(GBytes &bytes)
@@ -127,7 +128,7 @@ gcstring GBinaryFile_Ex::OpenMode() const
 	switch(m_nOpenMode)
 	{
 		case GFile::NO_OPEN:
-			return NULL;
+			return GNULL;
 		case GFile::ONLY_READ:
 			return "rb";
 		case GFile::ONLY_WIRTE:
@@ -139,7 +140,7 @@ gcstring GBinaryFile_Ex::OpenMode() const
 		default:
 			break;
 	}
-	return NULL;
+	return GNULL;
 }
 
 #undef G_BINARY_DOCUMNET_BUFFER_SIZE

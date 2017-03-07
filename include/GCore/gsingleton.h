@@ -10,10 +10,10 @@ class GSingleton
 public:
 	static ClassT& Instance()
 	{
-		if (m_pInstance == NULL)
+		if (m_pInstance == GNULL)
 		{
 			GLockGuard<LockT> lock(m_tLock);
-			if (m_pInstance == NULL)
+			if (m_pInstance == GNULL)
 			{
 				m_pInstance = new ClassT;
 				m_pInstance->Initialize();
@@ -37,16 +37,16 @@ private:
 
 	static gvoid Destroy()
 	{
-		if (m_pInstance != NULL)
+		if (m_pInstance != GNULL)
 			delete m_pInstance;
-		m_pInstance = NULL;
+		m_pInstance = GNULL;
 	}
 
 	static ClassT * volatile m_pInstance;
 };
 
 template <typename ClassT, typename LockT>
-ClassT *volatile GSingleton<ClassT, LockT>::m_pInstance = NULL;
+ClassT *volatile GSingleton<ClassT, LockT>::m_pInstance = GNULL;
 
 template <typename ClassT, typename LockT>
 LockT GSingleton<ClassT, LockT>::m_tLock = LockT();

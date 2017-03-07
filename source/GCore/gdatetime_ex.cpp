@@ -2,6 +2,9 @@
 #include "gdatetime.h"
 #include <time.h>
 #ifdef WIN32
+#	ifndef WIN32_LEAN_AND_MEAN
+#		define WIN32_LEAN_AND_MEAN
+#	endif
 #include <windows.h>
 #endif
 
@@ -29,7 +32,7 @@ gbool GDateTime_Ex::GetNow(guint &y, guint &m, guint &d, guint &dofw,
 	time_t tmptime;
 
 #ifdef WIN32
-	intertimep = (guint)time(NULL);
+	intertimep = (guint)time(GNULL);
 	SYSTEMTIME cursystimep;
 	GetSystemTime(&cursystimep);
 	msecp = cursystimep.wMilliseconds;
@@ -43,12 +46,12 @@ gbool GDateTime_Ex::GetNow(guint &y, guint &m, guint &d, guint &dofw,
 	}
 #else
 	struct timeval  tmptimeval;
-	gettimeofday(&tmptimeval, NULL);
+	gettimeofday(&tmptimeval, GNULL);
 	intertimep = (guint)tmptimeval.tv_sec;
 	msecp = (gshort)(tmptimeval.tv_usec / 1000);
 	tmptime = (time_t)intertimep;
 	struct tm  * ptm = localtime_r((time_t *)&tmptime, (tm *)&breakuptime);
-	if (ptm == NULL)
+	if (ptm == GNULL)
 	{
 		return false
 	};

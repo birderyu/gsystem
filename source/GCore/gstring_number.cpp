@@ -1,174 +1,168 @@
 #include "gstring.h"
-#include <sstream>
+#include "gcstringhelper.h"
 
-template <typename T>
-GString _FromNum(T nNum, gint nBase)
-{
-	std::ostringstream oss;
-	if (nBase == 2)
-	{
+namespace GNova {
+	namespace String {
+		namespace Private {
 
+			template <typename T>
+			GString NumberToString(T nNum, gint nBase)
+			{
+				std::ostringstream oss;
+				if (nBase == 2)
+				{
+
+				}
+				else if (nBase == 8)
+				{
+					oss << std::oct;
+				}
+				else if (nBase == 10)
+				{
+					oss << std::dec;
+				}
+				else if (nBase == 16)
+				{
+					oss << std::hex;
+				}
+				else
+				{
+					oss << std::dec;
+				}
+				oss << nNum;
+				return GString(oss.str().c_str());
+			}
+
+		}
 	}
-	else if (nBase == 8)
-	{
-		oss << std::oct;
-	}
-	else if (nBase == 10)
-	{
-		oss << std::dec;
-	}
-	else if (nBase == 16)
-	{
-		oss << std::hex;
-	}
-	else
-	{
-		oss << std::dec;
-	}
-	oss << nNum;
-	return GString(oss.str().c_str());
 }
 
-template <typename T>
-T _ToNum(const GString &str, gbool *isok)
+GString GString::Number(gsmall nNum, gint nBase)
 {
-	std::istringstream iss(str.CString());
-	T nNum;
-	if (isok) *isok = false;
-
-	if (iss >> nNum)
-	{
-		if (isok) *isok = true;
-	}
-	return nNum;
+	return GNova::String::Private::NumberToString<gsmall>(nNum, nBase);
 }
 
-GString GString::FromNum(gsmall nNum, gint nBase)
+GString GString::Number(gusmall nNum, gint nBase)
 {
-	return _FromNum<gsmall>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gusmall>(nNum, nBase);
 }
 
-GString GString::FromNum(gusmall nNum, gint nBase)
+GString GString::Number(gshort nNum, gint nBase)
 {
-	return _FromNum<gusmall>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gshort>(nNum, nBase);
 }
 
-GString GString::FromNum(gshort nNum, gint nBase)
+GString GString::Number(gushort nNum, gint nBase)
 {
-	return _FromNum<gshort>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gushort>(nNum, nBase);
 }
 
-GString GString::FromNum(gushort nNum, gint nBase)
+GString GString::Number(gint nNum, gint nBase)
 {
-	return _FromNum<gushort>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gint>(nNum, nBase);
 }
 
-GString GString::FromNum(gint nNum, gint nBase)
+GString GString::Number(guint nNum, gint nBase)
 {
-	return _FromNum<gint>(nNum, nBase);
+	return GNova::String::Private::NumberToString<guint>(nNum, nBase);
 }
 
-GString GString::FromNum(guint nNum, gint nBase)
+GString GString::Number(glong nNum, gint nBase)
 {
-	return _FromNum<guint>(nNum, nBase);
+	return GNova::String::Private::NumberToString<glong>(nNum, nBase);
 }
 
-GString GString::FromNum(glong nNum, gint nBase)
+GString GString::Number(gulong nNum, gint nBase)
 {
-	return _FromNum<glong>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gulong>(nNum, nBase);
 }
 
-GString GString::FromNum(gulong nNum, gint nBase)
+GString GString::Number(glonglong nNum, gint nBase)
 {
-	return _FromNum<gulong>(nNum, nBase);
+	return GNova::String::Private::NumberToString<glonglong>(nNum, nBase);
 }
 
-GString GString::FromNum(glonglong nNum, gint nBase)
+GString GString::Number(gulonglong nNum, gint nBase)
 {
-	return _FromNum<glonglong>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gulonglong>(nNum, nBase);
 }
 
-GString GString::FromNum(gulonglong nNum, gint nBase)
+GString GString::Number(gfloat nNum, gint nBase)
 {
-	return _FromNum<gulonglong>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gfloat>(nNum, nBase);
 }
 
-GString GString::FromNum(gfloat nNum, gint nBase)
+GString GString::Number(gdouble nNum, gint nBase)
 {
-	return _FromNum<gfloat>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gdouble>(nNum, nBase);
 }
 
-GString GString::FromNum(gdouble nNum, gint nBase)
+GString GString::Number(gdecimal nNum, gint nBase)
 {
-	return _FromNum<gdouble>(nNum, nBase);
+	return GNova::String::Private::NumberToString<gdecimal>(nNum, nBase);
 }
 
-GString GString::FromNum(gdecimal nNum, gint nBase)
+gsmall GString::ToSmall(gbool *ok) const
 {
-	return _FromNum<gdecimal>(nNum, nBase);
+	return GCStringHelper::ToNum<gsmall>(CString(), ok);
 }
 
-gsmall GString::ToSmall(gbool *bIsOk) const
+gusmall GString::ToUSmall(gbool *ok) const
 {
-	return _ToNum<gsmall>(*this, bIsOk);
+	return GCStringHelper::ToNum<gusmall>(CString(), ok);
 }
 
-gusmall GString::ToUSmall(gbool *bIsOk) const
+gshort GString::ToShort(gbool *ok) const
 {
-	return _ToNum<gusmall>(*this, bIsOk);
+	return GCStringHelper::ToNum<gshort>(CString(), ok);
 }
 
-gshort GString::ToShort(gbool *bIsOk) const
+gushort GString::ToUShort(gbool *ok) const
 {
-	return _ToNum<gshort>(*this, bIsOk);
+	return GCStringHelper::ToNum<gushort>(CString(), ok);
 }
 
-gushort GString::ToUShort(gbool *bIsOk) const
+gint GString::ToInt(gbool *ok) const
 {
-	return _ToNum<gushort>(*this, bIsOk);
+	return GCStringHelper::ToNum<gint>(CString(), ok);
 }
 
-gint GString::ToInt(gbool *bIsOk) const
+guint GString::ToUInt(gbool *ok) const
 {
-	return _ToNum<gint>(*this, bIsOk);
+	return GCStringHelper::ToNum<guint>(CString(), ok);
 }
 
-guint GString::ToUInt(gbool *bIsOk) const
+glong GString::ToLong(gbool *ok) const
 {
-	return _ToNum<guint>(*this, bIsOk);
+	return GCStringHelper::ToNum<glong>(CString(), ok);
 }
 
-glong GString::ToLong(gbool *bIsOk) const
+gulong GString::ToULong(gbool *ok) const
 {
-	return _ToNum<glong>(*this, bIsOk);
+	return GCStringHelper::ToNum<gulong>(CString(), ok);
 }
 
-gulong GString::ToULong(gbool *bIsOk) const
+glonglong GString::ToLongLong(gbool *ok) const
 {
-	return _ToNum<gulong>(*this, bIsOk);
+	return GCStringHelper::ToNum<glonglong>(CString(), ok);
 }
 
-glonglong GString::ToLongLong(gbool *bIsOk) const
+gulonglong GString::ToULongLong(gbool *ok) const
 {
-	return _ToNum<glonglong>(*this, bIsOk);
+	return GCStringHelper::ToNum<gulonglong>(CString(), ok);
 }
 
-gulonglong GString::ToULongLong(gbool *bIsOk) const
+gfloat GString::ToFloat(gbool *ok) const
 {
-	return _ToNum<gulonglong>(*this, bIsOk);
+	return GCStringHelper::ToNum<gfloat>(CString(), ok);
 }
 
-gfloat GString::ToFloat(gbool *bIsOk) const
+gdouble GString::ToDouble(gbool *ok) const
 {
-	return _ToNum<gfloat>(*this, bIsOk);
+	return GCStringHelper::ToNum<gdouble>(CString(), ok);
 }
 
-gdouble GString::ToDouble(gbool *bIsOk) const
+glongdouble GString::ToLongDouble(gbool *ok) const
 {
-	return _ToNum<gdouble>(*this, bIsOk);
-}
-
-gdecimal GString::ToDecimal(gbool *bIsOk) const
-{
-	return _ToNum<gdecimal>(*this, bIsOk);
+	return GCStringHelper::ToNum<glongdouble>(CString(), ok);
 }

@@ -3,8 +3,12 @@
 
 #include "gobject.h"
 
+G_BEGIN_NAMESPACE
 class GString;
 class GSockAddress_Ex;
+G_END_NAMESPACE
+
+G_BEGIN_NAMESPACE
 
 class GAPI GSockAddress 
 {
@@ -23,5 +27,7 @@ public:
 private:
 	GSockAddress_Ex *m_pSockAddress_Ex;
 };
+
+G_END_NAMESPACE
 
 #endif // _CORE_SOCKET_ADDRESS_H_

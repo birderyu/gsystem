@@ -9,11 +9,11 @@ class GAPI GTextFile
 	: public GFile
 {
 public:
-	GTextFile(const GString &sFileName);
+	GTextFile(const GString &filename);
 
-	gbool Read(gsize size, GString &);
-	gbool ReadAll(GString &);
-	gbool Write(const GString &);
+	gbool Read(gsize size, GString &content);
+	gbool ReadAll(GString &content);
+	gbool Write(const GString &content);
 
 protected:
 	GTextFile(GTextFile_Ex *);
