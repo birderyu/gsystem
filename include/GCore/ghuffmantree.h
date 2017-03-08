@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	ghuffmantree.h
 ** @brief	¹þ·òÂüÊ÷µÄ¶¨Òå

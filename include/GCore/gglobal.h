@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	gglobal.h
 ** @brief	全局包含文件

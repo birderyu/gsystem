@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	gjsonarray.h
 ** @brief	Json数组类型的定义

@@ -405,11 +405,9 @@ template<>
 struct GIsIntegralT<guchar>
 	: GTrueType{};
 
-#ifdef G_HAS_WCHAR
 template<>
 struct GIsIntegralT<gwchar>
 	: GTrueType{};
-#endif // G_HAS_WCHAR
 
 template<>
 struct GIsIntegralT<gshort>

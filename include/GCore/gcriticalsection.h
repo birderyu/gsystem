@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	gcriticalsection.h
 ** @brief	基础对象类型的定义

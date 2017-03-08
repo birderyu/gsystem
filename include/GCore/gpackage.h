@@ -1,6 +1,6 @@
 ﻿/****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	gpackage.h
 ** @brief	基础类型封装类的定义

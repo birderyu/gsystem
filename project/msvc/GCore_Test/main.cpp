@@ -61,16 +61,9 @@
 #include "gdatetime_example.h"
 #include "gtable_example.h"
 
-#include "gdynamictable.h"
-
 int main(int argc, char *argv[])
 {
-	GDynamicTableRow<gint, gdouble, GString> row;
-	for (gsize i = 0; i < 3; i++)
-	{
-		std::cout << GDynamicTableRow<gint, gdouble, GString>::m_type_cursor[i] << std::endl;
-	}
-	StaticTable_Test();
+	Table_Test();
 	Tuple_Test();
 	Time_Test();
 

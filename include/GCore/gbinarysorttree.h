@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	gbinarysorttree.h
 ** @brief	该文件包含了二叉排序树的定义及实现

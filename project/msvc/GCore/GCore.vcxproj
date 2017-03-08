@@ -168,7 +168,6 @@
     <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
     <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gdatetimedefine.h" />
-    <ClInclude Include="..\..\..\include\GCore\gdynamictable.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glog.h" />
     <ClInclude Include="..\..\..\include\GCore\gseries.h" />
@@ -249,7 +248,7 @@
     <ClInclude Include="..\..\..\include\GCore\gstaticarray.h" />
     <ClInclude Include="..\..\..\include\GCore\gstringbuffer.h" />
     <ClInclude Include="..\..\..\include\GCore\gsynchronouslog.h" />
-    <ClInclude Include="..\..\..\include\GCore\gstatictable.h" />
+    <ClInclude Include="..\..\..\include\GCore\gtable.h" />
     <ClInclude Include="..\..\..\include\GCore\gtextfile.h" />
     <ClInclude Include="..\..\..\include\GCore\gthread.h" />
     <ClInclude Include="..\..\..\include\GCore\gtimer.h" />
@@ -432,6 +431,7 @@
     <None Include="..\..\..\include\GCore\gsharedpointer.inl" />
     <None Include="..\..\..\include\GCore\gsinglelinkedlist.inl" />
     <None Include="..\..\..\include\GCore\gstaticarray.inl" />
+    <None Include="..\..\..\include\GCore\gtable.inl" />
     <None Include="..\..\..\include\GCore\gtuple.inl" />
     <None Include="..\..\..\include\GCore\guniquepointer.inl" />
     <None Include="..\..\..\include\GCore\gunordermap.inl" />

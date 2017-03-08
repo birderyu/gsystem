@@ -1,11 +1,11 @@
 /****************************************************************************
 **
-** GNova: A quick, micro library of C++
+** GSystem: A quick, micro library of C++
 **
 ** @file	gdefine.h
 ** @brief	全局宏定义
 ** @author	birderyu
-** @contact	https://github.com/birderyu
+** @contact	https://github.com/birderyu/GSystem
 ** @date	2015-12-31
 ** @version	1.0
 **
@@ -71,23 +71,17 @@
 #	define GAPI
 #endif // G_COMPILER_MSVC
 
-#define GOFFSET(type, member) ((size_t)&(((type *)0)->member))
-struct gdummy
-{
-	void *p;
-	unsigned char slot;
-};
-#define G_X86_64 (GOFFSET(gdummy, slot) == 8) //在64位系统下，指针寻址8个字节大小的地址空间
-#define G_X86_32 (GOFFSET(gdummy, slot) == 4) //在32位系统下，指针寻址4个字节大小的地址空间
-
 //#if __cplusplus >= 201103L
 #	define G_CXX_11
 //#endif
 
 #define GNULL nullptr
 
-#define G_BEGIN_NAMESPACE	//namespace GNova {
+#define G_BEGIN_NAMESPACE	//namespace geonova {
 #define G_END_NAMESPACE		//}
+
+#define G_PRIVATE_BEGIN_NAMESPACE	//namespace private {
+#define G_PRIVATE_END_NAMESPACE		//}
 
 #ifdef _DEBUG
 #	define GDEBUG
@@ -145,7 +139,6 @@ extern "C"{
 }
 #endif
 
-#define G_HAS_WCHAR
 #define G_HAS_DECIMAL
 
 // 

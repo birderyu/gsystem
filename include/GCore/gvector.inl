@@ -253,6 +253,7 @@ GINLINE gvoid GVector<DataT>::PushBack(const DataT &data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
+	Resize(++old_size);
 	m_tArray[m_nTail++] = data;
 	if (m_nHead == NULL_POS)
 	{
@@ -271,6 +272,7 @@ GINLINE gvoid GVector<DataT>::PushBack(DataT &&data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
+	Resize(++old_size);
 	m_tArray[m_nTail++] = GForward<DataT>(data);
 	if (m_nHead == NULL_POS)
 	{

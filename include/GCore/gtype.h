@@ -13,10 +13,15 @@ typedef	signed char		gschar;
 typedef	unsigned char	guchar;
 typedef	const gchar*	gcstring;
 
-#ifdef G_HAS_WCHAR
+typedef gchar		gchar8;
+typedef char16_t	gchar16;
+typedef char32_t	gchar32;
+
+typedef	const gchar16*	gc16string;
+typedef	const gchar32*	gc32string;
+
 typedef	wchar_t			gwchar;
 typedef	const gwchar*	gcwstring;
-#endif // G_HAS_WCHAR
 
 typedef bool				gbool;
 typedef short				gshort;

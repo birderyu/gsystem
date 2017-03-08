@@ -1,0 +1,4 @@
+#ifndef _CORE_TABLE_INLINE_
+#define _CORE_TABLE_INLINE_
+
+#endif // _CORE_TABLE_INLINE_

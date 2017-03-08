@@ -558,14 +558,11 @@
     <ClInclude Include="..\..\..\include\GCore\gdatetimedefine.h">
       <Filter>头文件\Time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstatictable.h">
-      <Filter>头文件\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdynamictable.h">
-      <Filter>头文件\Structure</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h">
       <Filter>头文件\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gtable.h">
+      <Filter>头文件\Structure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -929,6 +926,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gtuple.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gtable.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>
