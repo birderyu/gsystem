@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 class GAPI GAmazing
 {
 	/// 快速求平方根的倒数
@@ -16,5 +18,7 @@ class GAPI GAmazing
 		return x;
 	}
 };
+
+}
 
 #endif // _CORE_AMAZING_H_

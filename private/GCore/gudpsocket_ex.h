@@ -3,6 +3,9 @@
 
 #include "gsocket_ex.h"
 
+namespace gnova {
+namespace extra {
+
 class GUdpSocket_Ex 
 	: public GSocket_Ex
 {
@@ -14,5 +17,8 @@ public:
 	gbool SendTo(const gchar *pBufData, gint nLen, GSockAddress_Ex *pPeer);
 	gint RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress_Ex *pPeer);
 };
+
+}
+}
 
 #endif // _CORE_UDP_SOCKET_EX_H_

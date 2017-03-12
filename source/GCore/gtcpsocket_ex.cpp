@@ -1,6 +1,9 @@
 #include "gtcpsocket_ex.h"
 #include "gtcpsocket.h"
 
+namespace gnova {
+namespace extra {
+
 gbool GTcpSocket_Ex::Open(gbool nResue)
 {
 	m_hSocket = GOpenSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -97,4 +100,7 @@ gint GTcpSocket_Ex::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
 {
 	int nFlags = nWaitAll ? MSG_WAITALL : 0;
 	return GRecvSocket(m_hSocket, pBufData, nDataLen, nFlags);
+}
+
+}
 }

@@ -7,7 +7,7 @@
 #include "gstring.h"
 #include "gunordermap.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GRegister
 	: public GSingleton<GRegister, GMutex>
@@ -21,6 +21,6 @@ private:
 	GUnorderMap<guint, GString> m_tClassCode_ClassName;
 };
 
-G_END_NAMESPACE
+} // end namespace gnova
 
 #endif // _CORE_REGISTER_H_

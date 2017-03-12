@@ -23,12 +23,15 @@
 #include "gstring.h"
 #include "gmap.h"
 
-G_BEGIN_NAMESPACE
-class GJsonPair;
-class GJsonParserMessage;
-G_END_NAMESPACE
+namespace gnova {
+	namespace json {
+		class GJsonPair;
+		class GJsonParserMessage;
+	}
+}
 
-G_BEGIN_NAMESPACE
+namespace gnova {
+namespace json {
 
 class GAPI GJsonObject
 	: public GNewT<GJsonObject>
@@ -39,6 +42,8 @@ public:
 	GJsonObject(const GString &jsonStr);
 	GJsonObject(const GJsonObject &jsonObj);
 	~GJsonObject();
+
+	gbool test(GJsonPair &p) const;
 
 	gbool Valid() const;
 	GString ToString() const;
@@ -51,6 +56,7 @@ private:
 	GMap<GString, GJsonPair*> m_tJsonPairs;
 };
 
-G_END_NAMESPACE
+}
+}
 
 #endif // _CORE_JSON_OBJECT_H_

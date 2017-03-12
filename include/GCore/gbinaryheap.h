@@ -8,6 +8,8 @@
 #define G_BINARY_HEAP_DEFAULT_CAPACITY 1024
 #define G_BINARY_HEAP_DEFAULT_ADD_SIZE 512
 
+namespace gnova {
+
 template<typename DataT, typename CompareT>
 class GBinaryHeap
 	: public GListT<GBinaryHeap<DataT, CompareT>>
@@ -70,6 +72,8 @@ class GMaxHeap
 };
 
 #include "gbinaryheap.inl"
+
+}
 
 #undef G_BINARY_HEAP_DEFAULT_ADD_SIZE
 #undef G_BINARY_HEAP_DEFAULT_CAPACITY

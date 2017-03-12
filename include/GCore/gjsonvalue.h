@@ -25,13 +25,16 @@
 #include "gobject.h"
 #include "gvariety.h"
 
-G_BEGIN_NAMESPACE
-class GJsonObject;
-class GJsonArray;
-class GJsonParserMessage;
-G_END_NAMESPACE
+namespace gnova {
+	namespace json {
+		class GJsonObject;
+		class GJsonArray;
+		class GJsonParserMessage;
+	}
+}
 
-G_BEGIN_NAMESPACE
+namespace gnova {
+namespace json {
 
 class GAPI GJsonValue
 	: public GObject
@@ -71,6 +74,7 @@ private:
 	gbyte m_nType;
 };
 
-G_END_NAMESPACE
+}
+}
 
 #endif // _CORE_JSON_VALUE_H_

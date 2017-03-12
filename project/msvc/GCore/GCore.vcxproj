@@ -329,7 +329,6 @@
     <ClCompile Include="..\..\..\source\GCore\gcstringhelper.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdate.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdatetime.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gdatetime_ex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile_ex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gjsonarray.cpp" />
@@ -347,7 +346,6 @@
     <ClCompile Include="..\..\..\source\GCore\glonginteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\glonglonginteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gmath.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gmemorypool.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gmutex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gmemory.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gobject.cpp" />

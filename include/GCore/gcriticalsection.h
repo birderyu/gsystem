@@ -17,6 +17,8 @@
 
 #define G_CRITICAL_SECTION_HANELD_SIZE G_POINTER_ADDRESS_SIZE*8
 
+namespace gnova {
+
 /****************************************************************************
 **
 ** gobject.h
@@ -50,6 +52,8 @@ private:
 	gbyte m_pHandle[G_CRITICAL_SECTION_HANELD_SIZE];
 #endif // G_SYSTEM_WINDOWS
 };
+
+}
 
 #undef G_CRITICAL_SECTION_HANELD_SIZE
 

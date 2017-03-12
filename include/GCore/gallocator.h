@@ -3,15 +3,15 @@
 ** GSystem: A quick, micro library of C++
 **
 ** @file	gallocator.h
-** @brief	¿Õ¼ä·ÖÅäÆ÷
+** @brief	ç©ºé—´åˆ†é…å™¨
 ** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2017-1-24
 ** @version	0.1
 **
-** °üº¬Á½¸ö²Ù×÷£º
-** ·ÖÅäÄÚ´æ²Ù×÷£ºallocate
-** ÊÍ·ÅÄÚ´æ²Ù×÷£ºdeallocate
+** åŒ…å«ä¸¤ä¸ªæ“ä½œï¼š
+** åˆ†é…å†…å­˜æ“ä½œï¼šallocate
+** é‡Šæ”¾å†…å­˜æ“ä½œï¼šdeallocate
 **
 ****************************************************************************/
 #ifndef _CORE_ALLOCATOR_H_
@@ -20,10 +20,14 @@
 #include "gmemory.h"
 #include <new>
 
+namespace gnova {
+
 template <typename ClassT> ClassT *GAllocate(gsize n = 1) noexcept(false);
 template <typename ClassT> gvoid GDeallocate(ClassT *ptr) noexcept;
 template <typename ClassT> ClassT *GReallocate(ClassT *oldptr, gsize newsize) noexcept(false);
 
 #include "gallocator.inl"
+
+}
 
 #endif // _CORE_ALLOCATOR_H_

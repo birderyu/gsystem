@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+namespace gnova {
+
 class GAPI GLongLongInteger 
 	: public GNumber<glonglong>
 {
@@ -26,5 +28,7 @@ typedef GLongLongInteger GLongLongInt;
 typedef GLongLongInteger GLongLong;
 typedef GLongLongInteger GInteger64;
 typedef GLongLongInteger GInt64;
+
+}
 
 #endif // _CORE_LONG_INTEGER_H_

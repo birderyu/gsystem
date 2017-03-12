@@ -8,10 +8,14 @@
 #include "gstructure.h"
 #include "gseries.h"
 
+namespace gnova {
 class GBytes;
+}
 
 #define G_BYTES_DEFAULT_CAPACITY 1024
 #define G_BYTES_DEFAULT_ADD_SIZE 512
+
+namespace gnova {
 
 class GAPI GByteBuffer final
 	: public GListT<GByteBuffer>
@@ -88,6 +92,8 @@ private:
 	GBytesData m_tBytes;
 	gsize m_nAddSize;
 };
+
+}
 
 #undef G_BYTES_DEFAULT_ADD_SIZE
 #undef G_BYTES_DEFAULT_CAPACITY

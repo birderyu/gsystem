@@ -8,13 +8,18 @@
 #ifndef  _WINSOCK_DEPRECATED_NO_WARNINGS
 #	define  _WINSOCK_DEPRECATED_NO_WARNINGS
 #endif // _WINSOCK_DEPRECATED_NO_WARNINGS
-
 #include <winsock2.h>
 #include <ws2tcpip.h>
+
+namespace gnova {
+namespace extra {
 typedef SOCKET				gsocket;
 #define GOpenSocket			socket
 #define GCloseSocket		closesocket
 #define GControlSocketIO	ioctlsocket
+}
+}
+
 #else // !G_SYSTEM_WINDOWS
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -25,12 +30,17 @@ typedef SOCKET				gsocket;
 #include <unistd.h>
 #include <sys/time.h>
 #include <fcntl.h>
+namespace gnova {
+namespace extra {
 typedef gint gsocket;
 #define GOpenSocket			socket
 #define GCloseSocket		close
 #define GControlSocketIO	ioctl
+}
 #endif // G_SYSTEM_WINDOWS
 
+namespace gnova {
+namespace extra {
 #define GBindSocket			bind
 #define GListenSocket		listen
 #define GAcceptSocket		accept
@@ -41,8 +51,15 @@ typedef gint gsocket;
 #define GRecvFromSocket		recvfrom
 #define GSetSocketOpt		setsockopt
 #define GGetSocketOpt		getsockopt
+}
+}
 
+namespace gnova {
 class GString;
+}
+
+namespace gnova {
+namespace extra {
 
 class GSockAddress_Ex
 {
@@ -61,5 +78,8 @@ public:
 private:
 	sockaddr_in m_tSocketAddr;
 };
+
+}
+}
 
 #endif // _CORE_SOCKETADDRESS_EX_H_

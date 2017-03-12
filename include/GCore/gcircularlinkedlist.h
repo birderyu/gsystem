@@ -12,7 +12,9 @@
 #ifndef _CORE_CIRCULAR_LINKED_LIST_H_
 #define _CORE_CIRCULAR_LINKED_LIST_H_
 
-#include "gsinglelinkedlist.h" 
+#include "gsinglelinkedlist.h"
+
+namespace gnova {
 
 template<typename DataT, typename NodeT = GSingleLinkedListNode<DataT>>
 class GCircularLinkedList 
@@ -34,5 +36,7 @@ protected:
 };
 
 #include "gcircularlinkedlist.inl"
+
+}
 
 #endif // _CORE_CIRCULAR_LINKED_LIST_H_

@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GDoubleFloat 
 	: public GNumber<gdouble>
@@ -39,6 +39,6 @@ public:
 
 typedef GDoubleFloat GDouble;
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_DOUBLE_FLOAT_H_

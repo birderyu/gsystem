@@ -1,5 +1,7 @@
 #include "gunsignedcharacter.h"
 
+namespace gnova {
+
 GUnsignedCharacter::GUnsignedCharacter(guchar val)
 : GNumber<guchar>(val)
 {
@@ -15,4 +17,6 @@ GUnsignedCharacter::GUnsignedCharacter(const GUnsignedCharacter &val)
 guint GUnsignedCharacter::ClassCode() const
 {
 	return GUnsignedCharacter::CLASS_CODE;
+}
+
 }

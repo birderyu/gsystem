@@ -3,7 +3,7 @@
 
 #include "gsocket.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GUdpSocket final
 	: public GSocket
@@ -19,6 +19,6 @@ public:
 	gint RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress &tPeer);
 };
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_UDP_SOCKET_H_

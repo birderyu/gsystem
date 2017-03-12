@@ -1,5 +1,7 @@
 #include "gstringbuffer.h"
 
+namespace gnova {
+
 GStringBuffer::GStringBuffer(gsize nCapacity, gsize nAddSize)
 {
 	// TODO
@@ -52,4 +54,6 @@ GStringBuffer &GStringBuffer::Append(const GString &)
 {
 	// TODO
 	return *this;
+}
+
 }

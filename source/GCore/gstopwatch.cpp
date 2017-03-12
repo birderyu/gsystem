@@ -9,6 +9,8 @@
 #include <time.h>
 #endif // G_SYSTEM_WINDOWS
 
+namespace gnova {
+
 gvoid GStopWatch::Start()
 {
 	m_nStart = Tick();
@@ -29,10 +31,12 @@ gint GStopWatch::Stop()
 gulong GStopWatch::Tick() const
 {
 #ifdef G_SYSTEM_WINDOWS 
-	return GetTickCount();
+	return ::GetTickCount();
 #else // !G_SYSTEM_WINDOWS
 	struct timespec ts;
 	clock_gettime(CLOCK_MONOTONIC, &ts);
 	return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
 #endif // G_SYSTEM_WINDOWS
+}
+
 }

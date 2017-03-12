@@ -13,6 +13,8 @@
 
 #endif // G_SYSTEM_WINDOWS
 
+namespace gnova {
+
 gvoid GThread::Sleep(gulong nSecs)
 {
 	::Sleep(1000 * nSecs);
@@ -29,7 +31,7 @@ gvoid GThread::Join(GRunnable &thread)
 	HANDLE thread_handle = (HANDLE)thread.m_pHandle;
 	if (thread_handle)
 	{
-		WaitForSingleObject(thread_handle, INFINITE);
+		::WaitForSingleObject(thread_handle, INFINITE);
 		thread.m_pHandle = GNULL;
 	}
 #else // !G_SYSTEM_WINDOWS
@@ -70,4 +72,6 @@ gvoid GThread::Stop(gulong msecs)
 gint GThread::Run()
 {
 	return 0;
+}
+
 }

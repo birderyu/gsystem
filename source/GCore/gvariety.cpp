@@ -5,6 +5,8 @@
 #include "gcstringhelper.h"
 #include "gconstructor.h"
 
+namespace gnova {
+
 GVariety::GVariety(const gchar *val)
 	: m_nType(VARIETY_TYPE_STRING)
 {
@@ -1383,4 +1385,6 @@ gvoid GVariety::Free()
 
 	m_nType = VARIETY_TYPE_ILLEGAL;
 	m_pVal = GNULL;
+}
+
 }

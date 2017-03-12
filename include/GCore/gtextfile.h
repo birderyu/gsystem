@@ -3,7 +3,13 @@
 
 #include "gfile.h"
 
+namespace gnova {
+namespace extra {
 class GTextFile_Ex;
+}
+}
+
+namespace gnova {
 
 class GAPI GTextFile 
 	: public GFile
@@ -16,7 +22,9 @@ public:
 	gbool Write(const GString &content);
 
 protected:
-	GTextFile(GTextFile_Ex *);
+	GTextFile(extra::GTextFile_Ex *);
 };
+
+}
 
 #endif // _CORE_TEXT_FILE_H_

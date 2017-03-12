@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 class GAPI GStopWatch
 {
 public:
@@ -16,5 +18,7 @@ private:
 private:
 	gulong m_nStart;
 };
+
+}
 
 #endif // _CORE_STOP_WATCH_H_

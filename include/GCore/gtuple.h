@@ -3,6 +3,8 @@
 
 #include "gutility.h"
 
+namespace gnova {
+
 // ¶Ô×é
 template<typename T1, typename T2>
 class GPair
@@ -330,5 +332,7 @@ gvoid GTupleSet(GTuple<TS...> &tuple_, typename GTupleAt<N, GTuple<TS...> >::Val
 }
 
 #include "gtuple.inl"
+
+}
 
 #endif // _CORE_TUPLE_H_

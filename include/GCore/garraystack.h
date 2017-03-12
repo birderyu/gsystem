@@ -7,6 +7,8 @@
 
 #define G_STACK_DEFAULT_CAPACITY 1024
 
+namespace gnova {
+
 template<typename DataT>
 class GArrayStack 
 	: public GStack<DataT>
@@ -44,6 +46,8 @@ private:
 };
 
 #include "garraystack.inl"
+
+}
 
 #undef G_STACK_DEFAULT_CAPACITY
 

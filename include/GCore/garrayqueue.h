@@ -7,6 +7,8 @@
 
 #define G_QUEUE_DEFAULT_CAPACITY 1024
 
+namespace gnova {
+
 template <typename DataT>
 class GArrayQueue
 	: public GQueue<DataT>
@@ -85,5 +87,7 @@ int GArrayQueue<DataT>::Size()
 {
 	return (m_nRear - m_nFront + maxsize) % maxsize;
 };
+
+}
 
 #endif // _CORE_ARRAY_QUEUE_H_

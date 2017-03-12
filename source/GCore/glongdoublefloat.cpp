@@ -1,5 +1,7 @@
 #include "glongdoublefloat.h"
 
+namespace gnova {
+
 glongdouble GLongDoubleFloat::MaxValue()
 {
 	return 1.7976931348623158e+308;
@@ -84,4 +86,6 @@ guint GLongDoubleFloat::ClassCode() const
 gbool GLongDoubleFloat::IsNaN() const
 {
 	return m_nValue != m_nValue;
+}
+
 }

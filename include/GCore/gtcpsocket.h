@@ -3,7 +3,7 @@
 
 #include "gsocket.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GTcpSocket final
 	: public GSocket
@@ -27,6 +27,6 @@ public:
 	gint Recv(gchar *pBufData, gint nDataLen, gint nWaitAll = 0);
 };
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_TCP_SOCKET_H_

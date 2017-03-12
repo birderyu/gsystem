@@ -4,7 +4,11 @@
 #include "gstringpool.h"
 #include "gmap.h"
 
-class GString;
+namespace gnova {
+	class GString;
+}
+
+namespace gnova {
 
 enum G_STRING_TYPE
 {
@@ -32,5 +36,7 @@ private:
 	GStringPool m_tPool;
 	GMap<gsize, gpointer> m_t; // <ÏÂ±ê£¬Ö¸Õë>
 };
+
+}
 
 #endif // _CORE_STRING_LIST_H_

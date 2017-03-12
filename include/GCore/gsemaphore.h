@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 /// 信号量
 class GAPI GSemaphore
 {
@@ -17,5 +19,7 @@ private:
 	gint Initialize(gint nInitialValue);
 	gpointer m_pHandle;
 };
+
+}
 
 #endif // _CORE_SEMAPHORE_H_

@@ -3,6 +3,9 @@
 #include "gjsonparsermessage.h"
 #include "gliststack.h"
 
+namespace gnova {
+namespace json {
+
 GJsonArray::GJsonArray()
 {
 
@@ -241,4 +244,7 @@ gvoid GJsonArray::Dispose()
 		}
 	}
 	m_tJsonValues.Clear();
+}
+
+}
 }

@@ -18,14 +18,14 @@
 #include "gglobal.h"
 #include "gsharedpointer.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 class GObject;
 class GString;
 class GBytes;
 typedef GSharedPointer<GObject> GObjectP;
-G_END_NAMESPACE
+}
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 // ¿‡–Ú¡–∫≈
 enum G_CLASS_CODE
@@ -271,6 +271,6 @@ public:
 	//template<typename ArchiveT> gbool Deserialize(ArchiveT &archive);
 };
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_OBJECT_H_

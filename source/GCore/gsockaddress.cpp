@@ -2,14 +2,16 @@
 #include "gsockaddress_ex.h"
 #include "gstring.h"
 
+namespace gnova {
+
 GSockAddress::GSockAddress()
-: m_pSockAddress_Ex(new GSockAddress_Ex())
+: m_pSockAddress_Ex(new extra::GSockAddress_Ex())
 {
 
 }
 
 GSockAddress::GSockAddress(const GString &sIP, gushort nPort)
-: m_pSockAddress_Ex(new GSockAddress_Ex(sIP, nPort))
+: m_pSockAddress_Ex(new extra::GSockAddress_Ex(sIP, nPort))
 {
 
 }
@@ -35,4 +37,6 @@ gvoid GSockAddress::SetPortID(const gushort nPort)
 {
 	GASSERT(m_pSockAddress_Ex);
 	m_pSockAddress_Ex->SetPortID(nPort);
+}
+
 }

@@ -1,5 +1,7 @@
 #include "gbyte.h"
 
+namespace gnova {
+
 GByte::GByte(gbyte val)
 : GPackage<gbyte>(val)
 {
@@ -15,4 +17,6 @@ GByte::GByte(const GByte &val)
 guint GByte::ClassCode() const
 {
 	return GByte::CLASS_CODE;
+}
+
 }

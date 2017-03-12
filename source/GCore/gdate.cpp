@@ -25,6 +25,8 @@
 #define G_DATA_SIZE_DAY_OF_YEAR		2
 #define G_DATA_SIZE_DAY_OF_WEEK		1
 
+namespace gnova {
+
 GDate GDate::Now()
 {
 	return GDate(::time(GNULL));
@@ -135,7 +137,7 @@ guint GDate::DayOfWeek() const
 gbool GDate::SetDate(gtime timestamp)
 {
 	struct tm t = { 0 };
-	if (0 != localtime_s(&t, &timestamp))
+	if (0 != ::localtime_s(&t, &timestamp))
 	{
 		return false;
 	}
@@ -506,6 +508,8 @@ GString GDate::ToString() const
 	str.Append("-");
 	str.Append(GString::Number(Day()));
 	return str;
+}
+
 }
 
 #undef G_DATA_SIZE_DAY_OF_WEEK		

@@ -1,5 +1,7 @@
 #include "gstdstringhelper.h"
 
+namespace gnova {
+
 std::string GStdStringHelper::Trim(const std::string &sStr)
 {
 	std::string _sStr(sStr);
@@ -75,14 +77,15 @@ std::string GStdStringHelper::Replace(const std::string &sStr, const std::string
 	return _sStr;
 }
 
-gvoid GStdStringHelper::Split(const std::string &sStr, const std::string &sSep,
-	gbool bIgnoreEmpty, gbool bIsSensitive,
-	std::vector<std::string> &tStrs)
+std::vector<std::string> GStdStringHelper::Split(const std::string &sStr, const std::string &sSep,
+	gbool bIgnoreEmpty, gbool bIsSensitive)
 {
+	std::vector<std::string> tStrs;
+
 	std::string _sSep(sSep);
 	if (_sSep.empty())
 	{
-		return;
+		return tStrs;
 	}
 
 	std::string _sStr(sStr);
@@ -117,6 +120,8 @@ gvoid GStdStringHelper::Split(const std::string &sStr, const std::string &sSep,
 			i = nPos + _sSep.size() - 1;
 		}
 	}
+
+	return tStrs;
 }
 
 gint GStdStringHelper::Find(const std::string &str, gchar c, gsize start, gbool bIsSensitive)
@@ -157,4 +162,6 @@ gint GStdStringHelper::Find(const std::string &str, const std::string &tar, gsiz
 		return -1;
 	}
 	return static_cast<gint>(pos);
+}
+
 }

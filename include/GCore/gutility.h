@@ -3,6 +3,8 @@
 
 #include "gtraits.h"
 
+namespace gnova {
+
 /// “∆∂Ø”Ô“Â
 template<typename T> typename GRemoveReference<T>::Type &&GMove(T &&t);
 
@@ -14,5 +16,7 @@ template<typename T> T&& GForward(typename GRemoveReference<T>::Type &&t);
 template<typename T> gvoid GSwap(T &a, T &b);
 
 #include "gutility.inl"
+
+}
 
 #endif // _CORE_UTILITY_H_

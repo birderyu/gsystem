@@ -4,6 +4,8 @@
 
 #include "glock.h"
 
+namespace gnova {
+
 class GAPI GMutex final 
 	: public GLock
 {
@@ -22,5 +24,7 @@ private:
 	gpointer m_pHandle;
 #endif // G_SYSTEM_WINDOWS
 };
+
+}
 
 #endif // _CORE_MUTEX_H_

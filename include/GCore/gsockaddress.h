@@ -3,12 +3,13 @@
 
 #include "gobject.h"
 
-G_BEGIN_NAMESPACE
-class GString;
-class GSockAddress_Ex;
-G_END_NAMESPACE
+namespace gnova {
+	namespace extra {
+		class GSockAddress_Ex;
+	}
+}
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GSockAddress 
 {
@@ -25,9 +26,9 @@ public:
 	gvoid SetPortID(gushort nPort);
 
 private:
-	GSockAddress_Ex *m_pSockAddress_Ex;
+	extra::GSockAddress_Ex *m_pSockAddress_Ex;
 };
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_SOCKET_ADDRESS_H_

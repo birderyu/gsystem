@@ -3,6 +3,8 @@
 
 #include "ghashtable.h"
 
+namespace gnova {
+
 template <typename KeyT, typename ValueT,
 	typename HashT = GHashF<KeyT>,
 	typename CompareT = GEqualToF<KeyT>>
@@ -288,5 +290,7 @@ private:
 };
 
 #include "gunordermap.inl"
+
+}
 
 #endif // _CORE_UNORDER_MAP_H_

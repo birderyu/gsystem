@@ -1,6 +1,8 @@
 #ifndef _CORE_B_TREE_H_
 #define _CORE_B_TREE_H_
 
+namespace gnova {
+
 template<typename KeyT, typename ValueT, gsize KEY_MAX, gsize CHILD_MAX>
 struct GBTreeNode
 	: public GNewT<GBTreeNode<KeyT, ValueT, KEY_MAX, CHILD_MAX>>
@@ -405,5 +407,7 @@ private:
 private:
 	NodeT * m_pRoot;  //B树的根节点  
 };
+
+}
 
 #endif // _CORE_B_TREE_H_

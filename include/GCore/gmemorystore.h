@@ -9,6 +9,8 @@
 #include "gglobal.h"
 #include "gblock.h"
 
+namespace gnova {
+
 class GAPI GMemoryStore
 {
 	// 内存池单元
@@ -39,5 +41,7 @@ private:
 	gsize m_nGrowSize;		// 增长大小
 	GMemCell *m_pList;		// 内存块链表
 };
+
+}
 
 #endif // _CORE_MEMORY_STORE_H_

@@ -1,6 +1,8 @@
 #include "gstring.h"
 #include "gcstringhelper.h"
 
+namespace gnova {
+
 GString &GString::operator=(const GString &str)
 {
 	if (this == &str)
@@ -98,4 +100,6 @@ gbool operator<=(const GString &s1, const GString &s2)
 		return true;
 	}
 	return strcmp(s1.CString(), s2.CString()) <= 0;
+}
+
 }

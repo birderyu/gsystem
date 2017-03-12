@@ -1,5 +1,7 @@
 #include "gcharacter.h"
 
+namespace gnova {
+
 GCharacter::GCharacter(gchar val)
 : GPackage<gchar>(val)
 {
@@ -14,4 +16,6 @@ GCharacter::GCharacter(const GCharacter &val)
 guint GCharacter::ClassCode() const
 {
 	return GCharacter::CLASS_CODE;
+}
+
 }

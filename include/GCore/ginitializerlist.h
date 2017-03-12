@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 template<class ElemT>
 class GInitializerList
 {
@@ -45,5 +47,7 @@ private:
 	const ElemT *m_pFirst;
 	const ElemT *m_pLast;
 };
+
+}
 
 #endif // _CORE_INITIALIZER_LIST_H_

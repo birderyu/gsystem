@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+namespace gnova {
+
 class GAPI GSignedCharacter 
 	: public GPackage<gschar>
 {
@@ -20,5 +22,7 @@ public:
 typedef GSignedCharacter GSCharacter;
 typedef GSignedCharacter GSignedChar;
 typedef GSignedCharacter GSChar;
+
+}
 
 #endif // _CORE_SIGNED_CHARACTER_H_

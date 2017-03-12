@@ -2,6 +2,8 @@
 #include "gstringlist.h"
 #include "gcstringhelper.h"
 
+namespace gnova {
+
 GString::GString()
 {
 	
@@ -295,4 +297,6 @@ gvoid GString::Append(const GString &str)
 gvoid GString::Append(GString &&str)
 {
 	m_tString.Append(GMove(str.m_tString));
+}
+
 }

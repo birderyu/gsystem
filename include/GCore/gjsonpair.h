@@ -22,11 +22,14 @@
 #include "gstring.h"
 #include "gjsonvalue.h"
 
-G_BEGIN_NAMESPACE
-class GJsonParserMessage;
-G_END_NAMESPACE
+namespace gnova {
+	namespace json {
+		class GJsonParserMessage;
+	}
+}
 
-G_BEGIN_NAMESPACE
+namespace gnova {
+namespace json {
 
 class GAPI GJsonPair
 	: public GObject
@@ -52,6 +55,7 @@ private:
 	GJsonValue *m_pValue;
 };
 
-G_END_NAMESPACE
+}
+}
 
 #endif // _CORE_JSON_PAIR_H_

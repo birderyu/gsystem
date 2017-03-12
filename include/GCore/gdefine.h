@@ -3,13 +3,13 @@
 ** GSystem: A quick, micro library of C++
 **
 ** @file	gdefine.h
-** @brief	È«¾Öºê¶¨Òå
+** @brief	å…¨å±€å®å®šä¹‰
 ** @author	birderyu
 ** @contact	https://github.com/birderyu/GSystem
 ** @date	2015-12-31
 ** @version	1.0
 **
-** È«¾Öºê¶¨ÒåÁËÒ»Ð©È«¾ÖµÄºê³£Á¿£¬²¢¸ù¾Ý²»Í¬²Ù×÷ÏµÍ³ºÍ²»Í¬±àÒëÆ÷×ö³öÏàÓ¦µÄµ÷Õû¡£
+** å…¨å±€å®å®šä¹‰äº†ä¸€äº›å…¨å±€çš„å®å¸¸é‡ï¼Œå¹¶æ ¹æ®ä¸åŒæ“ä½œç³»ç»Ÿå’Œä¸åŒç¼–è¯‘å™¨åšå‡ºç›¸åº”çš„è°ƒæ•´ã€‚
 **
 ****************************************************************************/
 
@@ -19,7 +19,7 @@
 /****************************************************************************
 **
 ** gdefine.h
-** ²Ù×÷ÏµÍ³
+** æ“ä½œç³»ç»Ÿ
 ** G_SYSTEM_WINDOWS:	Windows
 ** G_SYSTEM_LINUX:		Linux
 **
@@ -35,7 +35,7 @@
 /****************************************************************************
 **
 ** gdefine.h
-** ±àÒëÆ÷
+** ç¼–è¯‘å™¨
 ** G_COMPILER_MSVC: MSVC
 ** G_COMPILER_GCC: GCC
 **
@@ -56,7 +56,7 @@
 #	endif // _WIN64
 #endif // G_SYSTEM_WINDOWS
 
-// ¶¨ÒåAPI
+// å®šä¹‰API
 #ifdef _DLL
 	#define GDLL
 #endif // _DLL
@@ -72,16 +72,13 @@
 #endif // G_COMPILER_MSVC
 
 //#if __cplusplus >= 201103L
-#	define G_CXX_11
+#define G_CXX_11
 //#endif
 
 #define GNULL nullptr
 
 #define G_BEGIN_NAMESPACE	//namespace geonova {
 #define G_END_NAMESPACE		//}
-
-#define G_PRIVATE_BEGIN_NAMESPACE	//namespace private {
-#define G_PRIVATE_END_NAMESPACE		//}
 
 #ifdef _DEBUG
 #	define GDEBUG
@@ -106,7 +103,7 @@
 #	define G_BYTE_ORDER G_BIG_ENDIAN
 #endif
 
-#define G_POINTER_ADDRESS_SIZE	sizeof(gvoid*)
+#define G_POINTER_ADDRESS_SIZE	sizeof(gnova::gvoid*)
 
 #define G_INT8_MAX		0x7f
 #define G_INT8_MIN		(-0x80)
@@ -150,8 +147,8 @@ extern "C"{
 #	define GINLINE	inline
 #endif // !GINLINE
 
-// ×Ö·û´¦Àí
-#define GUCHAR(c)				((guchar)(c))
+// å­—ç¬¦å¤„ç†
+#define GUCHAR(c)				((gnova::guchar)(c))
 #define G_CHAR_IS_ASCII(c)		(isascii(GUCHAR(c)) != 0)
 #define G_CHAR_IS_ALNUM(c)		(isalnum(GUCHAR(c)) != 0)
 #define G_CHAR_IS_ALPHA(c)		(isalpha(GUCHAR(c)) != 0)
@@ -168,7 +165,7 @@ extern "C"{
 #define G_CHAR_TO_LOWER(c)		tolower(GUCHAR(c))
 #define G_CHAR_TO_UPPER(c)		toupper(GUCHAR(c))
 
-// ³£ÓÃº¯Êý
+// å¸¸ç”¨å‡½æ•°
 #define G_CALL_AT_EXIT atexit
 #define G_MAX(a,b)  (((a) > (b)) ? (a) : (b))
 #define G_MIN(a,b)  (((a) < (b)) ? (a) : (b))

@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 template <typename LockT>
 class GLockGuard
 {
@@ -16,5 +18,7 @@ private:
 };
 
 #include "glockguard.inl"
+
+}
 
 #endif // _CORE_LOCK_GUARD_H_

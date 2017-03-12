@@ -1,6 +1,8 @@
 #include "gregister.h"
 #include "gstring.h"
 
+namespace gnova {
+
 gbool GRegister::Register(const GString &sClassName, guint nClassCode)
 {
 	GLockGuard<GMutex> lock(m_tLock);
@@ -23,4 +25,6 @@ gvoid GRegister::Initialize()
 	Register("Number", CLASS_CODE_NUMBER);
 	Register("Byte", CLASS_CODE_BYTE);
 	Register("Bool", CLASS_CODE_BOOLEAN);
+}
+
 }

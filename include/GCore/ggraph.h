@@ -3,6 +3,8 @@
 
 #include "gobject.h"
 
+namespace gnova {
+
 template<typename NodeT, typename EdgeT>
 class GGraph
 {
@@ -194,6 +196,8 @@ void *data)
 	for (i = 0; i < g->alist[source]->d; i++) {
 		f(g, source, g->alist[source]->list[i], data);
 	}
+}
+
 }
 
 #endif // _CORE_GRAPH_H_

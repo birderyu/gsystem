@@ -7,6 +7,8 @@
 #include "gtype.h"
 #include <type_traits>
 
+namespace gnova {
+
 template<typename ClassT, ClassT DefValue>
 struct GIntegralConstant
 {
@@ -787,5 +789,7 @@ struct GTypeExist<T, T2, TS...>
 	static const gbool exist = GIsSame<T, T2>::value || GTypeExist<T, TS...>::exist;
 	static constexpr gsize id = GIsSame<T, T2>::value ? 1 : 1 + GTypeExist<T, TS...>::id;
 };
+
+}
 
 #endif // _CORE_TRAITS_H_

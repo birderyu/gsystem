@@ -7,6 +7,8 @@
 #include "gglobal.h"
 #include "gstructure.h"
 
+namespace gnova {
+
 class GAPI GBlock
 	: public GListT<GBlock>
 {
@@ -51,5 +53,7 @@ private:
 		gbyte *m_pBlock;
 	};
 };
+
+}
 
 #endif // _CORE_BLOCK_H_

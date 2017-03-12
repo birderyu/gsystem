@@ -14,6 +14,8 @@
 #endif // G_SYSTEM_WINDOWS
 
 #ifdef G_SYSTEM_WINDOWS
+namespace gnova {
+
 guint WINAPI ThreadProc4Win32(gpointer param)
 {
 	if (!param)
@@ -24,7 +26,11 @@ guint WINAPI ThreadProc4Win32(gpointer param)
 	thread->Run();
 	return 0;
 }
+
+}
 #endif // G_SYSTEM_WINDOWS
+
+namespace gnova {
 
 GRunnable::GRunnable()
 	: m_pHandle(GNULL)
@@ -41,7 +47,7 @@ gbool GRunnable::Start()
 {
 #ifdef G_SYSTEM_WINDOWS
 	guint thread_addr;
-	HANDLE thread_handle = (HANDLE)_beginthreadex(GNULL, 0, ThreadProc4Win32, this, 0, &thread_addr);
+	HANDLE thread_handle = (HANDLE)::_beginthreadex(GNULL, 0, ThreadProc4Win32, this, 0, &thread_addr);
 	if (thread_handle == GNULL)
 	{
 		m_pHandle = GNULL;
@@ -63,13 +69,15 @@ gvoid GRunnable::Stop(gulong msecs)
 	}
 #ifdef G_SYSTEM_WINDOWS
 	HANDLE thread_handle = (HANDLE)m_pHandle;
-	if (WAIT_OBJECT_0 != WaitForSingleObject(thread_handle, msecs))
+	if (WAIT_OBJECT_0 != ::WaitForSingleObject(thread_handle, msecs))
 	{
-		TerminateThread(thread_handle, 0);
+		::TerminateThread(thread_handle, 0);
 	}
-	CloseHandle(thread_handle);
+	::CloseHandle(thread_handle);
 	m_pHandle = GNULL;
 #else // !G_SYSTEM_WINDOWS
 	// TODO，线程的跨平台实现
 #endif // G_SYSTEM_WINDOWS
+}
+
 }

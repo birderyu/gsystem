@@ -6,6 +6,8 @@
 #include <sstream>
 #include <vector>
 
+namespace gnova {
+
 class GAPI GStdStringHelper
 {
 public:
@@ -14,9 +16,8 @@ public:
 	static std::string ToLower(const std::string &sStr);
 	static std::string Replace(const std::string &sStr, const std::string &from,
 		const std::string &to, gbool bIsSensitive);
-	static gvoid Split(const std::string &sStr, const std::string &sSep,
-		gbool bIgnoreEmpty, gbool bIsSensitive,
-		std::vector<std::string> &tStrs);
+	static std::vector<std::string> Split(const std::string &sStr, const std::string &sSep,
+		gbool bIgnoreEmpty, gbool bIsSensitive);
 	static gint Find(const std::string &str, gchar c, gsize start, gbool bIsSensitive);
 	static gint Find(const std::string &str, const std::string &tar, gsize start, gbool bIsSensitive);
 
@@ -72,6 +73,8 @@ T GStdStringHelper::ToNum(const std::string &str,gbool *bIsOk)
 		}
 	}
 	return nNum;
+}
+
 }
 
 #endif // _CORE_STD_STRING_UTILITY_H_

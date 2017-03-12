@@ -4,6 +4,8 @@
 
 #include "ghashtable.h"
 
+namespace gnova {
+
 template<typename KeyT, 
 	typename HashT = GHashF<KeyT>,
 	typename CompareT = GEqualToF<KeyT>>
@@ -288,5 +290,7 @@ private:
 };
 
 #include "gunorderset.inl"
+
+}
 
 #endif // _CORE_UNORDER_SET_H_

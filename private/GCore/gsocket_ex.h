@@ -3,6 +3,9 @@
 
 #include "gsockaddress_ex.h"
 
+namespace gnova {
+namespace extra {
+
 class GSocket_Ex
 {
 public:
@@ -25,4 +28,6 @@ protected:
 	gsocket m_hSocket;
 };
 
+}
+}
 #endif // _CORE_SOCKET_EX_H_

@@ -18,6 +18,8 @@
 #include "gstring.h"
 #include "ghash.h"
 
+namespace gnova {
+
 template <typename ValueT>
 class GPackage 
 	: public GObject
@@ -104,5 +106,7 @@ public:
 };
 
 #include "gpackage.inl"
+
+}
 
 #endif // _CORE_PACKAGE_H_

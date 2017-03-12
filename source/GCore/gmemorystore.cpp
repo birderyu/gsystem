@@ -1,5 +1,7 @@
 #include "gmemorystore.h"
 
+namespace gnova {
+
 GMemoryStore::GMemCell::GMemCell(gsize nSize)
 : m_tBlock(nSize), m_nCursor(0), m_pNext(GNULL)
 {
@@ -71,4 +73,6 @@ gpointer GMemoryStore::Alloc(gsize nSize)
 		pBlock->m_nCursor += nSize;
 	}
 	return pPtr;
+}
+
 }

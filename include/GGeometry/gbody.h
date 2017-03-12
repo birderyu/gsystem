@@ -3,6 +3,9 @@
 
 #include "ggeometry.h"
 
+namespace gnova {
+namespace geom {
+
 class GAPI GBody
 	: virtual public GGeometry
 {
@@ -18,5 +21,8 @@ public:
 	****************************************************************************/
 	virtual greal Volume() const = 0;
 };
+
+}
+}
 
 #endif // _GEOMETRY_BODY_H_

@@ -18,6 +18,8 @@
 #include "gvector.h"
 #include "gmap.h"
 
+namespace gnova {
+
 /****************************************************************************
 **
 ** gstringpool.h
@@ -67,5 +69,7 @@ private:
 	GMap<gsize, GVector<gaddress>> m_tRecycle;
 	GMemoryStore m_tStore;
 };
+
+}
 
 #endif // _CORE_STRING_POOL_H_

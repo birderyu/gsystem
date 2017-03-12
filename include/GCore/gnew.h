@@ -6,7 +6,7 @@
 #include "gmemorypool.h"
 #include "glockguard.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 // NewHandler
 class GNewHander
@@ -145,6 +145,6 @@ private:
 
 #include "gnew.inl"
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_NEW_H_

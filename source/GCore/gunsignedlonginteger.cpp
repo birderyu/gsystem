@@ -1,5 +1,7 @@
 #include "gunsignedlonginteger.h"
 
+namespace gnova {
+
 gulong GUnsignedLongInteger::MaxValue()
 {
 	return G_UINT32L_MAX;
@@ -34,4 +36,6 @@ GUnsignedLongInteger::GUnsignedLongInteger(const GUnsignedLongInteger &val)
 guint GUnsignedLongInteger::ClassCode() const
 {
 	return GUnsignedLongInteger::CLASS_CODE;
+}
+
 }

@@ -14,6 +14,8 @@
 #include "glinkedlist.h"
 #include "gstructure.h"
 
+namespace gnova {
+
 template<typename DataT>
 struct GDoubleLinkedListNode
 	: public GPreviousNextNodeT<GDoubleLinkedListNode<DataT>>
@@ -114,5 +116,7 @@ protected:
 };
 
 #include "gdoublelinkedlist.inl"
+
+}
 
 #endif // _CORE_DOUBLE_LINKED_LIST_H_

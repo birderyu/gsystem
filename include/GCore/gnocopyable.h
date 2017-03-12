@@ -1,6 +1,8 @@
 #ifndef _CORE_NO_COPYABLE_H_
 #define _CORE_NO_COPYABLE_H_
 
+namespace gnova {
+
 // the class which cannot copy
 class GNocopyable
 {
@@ -10,5 +12,7 @@ protected:
 	GNocopyable(const GNocopyable &) = delete;
 	GNocopyable &operator=(const GNocopyable &) = delete;
 };
+
+}
 
 #endif // _CORE_NO_COPYABLE_H_

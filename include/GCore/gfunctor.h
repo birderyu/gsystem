@@ -3,6 +3,8 @@
 
 #include "gtype.h"
 
+namespace gnova {
+
 /// Ò»Ôªº¯Êý
 template<typename ArgType,
 	typename ResultType>
@@ -156,5 +158,7 @@ struct GLeftClosedRightOpenF
 		return key >= left && key < right;
 	}
 };
+
+}
 
 #endif // _CORE_FUNCTOR_H_

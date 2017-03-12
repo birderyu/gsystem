@@ -1,5 +1,7 @@
 #include "gunsignedsmallinteger.h"
 
+namespace gnova {
+
 gusmall GUnsignedSmallInteger::MaxValue()
 {
 	return G_UINT8_MAX;
@@ -39,4 +41,6 @@ GUnsignedSmallInteger::~GUnsignedSmallInteger()
 guint GUnsignedSmallInteger::ClassCode() const
 {
 	return GUnsignedSmallInteger::CLASS_CODE;
+}
+
 }

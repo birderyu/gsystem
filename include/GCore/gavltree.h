@@ -5,6 +5,8 @@
 
 #include "gbinarysorttree.h"
 
+namespace gnova {
+
 template<typename KeyT, typename ValueT>
 struct GAvlTreeNode
 	: public GBinaryTreeNodeT<GAvlTreeNode<KeyT, ValueT>>
@@ -40,5 +42,7 @@ private:
 	// Ë«×óÐý
 	gvoid DoubleRotateLeft(NodeT *);
 };
+
+}
 
 #endif // _CORE_AVL_TREE_H_

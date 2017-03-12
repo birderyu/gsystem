@@ -3,7 +3,11 @@
 
 #include "gdefine.h"
 
-G_BEGIN_NAMESPACE
+#if !defined (time_t) || !defined(ptrdiff_t)
+#include <cstddef>
+#endif
+
+namespace gnova {
 
 typedef	void			gvoid;
 typedef	void*			gpointer;
@@ -73,6 +77,6 @@ typedef ptrdiff_t	gaddress;
 typedef size_t		gsize;
 typedef time_t		gtime;		// 时间戳类型
 
-G_END_NAMESPACE
+} // end namespace gnova
 
 #endif // _CORE_TYPE_H_

@@ -1,5 +1,7 @@
 #include "gunsignedshortinteger.h"
 
+namespace gnova {
+
 gushort GUnsignedShortInteger::MaxValue()
 {
 	return G_UINT16_MAX;
@@ -39,4 +41,6 @@ GUnsignedShortInteger::~GUnsignedShortInteger()
 guint GUnsignedShortInteger::ClassCode() const
 {
 	return GUnsignedShortInteger::CLASS_CODE;
+}
+
 }

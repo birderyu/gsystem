@@ -2,6 +2,8 @@
 #ifndef _CORE_FINAL_H_
 #define _CORE_FINAL_H_
 
+namespace gnova {
+
 #ifdef WIN32  
 template<typename TDerive, typename TProvider>
 class GFinalBase
@@ -39,5 +41,7 @@ public:
 	GFinal() {}
 	~GFinal() {}
 };
+
+}
 
 #endif // _CORE_FINAL_H_

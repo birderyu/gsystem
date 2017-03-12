@@ -5,6 +5,8 @@
 #include "gtuple.h"
 #include "gvector.h"
 
+namespace gnova {
+
 template<typename ...TS>
 class GTable
 	: virtual public GObject
@@ -106,5 +108,7 @@ private:
 };
 
 #include "gtable.inl"
+
+}
 
 #endif // _CORE_TABLE_H_

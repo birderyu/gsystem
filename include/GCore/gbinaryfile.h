@@ -3,8 +3,17 @@
 
 #include "gfile.h"
 
+namespace gnova {
+
 class GBytes;
+
+namespace extra {
 class GBinaryFile_Ex;
+}
+
+}
+
+namespace gnova {
 
 class GAPI GBinaryFile
 	: public GFile
@@ -17,7 +26,9 @@ public:
 	gbool Write(const GBytes &);
 
 protected:
-	GBinaryFile(GBinaryFile_Ex *);
+	GBinaryFile(extra::GBinaryFile_Ex *);
 };
+
+}
 
 #endif // _CORE_BINARY_FILE_H_

@@ -689,9 +689,6 @@
     <ClCompile Include="..\..\..\source\GCore\gfile.cpp">
       <Filter>源文件\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gmemorypool.cpp">
-      <Filter>源文件\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gmemorystore.cpp">
       <Filter>源文件\Tool</Filter>
     </ClCompile>
@@ -702,9 +699,6 @@
       <Filter>源文件\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gbinaryfile_ex.cpp">
-      <Filter>源文件\_private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gdatetime_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gfile_ex.cpp">
@@ -770,9 +764,6 @@
     <ClCompile Include="..\..\..\source\GCore\gbytebuffer.cpp">
       <Filter>源文件\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\glog.cpp">
-      <Filter>源文件\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\grunnable.cpp">
       <Filter>源文件\Thread</Filter>
     </ClCompile>
@@ -790,6 +781,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gtime.cpp">
       <Filter>源文件\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\glog.cpp">
+      <Filter>源文件\Log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

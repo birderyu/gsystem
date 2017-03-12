@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+namespace gnova {
+
 class GAPI GShortInteger 
 	: public GNumber<gshort>
 {
@@ -26,5 +28,7 @@ typedef GShortInteger GShortInt;
 typedef GShortInteger GShort;
 typedef GShortInteger GInteger16;
 typedef GShortInteger GInt16;
+
+}
 
 #endif // _CORE_SHORT_INTEGER_H_

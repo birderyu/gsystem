@@ -5,6 +5,9 @@
 #		define WIN32_LEAN_AND_MEAN
 #	endif
 #include <windows.h>
+#endif // G_SYSTEM_WINDOWS
+
+namespace gnova {
 
 GMutex::GMutex()
 : m_pHandle(GNULL)
@@ -23,7 +26,7 @@ gvoid GMutex::Lock()
 	{
 		return;
 	}
-	WaitForSingleObject((HANDLE)m_pHandle, INFINITE);
+	::WaitForSingleObject((HANDLE)m_pHandle, INFINITE);
 }
 
 gbool GMutex::Trylock()
@@ -33,7 +36,7 @@ gbool GMutex::Trylock()
 		return false;
 	}
 
-	DWORD ret = WaitForSingleObject((HANDLE)m_pHandle, 1);
+	::DWORD ret = ::WaitForSingleObject((::HANDLE)m_pHandle, 1);
 	if (ret == WAIT_OBJECT_0)
 	{
 		return true; // success
@@ -51,12 +54,12 @@ gvoid GMutex::Unlock()
 	{
 		return;
 	}
-	ReleaseMutex((HANDLE)m_pHandle);
+	::ReleaseMutex((HANDLE)m_pHandle);
 }
 
 gbool GMutex::Initialize()
 {
-	m_pHandle = CreateMutex(GNULL, false, GNULL);
+	m_pHandle = ::CreateMutex(GNULL, false, GNULL);
 	if (m_pHandle == GNULL)
 	{
 		return false;
@@ -69,4 +72,4 @@ gvoid GMutex::Release()
 	m_pHandle = GNULL;
 }
 
-#endif // G_SYSTEM_WINDOWS
+}

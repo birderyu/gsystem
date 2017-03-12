@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 /// 基本内置类型的Hash算法
 GAPI guint GHashing(gbool);
 GAPI guint GHashing(gchar);
@@ -185,5 +187,7 @@ struct GHashF<T*>
 		return GHashing(v);
 	}
 };
+
+}
 
 #endif // _CORE_HASH_H_

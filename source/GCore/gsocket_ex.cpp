@@ -2,9 +2,16 @@
 #include "gsocket.h"
 #include "gsockaddress_ex.h"
 
+namespace gnova {
+namespace extra {
+
 #ifdef G_SYSTEM_WINDOWS
 // Windows下使用Socket需要先初始化
 #pragma comment(lib,"ws2_32")
+
+namespace gnova {
+namespace extra {
+
 class GSocketInit
 {
 public:
@@ -23,6 +30,9 @@ public:
 	}
 };
 static GSocketInit g_tSocket_Init_Win32;
+
+}
+}
 #endif // G_SYSTEM_WINDOWS
 
 GSocket_Ex::GSocket_Ex()
@@ -164,4 +174,7 @@ gbool GSocket_Ex::GetLocalAddr(GSockAddress_Ex *pSockAddr) const
 		return false;
 	}
 	return true;
+}
+
+}
 }

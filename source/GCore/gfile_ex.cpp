@@ -2,6 +2,9 @@
 #include "gstring.h"
 #include "gfile.h"
 
+namespace gnova {
+namespace extra {
+
 GFile_Ex::GFile_Ex(const GString &sFileName)
 : m_sFileName(sFileName)
 , m_pFileStream(GNULL)
@@ -60,9 +63,9 @@ gbool GFile_Ex::Open(gbyte nOpenMode)
 	}
 
 	FILE *new_file_stream = GNULL;
-	errno_t errno;
-	errno = fopen_s(&new_file_stream, m_sFileName.CString(), open_mode);
-	if (!new_file_stream || errno != 0)
+	errno_t eno;
+	eno = ::fopen_s(&new_file_stream, m_sFileName.CString(), open_mode);
+	if (!new_file_stream || eno != 0)
 	{
 		return false;
 	}
@@ -148,4 +151,7 @@ gbool GFile_Ex::CanWrite() const
 		return false;
 	}
 	return true;
+}
+
+}
 }

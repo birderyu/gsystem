@@ -165,32 +165,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="garray_example.h" />
-    <ClInclude Include="Array_Test.h" />
-    <ClInclude Include="Atom_Test.h" />
-    <ClInclude Include="BTree_Test.h" />
-    <ClInclude Include="Bytes_Test.h" />
-    <ClInclude Include="File_Test.h" />
-    <ClInclude Include="gallocator_example.h" />
-    <ClInclude Include="gconstructor_example.h" />
-    <ClInclude Include="gdatetime_example.h" />
-    <ClInclude Include="gmemorypool_example.h" />
     <ClInclude Include="gtable_example.h" />
-    <ClInclude Include="gtuple_example.h" />
-    <ClInclude Include="gvariant_example.h" />
-    <ClInclude Include="Hash_Test.h" />
-    <ClInclude Include="json_test.h" />
-    <ClInclude Include="List_Test.h" />
-    <ClInclude Include="Map_Test.h" />
-    <ClInclude Include="MemPool_Test.h" />
-    <ClInclude Include="RBTree.h" />
-    <ClInclude Include="Set_Test.h" />
-    <ClInclude Include="SortStack.h" />
-    <ClInclude Include="Sort_Test.h" />
-    <ClInclude Include="gthread_example.h" />
-    <ClInclude Include="Traits_Test.h" />
-    <ClInclude Include="variant.h" />
-    <ClInclude Include="Vector_Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

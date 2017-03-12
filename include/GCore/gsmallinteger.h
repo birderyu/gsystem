@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+namespace gnova {
+
 class GAPI GSmallInteger 
 	: public GNumber<gsmall>
 {
@@ -25,5 +27,7 @@ typedef GSmallInteger GSmallInt;
 typedef GSmallInteger GSmall;
 typedef GSmallInteger GInteger8;
 typedef GSmallInteger GInt8;
+
+}
 
 #endif // _CORE_SMALL_INTEGER_H_

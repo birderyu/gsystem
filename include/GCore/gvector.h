@@ -6,6 +6,8 @@
 
 #define G_VECTOR_DEFAULT_CAPACITY 16
 
+namespace gnova {
+
 template <typename DataT>
 class GVector final
 	: virtual public GListT<GVector<DataT>>
@@ -179,6 +181,8 @@ private:
 };
 
 #include "gvector.inl"
+
+}
 
 #undef G_VECTOR_DEFAULT_CAPACITY
 

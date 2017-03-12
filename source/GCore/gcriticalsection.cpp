@@ -6,6 +6,8 @@
 #	endif
 #include <windows.h>
 
+namespace gnova {
+
 GCriticalSection::GCriticalSection()
 {
 	Initialize(false, 0);
@@ -23,29 +25,31 @@ GCriticalSection::~GCriticalSection()
 
 gvoid GCriticalSection::Lock()
 {
-	EnterCriticalSection((CRITICAL_SECTION*)m_pHandle);
+	::EnterCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
 gvoid GCriticalSection::Unlock()
 {
-	LeaveCriticalSection((CRITICAL_SECTION*)m_pHandle);
+	::LeaveCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
 gvoid GCriticalSection::Initialize(gbool spin, gsize spin_count)
 {
 	if (spin)
 	{
-		InitializeCriticalSectionAndSpinCount((CRITICAL_SECTION*)m_pHandle, spin_count);
+		::InitializeCriticalSectionAndSpinCount((CRITICAL_SECTION*)m_pHandle, spin_count);
 	}
 	else
 	{
-		InitializeCriticalSection((CRITICAL_SECTION*)m_pHandle);
+		::InitializeCriticalSection((CRITICAL_SECTION*)m_pHandle);
 	}
 }
 
 gvoid GCriticalSection::Release()
 {
-	DeleteCriticalSection((CRITICAL_SECTION*)m_pHandle);
+	::DeleteCriticalSection((CRITICAL_SECTION*)m_pHandle);
+}
+
 }
 
 #endif // G_SYSTEM_WINDOWS

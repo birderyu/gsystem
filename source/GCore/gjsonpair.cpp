@@ -3,6 +3,9 @@
 #include "gliststack.h"
 #include "gjsonparsermessage.h"
 
+namespace gnova {
+namespace json {
+
 GJsonPair::GJsonPair()
 : m_pValue(GNULL)
 {
@@ -263,4 +266,7 @@ gvoid GJsonPair::Dispose()
 		delete m_pValue;
 	}
 	m_pValue = GNULL;
+}
+
+}
 }

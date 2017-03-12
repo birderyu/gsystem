@@ -3,6 +3,9 @@
 
 #include "gsocket_ex.h"
 
+namespace gnova {
+namespace extra {
+
 class GTcpSocket_Ex 
 	: public GSocket_Ex
 {
@@ -19,5 +22,8 @@ public:
 	gint Send(const gchar *pBufData, gint nDataLen);
 	gint Recv(gchar *pBufData, gint nDataLen, gint nWaitAll);
 };
+
+}
+}
 
 #endif // _CORE_TCP_SOCKET_EX_H_

@@ -22,6 +22,8 @@
 #define G_TIME_SIZE_SECOND			1
 #define G_TIME_SIZE_MILLISECOND		2
 
+namespace gnova {
+
 GTime GTime::Now()
 {
 	GTime t;
@@ -322,6 +324,8 @@ GString GTime::ToString() const
 	str.Append(":");
 	str.Append(GString::Number(Millisecond()));
 	return str;
+}
+
 }
 
 #undef G_TIME_SIZE_MILLISECOND	

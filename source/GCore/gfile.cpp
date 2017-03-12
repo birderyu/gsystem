@@ -1,7 +1,9 @@
 #include "gfile.h"
 #include "gfile_ex.h"
 
-GFile::GFile(GFile_Ex *pFile_Ex)
+namespace gnova {
+
+GFile::GFile(extra::GFile_Ex *pFile_Ex)
 : m_pFileEx(pFile_Ex)
 {
 
@@ -89,4 +91,6 @@ gsize GFile::Size() const
 		return 0;
 	}
 	return static_cast<gsize>(size);
+}
+
 }

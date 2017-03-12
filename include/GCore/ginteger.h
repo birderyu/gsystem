@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GInteger 
 	: public GNumber<gint>
@@ -30,6 +30,6 @@ typedef GInteger GInt;
 typedef GInteger GInteger32;
 typedef GInteger GInt32;
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_INTEGER_H_

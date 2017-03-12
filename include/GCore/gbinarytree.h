@@ -20,6 +20,8 @@
 #include "gstructure.h"
 #include "glist.h"
 
+namespace gnova {
+
 /****************************************************************************
 **
 ** gbinarytree.h
@@ -439,5 +441,7 @@ protected:
 };
 
 #include "gbinarytree.inl"
+
+}
 
 #endif // _CORE_BINARY_TREE_H_

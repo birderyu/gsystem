@@ -3,8 +3,16 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 class GString;
+
+namespace extra {
 class GFile_Ex;
+}
+}
+
+namespace gnova {
 
 class GAPI GFile
 {
@@ -32,7 +40,7 @@ public:
 	};
 
 public:
-	GFile(GFile_Ex *);
+	GFile(extra::GFile_Ex *);
 	virtual ~GFile() = 0;
 
 	FILE_FORMAT Format() const;
@@ -55,7 +63,9 @@ public:
 	gsize Size() const;
 
 protected:
-	GFile_Ex *m_pFileEx;
+	extra::GFile_Ex *m_pFileEx;
 };
+
+}
 
 #endif _CORE_FILE_H_

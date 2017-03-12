@@ -7,6 +7,8 @@
 #define G_ORDER_MAP_NODE_RED	0
 #define G_ORDER_MAP_NODE_BLACK	1
 
+namespace gnova {
+
 template<typename KeyT, typename ValueT,
 	typename CompareT = GCompareToF<KeyT >>
 class GOrderMap
@@ -351,6 +353,8 @@ private:
 };
 
 #include "gordermap.inl"
+
+}
 
 #undef G_ORDER_MAP_NODE_BLACK
 #undef G_ORDER_MAP_NODE_RED

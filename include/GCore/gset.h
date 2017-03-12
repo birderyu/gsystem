@@ -3,6 +3,8 @@
 
 #define G_SET_USER_UNORDER
 
+namespace gnova {
+
 #ifdef G_SET_USER_UNORDER
 #include "gunorderset.h"
 template < typename KeyT,
@@ -17,5 +19,7 @@ template < typename KeyT,
 class GSet final
 	: public GOrderSet<KeyT, CompareT> {};
 #endif // G_SET_USER_UNORDER
+
+}
 
 #endif // _CORE_SET_H_

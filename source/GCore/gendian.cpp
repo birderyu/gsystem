@@ -1,5 +1,7 @@
 #include "gendian.h"
 
+namespace gnova {
+
 void GEndian::ToBigEndianBytes(guint16 val, gbyte bytes[])
 {
 	bytes[0] = (gbyte)(val >> 8);
@@ -197,5 +199,7 @@ GEndian::GEndian(const GEndian&)
 
 GEndian::~GEndian()
 {
+
+}
 
 }

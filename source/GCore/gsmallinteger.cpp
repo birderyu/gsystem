@@ -1,5 +1,7 @@
 #include "gsmallinteger.h"
 
+namespace gnova {
+
 gsmall GSmallInteger::MaxValue()
 {
 	return G_INT8_MAX;
@@ -34,4 +36,6 @@ GSmallInteger::GSmallInteger(const GSmallInteger &val)
 guint GSmallInteger::ClassCode() const
 {
 	return GSmallInteger::CLASS_CODE;
+}
+
 }

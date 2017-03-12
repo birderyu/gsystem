@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+namespace gnova {
+
 class GAPI GWideCharacter 
 	: public GPackage<gwchar>
 {
@@ -19,5 +21,7 @@ public:
 typedef GWideCharacter GWCharacter;
 typedef GWideCharacter GWindChar;
 typedef GWideCharacter GWChar;
+
+}
 
 #endif // _CORE_WIND_CHARACTER_H_

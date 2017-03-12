@@ -12,7 +12,7 @@
 #define RTREE_DONT_USE_MEMPOOLS // This version does not contain a fixed memory allocator, fill in lines with EXAMPLE to implement one.
 #define RTREE_USE_SPHERICAL_VOLUME // Better split classification, may be slower on some systems
 
-
+namespace gnova {
 
 /// \class RTree
 /// Implementation of RTree, a multidimensional bounding rectangle tree.
@@ -324,5 +324,7 @@ protected:
 };
 
 #include "grtree.inl"
+
+}
 
 #endif // _CORE_R_TREE_H_

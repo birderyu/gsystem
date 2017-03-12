@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 /// Serializeº¯Êý
 template<typename ArchiveT, typename DataT>
 struct GSerializeF
@@ -372,5 +374,7 @@ struct GDeserializeF<ArchiveT, DataT*>
 		return true;
 	}
 };
+
+}
 
 #endif // _CORE_SERIALIZE_H_

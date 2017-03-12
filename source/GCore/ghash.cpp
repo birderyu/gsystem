@@ -1,6 +1,8 @@
 #include "ghash.h"
 #include "gmath.h"
 
+namespace gnova {
+
 guint GHashing(gbool val)
 {
 	if (val)
@@ -95,4 +97,6 @@ guint GHashing(gdecimal)
 guint GHashing(gpointer)
 {
 	return 0;
+}
+
 }

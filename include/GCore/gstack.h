@@ -3,6 +3,8 @@
 
 #include "glimitedlist.h"
 
+namespace gnova {
+
 // LIFO
 template<typename DataT>
 class GStack 
@@ -26,5 +28,7 @@ public:
 };
 
 #include "gstack.inl"
+
+}
 
 #endif // _CORE_STACK_H_

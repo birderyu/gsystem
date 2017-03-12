@@ -6,12 +6,16 @@
 #include "gstructure.h"
 #include "gseries.h"
 
-class GByteBuffer;
+namespace gnova {
+	class GByteBuffer;
+}
+
+namespace gnova {
 
 class GAPI GBytes final
 	: public GListT<GBytes>
 	, public GArray<gbyte>
-	, public GObject
+	, virtual public GObject
 {
 	friend class GByteBuffer;
 
@@ -63,5 +67,7 @@ private:
 };
 
 #include "gbytes.inl"
+
+}
 
 #endif // _CORE_BYTES_H_

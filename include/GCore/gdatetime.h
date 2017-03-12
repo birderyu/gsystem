@@ -4,9 +4,13 @@
 #include "gobject.h"
 #include "gdatetimedefine.h"
 
-class GDate;
-class GTime;
-class GVariety;
+namespace gnova {
+	class GDate;
+	class GTime;
+	class GVariety;
+}
+
+namespace gnova {
 
 // 年(2)-月(1)-日(1)-星期几(1)-一年中的第几天(2) = 7
 // 时(1)-分(1)-秒(1)-毫秒数(2) = 5
@@ -173,5 +177,7 @@ GAPI gbool operator>(const GDateTime &dt1, const GDateTime &dt2);
 GAPI gbool operator>=(const GDateTime &dt1, const GDateTime &dt2);
 GAPI gbool operator<(const GDateTime &dt1, const GDateTime &dt2);
 GAPI gbool operator<=(const GDateTime &dt1, const GDateTime &dt2);
+
+}
 
 #endif // _CORE_DATE_TIME_H_

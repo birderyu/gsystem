@@ -1,5 +1,7 @@
 #include "ginteger.h"
 
+namespace gnova {
+
 gint GInteger::MaxValue()
 {
 	return G_INT32_MAX;
@@ -34,4 +36,6 @@ GInteger::GInteger(const GInteger &val)
 guint GInteger::ClassCode() const
 {
 	return GInteger::CLASS_CODE;
+}
+
 }

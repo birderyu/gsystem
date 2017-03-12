@@ -2,7 +2,6 @@
 #define _CORE_C_STRING_HELPER_H_
 
 #include "gglobal.h"
-#include <sstream>
 
 #define G_USE_MSVC_STRCMP
 
@@ -11,10 +10,12 @@
 #	define strcasecmp	_stricmp
 #	define strncasecmp	_strnicmp 
 #	else // !G_USE_MSVC_STRCMP
-GAPI gint strcasecmp(const gchar *s1, gchar *s2);
-GAPI gint strncasecmp(const gchar *s1, gchar *s2, /*register*/ gint n);
+GAPI gnova::gint strcasecmp(const gnova::gchar *s1, gnova::gchar *s2);
+GAPI gnova::gint strncasecmp(const gnova::gchar *s1, gnova::gchar *s2, /*register*/ gnova::gint n);
 #	endif // G_USE_MSVC_STRCMP
 #endif // G_COMPILER_MSVC
+
+namespace gnova {
 
 // Î´×öÅÐ¿Õ²Ù×÷
 class GAPI GCStringHelper
@@ -51,18 +52,6 @@ public:
 	static T ToNum(const gchar *c_str, gbool *isok);
 };
 
-template <typename T>
-T GCStringHelper::ToNum(const gchar *c_str, gbool *isok)
-{
-	std::istringstream iss(c_str);
-	T nNum;
-	if (isok) *isok = false;
-
-	if (iss >> nNum)
-	{
-		if (isok) *isok = true;
-	}
-	return nNum;
 }
 
 #endif // _CORE_C_STRING_HELPER_H_

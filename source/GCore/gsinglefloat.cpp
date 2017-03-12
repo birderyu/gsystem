@@ -1,5 +1,7 @@
 #include "gsinglefloat.h"
 
+namespace gnova {
+
 gfloat GSingleFloat::MaxValue()
 {
 	return 3.402823466e+38F;
@@ -94,4 +96,6 @@ guint GSingleFloat::ClassCode() const
 gbool GSingleFloat::IsNaN() const
 {
 	return m_nValue != m_nValue;
+}
+
 }

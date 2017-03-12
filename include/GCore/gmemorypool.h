@@ -9,7 +9,7 @@
 #include "gglobal.h"
 #include "gmemory.h"
 
-#define G_MEMORYPOOL_ALIGNMENT 8            // 对齐长度
+namespace gnova {
 
 template<gsize UNIT_SIZE,
 	guint16 INIT_SIZE = 512,
@@ -183,5 +183,7 @@ private:
 };
 
 #include "gmemorypool.inl"
+
+}
 
 #endif // _CORE_MEMORY_POOL_H_

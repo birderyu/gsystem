@@ -7,6 +7,8 @@
 #include "gallocator.h"
 #include "gconstructor.h"
 
+namespace gnova {
+
 template <typename DataT>
 class GArray
 	: public GListT<GArray<DataT>>
@@ -97,5 +99,7 @@ public:
 };
 
 #include "garray.inl"
+
+}
 
 #endif // _CORE_ARRAY_H_

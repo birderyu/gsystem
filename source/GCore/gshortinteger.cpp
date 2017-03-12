@@ -1,5 +1,7 @@
 #include "gshortinteger.h"
 
+namespace gnova {
+
 gshort GShortInteger::MaxValue()
 {
 	return G_INT16_MAX;
@@ -39,4 +41,6 @@ GShortInteger::~GShortInteger()
 guint GShortInteger::ClassCode() const
 {
 	return GShortInteger::CLASS_CODE;
+}
+
 }

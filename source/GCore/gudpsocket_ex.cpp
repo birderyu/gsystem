@@ -1,5 +1,8 @@
 #include "gudpsocket_ex.h"
 
+namespace gnova {
+namespace extra {
+
 gbool GUdpSocket_Ex::Open(gbool nResue)
 {
 	m_hSocket = GOpenSocket(AF_INET, SOCK_DGRAM, 0);
@@ -70,4 +73,7 @@ gint GUdpSocket_Ex::RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress_Ex *pPe
 		return -1;
 	}
 	return n;
+}
+
+}
 }

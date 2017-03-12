@@ -3,6 +3,8 @@
 
 #include "gpackage.h"
 
+namespace gnova {
+
 class GAPI GUnsignedInteger 
 	: public GNumber<guint>
 {
@@ -29,5 +31,7 @@ typedef GUnsignedInteger GUnsignedInteger32;
 typedef GUnsignedInteger GUInteger32;
 typedef GUnsignedInteger GUnsignedInt32;
 typedef GUnsignedInteger GUInt32;
+
+}
 
 #endif // _CORE_UNSIGNED_INTEGER_H_

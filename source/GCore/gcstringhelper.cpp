@@ -1,27 +1,26 @@
 #include "gcstringhelper.h"
 #include "gmemory.h"
-#include <string>
 #include <string.h>
-
 
 #ifdef _MSC_VER
 #	ifndef G_USE_MSVC_STRCMP
-gint strcasecmp(const gchar *s1, gchar *s2)
+gnova::gint strcasecmp(const gnova::gchar *s1, gnova::gchar *s2)
 {
-	while (toupper((guchar)*s1) == toupper((guchar)*s2++))
+	while (::toupper((gnova::guchar)*s1) == ::toupper((gnova::guchar)*s2++))
 		if (*s1++ == '\0') return 0;
-	return(toupper((guchar)*s1) - toupper((guchar)*--s2));
+	return(::toupper((gnova::guchar)*s1) - ::toupper((gnova::guchar)*--s2));
 }
 
-int strncasecmp(const gchar *s1, gchar *s2, /*register*/ gint n)
+gnova::gint strncasecmp(const gnova::gchar *s1, gnova::gchar *s2, /*register*/ gnova::gint n)
 {
-	while (--n >= 0 && toupper((guchar)*s1) == toupper((guchar)*s2++))
+	while (--n >= 0 && ::toupper((gnova::guchar)*s1) == ::toupper((gnova::guchar)*s2++))
 		if (*s1++ == '\0')  return 0;
-	return(n < 0 ? 0 : toupper((guchar)*s1) - toupper((guchar)*--s2));
+	return(n < 0 ? 0 : ::toupper((gnova::guchar)*s1) - ::toupper((gnova::guchar)*--s2));
 }
 #	endif // !G_USE_MSVC_STRCMP
 #endif
 
+namespace gnova {
 
 gsize GCStringHelper::Size(const gchar *c_str)
 {
@@ -29,7 +28,7 @@ gsize GCStringHelper::Size(const gchar *c_str)
 	{
 		return 0;
 	}
-	return strlen(c_str);
+	return ::strlen(c_str);
 }
 
 gvoid GCStringHelper::Copy(const gchar *src, gsize len, gchar *dest)
@@ -173,7 +172,7 @@ gvoid GCStringHelper::MakeTrimLeft(gchar *c_str, gsize size, gsize &out_size)
 
 	else if (first_no_empty != 0)
 	{
-		memmove(c_str, c_str + first_no_empty, size - first_no_empty);
+		GMemMove(c_str, c_str + first_no_empty, size - first_no_empty);
 		out_size = size - first_no_empty;
 		c_str[out_size] = '\0';
 	}
@@ -246,11 +245,11 @@ gbool GCStringHelper::Replace(const gchar *c_str, gsize len,
 		gint ret = 0;
 		if (bIsSensitive)
 		{
-			ret = strncmp(c_str + i, from, from_len);
+			ret = ::strncmp(c_str + i, from, from_len);
 		}
 		else
 		{
-			ret = strncasecmp(c_str + i, from, from_len);
+			ret = ::strncasecmp(c_str + i, from, from_len);
 		}
 		if (ret != 0)
 		{
@@ -277,4 +276,6 @@ gbool GCStringHelper::Replace(const gchar *c_str, gsize len,
 	out_len += _len_;
 	c_str_out[out_len] = '\0';
 	return true;
+}
+
 }

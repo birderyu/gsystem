@@ -4,6 +4,9 @@
 #include "gglobal.h"
 #include "gnocopyable.h"
 
+namespace gnova {
+namespace log {
+
 class GAPI GSynchronousLog
 	: private GNocopyable
 {
@@ -14,5 +17,8 @@ public:
 	gvoid Append(const GString &msg, gsize size);
 	gvoid Flush();
 };
+
+}
+}
 
 #endif // _CORE_SYNCHRONOUS_LOG_H_

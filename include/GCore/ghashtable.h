@@ -11,6 +11,8 @@
 #define G_HASH_TABLE_MAX_MODULE_SIZE			0x40000000 // 2 30
 #define G_HASH_TABLE_DEFAULT_LOAD_FACTOR		0.75f
 
+namespace gnova {
+
 // 一个默认的hash节点
 template<typename KeyT, typename ValueT>
 struct GHashTableNode 
@@ -400,6 +402,8 @@ private:
 };
 
 #include "ghashtable.inl"
+
+}
 
 #undef G_HASH_TABLE_DEFAULT_LOAD_FACTOR
 #undef G_HASH_TABLE_MAX_MODULE_SIZE

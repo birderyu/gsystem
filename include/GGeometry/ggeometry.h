@@ -17,12 +17,19 @@
 #include "ggeometryglobal.h"
 #include "GCore/gobject.h"
 
-class GGeometry;
-class GGeometryFactory;
-class GEnvelope;
-class GCoordinate;
-class GCoordinateSequence;
-typedef GSharedPointer<GGeometry> GGeometryP;
+namespace gnova {
+	namespace geom {
+		class GGeometry;
+		class GGeometryFactory;
+		class GEnvelope;
+		class GCoordinate;
+		class GCoordinateSequence;
+		typedef GSharedPointer<GGeometry> GGeometryP;
+	}
+}
+
+namespace gnova {
+namespace geom {
 
 /****************************************************************************
 **
@@ -145,5 +152,9 @@ public:
 	//virtual GGeometryP Union(const GGeometry &geo) const = 0;
 	//virtual GGeometryP Difference(const GGeometry &geo) const = 0;
 };
+
+
+}
+}
 
 #endif // _GEOMETRY_GEOMETRY_H_

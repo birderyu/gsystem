@@ -5,6 +5,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 /****************************************************************************
 **
 ** GNew
@@ -95,5 +97,7 @@ GAPI gpointer GMemMove(gvoid *dst, const gvoid *src, gsize size);
 **
 ****************************************************************************/
 GAPI gpointer GMemSet(gvoid *dst, gbyte value, gsize size);
+
+}
 
 #endif // _CORE_MEMORY_H_

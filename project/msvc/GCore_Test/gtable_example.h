@@ -1,9 +1,12 @@
 #pragma once
 
 #include "gtable.h"
+#include "gstring.h"
 
-gvoid Table_Test()
+gnova::gvoid Table_Test()
 {
+	using namespace gnova;
+
 	GTable<gint, gdouble, GString> table;
 	table.AddRow(1, 1.1, GString("abc"));
 	table.AddRow(2, 2.2, GString("def"));
@@ -34,7 +37,4 @@ gvoid Table_Test()
 		<< table.GetValue<0>(2)
 		<< " " << table.GetValue<1>(2)
 		<< " " << table.GetValue<2>(2).CString() << std::endl;
-
-	gint stop = 1;
-	stop++;
 }

@@ -2,7 +2,7 @@
 #define _CORE_SORT_INLINE_H_
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::BubbleSort(ArrT &arr, gsize start, gsize len)
+GINLINE gvoid GSort::BubbleSort(ArrT &arr, gsize start, gsize len)
 {
 	CompareT compareF;
 	for (gsize i = 0; i < len; ++i)
@@ -21,13 +21,13 @@ inline void GSort::BubbleSort(ArrT &arr, gsize start, gsize len)
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::InsertSort(ArrT &arr, gsize start, gsize len, gbool bRecur)
+GINLINE gvoid GSort::InsertSort(ArrT &arr, gsize start, gsize len, gbool bRecur)
 {
 	CompareT compareF;
 	if (bRecur)
 	{
 		// 递归实现
-		GSort_Ex::InsertSorting<ArrT, ElemT, CompareT>(arr, start, len, compareF);
+		extra::GSort_Ex::InsertSorting<ArrT, ElemT, CompareT>(arr, start, len, compareF);
 		return;
 	}
 
@@ -52,7 +52,7 @@ inline void GSort::InsertSort(ArrT &arr, gsize start, gsize len, gbool bRecur)
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::ShellSort(ArrT &arr, gsize start, gsize len)
+GINLINE gvoid GSort::ShellSort(ArrT &arr, gsize start, gsize len)
 {
 	CompareT compareF;
 	gsize i, j;
@@ -78,7 +78,7 @@ inline void GSort::ShellSort(ArrT &arr, gsize start, gsize len)
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::SelectSort(ArrT &arr, gsize start, gsize len)
+GINLINE gvoid GSort::SelectSort(ArrT &arr, gsize start, gsize len)
 {
 	CompareT compareF;
 	gsize index;
@@ -103,41 +103,43 @@ inline void GSort::SelectSort(ArrT &arr, gsize start, gsize len)
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::HeapSort(ArrT &arr, gsize start, gsize len)
+GINLINE gvoid GSort::HeapSort(ArrT &arr, gsize start, gsize len)
 {
 	CompareT compareF;
 	for (gint i = len / 2; i >= 0; --i)
 	{
-		GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, i, len, compareF);
+		extra::GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, i, len, compareF);
 	}
 
 	for (gint i = len - 1; i > 0; --i)
 	{
-		GSort_Ex::Swap<ElemT>(&arr[start], &arr[i + start]);
-		GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, 0, i, compareF);
+		extra::GSort_Ex::Swap<ElemT>(&arr[start], &arr[i + start]);
+		extra::GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, 0, i, compareF);
 	}
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::MergeSort(ArrT &arr, gsize start, gsize len)
+GINLINE gvoid GSort::MergeSort(ArrT &arr, gsize start, gsize len)
 {
 	if (len <= 0)
 	{
 		return;
 	}
 	CompareT compareF;
-	GSort_Ex::MergeSorting<ArrT, ElemT, CompareT>(arr, 0, len - 1, compareF);
+	extra::GSort_Ex::MergeSorting<ArrT, ElemT, CompareT>(arr, 0, len - 1, compareF);
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort::QuickSort(ArrT &arr, gsize start, gsize len)
+GINLINE gvoid GSort::QuickSort(ArrT &arr, gsize start, gsize len)
 {
 	CompareT compareF;
-	GSort_Ex::QuickSorting<ArrT, ElemT, CompareT>(arr, start, start + len - 1, compareF);
+	extra::GSort_Ex::QuickSorting<ArrT, ElemT, CompareT>(arr, start, start + len - 1, compareF);
 }
 
+namespace extra {
+
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort_Ex::InsertSorting(ArrT &arr, const gsize start, const gsize len, const CompareT &compareF)
+GINLINE gvoid GSort_Ex::InsertSorting(ArrT &arr, const gsize start, const gsize len, const CompareT &compareF)
 {
 	if (len > 1)
 	{
@@ -160,7 +162,7 @@ inline void GSort_Ex::InsertSorting(ArrT &arr, const gsize start, const gsize le
 }
 
 template<typename ElemT>
-inline void GSort_Ex::Swap(ElemT* l, ElemT* r)
+GINLINE gvoid GSort_Ex::Swap(ElemT* l, ElemT* r)
 {
 	ElemT tmp(*l);
 	*l = *r;
@@ -168,7 +170,7 @@ inline void GSort_Ex::Swap(ElemT* l, ElemT* r)
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort_Ex::PercDown(ArrT &arr, gsize start, gsize i, gsize len, const CompareT &compareF)
+GINLINE gvoid GSort_Ex::PercDown(ArrT &arr, gsize start, gsize i, gsize len, const CompareT &compareF)
 {
 	ElemT tmp(arr[start + i]);
 	gsize j, nc;
@@ -191,7 +193,7 @@ inline void GSort_Ex::PercDown(ArrT &arr, gsize start, gsize i, gsize len, const
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort_Ex::Merge(ArrT &arr, gsize first, gsize mid, gsize last, const CompareT &compareF)
+GINLINE gvoid GSort_Ex::Merge(ArrT &arr, gsize first, gsize mid, gsize last, const CompareT &compareF)
 {
 	//设置indexA，并扫描subArray1 [first,mid)  
 	//设置indexB,并扫描subArray2 [mid,last]  
@@ -243,7 +245,7 @@ inline void GSort_Ex::Merge(ArrT &arr, gsize first, gsize mid, gsize last, const
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort_Ex::MergeSorting(ArrT &arr, gsize first, gsize last, const CompareT &compareF)
+GINLINE gvoid GSort_Ex::MergeSorting(ArrT &arr, gsize first, gsize last, const CompareT &compareF)
 {
 	if (first < last - 1)
 	{
@@ -255,7 +257,7 @@ inline void GSort_Ex::MergeSorting(ArrT &arr, gsize first, gsize last, const Com
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline ElemT GSort_Ex::Median3(ArrT &arr, gsize left, gsize right, const CompareT &compareF)
+GINLINE ElemT GSort_Ex::Median3(ArrT &arr, gsize left, gsize right, const CompareT &compareF)
 {
 	gsize mid = (left + right) / 2;
 	if (compareF(arr[mid], arr[left]))
@@ -275,7 +277,7 @@ inline ElemT GSort_Ex::Median3(ArrT &arr, gsize left, gsize right, const Compare
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
-inline void GSort_Ex::QuickSorting(ArrT &arr, gsize first, gsize last, const CompareT &compareF)
+GINLINE gvoid GSort_Ex::QuickSorting(ArrT &arr, gsize first, gsize last, const CompareT &compareF)
 {
 	const gsize cutoff = 3;
 	if (first + cutoff < last)
@@ -304,6 +306,8 @@ inline void GSort_Ex::QuickSorting(ArrT &arr, gsize first, gsize last, const Com
 	{
 		GSort::InsertSort<ArrT, ElemT, CompareT>(arr, first, last - first + 1);
 	}
+}
+
 }
 
 #endif // _CORE_SORT_INLINE_H_

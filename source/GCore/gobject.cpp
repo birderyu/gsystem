@@ -2,6 +2,8 @@
 #include "gstring.h"
 #include "gbytes.h"
 
+namespace gnova {
+
 GObject::~GObject()
 {
 
@@ -50,4 +52,6 @@ gbool GObject::Equals(const GObject *obj) const
 gbool GObject::Serializable() const
 {
 	return false;
+}
+
 }

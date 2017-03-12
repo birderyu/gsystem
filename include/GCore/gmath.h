@@ -3,6 +3,8 @@
 
 #include "gglobal.h"
 
+namespace gnova {
+
 class GAPI GMath
 {
 public:
@@ -78,5 +80,7 @@ private:
 };
 
 #include "gmath.inl"
+
+}
 
 #endif // _CORE_MATH_H_

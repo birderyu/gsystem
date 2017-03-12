@@ -6,13 +6,20 @@
 #		define WIN32_LEAN_AND_MEAN
 #	endif
 #include <windows.h>
+#endif // G_SYSTEM_WINDOWS
 
 /// Win32ÐÅºÅÁ¿ÊµÀý¾ä±ú
+namespace gnova {
+
 struct GSemaphoreHandle
 	: public GNewT<GSemaphoreHandle>
 {
 	HANDLE m_hSemaphore;
 };
+
+}
+
+namespace gnova {
 
 GSemaphore::GSemaphore(gint nInitialValue)
 :m_pHandle(GNULL)
@@ -35,7 +42,7 @@ gbool GSemaphore::Wait()
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
 	if (!pHandle) return false;
 
-	WaitForSingleObject(pHandle->m_hSemaphore, INFINITE);
+	::WaitForSingleObject(pHandle->m_hSemaphore, INFINITE);
 	return true;
 }
 
@@ -44,7 +51,7 @@ gbool GSemaphore::Wait(gulong nMsecs)
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
 	if (!pHandle) return false;
 
-	DWORD nRet = WaitForSingleObject(pHandle->m_hSemaphore, nMsecs);
+	::DWORD nRet = ::WaitForSingleObject(pHandle->m_hSemaphore, nMsecs);
 	if (nRet == WAIT_OBJECT_0)
 	{
 		return true; // success
@@ -61,7 +68,7 @@ void GSemaphore::Post()
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
 	if (!pHandle) return;
 
-	ReleaseSemaphore(pHandle->m_hSemaphore, 1, GNULL);
+	::ReleaseSemaphore(pHandle->m_hSemaphore, 1, GNULL);
 }
 
 gint GSemaphore::Initialize(gint nInitialValue)
@@ -70,7 +77,7 @@ gint GSemaphore::Initialize(gint nInitialValue)
 	if (!pHandle) return -1;
 	m_pHandle = pHandle;
 
-	pHandle->m_hSemaphore = CreateSemaphore(GNULL, nInitialValue, 5000, GNULL);
+	pHandle->m_hSemaphore = ::CreateSemaphore(GNULL, nInitialValue, 5000, GNULL);
 	if (pHandle->m_hSemaphore == GNULL)
 	{
 		delete pHandle;
@@ -81,4 +88,4 @@ gint GSemaphore::Initialize(gint nInitialValue)
 	return 0;
 }
 
-#endif // G_SYSTEM_WINDOWS
+}

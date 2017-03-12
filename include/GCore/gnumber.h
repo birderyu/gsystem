@@ -21,10 +21,14 @@
 #include "gdoublefloat.h"
 #include "glongdoublefloat.h"
 
+namespace gnova {
+
 #ifdef G_REAL_USE_FLOAT
 typedef GFloat		GReal;
 #else // !G_REAL_USE_FLOAT
 typedef GDouble	GReal;
 #endif // G_REAL_USE_FLOAT
+
+}
 
 #endif // _CORE_NUMBER_H_

@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 class GAPI GLongDoubleFloat 
 	: public GNumber<glongdouble>
@@ -37,6 +37,6 @@ public:
 typedef GLongDoubleFloat GLongDouble;
 typedef GLongDoubleFloat GDecimal;
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_LONG_DOUBLE_FLOAT_H_

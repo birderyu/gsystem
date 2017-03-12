@@ -1,6 +1,8 @@
 #include "gmemory.h"
 #include "dlmalloc.h"
 
+namespace gnova {
+
 gpointer GMalloc(gsize size)
 {
 	return dlmalloc(size);
@@ -34,4 +36,6 @@ gpointer GMemMove(gvoid *dst, const gvoid *src, gsize size)
 GAPI gpointer GMemSet(gvoid *dst, gbyte value, gsize size)
 {
 	return memset(dst, (gint)value, size);
+}
+
 }

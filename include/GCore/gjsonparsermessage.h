@@ -4,7 +4,8 @@
 #include "gobject.h"
 #include "gstring.h"
 
-G_BEGIN_NAMESPACE
+namespace gnova {
+namespace json {
 
 class GAPI GJsonParserMessage
 {
@@ -23,6 +24,7 @@ private:
 	GString m_sErrorMessage;
 };
 
-G_END_NAMESPACE
+}
+}
 
 #endif // _CORE_JSON_PARSER_MESSAGE_H_

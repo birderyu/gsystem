@@ -17,12 +17,14 @@
 
 #include "gglobal.h"
 
-G_BEGIN_NAMESPACE
-class GSocket_Ex;
-class GSockAddress;
-G_END_NAMESPACE
+namespace gnova {
+	class GSockAddress;
+	namespace extra {
+		class GSocket_Ex;
+	}
+}
 
-G_BEGIN_NAMESPACE
+namespace gnova {
 
 /****************************************************************************
 **
@@ -48,7 +50,7 @@ public:
 	** @param[in]	socket_ex {GSocket_Ex *} 私有实现类的指针，由子类传入。
 	**
 	****************************************************************************/
-	GSocket(GSocket_Ex *socket_ex);
+	GSocket(extra::GSocket_Ex *socket_ex);
 	virtual ~GSocket() = 0;
 
 	virtual gbool Open(gbool nResue = false) = 0;
@@ -67,9 +69,9 @@ public:
 	gbool GetLocalAddr(GSockAddress &tSockAddr) const;
 
 protected:
-	GSocket_Ex *m_pSocket_Ex;
+	extra::GSocket_Ex *m_pSocket_Ex;
 };
 
-G_END_NAMESPACE
+}
 
 #endif // _CORE_SOCKET_H_

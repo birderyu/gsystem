@@ -1,5 +1,7 @@
 #include "gstringpool.h"
 
+namespace gnova {
+
 GStringPool::GStringPool(gsize nInitSzie, gsize nMaxSize)
 :m_tStore(nInitSzie, nInitSzie)
 {
@@ -18,5 +20,7 @@ gpointer GStringPool::Alloc(gsize size)
 
 gvoid GStringPool::Free(gpointer)
 {
+
+}
 
 }

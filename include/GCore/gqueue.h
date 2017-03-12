@@ -3,6 +3,8 @@
 
 #include "glimitedlist.h"
 
+namespace gnova {
+
 template<typename DataT>
 class GQueue
 	: public GLimitedList<DataT>
@@ -24,6 +26,8 @@ public:
 	virtual const DataT &Rear() const = 0; // ∂”Œ≤
 	virtual DataT &Rear() = 0; // ∂”Œ≤
 };
+
+}
 
 #include "gqueue.inl"
 

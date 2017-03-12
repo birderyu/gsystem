@@ -5,6 +5,8 @@
 #include "gserialize.h"
 #include "gstructure.h"
 
+namespace gnova {
+
 // NodeT为节点类型，设置为从外部传入，以增加扩展性
 template<typename DataT, typename NodeT>
 class GLinkedList
@@ -93,5 +95,7 @@ public:
 };
 
 #include "glinkedlist.inl"
+
+}
 
 #endif // _CORE_LINKED_LIST_H_

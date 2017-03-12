@@ -2,13 +2,13 @@
 #define _CORE_STATIC_ARRAY_INLINE_
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline GStaticArray<DataT, ARRAY_SIZE>::GStaticArray()
+GINLINE GStaticArray<DataT, ARRAY_SIZE>::GStaticArray()
 {
 
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline GStaticArray<DataT, ARRAY_SIZE>::GStaticArray(const DataT &data)
+GINLINE GStaticArray<DataT, ARRAY_SIZE>::GStaticArray(const DataT &data)
 {
 	for (gsize i = 0; i < ARRAY_SIZE; i++)
 	{
@@ -18,72 +18,72 @@ inline GStaticArray<DataT, ARRAY_SIZE>::GStaticArray(const DataT &data)
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline gsize GStaticArray<DataT, ARRAY_SIZE>::Size() const
+GINLINE gsize GStaticArray<DataT, ARRAY_SIZE>::Size() const
 {
 	return ARRAY_SIZE;
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline gbool GStaticArray<DataT, ARRAY_SIZE>::IsEmpty() const
+GINLINE gbool GStaticArray<DataT, ARRAY_SIZE>::IsEmpty() const
 {
 	return ARRAY_SIZE == 0;
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline DataT &GStaticArray<DataT, ARRAY_SIZE>::GetAt(gsize pos)
+GINLINE DataT &GStaticArray<DataT, ARRAY_SIZE>::GetAt(gsize pos)
 {
 	GASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline const DataT &GStaticArray<DataT, ARRAY_SIZE>::GetAt(gsize pos) const
+GINLINE const DataT &GStaticArray<DataT, ARRAY_SIZE>::GetAt(gsize pos) const
 {
 	GASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline DataT &GStaticArray<DataT, ARRAY_SIZE>::operator[](gsize pos)
+GINLINE DataT &GStaticArray<DataT, ARRAY_SIZE>::operator[](gsize pos)
 {
 	GASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline const DataT &GStaticArray<DataT, ARRAY_SIZE>::operator[](gsize pos) const
+GINLINE const DataT &GStaticArray<DataT, ARRAY_SIZE>::operator[](gsize pos) const
 {
 	GASSERT(pos < ARRAY_SIZE);
 	return m_pData[pos];
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline DataT *GStaticArray<DataT, ARRAY_SIZE>::operator+=(gsize pos)
+GINLINE DataT *GStaticArray<DataT, ARRAY_SIZE>::operator+=(gsize pos)
 {
 	return m_pData + pos;
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline const DataT *GStaticArray<DataT, ARRAY_SIZE>::operator+=(gsize pos) const
+GINLINE const DataT *GStaticArray<DataT, ARRAY_SIZE>::operator+=(gsize pos) const
 {
 	return m_pData + pos;
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline guint GStaticArray<DataT, ARRAY_SIZE>::ClassCode() const
+GINLINE guint GStaticArray<DataT, ARRAY_SIZE>::ClassCode() const
 {
 	return GStaticArray<DataT, ARRAY_SIZE>::CLASS_CODE;
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
-inline gbool GStaticArray<DataT, ARRAY_SIZE>::Serializable() const
+GINLINE gbool GStaticArray<DataT, ARRAY_SIZE>::Serializable() const
 {
 	return true;
 }
 
 template <typename DataT, gsize ARRAY_SIZE>
 template <typename ArchiveT>
-inline gbool GStaticArray<DataT, ARRAY_SIZE>::Serialize(ArchiveT &archive) const
+GINLINE gbool GStaticArray<DataT, ARRAY_SIZE>::Serialize(ArchiveT &archive) const
 {
 	if (!archive.Input())
 	{
@@ -108,7 +108,7 @@ inline gbool GStaticArray<DataT, ARRAY_SIZE>::Serialize(ArchiveT &archive) const
 
 template <typename DataT, gsize ARRAY_SIZE>
 template <typename ArchiveT>
-inline gbool GStaticArray<DataT, ARRAY_SIZE>::Deserialize(ArchiveT &archive)
+GINLINE gbool GStaticArray<DataT, ARRAY_SIZE>::Deserialize(ArchiveT &archive)
 {
 	if (!archive.Output())
 	{

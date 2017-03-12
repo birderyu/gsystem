@@ -3,54 +3,58 @@
 
 #include "gseries.h"
 
-class GBytes;
-class GString;
-class GWString;
-class GDateTime;
-
-namespace GNova {
-	namespace Variety {
-		namespace Private {
-
-			template<typename T>
-			struct GVarietyExtraType
-				: GFalseType {};
-
-			template<>
-			struct GVarietyExtraType<GBytes>
-				: GTrueType {};
-
-			template<>
-			struct GVarietyExtraType<GString>
-				: GTrueType {};
-
-			template<>
-			struct GVarietyExtraType<GWString>
-				: GTrueType {};
-
-			template<typename T>
-			struct GVarietyConstructible
-				: GCatBase<GIsArithmetic<T>::value || GVarietyExtraType<T>::value>
-			{
-			};
-
-			template<typename T>
-			struct GVarietyGetValue 
-				: GCatBase<GIsArithmetic<T>::value 
-					|| GIsPointer<T>::value
-					|| GVarietyExtraType<T>::value>
-			{
-			};
-
-			template<typename T>
-			struct GVarietyGetReference
-				: GCatBase<GIsArithmetic<T>::value>
-			{
-			};
-
-		}
-	}
+namespace gnova {
+	class GBytes;
+	class GString;
+	class GWString;
+	class GDateTime;
 }
+
+namespace gnova {
+namespace extra {
+namespace variety {
+
+template<typename T>
+struct GVarietyExtraType
+	: GFalseType {};
+
+template<>
+struct GVarietyExtraType<GBytes>
+	: GTrueType {};
+
+template<>
+struct GVarietyExtraType<GString>
+	: GTrueType {};
+
+template<>
+struct GVarietyExtraType<GWString>
+	: GTrueType {};
+
+template<typename T>
+struct GVarietyConstructible
+	: GCatBase<GIsArithmetic<T>::value || GVarietyExtraType<T>::value>
+{
+};
+
+template<typename T>
+struct GVarietyGetValue
+	: GCatBase<GIsArithmetic<T>::value
+	|| GIsPointer<T>::value
+	|| GVarietyExtraType<T>::value>
+{
+};
+
+template<typename T>
+struct GVarietyGetReference
+	: GCatBase<GIsArithmetic<T>::value>
+{
+};
+
+}
+}
+}
+
+namespace gnova {
 
 /// 一个使用union结构构件的变体结构（variant）
 /// 为了与使用模板实现的变体类型区分，将其命名为GVariety
@@ -224,5 +228,7 @@ private:
 };
 
 #include "gvariety.inl"
+
+}
 
 #endif // _CORE_VARIETY_H_

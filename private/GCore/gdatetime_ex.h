@@ -3,9 +3,16 @@
 
 #include "gglobal_ex.h"
 
+namespace gnova {
+
 class GDateTime;
 class GDate;
 class GTime;
+
+}
+
+namespace gnova {
+namespace extra {
 
 class GDateTime_Ex
 {
@@ -18,5 +25,8 @@ private:
 	static gbool GetNow(guint &y, guint &m, guint &d, guint &dofw,
 		guint &h, guint &mm, guint &s, guint &ms);
 };
+
+}
+}
 
 #endif // _CORE_DATETIME_PRIVATE_H

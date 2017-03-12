@@ -8,6 +8,8 @@
 #include "gmutex.h"
 #endif // G_SYSTEM_WINDOWS
 
+namespace gnova {
+
 class GAPI GQuickLock final
 	: public GLock
 {
@@ -22,5 +24,7 @@ private:
 	GMutex m_tLock;
 #endif // G_SYSTEM_WINDOWS
 };
+
+}
 
 #endif // _CORE_QUICK_LOCK_H_

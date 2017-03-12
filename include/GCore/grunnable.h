@@ -22,7 +22,11 @@
 
 #include "gglobal.h"
 
-class GThread;
+namespace gnova {
+	class GThread;
+}
+
+namespace gnova {
 
 /// 线程类
 class GAPI GRunnable
@@ -57,5 +61,7 @@ private:
 	/// 当前线程体的句柄，在不同的操作系统下使用不同的结构
 	gpointer m_pHandle;
 };
+
+}
 
 #endif // _CORE_RUNNABLE_H_

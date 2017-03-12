@@ -2,6 +2,8 @@
 #include "gstring.h"
 #include "gcstringhelper.h"
 
+namespace gnova {
+
 GString GStringList::GetAt(gsize pos, G_STRING_TYPE emStrType) const
 {
 	if (emStrType == STRING_TYPE_VALUE)
@@ -35,4 +37,6 @@ gbool GStringList::Add(const GString &str)
 gsize GStringList::Size() const
 {
 	return 0;
+}
+
 }

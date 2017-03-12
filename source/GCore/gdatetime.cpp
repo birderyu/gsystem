@@ -36,6 +36,8 @@
 #define G_DATA_TIME_SIZE_SECOND			1
 #define G_DATA_TIME_SIZE_MILLISECOND	2
 
+namespace gnova {
+
 GDateTime GDateTime::Now()
 {
 	GDateTime dt;
@@ -409,7 +411,7 @@ GTime GDateTime::Time() const
 gbool GDateTime::SetDateTime(gtime timestamp)
 {
 	struct tm t = { 0 };
-	if (0 != localtime_s(&t, &timestamp))
+	if (0 != ::localtime_s(&t, &timestamp))
 	{
 		return false;
 	}
@@ -1286,6 +1288,8 @@ gbool operator<(const GDateTime &dt1, const GDateTime &dt2)
 gbool operator<=(const GDateTime &dt1, const GDateTime &dt2)
 {
 	return !(dt1 > dt2);
+}
+
 }
 
 #undef G_DATA_TIME_SIZE_MILLISECOND	

@@ -1,5 +1,8 @@
 #include "gjsonparsermessage.h"
 
+namespace gnova {
+namespace json {
+
 gbool GJsonParserMessage::IsSuccess() const
 {
 	return m_bSuccess;
@@ -28,4 +31,7 @@ gvoid GJsonParserMessage::SetErrorCursor(gsize cursor)
 gvoid GJsonParserMessage::SetErrorMessage(const GString &msg)
 {
 	m_sErrorMessage = msg;
+}
+
+}
 }
