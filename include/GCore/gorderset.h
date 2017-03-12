@@ -7,7 +7,7 @@
 #define G_ORDER_SET_NODE_RED	0
 #define G_ORDER_SET_NODE_BLACK	1
 
-namespace gnova {
+namespace gnova { // gnova
 
 template < typename KeyT, typename CompareT = GCompareToF<KeyT>>
 class GOrderSet
@@ -363,9 +363,9 @@ private:
 	gsize m_nSize;
 };
 
-#include "gorderset.inl"
+} // namespace gnova
 
-}
+#include "gorderset.inl"
 
 #undef G_ORDER_SET_NODE_BLACK
 #undef G_ORDER_SET_NODE_RED

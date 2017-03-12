@@ -1,6 +1,6 @@
 #include "gunsignedlonginteger.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gulong GUnsignedLongInteger::MaxValue()
 {

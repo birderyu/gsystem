@@ -1,6 +1,6 @@
 #include "gunsignedsmallinteger.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gusmall GUnsignedSmallInteger::MaxValue()
 {

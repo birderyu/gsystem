@@ -4,7 +4,7 @@
 
 #include "ghashtable.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename KeyT, 
 	typename HashT = GHashF<KeyT>,
@@ -289,8 +289,8 @@ private:
 	GHashTable<KeyT, GDummyNodeT, HashT, CompareT, GUnorderSetNode> m_tTable;
 };
 
-#include "gunorderset.inl"
+} // namespace gnova
 
-}
+#include "gunorderset.inl"
 
 #endif // _CORE_UNORDER_SET_H_

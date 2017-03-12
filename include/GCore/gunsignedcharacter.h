@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GUnsignedCharacter 
 	: public GNumber<guchar>
@@ -21,6 +21,6 @@ typedef GUnsignedCharacter GUCharacter;
 typedef GUnsignedCharacter GUnsignedChar;
 typedef GUnsignedCharacter GUChar;
 
-}
+} // namespace gnova
 
 #endif // _CORE_UNSIGNED_CHARACTER_H_

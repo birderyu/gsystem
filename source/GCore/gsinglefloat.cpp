@@ -1,6 +1,6 @@
 #include "gsinglefloat.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gfloat GSingleFloat::MaxValue()
 {

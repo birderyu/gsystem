@@ -1,7 +1,7 @@
 #include "gtcpsocket_ex.h"
 #include "gtcpsocket.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 gbool GTcpSocket_Ex::Open(gbool nResue)

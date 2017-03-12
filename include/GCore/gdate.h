@@ -4,11 +4,11 @@
 #include "gobject.h"
 #include "gdatetimedefine.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GDateTime;
-}
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GDate final 
 	: public GObject
@@ -75,6 +75,6 @@ private:
 	gbyte m_tDate[G_DATE_SIZE];
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_DATE_H_

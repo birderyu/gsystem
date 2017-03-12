@@ -3,6 +3,9 @@
 
 #include "ggeometry.h"
 
+namespace gnova { // gnova
+namespace geom {
+
 class GAPI GGeometryFactory 
 {
 public:
@@ -12,5 +15,8 @@ public:
 	GGeometryP CreatePoint3D(greal x, greal y, greal z) const;
 #endif
 };
+
+}
+}
 
 #endif // _GEOMETRY_GEOMETRY_FACTORY_H_

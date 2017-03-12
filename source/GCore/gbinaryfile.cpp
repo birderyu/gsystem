@@ -1,7 +1,7 @@
 #include "gbinaryfile.h"
 #include "gbinaryfile_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GBinaryFile::GBinaryFile(const GString &sFileName)
 : GFile(new extra::GBinaryFile_Ex(sFileName))

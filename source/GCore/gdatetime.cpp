@@ -36,7 +36,7 @@
 #define G_DATA_TIME_SIZE_SECOND			1
 #define G_DATA_TIME_SIZE_MILLISECOND	2
 
-namespace gnova {
+namespace gnova { // gnova
 
 GDateTime GDateTime::Now()
 {

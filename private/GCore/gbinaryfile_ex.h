@@ -3,12 +3,12 @@
 
 #include "gfile_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GBytes;
-}
+} // namespace gnova
 
-namespace gnova {
-namespace extra {
+namespace gnova { // gnova
+namespace extra { // gnova.extra
 
 class GBinaryFile_Ex
 	: public GFile_Ex
@@ -30,7 +30,7 @@ protected:
 	gcstring OpenMode() const;
 };
 
-}
-}
+} // namespace gnova.extra
+} // namespace gnova
 
 #endif // _CORE_BINARY_FILE_EX_H_

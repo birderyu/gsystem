@@ -1,6 +1,8 @@
 #ifndef _CORE_SINGLE_LINKED_LIST_INLINE_
 #define _CORE_SINGLE_LINKED_LIST_INLINE_
 
+namespace gnova { // gnova
+
 template<typename DataT, typename NodeT>
 GINLINE GSingleLinkedList<DataT, NodeT>::GSingleLinkedList()
 : m_nSize(0), m_pFirst(GNULL)
@@ -857,5 +859,7 @@ const DataT &GSingleLinkedList<DataT, NodeT>::operator[](gsize pos) const
 {
 	return GetDataAt(pos);
 }
+
+} // namespace gnova
 
 #endif // _CORE_SINGLE_LINKED_LIST_INLINE_

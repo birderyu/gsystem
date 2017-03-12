@@ -4,7 +4,7 @@
 
 #include "garray.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename DataT>
 class GDynamicArray final
@@ -78,8 +78,8 @@ private:
 typedef GDynamicArray<gint> GIntegerArray;
 typedef GDynamicArray<gsize> GSizeArray;
 
-#include "gdynamicarray.inl"
+} // namespace gnova
 
-}
+#include "gdynamicarray.inl"
 
 #endif // _CORE_DYNAMIC_ARRAY_H_

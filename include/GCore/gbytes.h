@@ -6,11 +6,11 @@
 #include "gstructure.h"
 #include "gseries.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GByteBuffer;
-}
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GBytes final
 	: public GListT<GBytes>
@@ -66,8 +66,8 @@ private:
 	GBytesData m_tBytes;
 };
 
-#include "gbytes.inl"
+} // namespace gnova
 
-}
+#include "gbytes.inl"
 
 #endif // _CORE_BYTES_H_

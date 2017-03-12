@@ -2,7 +2,7 @@
 
 #include "gseries.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename T,
 	gsize LOCAL_SIZE,
@@ -13,4 +13,4 @@ class GSeriesPool
 	
 };
 
-}
+} // namespace gnova

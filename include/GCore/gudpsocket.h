@@ -3,7 +3,7 @@
 
 #include "gsocket.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GUdpSocket final
 	: public GSocket
@@ -19,6 +19,6 @@ public:
 	gint RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress &tPeer);
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_UDP_SOCKET_H_

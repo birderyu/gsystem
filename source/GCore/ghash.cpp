@@ -1,7 +1,7 @@
 #include "ghash.h"
 #include "gmath.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 guint GHashing(gbool val)
 {

@@ -2,7 +2,7 @@
 #include "gstring.h"
 #include "gbytes.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GObject::~GObject()
 {

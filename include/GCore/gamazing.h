@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GAmazing
 {
@@ -19,6 +19,6 @@ class GAPI GAmazing
 	}
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_AMAZING_H_

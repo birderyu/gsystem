@@ -1,6 +1,6 @@
 #include "gudpsocket_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 gbool GUdpSocket_Ex::Open(gbool nResue)

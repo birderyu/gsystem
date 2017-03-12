@@ -1,6 +1,6 @@
 #include "gboolean.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GBoolean GBoolean::ValueOf(const GString &str)
 {

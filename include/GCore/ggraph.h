@@ -3,7 +3,7 @@
 
 #include "gobject.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename NodeT, typename EdgeT>
 class GGraph
@@ -198,6 +198,6 @@ void *data)
 	}
 }
 
-}
+} // namespace gnova
 
 #endif // _CORE_GRAPH_H_

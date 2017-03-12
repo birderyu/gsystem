@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GBoolean 
 	: public GPackage<gbool>
@@ -23,6 +23,6 @@ public:
 
 typedef GBoolean GBool;
 
-}
+} // namespace gnova
 
 #endif // _CORE_BOOLEAN_H_

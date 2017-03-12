@@ -1,6 +1,6 @@
 #include "gwidecharacter.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GWideCharacter::GWideCharacter(gwchar val)
 : GPackage<gwchar>(val)

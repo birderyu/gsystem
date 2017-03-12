@@ -6,7 +6,7 @@
 #	endif
 #include <windows.h>
 
-namespace gnova {
+namespace gnova { // gnova
 
 GCriticalSection::GCriticalSection()
 {

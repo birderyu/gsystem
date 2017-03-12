@@ -7,7 +7,7 @@
 
 #define G_STACK_DEFAULT_CAPACITY 1024
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename DataT>
 class GArrayStack 
@@ -45,9 +45,9 @@ private:
 	gsize m_TopCursor;
 };
 
-#include "garraystack.inl"
+} // namespace gnova
 
-}
+#include "garraystack.inl"
 
 #undef G_STACK_DEFAULT_CAPACITY
 

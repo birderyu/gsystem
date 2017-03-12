@@ -1,6 +1,6 @@
 #include "glonglonginteger.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 glonglong GLongLongInteger::MaxValue()
 {

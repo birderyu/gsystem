@@ -3,7 +3,7 @@
 
 #include "gunsignedcharacter.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GUnsignedSmallInteger 
 	: public GNumber<gusmall>
@@ -33,6 +33,6 @@ typedef GUnsignedSmallInteger GUInteger8;
 typedef GUnsignedSmallInteger GUnsignedInt8;
 typedef GUnsignedSmallInteger GUInt8;
 
-}
+} // namespace gnova
 
 #endif // _CORE_UNSIGNED_SMALL_INTEGER_H_

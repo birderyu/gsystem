@@ -1,6 +1,8 @@
 #ifndef _CORE_STATIC_ARRAY_INLINE_
 #define _CORE_STATIC_ARRAY_INLINE_
 
+namespace gnova { // gnova
+
 template <typename DataT, gsize ARRAY_SIZE>
 GINLINE GStaticArray<DataT, ARRAY_SIZE>::GStaticArray()
 {
@@ -136,5 +138,7 @@ GINLINE gbool GStaticArray<DataT, ARRAY_SIZE>::Deserialize(ArchiveT &archive)
 
 	return true;
 }
+
+} // namespace gnova
 
 #endif // _CORE_STATIC_ARRAY_INLINE_

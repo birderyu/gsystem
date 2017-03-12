@@ -2,14 +2,14 @@
 #include "gsocket.h"
 #include "gsockaddress_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 #ifdef G_SYSTEM_WINDOWS
 // Windows下使用Socket需要先初始化
 #pragma comment(lib,"ws2_32")
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 class GSocketInit

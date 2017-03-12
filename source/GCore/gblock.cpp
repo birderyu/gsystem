@@ -4,7 +4,7 @@
 #define G_BLOCK_AUTO_RELEASE m_tConfig[0]
 #define G_BLOCK_LOCAL_MEMORY m_tConfig[1]
 
-namespace gnova {
+namespace gnova { // gnova
 
 GBlock::GBlock(gsize nSize)
 	: m_nSize(nSize)

@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 /// Serializeº¯Êý
 template<typename ArchiveT, typename DataT>
@@ -375,6 +375,6 @@ struct GDeserializeF<ArchiveT, DataT*>
 	}
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_SERIALIZE_H_

@@ -1,6 +1,8 @@
 #ifndef _CORE_PACKAGE_INLINE_
 #define _CORE_PACKAGE_INLINE_
 
+namespace gnova { // gnova
+
 template <typename ValueT>
 GINLINE GPackage<ValueT> GPackage<ValueT>::ValueOf(typename GPackage<ValueT>::ValueType val)
 {
@@ -346,5 +348,7 @@ GINLINE gbool GNumber<ValueT>::operator<(const GNumber<ValueT> &val) const
 {
 	return m_nValue < val.m_nValue;
 }
+
+} // namespace gnova
 
 #endif // _CORE_PACKAGE_INLINE_

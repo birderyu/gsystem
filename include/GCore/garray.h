@@ -7,7 +7,7 @@
 #include "gallocator.h"
 #include "gconstructor.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename DataT>
 class GArray
@@ -98,8 +98,8 @@ public:
 	virtual guint ClassCode() const;
 };
 
-#include "garray.inl"
+} // namespace gnova
 
-}
+#include "garray.inl"
 
 #endif // _CORE_ARRAY_H_

@@ -1,6 +1,6 @@
 #include "gjsonparsermessage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace json {
 
 gbool GJsonParserMessage::IsSuccess() const

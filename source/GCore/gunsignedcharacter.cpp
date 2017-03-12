@@ -1,6 +1,6 @@
 #include "gunsignedcharacter.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GUnsignedCharacter::GUnsignedCharacter(guchar val)
 : GNumber<guchar>(val)

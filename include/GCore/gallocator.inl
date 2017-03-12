@@ -1,6 +1,8 @@
 #ifndef _CORE_ALLOCATOR_INLINE_
 #define _CORE_ALLOCATOR_INLINE_
 
+namespace gnova { // gnova
+
 template <typename ClassT>
 GINLINE ClassT *GAllocate(gsize n) noexcept(false)
 {
@@ -28,6 +30,8 @@ GINLINE ClassT *GReallocate(ClassT *oldptr, gsize n) noexcept(false)
 	}
 	return ptr;
 }
+
+} // namespace gnova
 
 #endif // _CORE_ALLOCATOR_INLINE_
 

@@ -1,6 +1,6 @@
 #include "gbyte.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GByte::GByte(gbyte val)
 : GPackage<gbyte>(val)

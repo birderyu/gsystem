@@ -17,12 +17,12 @@
 #include "gobject.h"
 #include "gseries.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GVariety;
 	class GStringList;
-}
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 /****************************************************************************
 **
@@ -148,6 +148,6 @@ GAPI gbool operator>=(const GString &s1, const GString &s2);
 GAPI gbool operator<(const GString &s1, const GString &s2);
 GAPI gbool operator<=(const GString &s1, const GString &s2);
 
-}
+} // namespace gnova
 
 #endif // _CORE_STRING_H_

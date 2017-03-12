@@ -5,6 +5,9 @@
 #include "GCore/gvector.h"
 #include "gcoordinate.h"
 
+namespace gnova { // gnova
+namespace geom {
+
 class GAPI GCoordinateSequence
 {
 public:
@@ -30,5 +33,8 @@ public:
 private:
 	GVector<greal> m_tCoords;
 };
+
+}
+}
 
 #endif // _GEOMETRY_COORDINATE_SEQUENCE_H_

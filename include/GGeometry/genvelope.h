@@ -8,8 +8,15 @@
 #include "ggeometryglobal.h"
 #include "GCore/gobject.h"
 
-class GCoordinate;
-class GCoordinateSequence;
+namespace gnova { // gnova
+	namespace geom {
+		class GCoordinate;
+		class GCoordinateSequence;
+	}
+}
+
+namespace gnova { // gnova
+namespace geom {
 
 class GAPI GEnvelope
 	: public GObject
@@ -70,5 +77,8 @@ private:
 	// MinX, MinY(, MinZ), MaxX, MaxY(, MaxZ)
 	greal m_tCoords[G_ENVELOPE_SIZE];
 };
+
+}
+}
 
 #endif // _GEOMETRY_ENVELOPE_H_

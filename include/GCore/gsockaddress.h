@@ -3,13 +3,13 @@
 
 #include "gobject.h"
 
-namespace gnova {
-	namespace extra {
+namespace gnova { // gnova
+	namespace extra { // gnova.extra
 		class GSockAddress_Ex;
-	}
-}
+	} // namespace gnova.extra
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GSockAddress 
 {
@@ -29,6 +29,6 @@ private:
 	extra::GSockAddress_Ex *m_pSockAddress_Ex;
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_SOCKET_ADDRESS_H_

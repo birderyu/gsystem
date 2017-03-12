@@ -1,6 +1,8 @@
 #ifndef _CORE_CIRCULAR_LINKED_LIST_INLINE_
 #define _CORE_CIRCULAR_LINKED_LIST_INLINE_
 
+namespace gnova { // gnova
+
 template<typename DataT, typename NodeT>
 GINLINE GCircularLinkedList<DataT, NodeT>::GCircularLinkedList()
 : m_pCursor(GNULL)
@@ -92,5 +94,7 @@ GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 	--m_nSize;
 	return;
 }
+
+}  // namespace gnova
 
 #endif // _CORE_CIRCULAR_LINKED_LIST_INLINE_

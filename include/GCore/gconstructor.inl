@@ -1,8 +1,9 @@
 #ifndef _CORE_CONSTRUCTOR_INLINE_
 #define _CORE_CONSTRUCTOR_INLINE_
 
-namespace extra {
-namespace constructor {
+namespace gnova { // gnova
+namespace extra { // gnova.extra
+namespace constructor { // gnova.extra.constructor
 
 template <typename ClassT>
 GINLINE gvoid _GDefaultConstruct(ClassT *ptr, GTrueType)
@@ -88,8 +89,11 @@ GINLINE gvoid _GDestruct(ClassT *ptr, GFalseType)
 }
 
 
-}
-}
+}  // namespace gnova.extra.constructor
+}  // namespace gnova.extra
+}  // namespace gnova
+
+namespace gnova { // gnova
 
 template <typename ClassT> 
 GINLINE gvoid GConstruct(ClassT *ptr)
@@ -142,5 +146,7 @@ GINLINE gvoid GMoveConstruct(ClassT *ptr, ClassT &&moveable)
 	extra::constructor::_GMoveConstruct<ClassT>(ptr, GForward<ClassT>(moveable),
 		GTypeTraits<ClassT>::TrivialMoveConstructible());
 }
+
+} // namespace gnova
 
 #endif // _CORE_CONSTRUCTOR_INLINE_

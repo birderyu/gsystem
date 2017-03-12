@@ -4,7 +4,7 @@
 
 #include "garray.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename DataT, gsize ARRAY_SIZE>
 class GStaticArray final
@@ -39,8 +39,8 @@ private:
 	DataT m_pData[ARRAY_SIZE];
 };
 
-#include "gstaticarray.inl"
+} // namespace gnova
 
-}
+#include "gstaticarray.inl"
 
 #endif // _CORE_STATIC_ARRAY_H_

@@ -4,6 +4,9 @@
 #include "ggeometryglobal.h"
 #include "GCore/gobject.h"
 
+namespace gnova { // gnova
+namespace geom {
+
 class GAPI GCoordinate
 	: public GObject
 {
@@ -34,5 +37,8 @@ public:
 private:
 	greal m_tCoord[G_COORDINATE_SIZE];
 };
+
+}
+}
 
 #endif // _GEOMETRY_COORDINATE_EX_H_

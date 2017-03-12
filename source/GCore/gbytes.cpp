@@ -1,7 +1,7 @@
 #include "gbytes.h"
 #include "gbytebuffer.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GBytes::GBytes()
 {

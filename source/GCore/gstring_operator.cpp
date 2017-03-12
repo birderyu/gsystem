@@ -1,7 +1,7 @@
 #include "gstring.h"
 #include "gcstringhelper.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GString &GString::operator=(const GString &str)
 {

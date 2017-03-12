@@ -1,7 +1,7 @@
 #include "gsockaddress_ex.h"
 #include "gstring.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 GSockAddress_Ex::GSockAddress_Ex()

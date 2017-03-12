@@ -29,15 +29,15 @@
 
 #include "glist.h"
 
-namespace gnova {
-	namespace json {
+namespace gnova { // gnova
+	namespace json { // gnova.json
 		class GJsonValue;
 		class GJsonParserMessage;
-	}
-}
+	} // namespace gnova.json
+} // namespace gnova
 
-namespace gnova {
-namespace json {
+namespace gnova { // gnova
+namespace json { // gnova.json
 
 class GAPI GJsonArray
 	: public GObject
@@ -57,7 +57,7 @@ private:
 	GList<GJsonValue*> m_tJsonValues;
 };
 
-}
-}
+} // namespace gnova.json
+} // namespace gnova
 
 #endif // _CORE_JSON_ARRAY_H_

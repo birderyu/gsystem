@@ -2,7 +2,7 @@
 #include "gtcpsocket_ex.h"
 #include "gsockaddress.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GTcpSocket::GTcpSocket()
 : GSocket(new extra::GTcpSocket_Ex())

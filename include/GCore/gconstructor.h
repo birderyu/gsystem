@@ -25,7 +25,7 @@
 #include "gglobal.h"
 #include "gtraits.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename ClassT> gvoid GConstruct(ClassT *ptr);
 template <typename ClassT> gvoid GConstruct(ClassT *ptr, const ClassT &copyable);
@@ -36,8 +36,8 @@ template <typename ClassT> gvoid GDefaultConstruct(ClassT *ptr);
 template <typename ClassT> gvoid GCopyConstruct(ClassT *ptr, const ClassT &copyable);
 template <typename ClassT> gvoid GMoveConstruct(ClassT *ptr, ClassT &&moveable);
 
-#include "gconstructor.inl"
+} // namespace gnova
 
-}
+#include "gconstructor.inl"
 
 #endif // _CORE_CONSTRUCTOR_H_

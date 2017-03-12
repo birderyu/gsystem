@@ -20,7 +20,7 @@
 #include "gstructure.h"
 #include "glist.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 /****************************************************************************
 **
@@ -440,8 +440,8 @@ protected:
 	NodeT *m_pRoot;
 };
 
-#include "gbinarytree.inl"
+} // namespace gnova
 
-}
+#include "gbinarytree.inl"
 
 #endif // _CORE_BINARY_TREE_H_

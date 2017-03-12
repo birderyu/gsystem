@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GCharacter 
 	: public GPackage<gchar>
@@ -20,6 +20,6 @@ public:
 
 typedef GCharacter GChar;
 
-}
+} // namespace gnova
 
 #endif // _CORE_CHARACTER_H_

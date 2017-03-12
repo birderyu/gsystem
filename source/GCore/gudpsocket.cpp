@@ -2,7 +2,7 @@
 #include "gudpsocket_ex.h"
 #include "gsockaddress.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GUdpSocket::GUdpSocket()
 : GSocket(new extra::GUdpSocket_Ex())

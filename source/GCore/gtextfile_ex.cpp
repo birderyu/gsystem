@@ -3,7 +3,7 @@
 
 #define G_TEXT_DOCUMNET_BUFFER_SIZE 4096
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 GTextFile_Ex::GTextFile_Ex(const GString &sFileName)

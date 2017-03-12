@@ -6,6 +6,8 @@
 #define G_RED_BLACK_TREE_TEMPLATE		template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 #define G_RED_BLACK_TREE_QUAL			GReadBlackTree<KeyT, ValueT, CompareT, NodeT>
 
+namespace gnova { // gnova
+
 G_RED_BLACK_TREE_NODE_TEMPLATE
 GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
 	const KeyT &key,
@@ -446,6 +448,8 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::RotateRight(NodeT *node)
 	node->m_pParent = lower_left;
 	lower_left->m_pRight = node;
 }
+
+} // namespace gnova
 
 #undef G_RED_BLACK_TREE_QUAL
 #undef G_RED_BLACK_TREE_TEMPLATE	

@@ -23,7 +23,7 @@
 #define G_RED_BLACK_TREE_NODE_RED		0
 #define G_RED_BLACK_TREE_NODE_BLACK		1
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename KeyT, typename ValueT>
 struct GReadBlackTreeNode 
@@ -97,9 +97,9 @@ protected:
 	gvoid RotateRight(NodeT *);
 };
 
-#include "greadblacktree.inl"
+} // namespace gnova
 
-}
+#include "greadblacktree.inl"
 
 #undef G_RED_BLACK_TREE_NODE_BLACK
 #undef G_RED_BLACK_TREE_NODE_RED

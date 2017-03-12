@@ -4,8 +4,8 @@
 #include "gstring.h"
 #include <stdio.h>
 
-namespace gnova {
-namespace extra {
+namespace gnova { // gnova
+namespace extra { // gnova.extra
 
 class GFile_Ex
 	: public GNewT<GFile_Ex>
@@ -42,7 +42,7 @@ protected:
 	gbyte m_nOpenMode;
 };
 
-}
-}
+} // namespace gnova.extra
+} // namespace gnova
 
 #endif // _CORE_FILE_EX_H_

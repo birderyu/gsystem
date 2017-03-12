@@ -1,6 +1,6 @@
 #include "glongdoublefloat.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 glongdouble GLongDoubleFloat::MaxValue()
 {

@@ -1,7 +1,7 @@
 #include "gtextfile.h"
 #include "gtextfile_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GTextFile::GTextFile(const GString &filename)
 : GFile(new extra::GTextFile_Ex(filename))

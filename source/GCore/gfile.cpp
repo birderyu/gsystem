@@ -1,7 +1,7 @@
 #include "gfile.h"
 #include "gfile_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GFile::GFile(extra::GFile_Ex *pFile_Ex)
 : m_pFileEx(pFile_Ex)

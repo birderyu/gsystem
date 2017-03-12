@@ -4,7 +4,7 @@
 
 #include "gdoublelinkedlist.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename DataT>
 class GList final
@@ -347,8 +347,8 @@ private:
 	GDoubleLinkedList<DataT, GListNode> m_tList;
 };
 
-#include "glist.inl"
+} // namespace gnova
 
-}
+#include "glist.inl"
 
 #endif // _CORE_LIST_H_

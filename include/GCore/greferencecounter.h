@@ -5,7 +5,7 @@
 #include "gnew.h"
 #include "gatom.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename ClassT>
 class GReferenceCounter 
@@ -26,8 +26,8 @@ private:
 	ClassT *m_pPointer;
 };
 
-#include "greferencecounter.inl"
+} // namespace gnova
 
-}
+#include "greferencecounter.inl"
 
 #endif // _CORE_REFERENCE_COUNTER_H_

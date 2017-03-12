@@ -3,16 +3,16 @@
 
 #include "gseries.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GBytes;
 	class GString;
 	class GWString;
 	class GDateTime;
-}
+} // namespace gnova
 
-namespace gnova {
-namespace extra {
-namespace variety {
+namespace gnova { // gnova
+namespace extra { // gnova.extra
+namespace variety { // gnova.extra.variety
 
 template<typename T>
 struct GVarietyExtraType
@@ -50,11 +50,11 @@ struct GVarietyGetReference
 {
 };
 
-}
-}
-}
+} // namespace gnova.extra.variety
+} // namespace gnova.extra
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 /// 一个使用union结构构件的变体结构（variant）
 /// 为了与使用模板实现的变体类型区分，将其命名为GVariety
@@ -227,8 +227,8 @@ private:
 	gbyte m_nType;
 };
 
-#include "gvariety.inl"
+} // namespace gnova
 
-}
+#include "gvariety.inl"
 
 #endif // _CORE_VARIETY_H_

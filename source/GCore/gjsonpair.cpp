@@ -3,7 +3,7 @@
 #include "gliststack.h"
 #include "gjsonparsermessage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace json {
 
 GJsonPair::GJsonPair()

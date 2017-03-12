@@ -4,7 +4,7 @@
 
 #include "gglobal.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GReadWriteLock
 {
@@ -23,6 +23,6 @@ public:
 	virtual gvoid UnlockWrite() = 0;
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_READ_WRITE_LOCK_H_

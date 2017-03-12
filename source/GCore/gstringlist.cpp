@@ -2,7 +2,7 @@
 #include "gstring.h"
 #include "gcstringhelper.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GString GStringList::GetAt(gsize pos, G_STRING_TYPE emStrType) const
 {

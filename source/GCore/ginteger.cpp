@@ -1,6 +1,6 @@
 #include "ginteger.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gint GInteger::MaxValue()
 {

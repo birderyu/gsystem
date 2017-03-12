@@ -2,7 +2,7 @@
 #include "gstring.h"
 #include "gfile.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 GFile_Ex::GFile_Ex(const GString &sFileName)

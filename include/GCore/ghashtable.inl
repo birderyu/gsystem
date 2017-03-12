@@ -7,6 +7,8 @@
 #define G_HASH_TABLE_QUAL			GHashTable<KeyT, ValueT, HashT, CompareT, NodeT>
 #define G_HASH_TABLE_MODULE			(m_tBuckets.Size())
 
+namespace gnova { // gnova
+
 G_HASH_TABLE_NODE_TEMPLATE
 GINLINE G_HASH_TABLE_NODE_QUAL::GHashTableNode(const KeyT &key,
 	const ValueT &value,
@@ -585,6 +587,8 @@ GINLINE gsize G_HASH_TABLE_QUAL::IndexOf(const KeyT &key, gsize module) const
 	h = h ^ (h >> 7) ^ (h >> 4);
 	return h & (module - 1);
 }
+
+} // namespace gnova
 
 #undef G_HASH_TABLE_MODULE
 #undef G_HASH_TABLE_QUAL

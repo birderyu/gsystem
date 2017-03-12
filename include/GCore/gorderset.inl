@@ -1,6 +1,8 @@
 #ifndef _CORE_ORDER_SET_INLINE_
 #define _CORE_ORDER_SET_INLINE_
 
+namespace gnova { // gnova
+
 template < typename KeyT, typename CompareT>
 GINLINE GOrderSet<KeyT, CompareT>::GOrderSet()
 {
@@ -338,5 +340,7 @@ GINLINE GOrderSet<KeyT, CompareT> &GOrderSet<KeyT, CompareT>::operator=(GOrderSe
 	set.m_nSize = 0;
 	return *this;
 }
+
+} // namespace gnova
 
 #endif // _CORE_ORDER_SET_INLINE_

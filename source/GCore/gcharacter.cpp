@@ -1,6 +1,6 @@
 #include "gcharacter.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GCharacter::GCharacter(gchar val)
 : GPackage<gchar>(val)

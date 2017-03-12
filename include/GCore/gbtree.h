@@ -1,7 +1,7 @@
 #ifndef _CORE_B_TREE_H_
 #define _CORE_B_TREE_H_
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename KeyT, typename ValueT, gsize KEY_MAX, gsize CHILD_MAX>
 struct GBTreeNode
@@ -23,7 +23,7 @@ template<typename KeyT,
 	gsize KEY_MAX = 2 * M - 1, 
 	gsize KEY_MIN = M - 1,
 	gsize CHILD_MAX = KEY_MAX + 1, 
-	hugsize CHILD_MIN = KEY_MIN + 1,
+	gsize CHILD_MIN = KEY_MIN + 1,
 	typename NodeT = GBTreeNode<KeyT, ValueT, KEY_MAX, CHILD_MAX>>
 class GBTree
 {
@@ -408,6 +408,6 @@ private:
 	NodeT * m_pRoot;  //B树的根节点  
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_B_TREE_H_

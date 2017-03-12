@@ -3,7 +3,7 @@
 #include "gsockaddress.h"
 #include "gsockaddress_ex.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GSocket::GSocket(extra::GSocket_Ex *pSocket_Ex)
 :m_pSocket_Ex(pSocket_Ex)

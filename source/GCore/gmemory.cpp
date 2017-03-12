@@ -1,7 +1,7 @@
 #include "gmemory.h"
 #include "dlmalloc.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gpointer GMalloc(gsize size)
 {

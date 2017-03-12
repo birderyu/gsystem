@@ -5,7 +5,7 @@
 #include "gcstringhelper.h"
 #include "gconstructor.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GVariety::GVariety(const gchar *val)
 	: m_nType(VARIETY_TYPE_STRING)

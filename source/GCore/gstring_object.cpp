@@ -1,6 +1,6 @@
 #include "gstring.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 const GObject *GString::Boxing() const
 {

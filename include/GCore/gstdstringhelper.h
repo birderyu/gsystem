@@ -6,7 +6,7 @@
 #include <sstream>
 #include <vector>
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GStdStringHelper
 {
@@ -75,6 +75,6 @@ T GStdStringHelper::ToNum(const std::string &str,gbool *bIsOk)
 	return nNum;
 }
 
-}
+} // namespace gnova
 
 #endif // _CORE_STD_STRING_UTILITY_H_

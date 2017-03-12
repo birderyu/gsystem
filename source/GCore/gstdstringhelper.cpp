@@ -1,6 +1,6 @@
 #include "gstdstringhelper.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 std::string GStdStringHelper::Trim(const std::string &sStr)
 {

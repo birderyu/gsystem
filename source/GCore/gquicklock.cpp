@@ -1,6 +1,6 @@
 #include "gquicklock.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gvoid GQuickLock::Lock()
 {

@@ -1,7 +1,7 @@
 #include "glog.h"
 #include "gstring.h"
 
-namespace gnova {
+namespace gnova { // gnova
 namespace log {
 
 GLog::GLog(const GString &filename)

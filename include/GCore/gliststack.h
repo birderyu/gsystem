@@ -5,7 +5,7 @@
 #include "gstack.h"
 #include "gdoublelinkedlist.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename DataT>
 class GListStack 
@@ -36,8 +36,8 @@ private:
 	GDoubleLinkedList<DataT> m_tList;
 };
 
-#include "gliststack.inl"
+} // namespace gnova
 
-}
+#include "gliststack.inl"
 
 #endif // _CORE_LIST_STACK_H_

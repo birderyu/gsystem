@@ -1,6 +1,8 @@
 #ifndef _CORE_LIST_INLINE_
 #define _CORE_LIST_INLINE_
 
+namespace gnova { // gnova
+
 template <typename DataT>
 GINLINE GList<DataT>::GList()
 {
@@ -264,5 +266,7 @@ GINLINE gbool GList<DataT>::EndWith(const DataT &data) const
 	}
 	return Last() == data;
 }
+
+} // namespace gnova
 
 #endif // _CORE_LIST_INLINE_

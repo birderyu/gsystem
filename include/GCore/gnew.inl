@@ -1,6 +1,8 @@
 #ifndef _CORE_NEW_INLINE_
 #define _CORE_NEW_INLINE_
 
+namespace gnova { // gnova
+
 template<typename ClassT>
 GINLINE gpointer GNewT<ClassT>::operator new(gsize size) noexcept(false)
 {
@@ -233,5 +235,7 @@ GINLINE gvoid GSafeNewInPoolWithHandlerT<ClassT, LockT>::operator delete(gpointe
 	GLockGuard<LockT> autolock(lock);
 	pool.Free(free);
 }
+
+} // namespace gnova
 
 #endif // _CORE_NEW_INLINE_

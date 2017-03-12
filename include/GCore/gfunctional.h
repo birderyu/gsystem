@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 
-namespace gnova {
+namespace gnova { // gnova
 
 /// std::function
 template<class FunT>
@@ -11,4 +11,4 @@ class GFunction
 
 };
 
-}
+} // namespace gnova

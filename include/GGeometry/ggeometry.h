@@ -17,7 +17,7 @@
 #include "ggeometryglobal.h"
 #include "GCore/gobject.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	namespace geom {
 		class GGeometry;
 		class GGeometryFactory;
@@ -28,7 +28,7 @@ namespace gnova {
 	}
 }
 
-namespace gnova {
+namespace gnova { // gnova
 namespace geom {
 
 /****************************************************************************

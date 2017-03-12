@@ -15,7 +15,7 @@ GAPI gnova::gint strncasecmp(const gnova::gchar *s1, gnova::gchar *s2, /*registe
 #	endif // G_USE_MSVC_STRCMP
 #endif // G_COMPILER_MSVC
 
-namespace gnova {
+namespace gnova { // gnova
 
 // Î´×öÅÐ¿Õ²Ù×÷
 class GAPI GCStringHelper
@@ -52,6 +52,6 @@ public:
 	static T ToNum(const gchar *c_str, gbool *isok);
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_C_STRING_HELPER_H_

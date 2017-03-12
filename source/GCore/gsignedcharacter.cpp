@@ -1,6 +1,6 @@
 #include "gsignedcharacter.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GSignedCharacter::GSignedCharacter(gschar val)
 : GPackage<gschar>(val)

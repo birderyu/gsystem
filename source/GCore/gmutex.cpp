@@ -7,7 +7,7 @@
 #include <windows.h>
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova {
+namespace gnova { // gnova
 
 GMutex::GMutex()
 : m_pHandle(GNULL)

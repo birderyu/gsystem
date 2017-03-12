@@ -1,7 +1,7 @@
 #include "gstring.h"
 #include <sstream>
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 namespace string {
 
@@ -51,7 +51,7 @@ T GStringToNumber(const GString &str, gbool *isok)
 }
 }
 
-namespace gnova {
+namespace gnova { // gnova
 
 GString GString::Number(gsmall nNum, gint nBase)
 {

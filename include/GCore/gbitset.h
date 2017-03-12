@@ -4,7 +4,7 @@
 
 #include "gglobal.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<gsize SIZE>
 class GBitSet
@@ -17,6 +17,6 @@ public:
 	gbool GetAt(gsize pos) const;
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_BIT_SET_H_

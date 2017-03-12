@@ -13,7 +13,7 @@
 
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova {
+namespace gnova { // gnova
 
 gvoid GThread::Sleep(gulong nSecs)
 {

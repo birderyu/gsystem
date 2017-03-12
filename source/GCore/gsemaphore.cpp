@@ -9,7 +9,7 @@
 #endif // G_SYSTEM_WINDOWS
 
 /// Win32ÐÅºÅÁ¿ÊµÀý¾ä±ú
-namespace gnova {
+namespace gnova { // gnova
 
 struct GSemaphoreHandle
 	: public GNewT<GSemaphoreHandle>
@@ -19,7 +19,7 @@ struct GSemaphoreHandle
 
 }
 
-namespace gnova {
+namespace gnova { // gnova
 
 GSemaphore::GSemaphore(gint nInitialValue)
 :m_pHandle(GNULL)

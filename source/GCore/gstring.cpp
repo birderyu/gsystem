@@ -2,7 +2,7 @@
 #include "gstringlist.h"
 #include "gcstringhelper.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GString::GString()
 {

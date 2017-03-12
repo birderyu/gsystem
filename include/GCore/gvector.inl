@@ -1,6 +1,8 @@
 #ifndef _CORE_VECTOR_INLINE_
 #define _CORE_VECTOR_INLINE_
 
+namespace gnova { // gnova
+
 template <typename DataT>
 GINLINE GVector<DataT>::GVector()
 : m_tArray(0), m_nHead(NULL_POS), m_nTail(0)
@@ -589,5 +591,7 @@ GINLINE const DataT *GVector<DataT>::Tail() const
 	}
 	return m_tArray.CursorAt(m_nTail);
 }
+
+} // namespace gnova
 
 #endif // _CORE_VECTOR_INLINE_

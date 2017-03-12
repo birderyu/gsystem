@@ -1,6 +1,8 @@
 #ifndef _CORE_REFERENCE_COUNTER_INLINE_
 #define _CORE_REFERENCE_COUNTER_INLINE_
 
+namespace gnova { // gnova
+
 template <typename ClassT>
 GINLINE GReferenceCounter<ClassT>::GReferenceCounter(ClassT *ptr, gsize count)
 : m_pPointer(ptr), m_nCount(count)
@@ -44,5 +46,7 @@ GINLINE const ClassT *GReferenceCounter<ClassT>::Pointer() const
 {
 	return m_pPointer;
 }
+
+} // namespace gnova
 
 #endif // _CORE_REFERENCE_COUNTER_INLINE_

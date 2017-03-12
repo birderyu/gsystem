@@ -22,7 +22,7 @@
 #define G_TIME_SIZE_SECOND			1
 #define G_TIME_SIZE_MILLISECOND		2
 
-namespace gnova {
+namespace gnova { // gnova
 
 GTime GTime::Now()
 {

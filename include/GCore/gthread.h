@@ -5,11 +5,11 @@
 #include "grunnable.h"
 #include "gnocopyable.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GRunnable;
-}
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GThread final
 	: public GRunnable
@@ -49,6 +49,6 @@ private:
 	gint Run();
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_THREAD_H_

@@ -18,7 +18,7 @@
 #include "gstring.h"
 #include "ghash.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename ValueT>
 class GPackage 
@@ -105,8 +105,8 @@ public:
 	gbool operator<(const GNumber<ValueT> &) const;
 };
 
-#include "gpackage.inl"
+} // namespace gnova
 
-}
+#include "gpackage.inl"
 
 #endif // _CORE_PACKAGE_H_

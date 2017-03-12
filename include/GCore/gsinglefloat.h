@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GSingleFloat 
 	: public GNumber<gfloat>
@@ -38,6 +38,6 @@ public:
 
 typedef GSingleFloat GFloat;
 
-}
+} // namespace gnova
 
 #endif // _CORE_SINGLE_SINGLE_FLOAT_H_

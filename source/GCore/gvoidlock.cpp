@@ -1,6 +1,6 @@
 #include "gvoidlock.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gvoid GVoidLock::Lock()
 {

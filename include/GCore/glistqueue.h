@@ -1,5 +1,5 @@
 
-namespace gnova {
+namespace gnova { // gnova
 
 /*基于链表的队列的ADT*/
 template <typename T>
@@ -67,4 +67,4 @@ int LinkQueue<T>::size()
 	return count;
 };
 
-}
+} // namespace gnova

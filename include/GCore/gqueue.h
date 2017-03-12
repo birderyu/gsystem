@@ -3,7 +3,7 @@
 
 #include "glimitedlist.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename DataT>
 class GQueue
@@ -27,7 +27,7 @@ public:
 	virtual DataT &Rear() = 0; // ∂”Œ≤
 };
 
-}
+} // namespace gnova
 
 #include "gqueue.inl"
 

@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GUnsignedLongLongInteger 
 	: public GNumber<gulonglong>
@@ -34,6 +34,6 @@ typedef GUnsignedLongLongInteger GUInteger64;
 typedef GUnsignedLongLongInteger GUnsignedInt64;
 typedef GUnsignedLongLongInteger GUInt64;
 
-}
+} // namespace gnova
 
 #endif // _CORE_UNSIGNED_LONG_INTEGER_H_

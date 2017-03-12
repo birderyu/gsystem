@@ -17,14 +17,14 @@
 
 #include "gglobal.h"
 
-namespace gnova {
+namespace gnova { // gnova
 	class GSockAddress;
-	namespace extra {
+	namespace extra { // gnova.extra
 		class GSocket_Ex;
-	}
-}
+	} // namespace gnova.extra
+} // namespace gnova
 
-namespace gnova {
+namespace gnova { // gnova
 
 /****************************************************************************
 **
@@ -72,6 +72,6 @@ protected:
 	extra::GSocket_Ex *m_pSocket_Ex;
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_SOCKET_H_

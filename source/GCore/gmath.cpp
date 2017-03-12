@@ -1,7 +1,7 @@
 #include "gmath.h"
 #include <cmath>
 
-namespace gnova {
+namespace gnova { // gnova
 
 #define G_SINE_TABLE_SIZE 256
 extern const gdouble g_sine_table[G_SINE_TABLE_SIZE] = { 0 };

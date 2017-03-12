@@ -19,7 +19,7 @@
 
 #include "gbinarytree.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template<typename KeyT, typename ValueT>
 struct GBinarySortTreeNode 
@@ -378,8 +378,8 @@ protected:
 	static const CompareT m_fCompare;
 };
 
-#include "gbinarysorttree.inl"
+} // namespace gnova
 
-}
+#include "gbinarysorttree.inl"
 
 #endif // _CORE_BINARY_SORT_TREE_H_

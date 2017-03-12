@@ -25,7 +25,7 @@
 #define G_DATA_SIZE_DAY_OF_YEAR		2
 #define G_DATA_SIZE_DAY_OF_WEEK		1
 
-namespace gnova {
+namespace gnova { // gnova
 
 GDate GDate::Now()
 {

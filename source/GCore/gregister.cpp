@@ -1,7 +1,7 @@
 #include "gregister.h"
 #include "gstring.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gbool GRegister::Register(const GString &sClassName, guint nClassCode)
 {

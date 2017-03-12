@@ -8,8 +8,8 @@
 #define G_CRLF  0x0d0a
 #define G_LFCR  0x0a0d
 
-namespace gnova {
-namespace extra {
+namespace gnova { // gnova
+namespace extra { // gnova.extra
 
 class GTextFile_Ex 
 	: public GFile_Ex
@@ -30,7 +30,7 @@ protected:
 	gcstring OpenMode() const;
 };
 
-}
-}
+} // namespace gnova.extra
+} // namespace gnova
 
 #endif // _CORE_TEXT_DOCUMENT_EX_H_

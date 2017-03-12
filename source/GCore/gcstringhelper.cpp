@@ -20,7 +20,7 @@ gnova::gint strncasecmp(const gnova::gchar *s1, gnova::gchar *s2, /*register*/ g
 #	endif // !G_USE_MSVC_STRCMP
 #endif
 
-namespace gnova {
+namespace gnova { // gnova
 
 gsize GCStringHelper::Size(const gchar *c_str)
 {

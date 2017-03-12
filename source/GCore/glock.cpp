@@ -1,6 +1,6 @@
 #include "glock.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GLock::~GLock()
 {

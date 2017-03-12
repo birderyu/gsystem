@@ -4,7 +4,7 @@
 #include "gglobal.h"
 #include "gnocopyable.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename ClassT>
 class GUniquePointer
@@ -30,8 +30,8 @@ private:
 
 template<typename ClassT, typename... TS> GUniquePointer<ClassT> GMakeUnique(TS&&... args);
 
-#include "guniquepointer.inl"
+} // namespace gnova
 
-}
+#include "guniquepointer.inl"
 
 #endif // _CORE_UNIQUE_POINTER_H_

@@ -1,4 +1,4 @@
-// 使用动态数组实现
+// 使用动态数组实现的顺序容器
 #ifndef _CORE_VECTOR_H_
 #define _CORE_VECTOR_H_
 
@@ -6,7 +6,7 @@
 
 #define G_VECTOR_DEFAULT_CAPACITY 16
 
-namespace gnova {
+namespace gnova { // gnova
 
 template <typename DataT>
 class GVector final
@@ -180,9 +180,9 @@ private:
 	gsize m_nTail;
 };
 
-#include "gvector.inl"
+} // namespace gnova
 
-}
+#include "gvector.inl"
 
 #undef G_VECTOR_DEFAULT_CAPACITY
 

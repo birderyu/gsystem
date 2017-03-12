@@ -9,7 +9,7 @@
 #include "gglobal.h"
 #include "gblock.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 class GAPI GMemoryStore
 {
@@ -42,6 +42,6 @@ private:
 	GMemCell *m_pList;		// ÄÚ´æ¿éÁ´±í
 };
 
-}
+} // namespace gnova
 
 #endif // _CORE_MEMORY_STORE_H_

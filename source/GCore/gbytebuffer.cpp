@@ -4,7 +4,7 @@
 
 #define G_BYTES_DEFAULT_ADD_SIZE 512
 
-namespace gnova {
+namespace gnova { // gnova
 
 GByteBuffer::GByteBuffer(gsize capacity, gsize add_size)
 	: m_nAddSize(add_size)

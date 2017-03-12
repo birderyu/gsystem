@@ -1,6 +1,8 @@
 #ifndef _CORE_SHARED_POINTER_GINLINE_
 #define _CORE_SHARED_POINTER_GINLINE_
 
+namespace gnova { // gnova
+
 template <typename ClassT>
 GINLINE GSharedPointer<ClassT>::GSharedPointer(ClassT *ptr, gsize count)
 : m_pRefCounter(new GReferenceCounter<ClassT>(ptr, count))
@@ -149,5 +151,7 @@ GINLINE GSharedPointer<ClassT> GMakeShared(TS&&... args)
 {
 	return GSharedPointer<ClassT>(new ClassT(GForward<TS>(args)...), 1);
 }
+
+} // namespace gnova
 
 #endif // _CORE_SHARED_POINTER_GINLINE_

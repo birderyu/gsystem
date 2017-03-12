@@ -1,6 +1,8 @@
 #ifndef _CORE_LOCK_GUARD_INLINE_
 #define _CORE_LOCK_GUARD_INLINE_
 
+namespace gnova { // gnova
+
 template <typename LockT>
 GINLINE GLockGuard<LockT>::GLockGuard(LockT &tLock)
 : m_tLock(tLock)
@@ -13,5 +15,7 @@ GINLINE GLockGuard<LockT>::~GLockGuard()
 {
 	m_tLock.Unlock();
 }
+
+} // namespace gnova
 
 #endif // _CORE_LOCK_GUARD_INLINE_

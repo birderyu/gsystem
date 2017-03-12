@@ -1,6 +1,6 @@
 #include "gsmallinteger.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gsmall GSmallInteger::MaxValue()
 {

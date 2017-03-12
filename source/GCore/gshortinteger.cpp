@@ -1,6 +1,6 @@
 #include "gshortinteger.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 gshort GShortInteger::MaxValue()
 {

@@ -1,6 +1,8 @@
 #ifndef _CORE_VARIETY_INLINE_
 #define _CORE_VARIETY_INLINE_
 
+namespace gnova { // gnova
+
 GINLINE GVariety::GVariety()
 : m_nType(VARIETY_TYPE_ILLEGAL)
 , m_pVal(GNULL)
@@ -349,5 +351,7 @@ GINLINE gint GVariety::GetValue<gint>() const
 {
 	return ToInt();
 }
+
+} // namespace gnova
 
 #endif // _CORE_VARIETY_INLINE_

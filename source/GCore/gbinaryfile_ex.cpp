@@ -4,7 +4,7 @@
 
 #define G_BINARY_DOCUMNET_BUFFER_SIZE 4096
 
-namespace gnova {
+namespace gnova { // gnova
 namespace extra {
 
 GBinaryFile_Ex::GBinaryFile_Ex(const GString &sFileName)

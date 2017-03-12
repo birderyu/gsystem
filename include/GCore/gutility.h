@@ -3,7 +3,7 @@
 
 #include "gtraits.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 /// 移动语义
 template<typename T> typename GRemoveReference<T>::Type &&GMove(T &&t);
@@ -15,8 +15,8 @@ template<typename T> T&& GForward(typename GRemoveReference<T>::Type &&t);
 /// 交换两个对象，优先使用移动操作
 template<typename T> gvoid GSwap(T &a, T &b);
 
-#include "gutility.inl"
+} // namespace gnova
 
-}
+#include "gutility.inl"
 
 #endif // _CORE_UTILITY_H_

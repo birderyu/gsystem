@@ -1,6 +1,6 @@
 #include "gstringbuffer.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 GStringBuffer::GStringBuffer(gsize nCapacity, gsize nAddSize)
 {

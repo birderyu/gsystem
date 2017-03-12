@@ -1,6 +1,8 @@
 #ifndef _CORE_ARRAY_STACK_INLINE_
 #define _CORE_ARRAY_STACK_INLINE_
 
+namespace gnova { // gnova
+
 template<typename DataT>
 GINLINE GArrayStack<DataT>::GArrayStack(gsize capacity)
 : m_TopCursor(NULL_POS), m_tArray(capacity)
@@ -193,5 +195,7 @@ GINLINE DataT &GArrayStack<DataT>::Bottom()
 {
 	return m_tArray[0];
 }
+
+} // namespace gnova
 
 #endif // _CORE_ARRAY_STACK_INLINE_

@@ -3,7 +3,7 @@
 
 #include "gutility.h"
 
-namespace gnova {
+namespace gnova { // gnova
 
 // ¶Ô×é
 template<typename T1, typename T2>
@@ -331,8 +331,8 @@ gvoid GTupleSet(GTuple<TS...> &tuple_, typename GTupleAt<N, GTuple<TS...> >::Val
 	cur_val = GMove(val);
 }
 
-#include "gtuple.inl"
+} // namespace gnova
 
-}
+#include "gtuple.inl"
 
 #endif // _CORE_TUPLE_H_
