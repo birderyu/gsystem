@@ -4,7 +4,7 @@
 #include "gliststack.h"
 
 namespace gnova { // gnova
-namespace json {
+namespace json { // gnova.json
 
 GJsonArray::GJsonArray()
 {
@@ -246,5 +246,5 @@ gvoid GJsonArray::Dispose()
 	m_tJsonValues.Clear();
 }
 
-}
-}
+} // namespace gnova.json
+} // namespace gnova

@@ -2,8 +2,8 @@
 #define _CORE_CONSTRUCTOR_INLINE_
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace constructor { // gnova.extra.constructor
+namespace detail { // gnova.detail
+namespace constructor { // gnova.detail.constructor
 
 template <typename ClassT>
 GINLINE gvoid _GDefaultConstruct(ClassT *ptr, GTrueType)
@@ -89,11 +89,17 @@ GINLINE gvoid _GDestruct(ClassT *ptr, GFalseType)
 }
 
 
-}  // namespace gnova.extra.constructor
-}  // namespace gnova.extra
+}  // namespace gnova.detail.constructor
+}  // namespace gnova.detail
 }  // namespace gnova
 
 namespace gnova { // gnova
+
+template <typename ClassT, typename... ArgsT>
+GINLINE gvoid GConstruct(ClassT *ptr, ArgsT&& ...args)
+{
+	new(ptr) ClassT(GForward<ArgsT>(args)...);
+}
 
 template <typename ClassT> 
 GINLINE gvoid GConstruct(ClassT *ptr)
@@ -116,7 +122,7 @@ GINLINE gvoid GConstruct(ClassT *ptr, ClassT &&moveable)
 template <typename ClassT>
 GINLINE gvoid GDestruct(ClassT *ptr)
 {
-	extra::constructor::_GDestruct(ptr,
+	detail::constructor::_GDestruct(ptr,
 		GTypeTraits<ClassT>::TrivialDestructible());
 }
 
@@ -125,7 +131,7 @@ GINLINE gvoid GDefaultConstruct(ClassT *ptr)
 {
 	static_assert(GIsDefaultConstructible<ClassT>::value,
 		"this type has not a default constructor.");
-	extra::constructor::_GDefaultConstruct(ptr,
+	detail::constructor::_GDefaultConstruct(ptr,
 		GTypeTraits<ClassT>::TrivialDefaultConstructible());
 }
 
@@ -134,7 +140,7 @@ GINLINE gvoid GCopyConstruct(ClassT *ptr, const ClassT &copyable)
 {
 	static_assert(GIsCopyConstructible<ClassT>::value,
 		"this type has not a copy constructor.");
-	extra::constructor::_GCopyConstruct(ptr, copyable,
+	detail::constructor::_GCopyConstruct(ptr, copyable,
 		GTypeTraits<ClassT>::TrivialCopyConstructible());
 }
 
@@ -143,7 +149,7 @@ GINLINE gvoid GMoveConstruct(ClassT *ptr, ClassT &&moveable)
 {
 	static_assert(GIsMoveConstructible<ClassT>::value,
 		"this type has not a move constructor.");
-	extra::constructor::_GMoveConstruct<ClassT>(ptr, GForward<ClassT>(moveable),
+	detail::constructor::_GMoveConstruct<ClassT>(ptr, GForward<ClassT>(moveable),
 		GTypeTraits<ClassT>::TrivialMoveConstructible());
 }
 

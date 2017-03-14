@@ -75,4 +75,4 @@ gpointer GMemoryStore::Alloc(gsize nSize)
 	return pPtr;
 }
 
-}
+} // namespace gnova

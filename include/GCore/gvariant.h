@@ -5,8 +5,8 @@
 #include "gnew.h"
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace variant { // gnova.extra.variant
+namespace detail { // gnova.detail
+namespace variant { // gnova.detail.variant
 
 template<typename T, typename ...TS>
 struct GSelectConvertible
@@ -184,8 +184,8 @@ struct g_variant_cast
 	operator T &() { return static_cast<V &>(*this).template GetReference<T>(); }
 };
 
-} // namespace gnova.extra.variant
-} // namespace gnova.extra
+} // namespace gnova.detail.variant
+} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -206,11 +206,11 @@ public:
 			typename GEnableIf<
 				!GIsSame<
 					typename GRemoveReference<T>::Type, 
-					Variant<TS...>
+					GVariant<TS...>
 				>::value
 			>::Type,
 		typename CT =
-			typename extra::variant::GSelectType<
+			typename detail::variant::GSelectType<
 				typename GRemoveReference<T>::Type, TS...
 			>::Type
 		>
@@ -220,7 +220,7 @@ public:
 		static_assert(GTypeExist<CT, TS...>::exist,
 			"invalid type for the variant.");
 
-		static_assert(extra::variant::GCheckConstructible<GIsRvalueReference<T>::value, CT>::value,
+		static_assert(detail::variant::GCheckConstructible<GIsRvalueReference<T>::value, CT>::value,
 			"try to copy or move an object that is not copyable or movable.");
 
 		GCopyConstruct<CT>((CT *)data_, v);
@@ -231,11 +231,11 @@ public:
 			typename GEnableIf<
 				!GIsSame<
 					typename GRemoveReference<T>::Type,
-					Variant<TS...>
+					GVariant<TS...>
 				>::value
 			>::Type,
 		typename CT = 
-			typename extra::variant::GSelectType<
+			typename detail::variant::GSelectType<
 				typename GRemoveReference<T>::Type, TS...
 			>::Type
 		>
@@ -245,14 +245,14 @@ public:
 		static_assert(GTypeExist<CT, TS...>::exist, 
 			"invalid type for the variant.");
 
-		static_assert(extra::variant::GCheckConstructible<GIsLvalueReference<T>::value, CT>::value,
+		static_assert(detail::variant::GCheckConstructible<GIsLvalueReference<T>::value, CT>::value,
 			"try to copy or move an object that is not copyable or movable.");
 
 		GMoveConstruct<CT>((CT *)data_, GForward<T>(v));
 	}
 
 	GVariant(const GVariant<TS...> &v) noexcept(
-		extra::variant::GCheckTypeList<GIsNothrowCopyConstructible, TS...>::value)
+		detail::variant::GCheckTypeList<GIsNothrowCopyConstructible, TS...>::value)
 	{
 		if (v.type_ == 0) return;
 		m_copy_construct[v.type_ - 1](data_, v.data_);
@@ -260,7 +260,7 @@ public:
 	}
 
 	GVariant(GVariant<TS...> &&v) noexcept(
-		extra::variant::GCheckTypeList<GIsNothrowMoveConstructible, TS...>::value)
+		detail::variant::GCheckTypeList<GIsNothrowMoveConstructible, TS...>::value)
 	{
 		if (v.type_ == 0) return; 
 		m_move_construct[v.type_ - 1](data_, v.data_);
@@ -270,14 +270,14 @@ public:
 	template<typename T,
 		typename D = typename GEnableIf<
 			!GIsSame< typename GRemoveReference<T>::Type, Variant<TS...>>::value>::Type,
-		typename CT = typename extra::variant::GSelectType<
+		typename CT = typename detail::variant::GSelectType<
 			typename GRemoveReference<T>::Type, TS...>::Type>
 	GVariant &operator=(const T &v)
 	{
 		static_assert(GTypeExist<CT, TS...>::exist,
 			"invalid type for the variant.");
 
-		static_assert(extra::variant::GCheckConstructible<GIsRvalueReference<T>::value, CT>::value,
+		static_assert(detail::variant::GCheckConstructible<GIsRvalueReference<T>::value, CT>::value,
 			"try to copy or move an object that is not copyable or movable.");
 
 		if (type_ != GTypeExist<CT, TS...>::id)
@@ -303,14 +303,14 @@ public:
 	template<typename T,
 		typename D = typename GEnableIf<
 			!GIsSame< typename GRemoveReference<T>::Type, Variant<TS...>>::value>::Type,
-		typename CT = typename extra::variant::GSelectType<
+		typename CT = typename detail::variant::GSelectType<
 			typename GRemoveReference<T>::Type, TS...>::Type>
 	GVariant &operator=(T &&v)
 	{
 		static_assert(GTypeExist<CT, TS...>::exist,
 			"invalid type for the variant.");
 
-		static_assert(extra::variant::GCheckConstructible<GIsLvalueReference<T>::value, CT>::value,
+		static_assert(detail::variant::GCheckConstructible<GIsLvalueReference<T>::value, CT>::value,
 			"try to copy or move an object that is not copyable or movable.");
 
 		if (type_ != GTypeExist<CT, TS...>::id)
@@ -362,8 +362,8 @@ public:
 	}
 	
 	GVariant &operator=(GVariant<TS...> &&v) noexcept(
-		extra::variant::GCheckTypeList<GIsNothrowMoveConstructible, TS...>::value &&
-		extra::variant::GCheckTypeList<GIsNothrowMoveAssignable, TS...>::value)
+		detail::variant::GCheckTypeList<GIsNothrowMoveConstructible, TS...>::value &&
+		detail::variant::GCheckTypeList<GIsNothrowMoveAssignable, TS...>::value)
 	{
 		if (this == &v)
 		{
@@ -402,8 +402,7 @@ public:
 
 		Release();
 
-		// TODO，封装了变长的构造函数
-		new(data_) T(GForward<TS2>(arg)...);
+		GConstruct<T>((T *)data_, GForward<TS2>(arg)...);
 		type_ = GTypeExist<T, TS...>::id;
 	}
 
@@ -480,27 +479,27 @@ private:
 
 private:
 	// 只是声明，需在结构体外再定义。 
-	constexpr static extra::variant::construct_func_t m_default_construct[] = { extra::variant::DefaultConstruct<TS>... };
-	constexpr static extra::variant::copy_func_t m_copy_construct[] = { extra::variant::CopyConstruct<TS>... };
-	constexpr static extra::variant::move_func_t m_move_construct[] = { extra::variant::MoveConstruct<TS>... };
-	constexpr static extra::variant::destruct_func_t m_destruct[] = { extra::variant::Destruct<TS>...};
-	constexpr static extra::variant::copy_func_t m_copy_assign[] = { extra::variant::CopyAssign<TS>... };
-	constexpr static extra::variant::move_func_t m_move_assign[] = { extra::variant::MoveAssign<TS>... };
+	constexpr static detail::variant::construct_func_t m_default_construct[] = { detail::variant::DefaultConstruct<TS>... };
+	constexpr static detail::variant::copy_func_t m_copy_construct[] = { detail::variant::CopyConstruct<TS>... };
+	constexpr static detail::variant::move_func_t m_move_construct[] = { detail::variant::MoveConstruct<TS>... };
+	constexpr static detail::variant::destruct_func_t m_destruct[] = { detail::variant::Destruct<TS>...};
+	constexpr static detail::variant::copy_func_t m_copy_assign[] = { detail::variant::CopyAssign<TS>... };
+	constexpr static detail::variant::move_func_t m_move_assign[] = { detail::variant::MoveAssign<TS>... };
 };
 
 // 定义 constexpr 数组。 
 template<typename ...TS>
-constexpr extra::variant::construct_func_t GVariant<TS...>::m_default_construct[];
+constexpr detail::variant::construct_func_t GVariant<TS...>::m_default_construct[];
 template<typename ...TS>
-constexpr extra::variant::copy_func_t GVariant<TS...>::m_copy_construct[];
+constexpr detail::variant::copy_func_t GVariant<TS...>::m_copy_construct[];
 template<typename ...TS>
-constexpr extra::variant::move_func_t GVariant<TS...>::m_move_construct[];
+constexpr detail::variant::move_func_t GVariant<TS...>::m_move_construct[];
 template<typename ...TS>
-constexpr extra::variant::destruct_func_t GVariant<TS...>::m_destruct[];
+constexpr detail::variant::destruct_func_t GVariant<TS...>::m_destruct[];
 template<typename ...TS>
-constexpr extra::variant::copy_func_t GVariant<TS...>::m_copy_assign[];
+constexpr detail::variant::copy_func_t GVariant<TS...>::m_copy_assign[];
 template<typename ...TS>
-constexpr extra::variant::move_func_t GVariant<TS...>::m_move_assign[];
+constexpr detail::variant::move_func_t GVariant<TS...>::m_move_assign[];
 
 } // namespace gnova
 

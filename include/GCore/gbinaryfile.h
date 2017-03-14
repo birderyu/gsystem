@@ -5,9 +5,9 @@
 
 namespace gnova { // gnova
 	class GBytes;
-	namespace extra { // gnova.extra
+	namespace detail { // gnova.detail
 		class GBinaryFile_Ex;
-	} // namespace gnova.extra
+	} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -23,7 +23,7 @@ public:
 	gbool Write(const GBytes &);
 
 protected:
-	GBinaryFile(extra::GBinaryFile_Ex *);
+	GBinaryFile(detail::GBinaryFile_Ex *);
 };
 
 } // namespace gnova

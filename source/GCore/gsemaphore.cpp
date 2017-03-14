@@ -88,4 +88,4 @@ gint GSemaphore::Initialize(gint nInitialValue)
 	return 0;
 }
 
-}
+} // namespace gnova

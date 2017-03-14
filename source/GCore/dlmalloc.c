@@ -523,7 +523,7 @@ typedef unsigned int flag_t;           /* The type of various bit flag sets */
 /* Head value for fenceposts */
 #define FENCEPOST_HEAD      (INUSE_BITS|SIZE_T_SIZE)
 
-/* extraction of fields from head words */
+/* detailction of fields from head words */
 #define cinuse(p)           ((p)->head & CINUSE_BIT)
 #define pinuse(p)           ((p)->head & PINUSE_BIT)
 #define chunksize(p)        ((p)->head & ~(INUSE_BITS))
@@ -539,7 +539,7 @@ typedef unsigned int flag_t;           /* The type of various bit flag sets */
 #define next_chunk(p) ((mchunkptr)( ((char*)(p)) + ((p)->head & ~INUSE_BITS)))
 #define prev_chunk(p) ((mchunkptr)( ((char*)(p)) - ((p)->prev_foot) ))
 
-/* extract next chunk's pinuse bit */
+/* detailct next chunk's pinuse bit */
 #define next_pinuse(p)  ((next_chunk(p)->head) & PINUSE_BIT)
 
 /* Get/set size at footer */
@@ -711,7 +711,7 @@ typedef struct malloc_tree_chunk* tbinptr; /* The type of bins of trees */
   don't expect to have huge numbers of segments:
 
   * Segments are not indexed, so traversal requires linear scans.  (It
-    would be possible to index these, but is not worth the extra
+    would be possible to index these, but is not worth the detail
     overhead and complexity for most programs on most platforms.)
   * New segments are only appended to old ones when holding top-most
     memory; if they cannot be prepended to others, they are held in
@@ -2420,32 +2420,32 @@ static int sys_trim(mstate m, size_t pad) {
     if (m->topsize > pad) {
       /* Shrink top space in granularity-size units, keeping at least one */
       size_t unit = mparams.granularity;
-      size_t extra = ((m->topsize - pad + (unit - SIZE_T_ONE)) / unit -
+      size_t detail = ((m->topsize - pad + (unit - SIZE_T_ONE)) / unit -
                       SIZE_T_ONE) * unit;
       msegmentptr sp = segment_holding(m, (char*)m->top);
 
       if (!is_extern_segment(sp)) {
         if (is_mmapped_segment(sp)) {
           if (HAVE_MMAP &&
-              sp->size >= extra &&
+              sp->size >= detail &&
               !has_segment_link(m, sp)) { /* can't shrink if pinned */
-            size_t newsize = sp->size - extra;
+            size_t newsize = sp->size - detail;
             /* Prefer mremap, fall back to munmap */
             if ((CALL_MREMAP(sp->base, sp->size, newsize, 0) != MFAIL) ||
-                (CALL_MUNMAP(sp->base + newsize, extra) == 0)) {
-              released = extra;
+                (CALL_MUNMAP(sp->base + newsize, detail) == 0)) {
+              released = detail;
             }
           }
         }
         else if (HAVE_MORECORE) {
-          if (extra >= HALF_MAX_SIZE_T) /* Avoid wrapping negative */
-            extra = (HALF_MAX_SIZE_T) + SIZE_T_ONE - unit;
+          if (detail >= HALF_MAX_SIZE_T) /* Avoid wrapping negative */
+            detail = (HALF_MAX_SIZE_T) + SIZE_T_ONE - unit;
           ACQUIRE_MORECORE_LOCK();
           {
             /* Make sure end of memory is where we last set it. */
             char* old_br = (char*)(CALL_MORECORE(0));
             if (old_br == sp->base + sp->size) {
-              char* rel_br = (char*)(CALL_MORECORE(-extra));
+              char* rel_br = (char*)(CALL_MORECORE(-detail));
               char* new_br = (char*)(CALL_MORECORE(0));
               if (rel_br != CMFAIL && new_br < old_br)
                 released = old_br - new_br;
@@ -2601,7 +2601,7 @@ static void* internal_realloc(mstate m, void* oldmem, size_t bytes) {
     size_t oldsize = chunksize(oldp);
     mchunkptr next = chunk_plus_offset(oldp, oldsize);
     mchunkptr newp = 0;
-    void* extra = 0;
+    void* detail = 0;
 
     /* Try to either shrink or extend into top. Else malloc-copy-free */
 
@@ -2617,7 +2617,7 @@ static void* internal_realloc(mstate m, void* oldmem, size_t bytes) {
           mchunkptr remainder = chunk_plus_offset(newp, nb);
           set_inuse(m, newp, nb);
           set_inuse(m, remainder, rsize);
-          extra = chunk2mem(remainder);
+          detail = chunk2mem(remainder);
         }
       }
       else if (next == m->top && oldsize + m->topsize > nb) {
@@ -2641,8 +2641,8 @@ static void* internal_realloc(mstate m, void* oldmem, size_t bytes) {
     POSTACTION(m);
 
     if (newp != 0) {
-      if (extra != 0) {
-        internal_free(m, extra);
+      if (detail != 0) {
+        internal_free(m, detail);
       }
       check_inuse_chunk(m, newp);
       return chunk2mem(newp);

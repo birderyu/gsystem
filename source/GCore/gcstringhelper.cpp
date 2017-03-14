@@ -278,4 +278,4 @@ gbool GCStringHelper::Replace(const gchar *c_str, gsize len,
 	return true;
 }
 
-}
+} // namespace gnova

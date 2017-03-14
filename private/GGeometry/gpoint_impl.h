@@ -6,6 +6,10 @@
 #include "genvelope.h"
 #include "gcoordinatesequence.h"
 
+namespace gnova { // gnova
+namespace detail { // gnova.detail
+namespace geom { // gnova.detail.geom
+
 template<gsize DIMENSION>
 class GPoint_Impl
 	: virtual public GPoint
@@ -39,6 +43,10 @@ private:
 	GSinglePoint_Store<DIMENSION> m_tStore;
 	const GGeometryFactory *m_pFactory;
 };
+
+} // namespace gnova.detail.geom
+} // namespace gnova.detail
+} // namespace gnova
 
 #include "gpoint_impl.inl"
 

@@ -18,18 +18,18 @@
 #include "GCore/gobject.h"
 
 namespace gnova { // gnova
-	namespace geom {
+	namespace geom { // gnova.geom
 		class GGeometry;
 		class GGeometryFactory;
 		class GEnvelope;
 		class GCoordinate;
 		class GCoordinateSequence;
 		typedef GSharedPointer<GGeometry> GGeometryP;
-	}
-}
+	} // namespace gnova.geom
+} // namespace gnova
 
 namespace gnova { // gnova
-namespace geom {
+namespace geom { // gnova.geom
 
 /****************************************************************************
 **

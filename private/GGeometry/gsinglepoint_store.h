@@ -5,6 +5,10 @@
 #include "gcoordinate.h"
 #include "GCore/gbytes.h"
 
+namespace gnova { // gnova
+namespace detail { // gnova.detail
+namespace geom { // gnova.detail.geom
+
 template<gsize DIMENSION>
 class GSinglePoint_Store
 {
@@ -38,6 +42,10 @@ public:
 private:
 	greal m_aCoord[COORD_VALUE_SIZE];
 };
+
+} // namespace gnova.detail.geom
+} // namespace gnova.detail
+} // namespace gnova
 
 #include "gsinglepoint_store.inl"
 

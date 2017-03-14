@@ -223,7 +223,7 @@ gvoid GBlock::Free()
 	m_nSize = 0;
 }
 
-}
+} // namespace gnova
 
 #undef G_BLOCK_LOCAL_MEMORY
 #undef G_BLOCK_AUTO_RELEASE

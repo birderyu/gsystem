@@ -72,4 +72,4 @@ gvoid GMutex::Release()
 	m_pHandle = GNULL;
 }
 
-}
+} // namespace gnova

@@ -1,7 +1,7 @@
 #include "gjsonparsermessage.h"
 
 namespace gnova { // gnova
-namespace json {
+namespace json { // gnova.json
 
 gbool GJsonParserMessage::IsSuccess() const
 {
@@ -33,5 +33,5 @@ gvoid GJsonParserMessage::SetErrorMessage(const GString &msg)
 	m_sErrorMessage = msg;
 }
 
-}
-}
+} // namespace gnova.json
+} // namespace gnova

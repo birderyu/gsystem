@@ -164,4 +164,4 @@ gint GStdStringHelper::Find(const std::string &str, const std::string &tar, gsiz
 	return static_cast<gint>(pos);
 }
 
-}
+} // namespace gnova

@@ -32,4 +32,4 @@ guint GBoolean::ClassCode() const
 	return GBoolean::CLASS_CODE;
 }
 
-}
+} // namespace gnova

@@ -144,6 +144,6 @@ gdecimal GMath::Sqrt(gdecimal v)
 }
 #endif // G_HAS_DECIMAL
 
-}
+} // namespace gnova
 
 #undef G_SINE_TABLE_SIZE

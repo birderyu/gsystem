@@ -10,7 +10,7 @@ namespace gnova { // gnova
 } // namespace gnova
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 
 class GDateTime_Ex
 {
@@ -24,7 +24,7 @@ private:
 		guint &h, guint &mm, guint &s, guint &ms);
 };
 
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 #endif // _CORE_DATETIME_PRIVATE_H

@@ -6,7 +6,7 @@
 #include "gcoordinate.h"
 
 namespace gnova { // gnova
-namespace geom {
+namespace geom { // gnova.geom
 
 class GAPI GCoordinateSequence
 {

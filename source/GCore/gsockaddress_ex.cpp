@@ -2,7 +2,7 @@
 #include "gstring.h"
 
 namespace gnova { // gnova
-namespace extra {
+namespace detail { // gnova.detail
 
 GSockAddress_Ex::GSockAddress_Ex()
 {
@@ -15,7 +15,7 @@ GSockAddress_Ex::GSockAddress_Ex(const GString &sIP, gushort nPort)
 {
 	m_tSocketAddr.sin_family = AF_INET;
 	m_tSocketAddr.sin_addr.s_addr = inet_addr(sIP.CString());
-	m_tSocketAddr.sin_port = htons(nPort);
+	m_tSocketAddr.sin_port = ::htons(nPort);
 }
 
 gvoid GSockAddress_Ex::SetIP(const GString &sIP)
@@ -30,8 +30,8 @@ gvoid GSockAddress_Ex::SetIP(guint nIP)
 
 gvoid GSockAddress_Ex::SetPortID(gushort nPort)
 {
-	m_tSocketAddr.sin_port = htons(nPort);
+	m_tSocketAddr.sin_port = ::htons(nPort);
 }
 
-}
-}
+} // namespace gnova.detail
+} // namespace gnova

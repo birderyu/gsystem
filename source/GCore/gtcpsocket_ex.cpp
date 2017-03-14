@@ -2,7 +2,7 @@
 #include "gtcpsocket.h"
 
 namespace gnova { // gnova
-namespace extra {
+namespace detail { // gnova.detail
 
 gbool GTcpSocket_Ex::Open(gbool nResue)
 {
@@ -102,5 +102,5 @@ gint GTcpSocket_Ex::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
 	return GRecvSocket(m_hSocket, pBufData, nDataLen, nFlags);
 }
 
-}
-}
+} // namespace gnova.detail
+} // namespace gnova

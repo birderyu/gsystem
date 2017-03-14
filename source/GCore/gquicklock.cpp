@@ -12,4 +12,4 @@ gvoid GQuickLock::Unlock()
 	m_tLock.Unlock();
 }
 
-}
+} // namespace gnova

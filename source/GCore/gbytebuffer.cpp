@@ -723,6 +723,6 @@ GByteBuffer &GByteBuffer::operator >> (gdecimal &val)
 }
 */
 
-}
+} // namespace gnova
 
 #undef G_BYTES_DEFAULT_ADD_SIZE

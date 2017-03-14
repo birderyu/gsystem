@@ -5,7 +5,7 @@
 namespace gnova { // gnova
 
 GUdpSocket::GUdpSocket()
-: GSocket(new extra::GUdpSocket_Ex())
+: GSocket(new detail::GUdpSocket_Ex())
 {
 	GASSERT(m_pSocket_Ex);
 }
@@ -13,31 +13,31 @@ GUdpSocket::GUdpSocket()
 gbool GUdpSocket::Open(gbool nResue)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((extra::GUdpSocket_Ex*)m_pSocket_Ex)->Open(nResue);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Open(nResue);
 }
 
 gbool GUdpSocket::Open(const GSockAddress &tSockAddr, gbool nResue)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((extra::GUdpSocket_Ex*)m_pSocket_Ex)->Open(tSockAddr.m_pSockAddress_Ex, nResue);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Open(tSockAddr.m_pSockAddress_Ex, nResue);
 }
 
 gvoid GUdpSocket::Close()
 {
 	GASSERT(m_pSocket_Ex);
-	((extra::GUdpSocket_Ex*)m_pSocket_Ex)->Close();
+	((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Close();
 }
 
 gbool GUdpSocket::SendTo(const gchar *pBufData, gint nLen, const GSockAddress &tPeer)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((extra::GUdpSocket_Ex*)m_pSocket_Ex)->SendTo(pBufData, nLen, tPeer.m_pSockAddress_Ex);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->SendTo(pBufData, nLen, tPeer.m_pSockAddress_Ex);
 }
 
 gint GUdpSocket::RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress &tPeer)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((extra::GUdpSocket_Ex*)m_pSocket_Ex)->RecvFrom(pBufData, nMaxLen, tPeer.m_pSockAddress_Ex);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->RecvFrom(pBufData, nMaxLen, tPeer.m_pSockAddress_Ex);
 }
 
-}
+} // namespace gnova

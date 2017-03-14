@@ -5,7 +5,7 @@
 #include "gjsonparsermessage.h"
 
 namespace gnova { // gnova
-namespace json {
+namespace json { // gnova.json
 
 GJsonObject::GJsonObject()
 {
@@ -261,5 +261,5 @@ gvoid GJsonObject::Dispose()
 	m_tJsonPairs.Clear();
 }
 
-}
-}
+} // namespace gnova.json
+} // namespace gnova

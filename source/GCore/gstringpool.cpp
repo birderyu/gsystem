@@ -23,4 +23,4 @@ gvoid GStringPool::Free(gpointer)
 
 }
 
-}
+} // namespace gnova

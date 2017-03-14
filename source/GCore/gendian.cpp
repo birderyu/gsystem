@@ -202,4 +202,4 @@ GEndian::~GEndian()
 
 }
 
-}
+} // namespace gnova

@@ -18,6 +18,9 @@
 #	define G_COORDINATE_Y_POS	1
 #endif // G_GEOMETRY_HAS_Z
 
+namespace gnova { // gnova
+namespace geom { // gnova.geom
+
 // Î¬¶È * 4
 enum G_GEOMETRY_DIMENSION
 {
@@ -80,5 +83,8 @@ struct GGeometryGlobal
 	static greal _g_n_coordinate_y_;
 	static greal _g_n_coordinate_z_;
 };
+
+}
+}
 
 #endif // _GEOMETRY_GEOMETRY_GLOBAL_H_

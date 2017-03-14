@@ -57,7 +57,7 @@ public:
 	static void QuickSort(ArrT &arr, gsize start, gsize len);
 };
 
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 
 /// 排序算法实现类
 class GSort_Ex
@@ -107,7 +107,7 @@ private:
 	static void QuickSorting(ArrT &arr, gsize first, gsize last, const CompareT &compareF);
 };
 
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 #include "gsort.inl"

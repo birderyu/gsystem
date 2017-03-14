@@ -4,7 +4,7 @@
 #define G_TEXT_DOCUMNET_BUFFER_SIZE 4096
 
 namespace gnova { // gnova
-namespace extra {
+namespace detail { // gnova.detail
 
 GTextFile_Ex::GTextFile_Ex(const GString &sFileName)
 : GFile_Ex(sFileName)
@@ -139,7 +139,7 @@ gcstring GTextFile_Ex::OpenMode() const
 	return GNULL;
 }
 
-}
-}
+} // namespace gnova.detail
+} // namespace gnova
 
 #undef G_TEXT_DOCUMNET_BUFFER_SIZE

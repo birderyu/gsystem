@@ -1,6 +1,10 @@
 #ifndef _GEOMETRY_SINGLE_POINT_STORE_INLINE_
 #define _GEOMETRY_SINGLE_POINT_STORE_INLINE_
 
+namespace gnova { // gnova
+namespace detail { // gnova.detail
+namespace geom { // gnova.detail.geom
+
 template<gsize DIMENSION>
 inline gvoid GSinglePoint_Store<DIMENSION>::Initialize()
 {
@@ -207,5 +211,9 @@ inline gvoid GSinglePoint_Store<2>::SetZ(greal z)
 {
 
 }
+
+} // namespace gnova.detail.geom
+} // namespace gnova.detail
+} // namespace gnova
 
 #endif // _GEOMETRY_SINGLE_POINT_STORE_INLINE_

@@ -11,28 +11,28 @@ namespace gnova { // gnova
 } // namespace gnova
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace variety { // gnova.extra.variety
+namespace detail { // gnova.detail
+namespace variety { // gnova.detail.variety
 
 template<typename T>
-struct GVarietyExtraType
+struct GVarietydetailType
 	: GFalseType {};
 
 template<>
-struct GVarietyExtraType<GBytes>
+struct GVarietydetailType<GBytes>
 	: GTrueType {};
 
 template<>
-struct GVarietyExtraType<GString>
+struct GVarietydetailType<GString>
 	: GTrueType {};
 
 template<>
-struct GVarietyExtraType<GWString>
+struct GVarietydetailType<GWString>
 	: GTrueType {};
 
 template<typename T>
 struct GVarietyConstructible
-	: GCatBase<GIsArithmetic<T>::value || GVarietyExtraType<T>::value>
+	: GCatBase<GIsArithmetic<T>::value || GVarietydetailType<T>::value>
 {
 };
 
@@ -40,7 +40,7 @@ template<typename T>
 struct GVarietyGetValue
 	: GCatBase<GIsArithmetic<T>::value
 	|| GIsPointer<T>::value
-	|| GVarietyExtraType<T>::value>
+	|| GVarietydetailType<T>::value>
 {
 };
 
@@ -50,8 +50,8 @@ struct GVarietyGetReference
 {
 };
 
-} // namespace gnova.extra.variety
-} // namespace gnova.extra
+} // namespace gnova.detail.variety
+} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova

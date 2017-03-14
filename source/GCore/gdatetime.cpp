@@ -1290,7 +1290,7 @@ gbool operator<=(const GDateTime &dt1, const GDateTime &dt2)
 	return !(dt1 > dt2);
 }
 
-}
+} // namespace gnova
 
 #undef G_DATA_TIME_SIZE_MILLISECOND	
 #undef G_DATA_TIME_SIZE_SECOND			

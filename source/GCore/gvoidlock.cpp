@@ -12,4 +12,4 @@ gvoid GVoidLock::Unlock()
 	
 }
 
-}
+} // namespace gnova

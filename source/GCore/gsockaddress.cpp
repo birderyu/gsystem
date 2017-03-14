@@ -5,13 +5,13 @@
 namespace gnova { // gnova
 
 GSockAddress::GSockAddress()
-: m_pSockAddress_Ex(new extra::GSockAddress_Ex())
+: m_pSockAddress_Ex(new detail::GSockAddress_Ex())
 {
 
 }
 
 GSockAddress::GSockAddress(const GString &sIP, gushort nPort)
-: m_pSockAddress_Ex(new extra::GSockAddress_Ex(sIP, nPort))
+: m_pSockAddress_Ex(new detail::GSockAddress_Ex(sIP, nPort))
 {
 
 }
@@ -39,4 +39,4 @@ gvoid GSockAddress::SetPortID(const gushort nPort)
 	m_pSockAddress_Ex->SetPortID(nPort);
 }
 
-}
+} // namespace gnova

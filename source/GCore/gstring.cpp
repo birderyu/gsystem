@@ -299,4 +299,4 @@ gvoid GString::Append(GString &&str)
 	m_tString.Append(GMove(str.m_tString));
 }
 
-}
+} // namespace gnova

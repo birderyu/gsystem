@@ -29,7 +29,7 @@ GINLINE gvoid GSort::InsertSort(ArrT &arr, gsize start, gsize len, gbool bRecur)
 	if (bRecur)
 	{
 		// µ›πÈ µœ÷
-		extra::GSort_Ex::InsertSorting<ArrT, ElemT, CompareT>(arr, start, len, compareF);
+		detail::GSort_Ex::InsertSorting<ArrT, ElemT, CompareT>(arr, start, len, compareF);
 		return;
 	}
 
@@ -110,13 +110,13 @@ GINLINE gvoid GSort::HeapSort(ArrT &arr, gsize start, gsize len)
 	CompareT compareF;
 	for (gint i = len / 2; i >= 0; --i)
 	{
-		extra::GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, i, len, compareF);
+		detail::GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, i, len, compareF);
 	}
 
 	for (gint i = len - 1; i > 0; --i)
 	{
-		extra::GSort_Ex::Swap<ElemT>(&arr[start], &arr[i + start]);
-		extra::GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, 0, i, compareF);
+		detail::GSort_Ex::Swap<ElemT>(&arr[start], &arr[i + start]);
+		detail::GSort_Ex::PercDown<ArrT, ElemT, CompareT>(arr, start, 0, i, compareF);
 	}
 }
 
@@ -128,17 +128,17 @@ GINLINE gvoid GSort::MergeSort(ArrT &arr, gsize start, gsize len)
 		return;
 	}
 	CompareT compareF;
-	extra::GSort_Ex::MergeSorting<ArrT, ElemT, CompareT>(arr, 0, len - 1, compareF);
+	detail::GSort_Ex::MergeSorting<ArrT, ElemT, CompareT>(arr, 0, len - 1, compareF);
 }
 
 template<typename ArrT, typename ElemT, typename CompareT>
 GINLINE gvoid GSort::QuickSort(ArrT &arr, gsize start, gsize len)
 {
 	CompareT compareF;
-	extra::GSort_Ex::QuickSorting<ArrT, ElemT, CompareT>(arr, start, start + len - 1, compareF);
+	detail::GSort_Ex::QuickSorting<ArrT, ElemT, CompareT>(arr, start, start + len - 1, compareF);
 }
 
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 
 template<typename ArrT, typename ElemT, typename CompareT>
 GINLINE gvoid GSort_Ex::InsertSorting(ArrT &arr, const gsize start, const gsize len, const CompareT &compareF)
@@ -310,7 +310,7 @@ GINLINE gvoid GSort_Ex::QuickSorting(ArrT &arr, gsize first, gsize last, const C
 	}
 }
 
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 #endif // _CORE_SORT_INLINE_H_

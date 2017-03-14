@@ -9,14 +9,14 @@
 #include "GCore/gobject.h"
 
 namespace gnova { // gnova
-	namespace geom {
+	namespace geom { // gnova.geom
 		class GCoordinate;
 		class GCoordinateSequence;
 	}
 }
 
 namespace gnova { // gnova
-namespace geom {
+namespace geom { // gnova.geom
 
 class GAPI GEnvelope
 	: public GObject

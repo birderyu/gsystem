@@ -56,4 +56,4 @@ GStringBuffer &GStringBuffer::Append(const GString &)
 	return *this;
 }
 
-}
+} // namespace gnova

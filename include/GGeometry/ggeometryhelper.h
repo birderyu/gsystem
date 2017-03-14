@@ -3,12 +3,18 @@
 
 #include "ggeometryinterface.h"
 
+namespace gnova { // gnova
+namespace geom { // gnova.geom
+
 class GAPI GGeometryHelper
 {
 public:
 	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GGeometryP &geo);
 	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GPointP &point);
 };
+
+}
+}
 
 #include "ggeometryhelper.inl"
 

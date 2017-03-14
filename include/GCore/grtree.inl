@@ -446,7 +446,7 @@ typename GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>
 }
 
 // Split a node.
-// Divides the nodes branches and the extra one between two nodes.
+// Divides the nodes branches and the detail one between two nodes.
 // Old node is one of the new ones, and one really new one is created.
 // Tries more than one method for choosing a partition, uses best result.
 template<typename DATATYPE, typename ELEMTYPE, gsize NUMDIMS, typename ELEMTYPEREAL, gsize TMAXNODES, gsize TMINNODES>
@@ -536,7 +536,7 @@ ELEMTYPEREAL GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNO
 #endif // RTREE_USE_SPHERICAL_VOLUME  
 }
 
-// Load branch buffer with branches from full node plus the extra branch.
+// Load branch buffer with branches from full node plus the detail branch.
 template<typename DATATYPE, typename ELEMTYPE, gsize NUMDIMS, typename ELEMTYPEREAL, gsize TMAXNODES, gsize TMINNODES>
 void GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>::GetBranches(Node* a_node, Branch* a_branch, PartitionVars* a_parVars)
 {

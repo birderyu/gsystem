@@ -4,8 +4,10 @@
 #include "gconstructor.h"
 #include "gstring.h"
 
-gvoid Constructor_Test()
+gnova::gvoid Constructor_Test()
 {
+	using namespace gnova;
+
 	// 为基本内置类型分配一个空间
 	gint *p_int = GAllocate<gint>();
 
@@ -31,4 +33,26 @@ gvoid Constructor_Test()
 
 	// 释放多个连续空间
 	GDeallocate<gint>(p_int_arr);
+
+	// 申请空间
+	GString *p_str_original = GAllocate<GString>();
+	GString *p_str_copy = GAllocate<GString>();
+	GString *p_str_move = GAllocate<GString>();
+
+	// 调用带参数的构造函数
+	GConstruct<GString>(p_str_original, "abcdef123456");
+	// 调用拷贝构造函数
+	GCopyConstruct<GString>(p_str_copy, *p_str_original);
+	// 调用移动构造函数
+	GMoveConstruct<GString>(p_str_move, GMove(*p_str_original));
+
+	// 析构
+	GDestruct<GString>(p_str_original);
+	GDestruct<GString>(p_str_copy);
+	GDestruct<GString>(p_str_move);
+
+	// 释放空间
+	GDeallocate<GString>(p_str_original);
+	GDeallocate<GString>(p_str_copy);
+	GDeallocate<GString>(p_str_move);
 }

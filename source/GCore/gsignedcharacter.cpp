@@ -24,4 +24,4 @@ guint GSignedCharacter::ClassCode() const
 	return GSignedCharacter::CLASS_CODE;
 }
 
-}
+} // namespace gnova

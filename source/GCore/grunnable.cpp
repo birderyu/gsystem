@@ -80,4 +80,4 @@ gvoid GRunnable::Stop(gulong msecs)
 #endif // G_SYSTEM_WINDOWS
 }
 
-}
+} // namespace gnova

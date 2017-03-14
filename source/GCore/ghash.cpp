@@ -99,4 +99,4 @@ guint GHashing(gpointer)
 	return 0;
 }
 
-}
+} // namespace gnova

@@ -2,7 +2,7 @@
 #include "gstring.h"
 
 namespace gnova { // gnova
-namespace log {
+namespace log { // gnova.log
 
 GLog::GLog(const GString &filename)
 	: m_tLogFile(filename)
@@ -30,5 +30,5 @@ gvoid GLog::Error(const GString &msg)
 
 }
 
-}
-}
+} // namespace gnova.log
+} // namespace gnova

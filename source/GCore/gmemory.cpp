@@ -33,9 +33,9 @@ gpointer GMemMove(gvoid *dst, const gvoid *src, gsize size)
 	return memmove(dst, src, size);
 }
 
-GAPI gpointer GMemSet(gvoid *dst, gbyte value, gsize size)
+gpointer GMemSet(gvoid *dst, gbyte value, gsize size)
 {
 	return memset(dst, (gint)value, size);
 }
 
-}
+} // namespace gnova

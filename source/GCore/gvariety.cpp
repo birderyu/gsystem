@@ -1387,4 +1387,4 @@ gvoid GVariety::Free()
 	m_pVal = GNULL;
 }
 
-}
+} // namespace gnova

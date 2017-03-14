@@ -2,8 +2,8 @@
 #define _CORE_ARRAY_DATA_INLINE_
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace series { // gnova.extra.series
+namespace detail { // gnova.detail
+namespace series { // gnova.detail.series
 
 template<gbool HAS_END_FLAG>
 class GSeriesHelper
@@ -130,8 +130,8 @@ GINLINE gvoid GSeriesHelper<true>::SetEndFlag(T *arr, gsize size, T &&end_flag)
 	arr[size] = GForward<T>(end_flag);
 }
 
-} // namespace gnova.extra.series
-} // namespace gnova.extra
+} // namespace gnova.detail.series
+} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -150,10 +150,10 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(gsize capacity)
 	{
 		m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
 		m_nCapacity = capacity;
-		m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(capacity);
+		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(capacity);
 		m_pStart = m_pArray;
 	}
-	extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
 template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
@@ -175,17 +175,17 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(const T *copy_ar
 		{
 			m_nType = G_ARRAY_DATA_LOCAL_TYPE;
 			m_nCapacity = MIN_CAPACITY;
-			extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, copy_size, copy_arr);
+			detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, copy_size, copy_arr);
 			m_pStart = m_tArray;
 		}
 		else
 		{
 			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
 			m_nCapacity = copy_size;
-			m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(copy_arr, copy_size);
+			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(copy_arr, copy_size);
 			m_pStart = m_pArray;
 		}
-		extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 	}
 }
 
@@ -200,13 +200,13 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(const GSeries<T,
 	{
 	case G_ARRAY_DATA_LOCAL_TYPE:
 	{
-		extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
 		m_pStart = m_tArray;
 	}
 		break;
 	case G_ARRAY_DATA_GLOBAL_TYPE:
 	{
-		m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(arr.m_pStart, arr.m_nSize);
+		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(arr.m_pStart, arr.m_nSize);
 		m_pStart = m_pArray;
 	}
 		break;
@@ -233,7 +233,7 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(GSeries<T, LOCAL
 	case G_ARRAY_DATA_LOCAL_TYPE:
 	{
 		m_pStart = m_tArray;
-		extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_pStart, arr.m_nSize, arr.m_pStart);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_pStart, arr.m_nSize, arr.m_pStart);
 	}
 		break;
 	case G_ARRAY_DATA_GLOBAL_TYPE:
@@ -291,7 +291,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Resize(gsize size)
 		// 引用类型
 		ToValue(size);
 		m_nSize = size;
-		extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 	}
 	else
 	{
@@ -304,14 +304,14 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Resize(gsize size)
 		if (size <= m_nCapacity)
 		{
 			m_nSize = size;
-			extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+			detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 			return;
 		}
 
 		if (m_nType == G_ARRAY_DATA_LOCAL_TYPE)
 		{
 			// 需要将local type扩展成global type
-			T *arr = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(size, m_tArray, m_nSize);
+			T *arr = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(size, m_tArray, m_nSize);
 			m_nCapacity = size;
 			m_pArray = arr;
 			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
@@ -320,10 +320,10 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Resize(gsize size)
 		else if (m_nType == G_ARRAY_DATA_GLOBAL_TYPE)
 		{
 			// 数组扩容
-			m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::ResizeSeries<T>(m_pArray, m_nCapacity, size);
+			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::ResizeSeries<T>(m_pArray, m_nCapacity, size);
 		}
 		m_nSize = size;
-		extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 	}
 }
 
@@ -347,7 +347,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Reserve(gsize capa
 		if (m_nType == G_ARRAY_DATA_LOCAL_TYPE)
 		{
 			// 需要将local type扩展成global type
-			T *arr = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(capacity, m_tArray, m_nSize);
+			T *arr = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(capacity, m_tArray, m_nSize);
 			m_pArray = arr;
 			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
 			m_pStart = m_pArray;
@@ -355,7 +355,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Reserve(gsize capa
 		else
 		{
 			// 数组扩容
-			m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::ResizeSeries<T>(m_pArray, m_nCapacity, capacity);
+			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::ResizeSeries<T>(m_pArray, m_nCapacity, capacity);
 		}
 		m_nCapacity = capacity;
 	}
@@ -445,7 +445,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Clear()
 	case G_ARRAY_DATA_LOCAL_TYPE:
 	case G_ARRAY_DATA_GLOBAL_TYPE:
 	{
-		extra::series::GSeriesHelper<HAS_END_FLAG>::ClearSeries<T>(m_pArray, m_nCapacity);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::ClearSeries<T>(m_pArray, m_nCapacity);
 	}
 		break;
 	case G_ARRAY_DATA_REFERENCE_TYPE:
@@ -455,7 +455,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Clear()
 		m_nSize = 0;
 		m_nCapacity = MIN_CAPACITY;
 		m_pStart = m_tArray;
-		extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 	}
 		break;
 	default:
@@ -463,7 +463,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Clear()
 		break;
 	}
 	m_nSize = 0;
-	extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
 template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
@@ -477,7 +477,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Dispose()
 	m_nSize = 0;
 	m_nCapacity = MIN_CAPACITY;
 	m_pStart = m_tArray;
-	extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
 template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
@@ -485,7 +485,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Append(const GSeri
 {
 	ToValue(m_nSize + series.m_nSize); // 转换成值类型
 	Reserve(m_nSize + series.m_nSize);
-	extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart + m_nSize, series.m_nSize, series.m_pStart);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart + m_nSize, series.m_nSize, series.m_pStart);
 	m_nSize += series.m_nSize;
 }
 
@@ -494,7 +494,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Append(GSeries<T, 
 {
 	ToValue(m_nSize + series.m_nSize); // 转换成值类型
 	Reserve(m_nSize + series.m_nSize);
-	extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart + m_nSize, series.m_nSize, series.m_pStart);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart + m_nSize, series.m_nSize, series.m_pStart);
 	m_nSize += series.m_nSize;
 }
 
@@ -526,7 +526,7 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 			// 将local type扩展成global type，仅需分配内存，不需要创建元素
 			m_nCapacity = arr.m_nSize;
 			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
-			m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(arr.m_nSize);
+			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(arr.m_nSize);
 			m_pStart = m_pArray;
 		}
 	}
@@ -538,7 +538,7 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 		if (m_nCapacity < arr.m_nSize)
 		{
 			// 原有的数据已经无法容纳下新的数组，需要将旧的数组销毁
-			extra::series::GSeriesHelper<HAS_END_FLAG>::DestorySeries<T>(m_pArray, m_nCapacity);
+			detail::series::GSeriesHelper<HAS_END_FLAG>::DestorySeries<T>(m_pArray, m_nCapacity);
 			if (arr.m_nSize <= MIN_CAPACITY)
 			{
 				// 新的数组将采用local type，无需分配内存
@@ -551,7 +551,7 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 				// 新的数组将采用global type，需要分配内存
 				m_nCapacity = arr.m_nSize;
 				m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
-				m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(arr.m_nSize);
+				m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(arr.m_nSize);
 				m_pStart = m_pArray;
 			}
 		}
@@ -568,13 +568,13 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 		{
 		case G_ARRAY_DATA_LOCAL_TYPE:
 		{
-			extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
+			detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
 			m_pStart = m_tArray;
 		}
 		break;
 		case G_ARRAY_DATA_GLOBAL_TYPE:
 		{
-			m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(arr.m_pStart, arr.m_nSize);
+			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(arr.m_pStart, arr.m_nSize);
 			m_pStart = m_pArray;
 		}
 		break;
@@ -590,7 +590,7 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 
 	// 拷贝元素
 	m_nSize = arr.m_nSize;
-	extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart, arr.m_nSize, arr.m_pStart);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart, arr.m_nSize, arr.m_pStart);
 }
 
 template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
@@ -623,7 +623,7 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 	{
 	case G_ARRAY_DATA_LOCAL_TYPE:
 	{
-		extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
 		m_pStart = m_tArray;
 	}
 		break;
@@ -670,13 +670,13 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Free()
 	case G_ARRAY_DATA_LOCAL_TYPE:
 	{
 		// 只析构元素，不释放内存
-		extra::series::GSeriesHelper<HAS_END_FLAG>::ClearSeries<T>(m_pArray, m_nCapacity);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::ClearSeries<T>(m_pArray, m_nCapacity);
 	}
 	break;
 	case G_ARRAY_DATA_GLOBAL_TYPE:
 	{
 		// 析构元素后，释放内存
-		extra::series::GSeriesHelper<HAS_END_FLAG>::DestorySeries<T>(m_pArray, m_nCapacity);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::DestorySeries<T>(m_pArray, m_nCapacity);
 	}
 	break;
 	case G_ARRAY_DATA_REFERENCE_TYPE:
@@ -711,20 +711,20 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ToValue(gsize capa
 	{
 		m_nType = G_ARRAY_DATA_LOCAL_TYPE;
 		m_nCapacity = MIN_CAPACITY;
-		extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, real_size, m_pStart);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, real_size, m_pStart);
 		m_pStart = m_tArray;
 	}
 	else
 	{
 		m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
 		m_nCapacity = capacity;
-		m_pArray = extra::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(capacity);
-		extra::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_pArray, real_size, m_pStart);
+		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(capacity);
+		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_pArray, real_size, m_pStart);
 		m_pStart = m_pArray;
 	}
 
 	m_nSize = real_size;
-	extra::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
 } // namespace gnova

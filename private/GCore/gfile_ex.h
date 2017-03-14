@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 
 class GFile_Ex
 	: public GNewT<GFile_Ex>
@@ -42,7 +42,7 @@ protected:
 	gbyte m_nOpenMode;
 };
 
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 #endif // _CORE_FILE_EX_H_

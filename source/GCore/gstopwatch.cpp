@@ -39,4 +39,4 @@ gulong GStopWatch::Tick() const
 #endif // G_SYSTEM_WINDOWS
 }
 
-}
+} // namespace gnova

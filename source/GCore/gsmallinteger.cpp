@@ -38,4 +38,4 @@ guint GSmallInteger::ClassCode() const
 	return GSmallInteger::CLASS_CODE;
 }
 
-}
+} // namespace gnova

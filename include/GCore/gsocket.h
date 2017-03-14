@@ -19,9 +19,9 @@
 
 namespace gnova { // gnova
 	class GSockAddress;
-	namespace extra { // gnova.extra
+	namespace detail { // gnova.detail
 		class GSocket_Ex;
-	} // namespace gnova.extra
+	} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -50,7 +50,7 @@ public:
 	** @param[in]	socket_ex {GSocket_Ex *} 私有实现类的指针，由子类传入。
 	**
 	****************************************************************************/
-	GSocket(extra::GSocket_Ex *socket_ex);
+	GSocket(detail::GSocket_Ex *socket_ex);
 	virtual ~GSocket() = 0;
 
 	virtual gbool Open(gbool nResue = false) = 0;
@@ -69,7 +69,7 @@ public:
 	gbool GetLocalAddr(GSockAddress &tSockAddr) const;
 
 protected:
-	extra::GSocket_Ex *m_pSocket_Ex;
+	detail::GSocket_Ex *m_pSocket_Ex;
 };
 
 } // namespace gnova

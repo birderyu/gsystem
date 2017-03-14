@@ -155,6 +155,6 @@ const gbyte &GBytes::operator[](gsize pos) const
 	return m_tBytes[pos];
 }
 
-}
+} // namespace gnova
 
 #undef G_BYTES_DEFAULT_ADD_SIZE

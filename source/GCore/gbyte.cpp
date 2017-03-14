@@ -19,4 +19,4 @@ guint GByte::ClassCode() const
 	return GByte::CLASS_CODE;
 }
 
-}
+} // namespace gnova

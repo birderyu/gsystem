@@ -4,7 +4,7 @@
 #include "gjsonparsermessage.h"
 
 namespace gnova { // gnova
-namespace json {
+namespace json { // gnova.json
 
 GJsonPair::GJsonPair()
 : m_pValue(GNULL)
@@ -268,5 +268,5 @@ gvoid GJsonPair::Dispose()
 	m_pValue = GNULL;
 }
 
-}
-}
+} // namespace gnova.json
+} // namespace gnova

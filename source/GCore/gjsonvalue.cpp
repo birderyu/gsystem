@@ -4,7 +4,7 @@
 #include "gjsonparsermessage.h"
 
 namespace gnova { // gnova
-namespace json {
+namespace json { // gnova.json
 
 GJsonValue::GJsonValue()
 : m_nType(JSON_VALUE_TYPE_ILLEGAL)
@@ -498,5 +498,5 @@ gvoid GJsonValue::Dispose()
 	m_nType = JSON_VALUE_TYPE_ILLEGAL;
 }
 
-}
-}
+} // namespace gnova.json
+} // namespace gnova

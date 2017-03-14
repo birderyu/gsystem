@@ -7,4 +7,4 @@ GLock::~GLock()
 
 }
 
-}
+} // namespace gnova

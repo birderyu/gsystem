@@ -54,4 +54,4 @@ gbool GObject::Serializable() const
 	return false;
 }
 
-}
+} // namespace gnova

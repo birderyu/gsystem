@@ -4,9 +4,9 @@
 #include "gobject.h"
 
 namespace gnova { // gnova
-	namespace extra { // gnova.extra
+	namespace detail { // gnova.detail
 		class GSockAddress_Ex;
-	} // namespace gnova.extra
+	} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -26,7 +26,7 @@ public:
 	gvoid SetPortID(gushort nPort);
 
 private:
-	extra::GSockAddress_Ex *m_pSockAddress_Ex;
+	detail::GSockAddress_Ex *m_pSockAddress_Ex;
 };
 
 } // namespace gnova

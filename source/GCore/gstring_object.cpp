@@ -17,4 +17,4 @@ GString GString::ToString() const
 	return GString(m_tString);
 }
 
-}
+} // namespace gnova

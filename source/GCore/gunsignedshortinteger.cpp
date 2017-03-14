@@ -43,4 +43,4 @@ guint GUnsignedShortInteger::ClassCode() const
 	return GUnsignedShortInteger::CLASS_CODE;
 }
 
-}
+} // namespace gnova

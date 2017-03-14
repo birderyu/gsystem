@@ -1,6 +1,10 @@
 #ifndef _GEOMETRY_POINT_IMPLEMENT_INLINE_
 #define _GEOMETRY_POINT_IMPLEMENT_INLINE_
 
+namespace gnova { // gnova
+namespace detail { // gnova.detail
+namespace geom { // gnova.detail.geom
+
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GGeometryFactory *factory)
 : m_pFactory(factory)
@@ -132,5 +136,9 @@ inline gvoid GPoint_Impl<DIMENSION>::SetZ(greal z)
 {
 	m_tStore.SetZ(z);
 }
+
+} // namespace gnova.detail.geom
+} // namespace gnova.detail
+} // namespace gnova
 
 #endif // _GEOMETRY_POINT_IMPLEMENT_INLINE_

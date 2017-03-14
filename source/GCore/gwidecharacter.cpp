@@ -18,4 +18,4 @@ guint GWideCharacter::ClassCode() const
 	return GWideCharacter::CLASS_CODE;
 }
 
-}
+} // namespace gnova

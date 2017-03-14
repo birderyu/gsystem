@@ -326,7 +326,7 @@ GString GTime::ToString() const
 	return str;
 }
 
-}
+} // namespace gnova
 
 #undef G_TIME_SIZE_MILLISECOND	
 #undef G_TIME_SIZE_SECOND			

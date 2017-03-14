@@ -2,8 +2,8 @@
 #define _CORE_UTILITY_INLINE_
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace utility { // gnova.extra.utility
+namespace detail { // gnova.detail
+namespace utility { // gnova.detail.utility
 
 /// 算数类型，直接使用值拷贝交换操作
 template<typename T>
@@ -23,8 +23,8 @@ GINLINE gvoid GSwap(T& a, T& b, GFalseType)
 	b = GMove(t);
 }
 
-} // namespace gnova.extra.utility
-} // namespace gnova.extra
+} // namespace gnova.detail.utility
+} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -51,7 +51,7 @@ GINLINE T &&GForward(typename GRemoveReference<T>::Type &&t)
 template<typename T> 
 GINLINE gvoid GSwap(T &a, T &b)
 {
-	extra::utility::GSwap(a, b,
+	detail::utility::GSwap(a, b,
 		GTypeTraits<T>::Arithmetic())
 }
 

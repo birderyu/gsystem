@@ -43,4 +43,4 @@ guint GUnsignedLongLongInteger::ClassCode() const
 	return GUnsignedLongLongInteger::CLASS_CODE;
 }
 
-}
+} // namespace gnova

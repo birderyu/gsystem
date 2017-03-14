@@ -5,9 +5,9 @@
 
 namespace gnova { // gnova
 	class GString;
-	namespace extra { // gnova.extra
+	namespace detail { // gnova.detail
 		class GFile_Ex;
-	} // namespace gnova.extra
+	} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -38,7 +38,7 @@ public:
 	};
 
 public:
-	GFile(extra::GFile_Ex *);
+	GFile(detail::GFile_Ex *);
 	virtual ~GFile() = 0;
 
 	FILE_FORMAT Format() const;
@@ -61,7 +61,7 @@ public:
 	gsize Size() const;
 
 protected:
-	extra::GFile_Ex *m_pFileEx;
+	detail::GFile_Ex *m_pFileEx;
 };
 
 } // namespace gnova

@@ -2,8 +2,8 @@
 #define _CORE_ARRAY_INLINE_
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace array { // gnova.extra.array
+namespace detail { // gnova.detail
+namespace array { // gnova.detail.array
 
 /// DataT具有内置的构造函数，无需构造，仅分配内存
 template <typename DataT> GINLINE DataT *_GArrayCreate(gsize size, GTrueType) noexcept(false)
@@ -18,7 +18,7 @@ template <typename DataT> GINLINE DataT *_GArrayCreate(gsize size, GFalseType) n
 	DataT *arr = GAllocate<DataT>(size);
 	for (gsize i = 0; i < size; i++)
 	{
-		GConstruct<DataT>(arr + i);
+		GDefaultConstruct<DataT>(arr + i);
 	}
 	return arr;
 }
@@ -37,7 +37,7 @@ template <typename DataT> GINLINE DataT *_GArrayCreate(const DataT *copy_arr, gs
 	DataT *new_arr = GAllocate<DataT>(copy_size);
 	for (gsize i = 0; i < copy_size; i++)
 	{
-		GConstruct<DataT>(new_arr + i, copy_arr[i + copy_start]);
+		GCopyConstruct<DataT>(new_arr + i, copy_arr[i + copy_start]);
 	}
 	return new_arr;
 }
@@ -60,25 +60,25 @@ template <typename DataT> GINLINE DataT *_GArrayCreate(gsize size, gsize start, 
 
 	for (gsize i = 0; i < start; i++)
 	{
-		GConstruct<DataT>(new_arr + i);
+		GDefaultConstruct<DataT>(new_arr + i);
 	}
 
 	if (copy_size < new_copy_size)
 	{
 		for (gsize i = start; i < start + copy_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copy_arr[i + copy_start]);
+			GCopyConstruct<DataT>(new_arr + i, copy_arr[i + copy_start]);
 		}
 		for (gsize i = start + copy_size; i < size; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 	}
 	else
 	{
 		for (gsize i = start; i < size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copy_arr[i + copy_start]);
+			GCopyConstruct<DataT>(new_arr + i, copy_arr[i + copy_start]);
 		}
 	}
 
@@ -99,18 +99,18 @@ template <typename DataT> GINLINE DataT *__GArrayResize(DataT *old_arr, gsize ol
 	{
 		for (gsize i = 0; i < old_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[i]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[i]);
 		}
 		for (gsize i = old_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[i]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[i]);
 		}
 	}
 
@@ -135,18 +135,18 @@ template <typename DataT> GINLINE DataT *_GArrayResize(DataT *old_arr, gsize old
 	{
 		for (gsize i = 0; i < old_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
 		}
 		for (gsize i = old_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
 		}
 	}
 
@@ -163,7 +163,7 @@ template <typename DataT> GINLINE DataT *__GArrayResize(DataT *old_arr, gsize ol
 	{
 		for (gsize i = old_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 	}
 	return new_arr;
@@ -177,18 +177,18 @@ template <typename DataT> GINLINE DataT *__GArrayResize(DataT *old_arr, gsize ol
 	{
 		for (gsize i = 0; i < old_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[i]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[i]);
 		}
 		for (gsize i = old_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[i]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[i]);
 		}
 	}
 
@@ -213,18 +213,18 @@ template <typename DataT> GINLINE DataT *_GArrayResize(DataT *old_arr, gsize old
 	{
 		for (gsize i = 0; i < old_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
 		}
 		for (gsize i = old_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[i]));
 		}
 	}
 
@@ -271,26 +271,26 @@ template <typename DataT> GINLINE DataT *__GArrayResize(DataT *old_arr, gsize ol
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 		for (gsize i = new_start; i < new_real_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[j++]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[j++]);
 		}
 		for (gsize i = new_real_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 		for (gsize i = new_start; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[j++]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[j++]);
 		}
 	}
 
@@ -318,26 +318,26 @@ template <typename DataT> GINLINE DataT *_GArrayResize(DataT *old_arr, gsize old
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 		for (gsize i = new_start; i < new_real_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
 		}
 		for (gsize i = new_real_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i);
+			GDefaultConstruct<DataT>(new_arr + i);
 		}
 		for (gsize i = new_start; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
 		}
 	}
 
@@ -396,26 +396,26 @@ template <typename DataT> GINLINE DataT *__GArrayResize(DataT *old_arr, gsize ol
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 		for (gsize i = new_start; i < new_real_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[j++]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[j++]);
 		}
 		for (gsize i = new_real_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 		for (gsize i = new_start; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, old_arr[j++]);
+			GCopyConstruct<DataT>(new_arr + i, old_arr[j++]);
 		}
 	}
 
@@ -443,26 +443,26 @@ template <typename DataT> GINLINE DataT *_GArrayResize(DataT *old_arr, gsize old
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 		for (gsize i = new_start; i < new_real_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
 		}
 		for (gsize i = new_real_size; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 	}
 	else // old_size >= new_size
 	{
 		for (gsize i = 0; i < new_start; i++)
 		{
-			GConstruct<DataT>(new_arr + i, copyable);
+			GCopyConstruct<DataT>(new_arr + i, copyable);
 		}
 		for (gsize i = new_start; i < new_size; i++)
 		{
-			GConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
+			GMoveConstruct<DataT>(new_arr + i, GMove(old_arr[j++]));
 		}
 	}
 
@@ -492,11 +492,11 @@ template <typename DataT> GINLINE DataT *__GArrayRemoveAt(DataT *arr, gsize size
 	DataT *new_arr = GAllocate<DataT>(size - 1);
 	for (gsize i = 0; i < pos; i++)
 	{
-		GConstruct<DataT>(new_arr + i, arr[i]);
+		GCopyConstruct<DataT>(new_arr + i, arr[i]);
 	}
 	for (gsize i = pos + 1; i < size; i++)
 	{
-		GConstruct<DataT>(new_arr + i - 1, arr[i]);
+		GCopyConstruct<DataT>(new_arr + i - 1, arr[i]);
 	}
 
 	// 销毁旧的数组
@@ -518,11 +518,11 @@ template <typename DataT> GINLINE DataT *_GArrayRemoveAt(DataT *arr, gsize size,
 	DataT *new_arr = GAllocate<DataT>(size - 1);
 	for (gsize i = 0; i < pos; i++)
 	{
-		GConstruct<DataT>(new_arr + i, GMove(arr[i]));
+		GMoveConstruct<DataT>(new_arr + i, GMove(arr[i]));
 	}
 	for (gsize i = pos + 1; i < size; i++)
 	{
-		GConstruct<DataT>(new_arr + i - 1, GMove(arr[i]));
+		GMoveConstruct<DataT>(new_arr + i - 1, GMove(arr[i]));
 	}
 
 	// 销毁旧的数组
@@ -564,7 +564,7 @@ template <typename DataT> GINLINE gvoid _GArrayCopyFrom(DataT *arr, gsize size, 
 		GDestruct<DataT>(arr + i);
 
 		// 拷贝构造新的元素
-		GConstruct<DataT>(arr + i, copy_arr[i]);
+		GCopyConstruct<DataT>(arr + i, copy_arr[i]);
 	}
 }
 
@@ -595,13 +595,13 @@ template <typename DataT> GINLINE DataT *_GArrayCopyFrom(DataT *arr, gsize size,
 	}
 	for (gsize i = 0; i < copy_size; i++)
 	{
-		GConstruct<DataT>(arr + i, copy_arr[i]);
+		GCopyConstruct<DataT>(arr + i, copy_arr[i]);
 	}
 	return arr;
 }
 
-} // namespace gnova.extra.array
-} // namespace gnova.extra
+} // namespace gnova.detail.array
+} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -612,7 +612,7 @@ GINLINE DataT *GArray<DataT>::CreateArray(gsize size) noexcept(false)
 	GASSERT(size > 0);
 
 	/// 根据DataT是否具有内置的默认构造函数，去调用不同的处理逻辑
-	return extra::array::_GArrayCreate<DataT>(size,
+	return detail::array::_GArrayCreate<DataT>(size,
 		GTypeTraits<DataT>::TrivialDefaultConstructible());
 }
 
@@ -625,7 +625,7 @@ GINLINE DataT *GArray<DataT>::CreateArray(gsize size, const DataT &copyable) noe
 	for (gsize i = 0; i < size; i++)
 	{
 		// 在GConstruct的调用过程中，已经处理了针对内置类型的处理逻辑
-		GConstruct<DataT>(arr + i, copyable);
+		GCopyConstruct<DataT>(arr + i, copyable);
 	}
 	return arr;
 }
@@ -637,7 +637,7 @@ GINLINE DataT *GArray<DataT>::CreateArray(const DataT *copy_arr, gsize copy_star
 	GASSERT(copy_arr && copy_start < copy_size);
 
 	// 根据DataT是否是内置类型，去调用不同的处理逻辑
-	return extra::array::_GArrayCreate<DataT>(copy_arr, copy_start, copy_size,
+	return detail::array::_GArrayCreate<DataT>(copy_arr, copy_start, copy_size,
 		GTypeTraits<DataT>::Arithmetic());
 }
 
@@ -647,7 +647,7 @@ GINLINE DataT *GArray<DataT>::CreateArray(gsize size, gsize start, const DataT *
 	GASSERT(start < size && copy_arr && copy_start < copy_size);
 
 	// 根据DataT是否是内置类型，去调用不同的处理逻辑
-	return extra::array::_GArrayCreate(size, start, copy_arr, copy_start, copy_size,
+	return detail::array::_GArrayCreate(size, start, copy_arr, copy_start, copy_size,
 		GTypeTraits<DataT>::Arithmetic());
 }
 
@@ -655,7 +655,7 @@ template <typename DataT>
 GINLINE DataT *GArray<DataT>::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size) noexcept(false)
 {
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
-	return extra::array::_GArrayResize<DataT>(old_arr, old_size, new_size,
+	return detail::array::_GArrayResize<DataT>(old_arr, old_size, new_size,
 		GTypeTraits<DataT>::TrivialMoveConstructible());
 }
 
@@ -663,7 +663,7 @@ template <typename DataT>
 GINLINE DataT *GArray<DataT>::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable) noexcept(false)
 {
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
-	return extra::array::_GArrayResize<DataT>(old_arr, old_size, new_size, copyable,
+	return detail::array::_GArrayResize<DataT>(old_arr, old_size, new_size, copyable,
 		GTypeTraits<DataT>::TrivialMoveConstructible());
 }
 
@@ -673,7 +673,7 @@ GINLINE DataT *GArray<DataT>::ResizeArray(DataT *old_arr, gsize old_start, gsize
 	GASSERT(old_start < old_size);
 
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
-	return extra::array::_GArrayResize<DataT>(old_arr, old_start, old_size, new_size, new_start,
+	return detail::array::_GArrayResize<DataT>(old_arr, old_start, old_size, new_size, new_start,
 		GTypeTraits<DataT>::TrivialMoveConstructible());
 }
 
@@ -681,7 +681,7 @@ template <typename DataT>
 GINLINE DataT *GArray<DataT>::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable) noexcept(false)
 {
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
-	return extra::array::_GArrayResize<DataT>(old_arr, old_start, old_size, new_size, new_start, copyable,
+	return detail::array::_GArrayResize<DataT>(old_arr, old_start, old_size, new_size, new_start, copyable,
 		GTypeTraits<DataT>::TrivialMoveConstructible());
 }
 
@@ -691,14 +691,14 @@ GINLINE DataT *GArray<DataT>::RemoveArrayElementAt(DataT *arr, gsize size, gsize
 	GASSERT(size > 0 && pos < size);
 
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
-	return extra::array::_GArrayRemoveAt(arr, size, pos,
+	return detail::array::_GArrayRemoveAt(arr, size, pos,
 		GTypeTraits<DataT>::TrivialMoveConstructible());
 }
 
 template <typename DataT>
 GINLINE gvoid GArray<DataT>::ClearArray(DataT *arr, gsize size) noexcept
 {
-	extra::array::_GArrayClear(arr, size,
+	detail::array::_GArrayClear(arr, size,
 		GTypeTraits<DataT>::TrivialDestructible());
 }
 
@@ -706,7 +706,7 @@ template <typename DataT>
 GINLINE gvoid GArray<DataT>::DestoryArray(DataT *arr, gsize size) noexcept
 {
 	// 判断DataT是否具有析构函数，以判断是否需要调用不同的函数
-	extra::array::_GArrayClear(arr, size,
+	detail::array::_GArrayClear(arr, size,
 		GTypeTraits<DataT>::TrivialDestructible());
 
 	// 释放内存
@@ -719,7 +719,7 @@ GINLINE gvoid GArray<DataT>::CopyArrayFrom(DataT *arr, gsize size, const DataT *
 	GASSERT(arr && copy_arr);
 
 	// 判断DataT是否是基本类型，以判断是否需要调用不同的函数
-	extra::array::_GArrayCopyFrom<DataT>(arr, size, copy_arr,
+	detail::array::_GArrayCopyFrom<DataT>(arr, size, copy_arr,
 		GTypeTraits<DataT>::Arithmetic());
 }
 
@@ -729,7 +729,7 @@ GINLINE DataT *GArray<DataT>::CopyArrayFrom(DataT *arr, gsize size, const DataT 
 	GASSERT(arr && copy_arr);
 
 	// 判断DataT是否是基本类型，以判断是否需要调用不同的函数
-	return extra::array::_GArrayCopyFrom<DataT>(arr, size, copy_arr, copy_size,
+	return detail::array::_GArrayCopyFrom<DataT>(arr, size, copy_arr, copy_size,
 		GTypeTraits<DataT>::Arithmetic());
 }
 

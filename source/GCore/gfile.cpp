@@ -3,7 +3,7 @@
 
 namespace gnova { // gnova
 
-GFile::GFile(extra::GFile_Ex *pFile_Ex)
+GFile::GFile(detail::GFile_Ex *pFile_Ex)
 : m_pFileEx(pFile_Ex)
 {
 
@@ -93,4 +93,4 @@ gsize GFile::Size() const
 	return static_cast<gsize>(size);
 }
 
-}
+} // namespace gnova

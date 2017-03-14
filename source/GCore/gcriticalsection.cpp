@@ -5,6 +5,7 @@
 #		define WIN32_LEAN_AND_MEAN
 #	endif
 #include <windows.h>
+#endif // G_SYSTEM_WINDOWS
 
 namespace gnova { // gnova
 
@@ -50,6 +51,4 @@ gvoid GCriticalSection::Release()
 	::DeleteCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
-}
-
-#endif // G_SYSTEM_WINDOWS
+} // namespace gnova

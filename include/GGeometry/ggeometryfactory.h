@@ -4,7 +4,7 @@
 #include "ggeometry.h"
 
 namespace gnova { // gnova
-namespace geom {
+namespace geom { // gnova.geom
 
 class GAPI GGeometryFactory 
 {

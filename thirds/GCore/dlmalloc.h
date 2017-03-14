@@ -60,7 +60,7 @@
 
        Even a request for zero bytes (i.e., malloc(0)) returns a
        pointer to something of the minimum allocatable size.
-       The maximum overhead wastage (i.e., number of extra bytes
+       The maximum overhead wastage (i.e., number of detail bytes
        allocated than were requested in malloc) is less than or equal
        to the minimum size, except for requests >= mmap_threshold that
        are serviced via mmap(), where the worst case wastage is about
@@ -232,7 +232,7 @@ USE_LOCKS                default: 0 (false)
   overridden on a per-mspace basis for mspace versions.)
 
 FOOTERS                  default: 0
-  If true, provide extra checking and dispatching by placing
+  If true, provide detail checking and dispatching by placing
   information in the footers of allocated chunks. This adds
   space and time overhead.
 

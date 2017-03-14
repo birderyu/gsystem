@@ -27,4 +27,4 @@ gvoid GRegister::Initialize()
 	Register("Bool", CLASS_CODE_BOOLEAN);
 }
 
-}
+} // namespace gnova

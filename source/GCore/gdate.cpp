@@ -510,7 +510,7 @@ GString GDate::ToString() const
 	return str;
 }
 
-}
+} // namespace gnova
 
 #undef G_DATA_SIZE_DAY_OF_WEEK		
 #undef G_DATA_SIZE_DAY_OF_YEAR	

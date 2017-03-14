@@ -3,7 +3,7 @@
 #include "gfile.h"
 
 namespace gnova { // gnova
-namespace extra {
+namespace detail { // gnova.detail
 
 GFile_Ex::GFile_Ex(const GString &sFileName)
 : m_sFileName(sFileName)
@@ -153,5 +153,5 @@ gbool GFile_Ex::CanWrite() const
 	return true;
 }
 
-}
-}
+} // namespace gnova.detail
+} // namespace gnova

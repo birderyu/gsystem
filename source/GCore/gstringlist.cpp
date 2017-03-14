@@ -39,4 +39,4 @@ gsize GStringList::Size() const
 	return 0;
 }
 
-}
+} // namespace gnova

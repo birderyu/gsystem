@@ -102,4 +102,4 @@ gbool operator<=(const GString &s1, const GString &s2)
 	return strcmp(s1.CString(), s2.CString()) <= 0;
 }
 
-}
+} // namespace gnova

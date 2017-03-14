@@ -2,8 +2,8 @@
 #define _CORE_JSON_PARSER_EX_H_
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
-namespace json { // gnova.extra.json
+namespace detail { // gnova.detail
+namespace json { // gnova.json // gnova.detail.json
 
 class GJsonParser
 {
@@ -11,8 +11,8 @@ public:
 
 };
 
-} // namespace gnova.extra.json
-} // namespace gnova.extra
+} // namespace gnova.detail.json
+} // namespace gnova.detail
 } // namespace gnova
 
 #endif // _CORE_JSON_PARSER_EX_H_

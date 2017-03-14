@@ -74,4 +74,4 @@ gint GThread::Run()
 	return 0;
 }
 
-}
+} // namespace gnova

@@ -6,9 +6,15 @@
 
 #include "GCore/gglobal.h"
 
+namespace gnova { // gnova
+namespace geom { // gnova.geom
+
 class GAPI GGeometryPool
 {
 
 };
+
+}
+}
 
 #endif // _GEOMETRY_GEOMETRY_POOL_H_

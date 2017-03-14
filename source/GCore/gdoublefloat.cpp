@@ -88,4 +88,4 @@ gbool GDoubleFloat::IsNaN() const
 	return m_nValue != m_nValue;
 }
 
-}
+} // namespace gnova

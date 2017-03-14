@@ -23,5 +23,8 @@
     <ClInclude Include="gtable_example.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="gconstructor_example.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

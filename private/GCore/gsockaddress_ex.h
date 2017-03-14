@@ -12,12 +12,12 @@
 #include <ws2tcpip.h>
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 typedef SOCKET				gsocket;
 #define GOpenSocket			socket
 #define GCloseSocket		closesocket
 #define GControlSocketIO	ioctlsocket
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 #else // !G_SYSTEM_WINDOWS
@@ -31,17 +31,17 @@ typedef SOCKET				gsocket;
 #include <sys/time.h>
 #include <fcntl.h>
 namespace gnova { // gnova
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 typedef gint gsocket;
 #define GOpenSocket			socket
 #define GCloseSocket		close
 #define GControlSocketIO	ioctl
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 #endif // G_SYSTEM_WINDOWS
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 #define GBindSocket			bind
 #define GListenSocket		listen
 #define GAcceptSocket		accept
@@ -52,15 +52,15 @@ namespace extra { // gnova.extra
 #define GRecvFromSocket		recvfrom
 #define GSetSocketOpt		setsockopt
 #define GGetSocketOpt		getsockopt
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
 class GString;
-} // namespace gnova.extra
+} // namespace gnova.detail
 
 namespace gnova { // gnova
-namespace extra { // gnova.extra
+namespace detail { // gnova.detail
 
 class GSockAddress_Ex
 {
@@ -80,7 +80,7 @@ private:
 	sockaddr_in m_tSocketAddr;
 };
 
-} // namespace gnova.extra
+} // namespace gnova.detail
 } // namespace gnova
 
 #endif // _CORE_SOCKETADDRESS_EX_H_

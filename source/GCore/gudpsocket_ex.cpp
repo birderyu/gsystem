@@ -1,7 +1,7 @@
 #include "gudpsocket_ex.h"
 
 namespace gnova { // gnova
-namespace extra {
+namespace detail { // gnova.detail
 
 gbool GUdpSocket_Ex::Open(gbool nResue)
 {
@@ -75,5 +75,5 @@ gint GUdpSocket_Ex::RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress_Ex *pPe
 	return n;
 }
 
-}
-}
+} // namespace gnova.detail
+} // namespace gnova

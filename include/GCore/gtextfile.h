@@ -4,9 +4,9 @@
 #include "gfile.h"
 
 namespace gnova { // gnova
-	namespace extra { // gnova.extra
+	namespace detail { // gnova.detail
 		class GTextFile_Ex;
-	} // namespace gnova.extra
+	} // namespace gnova.detail
 } // namespace gnova
 
 namespace gnova { // gnova
@@ -22,7 +22,7 @@ public:
 	gbool Write(const GString &content);
 
 protected:
-	GTextFile(extra::GTextFile_Ex *);
+	GTextFile(detail::GTextFile_Ex *);
 };
 
 } // namespace gnova
