@@ -10,12 +10,12 @@
 #	define strcasecmp	_stricmp
 #	define strncasecmp	_strnicmp 
 #	else // !G_USE_MSVC_STRCMP
-GAPI gnova::gint strcasecmp(const gnova::gchar *s1, gnova::gchar *s2);
-GAPI gnova::gint strncasecmp(const gnova::gchar *s1, gnova::gchar *s2, /*register*/ gnova::gint n);
+GAPI gsystem::gint strcasecmp(const gsystem::gchar *s1, gsystem::gchar *s2);
+GAPI gsystem::gint strncasecmp(const gsystem::gchar *s1, gsystem::gchar *s2, /*register*/ gsystem::gint n);
 #	endif // G_USE_MSVC_STRCMP
 #endif // G_COMPILER_MSVC
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 // Î´×öÅÐ¿Õ²Ù×÷
 class GAPI GCStringHelper
@@ -52,6 +52,6 @@ public:
 	static T ToNum(const gchar *c_str, gbool *isok);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_C_STRING_HELPER_H_

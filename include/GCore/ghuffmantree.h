@@ -17,7 +17,7 @@
 #include "gbinarytree.h"
 #include "gbinaryheap.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT>
 class GHuffmanTreeNode 
@@ -50,6 +50,6 @@ public:
 	gvoid Append(DataT *arr, gsize start, gsize size);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_HUFFMAN_TREE_H_

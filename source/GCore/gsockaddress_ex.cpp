@@ -1,8 +1,8 @@
 #include "gsockaddress_ex.h"
 #include "gstring.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 GSockAddress_Ex::GSockAddress_Ex()
 {
@@ -33,5 +33,5 @@ gvoid GSockAddress_Ex::SetPortID(gushort nPort)
 	m_tSocketAddr.sin_port = ::htons(nPort);
 }
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem

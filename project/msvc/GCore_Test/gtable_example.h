@@ -3,9 +3,9 @@
 #include "gtable.h"
 #include "gstring.h"
 
-gnova::gvoid Table_Test()
+gsystem::gvoid Table_Test()
 {
-	using namespace gnova;
+	using namespace gsystem;
 
 	GTable<gint, gdouble, GString> table;
 	table.AddRow(1, 1.1, GString("abc"));

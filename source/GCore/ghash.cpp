@@ -1,7 +1,7 @@
 #include "ghash.h"
 #include "gmath.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 guint GHashing(gbool val)
 {
@@ -99,4 +99,4 @@ guint GHashing(gpointer)
 	return 0;
 }
 
-} // namespace gnova
+} // namespace gsystem

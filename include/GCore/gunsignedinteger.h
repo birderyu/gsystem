@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GUnsignedInteger 
 	: public GNumber<guint>
@@ -32,6 +32,6 @@ typedef GUnsignedInteger GUInteger32;
 typedef GUnsignedInteger GUnsignedInt32;
 typedef GUnsignedInteger GUInt32;
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_UNSIGNED_INTEGER_H_

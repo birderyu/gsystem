@@ -6,8 +6,8 @@
 
 #include "GCore/gglobal.h"
 
-namespace gnova { // gnova
-namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
 
 class GAPI GGeometryPool
 {

@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GUnsignedShortInteger 
 	: public GNumber<gushort>
@@ -33,6 +33,6 @@ typedef GUnsignedShortInteger GUInteger16;
 typedef GUnsignedShortInteger GUnsignedInt16;
 typedef GUnsignedShortInteger GUInt16;
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_UNSIGNED_SHORT_INTEGER_H_

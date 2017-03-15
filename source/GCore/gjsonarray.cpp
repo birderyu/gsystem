@@ -3,8 +3,8 @@
 #include "gjsonparsermessage.h"
 #include "gliststack.h"
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 GJsonArray::GJsonArray()
 {
@@ -246,5 +246,5 @@ gvoid GJsonArray::Dispose()
 	m_tJsonValues.Clear();
 }
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem

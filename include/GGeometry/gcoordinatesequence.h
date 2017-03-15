@@ -5,8 +5,8 @@
 #include "GCore/gvector.h"
 #include "gcoordinate.h"
 
-namespace gnova { // gnova
-namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
 
 class GAPI GCoordinateSequence
 {

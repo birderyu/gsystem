@@ -1,7 +1,7 @@
 #ifndef _CORE_STRUCTURE_INLINE_
 #define _CORE_STRUCTURE_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
@@ -260,6 +260,6 @@ GINLINE GPairNodeT<KeyT, ValueT>::GPairNodeT(const KeyT &key, ValueT &&value)
 
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_STRUCTURE_INLINE_

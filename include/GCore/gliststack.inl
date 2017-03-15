@@ -1,7 +1,7 @@
 #ifndef _CORE_LIST_STACK_INLINE_
 #define _CORE_LIST_STACK_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT>
 GINLINE GListStack<DataT>::GListStack() :m_tList()
@@ -95,6 +95,6 @@ GINLINE DataT &GListStack<DataT>::Bottom()
 	return m_tList.GetLastData();
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_LIST_STACK_INLINE_

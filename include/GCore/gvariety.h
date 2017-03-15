@@ -3,16 +3,16 @@
 
 #include "gseries.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GBytes;
 	class GString;
 	class GWString;
 	class GDateTime;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace variety { // gnova.detail.variety
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace variety { // gsystem.detail.variety
 
 template<typename T>
 struct GVarietydetailType
@@ -50,11 +50,11 @@ struct GVarietyGetReference
 {
 };
 
-} // namespace gnova.detail.variety
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.variety
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 一个使用union结构构件的变体结构（variant）
 /// 为了与使用模板实现的变体类型区分，将其命名为GVariety
@@ -227,7 +227,7 @@ private:
 	gbyte m_nType;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gvariety.inl"
 

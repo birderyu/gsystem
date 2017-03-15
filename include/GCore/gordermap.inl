@@ -1,7 +1,7 @@
 #ifndef _CORE_ORDER_MAP_INLINE_
 #define _CORE_ORDER_MAP_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT, typename CompareT>
 GINLINE GOrderMap<KeyT, ValueT, CompareT>::GOrderMap()
@@ -242,6 +242,6 @@ GINLINE gbool GOrderMap<KeyT, ValueT, CompareT>::operator!=(const GOrderMap<KeyT
 		|| m_tTree != map.m_tTree;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_ORDER_MAP_INLINE_

@@ -1,6 +1,6 @@
 #include "gsignedcharacter.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GSignedCharacter::GSignedCharacter(gschar val)
 : GPackage<gschar>(val)
@@ -24,4 +24,4 @@ guint GSignedCharacter::ClassCode() const
 	return GSignedCharacter::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

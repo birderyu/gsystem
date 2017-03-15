@@ -8,7 +8,7 @@
 #define G_BINARY_HEAP_DEFAULT_CAPACITY 1024
 #define G_BINARY_HEAP_DEFAULT_ADD_SIZE 512
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT, typename CompareT>
 class GBinaryHeap
@@ -71,7 +71,7 @@ class GMaxHeap
 
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gbinaryheap.inl"
 

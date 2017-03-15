@@ -3,14 +3,14 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GString;
-	namespace detail { // gnova.detail
+	namespace detail { // gsystem.detail
 		class GFile_Ex;
-	} // namespace gnova.detail
-} // namespace gnova
+	} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GFile
 {
@@ -64,6 +64,6 @@ protected:
 	detail::GFile_Ex *m_pFileEx;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif _CORE_FILE_H_

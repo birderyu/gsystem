@@ -1,7 +1,7 @@
 #include "gmemory.h"
 #include "dlmalloc.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gpointer GMalloc(gsize size)
 {
@@ -38,4 +38,4 @@ gpointer GMemSet(gvoid *dst, gbyte value, gsize size)
 	return memset(dst, (gint)value, size);
 }
 
-} // namespace gnova
+} // namespace gsystem

@@ -3,8 +3,8 @@
 
 #include "gsocket_ex.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 class GTcpSocket_Ex 
 	: public GSocket_Ex
@@ -23,7 +23,7 @@ public:
 	gint Recv(gchar *pBufData, gint nDataLen, gint nWaitAll);
 };
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #endif // _CORE_TCP_SOCKET_EX_H_

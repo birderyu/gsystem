@@ -3,11 +3,11 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GString;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GPath
 {
@@ -15,6 +15,6 @@ public:
 	static gbool CreatePath(const GString &, gint perms);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_PATH_H_

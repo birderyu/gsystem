@@ -14,7 +14,7 @@
 #include "glinkedlist.h"
 #include "gstructure.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT>
 struct GDoubleLinkedListNode
@@ -115,7 +115,7 @@ protected:
 	Node *m_pLast;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gdoublelinkedlist.inl"
 

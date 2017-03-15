@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename LockT>
 class GLockGuard
@@ -17,7 +17,7 @@ private:
 	LockT &m_tLock;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "glockguard.inl"
 

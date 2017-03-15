@@ -4,7 +4,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 原子操作
 /// 仅支持guint、gulong、gulonglong以及与之等价类型（如guint32、guint64）的原子操作
@@ -56,7 +56,7 @@ public:
 	template<typename T> static T GetValue(T *target);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gatom.inl"
 

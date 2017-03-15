@@ -4,8 +4,8 @@
 #include "gglobal.h"
 #include "gnocopyable.h"
 
-namespace gnova { // gnova
-namespace log { // gnova.log
+namespace gsystem { // gsystem
+namespace log { // gsystem.log
 
 class GAPI GSynchronousLog
 	: private GNocopyable
@@ -18,7 +18,7 @@ public:
 	gvoid Flush();
 };
 
-} // namespace gnova.log
-} // namespace gnova
+} // namespace gsystem.log
+} // namespace gsystem
 
 #endif // _CORE_SYNCHRONOUS_LOG_H_

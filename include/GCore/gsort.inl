@@ -1,7 +1,7 @@
 #ifndef _CORE_SORT_INLINE_H_
 #define _CORE_SORT_INLINE_H_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename ArrT, typename ElemT, typename CompareT>
 GINLINE gvoid GSort::BubbleSort(ArrT &arr, gsize start, gsize len)
@@ -138,7 +138,7 @@ GINLINE gvoid GSort::QuickSort(ArrT &arr, gsize start, gsize len)
 	detail::GSort_Ex::QuickSorting<ArrT, ElemT, CompareT>(arr, start, start + len - 1, compareF);
 }
 
-namespace detail { // gnova.detail
+namespace detail { // gsystem.detail
 
 template<typename ArrT, typename ElemT, typename CompareT>
 GINLINE gvoid GSort_Ex::InsertSorting(ArrT &arr, const gsize start, const gsize len, const CompareT &compareF)
@@ -310,7 +310,7 @@ GINLINE gvoid GSort_Ex::QuickSorting(ArrT &arr, gsize first, gsize last, const C
 	}
 }
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #endif // _CORE_SORT_INLINE_H_

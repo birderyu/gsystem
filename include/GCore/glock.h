@@ -4,7 +4,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GLock
 {
@@ -14,6 +14,6 @@ public:
 	virtual gvoid Unlock() = 0;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_MUTEX_H_

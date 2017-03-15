@@ -4,7 +4,7 @@
 
 #include "glockguard.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename ClassT, typename LockT>
 class GSingleton
@@ -53,6 +53,6 @@ ClassT *volatile GSingleton<ClassT, LockT>::m_pInstance = GNULL;
 template <typename ClassT, typename LockT>
 LockT GSingleton<ClassT, LockT>::m_tLock = LockT();
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_SINGLETON_H_

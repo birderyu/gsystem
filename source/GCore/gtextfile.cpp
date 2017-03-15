@@ -1,7 +1,7 @@
 #include "gtextfile.h"
 #include "gtextfile_ex.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GTextFile::GTextFile(const GString &filename)
 : GFile(new detail::GTextFile_Ex(filename))
@@ -36,4 +36,4 @@ gbool GTextFile::Write(const GString &content)
 	return pTextFile_Ex->Write(content);
 }
 
-} // namespace gnova
+} // namespace gsystem

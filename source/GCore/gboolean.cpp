@@ -1,6 +1,6 @@
 #include "gboolean.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GBoolean GBoolean::ValueOf(const GString &str)
 {
@@ -32,4 +32,4 @@ guint GBoolean::ClassCode() const
 	return GBoolean::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

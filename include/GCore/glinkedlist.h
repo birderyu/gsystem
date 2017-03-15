@@ -5,7 +5,7 @@
 #include "gserialize.h"
 #include "gstructure.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 // NodeT为节点类型，设置为从外部传入，以增加扩展性
 template<typename DataT, typename NodeT>
@@ -94,7 +94,7 @@ public:
 	virtual guint ClassCode() const;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "glinkedlist.inl"
 

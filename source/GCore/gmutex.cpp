@@ -7,7 +7,7 @@
 #include <windows.h>
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GMutex::GMutex()
 : m_pHandle(GNULL)
@@ -72,4 +72,4 @@ gvoid GMutex::Release()
 	m_pHandle = GNULL;
 }
 
-} // namespace gnova
+} // namespace gsystem

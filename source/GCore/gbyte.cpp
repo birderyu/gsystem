@@ -1,6 +1,6 @@
 #include "gbyte.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GByte::GByte(gbyte val)
 : GPackage<gbyte>(val)
@@ -19,4 +19,4 @@ guint GByte::ClassCode() const
 	return GByte::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

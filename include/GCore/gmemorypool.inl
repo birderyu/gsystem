@@ -4,9 +4,9 @@
 // ¶ÔÆë³¤¶È
 #define G_MEMORYPOOL_ALIGNMENT 8
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace mempool { // gnova.detail.mempool
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace mempool { // gsystem.detail.mempool
 
 template<gsize SIZE>
 struct GAligment
@@ -38,17 +38,17 @@ struct GAligment<4>
 	static const gsize value = sizeof(guint32);
 };
 
-} // namespace gnova.detail.mempool
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.mempool
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<gsize UNIT_SIZE, guint16 INIT_SIZE, guint16 GROW_SIZE>
 const gsize GMemoryPool<UNIT_SIZE, INIT_SIZE, GROW_SIZE>::m_nUnitSize
 	= detail::mempool::GAligment<UNIT_SIZE>::value;
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_MEMORYPOOL_ALIGNMENT
 

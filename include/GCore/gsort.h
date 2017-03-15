@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// ArrT必须提供下标操作元素的方法
 /// ElemT默认情况下需实现拷贝构造和等号重载的方法，也可以通过继承仿函数CompareT的方式
@@ -57,7 +57,7 @@ public:
 	static void QuickSort(ArrT &arr, gsize start, gsize len);
 };
 
-namespace detail { // gnova.detail
+namespace detail { // gsystem.detail
 
 /// 排序算法实现类
 class GSort_Ex
@@ -107,8 +107,8 @@ private:
 	static void QuickSorting(ArrT &arr, gsize first, gsize last, const CompareT &compareF);
 };
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #include "gsort.inl"
 

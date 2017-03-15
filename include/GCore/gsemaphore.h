@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 信号量
 class GAPI GSemaphore
@@ -20,6 +20,6 @@ private:
 	gpointer m_pHandle;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_SEMAPHORE_H_

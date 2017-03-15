@@ -1,7 +1,7 @@
 #ifndef _CORE_BINARY_HEAP_INLINE_
 #define _CORE_BINARY_HEAP_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT, typename CompareT>
 GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(gsize capacity, gsize add_size)
@@ -275,6 +275,6 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::Output() const
 	cout << endl;
 }
 
-}  // namespace gnova
+}  // namespace gsystem
 
 #endif // _CORE_BINARY_HEAP_INLINE_

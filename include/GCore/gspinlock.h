@@ -1,6 +1,6 @@
 // зда§Ыј
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GSpinLock
 {
@@ -8,4 +8,4 @@ public:
 	
 };
 
-} // namespace gnova
+} // namespace gsystem

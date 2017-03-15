@@ -1,8 +1,8 @@
 #include "glog.h"
 #include "gstring.h"
 
-namespace gnova { // gnova
-namespace log { // gnova.log
+namespace gsystem { // gsystem
+namespace log { // gsystem.log
 
 GLog::GLog(const GString &filename)
 	: m_tLogFile(filename)
@@ -30,5 +30,5 @@ gvoid GLog::Error(const GString &msg)
 
 }
 
-} // namespace gnova.log
-} // namespace gnova
+} // namespace gsystem.log
+} // namespace gsystem

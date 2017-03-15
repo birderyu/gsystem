@@ -103,7 +103,7 @@
 #	define G_BYTE_ORDER G_BIG_ENDIAN
 #endif
 
-#define G_POINTER_ADDRESS_SIZE	sizeof(gnova::gvoid*)
+#define G_POINTER_ADDRESS_SIZE	sizeof(gsystem::gvoid*)
 
 #define G_INT8_MAX		0x7f
 #define G_INT8_MIN		(-0x80)
@@ -148,7 +148,7 @@ extern "C"{
 #endif // !GINLINE
 
 // 字符处理
-#define GUCHAR(c)				((gnova::guchar)(c))
+#define GUCHAR(c)				((gsystem::guchar)(c))
 #define G_CHAR_IS_ASCII(c)		(isascii(GUCHAR(c)) != 0)
 #define G_CHAR_IS_ALNUM(c)		(isalnum(GUCHAR(c)) != 0)
 #define G_CHAR_IS_ALPHA(c)		(isalpha(GUCHAR(c)) != 0)

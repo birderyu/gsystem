@@ -22,7 +22,7 @@
 #define G_TIME_SIZE_SECOND			1
 #define G_TIME_SIZE_MILLISECOND		2
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GTime GTime::Now()
 {
@@ -326,7 +326,7 @@ GString GTime::ToString() const
 	return str;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_TIME_SIZE_MILLISECOND	
 #undef G_TIME_SIZE_SECOND			

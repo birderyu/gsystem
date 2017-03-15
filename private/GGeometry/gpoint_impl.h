@@ -6,9 +6,9 @@
 #include "genvelope.h"
 #include "gcoordinatesequence.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace geom { // gnova.detail.geom
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace geom { // gsystem.detail.geom
 
 template<gsize DIMENSION>
 class GPoint_Impl
@@ -44,9 +44,9 @@ private:
 	const GGeometryFactory *m_pFactory;
 };
 
-} // namespace gnova.detail.geom
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.geom
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #include "gpoint_impl.inl"
 

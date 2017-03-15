@@ -6,7 +6,7 @@
 
 #define G_VECTOR_DEFAULT_CAPACITY 16
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename DataT>
 class GVector final
@@ -180,7 +180,7 @@ private:
 	gsize m_nTail;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gvector.inl"
 

@@ -1,7 +1,7 @@
 #ifndef _CORE_B_TREE_H_
 #define _CORE_B_TREE_H_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT, gsize KEY_MAX, gsize CHILD_MAX>
 struct GBTreeNode
@@ -30,7 +30,7 @@ class GBTree
 public:
 	GBTree()
 	{
-		m_pRoot = NULL;  //创建一棵空的B树  
+		m_pRoot = GNULL;  //创建一棵空的B树  
 	}
 
 	~GBTree()
@@ -38,15 +38,18 @@ public:
 		Clear();
 	}
 
-	gbool Insert(const KeyT &key, const ValueT &value)    //向B数中插入新结点key  
+	// 向B树中插入新结点key 
+	gbool Insert(const KeyT &key, const ValueT &value)     
 	{
-		if (Contains(key))  //检查该关键字是否已经存在  
+		// 检查该关键字是否已经存在
+		if (Contains(key))  
 		{
 			return false;
 		}
 		else
 		{
-			if (m_pRoot == NULL)//检查是否为空树  
+			// 检查是否为空树
+			if (m_pRoot == GNULL)
 			{
 				m_pRoot = new NodeT();
 			}
@@ -63,7 +66,8 @@ public:
 		}
 	}
 
-	gbool Delete(const KeyT &key)    //从B中删除结点key  
+	// 从B树中删除结点key 
+	gbool Delete(const KeyT &key)     
 	{
 		if (!Search(m_pRoot, key))  //不存在  
 		{
@@ -80,7 +84,8 @@ public:
 			{
 				NodeT *pChild1 = m_pRoot->m_pChild[0];
 				NodeT *pChild2 = m_pRoot->m_pChild[1];
-				if (pChild1->m_nKeyNum == KEY_MIN&&pChild2->m_nKeyNum == KEY_MIN)
+				if (pChild1->m_nKeyNum == KEY_MIN &&
+					pChild2->m_nKeyNum == KEY_MIN)
 				{
 					MergeChild(m_pRoot, 0);
 					DeleteNode(m_pRoot);
@@ -91,11 +96,13 @@ public:
 		Recursive_remove(m_pRoot, key);
 		return true;
 	}
+
 	gvoid Display()const //打印树的关键字  
 	{
 		DisplayInConcavo(m_pRoot, KEY_MAX * 10);
 	}
-	gbool Contains(const KeyT &key)const   //检查该key是否存在于B树中  
+
+	gbool Contains(const KeyT &key) const   //检查该key是否存在于B树中  
 	{
 		return Search(m_pRoot, key);
 	}
@@ -104,8 +111,9 @@ public:
 		Recursive_clear(m_pRoot);
 		m_pRoot = NULL;
 	}
+
 private:
-	//删除树  
+	// 递归删除树  
 	gvoid Recursive_clear(NodeT *pNode)
 	{
 		if (pNode != NULL)
@@ -161,13 +169,13 @@ private:
 	}
 
 	//分裂子节点  
-	gvoid SplitChild(NodeT *pParent, int nChildIndex, NodeT *pChild)
+	gvoid SplitChild(NodeT *pParent, gint nChildIndex, NodeT *pChild)
 	{
 		//将pChild分裂成pLeftNode和pChild两个节点  
 		NodeT *pRightNode = new NodeT();//分裂后的右节点  
 		pRightNode->m_bIsLeaf = pChild->m_bIsLeaf;
 		pRightNode->m_nKeyNum = KEY_MIN;
-		int i;
+		gint i;
 		for (i = 0; i < KEY_MIN; ++i)//拷贝关键字的值  
 		{
 			pRightNode->m_tKeys[i] = pChild->m_tKeys[i + CHILD_MIN];
@@ -195,7 +203,7 @@ private:
 	//在非满节点中插入关键字  
 	gvoid InsertNonFull(NodeT *pNode, const KeyT &key, const ValueT &value)
 	{
-		int i = pNode->m_nKeyNum;  //获取节点内关键字个数  
+		gint i = pNode->m_nKeyNum;  //获取节点内关键字个数  
 		if (pNode->m_bIsLeaf)      //pNode是叶子节点  
 		{
 			while (i > 0 && key < pNode->m_tKeys[i - 1])   //从后往前，查找关键字的插入位置  
@@ -223,7 +231,7 @@ private:
 	}
 
 	//用括号打印树  
-	gvoid DisplayInConcavo(NodeT *pNode, int count)const
+	gvoid DisplayInConcavo(NodeT *pNode, gint count)const
 	{
 		if (pNode != NULL)
 		{
@@ -408,6 +416,6 @@ private:
 	NodeT * m_pRoot;  //B树的根节点  
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_B_TREE_H_

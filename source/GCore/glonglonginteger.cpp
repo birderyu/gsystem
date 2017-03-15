@@ -1,6 +1,6 @@
 #include "glonglonginteger.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 glonglong GLongLongInteger::MaxValue()
 {
@@ -43,4 +43,4 @@ guint GLongLongInteger::ClassCode() const
 	return GLongLongInteger::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

@@ -14,7 +14,7 @@
 #include "glinkedlist.h"
 #include "gstructure.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT>
 struct GSingleLinkedListNode
@@ -113,7 +113,7 @@ protected:
 	Node *m_pFirst;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gsinglelinkedlist.inl"
 

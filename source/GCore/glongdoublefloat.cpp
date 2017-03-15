@@ -1,6 +1,6 @@
 #include "glongdoublefloat.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 glongdouble GLongDoubleFloat::MaxValue()
 {
@@ -88,4 +88,4 @@ gbool GLongDoubleFloat::IsNaN() const
 	return m_nValue != m_nValue;
 }
 
-} // namespace gnova
+} // namespace gsystem

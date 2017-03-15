@@ -3,7 +3,7 @@
 
 #define G_QUEUE_DEFAULT_CAPACITY 1024
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename DataT>
 DataT GArrayQueue<DataT>::front()
@@ -46,7 +46,7 @@ int GArrayQueue<DataT>::Size()
 	return (m_nRear - m_nFront + maxsize) % maxsize;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_QUEUE_DEFAULT_CAPACITY
 

@@ -25,7 +25,7 @@
 #define G_DATA_SIZE_DAY_OF_YEAR		2
 #define G_DATA_SIZE_DAY_OF_WEEK		1
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GDate GDate::Now()
 {
@@ -510,7 +510,7 @@ GString GDate::ToString() const
 	return str;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_DATA_SIZE_DAY_OF_WEEK		
 #undef G_DATA_SIZE_DAY_OF_YEAR	

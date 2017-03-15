@@ -1,8 +1,8 @@
 #include "gtcpsocket_ex.h"
 #include "gtcpsocket.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 gbool GTcpSocket_Ex::Open(gbool nResue)
 {
@@ -102,5 +102,5 @@ gint GTcpSocket_Ex::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
 	return GRecvSocket(m_hSocket, pBufData, nDataLen, nFlags);
 }
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem

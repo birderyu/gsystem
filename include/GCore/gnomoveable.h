@@ -1,7 +1,7 @@
 #ifndef _CORE_NO_MOVEABLE_H_
 #define _CORE_NO_MOVEABLE_H_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 // the class which is immovable
 class GNomovable
@@ -11,6 +11,6 @@ protected:
 	GNomovable &operator=(GNomovable &&) = delete;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_NO_MOVEABLE_H_

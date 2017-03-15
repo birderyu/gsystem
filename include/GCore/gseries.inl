@@ -1,9 +1,9 @@
 #ifndef _CORE_ARRAY_DATA_INLINE_
 #define _CORE_ARRAY_DATA_INLINE_
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace series { // gnova.detail.series
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace series { // gsystem.detail.series
 
 template<gbool HAS_END_FLAG>
 class GSeriesHelper
@@ -130,11 +130,11 @@ GINLINE gvoid GSeriesHelper<true>::SetEndFlag(T *arr, gsize size, T &&end_flag)
 	arr[size] = GForward<T>(end_flag);
 }
 
-} // namespace gnova.detail.series
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.series
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
 GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(gsize capacity)
@@ -727,6 +727,6 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ToValue(gsize capa
 	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_ARRAY_DATA_INLINE_

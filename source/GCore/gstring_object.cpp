@@ -1,6 +1,6 @@
 #include "gstring.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 const GObject *GString::Boxing() const
 {
@@ -17,4 +17,4 @@ GString GString::ToString() const
 	return GString(m_tString);
 }
 
-} // namespace gnova
+} // namespace gsystem

@@ -14,7 +14,7 @@
 
 #include "gsinglelinkedlist.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT, typename NodeT = GSingleLinkedListNode<DataT>>
 class GCircularLinkedList 
@@ -35,7 +35,7 @@ protected:
 	Node *m_pCursor;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gcircularlinkedlist.inl"
 

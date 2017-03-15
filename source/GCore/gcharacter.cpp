@@ -1,6 +1,6 @@
 #include "gcharacter.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GCharacter::GCharacter(gchar val)
 : GPackage<gchar>(val)
@@ -18,4 +18,4 @@ guint GCharacter::ClassCode() const
 	return GCharacter::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

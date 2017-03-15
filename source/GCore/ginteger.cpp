@@ -1,6 +1,6 @@
 #include "ginteger.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gint GInteger::MaxValue()
 {
@@ -38,4 +38,4 @@ guint GInteger::ClassCode() const
 	return GInteger::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

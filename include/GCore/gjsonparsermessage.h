@@ -4,8 +4,8 @@
 #include "gobject.h"
 #include "gstring.h"
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 class GAPI GJsonParserMessage
 {
@@ -24,7 +24,7 @@ private:
 	GString m_sErrorMessage;
 };
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem
 
 #endif // _CORE_JSON_PARSER_MESSAGE_H_

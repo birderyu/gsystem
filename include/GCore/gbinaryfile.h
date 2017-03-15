@@ -3,14 +3,14 @@
 
 #include "gfile.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GBytes;
-	namespace detail { // gnova.detail
+	namespace detail { // gsystem.detail
 		class GBinaryFile_Ex;
-	} // namespace gnova.detail
-} // namespace gnova
+	} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GBinaryFile
 	: public GFile
@@ -26,6 +26,6 @@ protected:
 	GBinaryFile(detail::GBinaryFile_Ex *);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_BINARY_FILE_H_

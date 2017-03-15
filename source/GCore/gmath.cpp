@@ -1,7 +1,7 @@
 #include "gmath.h"
 #include <cmath>
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 #define G_SINE_TABLE_SIZE 256
 extern const gdouble g_sine_table[G_SINE_TABLE_SIZE] = { 0 };
@@ -144,6 +144,6 @@ gdecimal GMath::Sqrt(gdecimal v)
 }
 #endif // G_HAS_DECIMAL
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_SINE_TABLE_SIZE

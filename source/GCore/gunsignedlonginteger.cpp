@@ -1,6 +1,6 @@
 #include "gunsignedlonginteger.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gulong GUnsignedLongInteger::MaxValue()
 {
@@ -38,4 +38,4 @@ guint GUnsignedLongInteger::ClassCode() const
 	return GUnsignedLongInteger::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

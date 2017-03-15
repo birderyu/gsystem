@@ -1,9 +1,9 @@
 #ifndef _CORE_ARRAY_INLINE_
 #define _CORE_ARRAY_INLINE_
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace array { // gnova.detail.array
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace array { // gsystem.detail.array
 
 /// DataT具有内置的构造函数，无需构造，仅分配内存
 template <typename DataT> GINLINE DataT *_GArrayCreate(gsize size, GTrueType) noexcept(false)
@@ -600,11 +600,11 @@ template <typename DataT> GINLINE DataT *_GArrayCopyFrom(DataT *arr, gsize size,
 	return arr;
 }
 
-} // namespace gnova.detail.array
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.array
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename DataT>
 GINLINE DataT *GArray<DataT>::CreateArray(gsize size) noexcept(false)
@@ -797,6 +797,6 @@ GINLINE guint GArray<DataT>::ClassCode() const
 	return GArray<DataT>::CLASS_CODE;
 }
 
-}  // namespace gnova
+}  // namespace gsystem
 
 #endif // _CORE_ARRAY_INLINE_

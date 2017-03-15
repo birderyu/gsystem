@@ -1,7 +1,7 @@
 #include "gfile.h"
 #include "gfile_ex.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GFile::GFile(detail::GFile_Ex *pFile_Ex)
 : m_pFileEx(pFile_Ex)
@@ -93,4 +93,4 @@ gsize GFile::Size() const
 	return static_cast<gsize>(size);
 }
 
-} // namespace gnova
+} // namespace gsystem

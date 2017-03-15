@@ -4,11 +4,11 @@
 #include "gstringpool.h"
 #include "gmap.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GString;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 enum G_STRING_TYPE
 {
@@ -37,6 +37,6 @@ private:
 	GMap<gsize, gpointer> m_t; // <ÏÂ±ê£¬Ö¸Õë>
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_STRING_LIST_H_

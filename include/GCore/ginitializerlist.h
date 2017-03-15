@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<class ElemT>
 class GInitializerList
@@ -48,6 +48,6 @@ private:
 	const ElemT *m_pLast;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_INITIALIZER_LIST_H_

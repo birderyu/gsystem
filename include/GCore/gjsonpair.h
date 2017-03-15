@@ -22,14 +22,14 @@
 #include "gstring.h"
 #include "gjsonvalue.h"
 
-namespace gnova { // gnova
-	namespace json { // gnova.json
+namespace gsystem { // gsystem
+	namespace json { // gsystem.json
 		class GJsonParserMessage;
-	} // namespace gnova.json
-} // namespace gnova
+	} // namespace gsystem.json
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 class GAPI GJsonPair
 	: public GObject
@@ -55,7 +55,7 @@ private:
 	GJsonValue *m_pValue;
 };
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem
 
 #endif // _CORE_JSON_PAIR_H_

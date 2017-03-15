@@ -1,6 +1,6 @@
 #include "gwidecharacter.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GWideCharacter::GWideCharacter(gwchar val)
 : GPackage<gwchar>(val)
@@ -18,4 +18,4 @@ guint GWideCharacter::ClassCode() const
 	return GWideCharacter::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

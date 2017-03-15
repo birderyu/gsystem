@@ -1,9 +1,9 @@
 #ifndef _CORE_UTILITY_INLINE_
 #define _CORE_UTILITY_INLINE_
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace utility { // gnova.detail.utility
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace utility { // gsystem.detail.utility
 
 /// 算数类型，直接使用值拷贝交换操作
 template<typename T>
@@ -23,11 +23,11 @@ GINLINE gvoid GSwap(T& a, T& b, GFalseType)
 	b = GMove(t);
 }
 
-} // namespace gnova.detail.utility
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.utility
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename T>
 GINLINE typename GRemoveReference<T>::Type &&GMove(T &&t)
@@ -55,6 +55,6 @@ GINLINE gvoid GSwap(T &a, T &b)
 		GTypeTraits<T>::Arithmetic())
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_UTILITY_INLINE_

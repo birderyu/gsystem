@@ -8,15 +8,15 @@
 #include "ggeometryglobal.h"
 #include "GCore/gobject.h"
 
-namespace gnova { // gnova
-	namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+	namespace geom { // gsystem.geom
 		class GCoordinate;
 		class GCoordinateSequence;
 	}
 }
 
-namespace gnova { // gnova
-namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
 
 class GAPI GEnvelope
 	: public GObject

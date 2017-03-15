@@ -1,7 +1,7 @@
 #include "gregister.h"
 #include "gstring.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gbool GRegister::Register(const GString &sClassName, guint nClassCode)
 {
@@ -27,4 +27,4 @@ gvoid GRegister::Initialize()
 	Register("Bool", CLASS_CODE_BOOLEAN);
 }
 
-} // namespace gnova
+} // namespace gsystem

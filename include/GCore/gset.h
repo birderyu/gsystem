@@ -7,24 +7,24 @@
 
 #include "gunorderset.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 template < typename KeyT,
 	typename HashT = GHashF<KeyT>,
 	typename CompareT = GEqualToF<KeyT>>
 class GSet final
 	: public GUnorderSet<KeyT, HashT, CompareT> {};
-} // namespace gnova
+} // namespace gsystem
 
 #else // !G_SET_USER_UNORDER
 
 #include "gorderset.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 template < typename KeyT,
 	typename CompareT = GCompareToF < KeyT >>
 class GSet final
 	: public GOrderSet<KeyT, CompareT> {};
-} // namespace gnova
+} // namespace gsystem
 
 #endif // G_SET_USER_UNORDER
 

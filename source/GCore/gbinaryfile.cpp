@@ -1,7 +1,7 @@
 #include "gbinaryfile.h"
 #include "gbinaryfile_ex.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GBinaryFile::GBinaryFile(const GString &sFileName)
 : GFile(new detail::GBinaryFile_Ex(sFileName))
@@ -45,4 +45,4 @@ gbool GBinaryFile::Write(const GBytes &bytes)
 	return m_pBinaryFile_Ex->Write(bytes);
 }
 
-} // namespace gnova
+} // namespace gsystem

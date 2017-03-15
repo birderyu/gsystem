@@ -6,8 +6,8 @@
 // Windows下使用Socket需要先初始化
 #pragma comment(lib,"ws2_32")
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 class GSocketInit
 {
@@ -28,12 +28,12 @@ public:
 };
 static GSocketInit g_tSocket_Init_Win32;
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 GSocket_Ex::GSocket_Ex()
 : m_hSocket(-1)
@@ -176,5 +176,5 @@ gbool GSocket_Ex::GetLocalAddr(GSockAddress_Ex *pSockAddr) const
 	return true;
 }
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem

@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 enum class GMonth
 	: guint
@@ -99,6 +99,6 @@ enum class GHour
 	Hour_23
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_DATE_TIME_DEFINE_H_

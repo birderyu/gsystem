@@ -5,7 +5,7 @@
 #include "gtuple.h"
 #include "gvector.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename ...TS>
 class GTable
@@ -107,7 +107,7 @@ private:
 	GVector<RowType> m_tTable;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gtable.inl"
 

@@ -2,7 +2,7 @@
 #include "gstring.h"
 #include "gbytes.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GObject::~GObject()
 {
@@ -54,4 +54,4 @@ gbool GObject::Serializable() const
 	return false;
 }
 
-} // namespace gnova
+} // namespace gsystem

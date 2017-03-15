@@ -7,7 +7,7 @@
 #include <windows.h>
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GCriticalSection::GCriticalSection()
 {
@@ -51,4 +51,4 @@ gvoid GCriticalSection::Release()
 	::DeleteCriticalSection((CRITICAL_SECTION*)m_pHandle);
 }
 
-} // namespace gnova
+} // namespace gsystem

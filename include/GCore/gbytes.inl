@@ -1,7 +1,7 @@
 #ifndef _CORE_BYTES_INLINE_
 #define _CORE_BYTES_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename T> 
 GINLINE gsize GBytes::ArithmeticToBytes(const T *val, gbyte *bytes)
@@ -49,6 +49,6 @@ GINLINE gsize GBytes::BytesToArithmetic(const gbyte *bytes, T *val)
 	return size;
 }
 
-}  // namespace gnova
+}  // namespace gsystem
 
 #endif // _CORE_BYTES_INLINE_

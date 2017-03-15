@@ -5,7 +5,7 @@
 #include "gqueue.h"
 #include "gdynamicarray.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename DataT>
 class GArrayQueue
@@ -41,7 +41,7 @@ private:
 	GDynamicArray<DataT> m_tArray;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "garrayqueue.inl"
 

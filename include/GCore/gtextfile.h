@@ -3,13 +3,13 @@
 
 #include "gfile.h"
 
-namespace gnova { // gnova
-	namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+	namespace detail { // gsystem.detail
 		class GTextFile_Ex;
-	} // namespace gnova.detail
-} // namespace gnova
+	} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GTextFile 
 	: public GFile
@@ -25,6 +25,6 @@ protected:
 	GTextFile(detail::GTextFile_Ex *);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_TEXT_FILE_H_

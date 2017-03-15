@@ -18,8 +18,8 @@
 #	define G_COORDINATE_Y_POS	1
 #endif // G_GEOMETRY_HAS_Z
 
-namespace gnova { // gnova
-namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
 
 // Î¬¶È * 4
 enum G_GEOMETRY_DIMENSION

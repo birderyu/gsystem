@@ -4,9 +4,9 @@
 #include "gglobal.h"
 #include "gnew.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace variant { // gnova.detail.variant
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace variant { // gsystem.detail.variant
 
 template<typename T, typename ...TS>
 struct GSelectConvertible
@@ -184,11 +184,11 @@ struct g_variant_cast
 	operator T &() { return static_cast<V &>(*this).template GetReference<T>(); }
 };
 
-} // namespace gnova.detail.variant
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.variant
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename ...TS>
 class GVariant
@@ -501,7 +501,7 @@ constexpr detail::variant::copy_func_t GVariant<TS...>::m_copy_assign[];
 template<typename ...TS>
 constexpr detail::variant::move_func_t GVariant<TS...>::m_move_assign[];
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gvariant.inl"
 

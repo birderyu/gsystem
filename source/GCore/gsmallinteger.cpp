@@ -1,6 +1,6 @@
 #include "gsmallinteger.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gsmall GSmallInteger::MaxValue()
 {
@@ -38,4 +38,4 @@ guint GSmallInteger::ClassCode() const
 	return GSmallInteger::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

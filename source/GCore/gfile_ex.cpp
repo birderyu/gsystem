@@ -2,8 +2,8 @@
 #include "gstring.h"
 #include "gfile.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 GFile_Ex::GFile_Ex(const GString &sFileName)
 : m_sFileName(sFileName)
@@ -153,5 +153,5 @@ gbool GFile_Ex::CanWrite() const
 	return true;
 }
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem

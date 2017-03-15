@@ -3,7 +3,7 @@
 
 #include "gtype.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// Ò»Ôªº¯Êý
 template<typename ArgType,
@@ -159,6 +159,6 @@ struct GLeftClosedRightOpenF
 	}
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_FUNCTOR_H_

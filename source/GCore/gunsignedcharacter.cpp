@@ -1,6 +1,6 @@
 #include "gunsignedcharacter.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GUnsignedCharacter::GUnsignedCharacter(guchar val)
 : GNumber<guchar>(val)
@@ -19,4 +19,4 @@ guint GUnsignedCharacter::ClassCode() const
 	return GUnsignedCharacter::CLASS_CODE;
 }
 
-} // namespace gnova
+} // namespace gsystem

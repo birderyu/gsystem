@@ -3,8 +3,8 @@
 
 #include "gsocket_ex.h"
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 class GUdpSocket_Ex 
 	: public GSocket_Ex
@@ -18,7 +18,7 @@ public:
 	gint RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress_Ex *pPeer);
 };
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #endif // _CORE_UDP_SOCKET_EX_H_

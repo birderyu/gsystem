@@ -2,7 +2,7 @@
 #include "gstringlist.h"
 #include "gcstringhelper.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GString::GString()
 {
@@ -299,4 +299,4 @@ gvoid GString::Append(GString &&str)
 	m_tString.Append(GMove(str.m_tString));
 }
 
-} // namespace gnova
+} // namespace gsystem

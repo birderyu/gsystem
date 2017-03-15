@@ -22,11 +22,11 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GThread;
 }
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 线程类
 class GAPI GRunnable
@@ -62,6 +62,6 @@ private:
 	gpointer m_pHandle;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_RUNNABLE_H_

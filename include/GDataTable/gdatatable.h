@@ -5,8 +5,17 @@
 
 #include "gtableglobal.h"
 
-class GVirtualTable;
-class GVirtualTableCursor;
+namespace gsystem {
+	namespace detail {
+		namespace table {
+			class GVirtualTable;
+			class GVirtualTableCursor;
+		}
+	}
+}
+
+namespace gsystem {
+namespace table {
 
 class GAPI GDataTable
 {
@@ -130,5 +139,8 @@ private:
 	GDataTable(GVirtualTable *);
 	GVirtualTable *m_pVirtualTable;
 };
+
+}
+}
 
 #endif // _CSCORE_CSDATATABLE_H_

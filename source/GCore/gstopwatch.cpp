@@ -9,7 +9,7 @@
 #include <time.h>
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gvoid GStopWatch::Start()
 {
@@ -39,4 +39,4 @@ gulong GStopWatch::Tick() const
 #endif // G_SYSTEM_WINDOWS
 }
 
-} // namespace gnova
+} // namespace gsystem

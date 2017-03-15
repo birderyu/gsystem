@@ -1,7 +1,7 @@
 #ifndef _CORE_UNIQUE_POINTER_INLINE_
 #define _CORE_UNIQUE_POINTER_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename ClassT>
 GINLINE GUniquePointer<ClassT>::GUniquePointer(ClassT *ptr)
@@ -86,6 +86,6 @@ GINLINE GUniquePointer<ClassT> GMakeUnique(TS&&... args)
 	return GUniquePointer<ClassT>(new ClassT(GForward<TS>(args)...));
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_UNIQUE_POINTER_INLINE_

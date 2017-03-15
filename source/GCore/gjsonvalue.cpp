@@ -3,8 +3,8 @@
 #include "gjsonarray.h"
 #include "gjsonparsermessage.h"
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 GJsonValue::GJsonValue()
 : m_nType(JSON_VALUE_TYPE_ILLEGAL)
@@ -498,5 +498,5 @@ gvoid GJsonValue::Dispose()
 	m_nType = JSON_VALUE_TYPE_ILLEGAL;
 }
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem

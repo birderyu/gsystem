@@ -1,7 +1,7 @@
 #ifndef _CORE_UNORDER_MAP_INLINE_
 #define _CORE_UNORDER_MAP_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT, typename HashT, typename CompareT>
 GINLINE GUnorderMap<KeyT, ValueT, HashT, CompareT>::GUnorderMap()
@@ -197,6 +197,6 @@ GINLINE gbool GUnorderMap<KeyT, ValueT, HashT, CompareT>::operator!=(const GUnor
 	return false;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_UNORDER_MAP_INLINE_

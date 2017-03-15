@@ -4,8 +4,8 @@
 
 #define G_BINARY_DOCUMNET_BUFFER_SIZE 4096
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 GBinaryFile_Ex::GBinaryFile_Ex(const GString &sFileName)
 : GFile_Ex(sFileName)
@@ -146,7 +146,7 @@ gcstring GBinaryFile_Ex::OpenMode() const
 	return GNULL;
 }
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #undef G_BINARY_DOCUMNET_BUFFER_SIZE

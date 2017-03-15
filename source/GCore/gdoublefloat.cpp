@@ -1,6 +1,6 @@
 #include "gdoublefloat.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gdouble GDoubleFloat::MaxValue()
 {
@@ -88,4 +88,4 @@ gbool GDoubleFloat::IsNaN() const
 	return m_nValue != m_nValue;
 }
 
-} // namespace gnova
+} // namespace gsystem

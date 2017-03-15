@@ -3,11 +3,11 @@
 
 #include "gobject.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GDateTime;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GTime final 
 	: public GObject
@@ -59,6 +59,6 @@ private:
 	gbyte m_tTime[G_TIME_SIZE];
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_TIME_H_

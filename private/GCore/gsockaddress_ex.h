@@ -11,14 +11,14 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 typedef SOCKET				gsocket;
 #define GOpenSocket			socket
 #define GCloseSocket		closesocket
 #define GControlSocketIO	ioctlsocket
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #else // !G_SYSTEM_WINDOWS
 #include <sys/types.h>
@@ -30,18 +30,18 @@ typedef SOCKET				gsocket;
 #include <unistd.h>
 #include <sys/time.h>
 #include <fcntl.h>
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 typedef gint gsocket;
 #define GOpenSocket			socket
 #define GCloseSocket		close
 #define GControlSocketIO	ioctl
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 #define GBindSocket			bind
 #define GListenSocket		listen
 #define GAcceptSocket		accept
@@ -52,15 +52,15 @@ namespace detail { // gnova.detail
 #define GRecvFromSocket		recvfrom
 #define GSetSocketOpt		setsockopt
 #define GGetSocketOpt		getsockopt
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 class GString;
-} // namespace gnova.detail
+} // namespace gsystem.detail
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 class GSockAddress_Ex
 {
@@ -80,7 +80,7 @@ private:
 	sockaddr_in m_tSocketAddr;
 };
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #endif // _CORE_SOCKETADDRESS_EX_H_

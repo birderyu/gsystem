@@ -4,8 +4,8 @@
 #include "gjsonpair.h"
 #include "gjsonparsermessage.h"
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 GJsonObject::GJsonObject()
 {
@@ -261,5 +261,5 @@ gvoid GJsonObject::Dispose()
 	m_tJsonPairs.Clear();
 }
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem

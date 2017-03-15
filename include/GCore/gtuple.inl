@@ -1,7 +1,7 @@
 #ifndef _CORE_TUPLE_INLINE_
 #define _CORE_TUPLE_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -103,6 +103,6 @@ GINLINE GPair<T1, T2> GMakePair(T1 &&first, T2 &&second)
 
 //////////////////////////////////////////////////////////////////////////
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_TUPLE_INLINE_

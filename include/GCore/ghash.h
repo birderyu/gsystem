@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 基本内置类型的Hash算法
 GAPI guint GHashing(gbool);
@@ -188,6 +188,6 @@ struct GHashF<T*>
 	}
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_HASH_H_

@@ -3,13 +3,20 @@
 
 #include "GCore/gglobal.h"
 
-class GStream;
+namespace gsystem {
+	namespace stream {
+		class GStream;
+	}
+}
+
+namespace gsystem {
+namespace archive {
 
 class GAPI GArchive
 {
 public:
 	// 根据流创建一个档案
-	GArchive(GStream &);
+	GArchive(stream::GStream &);
 	virtual ~GArchive();
 
 	virtual gbool Input() const = 0;
@@ -65,29 +72,32 @@ private:
 	GArchive &operator=(const GArchive &);
 
 protected:
-	GStream &m_rStream;
+	stream::GStream &m_rStream;
 };
 
-inline GArchive::GArchive(GStream &stream)
+GINLINE GArchive::GArchive(stream::GStream &stream)
 : m_rStream(stream)
 {
 
 }
 
-inline GArchive::GArchive(const GArchive &archive)
+GINLINE GArchive::GArchive(const GArchive &archive)
 : m_rStream(archive.m_rStream)
 {
 
 }
 
-inline GArchive::~GArchive()
+GINLINE GArchive::~GArchive()
 {
 
 }
 
-inline GArchive &GArchive::operator=(const GArchive &)
+GINLINE GArchive &GArchive::operator=(const GArchive &)
 {
 	return *this;
+}
+
+}
 }
 
 #endif // _SERIALIZATION_ARCHIVE_H_

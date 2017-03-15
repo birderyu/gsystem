@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GEndian
 {
@@ -66,7 +66,7 @@ private:
 	~GEndian();
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gendian.inl"
 

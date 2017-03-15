@@ -3,7 +3,7 @@
 
 #include "ggeometry.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 namespace geom {
 
 class GAPI GBody

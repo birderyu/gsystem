@@ -1,7 +1,7 @@
 #ifndef _CORE_UNORDER_SET_INLINE_
 #define _CORE_UNORDER_SET_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename KeyT, typename HashT, typename CompareT>
 GINLINE GUnorderSet<KeyT, HashT, CompareT>::GUnorderSet()
@@ -314,6 +314,6 @@ GINLINE GUnorderSet<KeyT, HashT, CompareT> &GUnorderSet<KeyT, HashT, CompareT>::
 	return *this;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_UNORDER_SET_INLINE_

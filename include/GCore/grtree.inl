@@ -1,7 +1,7 @@
 #ifndef _CORE_R_TREE_INLINE_
 #define _CORE_R_TREE_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DATATYPE, typename ELEMTYPE, gsize NUMDIMS, typename ELEMTYPEREAL, gsize TMAXNODES, gsize TMINNODES>
 GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>::GRTree()
@@ -922,6 +922,6 @@ inline bool GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNOD
 	return true; // Continue searching
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_R_TREE_INLINE_

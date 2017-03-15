@@ -21,7 +21,7 @@
 #include "gdoublefloat.h"
 #include "glongdoublefloat.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 #ifdef G_REAL_USE_FLOAT
 typedef GFloat	GReal;
@@ -29,6 +29,6 @@ typedef GFloat	GReal;
 typedef GDouble	GReal;
 #endif // G_REAL_USE_FLOAT
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_NUMBER_H_

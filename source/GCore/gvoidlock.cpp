@@ -1,6 +1,6 @@
 #include "gvoidlock.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gvoid GVoidLock::Lock()
 {
@@ -12,4 +12,4 @@ gvoid GVoidLock::Unlock()
 	
 }
 
-} // namespace gnova
+} // namespace gsystem

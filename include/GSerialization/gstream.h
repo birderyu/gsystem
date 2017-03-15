@@ -4,6 +4,9 @@
 
 #include "GCore/gglobal.h"
 
+namespace gsystem {
+namespace stream {
+
 class GAPI GStream
 {
 public:
@@ -23,5 +26,8 @@ public:
 	// 是否是输出流
 	virtual gbool IsOutput() const = 0;
 };
+
+}
+}
 
 #endif // _CORE_STREAM_H_

@@ -3,7 +3,7 @@
 #include "gsockaddress.h"
 #include "gsockaddress_ex.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GSocket::GSocket(detail::GSocket_Ex *pSocket_Ex)
 :m_pSocket_Ex(pSocket_Ex)
@@ -58,4 +58,4 @@ gbool GSocket::GetLocalAddr(GSockAddress &tSockAddr) const
 	return m_pSocket_Ex->GetLocalAddr(tSockAddr.m_pSockAddress_Ex);
 }
 
-} // namespace gnova
+} // namespace gsystem

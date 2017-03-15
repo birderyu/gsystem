@@ -5,7 +5,7 @@
 #include "gcstringhelper.h"
 #include "gconstructor.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GVariety::GVariety(const gchar *val)
 	: m_nType(VARIETY_TYPE_STRING)
@@ -1387,4 +1387,4 @@ gvoid GVariety::Free()
 	m_pVal = GNULL;
 }
 
-} // namespace gnova
+} // namespace gsystem

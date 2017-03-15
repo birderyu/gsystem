@@ -1,8 +1,8 @@
 #ifndef _CORE_ASYNCHRONOUS_LOG_H_
 #define _CORE_ASYNCHRONOUS_LOG_H_
 
-namespace gnova { // gnova
-namespace log { // gnova.log
+namespace gsystem { // gsystem
+namespace log { // gsystem.log
 
 class GAsynchronousLog
 {
@@ -11,7 +11,7 @@ public:
 
 };
 
-} // namespace gnova.log
-} // namespace gnova
+} // namespace gsystem.log
+} // namespace gsystem
 
 #endif // _CORE_ASYNCHRONOUS_LOG_H_

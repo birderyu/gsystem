@@ -4,23 +4,23 @@
 
 #ifdef _MSC_VER
 #	ifndef G_USE_MSVC_STRCMP
-gnova::gint strcasecmp(const gnova::gchar *s1, gnova::gchar *s2)
+gsystem::gint strcasecmp(const gsystem::gchar *s1, gsystem::gchar *s2)
 {
-	while (::toupper((gnova::guchar)*s1) == ::toupper((gnova::guchar)*s2++))
+	while (::toupper((gsystem::guchar)*s1) == ::toupper((gsystem::guchar)*s2++))
 		if (*s1++ == '\0') return 0;
-	return(::toupper((gnova::guchar)*s1) - ::toupper((gnova::guchar)*--s2));
+	return(::toupper((gsystem::guchar)*s1) - ::toupper((gsystem::guchar)*--s2));
 }
 
-gnova::gint strncasecmp(const gnova::gchar *s1, gnova::gchar *s2, /*register*/ gnova::gint n)
+gsystem::gint strncasecmp(const gsystem::gchar *s1, gsystem::gchar *s2, /*register*/ gsystem::gint n)
 {
-	while (--n >= 0 && ::toupper((gnova::guchar)*s1) == ::toupper((gnova::guchar)*s2++))
+	while (--n >= 0 && ::toupper((gsystem::guchar)*s1) == ::toupper((gsystem::guchar)*s2++))
 		if (*s1++ == '\0')  return 0;
-	return(n < 0 ? 0 : ::toupper((gnova::guchar)*s1) - ::toupper((gnova::guchar)*--s2));
+	return(n < 0 ? 0 : ::toupper((gsystem::guchar)*s1) - ::toupper((gsystem::guchar)*--s2));
 }
 #	endif // !G_USE_MSVC_STRCMP
 #endif
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gsize GCStringHelper::Size(const gchar *c_str)
 {
@@ -278,4 +278,4 @@ gbool GCStringHelper::Replace(const gchar *c_str, gsize len,
 	return true;
 }
 
-} // namespace gnova
+} // namespace gsystem

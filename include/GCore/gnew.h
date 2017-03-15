@@ -6,7 +6,7 @@
 #include "gmemorypool.h"
 #include "glockguard.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 // NewHandler
 class GNewHander
@@ -143,7 +143,7 @@ private:
 	static LockT lock;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gnew.inl"
 

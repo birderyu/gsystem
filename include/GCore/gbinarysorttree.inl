@@ -1,7 +1,7 @@
 #ifndef _CORE_BINARY_SORT_TREE_INLINE_
 #define _CORE_BINARY_SORT_TREE_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT>
 GINLINE GBinarySortTreeNode<KeyT, ValueT>::GBinarySortTreeNode(
@@ -862,6 +862,6 @@ GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::SwitchNode(NodeT *
 	return true;
 }
 
-}  // namespace gnova
+}  // namespace gsystem
 
 #endif // _CORE_BINARY_SORT_TREE_INLINE_

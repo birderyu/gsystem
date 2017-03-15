@@ -7,7 +7,7 @@
 #define G_ORDER_MAP_NODE_RED	0
 #define G_ORDER_MAP_NODE_BLACK	1
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT,
 	typename CompareT = GCompareToF<KeyT >>
@@ -352,7 +352,7 @@ private:
 	gsize m_nSize;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gordermap.inl"
 

@@ -1,9 +1,9 @@
 #ifndef _CORE_CONSTRUCTOR_INLINE_
 #define _CORE_CONSTRUCTOR_INLINE_
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace constructor { // gnova.detail.constructor
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace constructor { // gsystem.detail.constructor
 
 template <typename ClassT>
 GINLINE gvoid _GDefaultConstruct(ClassT *ptr, GTrueType)
@@ -89,11 +89,11 @@ GINLINE gvoid _GDestruct(ClassT *ptr, GFalseType)
 }
 
 
-}  // namespace gnova.detail.constructor
-}  // namespace gnova.detail
-}  // namespace gnova
+}  // namespace gsystem.detail.constructor
+}  // namespace gsystem.detail
+}  // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename ClassT, typename... ArgsT>
 GINLINE gvoid GConstruct(ClassT *ptr, ArgsT&& ...args)
@@ -153,6 +153,6 @@ GINLINE gvoid GMoveConstruct(ClassT *ptr, ClassT &&moveable)
 		GTypeTraits<ClassT>::TrivialMoveConstructible());
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_CONSTRUCTOR_INLINE_

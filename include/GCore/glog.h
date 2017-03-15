@@ -3,12 +3,12 @@
 
 #include "gtextfile.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GString;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace log { // gnova.log
+namespace gsystem { // gsystem
+namespace log { // gsystem.log
 
 class GAPI GLog
 {
@@ -25,7 +25,7 @@ private:
 	GTextFile m_tLogFile;
 };
 
-} // namespace gnova.log
-} // namespace gnova
+} // namespace gsystem.log
+} // namespace gsystem
 
 #endif // _CORE_LOG_H_

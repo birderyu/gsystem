@@ -17,7 +17,7 @@
 
 #define G_CRITICAL_SECTION_HANELD_SIZE G_POINTER_ADDRESS_SIZE*8
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /****************************************************************************
 **
@@ -53,7 +53,7 @@ private:
 #endif // G_SYSTEM_WINDOWS
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_CRITICAL_SECTION_HANELD_SIZE
 

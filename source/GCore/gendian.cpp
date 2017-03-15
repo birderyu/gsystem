@@ -1,6 +1,6 @@
 #include "gendian.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 void GEndian::ToBigEndianBytes(guint16 val, gbyte bytes[])
 {
@@ -202,4 +202,4 @@ GEndian::~GEndian()
 
 }
 
-} // namespace gnova
+} // namespace gsystem

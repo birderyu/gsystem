@@ -3,7 +3,7 @@
 
 #include "glimitedlist.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 // LIFO
 template<typename DataT>
@@ -27,7 +27,7 @@ public:
 	virtual DataT &Bottom() = 0; // Õ»µ×
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gstack.inl"
 

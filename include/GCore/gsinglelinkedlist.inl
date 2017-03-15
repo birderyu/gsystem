@@ -1,7 +1,7 @@
 #ifndef _CORE_SINGLE_LINKED_LIST_INLINE_
 #define _CORE_SINGLE_LINKED_LIST_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT, typename NodeT>
 GINLINE GSingleLinkedList<DataT, NodeT>::GSingleLinkedList()
@@ -860,6 +860,6 @@ const DataT &GSingleLinkedList<DataT, NodeT>::operator[](gsize pos) const
 	return GetDataAt(pos);
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_SINGLE_LINKED_LIST_INLINE_

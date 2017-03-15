@@ -1,8 +1,8 @@
 #ifndef _GEOMETRY_GEOMETRY_HELPER_INLINE_
 #define _GEOMETRY_GEOMETRY_HELPER_INLINE_
 
-namespace gnova { // gnova
-namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
 
 template<typename GeometryT>
 GINLINE GSharedPointer<GeometryT> GGeometryHelper::ConvertTo(GGeometryP &geo)

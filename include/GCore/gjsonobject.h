@@ -23,15 +23,15 @@
 #include "gstring.h"
 #include "gmap.h"
 
-namespace gnova { // gnova
-	namespace json { // gnova.json
+namespace gsystem { // gsystem
+	namespace json { // gsystem.json
 		class GJsonPair;
 		class GJsonParserMessage;
-	} // namespace gnova.json
-} // namespace gnova
+	} // namespace gsystem.json
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 class GAPI GJsonObject
 	: public GNewT<GJsonObject>
@@ -56,7 +56,7 @@ private:
 	GMap<GString, GJsonPair*> m_tJsonPairs;
 };
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem
 
 #endif // _CORE_JSON_OBJECT_H_

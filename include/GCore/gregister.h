@@ -7,7 +7,7 @@
 #include "gstring.h"
 #include "gunordermap.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GRegister
 	: public GSingleton<GRegister, GMutex>
@@ -21,6 +21,6 @@ private:
 	GUnorderMap<guint, GString> m_tClassCode_ClassName;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_REGISTER_H_

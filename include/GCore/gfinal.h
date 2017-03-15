@@ -2,7 +2,7 @@
 #ifndef _CORE_FINAL_H_
 #define _CORE_FINAL_H_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 #ifdef WIN32  
 template<typename TDerive, typename TProvider>
@@ -42,6 +42,6 @@ public:
 	~GFinal() {}
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_FINAL_H_

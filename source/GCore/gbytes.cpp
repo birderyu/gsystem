@@ -1,7 +1,7 @@
 #include "gbytes.h"
 #include "gbytebuffer.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GBytes::GBytes()
 {
@@ -155,6 +155,6 @@ const gbyte &GBytes::operator[](gsize pos) const
 	return m_tBytes[pos];
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_BYTES_DEFAULT_ADD_SIZE

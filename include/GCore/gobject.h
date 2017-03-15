@@ -18,14 +18,14 @@
 #include "gglobal.h"
 #include "gsharedpointer.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GObject;
 	class GString;
 	class GBytes;
 	typedef GSharedPointer<GObject> GObjectP;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 // ¿‡–Ú¡–∫≈
 enum G_CLASS_CODE
@@ -271,6 +271,6 @@ public:
 	//template<typename ArchiveT> gbool Deserialize(ArchiveT &archive);
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_OBJECT_H_

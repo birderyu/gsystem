@@ -9,7 +9,7 @@
 #define G_STRING_BUFFER_DEFAULT_CAPACITY 2048
 #define G_STRING_BUFFER_DEFAULT_ADD_SIZE 512
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GStringBuffer
 	: public GListT<GStringBuffer>
@@ -34,7 +34,7 @@ private:
 	GVector<gchar> m_tBlock;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_STRING_BUFFER_DEFAULT_ADD_SIZE
 #undef G_STRING_BUFFER_DEFAULT_CAPACITY

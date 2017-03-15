@@ -1,9 +1,9 @@
 #include "gstring.h"
 #include <sstream>
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
-namespace string { // gnova.detail.string
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
+namespace string { // gsystem.detail.string
 
 template <typename T>
 GString GNumberToString(T nNum, gint nBase)
@@ -47,11 +47,11 @@ T GStringToNumber(const GString &str, gbool *isok)
 	return nNum;
 }
 
-} // namespace gnova.detail.string
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail.string
+} // namespace gsystem.detail
+} // namespace gsystem
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GString GString::Number(gsmall nNum, gint nBase)
 {
@@ -183,4 +183,4 @@ glongdouble GString::ToLongDouble(gbool *ok) const
 	return detail::string::GStringToNumber<glongdouble>(*this, ok);
 }
 
-} // namespace gnova
+} // namespace gsystem

@@ -14,7 +14,7 @@
 #endif // G_SYSTEM_WINDOWS
 
 #ifdef G_SYSTEM_WINDOWS
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 guint WINAPI ThreadProc4Win32(gpointer param)
 {
@@ -30,7 +30,7 @@ guint WINAPI ThreadProc4Win32(gpointer param)
 }
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GRunnable::GRunnable()
 	: m_pHandle(GNULL)
@@ -80,4 +80,4 @@ gvoid GRunnable::Stop(gulong msecs)
 #endif // G_SYSTEM_WINDOWS
 }
 
-} // namespace gnova
+} // namespace gsystem

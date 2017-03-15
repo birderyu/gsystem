@@ -5,7 +5,7 @@
 #include "gobject.h"
 #include "gstructure.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT>
 class GLimitedList
@@ -24,6 +24,6 @@ public:
 	virtual gbool Remove(DataT *data = GNULL) = 0;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_LIMITED_LIST_H_

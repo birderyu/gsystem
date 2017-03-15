@@ -1,10 +1,10 @@
 #include "glock.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GLock::~GLock()
 {
 
 }
 
-} // namespace gnova
+} // namespace gsystem

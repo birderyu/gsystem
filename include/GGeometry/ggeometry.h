@@ -17,19 +17,19 @@
 #include "ggeometryglobal.h"
 #include "GCore/gobject.h"
 
-namespace gnova { // gnova
-	namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+	namespace geom { // gsystem.geom
 		class GGeometry;
 		class GGeometryFactory;
 		class GEnvelope;
 		class GCoordinate;
 		class GCoordinateSequence;
 		typedef GSharedPointer<GGeometry> GGeometryP;
-	} // namespace gnova.geom
-} // namespace gnova
+	} // namespace gsystem.geom
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace geom { // gnova.geom
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
 
 /****************************************************************************
 **

@@ -4,7 +4,7 @@
 
 #include "glock.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GVoidLock final 
 	: public GLock
@@ -14,6 +14,6 @@ public:
 	gvoid Unlock();
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_VOID_LOCK_H_

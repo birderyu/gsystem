@@ -2,7 +2,7 @@
 #include "gtable_example.h"
 #include "gconstructor_example.h"
 
-using namespace gnova;
+using namespace gsystem;
 
 gint main(gint argc, gchar *argv[])
 {

@@ -36,7 +36,7 @@
 #define G_DATA_TIME_SIZE_SECOND			1
 #define G_DATA_TIME_SIZE_MILLISECOND	2
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GDateTime GDateTime::Now()
 {
@@ -1290,7 +1290,7 @@ gbool operator<=(const GDateTime &dt1, const GDateTime &dt2)
 	return !(dt1 > dt2);
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #undef G_DATA_TIME_SIZE_MILLISECOND	
 #undef G_DATA_TIME_SIZE_SECOND			

@@ -3,14 +3,14 @@
 
 #include "gglobal_ex.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 	class GDateTime;
 	class GDate;
 	class GTime;
-} // namespace gnova
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace detail { // gnova.detail
+namespace gsystem { // gsystem
+namespace detail { // gsystem.detail
 
 class GDateTime_Ex
 {
@@ -24,7 +24,7 @@ private:
 		guint &h, guint &mm, guint &s, guint &ms);
 };
 
-} // namespace gnova.detail
-} // namespace gnova
+} // namespace gsystem.detail
+} // namespace gsystem
 
 #endif // _CORE_DATETIME_PRIVATE_H

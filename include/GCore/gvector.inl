@@ -1,7 +1,7 @@
 #ifndef _CORE_VECTOR_INLINE_
 #define _CORE_VECTOR_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename DataT>
 GINLINE GVector<DataT>::GVector()
@@ -592,6 +592,6 @@ GINLINE const DataT *GVector<DataT>::Tail() const
 	return m_tArray.CursorAt(m_nTail);
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_VECTOR_INLINE_

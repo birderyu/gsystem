@@ -25,16 +25,16 @@
 #include "gobject.h"
 #include "gvariety.h"
 
-namespace gnova { // gnova
-	namespace json { // gnova.json
+namespace gsystem { // gsystem
+	namespace json { // gsystem.json
 		class GJsonObject;
 		class GJsonArray;
 		class GJsonParserMessage;
-	} // namespace gnova.json
-} // namespace gnova
+	} // namespace gsystem.json
+} // namespace gsystem
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 class GAPI GJsonValue
 	: public GObject
@@ -74,7 +74,7 @@ private:
 	gbyte m_nType;
 };
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem
 
 #endif // _CORE_JSON_VALUE_H_

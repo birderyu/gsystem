@@ -2,7 +2,7 @@
 #include "gtcpsocket_ex.h"
 #include "gsockaddress.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GTcpSocket::GTcpSocket()
 : GSocket(new detail::GTcpSocket_Ex())
@@ -58,4 +58,4 @@ gint GTcpSocket::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
 	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Recv(pBufData, nDataLen, nWaitAll);
 }
 
-} // namespace gnova
+} // namespace gsystem

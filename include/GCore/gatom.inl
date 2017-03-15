@@ -8,7 +8,7 @@
 #include <windows.h>
 #endif // G_SYSTEM_WINDOWS
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename T> 
 GINLINE gbool GAtom::CompareAndSwap(T *target, T comperand, T exchange)
@@ -122,6 +122,6 @@ GINLINE T GAtom::GetValue(T *var)
 #endif // G_SYSTEM_WINDOWS
 }
 
-}  // namespace gnova
+}  // namespace gsystem
 
 #endif // _CORE_ATOMI_INLINE_

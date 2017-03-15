@@ -1,7 +1,7 @@
 #ifndef _CORE_QUEUE_INLINE_
 #define _CORE_QUEUE_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT>
 GINLINE GQueue<DataT>::~GQueue()
@@ -27,6 +27,6 @@ GINLINE gbool GQueue<DataT>::Remove(DataT *data)
 	return DeQueue(data);
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_QUEUE_INLINE_

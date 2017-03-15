@@ -4,7 +4,7 @@
 
 #include "glock.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GMutex final 
 	: public GLock
@@ -25,6 +25,6 @@ private:
 #endif // G_SYSTEM_WINDOWS
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_MUTEX_H_

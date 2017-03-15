@@ -18,7 +18,7 @@
 #include "gvector.h"
 #include "gmap.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /****************************************************************************
 **
@@ -70,6 +70,6 @@ private:
 	GMemoryStore m_tStore;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_STRING_POOL_H_

@@ -4,9 +4,9 @@
 #include "gconstructor.h"
 #include "gstring.h"
 
-gnova::gvoid Constructor_Test()
+gsystem::gvoid Constructor_Test()
 {
-	using namespace gnova;
+	using namespace gsystem;
 
 	// 为基本内置类型分配一个空间
 	gint *p_int = GAllocate<gint>();

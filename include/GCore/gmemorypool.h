@@ -9,7 +9,7 @@
 #include "gglobal.h"
 #include "gmemory.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<gsize UNIT_SIZE,
 	guint16 INIT_SIZE = 512,
@@ -182,7 +182,7 @@ private:
 	GMemoryCell *m_pList;	// 内存块链表
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gmemorypool.inl"
 

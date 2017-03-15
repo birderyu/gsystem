@@ -1,6 +1,6 @@
 #include "gstringbuffer.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GStringBuffer::GStringBuffer(gsize nCapacity, gsize nAddSize)
 {
@@ -56,4 +56,4 @@ GStringBuffer &GStringBuffer::Append(const GString &)
 	return *this;
 }
 
-} // namespace gnova
+} // namespace gsystem

@@ -1,7 +1,7 @@
 #ifndef _CORE_DOUBLE_LINKED_LIST_INLINE_
 #define _CORE_DOUBLE_LINKED_LIST_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename DataT, typename NodeT>
 GINLINE GDoubleLinkedList<DataT, NodeT>::GDoubleLinkedList()
@@ -1008,6 +1008,6 @@ GINLINE GLinkedList<DataT, NodeT> &GDoubleLinkedList<DataT, NodeT>::operator+=(G
 	return *this;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_DOUBLE_LINKED_LIST_INLINE_

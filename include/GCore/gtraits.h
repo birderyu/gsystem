@@ -7,7 +7,7 @@
 #include "gtype.h"
 #include <type_traits>
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template<typename ClassT, ClassT DefValue>
 struct GIntegralConstant
@@ -790,6 +790,6 @@ struct GTypeExist<T, T2, TS...>
 	static constexpr gsize id = GIsSame<T, T2>::value ? 1 : 1 + GTypeExist<T, TS...>::id;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_TRAITS_H_

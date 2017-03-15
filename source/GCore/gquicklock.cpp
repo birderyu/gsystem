@@ -1,6 +1,6 @@
 #include "gquicklock.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gvoid GQuickLock::Lock()
 {
@@ -12,4 +12,4 @@ gvoid GQuickLock::Unlock()
 	m_tLock.Unlock();
 }
 
-} // namespace gnova
+} // namespace gsystem

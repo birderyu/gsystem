@@ -1,7 +1,7 @@
 #ifndef _CORE_BINARY_TREE_INLINE_
 #define _CORE_BINARY_TREE_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GINLINE GBinaryTreeNode::GBinaryTreeNode(GBinaryTreeNode *parent, GBinaryTreeNode *left, GBinaryTreeNode *right)
 : GBinaryTreeNodeT<GBinaryTreeNode>(parent, left, right)
@@ -305,6 +305,6 @@ GINLINE gbool GBinaryTree<NodeT>::NodeEquals(const NodeT *node1, const NodeT *no
 	return true;
 }
 
-}  // namespace gnova
+}  // namespace gsystem
 
 #endif // _CORE_BINARY_TREE_INLINE_H_

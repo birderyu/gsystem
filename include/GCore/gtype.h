@@ -7,7 +7,7 @@
 #include <cstddef>
 #endif
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 typedef	void			gvoid;
 typedef	void*			gpointer;
@@ -77,6 +77,6 @@ typedef ptrdiff_t	gaddress;
 typedef size_t		gsize;
 typedef time_t		gtime;		// 时间戳类型
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_TYPE_H_

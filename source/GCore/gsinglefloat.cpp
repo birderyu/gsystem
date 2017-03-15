@@ -1,6 +1,6 @@
 #include "gsinglefloat.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 gfloat GSingleFloat::MaxValue()
 {
@@ -98,4 +98,4 @@ gbool GSingleFloat::IsNaN() const
 	return m_nValue != m_nValue;
 }
 
-} // namespace gnova
+} // namespace gsystem

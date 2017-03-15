@@ -11,7 +11,7 @@
 #define G_ARRAY_DATA_GLOBAL_TYPE	1
 #define G_ARRAY_DATA_REFERENCE_TYPE	2
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 当使用一个数组来存储数据时，针对这个数组有以下处理：
 /// 为了增加数组的初始化数据，当数据量小于MIN_SIZE时，数据存储在本地空间上，反之在全局空间中开辟内存
@@ -95,7 +95,7 @@ GAPI typedef GSeries<gbyte, 4, false, 0>		GBytesData;
 GAPI typedef GSeries<gchar, 8, true, '\0'>		GStringData;
 GAPI typedef GSeries<gwchar, 4, true, L'\0'>	GWStringData;
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gseries.inl"
 

@@ -3,7 +3,7 @@
 
 #include "greferencecounter.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename ClassT>
 class GSharedPointer
@@ -39,7 +39,7 @@ private:
 
 template<typename ClassT, typename... TS> GSharedPointer<ClassT> GMakeShared(TS&&... args);
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gsharedpointer.inl"
 

@@ -3,8 +3,8 @@
 #include "gliststack.h"
 #include "gjsonparsermessage.h"
 
-namespace gnova { // gnova
-namespace json { // gnova.json
+namespace gsystem { // gsystem
+namespace json { // gsystem.json
 
 GJsonPair::GJsonPair()
 : m_pValue(GNULL)
@@ -268,5 +268,5 @@ gvoid GJsonPair::Dispose()
 	m_pValue = GNULL;
 }
 
-} // namespace gnova.json
-} // namespace gnova
+} // namespace gsystem.json
+} // namespace gsystem

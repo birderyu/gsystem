@@ -1,7 +1,7 @@
 #ifndef _CORE_DYNAMIC_ARRAY_INLINE_
 #define _CORE_DYNAMIC_ARRAY_INLINE_
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 template <typename DataT>
 GINLINE GDynamicArray<DataT>::GDynamicArray()
@@ -373,6 +373,6 @@ GINLINE gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
 	return true;
 }
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_DYNAMIC_ARRAY_INLINE_

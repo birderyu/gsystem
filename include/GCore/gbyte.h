@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GByte 
 	: public GPackage<gbyte>
@@ -18,6 +18,6 @@ public:
 	guint ClassCode() const;
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_BYTE_H_

@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 /// 一维表通用模式定义
 template<typename ListT>
@@ -110,7 +110,7 @@ struct GDummyNodeT
 
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gstructure.inl"
 

@@ -3,7 +3,7 @@
 
 #include "gglobal.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GMath
 {
@@ -79,7 +79,7 @@ private:
 	~GMath() {}
 };
 
-} // namespace gnova
+} // namespace gsystem
 
 #include "gmath.inl"
 

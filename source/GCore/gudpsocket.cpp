@@ -2,7 +2,7 @@
 #include "gudpsocket_ex.h"
 #include "gsockaddress.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 GUdpSocket::GUdpSocket()
 : GSocket(new detail::GUdpSocket_Ex())
@@ -40,4 +40,4 @@ gint GUdpSocket::RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress &tPeer)
 	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->RecvFrom(pBufData, nMaxLen, tPeer.m_pSockAddress_Ex);
 }
 
-} // namespace gnova
+} // namespace gsystem

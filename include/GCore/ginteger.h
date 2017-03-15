@@ -3,7 +3,7 @@
 
 #include "gpackage.h"
 
-namespace gnova { // gnova
+namespace gsystem { // gsystem
 
 class GAPI GInteger 
 	: public GNumber<gint>
@@ -30,6 +30,6 @@ typedef GInteger GInt;
 typedef GInteger GInteger32;
 typedef GInteger GInt32;
 
-} // namespace gnova
+} // namespace gsystem
 
 #endif // _CORE_INTEGER_H_
