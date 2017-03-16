@@ -14,7 +14,7 @@
     <ProjectGuid>{64ADC1F0-FFF1-4EB8-B332-3B381833D5CE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>GSerialization_Test</ProjectName>
+    <ProjectName>GSerializationTest</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

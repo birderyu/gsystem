@@ -1,12 +1,9 @@
-#include <iostream>
-#include "gtable_example.h"
-#include "gconstructor_example.h"
-
+#include "typedef_test.h"
 using namespace gsystem;
 
 gint main(gint argc, gchar *argv[])
 {
-	Constructor_Test();
-	Table_Test();
+	testing::InitGoogleTest(&argc, argv);
+	RUN_ALL_TESTS();
 	system("pause");
 }

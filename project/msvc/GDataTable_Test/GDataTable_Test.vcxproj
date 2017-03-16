@@ -14,7 +14,7 @@
     <ProjectGuid>{467B5225-11E9-48D8-BF29-4D4785B5F6F0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>GDataTable_Test</ProjectName>
+    <ProjectName>GDataTableTest</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

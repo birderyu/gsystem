@@ -95,11 +95,22 @@ GINLINE gbool GVector<DataT>::Reserve(gsize capacity, gsize start)
 	}
 
 	gsize old_size = Size();
-	// 删去前面的无用元素
-	if (!m_tArray.Resize(capacity, m_nHead, old_size, start))
+	if (m_nHead == NULL_POS)
 	{
-		return false;
+		if (!m_tArray.Resize(capacity))
+		{
+			return false;
+		}
 	}
+	else
+	{
+		// 删去前面的无用元素
+		if (!m_tArray.Resize(capacity, m_nHead, old_size, start))
+		{
+			return false;
+		}
+	}
+	
 
 	if (start == 0)
 	{
@@ -255,8 +266,9 @@ GINLINE gvoid GVector<DataT>::PushBack(const DataT &data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
-	Resize(++old_size);
-	m_tArray[m_nTail++] = data;
+	// 为了处理head指向null_pos的问题，必须使用Resize来处理
+	m_tArray[m_nTail] = data;
+	Resize(++old_size); 
 	if (m_nHead == NULL_POS)
 	{
 		m_nHead = 0;
@@ -274,8 +286,9 @@ GINLINE gvoid GVector<DataT>::PushBack(DataT &&data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
+	// 为了处理head指向null_pos的问题，必须使用Resize来处理
+	m_tArray[m_nTail] = GForward<DataT>(data);
 	Resize(++old_size);
-	m_tArray[m_nTail++] = GForward<DataT>(data);
 	if (m_nHead == NULL_POS)
 	{
 		m_nHead = 0;

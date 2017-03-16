@@ -47,3 +47,5 @@ lib/GSerialization_Testd.lib
 bin/GSerialization_Testd.exe
 lib/GSerialization_Test.lib
 bin/GSerialization_Test.exe
+bin/GTestd.lib
+bin/GTest.lib

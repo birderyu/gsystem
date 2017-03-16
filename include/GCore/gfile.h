@@ -12,16 +12,34 @@ namespace gsystem { // gsystem
 
 namespace gsystem { // gsystem
 
+/****************************************************************************
+**
+** gfile.h
+**
+** @class		GFile
+** @brief		文件
+**
+** GFile表示一个文件，是一个抽象类，它的具体功能取决于它的两个实现：文本文件（GTextFile）和
+** 二进制文件（GBinaryFile）。GFile本身不支持缓存，若需要构建一个文件缓存，可以使用相应的流
+** 类型。
+**
+****************************************************************************/
 class GAPI GFile
 {
 public:
+	/****************************************************************************
+	**
+	** @name		OPEN_MODE
+	** @brief		文件的打开模式
+	**
+	****************************************************************************/
 	enum OPEN_MODE
 	{
-		NO_OPEN = 0x0000,
-		ONLY_READ = 0x0001,
-		ONLY_WIRTE = 0x0002,
-		READ_WIRTE = ONLY_READ | ONLY_WIRTE,
-		APPEND = 0x0004,
+		NO_OPEN = 0x0000,						/// 不打开
+		ONLY_READ = 0x0001,						/// 只读模式
+		ONLY_WIRTE = 0x0002,					/// 只写模式
+		READ_WIRTE = ONLY_READ | ONLY_WIRTE,	/// 读写模式
+		APPEND = 0x0004,						/// 在尾部添加
 	};
 
 	enum FILE_FORMAT
@@ -38,7 +56,6 @@ public:
 	};
 
 public:
-	GFile(detail::GFile_Ex *);
 	virtual ~GFile() = 0;
 
 	FILE_FORMAT Format() const;
@@ -50,7 +67,7 @@ public:
 	GString &FileName();
 	gvoid SetFileName(const GString &);
 
-	gbool Open(OPEN_MODE);
+	gbool Open(OPEN_MODE mode);
 	gvoid Close();
 
 	gbool Seek(glong offset, SEEK_MODE);
@@ -61,6 +78,7 @@ public:
 	gsize Size() const;
 
 protected:
+	GFile(detail::GFile_Ex *);
 	detail::GFile_Ex *m_pFileEx;
 };
 
