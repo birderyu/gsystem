@@ -1,8 +1,6 @@
 #pragma once
-
-#include "gtype.h"
-
 #include <gtest/gtest.h>
+#include "gtype.h"
 
 // 测试数据类型的长度在当前平台下是否符合规范
 TEST(TypedefTest, HandleNoneZeroInput)

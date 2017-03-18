@@ -2,7 +2,7 @@
 #ifndef _CORE_ORDER_MAP_H_
 #define _CORE_ORDER_MAP_H_
 
-#include "greadblacktree.h"
+#include "gredblacktree.h"
 
 #define G_ORDER_MAP_NODE_RED	0
 #define G_ORDER_MAP_NODE_BLACK	1
@@ -348,7 +348,7 @@ public:
 	//const ValueT &operator[](const KeyT &) const;
 
 private:
-	GReadBlackTree<KeyT, ValueT, CompareT, GOrderMapNode> m_tTree;
+	GRedBlackTree<KeyT, ValueT, CompareT, GOrderMapNode> m_tTree;
 	gsize m_nSize;
 };
 

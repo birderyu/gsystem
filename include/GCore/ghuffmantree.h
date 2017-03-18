@@ -27,9 +27,9 @@ class GHuffmanTreeNode
 {
 	GHuffmanTreeNode(
 		const DataT &data = DataT(),
-		GReadBlackTreeNode<DataT> *parent = GNULL,
-		GReadBlackTreeNode<DataT> *left = GNULL,
-		GReadBlackTreeNode<DataT> *right = GNULL)
+		GRedBlackTreeNode<DataT> *parent = GNULL,
+		GRedBlackTreeNode<DataT> *left = GNULL,
+		GRedBlackTreeNode<DataT> *right = GNULL)
 		: GBinaryTreeNodeT<GHuffmanTreeNode<DataT>>(parent, left, right)
 		, GDataNodeT<DataT>(data)
 	{
@@ -40,7 +40,7 @@ class GHuffmanTreeNode
 template<typename DataT,
 	typename CompareT = GLessThanF<DataT>>
 class GHuffmanTree
-	: GBinaryTree<GReadBlackTreeNode<DataT>>
+	: GBinaryTree<GRedBlackTreeNode<DataT>>
 {
 public:
 	GHuffmanTree();

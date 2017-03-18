@@ -2,14 +2,14 @@
 #define _CORE_RED_BLACK_TREE_INLINE_
 
 #define G_RED_BLACK_TREE_NODE_TEMPLATE	template<typename KeyT, typename ValueT>
-#define G_RED_BLACK_TREE_NODE_QUAL		GReadBlackTreeNode<KeyT, ValueT>
+#define G_RED_BLACK_TREE_NODE_QUAL		GRedBlackTreeNode<KeyT, ValueT>
 #define G_RED_BLACK_TREE_TEMPLATE		template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-#define G_RED_BLACK_TREE_QUAL			GReadBlackTree<KeyT, ValueT, CompareT, NodeT>
+#define G_RED_BLACK_TREE_QUAL			GRedBlackTree<KeyT, ValueT, CompareT, NodeT>
 
 namespace gsystem { // gsystem
 
 G_RED_BLACK_TREE_NODE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
+GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRedBlackTreeNode(
 	const KeyT &key,
 	const ValueT &value,
 	G_RED_BLACK_TREE_NODE_QUAL *parent,
@@ -24,7 +24,7 @@ GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
 }
 
 G_RED_BLACK_TREE_NODE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
+GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRedBlackTreeNode(
 	const KeyT &key, ValueT &&value,
 	G_RED_BLACK_TREE_NODE_QUAL *parent,
 	G_RED_BLACK_TREE_NODE_QUAL *left,
@@ -38,7 +38,7 @@ GINLINE G_RED_BLACK_TREE_NODE_QUAL::GReadBlackTreeNode(
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_QUAL::~GReadBlackTree()
+GINLINE G_RED_BLACK_TREE_QUAL::~GRedBlackTree()
 {
 
 }

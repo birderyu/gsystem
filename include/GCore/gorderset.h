@@ -2,7 +2,7 @@
 #ifndef _CORE_ORDER_SET_H_
 #define _CORE_ORDER_SET_H_
 
-#include "greadblacktree.h"
+#include "gredblacktree.h"
 
 #define G_ORDER_SET_NODE_RED	0
 #define G_ORDER_SET_NODE_BLACK	1
@@ -359,7 +359,7 @@ public:
 	GOrderSet<KeyT, CompareT> &operator=(GOrderSet<KeyT, CompareT> &&);
 
 private:
-	GReadBlackTree<KeyT, GDummyNodeT, CompareT, GOrderSetNode> m_tTree;
+	GRedBlackTree<KeyT, GDummyNodeT, CompareT, GOrderSetNode> m_tTree;
 	gsize m_nSize;
 };
 

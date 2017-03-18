@@ -23,5 +23,8 @@
     <ClInclude Include="typedef_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="binarytree_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

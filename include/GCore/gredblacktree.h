@@ -2,7 +2,7 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	greadblacktree.h
+** @file	gredblacktree.h
 ** @brief	该文件包含了红黑树的定义及实现
 ** @author	birderyu
 ** @contact	https://github.com/birderyu
@@ -26,34 +26,34 @@
 namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT>
-struct GReadBlackTreeNode 
-	: public GBinaryTreeNodeT<GReadBlackTreeNode<KeyT, ValueT>>
+struct GRedBlackTreeNode 
+	: public GBinaryTreeNodeT<GRedBlackTreeNode<KeyT, ValueT>>
 	, public GPairNodeT<KeyT, ValueT>
-	, public GNewT<GReadBlackTreeNode<KeyT, ValueT>>
+	, public GNewT<GRedBlackTreeNode<KeyT, ValueT>>
 {
 	gsmall m_nColor;
 
-	GReadBlackTreeNode(
+	GRedBlackTreeNode(
 		const KeyT &key = KeyT(),
 		const ValueT &value = ValueT(),
-		GReadBlackTreeNode<KeyT, ValueT> *parent = GNULL,
-		GReadBlackTreeNode<KeyT, ValueT> *left = GNULL,
-		GReadBlackTreeNode<KeyT, ValueT> *right = GNULL,
+		GRedBlackTreeNode<KeyT, ValueT> *parent = GNULL,
+		GRedBlackTreeNode<KeyT, ValueT> *left = GNULL,
+		GRedBlackTreeNode<KeyT, ValueT> *right = GNULL,
 		gsmall color = G_RED_BLACK_TREE_NODE_RED);
 
-	GReadBlackTreeNode(
+	GRedBlackTreeNode(
 		const KeyT &key, ValueT &&value,
-		GReadBlackTreeNode<KeyT, ValueT> *parent = GNULL,
-		GReadBlackTreeNode<KeyT, ValueT> *left = GNULL,
-		GReadBlackTreeNode<KeyT, ValueT> *right = GNULL,
+		GRedBlackTreeNode<KeyT, ValueT> *parent = GNULL,
+		GRedBlackTreeNode<KeyT, ValueT> *left = GNULL,
+		GRedBlackTreeNode<KeyT, ValueT> *right = GNULL,
 		gsmall color = G_RED_BLACK_TREE_NODE_RED);
 };
 
 /****************************************************************************
 **
-** greadblacktree.h
+** gredblacktree.h
 **
-** @class		GReadBlackTree
+** @class		GRedBlackTree
 ** @brief		红黑树
 ** @module		GCore
 **
@@ -64,19 +64,19 @@ struct GReadBlackTreeNode
 ** 4）如果一个结点是红的，那么它的俩个儿子都是黑的；
 ** 5）对每个结点，从该结点到其子孙结点的所有路径上包含相同数目的黑结点。
 **
-** @see GReadBlackTreeNode
+** @see GRedBlackTreeNode
 ** @see GBinaryTreeNodeT<NodeT>
 ** @see GKeyValueNodeT<KeyT, ValueT>
 **
 ****************************************************************************/
 template<typename KeyT, typename ValueT,
 	typename CompareT = GCompareToF<KeyT>,
-	typename NodeT = GReadBlackTreeNode<KeyT, ValueT> >
-class GReadBlackTree 
+	typename NodeT = GRedBlackTreeNode<KeyT, ValueT> >
+class GRedBlackTree 
 	: public GBinarySortTree<KeyT, ValueT, CompareT, NodeT>
 {
 public:
-	virtual ~GReadBlackTree();
+	virtual ~GRedBlackTree();
 
 	/// 插入一个数据
 	virtual NodeT *Insert(const KeyT &key, const ValueT &value, gbool *realInsert = GNULL);
@@ -99,7 +99,7 @@ protected:
 
 } // namespace gsystem
 
-#include "greadblacktree.inl"
+#include "gredblacktree.inl"
 
 #undef G_RED_BLACK_TREE_NODE_BLACK
 #undef G_RED_BLACK_TREE_NODE_RED

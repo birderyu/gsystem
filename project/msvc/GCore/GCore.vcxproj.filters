@@ -279,9 +279,6 @@
     <ClInclude Include="..\..\..\include\GCore\gqueue.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\greadblacktree.h">
-      <Filter>头文件\Structure</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\grtree.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
@@ -564,6 +561,9 @@
     <ClInclude Include="..\..\..\include\GCore\gtable.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gredblacktree.h">
+      <Filter>头文件\Structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">
@@ -832,9 +832,6 @@
     <None Include="..\..\..\include\GCore\gliststack.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\greadblacktree.inl">
-      <Filter>头文件\_inline</Filter>
-    </None>
     <None Include="..\..\..\include\GCore\grtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
@@ -923,6 +920,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gtable.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gredblacktree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>
