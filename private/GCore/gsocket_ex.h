@@ -12,16 +12,16 @@ public:
 	GSocket_Ex();
 	virtual ~GSocket_Ex() = 0;
 
-	gbool SetRecvTimeout(gint nMsecs);
+	gbool SetRecvTimeout(gint msecs);
 	gint  GetRecvTimeout() const;
 
-	gbool SetSendTimeout(gint nMsecs);
+	gbool SetSendTimeout(gint msecs);
 	gint  GetSendTimeout() const;
 
-	gbool SetReuseAddress(gbool nResue);
+	gbool SetReuseAddress(gbool resue);
 
-	gbool GetPeerAddr(GSockAddress_Ex *pSockAddr) const;
-	gbool GetLocalAddr(GSockAddress_Ex *pSockAddr) const;
+	gbool GetPeerAddr(GSockAddress_Ex &addr) const;
+	gbool GetLocalAddr(GSockAddress_Ex &addr) const;
 
 protected:
 	// 套接字的句柄

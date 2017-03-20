@@ -16,7 +16,7 @@
 #ifdef G_SYSTEM_WINDOWS
 namespace gsystem { // gsystem
 
-guint WINAPI ThreadProc4Win32(gpointer param)
+guint WINAPI ThreadProc4Win32(gptr param)
 {
 	if (!param)
 	{
@@ -53,7 +53,7 @@ gbool GRunnable::Start()
 		m_pHandle = GNULL;
 		return false;
 	}
-	m_pHandle = (gpointer)thread_handle;
+	m_pHandle = (gptr)thread_handle;
 	return true;
 #else // !G_SYSTEM_WINDOWS
 	// TODO，线程的跨平台实现

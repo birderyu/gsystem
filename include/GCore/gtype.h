@@ -10,21 +10,25 @@
 namespace gsystem { // gsystem
 
 typedef	void			gvoid;
-typedef	void*			gpointer;
+typedef	void *			gptr;
+typedef	const void *	gcptr;
 
 typedef	char			gchar;
 typedef	signed char		gschar;
 typedef	unsigned char	guchar;
-typedef	const gchar*	gcstring;
-
-typedef gchar		gchar8;
-typedef char16_t	gchar16;
-typedef char32_t	gchar32;
-
-typedef	const gchar16*	gc16string;
-typedef	const gchar32*	gc32string;
-
+typedef char			gchar8;
+typedef char16_t		gchar16;
+typedef char32_t		gchar32;
 typedef	wchar_t			gwchar;
+
+typedef	gchar *			gstring;
+typedef	const gchar *	gcstring;
+typedef	gchar8 *		gstring8;
+typedef	const gchar8 *	gcstring8;
+typedef	gchar16 *		gstring16;
+typedef	const gchar16 *	gcstring16;
+typedef	gchar32 *		gstring32;
+typedef	const gchar32 *	gcstring32;
 typedef	const gwchar*	gcwstring;
 
 typedef bool				gbool;
@@ -56,6 +60,10 @@ typedef guchar		gusmall;
 typedef	gsmall		gbyte;
 typedef	gushort		gword;
 
+typedef gbyte *			gbytes;
+typedef const gbyte *	gcbytes;
+typedef gword *			gwords;
+typedef const gword *	gcword;
 
 // 实数类型
 #ifdef G_REAL_USE_FLOAT

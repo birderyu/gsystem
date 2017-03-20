@@ -11,12 +11,12 @@ class GAPI GUdpSocket final
 public:
 	GUdpSocket();
 
-	gbool Open(gbool nResue = false);
-	gbool Open(const GSockAddress &tSockAddr, gbool nResue = false);
+	gbool Open(gbool resue = false);
+	gbool Open(const GSockAddress &addr, gbool resue = false);
 	gvoid Close();
 
-	gbool SendTo(const gchar *pBufData, gint nLen, const GSockAddress &tPeer);
-	gint RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress &tPeer);
+	gbool SendTo(gcbytes buf, gsize size, const GSockAddress &peer);
+	gint RecvFrom(gbytes buf, gsize max_size, GSockAddress &peer);
 };
 
 } // namespace gsystem

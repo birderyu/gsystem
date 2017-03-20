@@ -53,7 +53,7 @@ GString GJsonValue::ToString() const
 		{
 			return GString();
 		}
-		gpointer ptr = m_tValue.GetPoiter();
+		gptr ptr = m_tValue.GetPoiter();
 		if (!ptr)
 		{
 			return GString();
@@ -67,7 +67,7 @@ GString GJsonValue::ToString() const
 		{
 			return GString();
 		}
-		gpointer ptr = m_tValue.GetPoiter();
+		gptr ptr = m_tValue.GetPoiter();
 		if (!ptr)
 		{
 			return GString();
@@ -475,7 +475,7 @@ gvoid GJsonValue::Dispose()
 {
 	if (m_tValue.GetType() == GVariety::VARIETY_TYPE_POINTER)
 	{
-		gpointer ptr = m_tValue.GetPoiter();
+		gptr ptr = m_tValue.GetPoiter();
 		if (!ptr)
 		{
 			return;

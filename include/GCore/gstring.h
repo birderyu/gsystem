@@ -16,6 +16,7 @@
 #include "gstructure.h"
 #include "gobject.h"
 #include "gseries.h"
+#include "gencoding.h"
 
 namespace gsystem { // gsystem
 	class GVariety;
@@ -23,6 +24,13 @@ namespace gsystem { // gsystem
 } // namespace gsystem
 
 namespace gsystem { // gsystem
+
+enum class GEncode
+	: guint
+{
+	Unicode,
+	GBK,
+};
 
 /****************************************************************************
 **

@@ -122,7 +122,7 @@ GINLINE GVariety::GVariety(glongdouble val)
 
 }
 
-GINLINE GVariety::GVariety(gpointer val)
+GINLINE GVariety::GVariety(gptr val)
 : m_nType(VARIETY_TYPE_POINTER)
 , m_pVal(val)
 {
@@ -264,7 +264,7 @@ GINLINE gvoid GVariety::SetValue(glongdouble val)
 	m_ldVal = val;
 }
 
-GINLINE gvoid GVariety::SetPoiter(gpointer val)
+GINLINE gvoid GVariety::SetPoiter(gptr val)
 {
 	Free();
 	m_nType = VARIETY_TYPE_POINTER;
@@ -331,7 +331,7 @@ GINLINE gdecimal GVariety::ToDecimal(gdecimal def) const
 	return ToLongDouble(def);
 }
 
-GINLINE gpointer GVariety::GetPoiter() const
+GINLINE gptr GVariety::GetPoiter() const
 {
 	if (m_nType == VARIETY_TYPE_POINTER)
 	{

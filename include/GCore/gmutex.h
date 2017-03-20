@@ -21,7 +21,7 @@ private:
 	gvoid Release();
 
 #ifdef G_SYSTEM_WINDOWS
-	gpointer m_pHandle;
+	gptr m_pHandle;
 #endif // G_SYSTEM_WINDOWS
 };
 

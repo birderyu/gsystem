@@ -34,7 +34,7 @@ public:
 
 private:
 	GStringPool m_tPool;
-	GMap<gsize, gpointer> m_t; // <下标，指针>
+	GMap<gsize, gptr> m_t; // <下标，指针>
 };
 
 } // namespace gsystem

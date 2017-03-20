@@ -22,7 +22,7 @@ GAPI guint GHashing(gulonglong);
 GAPI guint GHashing(gfloat);
 GAPI guint GHashing(gdouble);
 GAPI guint GHashing(gdecimal);
-GAPI guint GHashing(gpointer);
+GAPI guint GHashing(gptr);
 
 /// Hashº¯Êý
 template<typename T>

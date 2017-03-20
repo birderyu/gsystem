@@ -3,28 +3,28 @@
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 
-gbool GUdpSocket_Ex::Open(gbool nResue)
+gbool GUdpSocket_Ex::Open(gbool resue)
 {
 	m_hSocket = GOpenSocket(AF_INET, SOCK_DGRAM, 0);
 	if ((gint)m_hSocket < 0)
 	{
 		return false;
 	}
-	SetReuseAddress(nResue);
+	SetReuseAddress(resue);
 	return true;
 }
 
-gbool GUdpSocket_Ex::Open(GSockAddress_Ex *pSockAddr, gbool nResue)
+gbool GUdpSocket_Ex::Open(GSockAddress_Ex *addr, gbool resue)
 {
-	if (!pSockAddr)
+	if (!addr)
 	{
 		return false;
 	}
-	if (!Open(nResue))
+	if (!Open(resue))
 	{
 		return false;
 	}
-	if (GBindSocket(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), sizeof(sockaddr)) < 0)
+	if (GBindSocket(m_hSocket, (sockaddr*)&(addr->m_tSocketAddr), sizeof(sockaddr)) < 0)
 	{
 		GCloseSocket(m_hSocket);
 		m_hSocket = -1;
@@ -43,36 +43,36 @@ gvoid GUdpSocket_Ex::Close()
 	}
 }
 
-gbool GUdpSocket_Ex::SendTo(const gchar *pBufData, gint nLen, GSockAddress_Ex *pPeer)
+gbool GUdpSocket_Ex::SendTo(gcbytes buf, gsize size, GSockAddress_Ex *peer)
 {
-	if (!pPeer)
+	if (!peer)
 	{
 		return false;
 	}
-	gint nAddrLen = sizeof(sockaddr_in);
-	gint nRet = GSendToSocket(m_hSocket, pBufData,
-		nLen, 0, (sockaddr*)&(pPeer->m_tSocketAddr), nAddrLen);
-	if (nRet < 0)
+	gsize len = sizeof(sockaddr_in);
+	gint ret = GSendToSocket(m_hSocket, (const gchar *)buf,
+		size, 0, (sockaddr*)&(peer->m_tSocketAddr), len);
+	if (ret < 0)
 	{
 		return false;
 	}
 	return true;
 }
 
-gint GUdpSocket_Ex::RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress_Ex *pPeer)
+gint GUdpSocket_Ex::RecvFrom(gbytes buf, gsize max_size, GSockAddress_Ex *peer)
 {
-	if (!pPeer)
+	if (!peer)
 	{
 		return -1;
 	}
-	gint nAddrLen = sizeof(sockaddr_in);
-	gint n = GRecvFromSocket(m_hSocket, pBufData,
-		nMaxLen, 0, (sockaddr*)&(pPeer->m_tSocketAddr), &nAddrLen);
-	if (n < 0)
+	gint len = sizeof(sockaddr_in);
+	gint ret = GRecvFromSocket(m_hSocket, (gchar *)buf,
+		max_size, 0, (sockaddr*)&(peer->m_tSocketAddr), &len);
+	if (ret < 0)
 	{
 		return -1;
 	}
-	return n;
+	return ret;
 }
 
 } // namespace gsystem.detail

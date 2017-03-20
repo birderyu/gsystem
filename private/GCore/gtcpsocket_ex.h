@@ -10,17 +10,17 @@ class GTcpSocket_Ex
 	: public GSocket_Ex
 {
 public:
-	gbool Open(gbool nResue);
-	gbool Open(GSockAddress_Ex *pSockAddr, gbool nResue);
+	gbool Open(gbool resue);
+	gbool Open(GSockAddress_Ex *addr, gbool resue);
 	gvoid Close();
 
-	gbool Listen(gint nBackLog);
-	gbool Accept(GTcpSocket_Ex *pPeer);
+	gbool Listen(gint back_log);
+	gbool Accept(GTcpSocket_Ex *peer);
 
-	gbool Connect(GSockAddress_Ex *pSockAddr);
+	gbool Connect(GSockAddress_Ex *addr);
 
-	gint Send(const gchar *pBufData, gint nDataLen);
-	gint Recv(gchar *pBufData, gint nDataLen, gint nWaitAll);
+	gint Send(gcbytes buf, gsize size);
+	gint Recv(gbytes buf, gsize size, gbool wait_all);
 };
 
 } // namespace gsystem.detail

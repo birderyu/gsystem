@@ -32,8 +32,8 @@ template<typename ClassT>
 class GNewT
 {
 public:
-	static gpointer operator new(gsize) noexcept(false);
-	static gvoid operator delete(gpointer) noexcept;
+	static gptr operator new(gsize) noexcept(false);
+	static gvoid operator delete(gptr) noexcept;
 };
 
 // 线程不安全
@@ -43,8 +43,8 @@ template<typename ClassT>
 class GNewInPoolT
 {
 public:
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static GMemoryPool<sizeof(ClassT)> pool;
@@ -58,8 +58,8 @@ class GNewWithHandlerT
 {
 public:
 	static std::new_handler set_new_handler(std::new_handler p);
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static std::new_handler currentHandler;
@@ -73,8 +73,8 @@ class GNewInPoolWithHandlerT
 {
 public:
 	static std::new_handler set_new_handler(std::new_handler p);
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static std::new_handler currentHandler;
@@ -88,8 +88,8 @@ template<typename ClassT, typename LockT>
 class GSafeNewT
 {
 public:
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static LockT lock;
@@ -103,8 +103,8 @@ class GSafeNewWithHandlerT
 {
 public:
 	static std::new_handler set_new_handler(std::new_handler p);
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static std::new_handler currentHandler;
@@ -118,8 +118,8 @@ template<typename ClassT, typename LockT>
 class GSafeNewInPoolT
 {
 public:
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static GMemoryPool<sizeof(ClassT)> pool;
@@ -134,8 +134,8 @@ class GSafeNewInPoolWithHandlerT
 {
 public:
 	static std::new_handler set_new_handler(std::new_handler p);
-	static gpointer operator new(gsize);
-	static gvoid operator delete(gpointer);
+	static gptr operator new(gsize);
+	static gvoid operator delete(gptr);
 
 private:
 	static std::new_handler currentHandler;

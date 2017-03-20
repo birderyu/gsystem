@@ -30,7 +30,7 @@ GMemoryStore::~GMemoryStore()
 	}
 }
 
-gpointer GMemoryStore::Alloc(gsize nSize)
+gptr GMemoryStore::Alloc(gsize nSize)
 {
 	GMemCell* pBlock = GNULL;
 	if (!m_pList)
@@ -67,7 +67,7 @@ gpointer GMemoryStore::Alloc(gsize nSize)
 		}
 	}
 
-	gpointer pPtr = pBlock->m_tBlock.CursorAt(pBlock->m_nCursor);
+	gptr pPtr = pBlock->m_tBlock.CursorAt(pBlock->m_nCursor);
 	if (pPtr)
 	{
 		pBlock->m_nCursor += nSize;

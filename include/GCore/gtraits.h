@@ -731,8 +731,8 @@ template <>			struct GIntegerForSize<4> { typedef guint32 Unsigned; typedef gint
 template <>			struct GIntegerForSize<8> { typedef guint64 Unsigned; typedef gint64 Signed; };
 
 template <typename T> struct GIntegerForSizeof : GIntegerForSize<sizeof(T)> { };
-typedef GIntegerForSizeof<gpointer>::Unsigned guintptr;
-typedef GIntegerForSizeof<gpointer>::Signed gptrdiff;
+typedef GIntegerForSizeof<gptr>::Unsigned guintptr;
+typedef GIntegerForSizeof<gptr>::Signed gptrdiff;
 
 template <typename ...TS>
 struct GTypesTraits

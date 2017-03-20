@@ -61,17 +61,17 @@ class GAPI GMemoryPool
 			}
 		}
 
-		static gpointer operator new(gsize size, gsize unit_size, guint16 unit_amount)
+		static gptr operator new(gsize size, gsize unit_size, guint16 unit_amount)
 		{
 			return GMalloc(size + unit_size * unit_amount);
 		}
 
-		static gvoid operator delete (gpointer cell, gsize unit_size, guint16 unit_amount)
+		static gvoid operator delete (gptr cell, gsize unit_size, guint16 unit_amount)
 		{
 			GFree(cell);
 		}
 		
-		static gvoid operator delete (gpointer cell)
+		static gvoid operator delete (gptr cell)
 		{
 			GFree(cell);
 		}
@@ -92,12 +92,12 @@ public:
 	}
 
 	// 分配内存，分配失败则返回GNULL
-	gpointer Alloc()
+	gptr Alloc()
 	{
 		if (!m_pList)
 		{
 			m_pList = new(m_nUnitSize, INIT_SIZE) GMemoryCell(m_nUnitSize, INIT_SIZE);
-			return (gpointer)m_pList->m_bData;
+			return (gptr)m_pList->m_bData;
 		}
 
 		// 找到符合条件的内存块
@@ -110,7 +110,7 @@ public:
 		if (block)
 		{
 			// 找到了，进行分配
-			gpointer ptr = block->m_bData + block->m_nFirst * m_nUnitSize;
+			gptr ptr = block->m_bData + block->m_nFirst * m_nUnitSize;
 			block->m_nFirst = *((gushort*)ptr);
 			block->m_nFree--;
 			return ptr;
@@ -124,12 +124,12 @@ public:
 			block->m_pNext = m_pList;
 			m_pList = block;
 
-			return (gpointer)block->m_bData;
+			return (gptr)block->m_bData;
 		}
 	}
 
 	// 释放内存
-	gvoid Free(gpointer free)
+	gvoid Free(gptr free)
 	{
 		if (GNULL == free)
 		{

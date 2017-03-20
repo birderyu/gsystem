@@ -118,7 +118,7 @@ public:
 	GVariety(const gwchar *val);
 	GVariety(const GWString &val);
 	GVariety(const GDateTime &val);
-	GVariety(gpointer val);
+	GVariety(gptr val);
 	GVariety(const GVariety &val);
 	GVariety(GVariety &&val);
 	~GVariety();
@@ -158,7 +158,7 @@ public:
 	gvoid SetValue(const GString &val);
 	gvoid SetValue(GString &&val);
 	gvoid SetValue(const GVariety &val);
-	gvoid SetPoiter(gpointer val);
+	gvoid SetPoiter(gptr val);
 
 	gbool ToBool(gbool def = false) const;
 	gchar ToChar(gchar def = 0) const;
@@ -195,7 +195,7 @@ public:
 	guint64 ToUInt64(guint64 def = 0) const;
 	gdecimal ToDecimal(gdecimal def = 0) const;
 
-	gpointer GetPoiter() const;
+	gptr GetPoiter() const;
 
 private:
 	gvoid Free();
@@ -218,7 +218,7 @@ private:
 		gfloat			m_fVal;
 		gdouble			m_dVal;
 		glongdouble		m_ldVal;
-		gpointer		m_pVal;
+		gptr		m_pVal;
 		GBytesData		m_bytesVal;
 		GStringData		m_strVal;
 		GWStringData	m_wstrVal;

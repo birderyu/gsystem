@@ -70,11 +70,12 @@ class GSockAddress_Ex
 
 public:
 	GSockAddress_Ex();
-	GSockAddress_Ex(const GString &sIP, gushort nPort);
+	GSockAddress_Ex(const GString &ip, guint16 port);
+	GSockAddress_Ex(const GSockAddress_Ex &addr);
 
-	gvoid SetIP(const GString &sIP);
-	gvoid SetIP(guint nIP);
-	gvoid SetPortID(gushort nPort);
+	gvoid SetIP(const GString &ip);
+	gvoid SetIP(guint ip);
+	gvoid SetPortID(guint16 port);
 
 private:
 	sockaddr_in m_tSocketAddr;

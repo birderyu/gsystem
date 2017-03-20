@@ -27,49 +27,49 @@ guint GHashing(guchar val)
 	return static_cast<guint>(val);
 }
 
-guint GHashing(gwchar)
+guint GHashing(gwchar val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
-guint GHashing(gshort)
+guint GHashing(gshort val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
-guint GHashing(gushort)
+guint GHashing(gushort val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
 guint GHashing(gint val)
 {
-	return val % G_INT32_MAX;
+	return static_cast<guint>(val);
 }
 
-guint GHashing(guint)
+guint GHashing(guint val)
 {
-	return 0;
+	return val;
 }
 
-guint GHashing(glong)
+guint GHashing(glong val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
-guint GHashing(gulong)
+guint GHashing(gulong val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
-guint GHashing(glonglong)
+guint GHashing(glonglong val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
-guint GHashing(gulonglong)
+guint GHashing(gulonglong val)
 {
-	return 0;
+	return static_cast<guint>(val);
 }
 
 guint GHashing(gfloat)
@@ -94,7 +94,7 @@ guint GHashing(gdecimal)
 	return 0;
 }
 
-guint GHashing(gpointer)
+guint GHashing(gptr)
 {
 	return 0;
 }

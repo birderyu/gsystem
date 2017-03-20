@@ -34,7 +34,7 @@ public:
 	~GMemoryStore();
 
 	// 分配内存，分配失败则返回NULL
-	gpointer Alloc(gsize);
+	gptr Alloc(gsize);
 
 private:
 	gsize m_nInitSize;		// 初始大小

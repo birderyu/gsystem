@@ -17,7 +17,7 @@ public:
 
 private:
 	gint Initialize(gint nInitialValue);
-	gpointer m_pHandle;
+	gptr m_pHandle;
 };
 
 } // namespace gsystem

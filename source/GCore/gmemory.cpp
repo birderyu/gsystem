@@ -3,37 +3,37 @@
 
 namespace gsystem { // gsystem
 
-gpointer GMalloc(gsize size)
+gptr GMalloc(gsize size)
 {
 	return dlmalloc(size);
 }
 
-gpointer GCalloc(gsize n, gsize size)
+gptr GCalloc(gsize n, gsize size)
 {
 	return dlcalloc(n, size);
 }
 
-gpointer GRealloc(gpointer oldptr, gsize newsize)
+gptr GRealloc(gptr oldptr, gsize newsize)
 {
 	return dlrealloc(oldptr, newsize);
 }
 
-gvoid GFree(gpointer pfree)
+gvoid GFree(gptr pfree)
 {
 	dlfree(pfree);
 }
 
-gpointer GMemCopy(gvoid *dst, const gvoid *src, gsize size)
+gptr GMemCopy(gptr dst, gcptr src, gsize size)
 {
 	return memcpy(dst, src, size);
 }
 
-gpointer GMemMove(gvoid *dst, const gvoid *src, gsize size)
+gptr GMemMove(gptr dst, gcptr src, gsize size)
 {
 	return memmove(dst, src, size);
 }
 
-gpointer GMemSet(gvoid *dst, gbyte value, gsize size)
+gptr GMemSet(gptr dst, gbyte value, gsize size)
 {
 	return memset(dst, (gint)value, size);
 }

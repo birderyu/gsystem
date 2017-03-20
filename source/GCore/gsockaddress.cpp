@@ -5,15 +5,27 @@
 namespace gsystem { // gsystem
 
 GSockAddress::GSockAddress()
-: m_pSockAddress_Ex(new detail::GSockAddress_Ex())
+	: m_pSockAddress_Ex(new detail::GSockAddress_Ex())
 {
 
 }
 
-GSockAddress::GSockAddress(const GString &sIP, gushort nPort)
-: m_pSockAddress_Ex(new detail::GSockAddress_Ex(sIP, nPort))
+GSockAddress::GSockAddress(const GString &ip, guint16 port)
+	: m_pSockAddress_Ex(new detail::GSockAddress_Ex(ip, port))
 {
 
+}
+
+GSockAddress::GSockAddress(const GSockAddress &addr)
+	: m_pSockAddress_Ex(new detail::GSockAddress_Ex(*addr.m_pSockAddress_Ex))
+{
+
+}
+
+GSockAddress::GSockAddress(GSockAddress &&addr)
+	: m_pSockAddress_Ex(addr.m_pSockAddress_Ex)
+{
+	addr.m_pSockAddress_Ex = GNULL;
 }
 
 GSockAddress::~GSockAddress()
@@ -21,22 +33,31 @@ GSockAddress::~GSockAddress()
 	delete m_pSockAddress_Ex;
 }
 
-gvoid GSockAddress::SetIP(const GString sIP)
+gvoid GSockAddress::SetIP(const GString &ip)
 {
-	GASSERT(m_pSockAddress_Ex);
-	m_pSockAddress_Ex->SetIP(sIP);
+	if (m_pSockAddress_Ex)
+	{
+		m_pSockAddress_Ex = new detail::GSockAddress_Ex;
+	}
+	m_pSockAddress_Ex->SetIP(ip);
 }
 
-gvoid GSockAddress::SetIP(const guint nIP)
+gvoid GSockAddress::SetIP(guint ip)
 {
-	GASSERT(m_pSockAddress_Ex);
-	m_pSockAddress_Ex->SetIP(nIP);
+	if (m_pSockAddress_Ex)
+	{
+		m_pSockAddress_Ex = new detail::GSockAddress_Ex;
+	}
+	m_pSockAddress_Ex->SetIP(ip);
 }
 
-gvoid GSockAddress::SetPortID(const gushort nPort)
+gvoid GSockAddress::SetPortID(guint16 port)
 {
-	GASSERT(m_pSockAddress_Ex);
-	m_pSockAddress_Ex->SetPortID(nPort);
+	if (m_pSockAddress_Ex)
+	{
+		m_pSockAddress_Ex = new detail::GSockAddress_Ex;
+	}
+	m_pSockAddress_Ex->SetPortID(port);
 }
 
 } // namespace gsystem

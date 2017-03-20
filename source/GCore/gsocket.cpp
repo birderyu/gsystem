@@ -46,16 +46,20 @@ gbool GSocket::SetReuseAddress(gbool nResue)
 	return m_pSocket_Ex->SetReuseAddress(nResue);
 }
 
-gbool GSocket::GetPeerAddr(GSockAddress &tSockAddr) const
+GSockAddress GSocket::GetPeerAddr() const
 {
 	GASSERT(m_pSocket_Ex);
-	return m_pSocket_Ex->GetPeerAddr(tSockAddr.m_pSockAddress_Ex);
+	GSockAddress addr;
+	m_pSocket_Ex->GetPeerAddr(*addr.m_pSockAddress_Ex);
+	return addr;
 }
 
-gbool GSocket::GetLocalAddr(GSockAddress &tSockAddr) const
+GSockAddress GSocket::GetLocalAddr() const
 {
 	GASSERT(m_pSocket_Ex);
-	return m_pSocket_Ex->GetLocalAddr(tSockAddr.m_pSockAddress_Ex);
+	GSockAddress addr;
+	m_pSocket_Ex->GetLocalAddr(*addr.m_pSockAddress_Ex);
+	return addr;
 }
 
 } // namespace gsystem

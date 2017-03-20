@@ -46,19 +46,19 @@ GSocket_Ex::~GSocket_Ex()
 
 }
 
-gbool GSocket_Ex::SetRecvTimeout(gint nMsecs)
+gbool GSocket_Ex::SetRecvTimeout(gint msecs)
 {
 #ifdef _WIN32
 	if (GSetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
-		(gchar*)&nMsecs, sizeof(gint)) < 0)
+		(gchar*)&msecs, sizeof(gint)) < 0)
 	{
 		return  false;
 	}
 	return true;
 #else
 	timeval tTimeValue;
-	tTimeValue.tv_sec = nMsecs / 1000;
-	tTimeValue.tv_usec = nMsecs % 1000 * 1000;
+	tTimeValue.tv_sec = msecs / 1000;
+	tTimeValue.tv_usec = msecs % 1000 * 1000;
 	if (GSetSocketOpt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO,
 		(gchar*)&tTimeValue, sizeof(timeval)) < 0)
 	{
@@ -91,19 +91,19 @@ gint GSocket_Ex::GetRecvTimeout() const
 #endif
 }
 
-gbool GSocket_Ex::SetSendTimeout(gint nMsecs)
+gbool GSocket_Ex::SetSendTimeout(gint msecs)
 {
 #ifdef _WIN32
 	if (GSetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
-		(gchar*)&nMsecs, sizeof(gint)) < 0)
+		(gchar*)&msecs, sizeof(gint)) < 0)
 	{
 		return  false;
 	}
 	return true;
 #else
 	timeval tTimeValue;
-	tTimeValue.tv_sec = nMsecs / 1000;
-	tTimeValue.tv_usec = nMsecs % 1000 * 1000;
+	tTimeValue.tv_sec = msecs / 1000;
+	tTimeValue.tv_usec = msecs % 1000 * 1000;
 	if (GSetSocketOpt(m_hSocket, SOL_SOCKET, SO_SNDTIMEO,
 		(gchar*)&tTimeValue, sizeof(timeval)) < 0)
 	{
@@ -136,40 +136,32 @@ gint GSocket_Ex::GetSendTimeout() const
 #endif
 }
 
-gbool GSocket_Ex::SetReuseAddress(gbool nResue)
+gbool GSocket_Ex::SetReuseAddress(gbool resue)
 {
-	gint nOpt = nResue ? 1 : 0;
-	socklen_t nLen = sizeof(nOpt);
+	gint opt = resue ? 1 : 0;
+	socklen_t len = sizeof(opt);
 	if (GSetSocketOpt(m_hSocket, SOL_SOCKET, SO_REUSEADDR,
-		(char*)&nOpt, nLen) < 0)
+		(char*)&opt, len) < 0)
 	{
 		return false;
 	}
 	return true;
 }
 
-gbool GSocket_Ex::GetPeerAddr(GSockAddress_Ex *pSockAddr) const
+gbool GSocket_Ex::GetPeerAddr(GSockAddress_Ex &addr) const
 {
-	if (!pSockAddr)
-	{
-		return false;
-	}
-	socklen_t nLen = sizeof(pSockAddr->m_tSocketAddr);
-	if (getpeername(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), &nLen) < 0)
+	socklen_t len = sizeof(addr.m_tSocketAddr);
+	if (getpeername(m_hSocket, (sockaddr*)&(addr.m_tSocketAddr), &len) < 0)
 	{
 		return false;
 	}
 	return true;
 }
 
-gbool GSocket_Ex::GetLocalAddr(GSockAddress_Ex *pSockAddr) const
+gbool GSocket_Ex::GetLocalAddr(GSockAddress_Ex &addr) const
 {
-	if (!pSockAddr)
-	{
-		return false;
-	}
-	socklen_t nLen = sizeof(pSockAddr->m_tSocketAddr);
-	if (getsockname(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), &nLen) < 0)
+	socklen_t len = sizeof(addr.m_tSocketAddr);
+	if (getsockname(m_hSocket, (sockaddr*)&(addr.m_tSocketAddr), &len) < 0)
 	{
 		return false;
 	}

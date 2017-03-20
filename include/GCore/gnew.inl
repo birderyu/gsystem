@@ -4,9 +4,9 @@
 namespace gsystem { // gsystem
 
 template<typename ClassT>
-GINLINE gpointer GNewT<ClassT>::operator new(gsize size) noexcept(false)
+GINLINE gptr GNewT<ClassT>::operator new(gsize size) noexcept(false)
 {
-	gpointer ptr = GMalloc(size);
+	gptr ptr = GMalloc(size);
 	if (GNULL == ptr)
 	{
 		throw std::bad_alloc();
@@ -15,7 +15,7 @@ GINLINE gpointer GNewT<ClassT>::operator new(gsize size) noexcept(false)
 }
 
 template<typename ClassT>
-GINLINE gvoid GNewT<ClassT>::operator delete(gpointer ptr) noexcept
+GINLINE gvoid GNewT<ClassT>::operator delete(gptr ptr) noexcept
 {
 	GFree(ptr);
 }
@@ -24,9 +24,9 @@ template<typename ClassT>
 GMemoryPool<sizeof(ClassT)> GNewInPoolT<ClassT>::pool;
 
 template<typename ClassT>
-GINLINE gpointer GNewInPoolT<ClassT>::operator new(gsize)
+GINLINE gptr GNewInPoolT<ClassT>::operator new(gsize)
 {
-	gpointer ptr = pool.Alloc();
+	gptr ptr = pool.Alloc();
 	if (!ptr)
 	{
 		throw std::bad_alloc();
@@ -35,7 +35,7 @@ GINLINE gpointer GNewInPoolT<ClassT>::operator new(gsize)
 }
 
 template<typename ClassT>
-GINLINE gvoid GNewInPoolT<ClassT>::operator delete(gpointer free)
+GINLINE gvoid GNewInPoolT<ClassT>::operator delete(gptr free)
 {
 	if (free == GNULL)
 	{
@@ -57,10 +57,10 @@ GINLINE std::new_handler GNewWithHandlerT<ClassT>::set_new_handler(std::new_hand
 }
 
 template<typename ClassT>
-GINLINE gpointer GNewWithHandlerT<ClassT>::operator new(gsize size)
+GINLINE gptr GNewWithHandlerT<ClassT>::operator new(gsize size)
 {
 	GNewHander h(std::set_new_handler(currentHandler));
-	gpointer ptr = GMalloc(size);
+	gptr ptr = GMalloc(size);
 	if (GNULL == ptr)
 	{
 		throw std::bad_alloc();
@@ -69,7 +69,7 @@ GINLINE gpointer GNewWithHandlerT<ClassT>::operator new(gsize size)
 }
 
 template<typename ClassT>
-GINLINE gvoid GNewWithHandlerT<ClassT>::operator delete(gpointer free)
+GINLINE gvoid GNewWithHandlerT<ClassT>::operator delete(gptr free)
 {
 	GFree(free);
 }
@@ -82,10 +82,10 @@ template<typename ClassT>
 GMemoryPool<sizeof(ClassT)> GNewInPoolWithHandlerT<ClassT>::pool;
 
 template<typename ClassT>
-GINLINE gpointer GNewInPoolWithHandlerT<ClassT>::operator new(gsize size)
+GINLINE gptr GNewInPoolWithHandlerT<ClassT>::operator new(gsize size)
 {
 	GNewHander h(std::set_new_handler(currentHandler));
-	gpointer ptr = pool.Alloc();
+	gptr ptr = pool.Alloc();
 	if (GNULL == ptr)
 	{
 		throw std::bad_alloc();
@@ -94,7 +94,7 @@ GINLINE gpointer GNewInPoolWithHandlerT<ClassT>::operator new(gsize size)
 }
 
 template<typename ClassT>
-GINLINE gvoid GNewInPoolWithHandlerT<ClassT>::operator delete(gpointer free)
+GINLINE gvoid GNewInPoolWithHandlerT<ClassT>::operator delete(gptr free)
 {
 	if (free == GNULL)
 	{
@@ -109,10 +109,10 @@ template<typename ClassT, typename LockT>
 LockT GSafeNewT<ClassT, LockT>::lock;
 
 template<typename ClassT, typename LockT>
-GINLINE gpointer GSafeNewT<ClassT, LockT>::operator new(gsize size)
+GINLINE gptr GSafeNewT<ClassT, LockT>::operator new(gsize size)
 {
 	GLockGuard<LockT> autolock(lock);
-	gpointer ptr = GMalloc(size);
+	gptr ptr = GMalloc(size);
 	if (nullptr == ptr)
 	{
 		throw std::bad_alloc();
@@ -121,7 +121,7 @@ GINLINE gpointer GSafeNewT<ClassT, LockT>::operator new(gsize size)
 }
 
 template<typename ClassT, typename LockT>
-GINLINE gvoid GSafeNewT<ClassT, LockT>::operator delete(gpointer free)
+GINLINE gvoid GSafeNewT<ClassT, LockT>::operator delete(gptr free)
 {
 	GLockGuard<LockT> autolock(lock);
 	GFree(free);
@@ -143,12 +143,12 @@ GINLINE std::new_handler GSafeNewWithHandlerT<ClassT, LockT>::set_new_handler(st
 }
 
 template<typename ClassT, typename LockT>
-GINLINE gpointer GSafeNewWithHandlerT<ClassT, LockT>::operator new(gsize size)
+GINLINE gptr GSafeNewWithHandlerT<ClassT, LockT>::operator new(gsize size)
 {
 	GNewHander h(std::set_new_handler(currentHandler));
 
 	GLockGuard<LockT> autolock(lock);
-	gpointer ptr = GMalloc(size);
+	gptr ptr = GMalloc(size);
 	if (nullptr == ptr)
 	{
 		throw std::bad_alloc();
@@ -157,7 +157,7 @@ GINLINE gpointer GSafeNewWithHandlerT<ClassT, LockT>::operator new(gsize size)
 }
 
 template<typename ClassT, typename LockT>
-GINLINE gvoid GSafeNewWithHandlerT<ClassT, LockT>::operator delete(gpointer free)
+GINLINE gvoid GSafeNewWithHandlerT<ClassT, LockT>::operator delete(gptr free)
 {
 	GLockGuard<LockT> autolock(lock);
 	GFree(free);
@@ -171,10 +171,10 @@ template<typename ClassT, typename LockT>
 GMemoryPool<sizeof(ClassT)> GSafeNewInPoolT<ClassT, LockT>::pool;
 
 template<typename ClassT, typename LockT>
-GINLINE gpointer GSafeNewInPoolT<ClassT, LockT>::operator new(gsize)
+GINLINE gptr GSafeNewInPoolT<ClassT, LockT>::operator new(gsize)
 {
 	GLockGuard<LockT> autolock(lock);
-	gpointer ptr = pool.Alloc();
+	gptr ptr = pool.Alloc();
 	if (!ptr)
 	{
 		throw std::bad_alloc();
@@ -183,7 +183,7 @@ GINLINE gpointer GSafeNewInPoolT<ClassT, LockT>::operator new(gsize)
 }
 
 template<typename ClassT, typename LockT>
-GINLINE gvoid GSafeNewInPoolT<ClassT, LockT>::operator delete(gpointer free)
+GINLINE gvoid GSafeNewInPoolT<ClassT, LockT>::operator delete(gptr free)
 {
 	if (free == GNULL)
 	{
@@ -212,12 +212,12 @@ GINLINE std::new_handler GSafeNewInPoolWithHandlerT<ClassT, LockT>::set_new_hand
 }
 
 template<typename ClassT, typename LockT>
-GINLINE gpointer GSafeNewInPoolWithHandlerT<ClassT, LockT>::operator new(gsize)
+GINLINE gptr GSafeNewInPoolWithHandlerT<ClassT, LockT>::operator new(gsize)
 {
 	GNewHander h(std::set_new_handler(currentHandler));
 
 	GLockGuard<LockT> autolock(lock);
-	gpointer ptr = pool.Alloc();
+	gptr ptr = pool.Alloc();
 	if (!ptr)
 	{
 		throw std::bad_alloc();
@@ -226,7 +226,7 @@ GINLINE gpointer GSafeNewInPoolWithHandlerT<ClassT, LockT>::operator new(gsize)
 }
 
 template<typename ClassT, typename LockT>
-GINLINE gvoid GSafeNewInPoolWithHandlerT<ClassT, LockT>::operator delete(gpointer free)
+GINLINE gvoid GSafeNewInPoolWithHandlerT<ClassT, LockT>::operator delete(gptr free)
 {
 	if (free == GNULL)
 	{

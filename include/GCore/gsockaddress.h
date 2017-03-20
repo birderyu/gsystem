@@ -19,11 +19,15 @@ class GAPI GSockAddress
 
 public:
 	explicit GSockAddress();
-	explicit GSockAddress(const GString &sIP, gushort nPort);
+	explicit GSockAddress(const GString &ip, guint16 port);
+	GSockAddress(const GSockAddress &addr);
+	GSockAddress(GSockAddress &&addr);
+
+
 	~GSockAddress();
-	gvoid SetIP(const GString sIP);
-	gvoid SetIP(guint nIP);
-	gvoid SetPortID(gushort nPort);
+	gvoid SetIP(const GString &ip);
+	gvoid SetIP(guint ip);
+	gvoid SetPortID(guint16 nPort);
 
 private:
 	detail::GSockAddress_Ex *m_pSockAddress_Ex;

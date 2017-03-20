@@ -10,16 +10,16 @@ GUdpSocket::GUdpSocket()
 	GASSERT(m_pSocket_Ex);
 }
 
-gbool GUdpSocket::Open(gbool nResue)
+gbool GUdpSocket::Open(gbool resue)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Open(nResue);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Open(resue);
 }
 
-gbool GUdpSocket::Open(const GSockAddress &tSockAddr, gbool nResue)
+gbool GUdpSocket::Open(const GSockAddress &addr, gbool resue)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Open(tSockAddr.m_pSockAddress_Ex, nResue);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Open(addr.m_pSockAddress_Ex, resue);
 }
 
 gvoid GUdpSocket::Close()
@@ -28,16 +28,16 @@ gvoid GUdpSocket::Close()
 	((detail::GUdpSocket_Ex*)m_pSocket_Ex)->Close();
 }
 
-gbool GUdpSocket::SendTo(const gchar *pBufData, gint nLen, const GSockAddress &tPeer)
+gbool GUdpSocket::SendTo(gcbytes buf, gsize size, const GSockAddress &peer)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->SendTo(pBufData, nLen, tPeer.m_pSockAddress_Ex);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->SendTo(buf, size, peer.m_pSockAddress_Ex);
 }
 
-gint GUdpSocket::RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress &tPeer)
+gint GUdpSocket::RecvFrom(gbytes buf, gsize max_size, GSockAddress &peer)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->RecvFrom(pBufData, nMaxLen, tPeer.m_pSockAddress_Ex);
+	return ((detail::GUdpSocket_Ex*)m_pSocket_Ex)->RecvFrom(buf, max_size, peer.m_pSockAddress_Ex);
 }
 
 } // namespace gsystem

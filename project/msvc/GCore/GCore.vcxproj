@@ -168,6 +168,7 @@
     <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
     <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gdatetimedefine.h" />
+    <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glog.h" />
     <ClInclude Include="..\..\..\include\GCore\gseries.h" />
@@ -329,6 +330,7 @@
     <ClCompile Include="..\..\..\source\GCore\gcstringhelper.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdate.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdatetime.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gencoding.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile_ex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gjsonarray.cpp" />

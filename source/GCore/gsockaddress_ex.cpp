@@ -11,26 +11,32 @@ GSockAddress_Ex::GSockAddress_Ex()
 	m_tSocketAddr.sin_port = 0;
 }
 
-GSockAddress_Ex::GSockAddress_Ex(const GString &sIP, gushort nPort)
+GSockAddress_Ex::GSockAddress_Ex(const GString &ip, guint16 port)
 {
 	m_tSocketAddr.sin_family = AF_INET;
-	m_tSocketAddr.sin_addr.s_addr = inet_addr(sIP.CString());
-	m_tSocketAddr.sin_port = ::htons(nPort);
+	m_tSocketAddr.sin_addr.s_addr = inet_addr(ip.CString());
+	m_tSocketAddr.sin_port = ::htons(port);
 }
 
-gvoid GSockAddress_Ex::SetIP(const GString &sIP)
+GSockAddress_Ex::GSockAddress_Ex(const GSockAddress_Ex &addr)
+	: m_tSocketAddr(addr.m_tSocketAddr)
 {
-	m_tSocketAddr.sin_addr.s_addr = inet_addr(sIP.CString());
+
 }
 
-gvoid GSockAddress_Ex::SetIP(guint nIP)
+gvoid GSockAddress_Ex::SetIP(const GString &ip)
 {
-	m_tSocketAddr.sin_addr.s_addr = nIP;
+	m_tSocketAddr.sin_addr.s_addr = inet_addr(ip.CString());
 }
 
-gvoid GSockAddress_Ex::SetPortID(gushort nPort)
+gvoid GSockAddress_Ex::SetIP(guint ip)
 {
-	m_tSocketAddr.sin_port = ::htons(nPort);
+	m_tSocketAddr.sin_addr.s_addr = ip;
+}
+
+gvoid GSockAddress_Ex::SetPortID(guint16 port)
+{
+	m_tSocketAddr.sin_port = ::htons(port);
 }
 
 } // namespace gsystem.detail

@@ -8,7 +8,7 @@ GStringPool::GStringPool(gsize nInitSzie, gsize nMaxSize)
 
 }
 
-gpointer GStringPool::Alloc(gsize size)
+gptr GStringPool::Alloc(gsize size)
 {
 	GMap<gsize, GVector<gaddress>>::ConstIterator citer = m_tRecycle.ConstFind(size);
 	if (citer != m_tRecycle.ConstEnd())
@@ -18,7 +18,7 @@ gpointer GStringPool::Alloc(gsize size)
 	return m_tStore.Alloc(size);
 }
 
-gvoid GStringPool::Free(gpointer)
+gvoid GStringPool::Free(gptr)
 {
 
 }

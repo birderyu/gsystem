@@ -61,8 +61,8 @@ class GAPI GStringPool
 
 public:
 	GStringPool(gsize nInitSzie = 2048, gsize nMaxSize = 10240);
-	gpointer Alloc(gsize);
-	gvoid Free(gpointer);
+	gptr Alloc(gsize);
+	gvoid Free(gptr);
 
 private:
 	/// ªÿ ’’æ

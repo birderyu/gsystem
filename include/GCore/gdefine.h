@@ -165,6 +165,12 @@ extern "C"{
 #define G_CHAR_TO_LOWER(c)		tolower(GUCHAR(c))
 #define G_CHAR_TO_UPPER(c)		toupper(GUCHAR(c))
 
+#define GGBK(cs)	(cs)		// gbk编码
+#define GUTF8(cs)	(u8##cs)	// utf-8编码
+#define GUTF16(cs)	(u##cs)		// utf-16编码
+#define GUTF32(cs)	(U##cs)		// utf-32编码
+#define GLOCALE(cs)	(L##cs)		// 
+
 // 常用函数
 #define G_CALL_AT_EXIT atexit
 #define G_MAX(a,b)  (((a) > (b)) ? (a) : (b))

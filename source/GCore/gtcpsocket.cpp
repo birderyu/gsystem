@@ -10,16 +10,16 @@ GTcpSocket::GTcpSocket()
 	GASSERT(m_pSocket_Ex);
 }
 
-gbool GTcpSocket::Open(gbool nResue)
+gbool GTcpSocket::Open(gbool resue)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Open(nResue);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Open(resue);
 }
 
-gbool GTcpSocket::Open(const GSockAddress &tSockAddr, gbool nResue)
+gbool GTcpSocket::Open(const GSockAddress &addr, gbool resue)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Open(tSockAddr.m_pSockAddress_Ex, nResue);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Open(addr.m_pSockAddress_Ex, resue);
 }
 
 gvoid GTcpSocket::Close()
@@ -28,34 +28,34 @@ gvoid GTcpSocket::Close()
 	((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Close();
 }
 
-gbool GTcpSocket::Listen(gint nBackLog)
+gbool GTcpSocket::Listen(gint back_log)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Listen(nBackLog);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Listen(back_log);
 }
 
-gbool GTcpSocket::Accept(const GTcpSocket &pPeer)
+gbool GTcpSocket::Accept(const GTcpSocket &peer)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Accept((detail::GTcpSocket_Ex*)pPeer.m_pSocket_Ex);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Accept((detail::GTcpSocket_Ex*)peer.m_pSocket_Ex);
 }
 
-gbool GTcpSocket::Connect(const GSockAddress &tSockAddr)
+gbool GTcpSocket::Connect(const GSockAddress &addr)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Connect(tSockAddr.m_pSockAddress_Ex);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Connect(addr.m_pSockAddress_Ex);
 }
 
-gint GTcpSocket::Send(const gchar *pBufData, gint nDataLen)
+gint GTcpSocket::Send(gcbytes buf, gsize size)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Send(pBufData, nDataLen);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Send(buf, size);
 }
 
-gint GTcpSocket::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
+gint GTcpSocket::Recv(gbytes buf, gsize size, gbool wait_all)
 {
 	GASSERT(m_pSocket_Ex);
-	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Recv(pBufData, nDataLen, nWaitAll);
+	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Recv(buf, size, wait_all);
 }
 
 } // namespace gsystem

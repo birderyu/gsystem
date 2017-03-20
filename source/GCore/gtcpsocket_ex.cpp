@@ -4,28 +4,28 @@
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 
-gbool GTcpSocket_Ex::Open(gbool nResue)
+gbool GTcpSocket_Ex::Open(gbool resue)
 {
 	m_hSocket = GOpenSocket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if ((gint)m_hSocket < 0)
 	{
 		return false;
 	}
-	SetReuseAddress(nResue);
+	SetReuseAddress(resue);
 	return true;
 }
 
-gbool GTcpSocket_Ex::Open(GSockAddress_Ex *pSockAddr, gbool nResue)
+gbool GTcpSocket_Ex::Open(GSockAddress_Ex *addr, gbool resue)
 {
-	if (!pSockAddr)
+	if (!addr)
 	{
 		return false;
 	}
-	if (!Open(nResue))
+	if (!Open(resue))
 	{
 		return false;
 	}
-	if (GBindSocket(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), sizeof(sockaddr_in)) < 0)
+	if (GBindSocket(m_hSocket, (sockaddr*)&(addr->m_tSocketAddr), sizeof(sockaddr_in)) < 0)
 	{
 		GCloseSocket(m_hSocket);
 		m_hSocket = -1;
@@ -44,18 +44,18 @@ gvoid GTcpSocket_Ex::Close()
 	}
 }
 
-gbool GTcpSocket_Ex::Listen(gint nBackLog)
+gbool GTcpSocket_Ex::Listen(gint back_log)
 {
-	if (GListenSocket(m_hSocket, nBackLog) < 0)
+	if (GListenSocket(m_hSocket, back_log) < 0)
 	{
 		return false;
 	}
 	return true;
 }
 
-gbool GTcpSocket_Ex::Accept(GTcpSocket_Ex *pPeer)
+gbool GTcpSocket_Ex::Accept(GTcpSocket_Ex *peer)
 {
-	if (!pPeer)
+	if (!peer)
 	{
 		return false;
 	}
@@ -74,32 +74,32 @@ gbool GTcpSocket_Ex::Accept(GTcpSocket_Ex *pPeer)
 		return false;
 	}
 #endif
-	pPeer->m_hSocket = tPeerHandle;
+	peer->m_hSocket = tPeerHandle;
 	return true;
 }
 
-gbool GTcpSocket_Ex::Connect(GSockAddress_Ex *pSockAddr)
+gbool GTcpSocket_Ex::Connect(GSockAddress_Ex *addr)
 {
-	if (!pSockAddr)
+	if (!addr)
 	{
 		return false;
 	}
-	if (GConnectSocket(m_hSocket, (sockaddr*)&(pSockAddr->m_tSocketAddr), sizeof(sockaddr)) < 0)
+	if (GConnectSocket(m_hSocket, (sockaddr*)&(addr->m_tSocketAddr), sizeof(sockaddr)) < 0)
 	{
 		return false;
 	}
 	return true;
 }
 
-gint GTcpSocket_Ex::Send(const gchar *pBufData, gint nDataLen)
+gint GTcpSocket_Ex::Send(gcbytes buf, gsize size)
 {
-	return GSendSocket(m_hSocket, pBufData, nDataLen, 0);
+	return GSendSocket(m_hSocket, (const gchar *)buf, size, 0);
 }
 
-gint GTcpSocket_Ex::Recv(gchar *pBufData, gint nDataLen, gint nWaitAll)
+gint GTcpSocket_Ex::Recv(gbytes buf, gsize size, gbool wait_all)
 {
-	int nFlags = nWaitAll ? MSG_WAITALL : 0;
-	return GRecvSocket(m_hSocket, pBufData, nDataLen, nFlags);
+	gint flags = wait_all ? MSG_WAITALL : 0;
+	return GRecvSocket(m_hSocket, (gchar *)buf, size, flags);
 }
 
 } // namespace gsystem.detail

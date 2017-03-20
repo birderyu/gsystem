@@ -59,7 +59,7 @@ public:
 
 private:
 	/// 当前线程体的句柄，在不同的操作系统下使用不同的结构
-	gpointer m_pHandle;
+	gptr m_pHandle;
 };
 
 } // namespace gsystem

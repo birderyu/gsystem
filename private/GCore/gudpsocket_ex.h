@@ -10,12 +10,12 @@ class GUdpSocket_Ex
 	: public GSocket_Ex
 {
 public:
-	gbool Open(gbool nResue);
-	gbool Open(GSockAddress_Ex *pSockAddr, gbool nResue);
+	gbool Open(gbool resue);
+	gbool Open(GSockAddress_Ex *addr, gbool resue);
 	gvoid Close();
 
-	gbool SendTo(const gchar *pBufData, gint nLen, GSockAddress_Ex *pPeer);
-	gint RecvFrom(gchar *pBufData, gint nMaxLen, GSockAddress_Ex *pPeer);
+	gbool SendTo(gcbytes buf, gsize size, GSockAddress_Ex *peer);
+	gint RecvFrom(gbytes buf, gsize max_size, GSockAddress_Ex *peer);
 };
 
 } // namespace gsystem.detail

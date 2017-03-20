@@ -11,20 +11,20 @@ class GAPI GTcpSocket final
 public:
 	GTcpSocket();
 
-	gbool Open(gbool nResue = false);
-	gbool Open(const GSockAddress &tSockAddr, gbool nResue = false);
+	gbool Open(gbool resue = false);
+	gbool Open(const GSockAddress &addr, gbool resue = false);
 	gvoid Close();
 
 	// 服务器
-	gbool Listen(gint nBackLog = 16);
-	gbool Accept(const GTcpSocket &pPeer);
+	gbool Listen(gint back_log = 16);
+	gbool Accept(const GTcpSocket &peer);
 
 	// 客户端
-	gbool Connect(const GSockAddress &tSockAddr);
+	gbool Connect(const GSockAddress &addr);
 
-	// 发送接收
-	gint Send(const gchar *pBufData, gint nDataLen);
-	gint Recv(gchar *pBufData, gint nDataLen, gint nWaitAll = 0);
+	// 发送接收，返回值为字节的数量
+	gint Send(gcbytes buf, gsize size);
+	gint Recv(gbytes buf, gsize size, gbool wait_all = false);
 };
 
 } // namespace gsystem

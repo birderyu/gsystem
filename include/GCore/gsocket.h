@@ -53,20 +53,20 @@ public:
 	GSocket(detail::GSocket_Ex *socket_ex);
 	virtual ~GSocket() = 0;
 
-	virtual gbool Open(gbool nResue = false) = 0;
-	virtual gbool Open(const GSockAddress &tSockAddr, gbool nResue = false) = 0;
+	virtual gbool Open(gbool resue = false) = 0;
+	virtual gbool Open(const GSockAddress &addr, gbool resue = false) = 0;
 	virtual gvoid Close() = 0;
 
-	gbool SetRecvTimeout(gint nMsecs);
+	gbool SetRecvTimeout(gint msecs);
 	gint GetRecvTimeout() const;
 
-	gbool SetSendTimeout(gint nMsecs);
+	gbool SetSendTimeout(gint msecs);
 	gint GetSendTimeout() const;
 
-	gbool SetReuseAddress(gbool nResue);
+	gbool SetReuseAddress(gbool resue);
 
-	gbool GetPeerAddr(GSockAddress &tSockAddr) const;
-	gbool GetLocalAddr(GSockAddress &tSockAddr) const;
+	GSockAddress GetPeerAddr() const;
+	GSockAddress GetLocalAddr() const;
 
 protected:
 	detail::GSocket_Ex *m_pSocket_Ex;
