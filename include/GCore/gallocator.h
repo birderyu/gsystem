@@ -18,7 +18,6 @@
 #define _CORE_ALLOCATOR_H_
 
 #include "gmemory.h"
-#include <new>
 
 namespace gsystem { // gsystem
 

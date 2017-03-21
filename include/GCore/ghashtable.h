@@ -6,6 +6,7 @@
 #include "gdynamicarray.h"
 #include "gstructure.h"
 #include "gnocopyable.h"
+#include "gnew.h"
 
 #define G_HASH_TABLE_DEFAULT_MODULE_SIZE		0x10
 #define G_HASH_TABLE_MAX_MODULE_SIZE			0x40000000 // 2 30

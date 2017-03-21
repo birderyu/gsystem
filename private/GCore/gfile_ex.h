@@ -1,6 +1,7 @@
 #ifndef _CORE_FILE_EX_H_
 #define _CORE_FILE_EX_H_
 
+#include "gnew.h"
 #include "gstring.h"
 #include <stdio.h>
 

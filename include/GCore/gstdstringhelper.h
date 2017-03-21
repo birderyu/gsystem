@@ -1,7 +1,10 @@
 #ifndef _CORE_STD_STRING_UTILITY_H_
 #define _CORE_STD_STRING_UTILITY_H_
 
-#include "gglobal.h"
+#include "gtype.h"
+
+#ifdef G_NEED_ALL_FUNCTION
+
 #include <string>
 #include <sstream>
 #include <vector>
@@ -76,5 +79,7 @@ T GStdStringHelper::ToNum(const std::string &str,gbool *bIsOk)
 }
 
 } // namespace gsystem
+
+#endif // G_NEED_ALL_FUNCTION
 
 #endif // _CORE_STD_STRING_UTILITY_H_

@@ -19,7 +19,6 @@
 #ifndef _CORE_JSON_OBJECT_H_
 #define _CORE_JSON_OBJECT_H_
 
-#include "gobject.h"
 #include "gstring.h"
 #include "gmap.h"
 
@@ -34,8 +33,7 @@ namespace gsystem { // gsystem
 namespace json { // gsystem.json
 
 class GAPI GJsonObject
-	: public GNewT<GJsonObject>
-	, public GObject
+	: public GObject
 {
 public:
 	GJsonObject();

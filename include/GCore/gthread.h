@@ -1,13 +1,9 @@
 #ifndef _CORE_THREAD_H_
 #define _CORE_THREAD_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 #include "grunnable.h"
 #include "gnocopyable.h"
-
-namespace gsystem { // gsystem
-	class GRunnable;
-} // namespace gsystem
 
 namespace gsystem { // gsystem
 

@@ -1,6 +1,8 @@
 #ifndef _CORE_CONSTRUCTOR_INLINE_
 #define _CORE_CONSTRUCTOR_INLINE_
 
+#include "gtraits.h"
+
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 namespace constructor { // gsystem.detail.constructor

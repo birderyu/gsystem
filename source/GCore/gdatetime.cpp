@@ -1,8 +1,10 @@
 #include "gdatetime.h"
+#include "gutility.h"
 #include "gbytes.h"
 #include "gstring.h"
 #include "gdate.h"
 #include "gtime.h"
+#include "gsharedpointer.h"
 
 #ifdef G_SYSTEM_WINDOWS 
 #	ifndef WIN32_LEAN_AND_MEAN

@@ -13,6 +13,7 @@
 
 #include "glinkedlist.h"
 #include "gstructure.h"
+#include "gnew.h"
 
 namespace gsystem { // gsystem
 

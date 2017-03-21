@@ -15,8 +15,10 @@
 #define _CORE_PACKAGE_H_
 
 #include "gobject.h"
-#include "gstring.h"
-#include "ghash.h"
+
+namespace gsystem { // gsystem
+	class GString;
+} // namespace gsystem
 
 namespace gsystem { // gsystem
 
@@ -25,7 +27,7 @@ class GPackage
 	: public GObject
 {
 public:
-	typedef typename GTypeTraits<ValueT>::ParameterType ValueType;
+	typedef typename ValueT ValueType;
 
 public:
 	enum { CLASS_CODE = CLASS_CODE_PACKAGE, };

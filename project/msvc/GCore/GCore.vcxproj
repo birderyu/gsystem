@@ -201,7 +201,6 @@
     <ClInclude Include="..\..\..\include\GCore\gjsonobject.h" />
     <ClInclude Include="..\..\..\include\GCore\gjsonparsermessage.h" />
     <ClInclude Include="..\..\..\include\GCore\gjsonvalue.h" />
-    <ClInclude Include="..\..\..\include\GCore\glimitedlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glistqueue.h" />
     <ClInclude Include="..\..\..\include\GCore\gmemory.h" />
     <ClInclude Include="..\..\..\include\GCore\gnomoveable.h" />
@@ -306,9 +305,7 @@
     <ClInclude Include="..\..\..\include\GCore\gfunctor.h" />
     <ClInclude Include="..\..\..\include\GCore\gxmlnode.h" />
     <ClInclude Include="..\..\..\private\GCore\gbinaryfile_ex.h" />
-    <ClInclude Include="..\..\..\private\GCore\gdatetime_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gfile_ex.h" />
-    <ClInclude Include="..\..\..\private\GCore\gglobal_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gjsonparser.h" />
     <ClInclude Include="..\..\..\private\GCore\gsockaddress_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gsocket_ex.h" />

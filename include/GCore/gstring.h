@@ -13,10 +13,9 @@
 #ifndef _CORE_STRING_H_
 #define _CORE_STRING_H_
 
-#include "gstructure.h"
 #include "gobject.h"
+#include "gstructure.h"
 #include "gseries.h"
-#include "gencoding.h"
 
 namespace gsystem { // gsystem
 	class GVariety;

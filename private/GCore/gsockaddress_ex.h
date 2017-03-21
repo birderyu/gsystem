@@ -1,7 +1,7 @@
 ﻿#ifndef _CORE_SOCKETADDRESS_EX_H_
 #define _CORE_SOCKETADDRESS_EX_H_
 
-#include "gglobal_ex.h"
+#include "gtype.h"
 
 #ifdef G_SYSTEM_WINDOWS
 

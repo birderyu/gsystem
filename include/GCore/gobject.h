@@ -15,13 +15,13 @@
 #ifndef _CORE_OBJECT_H_
 #define _CORE_OBJECT_H_
 
-#include "gglobal.h"
-#include "gsharedpointer.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 	class GObject;
 	class GString;
 	class GBytes;
+	template <typename ClassT> class GSharedPointer;
 	typedef GSharedPointer<GObject> GObjectP;
 } // namespace gsystem
 

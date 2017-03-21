@@ -402,13 +402,7 @@
     <ClInclude Include="..\..\..\private\GCore\gbinaryfile_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gdatetime_ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\private\GCore\gfile_ex.h">
-      <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gglobal_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\GCore\gjsonparser.h">
@@ -457,9 +451,6 @@
       <Filter>头文件\Global</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gdeque.h">
-      <Filter>头文件\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glimitedlist.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gatom.h">

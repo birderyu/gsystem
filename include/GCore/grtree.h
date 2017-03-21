@@ -1,7 +1,6 @@
 #ifndef _CORE_R_TREE_H_
 #define _CORE_R_TREE_H_
 
-#include "gglobal.h"
 #include "gmath.h"
 
 #include <stdio.h>

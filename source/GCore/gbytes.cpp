@@ -1,4 +1,5 @@
 #include "gbytes.h"
+#include "gutility.h"
 #include "gbytebuffer.h"
 
 namespace gsystem { // gsystem

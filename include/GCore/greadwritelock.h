@@ -2,7 +2,7 @@
 #ifndef _CORE_READ_WRITE_LOCK_H_
 #define _CORE_READ_WRITE_LOCK_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 

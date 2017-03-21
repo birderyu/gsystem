@@ -1,11 +1,8 @@
 #ifndef _CORE_ARRAY_H_
 #define _CORE_ARRAY_H_
 
-#include "gobject.h"
-#include "gserialize.h"
 #include "gstructure.h"
-#include "gallocator.h"
-#include "gconstructor.h"
+#include "gobject.h"
 
 namespace gsystem { // gsystem
 

@@ -1,7 +1,7 @@
 #ifndef _CORE_SERIALIZE_H_
 #define _CORE_SERIALIZE_H_
 
-#include "gglobal.h"
+#include "gfunctor.h"
 
 namespace gsystem { // gsystem
 

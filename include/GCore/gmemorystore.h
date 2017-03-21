@@ -6,7 +6,6 @@
 #ifndef _CORE_MEMORY_STORE_H_
 #define _CORE_MEMORY_STORE_H_
 
-#include "gglobal.h"
 #include "gblock.h"
 
 namespace gsystem { // gsystem

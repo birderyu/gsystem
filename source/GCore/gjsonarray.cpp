@@ -2,6 +2,7 @@
 #include "gjsonvalue.h"
 #include "gjsonparsermessage.h"
 #include "gliststack.h"
+#include <ctype.h>
 
 namespace gsystem { // gsystem
 namespace json { // gsystem.json

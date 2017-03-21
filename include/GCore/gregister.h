@@ -1,7 +1,6 @@
 #ifndef _CORE_REGISTER_H_
 #define _CORE_REGISTER_H_
 
-#include "gglobal.h"
 #include "gsingleton.h"
 #include "gmutex.h"
 #include "gstring.h"

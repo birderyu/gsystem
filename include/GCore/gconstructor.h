@@ -22,8 +22,7 @@
 #ifndef _CORE_CONSTRUCTOR_H_
 #define _CORE_CONSTRUCTOR_H_
 
-#include "gglobal.h"
-#include "gtraits.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 

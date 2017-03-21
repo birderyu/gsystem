@@ -1,6 +1,10 @@
 #ifndef _CORE_PACKAGE_INLINE_
 #define _CORE_PACKAGE_INLINE_
 
+#include "gstring.h"
+#include "ghash.h"
+#include "gsharedpointer.h"
+
 namespace gsystem { // gsystem
 
 template <typename ValueT>

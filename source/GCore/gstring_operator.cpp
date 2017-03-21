@@ -1,5 +1,7 @@
 #include "gstring.h"
+#include "gutility.h"
 #include "gcstringhelper.h"
+#include <string.h>
 
 namespace gsystem { // gsystem
 

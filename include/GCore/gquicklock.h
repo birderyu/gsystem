@@ -2,6 +2,7 @@
 #define _CORE_QUICK_LOCK_H_
 
 #include "glock.h"
+
 #ifdef G_SYSTEM_WINDOWS
 #include "gcriticalsection.h"
 #else // !G_SYSTEM_WINDOWS

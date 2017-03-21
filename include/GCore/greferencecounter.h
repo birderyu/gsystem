@@ -3,7 +3,6 @@
 #define _CORE_REFERENCE_COUNTER_H_
 
 #include "gnew.h"
-#include "gatom.h"
 
 namespace gsystem { // gsystem
 

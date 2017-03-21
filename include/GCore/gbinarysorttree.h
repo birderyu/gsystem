@@ -18,6 +18,7 @@
 #define _CORE_BINARY_SORT_TREE_H_
 
 #include "gbinarytree.h"
+#include "gfunctor.h"
 
 namespace gsystem { // gsystem
 

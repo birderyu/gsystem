@@ -2,7 +2,7 @@
 #ifndef _CORE_BIT_SET_H_
 #define _CORE_BIT_SET_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 

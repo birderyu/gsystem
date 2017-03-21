@@ -1,6 +1,8 @@
 #ifndef _CORE_B_TREE_H_
 #define _CORE_B_TREE_H_
 
+#include "gnew.h"
+
 namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT, gsize KEY_MAX, gsize CHILD_MAX>

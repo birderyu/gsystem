@@ -1,5 +1,7 @@
 #include "gstdstringhelper.h"
 
+#ifdef G_NEED_ALL_FUNCTION
+
 namespace gsystem { // gsystem
 
 std::string GStdStringHelper::Trim(const std::string &sStr)
@@ -165,3 +167,5 @@ gint GStdStringHelper::Find(const std::string &str, const std::string &tar, gsiz
 }
 
 } // namespace gsystem
+
+#endif // G_NEED_ALL_FUNCTION

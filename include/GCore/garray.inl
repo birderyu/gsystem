@@ -1,6 +1,10 @@
 #ifndef _CORE_ARRAY_INLINE_
 #define _CORE_ARRAY_INLINE_
 
+#include "gallocator.h"
+#include "gconstructor.h"
+#include "gserialize.h"
+
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 namespace array { // gsystem.detail.array

@@ -1,7 +1,7 @@
 #ifndef _CORE_SEMAPHORE_H_
 #define _CORE_SEMAPHORE_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 

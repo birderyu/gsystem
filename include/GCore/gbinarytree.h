@@ -18,6 +18,7 @@
 
 #include "gobject.h"
 #include "gstructure.h"
+#include "gnew.h"
 #include "glist.h"
 
 namespace gsystem { // gsystem

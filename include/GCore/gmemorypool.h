@@ -6,7 +6,6 @@
 #ifndef _CORE_MEMORY_POOL_H_
 #define _CORE_MEMORY_POOL_H_
 
-#include "gglobal.h"
 #include "gmemory.h"
 
 namespace gsystem { // gsystem

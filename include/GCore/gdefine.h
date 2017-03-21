@@ -180,4 +180,7 @@ extern "C"{
 #define G_TIME_SIZE			8
 #define G_DATE_TIME_SIZE	(G_DATE_SIZE + G_TIME_SIZE)
 
+// 若需要所有的功能，则应该定义如下的宏
+//#define G_NEED_ALL_FUNCTION
+
 #endif // _CORE_DEFINE_H_

@@ -1,7 +1,6 @@
 #ifndef _CORE_VARIANT_H_
 #define _CORE_VARIANT_H_
 
-#include "gglobal.h"
 #include "gnew.h"
 
 namespace gsystem { // gsystem

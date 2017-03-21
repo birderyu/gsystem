@@ -1,6 +1,7 @@
 #include "gobject.h"
 #include "gstring.h"
 #include "gbytes.h"
+#include "gsharedpointer.h"
 
 namespace gsystem { // gsystem
 

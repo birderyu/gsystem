@@ -3,6 +3,7 @@
 #include "gliststack.h"
 #include "gjsonpair.h"
 #include "gjsonparsermessage.h"
+#include <ctype.h>
 
 namespace gsystem { // gsystem
 namespace json { // gsystem.json

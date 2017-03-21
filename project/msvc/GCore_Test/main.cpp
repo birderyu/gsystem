@@ -14,13 +14,16 @@ gint main(gint argc, gchar *argv[])
 {
 	GStopWatch sw;
 	sw.Start();
-	double v = VolumeThreePrism(
-		-1, 0, -1,
-		1, 0, 0,
-		0, 1, 0,
-		-1, 0, 1,
-		1, 0, 1,
-		0, 1, 2);
+	for (gsize i = 0; i < 100000; i++)
+	{
+		double v = VolumeThreePrism(
+			-1, 0, -1,
+			1, 0, 0,
+			0, 1, 0,
+			-1, 0, 1,
+			1, 0, 1,
+			0, 1, 2);
+	}
 	cout << sw.Stop() << endl;
 
 	//nl_langinfo();
@@ -72,4 +75,6 @@ gint main(gint argc, gchar *argv[])
 	testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
 	system("pause");
+
+	return 0;
 }

@@ -1,6 +1,8 @@
 #ifndef _CORE_REFERENCE_COUNTER_INLINE_
 #define _CORE_REFERENCE_COUNTER_INLINE_
 
+#include "gatom.h"
+
 namespace gsystem { // gsystem
 
 template <typename ClassT>

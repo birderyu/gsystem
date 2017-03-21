@@ -15,7 +15,7 @@
 #ifndef _CORE_SOCKET_H_
 #define _CORE_SOCKET_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 	class GSockAddress;

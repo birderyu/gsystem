@@ -1,7 +1,6 @@
 #ifndef _CORE_JSON_PARSER_MESSAGE_H_
 #define _CORE_JSON_PARSER_MESSAGE_H_
 
-#include "gobject.h"
 #include "gstring.h"
 
 namespace gsystem { // gsystem

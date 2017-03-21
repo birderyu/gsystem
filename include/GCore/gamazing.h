@@ -1,7 +1,9 @@
  #ifndef _CORE_AMAZING_H_
 #define _CORE_AMAZING_H_
 
-#include "gglobal.h"
+#include "gtype.h"
+
+#ifdef G_NEED_ALL_FUNCTION
 
 namespace gsystem { // gsystem
 
@@ -20,5 +22,7 @@ class GAPI GAmazing
 };
 
 } // namespace gsystem
+
+#endif // G_NEED_ALL_FUNCTION
 
 #endif // _CORE_AMAZING_H_

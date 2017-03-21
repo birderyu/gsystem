@@ -1,6 +1,8 @@
 #ifndef _CORE_ALLOCATOR_INLINE_
 #define _CORE_ALLOCATOR_INLINE_
 
+#include <new>
+
 namespace gsystem { // gsystem
 
 template <typename ClassT>

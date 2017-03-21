@@ -13,7 +13,6 @@
 #ifndef _CORE_STRING_POOL_H_
 #define _CORE_STRING_POOL_H_
 
-#include "gglobal.h"
 #include "gmemorystore.h"
 #include "gvector.h"
 #include "gmap.h"

@@ -12,11 +12,20 @@ double VolumeThreePrism(double xa, double ya, double za,
 	double xb1, double yb1, double zb1,
 	double xc1, double yc1, double zc1);
 
-// 双精度浮点比较的精度值
-#define DOUBLE_PRECISION 0.000001
-
-#define MAX_OF(a,b)  (((a) > (b)) ? (a) : (b))
-#define MIN_OF(a,b)  (((a) < (b)) ? (a) : (b))
+/*
+int main(int argc, char *argv[])
+{
+	// 三棱柱 a_b_c-a1_b1_c1
+	double v = VolumeThreePrism(
+		-1, 0, -1,	// a  (x, y, z)
+		1, 0, 0,	// b  (x, y, z)
+		0, 1, 0,	// c  (x, y, z)
+		-1, 0, 1,	// a1 (x, y, z)
+		1, 0, 1,	// b1 (x, y, z)
+		0, 1, 2);	// c1 (x, y, z)
+	system("pause");
+}
+*/
 
 // 判断两个双精度浮点是否相等
 bool doubleEquals(double v1, double v2);
@@ -71,6 +80,11 @@ double getVolumeOfThreePyramid(
 	double xd, double yd, double zd);
 
 //////////////////////////////////////////////////////////////////////////
+// 双精度浮点比较的精度值
+#define DOUBLE_PRECISION 0.000001
+
+#define MAX_OF(a,b)  (((a) > (b)) ? (a) : (b))
+#define MIN_OF(a,b)  (((a) < (b)) ? (a) : (b))
 
 inline double VolumeThreePrism(double xa, double ya, double za,
 	double xb, double yb, double zb,

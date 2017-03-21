@@ -65,7 +65,6 @@ namespace gsystem { // gsystem
 /// glong、gulong、glonglong、gulonglong、gfloat、gdouble、glongdouble，及这些类型的等价类型
 /// 字符串GString、字节数组GBytes、宽字符串GWString
 class GAPI GVariety
-	: public GNewT<GVariety>
 {
 public:
 	enum TYPE

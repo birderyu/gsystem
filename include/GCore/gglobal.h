@@ -14,9 +14,9 @@
 #ifndef _CORE_GLOBAL_H_
 #define _CORE_GLOBAL_H_
 
-#include "gdefine.h"
+//#include "gdefine.h"
 #include "gtype.h"
-#include "gfunctor.h"
-#include "gutility.h"
+//#include "gfunctor.h"
+//#include "gutility.h"
 
 #endif // _CORE_GLOBAL_H_

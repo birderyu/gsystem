@@ -1,7 +1,7 @@
 #ifndef _CORE_C_STRING_HELPER_H_
 #define _CORE_C_STRING_HELPER_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 #define G_USE_MSVC_STRCMP
 

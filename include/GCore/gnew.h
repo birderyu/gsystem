@@ -1,10 +1,10 @@
 #ifndef _CORE_NEW_H_
 #define _CORE_NEW_H_
 
-#include <new>
 #include "gmemory.h"
 #include "gmemorypool.h"
 #include "glockguard.h"
+#include <new>
 
 namespace gsystem { // gsystem
 

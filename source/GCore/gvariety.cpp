@@ -1,4 +1,5 @@
 #include "gvariety.h"
+#include "gutility.h"
 #include "gbytes.h"
 #include "gstring.h"
 #include "gdatetime.h"

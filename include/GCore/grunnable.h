@@ -20,7 +20,7 @@
 #ifndef _CORE_RUNNABLE_H_
 #define _CORE_RUNNABLE_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 	class GThread;

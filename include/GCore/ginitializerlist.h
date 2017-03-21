@@ -1,7 +1,7 @@
 #ifndef _CORE_INITIALIZER_LIST_H_
 #define _CORE_INITIALIZER_LIST_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 

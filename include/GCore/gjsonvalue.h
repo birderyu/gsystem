@@ -22,7 +22,6 @@
 #ifndef _CORE_JSON_VALUE_H_
 #define _CORE_JSON_VALUE_H_
 
-#include "gobject.h"
 #include "gvariety.h"
 
 namespace gsystem { // gsystem

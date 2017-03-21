@@ -1,7 +1,7 @@
 #ifndef _CORE_SYNCHRONOUS_LOG_H_
 #define _CORE_SYNCHRONOUS_LOG_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 #include "gnocopyable.h"
 
 namespace gsystem { // gsystem
