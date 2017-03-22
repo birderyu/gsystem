@@ -15,6 +15,7 @@
 *.DB-shm
 *.db
 *.opendb
+*.enc
 lib/GCored.lib
 bin/GCored.dll
 lib/GCore.lib

@@ -95,7 +95,7 @@ inline double VolumeThreePrism(double xa, double ya, double za,
 {
 	// 判断哪一个面是up面，哪一个面是down面
 	return 
-	xa > xa1 ? 
+		za > za1 ?
 		getVolumeOfThreePrism(
 			xa, ya, za,
 			xb, yb, zb,

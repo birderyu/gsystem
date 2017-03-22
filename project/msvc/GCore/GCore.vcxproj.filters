@@ -922,5 +922,8 @@
     <None Include="..\..\..\include\GCore\gredblacktree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
+    <None Include="..\..\..\include\GCore\ghuffmantree.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
   </ItemGroup>
 </Project>

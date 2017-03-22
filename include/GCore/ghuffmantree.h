@@ -15,7 +15,6 @@
 #define _CORE_HUFFMAN_TREE_H_
 
 #include "gbinarytree.h"
-#include "gbinaryheap.h"
 
 namespace gsystem { // gsystem
 
@@ -43,7 +42,6 @@ class GHuffmanTree
 	: GBinaryTree<GRedBlackTreeNode<DataT>>
 {
 public:
-	GHuffmanTree();
 	gvoid Append(const GArray<DataT> &arr);
 	gvoid Append(const GArray<DataT> &arr, gsize start, gsize size);
 	gvoid Append(DataT *arr, gsize arr_size);
@@ -51,5 +49,7 @@ public:
 };
 
 } // namespace gsystem
+
+#include "ghuffmantree.inl"
 
 #endif // _CORE_HUFFMAN_TREE_H_

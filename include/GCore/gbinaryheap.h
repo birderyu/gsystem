@@ -46,7 +46,7 @@ public:
 
 	gvoid Insert(const DataT &data);
 	gbool Pop(DataT *data = GNULL);
-	gbool Top(DataT &data) const;
+	DataT Top() const;
 
 	gvoid Output() const;
 
@@ -61,14 +61,30 @@ template<typename DataT>
 class GMinHeap
 	: public GBinaryHeap<DataT, GLessThanF<DataT>>
 {
-
+public:
+	GMinHeap(gsize capacity = G_BINARY_HEAP_DEFAULT_CAPACITY,
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+	GMinHeap(const GArray<DataT> &arr,
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+	GMinHeap(DataT *arr, gsize arr_len,
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+	GMinHeap(const GMinHeap<DataT> &heap);
+	GMinHeap(GMinHeap<DataT> &&heap);
 };
 
 template<typename DataT>
 class GMaxHeap
 	: public GBinaryHeap<DataT, GGreaterThanF<DataT>>
 {
-
+public:
+	GMaxHeap(gsize capacity = G_BINARY_HEAP_DEFAULT_CAPACITY,
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+	GMaxHeap(const GArray<DataT> &arr,
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+	GMaxHeap(DataT *arr, gsize arr_len,
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+	GMaxHeap(const GMaxHeap<DataT> &heap);
+	GMaxHeap(GMaxHeap<DataT> &&heap);
 };
 
 } // namespace gsystem

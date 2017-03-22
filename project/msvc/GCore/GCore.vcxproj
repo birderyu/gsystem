@@ -393,6 +393,7 @@
   <ItemGroup>
     <None Include="..\..\..\include\GCore\gallocator.inl" />
     <None Include="..\..\..\include\GCore\garray.inl" />
+    <None Include="..\..\..\include\GCore\ghuffmantree.inl" />
     <None Include="..\..\..\include\GCore\gmemorypool.inl" />
     <None Include="..\..\..\include\GCore\gseries.inl" />
     <None Include="..\..\..\include\GCore\garrayqueue.inl" />
