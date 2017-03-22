@@ -36,9 +36,10 @@ public:
 	gvoid Append(const GBinaryHeap<DataT, CompareT> &heap, gsize start, gsize size);
 
 	// 模板添加方法，可以添加任何有数组行为的类
-	template<typename ArrT>gvoid AppendT(const ArrT &arr);
-	template<typename ArrT>gvoid AppendT(const ArrT &arr, gsize start, gsize size);
+	template<typename ArrT> gvoid AppendT(const ArrT &arr);
+	template<typename ArrT> gvoid AppendT(const ArrT &arr, gsize start, gsize size);
 
+	gbool IsEmpty() const;
 	gsize Size() const;
 	gsize Capacity() const;
 
@@ -54,7 +55,7 @@ private:
 	GDynamicArray<DataT> m_tHeap;
 	gsize m_nSize;
 	gsize m_nAddSize;
-	CompareT m_fCompare;
+	static CompareT m_fCompare;
 };
 
 template<typename DataT>
@@ -63,13 +64,37 @@ class GMinHeap
 {
 public:
 	GMinHeap(gsize capacity = G_BINARY_HEAP_DEFAULT_CAPACITY,
-		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE)
+		: GBinaryHeap<DataT, GLessThanF<DataT>>(capacity, add_size)
+	{
+
+	}
+
 	GMinHeap(const GArray<DataT> &arr,
-		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE)
+		: GBinaryHeap<DataT, GLessThanF<DataT>>(arr, add_size)
+	{
+
+	}
+
 	GMinHeap(DataT *arr, gsize arr_len,
-		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
-	GMinHeap(const GMinHeap<DataT> &heap);
-	GMinHeap(GMinHeap<DataT> &&heap);
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE)
+		: GBinaryHeap<DataT, GLessThanF<DataT>>(arr, arr_len, add_size)
+	{
+
+	}
+
+	GMinHeap(const GMinHeap<DataT> &heap)
+		: GBinaryHeap<DataT, GLessThanF<DataT>>(heap)
+	{
+
+	}
+
+	GMinHeap(GMinHeap<DataT> &&heap)
+		: GBinaryHeap<DataT, GLessThanF<DataT>>(GForward<GMinHeap<DataT>>(heap))
+	{
+
+	}
 };
 
 template<typename DataT>
@@ -78,13 +103,37 @@ class GMaxHeap
 {
 public:
 	GMaxHeap(gsize capacity = G_BINARY_HEAP_DEFAULT_CAPACITY,
-		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE)
+		: GBinaryHeap<DataT, GGreaterThanF<DataT>>(capacity, add_size)
+	{
+
+	}
+
 	GMaxHeap(const GArray<DataT> &arr,
-		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE)
+		: GBinaryHeap<DataT, GGreaterThanF<DataT>>(arr, add_size)
+	{
+
+	}
+
 	GMaxHeap(DataT *arr, gsize arr_len,
-		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
-	GMaxHeap(const GMaxHeap<DataT> &heap);
-	GMaxHeap(GMaxHeap<DataT> &&heap);
+		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE)
+		: GBinaryHeap<DataT, GGreaterThanF<DataT>>(arr, arr_len, add_size)
+	{
+
+	}
+
+	GMaxHeap(const GMaxHeap<DataT> &heap)
+		: GBinaryHeap<DataT, GGreaterThanF<DataT>>(heap)
+	{
+
+	}
+
+	GMaxHeap(GMaxHeap<DataT> &&heap)
+		: GBinaryHeap<DataT, GGreaterThanF<DataT>>(GForward<GMaxHeap<DataT>>(heap))
+	{
+
+	}
 };
 
 } // namespace gsystem

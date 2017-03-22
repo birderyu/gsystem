@@ -26,9 +26,9 @@ class GHuffmanTreeNode
 {
 	GHuffmanTreeNode(
 		const DataT &data = DataT(),
-		GRedBlackTreeNode<DataT> *parent = GNULL,
-		GRedBlackTreeNode<DataT> *left = GNULL,
-		GRedBlackTreeNode<DataT> *right = GNULL)
+		GHuffmanTreeNode<DataT> *parent = GNULL,
+		GHuffmanTreeNode<DataT> *left = GNULL,
+		GHuffmanTreeNode<DataT> *right = GNULL)
 		: GBinaryTreeNodeT<GHuffmanTreeNode<DataT>>(parent, left, right)
 		, GDataNodeT<DataT>(data)
 	{
@@ -39,13 +39,27 @@ class GHuffmanTreeNode
 template<typename DataT,
 	typename CompareT = GLessThanF<DataT>>
 class GHuffmanTree
-	: GBinaryTree<GRedBlackTreeNode<DataT>>
+	: GBinaryTree<GHuffmanTreeNode<DataT>>
 {
+private:
+	struct HuffmanCompareF
+	{
+		gbool operator()(const GHuffmanTreeNode<DataT> *left, 
+			const GHuffmanTreeNode<DataT> *right) const
+		{
+			CompareT compareF;
+			return compareF(left->m_tData < right->m_tData);
+		}
+	};
+
 public:
 	gvoid Append(const GArray<DataT> &arr);
 	gvoid Append(const GArray<DataT> &arr, gsize start, gsize size);
 	gvoid Append(DataT *arr, gsize arr_size);
 	gvoid Append(DataT *arr, gsize start, gsize size);
+
+private:
+	static HuffmanCompareF m_fCompare;
 };
 
 } // namespace gsystem

@@ -4,8 +4,11 @@
 namespace gsystem { // gsystem
 
 template<typename DataT, typename CompareT>
+CompareT GBinaryHeap<DataT, CompareT>::m_fCompare;
+
+template<typename DataT, typename CompareT>
 GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(gsize capacity, gsize add_size)
-:m_nSize(0), m_tHeap(capacity + 1), m_nAddSize(add_size)
+ : m_nSize(0), m_tHeap(capacity + 1), m_nAddSize(add_size)
 {
 	if (m_nAddSize <= 0)
 	{
@@ -171,6 +174,12 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::AppendT(const ArrT &arr, gsize start
 }
 
 template<typename DataT, typename CompareT>
+GINLINE gbool GBinaryHeap<DataT, CompareT>::IsEmpty() const
+{
+	return m_nSize == 0;
+}
+
+template<typename DataT, typename CompareT>
 GINLINE gsize GBinaryHeap<DataT, CompareT>::Size() const
 {
 	return m_nSize;
@@ -275,76 +284,6 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::Output() const
 	for (gsize i = 1; i <= m_nSize; i++)
 		cout << m_tHeap[i] << ' ';
 	cout << endl;
-}
-
-template<typename DataT>
-GINLINE GMinHeap::GMinHeap(gsize capacity, gsize add_size)
-	: GBinaryHeap<DataT, GLessThanF<DataT>>(capacity, add_size)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMinHeap::GMinHeap(const GArray<DataT> &arr, gsize add_size)
-	: GBinaryHeap<DataT, GLessThanF<DataT>>(arr, add_size)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMinHeap::GMinHeap(DataT *arr, gsize arr_len, gsize add_size)
-	: GBinaryHeap<DataT, GLessThanF<DataT>>(arr, arr_len, add_size)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMinHeap::GMinHeap(const GMinHeap<DataT> &heap)
-	: GBinaryHeap<DataT, GLessThanF<DataT>>(heap)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMinHeap::GMinHeap(GMinHeap<DataT> &&heap)
-	: GBinaryHeap<DataT, GLessThanF<DataT>>(GForward<GMinHeap<DataT>>(heap))
-{
-
-}
-
-template<typename DataT>
-GINLINE GMaxHeap::GMaxHeap(gsize capacity, gsize add_size)
-	: GBinaryHeap<DataT, GGreaterThanF<DataT>>(capacity, add_size)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMaxHeap::GMaxHeap(const GArray<DataT> &arr, gsize add_size)
-	: GBinaryHeap<DataT, GGreaterThanF<DataT>>(arr, add_size)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMaxHeap::GMaxHeap(DataT *arr, gsize arr_len, gsize add_size)
-	: GBinaryHeap<DataT, GGreaterThanF<DataT>>(arr, arr_len, add_size)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMaxHeap::GMaxHeap(const GMaxHeap<DataT> &heap)
-	: GBinaryHeap<DataT, GGreaterThanF<DataT>>(heap)
-{
-
-}
-
-template<typename DataT>
-GINLINE GMaxHeap::GMaxHeap(GMaxHeap<DataT> &&heap)
-	: GBinaryHeap<DataT, GGreaterThanF<DataT>>(GForward<GMaxHeap<DataT>>(heap))
-{
-
 }
 
 }  // namespace gsystem
