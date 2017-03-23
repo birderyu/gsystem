@@ -391,53 +391,147 @@
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\include\GCore\gallocator.inl" />
-    <None Include="..\..\..\include\GCore\garray.inl" />
-    <None Include="..\..\..\include\GCore\ghuffmantree.inl" />
-    <None Include="..\..\..\include\GCore\gmemorypool.inl" />
-    <None Include="..\..\..\include\GCore\gseries.inl" />
-    <None Include="..\..\..\include\GCore\garrayqueue.inl" />
-    <None Include="..\..\..\include\GCore\garraystack.inl" />
-    <None Include="..\..\..\include\GCore\gatom.inl" />
-    <None Include="..\..\..\include\GCore\gbinaryheap.inl" />
-    <None Include="..\..\..\include\GCore\gbytes.inl" />
-    <None Include="..\..\..\include\GCore\gconstructor.inl" />
-    <None Include="..\..\..\include\GCore\gendian.inl" />
-    <None Include="..\..\..\include\GCore\glinkedlist.inl" />
-    <None Include="..\..\..\include\GCore\glist.inl" />
-    <None Include="..\..\..\include\GCore\glistqueue.inl" />
-    <None Include="..\..\..\include\GCore\glockguard.inl" />
-    <None Include="..\..\..\include\GCore\gbinarysorttree.inl" />
-    <None Include="..\..\..\include\GCore\gbinarytree.inl" />
-    <None Include="..\..\..\include\GCore\gcircularlinkedlist.inl" />
-    <None Include="..\..\..\include\GCore\gdoublelinkedlist.inl" />
-    <None Include="..\..\..\include\GCore\gdynamicarray.inl" />
-    <None Include="..\..\..\include\GCore\ghashtable.inl" />
-    <None Include="..\..\..\include\GCore\gliststack.inl" />
-    <None Include="..\..\..\include\GCore\gmath.inl" />
-    <None Include="..\..\..\include\GCore\gnew.inl" />
-    <None Include="..\..\..\include\GCore\gordermap.inl" />
-    <None Include="..\..\..\include\GCore\gorderset.inl" />
-    <None Include="..\..\..\include\GCore\gqueue.inl" />
-    <None Include="..\..\..\include\GCore\grtree.inl" />
-    <None Include="..\..\..\include\GCore\gsort.inl" />
-    <None Include="..\..\..\include\GCore\gstack.inl" />
-    <None Include="..\..\..\include\GCore\gstructure.inl" />
-    <None Include="..\..\..\include\GCore\gpackage.inl" />
-    <None Include="..\..\..\include\GCore\gredblacktree.inl" />
-    <None Include="..\..\..\include\GCore\greferencecounter.inl" />
-    <None Include="..\..\..\include\GCore\gsharedpointer.inl" />
-    <None Include="..\..\..\include\GCore\gsinglelinkedlist.inl" />
-    <None Include="..\..\..\include\GCore\gstaticarray.inl" />
-    <None Include="..\..\..\include\GCore\gtable.inl" />
-    <None Include="..\..\..\include\GCore\gtuple.inl" />
-    <None Include="..\..\..\include\GCore\guniquepointer.inl" />
-    <None Include="..\..\..\include\GCore\gunordermap.inl" />
-    <None Include="..\..\..\include\GCore\gunorderset.inl" />
-    <None Include="..\..\..\include\GCore\gutility.inl" />
-    <None Include="..\..\..\include\GCore\gvariant.inl" />
-    <None Include="..\..\..\include\GCore\gvariety.inl" />
-    <None Include="..\..\..\include\GCore\gvector.inl" />
+    <None Include="..\..\..\include\GCore\gallocator.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\garray.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\ghuffmantree.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gmemorypool.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gseries.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\garrayqueue.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\garraystack.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gatom.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gbinaryheap.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gbytes.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gconstructor.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gendian.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\glinkedlist.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\glist.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\glistqueue.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\glockguard.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gbinarysorttree.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gbinarytree.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gcircularlinkedlist.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gdoublelinkedlist.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gdynamicarray.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\ghashtable.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gliststack.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gmath.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gnew.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gordermap.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gorderset.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gqueue.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\grtree.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gsort.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gstack.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gstructure.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gpackage.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gredblacktree.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\greferencecounter.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gsharedpointer.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gsinglelinkedlist.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gstaticarray.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gtable.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gtuple.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\guniquepointer.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gunordermap.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gunorderset.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gutility.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gvariant.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gvariety.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\..\include\GCore\gvector.inl">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -32,5 +32,8 @@
     <ClInclude Include="binaryheap_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="gbkcode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="binaryheap_test.h" />
     <ClInclude Include="binarytree_test.h" />
+    <ClInclude Include="gbkcode.h" />
     <ClInclude Include="ThreePrism.h" />
     <ClInclude Include="typedef_test.h" />
   </ItemGroup>

@@ -57,7 +57,7 @@ typedef double				gdouble;
 
 typedef gschar		gsmall;
 typedef guchar		gusmall;
-typedef	gsmall		gbyte;
+typedef	gusmall		gbyte;
 typedef	gushort		gword;
 
 typedef gbyte *			gbytes;

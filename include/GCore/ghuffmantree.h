@@ -24,6 +24,7 @@ class GHuffmanTreeNode
 	, public GDataNodeT<DataT>
 	, public GNewT<GHuffmanTreeNode<DataT>>
 {
+public:
 	GHuffmanTreeNode(
 		const DataT &data = DataT(),
 		GHuffmanTreeNode<DataT> *parent = GNULL,
@@ -48,7 +49,7 @@ private:
 			const GHuffmanTreeNode<DataT> *right) const
 		{
 			CompareT compareF;
-			return compareF(left->m_tData < right->m_tData);
+			return compareF(left->m_tData, right->m_tData);
 		}
 	};
 
