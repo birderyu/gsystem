@@ -6,7 +6,6 @@
 
 namespace gsystem { // gsystem
 
-// LIFO
 template<typename DataT>
 class GStack 
 	: public GListT<GStack<DataT>>
@@ -14,10 +13,6 @@ class GStack
 {
 public:
 	virtual ~GStack() = 0;
-
-	gbool Add(const DataT &data);
-	gbool Add(DataT &&data);
-	gbool Remove(DataT *data = GNULL);
 
 	virtual gbool Push(const DataT &data) = 0;
 	virtual gbool Push(DataT &&data) = 0;

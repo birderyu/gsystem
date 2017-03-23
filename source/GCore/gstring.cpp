@@ -1,6 +1,6 @@
 #include "gstring.h"
 #include "gstringlist.h"
-#include "gcstringhelper.h"
+#include "gcstring.h"
 
 namespace gsystem { // gsystem
 
@@ -18,9 +18,9 @@ GString::GString(gchar c)
 
 GString::GString(const gchar *str)
 {
-	gsize size = GCStringHelper::Size(str);
+	gsize size = GCString::Size(str);
 	m_tString.Resize(size);
-	GCStringHelper::Copy(str, size, m_tString.Start());
+	GCString::Copy(str, size, m_tString.Start());
 }
 
 GString::GString(const gchar *str, gsize size)
@@ -68,7 +68,7 @@ GString GString::Trim() const
 
 	GStringData str(new_size);
 	str.Reserve(new_size);
-	GCStringHelper::Trim(m_tString.Start(), new_size, str.Start(), new_size);
+	GCString::Trim(m_tString.Start(), new_size, str.Start(), new_size);
 	str.Resize(new_size);
 	return str;
 }
@@ -83,7 +83,7 @@ GString GString::TrimLeft() const
 
 	GStringData str(new_size);
 	str.Reserve(new_size);
-	GCStringHelper::TrimLeft(m_tString.Start(), new_size, str.Start(), new_size);
+	GCString::TrimLeft(m_tString.Start(), new_size, str.Start(), new_size);
 	str.Resize(new_size);
 	return str;
 }
@@ -98,7 +98,7 @@ GString GString::TrimRight() const
 
 	GStringData str(new_size);
 	str.Reserve(new_size);
-	GCStringHelper::TrimRight(m_tString.Start(), new_size, str.Start(), new_size);
+	GCString::TrimRight(m_tString.Start(), new_size, str.Start(), new_size);
 	str.Resize(new_size);
 	return str;
 }
@@ -112,7 +112,7 @@ GString GString::ToUpper() const
 	}
 
 	GString str(*this);
-	GCStringHelper::MakeUpper(str.m_tString.Start(), new_size);
+	GCString::MakeUpper(str.m_tString.Start(), new_size);
 	return str;
 }
 
@@ -125,7 +125,7 @@ GString GString::ToLower() const
 	}
 
 	GString str(*this);
-	GCStringHelper::MakeLower(str.m_tString.Start(), new_size);
+	GCString::MakeLower(str.m_tString.Start(), new_size);
 	return str;
 }
 

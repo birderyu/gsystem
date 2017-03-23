@@ -26,6 +26,17 @@ struct GHashTableNode
 		GHashTableNode<KeyT, ValueT> *next = GNULL);
 };
 
+// 一个默认的哈希桶
+// 哈希桶用于处理哈希冲突，默认的哈希桶采用链表的方式处理哈希冲突
+template<typename KeyT, typename ValueT, 
+	typename CompareT, typename NodeT>
+struct GHashTableSlot
+{
+	typedef NodeT Node;
+	typedef GList<NodeT *> Nodes;
+	typedef GList<const NodeT *> ConstNodes;
+};
+
 /// 哈希表
 template<typename KeyT, typename ValueT,
 	typename HashT = GHashF<KeyT>,
@@ -51,9 +62,6 @@ private:
 		, private GNocopyable
 	{
 	public:
-		NodeT *m_pHead;
-		gsize m_nSize;
-
 		GHashSlot() 
 			: m_pHead(GNULL), m_nSize(0), m_rCompare(m_gTable.m_fCompare) {}
 		~GHashSlot() { Free(); }
@@ -339,6 +347,9 @@ private:
 		}
 
 		const CompareT &m_rCompare;
+
+		NodeT *m_pHead;
+		gsize m_nSize;
 	};
 
 public:

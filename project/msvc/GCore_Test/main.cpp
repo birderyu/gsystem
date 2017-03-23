@@ -58,8 +58,31 @@ gvoid getHuffmanCode(const GHuffmanTreeNode<ByteCounter> &node)
 	
 }
 
+gsize g_strlen(gcstring str)
+{
+	gsize i = 0;
+	while (str[i++]) {}
+	return i - 1;
+}
+
 gint main(gint argc, gchar *argv[])
 {
+	gcstring c_str = "123456789";
+	gsize iiiii = ::strlen(NULL);
+
+	GStopWatch _sw;
+	_sw.Start();
+	for (gsize i = 0; i < 10000000; i++)
+	{
+		g_strlen(c_str);
+	}
+	gsize time1 = _sw.Stop();
+	for (gsize i = 0; i < 10000000; i++)
+	{
+		::strlen(c_str);
+	}
+	gsize time2 = _sw.Stop();
+
 	std::ofstream ofile1("C:\\Users\\Birderyu\\Desktop\\before.txt"), ofile2("C:\\Users\\Birderyu\\Desktop\\after.txt");
 	std::cout << "压缩前为：" << 41804 * 8 << "bit" << std::endl;
 

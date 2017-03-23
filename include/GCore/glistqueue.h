@@ -1,12 +1,14 @@
+#ifndef _CORE_LIST_QUEUE_H_
+#define _CORE_LIST_QUEUE_H_
 
 namespace gsystem { // gsystem
 
 /*基于链表的队列的ADT*/
 template <typename T>
-class LinkQueue
+class GListQueue
 {
 public:
-	LinkQueue() : phead(GNULL), pend(GNULL), count(0){
+	GListQueue() : phead(GNULL), pend(GNULL), count(0){
 		phead = new Node<T>();
 		pend = phead;
 		count = 0;
@@ -24,14 +26,14 @@ private:
 };
 
 template <typename T>
-T LinkQueue<T>::front()
+T GListQueue<T>::front()
 {
 	if (count != 0)
 		return phead->next->value;
 };
 
 template <typename T>
-bool LinkQueue<T>::pop()
+bool GListQueue<T>::pop()
 {
 	if (count == 0)
 		return false;
@@ -43,7 +45,7 @@ bool LinkQueue<T>::pop()
 };
 
 template <typename T>
-bool LinkQueue<T>::push(T t)
+bool GListQueue<T>::push(T t)
 {
 	Node<T>* pnode = new Node<T>(t);
 	pend->next = pnode;
@@ -53,7 +55,7 @@ bool LinkQueue<T>::push(T t)
 };
 
 template <typename T>
-bool LinkQueue<T>::isEmpty()
+bool GListQueue<T>::isEmpty()
 {
 	if (count == 0)
 		return true;
@@ -62,9 +64,11 @@ bool LinkQueue<T>::isEmpty()
 };
 
 template <typename T>
-int LinkQueue<T>::size()
+int GListQueue<T>::size()
 {
 	return count;
 };
 
 } // namespace gsystem
+
+#endif // _CORE_LIST_QUEUE_H_

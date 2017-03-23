@@ -1,6 +1,8 @@
 #ifndef _CORE_DYNAMIC_ARRAY_INLINE_
 #define _CORE_DYNAMIC_ARRAY_INLINE_
 
+#include "garrays.h"
+
 namespace gsystem { // gsystem
 
 template <typename DataT>
@@ -18,7 +20,7 @@ GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size)
 	{
 		return;
 	}
-	m_pData = GArray<DataT>::CreateArray(m_nSize);
+	m_pData = GArrays::CreateArray<DataT>(m_nSize);
 }
 
 template <typename DataT>
@@ -29,7 +31,7 @@ GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size, const DataT &data)
 	{
 		return;
 	}
-	m_pData = GArray<DataT>::CreateArray(m_nSize, data);
+	m_pData = GArrays::CreateArray<DataT>(m_nSize, data);
 }
 
 template <typename DataT>
@@ -40,7 +42,7 @@ GINLINE GDynamicArray<DataT>::GDynamicArray(const GDynamicArray<DataT> &array)
 	{
 		return;
 	}
-	m_pData = GArray<DataT>::CreateArray(array.m_pData, 0, array.m_nSize);
+	m_pData = GArrays::CreateArray<DataT>(array.m_pData, 0, array.m_nSize);
 }
 
 template <typename DataT>
@@ -60,7 +62,7 @@ GINLINE GDynamicArray<DataT>::GDynamicArray(const GArray<DataT> &array, gsize st
 		m_nSize = 0;
 		return;
 	}
-	m_pData = GArray<DataT>::CreateArray(&array[0], start, size);
+	m_pData = GArrays::CreateArray<DataT>(&array[0], start, size);
 }
 
 template <typename DataT>
@@ -98,7 +100,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize size)
 	}
 
 	// 当数组不存在时，会构建新的数组
-	m_pData = GArray<DataT>::ResizeArray(m_pData, m_nSize, size);
+	m_pData = GArrays::ResizeArray<DataT>(m_pData, m_nSize, size);
 
 	m_nSize = size;
 	return true;
@@ -119,7 +121,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
 		return true;
 	}
 
-	m_pData = GArray<DataT>::ResizeArray(m_pData, m_nSize, size, data);
+	m_pData = GArrays::ResizeArray<DataT>(m_pData, m_nSize, size, data);
 
 	m_nSize = size;
 	return true;
@@ -141,7 +143,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize si
 	}
 
 	// 重新分配内存
-	m_pData = GArray<DataT>::ResizeArray(m_pData, start, size, new_size, new_start);
+	m_pData = GArrays::ResizeArray<DataT>(m_pData, start, size, new_size, new_start);
 
 	m_nSize = new_size;
 	return true;
@@ -164,12 +166,12 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize si
 
 	if (!m_pData)
 	{
-		m_pData = GArray<DataT>::CreateArray(new_start, data);
+		m_pData = GArrays::CreateArray<DataT>(new_start, data);
 	}
 	else
 	{
 		// 重新分配内存
-		m_pData = GArray<DataT>::ResizeArray(m_pData, start, size, new_size, new_start);
+		m_pData = GArrays::ResizeArray<DataT>(m_pData, start, size, new_size, new_start);
 	}
 	m_nSize = new_size;
 	return true;
@@ -178,13 +180,13 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize si
 template <typename DataT>
 gvoid GDynamicArray<DataT>::Clear()
 {
-	GArray<DataT>::ClearArray(m_pData, m_nSize);
+	GArrays::ClearArray<DataT>(m_pData, m_nSize);
 }
 
 template <typename DataT>
 GINLINE gvoid GDynamicArray<DataT>::Dispose()
 {
-	GArray<DataT>::DestoryArray(m_pData, m_nSize);
+	GArrays::DestoryArray<DataT>(m_pData, m_nSize);
 	m_pData = GNULL;
 	m_nSize = 0;
 }
@@ -245,7 +247,7 @@ GINLINE gbool GDynamicArray<DataT>::RemoveAt(gsize pos)
 		}
 		return false;
 	}
-	m_pData = GArray<DataT>::RemoveArrayElementAt(m_pData, m_nSize, pos);
+	m_pData = GArrays::RemoveArrayElementAt<DataT>(m_pData, m_nSize, pos);
 	m_nSize--;
 	return false;
 }
@@ -262,7 +264,7 @@ GINLINE GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(const GDynamicArra
 		Dispose();
 		return *this;
 	}
-	m_pData = GArray<DataT>::CopyArrayFrom(m_pData, m_nSize, arr.m_pData, arr.m_nSize);
+	m_pData = GArrays::CopyArrayFrom<DataT>(m_pData, m_nSize, arr.m_pData, arr.m_nSize);
 	m_nSize = arr.m_nSize;
 	return *this;
 }

@@ -1,4 +1,4 @@
-#include "gcstringhelper.h"
+#include "gcstring.h"
 #include "gmemory.h"
 #include <string.h>
 
@@ -22,7 +22,7 @@ gsystem::gint strncasecmp(const gsystem::gchar *s1, gsystem::gchar *s2, /*regist
 
 namespace gsystem { // gsystem
 
-gsize GCStringHelper::Size(const gchar *c_str)
+gsize GCString::Size(gcstring c_str)
 {
 	if (GNULL == c_str)
 	{
@@ -31,12 +31,26 @@ gsize GCStringHelper::Size(const gchar *c_str)
 	return ::strlen(c_str);
 }
 
-gvoid GCStringHelper::Copy(const gchar *src, gsize len, gchar *dest)
+gsize GCString::Size(gcstring16 str)
+{
+	gsize i = 0;
+	while (str[i++]) {}
+	return i - 1;
+}
+
+gsize GCString::Size(gcstring32 str)
+{
+	gsize i = 0;
+	while (str[i++]) {}
+	return i - 1;
+}
+
+gvoid GCString::Copy(gcstring src, gsize len, gstring dest)
 {
 	GMemCopy(dest, src, len);
 }
 
-gvoid GCStringHelper::Trim(const gchar *c_str, gsize size,
+gvoid GCString::Trim(const gchar *c_str, gsize size,
 	gchar *out_c_str, gsize &out_size)
 {
 	out_size = 0;
@@ -60,7 +74,7 @@ gvoid GCStringHelper::Trim(const gchar *c_str, gsize size,
 	}
 
 	// 这里不需要复制末尾的'\0'，因为函数的最后会单独赋值
-	GCStringHelper::Copy(c_str + first_no_empty, size - first_no_empty, out_c_str);
+	GCString::Copy(c_str + first_no_empty, size - first_no_empty, out_c_str);
 	out_size = size - first_no_empty;
 
 	gint last_no_empty = out_size - 1;
@@ -82,7 +96,7 @@ gvoid GCStringHelper::Trim(const gchar *c_str, gsize size,
 	out_c_str[out_size] = '\0';
 }
 
-gvoid GCStringHelper::TrimLeft(const gchar *c_str, gsize size,
+gvoid GCString::TrimLeft(const gchar *c_str, gsize size,
 	gchar *out_c_str, gsize &out_size)
 {
 	out_size = 0;
@@ -106,12 +120,12 @@ gvoid GCStringHelper::TrimLeft(const gchar *c_str, gsize size,
 	}
 
 	// 这里不需要复制末尾的'\0'，因为函数的最后会单独赋值
-	GCStringHelper::Copy(c_str + first_no_empty, size - first_no_empty, out_c_str);
+	GCString::Copy(c_str + first_no_empty, size - first_no_empty, out_c_str);
 	out_size = size - first_no_empty;
 	out_c_str[out_size] = '\0';
 }
 
-gvoid GCStringHelper::TrimRight(const gchar *c_str, gsize size,
+gvoid GCString::TrimRight(const gchar *c_str, gsize size,
 	gchar *out_c_str, gsize &out_size)
 {
 	out_size = 0;
@@ -120,7 +134,7 @@ gvoid GCStringHelper::TrimRight(const gchar *c_str, gsize size,
 		return;
 	}
 	// 这里不需要复制末尾的'\0'，因为函数的最后会单独赋值
-	GCStringHelper::Copy(c_str, size, out_c_str);
+	GCString::Copy(c_str, size, out_c_str);
 	out_size = size;
 	gint last_no_empty = out_size - 1;
 	for (last_no_empty = out_size - 1; last_no_empty >= 0; last_no_empty--)
@@ -141,13 +155,13 @@ gvoid GCStringHelper::TrimRight(const gchar *c_str, gsize size,
 	out_c_str[out_size] = '\0';
 }
 
-gvoid GCStringHelper::MakeTrim(gchar *c_str, gsize size, gsize &out_size)
+gvoid GCString::MakeTrim(gchar *c_str, gsize size, gsize &out_size)
 {
 	MakeTrimLeft(c_str, size, out_size);
 	MakeTrimRight(c_str, out_size, out_size);
 }
 
-gvoid GCStringHelper::MakeTrimLeft(gchar *c_str, gsize size, gsize &out_size)
+gvoid GCString::MakeTrimLeft(gchar *c_str, gsize size, gsize &out_size)
 {
 	out_size = 0;
 	if (size <= 0)
@@ -178,7 +192,7 @@ gvoid GCStringHelper::MakeTrimLeft(gchar *c_str, gsize size, gsize &out_size)
 	}
 }
 
-gvoid GCStringHelper::MakeTrimRight(gchar *c_str, gsize size, gsize &out_size)
+gvoid GCString::MakeTrimRight(gchar *c_str, gsize size, gsize &out_size)
 {
 	out_size = size;
 	if (size <= 0)
@@ -205,7 +219,7 @@ gvoid GCStringHelper::MakeTrimRight(gchar *c_str, gsize size, gsize &out_size)
 	c_str[out_size] = '\0';
 }
 
-gvoid GCStringHelper::MakeUpper(gchar *c_str, gsize size)
+gvoid GCString::MakeUpper(gchar *c_str, gsize size)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -216,7 +230,7 @@ gvoid GCStringHelper::MakeUpper(gchar *c_str, gsize size)
 	}
 }
 
-gvoid GCStringHelper::MakeLower(gchar *c_str, gsize size)
+gvoid GCString::MakeLower(gchar *c_str, gsize size)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -227,7 +241,7 @@ gvoid GCStringHelper::MakeLower(gchar *c_str, gsize size)
 	}
 }
 
-gbool GCStringHelper::Replace(const gchar *c_str, gsize len, 
+gbool GCString::Replace(const gchar *c_str, gsize len, 
 	const gchar *from, gsize from_len,
 	const gchar *to, gsize to_len,
 	gbool bIsSensitive,
@@ -259,10 +273,10 @@ gbool GCStringHelper::Replace(const gchar *c_str, gsize len,
 		if (i > start)
 		{
 			gsize _len_ = i - start;
-			GCStringHelper::Copy(c_str + start, _len_, c_str_out + out_len);
+			GCString::Copy(c_str + start, _len_, c_str_out + out_len);
 			out_len += _len_;
 		}
-		GCStringHelper::Copy(to, to_len, c_str_out + out_len);
+		GCString::Copy(to, to_len, c_str_out + out_len);
 		out_len += to_len;
 		i += from_len;
 		start = i;
@@ -272,7 +286,7 @@ gbool GCStringHelper::Replace(const gchar *c_str, gsize len,
 		return false;
 	}
 	gsize _len_ = len - start;
-	GCStringHelper::Copy(c_str + start, _len_, c_str_out + out_len);
+	GCString::Copy(c_str + start, _len_, c_str_out + out_len);
 	out_len += _len_;
 	c_str_out[out_len] = '\0';
 	return true;

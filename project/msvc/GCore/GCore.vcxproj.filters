@@ -486,9 +486,6 @@
     <ClInclude Include="..\..\..\include\GCore\gfunctional.h">
       <Filter>头文件\Template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gcstringhelper.h">
-      <Filter>头文件\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gutility.h">
       <Filter>头文件\Template</Filter>
     </ClInclude>
@@ -556,6 +553,18 @@
       <Filter>头文件\Structure</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gencoding.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\garrays.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gstring16.h">
+      <Filter>头文件\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gstring32.h">
+      <Filter>头文件\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gcstring.h">
       <Filter>头文件\Utility</Filter>
     </ClInclude>
   </ItemGroup>
@@ -655,9 +664,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gvoidlock.cpp">
       <Filter>源文件\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gcstringhelper.cpp">
-      <Filter>源文件\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gendian.cpp">
       <Filter>源文件\Utility</Filter>
@@ -780,6 +786,9 @@
       <Filter>源文件\Log</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gencoding.cpp">
+      <Filter>源文件\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\gcstring.cpp">
       <Filter>源文件\Utility</Filter>
     </ClCompile>
   </ItemGroup>
@@ -923,6 +932,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gvector.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\garrays.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

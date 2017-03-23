@@ -166,6 +166,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="array_test.h" />
     <ClInclude Include="binaryheap_test.h" />
     <ClInclude Include="binarytree_test.h" />
     <ClInclude Include="gbkcode.h" />

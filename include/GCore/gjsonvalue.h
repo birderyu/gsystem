@@ -23,6 +23,7 @@
 #define _CORE_JSON_VALUE_H_
 
 #include "gvariety.h"
+#include "gobject.h"
 
 namespace gsystem { // gsystem
 	namespace json { // gsystem.json

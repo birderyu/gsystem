@@ -1,6 +1,6 @@
 #include "gstringlist.h"
 #include "gstring.h"
-#include "gcstringhelper.h"
+#include "gcstring.h"
 
 namespace gsystem { // gsystem
 
@@ -29,7 +29,7 @@ gbool GStringList::Add(const GString &str)
 	{
 		return false;
 	}
-	GCStringHelper::Copy(str.CString(), str.Size() + 1, ptr);
+	GCString::Copy(str.CString(), str.Size() + 1, ptr);
 	m_t.Insert(m_t.Size(), ptr);
 	return true;
 }

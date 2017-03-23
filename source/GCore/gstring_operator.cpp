@@ -1,6 +1,6 @@
 #include "gstring.h"
 #include "gutility.h"
-#include "gcstringhelper.h"
+#include "gcstring.h"
 #include <string.h>
 
 namespace gsystem { // gsystem
@@ -48,8 +48,8 @@ GString operator+(const GString &s1, const GString &s2)
 	gsize size1 = s1.Size();
 	gsize size2 = s2.Size();
 	GStringData str(size1 + size2);
-	GCStringHelper::Copy(s1.m_tString.Start(), size1, str.Start());
-	GCStringHelper::Copy(s2.m_tString.Start(), size2, str.CursorAt(size1));
+	GCString::Copy(s1.m_tString.Start(), size1, str.Start());
+	GCString::Copy(s2.m_tString.Start(), size2, str.CursorAt(size1));
 	str.Resize(size1 + size2);
 	return GString(GMove(str));
 }

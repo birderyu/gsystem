@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\GCore\gallocator.h" />
     <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
+    <ClInclude Include="..\..\..\include\GCore\garrays.h" />
     <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gdatetimedefine.h" />
     <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
@@ -190,7 +191,7 @@
     <ClInclude Include="..\..\..\include\GCore\gcircularlinkedlist.h" />
     <ClInclude Include="..\..\..\include\GCore\gconstructor.h" />
     <ClInclude Include="..\..\..\include\GCore\gcriticalsection.h" />
-    <ClInclude Include="..\..\..\include\GCore\gcstringhelper.h" />
+    <ClInclude Include="..\..\..\include\GCore\gcstring.h" />
     <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
     <ClInclude Include="..\..\..\include\GCore\gevent.h" />
     <ClInclude Include="..\..\..\include\GCore\gfile.h" />
@@ -222,6 +223,8 @@
     <ClInclude Include="..\..\..\include\GCore\gseriespool.h" />
     <ClInclude Include="..\..\..\include\GCore\gspinlock.h" />
     <ClInclude Include="..\..\..\include\GCore\gstopwatch.h" />
+    <ClInclude Include="..\..\..\include\GCore\gstring16.h" />
+    <ClInclude Include="..\..\..\include\GCore\gstring32.h" />
     <ClInclude Include="..\..\..\include\GCore\gstructure.h" />
     <ClInclude Include="..\..\..\include\GCore\gsinglefloat.h" />
     <ClInclude Include="..\..\..\include\GCore\ggraph.h" />
@@ -324,7 +327,7 @@
     <ClCompile Include="..\..\..\source\GCore\gbytes.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gcharacter.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gcriticalsection.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gcstringhelper.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gcstring.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdate.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdatetime.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gencoding.cpp" />
@@ -397,6 +400,7 @@
     <None Include="..\..\..\include\GCore\garray.inl">
       <FileType>Document</FileType>
     </None>
+    <None Include="..\..\..\include\GCore\garrays.inl" />
     <None Include="..\..\..\include\GCore\ghuffmantree.inl">
       <FileType>Document</FileType>
     </None>

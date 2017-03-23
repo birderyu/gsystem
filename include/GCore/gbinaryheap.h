@@ -2,8 +2,8 @@
 #ifndef _CORE_BINARY_HEAP_H_
 #define _CORE_BINARY_HEAP_H_
 
-#include "gobject.h"
 #include "gdynamicarray.h"
+#include "gfunctor.h"
 
 #define G_BINARY_HEAP_DEFAULT_CAPACITY 1024
 #define G_BINARY_HEAP_DEFAULT_ADD_SIZE 512

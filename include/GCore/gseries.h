@@ -5,7 +5,7 @@
 #ifndef _CORE_ARRAY_DATA_H_
 #define _CORE_ARRAY_DATA_H_
 
-#include "garray.h"
+#include "garrays.h"
 
 #define G_ARRAY_DATA_LOCAL_TYPE		0
 #define G_ARRAY_DATA_GLOBAL_TYPE	1

@@ -3,7 +3,7 @@
 #include "gbytes.h"
 #include "gstring.h"
 #include "gdatetime.h"
-#include "gcstringhelper.h"
+#include "gcstring.h"
 #include "gconstructor.h"
 
 namespace gsystem { // gsystem
@@ -11,7 +11,7 @@ namespace gsystem { // gsystem
 GVariety::GVariety(const gchar *val)
 	: m_nType(VARIETY_TYPE_STRING)
 {
-	gsize size = GCStringHelper::Size(val);
+	gsize size = GCString::Size(val);
 	new(&m_strVal)GStringData(val, size);
 }
 
@@ -160,12 +160,12 @@ GVariety::GVariety(GVariety &&val)
 
 gvoid GVariety::SetValue(const gchar *val)
 {
-	gsize size = GCStringHelper::Size(val);
+	gsize size = GCString::Size(val);
 	if (m_nType == VARIETY_TYPE_STRING)
 	{
 		// 直接Resize，可能不需要重新分配内存
 		m_strVal.Resize(size);
-		GCStringHelper::Copy(val, size, m_strVal.Start());
+		GCString::Copy(val, size, m_strVal.Start());
 	}
 	else
 	{

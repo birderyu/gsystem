@@ -2,8 +2,8 @@
 #ifndef _CORE_BYTES_H_
 #define _CORE_BYTES_H_
 
-#include "gobject.h"
 #include "gstructure.h"
+#include "garray.h"
 #include "gseries.h"
 
 namespace gsystem { // gsystem

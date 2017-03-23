@@ -35,5 +35,8 @@
     <ClInclude Include="gbkcode.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="array_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

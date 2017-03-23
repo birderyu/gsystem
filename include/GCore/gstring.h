@@ -6,15 +6,15 @@
 ** @contact	https://github.com/birderyu
 ** @file	gstring.h
 ** @date	2016-12-03
-** @brief	字符串类型的定义
+** @brief	以8个字节为1个字符的字符串类型
 **
 ****************************************************************************/
 
 #ifndef _CORE_STRING_H_
 #define _CORE_STRING_H_
 
-#include "gobject.h"
 #include "gstructure.h"
+#include "garray.h"
 #include "gseries.h"
 
 namespace gsystem { // gsystem
@@ -37,7 +37,7 @@ enum class GEncode
 **
 ** @class	GString
 ** @module	GCore
-** @brief	字符串类型
+** @brief	以8个字节为1个字符的字符串类型
 **
 ****************************************************************************/
 class GAPI GString final 
@@ -154,6 +154,8 @@ GAPI gbool operator>(const GString &s1, const GString &s2);
 GAPI gbool operator>=(const GString &s1, const GString &s2);
 GAPI gbool operator<(const GString &s1, const GString &s2);
 GAPI gbool operator<=(const GString &s1, const GString &s2);
+
+typedef GString GString8;
 
 } // namespace gsystem
 
