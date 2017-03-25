@@ -578,25 +578,21 @@ struct GIsMoveConstructible
 {
 };
 
-/*
 template<typename ToT, typename FromT>
 struct G_Is_Assignable
 {
 	template<class DestT, class SrcT>
-	static auto GFn(gint)
-		-> decltype((gvoid)(std::declval<DestT>() = std::declval<SrcT>()), GTrueType());
+	static decltype((gvoid)(GDeclval<DestT>() = GDeclval<SrcT>()), GTrueType()) Foo(gint);
 
 	template<typename DestT, typename SrcT>
-	static auto GFn(gint)
-		-> GFalseType();
+	static GFalseType Foo(gint);
 
-	typedef decltype(GFn<ToT, FromT>(0)) Type;
+	typedef decltype(Foo<ToT, FromT>(0)) Type;
 };
-*/
 
 template<typename ToT, typename FromT>
 struct GIsAssignable
-	: std::is_assignable<ToT, FromT>::type
+	: G_Is_Assignable<ToT, FromT>::Type
 {
 };
 
