@@ -9,6 +9,13 @@
 
 namespace gsystem { // gsystem
 
+struct GWrapInt
+{
+	GWrapInt(gint)
+	{
+	}
+};
+
 template<typename ClassT, ClassT DefValue>
 struct GIntegralConstant
 {
@@ -518,14 +525,20 @@ struct GAddConstVolatile
 template<typename T>
 struct GAddLvalueReference
 {
-	typedef typename std::_Add_reference<T>::_Lvalue Type;
+	typedef T& Type;
 };
 
 template<typename T>
 struct GAddRvalueReference
 {
-	typedef typename std::_Add_reference<T>::_Rvalue Type;
+	typedef T&& Type;
 };
+
+template<typename T>
+typename GAddRvalueReference<T>::Type GDeclval() noexcept
+{
+	return std::declval<T>();
+}
 
 template<typename FromT, typename ToT>
 struct GConvertible
@@ -565,9 +578,25 @@ struct GIsMoveConstructible
 {
 };
 
+/*
+template<typename ToT, typename FromT>
+struct G_Is_Assignable
+{
+	template<class DestT, class SrcT>
+	static auto GFn(gint)
+		-> decltype((gvoid)(std::declval<DestT>() = std::declval<SrcT>()), GTrueType());
+
+	template<typename DestT, typename SrcT>
+	static auto GFn(gint)
+		-> GFalseType();
+
+	typedef decltype(GFn<ToT, FromT>(0)) Type;
+};
+*/
+
 template<typename ToT, typename FromT>
 struct GIsAssignable
-	: GCatBase<__is_assignable(ToT, FromT)>
+	: std::is_assignable<ToT, FromT>::type
 {
 };
 
@@ -717,12 +746,6 @@ public:
 		>::Type
 	>::Type Type;
 };
-
-template<typename T>
-typename GAddRvalueReference<T>::Type GDeclval() noexcept
-{
-	return std::declval<T>();
-}
 
 template <gsize>	struct GIntegerForSize;
 template <>			struct GIntegerForSize<1> { typedef guint8  Unsigned; typedef gint8  Signed; };
