@@ -3,18 +3,18 @@
 ** GSystem: A quick, micro library of C++
 **
 ** @file	gtraits.h
-** @brief	İÍÈ¡Æ÷
+** @brief	èƒå–å™¨
 ** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2016-12-31
 ** @version	1.0
 **
-** İÍÈ¡Æ÷ÓÃÓÚÔÚ±àÒëÆÚ¼ä»ñÈ¡ÀàĞÍĞÅÏ¢£¬ÔÚGSystemÌá¹©ÁËĞí¶à²»Í¬¹¦ÄÜµÄİÍÈ¡Æ÷£¬ËüÃÇ¿ÉÒÔÓÃÀ´£º
-** 1£©ÒÆ³ıÀàĞÍĞÅÏ¢£¨Remove Traits£©£¬ÈçÒÆ³ıconstĞŞÊÎ·û¡¢ÒÆ³ıÒıÓÃµÈ£¬ÕâĞ©İÍÈ¡Æ÷ÍùÍùÒÔ
-** GRemove×÷ÎªÇ°×º£»2£©Ìí¼ÓÀàĞÍĞÅÏ¢£¨Add Traits£©£¬ÈçÌí¼ÓconstĞŞÊÎ·û¡¢Ìí¼Ó£¨×óÖµ»òÓÒ
-** Öµ£©ÒıÓÃµÈ£¬ÕâĞ©İÍÈ¡Æ÷ÍùÍùÒÔGAdd×÷ÎªÇ°×º£»3£©ÅĞ¶ÏÀàĞÍĞÅÏ¢£¨If Traits£©£¬ÈçÅĞ¶ÏÒ»¸öÀà
-** ĞÍÊÇ·ñÊÇÊı×éÀàĞÍµÈ£¬ÕâĞ©İÍÈ¡Æ÷ÍùÍùÒÔGIf×÷ÎªÇ°×º£»4£©ÆäËûİÍÈ¡Æ÷£¬°üÀ¨±ê×¼¿âÖĞµÄÖØĞÂÊµÏÖ
-** ºÍÒ»Ğ©×Ô¶¨ÒåµÄİÍÈ¡Æ÷¡£
+** èƒå–å™¨ç”¨äºåœ¨ç¼–è¯‘æœŸé—´è·å–ç±»å‹ä¿¡æ¯ï¼Œåœ¨GSystemæä¾›äº†è®¸å¤šä¸åŒåŠŸèƒ½çš„èƒå–å™¨ï¼Œå®ƒä»¬å¯ä»¥ç”¨æ¥ï¼š
+** 1ï¼‰ç§»é™¤ç±»å‹ä¿¡æ¯ï¼ˆRemove Traitsï¼‰ï¼Œå¦‚ç§»é™¤constä¿®é¥°ç¬¦ã€ç§»é™¤å¼•ç”¨ç­‰ï¼Œè¿™äº›èƒå–å™¨å¾€å¾€ä»¥
+** GRemoveä½œä¸ºå‰ç¼€ï¼›2ï¼‰æ·»åŠ ç±»å‹ä¿¡æ¯ï¼ˆAdd Traitsï¼‰ï¼Œå¦‚æ·»åŠ constä¿®é¥°ç¬¦ã€æ·»åŠ ï¼ˆå·¦å€¼æˆ–å³
+** å€¼ï¼‰å¼•ç”¨ç­‰ï¼Œè¿™äº›èƒå–å™¨å¾€å¾€ä»¥GAddä½œä¸ºå‰ç¼€ï¼›3ï¼‰åˆ¤æ–­ç±»å‹ä¿¡æ¯ï¼ˆIf Traitsï¼‰ï¼Œå¦‚åˆ¤æ–­ä¸€ä¸ªç±»
+** å‹æ˜¯å¦æ˜¯æ•°ç»„ç±»å‹ç­‰ï¼Œè¿™äº›èƒå–å™¨å¾€å¾€ä»¥GIfä½œä¸ºå‰ç¼€ï¼›4ï¼‰å…¶ä»–èƒå–å™¨ï¼ŒåŒ…æ‹¬æ ‡å‡†åº“ä¸­çš„é‡æ–°å®ç°
+** å’Œä¸€äº›è‡ªå®šä¹‰çš„èƒå–å™¨ã€‚
 **
 ****************************************************************************/
 
@@ -25,9 +25,9 @@
 #include <type_traits>
 
 namespace gsystem { // gsystem
-					// ÔÚÕâ¸ö´úÂëÆ¬¶ÎÄÚµÄİÍÈ¡Æ÷£¬Ö÷ÒªÓÃÓÚ¡°ÒÆ³ıÀàĞÍĞÅÏ¢¡±
+					// åœ¨è¿™ä¸ªä»£ç ç‰‡æ®µå†…çš„èƒå–å™¨ï¼Œä¸»è¦ç”¨äºâ€œç§»é™¤ç±»å‹ä¿¡æ¯â€
 
-// GRemoveConst£ºÒÆ³ıÀàĞÍÖĞµÄconst
+// GRemoveConstï¼šç§»é™¤ç±»å‹ä¸­çš„const
 template<typename T>
 struct GRemoveConst
 {
@@ -52,7 +52,7 @@ struct GRemoveConst<const T[N]>
 	typedef T Type[N];
 };
 
-// GRemoveVolatile£ºÒÆ³ıÀàĞÍÖĞµÄvolatile
+// GRemoveVolatileï¼šç§»é™¤ç±»å‹ä¸­çš„volatile
 template<typename T>
 struct GRemoveVolatile
 {
@@ -77,14 +77,14 @@ struct GRemoveVolatile<volatile T[N]>
 	typedef T Type[N];
 };
 
-// GRemoveConstVolatile£ºÒÆ³ıÀàĞÍÖĞµÄconstºÍvolatile
+// GRemoveConstVolatileï¼šç§»é™¤ç±»å‹ä¸­çš„constå’Œvolatile
 template<typename T>
 struct GRemoveConstVolatile
 {
 	typedef typename GRemoveConst<typename GRemoveVolatile<T>::Type>::Type Type;
 };
 
-// GRemoveReference£ºÒÆ³ıÀàĞÍÖĞµÄÒıÓÃ
+// GRemoveReferenceï¼šç§»é™¤ç±»å‹ä¸­çš„å¼•ç”¨
 template<typename T>
 struct GRemoveReference
 {
@@ -103,7 +103,7 @@ struct GRemoveReference<T&&>
 	typedef T Type;
 };
 
-// GRemovePointer£ºÒÆ³ıÀàĞÍÖĞµÄÖ¸Õë
+// GRemovePointerï¼šç§»é™¤ç±»å‹ä¸­çš„æŒ‡é’ˆ
 template<typename T>
 struct GRemovePointer
 {
@@ -116,7 +116,7 @@ struct GRemovePointer<T*>
 	typedef T Type;
 };
 
-// GRemoveExtent£ºÒÆ³ıÊı×é£¬½ö±£ÁôÀàĞÍ
+// GRemoveExtentï¼šç§»é™¤æ•°ç»„ï¼Œä»…ä¿ç•™ç±»å‹
 template<typename T>
 struct GRemoveExtent
 {
@@ -138,7 +138,7 @@ struct GRemoveExtent<T[]>
 } // namespace gsystem
 
 namespace gsystem { // gsystem
-					// ÔÚÕâ¸ö´úÂëÆ¬¶ÎÄÚµÄİÍÈ¡Æ÷£¬Ö÷ÒªÓÃÓÚ¡°Ìí¼ÓÀàĞÍĞÅÏ¢¡±
+					// åœ¨è¿™ä¸ªä»£ç ç‰‡æ®µå†…çš„èƒå–å™¨ï¼Œä¸»è¦ç”¨äºâ€œæ·»åŠ ç±»å‹ä¿¡æ¯â€
 
 template<typename T>
 struct GAddConst
@@ -186,7 +186,7 @@ struct GAddPointer
 }
 
 namespace gsystem { // gsystem
-					// ÔÚÕâ¸ö´úÂëÆ¬¶ÎÄÚµÄİÍÈ¡Æ÷£¬Ö÷ÒªÓÃÓÚ¡°ÅĞ¶ÏÀàĞÍĞÅÏ¢¡±
+					// åœ¨è¿™ä¸ªä»£ç ç‰‡æ®µå†…çš„èƒå–å™¨ï¼Œä¸»è¦ç”¨äºâ€œåˆ¤æ–­ç±»å‹ä¿¡æ¯â€
 
 template<typename ClassT, ClassT DefValue>
 struct GIntegralConstant
@@ -218,7 +218,7 @@ template<>
 struct GCatBase<true>
 	: GTrueType{};
 
-// GIsSame£ºÅĞ¶ÏÁ½¸öÀàĞÍÊÇ·ñÊÇÍ¬Ò»ÖÖÀàĞÍ
+// GIsSameï¼šåˆ¤æ–­ä¸¤ä¸ªç±»å‹æ˜¯å¦æ˜¯åŒä¸€ç§ç±»å‹
 template<typename T1, typename T2>
 struct GIsSame
 	: GFalseType
@@ -231,7 +231,7 @@ struct GIsSame<T1, T1>
 {
 };
 
-// GIsArray£ºÊÇ·ñÊÇÊı×é
+// GIsArrayï¼šæ˜¯å¦æ˜¯æ•°ç»„
 template<typename T>
 struct GIsArray
 	: GFalseType
@@ -334,7 +334,7 @@ struct GIsMemberFunctionPointer
 namespace detail { // gsystem.detail
 namespace traits { // gsystem.detail.traits
 
-	/// ÊÇ·ñÊÇÕûĞÍ
+	/// æ˜¯å¦æ˜¯æ•´å‹
 template<typename T>
 struct _GIsIntegral
 	: GFalseType{};
@@ -391,7 +391,7 @@ template<>
 struct _GIsIntegral<gulonglong>
 	: GTrueType{};
 
-/// ÊÇ·ñÊÇ¸¡µãĞÍ
+/// æ˜¯å¦æ˜¯æµ®ç‚¹å‹
 template<class T>
 struct _GIsFloatingPoint
 	: GFalseType {};
@@ -432,12 +432,12 @@ template<typename T>
 struct GIsFloatingPoint
 	: detail::traits::_GIsFloatingPoint<typename GRemoveConstVolatile<T>::Type>{};
 
-/// ÊÇ·ñÊÇÊı×ÖÀàĞÍ
+/// æ˜¯å¦æ˜¯æ•°å­—ç±»å‹
 template<typename T>
 struct GIsNumeric
 	: GCatBase<GIsIntegral<T>::value || GIsFloatingPoint<T>::value>{};
 
-/// ÊÇ·ñÊÇËãÊıÀàĞÍ
+/// æ˜¯å¦æ˜¯ç®—æ•°ç±»å‹
 template<typename T>
 struct GIsArithmetic
 	: GCatBase<GIsIntegral<T>::value || GIsFloatingPoint<T>::value>{};
@@ -670,7 +670,7 @@ struct GIsFunction
 } // namespace gsystem
 
 namespace gsystem { // gsystem
-					// ÔÚÕâ¸ö´úÂëÆ¬¶ÎÄÚµÄİÍÈ¡Æ÷£¬Ö÷Òª°üÀ¨Ò»Ğ©³£ÓÃµÄÅĞ¶Ï·½·¨
+					// åœ¨è¿™ä¸ªä»£ç ç‰‡æ®µå†…çš„èƒå–å™¨ï¼Œä¸»è¦åŒ…æ‹¬ä¸€äº›å¸¸ç”¨çš„åˆ¤æ–­æ–¹æ³•
 
 template<gbool TEST, typename T = gvoid>
 struct GEnableIf
@@ -683,7 +683,7 @@ struct GEnableIf<true, T>
 	typedef T Type;
 };
 
-// GConditional£ºÌõ¼şÅĞ¶Ï
+// GConditionalï¼šæ¡ä»¶åˆ¤æ–­
 template<gbool TEST,
 	typename T1, typename T2>
 struct GConditional
@@ -716,7 +716,7 @@ public:
 } // namespace gsystem
 
 namespace gsystem { // gsystem
-					// ÔÚÕâ¸ö´úÂëÆ¬¶ÎÄÚµÄİÍÈ¡Æ÷£¬Ö÷Òª°üÀ¨Ò»Ğ©±ê×¼¿âÖĞÃ»ÓĞ¶ÔÓ¦ÀàĞÍµÄ×Ô¶¨ÒåİÍÈ¡Æ÷
+					// åœ¨è¿™ä¸ªä»£ç ç‰‡æ®µå†…çš„èƒå–å™¨ï¼Œä¸»è¦åŒ…æ‹¬ä¸€äº›æ ‡å‡†åº“ä¸­æ²¡æœ‰å¯¹åº”ç±»å‹çš„è‡ªå®šä¹‰èƒå–å™¨
 
 template <gsize>	struct GIntegerForSize;
 template <>			struct GIntegerForSize<1> { typedef guint8  Unsigned; typedef gint8  Signed; };
@@ -762,8 +762,8 @@ public:
 	static constexpr gsize align = cur_align > next_align ? cur_align : next_align;
 };
 
-/// ÅĞ¶ÏÀàĞÍTÊÇ·ñ´æÔÚÓÚÀàĞÍÁĞ±íTSÖĞ
-/// id±íÊ¾TÔÚTSÖĞµÄÎ»ÖÃ£¨´Ó1¿ªÊ¼¼ÆÊı£¬0±íÊ¾²»´æÔÚ£©
+/// åˆ¤æ–­ç±»å‹Tæ˜¯å¦å­˜åœ¨äºç±»å‹åˆ—è¡¨TSä¸­
+/// idè¡¨ç¤ºTåœ¨TSä¸­çš„ä½ç½®ï¼ˆä»1å¼€å§‹è®¡æ•°ï¼Œ0è¡¨ç¤ºä¸å­˜åœ¨ï¼‰
 template <typename T, typename ...TS>
 struct GTypeExist
 {
@@ -971,7 +971,7 @@ struct GTypeTraits<glongdouble>
 	typedef GTrueType Arithmetic;
 };
 
-// ÈôTÎªÔ­ÉúÖ¸Õë£¬Ôò²ÉÓÃÏÂÃæµÄÊµÏÖ
+// è‹¥Tä¸ºåŸç”ŸæŒ‡é’ˆï¼Œåˆ™é‡‡ç”¨ä¸‹é¢çš„å®ç°
 template<typename T>
 struct GTypeTraits<T*>
 {
