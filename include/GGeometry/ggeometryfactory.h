@@ -9,10 +9,19 @@ namespace geom { // gsystem.geom
 class GAPI GGeometryFactory 
 {
 public:
-	GGeometryP CreatePoint2D(greal x, greal y) const;
+	GGeometryPtr CreatePoint() const;
+	GGeometryPtr CreateLineString() const;
+	GGeometryPtr CreatePolygon() const;
+	GGeometryPtr CreateMultiPoint() const;
+	GGeometryPtr CreateMultiLineString() const;
+	GGeometryPtr CreateMultiPolygon() const;
+
+	GGeometryPtr CreatePoint2D(greal x, greal y) const;
+	GGeometryPtr CreatePoint2D(const GCoordinate &coord) const;
 
 #ifdef G_GEOMETRY_HAS_Z
-	GGeometryP CreatePoint3D(greal x, greal y, greal z) const;
+	GGeometryPtr CreatePoint3D(greal x, greal y, greal z) const;
+	GGeometryPtr CreatePoint3D(const GCoordinate &coord) const;
 #endif
 };
 

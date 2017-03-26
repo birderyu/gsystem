@@ -1,4 +1,5 @@
 /// C风格的内存操作
+/// use dlmalloc
 
 #ifndef _CORE_MEMORY_H_
 #define _CORE_MEMORY_H_
@@ -14,7 +15,7 @@ namespace gsystem { // gsystem
 ** @name		GMalloc
 ** @brief		分配内存
 ** @param[in]	size {gsize} 分配内存的大小，单位字节
-** @return		{gptr} 分配内存的首地址，若分配失败则返回NULL
+** @return		{gptr} 分配内存的首地址，若分配失败则返回GNULL
 **
 ****************************************************************************/
 GAPI gptr GMalloc(gsize size);
@@ -27,7 +28,7 @@ GAPI gptr GMalloc(gsize size);
 ** @brief		分配内存
 ** @param[in]	n {gsize} 分配内存的大小，单位个
 ** @param[in]	size {gsize} 分配内存的大小，单位字节
-** @return		{gptr} 分配内存的首地址，大小为n*size个字节，若分配失败则返回NULL
+** @return		{gptr} 分配内存的首地址，大小为n*size个字节，若分配失败则返回GNULL
 **
 ****************************************************************************/
 GAPI gptr GCalloc(gsize n, gsize size);
@@ -40,7 +41,7 @@ GAPI gptr GCalloc(gsize n, gsize size);
 ** @brief		重新分配内存
 ** @param[in]	oldptr {gptr} 旧内存首地址
 ** @param[in]	newsize {gsize} 新内存的大小，单位字节
-** @return		{gptr} 新分配内存的首地址，若分配失败则返回NULL
+** @return		{gptr} 新分配内存的首地址，若分配失败则返回GNULL
 **
 ****************************************************************************/
 GAPI gptr GRealloc(gptr oldptr, gsize newsize);

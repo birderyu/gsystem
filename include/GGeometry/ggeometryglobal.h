@@ -22,6 +22,34 @@ namespace gsystem { // gsystem
 namespace geom { // gsystem.geom
 
 // Î¬¶È * 4
+enum class GDimension
+	: guint
+{
+	_0_ = 0,
+	_1_ = 1,
+	_2_ = 2,
+	_3_ = 3,
+};
+
+enum class GCoordinateType
+	: guint
+{
+	Plane = 0,
+	Sphere = 1,
+};
+
+enum class GGeometryType
+	: guint
+{
+	Null = 0,
+	Point,
+	LineString,
+	Polygon,
+	MulitPoint,
+	MulitLineString,
+	MulitPolygon,
+};
+
 enum G_GEOMETRY_DIMENSION
 {
 	GEOMETRY_DIMENSION_0 = 0,	/**< ÁãÎ¬ */

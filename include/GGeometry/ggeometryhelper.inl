@@ -5,7 +5,7 @@ namespace gsystem { // gsystem
 namespace geom { // gsystem.geom
 
 template<typename GeometryT>
-GINLINE GSharedPointer<GeometryT> GGeometryHelper::ConvertTo(GGeometryP &geo)
+GINLINE GSharedPointer<GeometryT> GGeometryHelper::ConvertTo(GGeometryPtr &geo)
 {
 	return geo.DynamicConvertTo<GeometryT>();
 }

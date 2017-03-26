@@ -10,9 +10,9 @@ GObject::~GObject()
 
 }
 
-GObjectP GObject::Clone() const
+GObjectPtr GObject::Clone() const
 {
-	return GObjectP();
+	return GObjectPtr();
 }
 
 const GObject *GObject::Boxing() const

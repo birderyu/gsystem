@@ -987,9 +987,9 @@ GDateTime &GDateTime::AddMilliseconds(gint ms)
 	return *this;
 }
 
-GObjectP GDateTime::Clone() const
+GObjectPtr GDateTime::Clone() const
 {
-	return GObjectP(new GDateTime(*this));
+	return GObjectPtr(new GDateTime(*this));
 }
 
 const GObject *GDateTime::Boxing() const

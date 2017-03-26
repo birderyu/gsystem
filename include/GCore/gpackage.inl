@@ -46,9 +46,9 @@ GINLINE ValueT GPackage<ValueT>::Value() const
 }
 
 template <typename ValueT>
-GINLINE GObjectP GPackage<ValueT>::Clone() const
+GINLINE GObjectPtr GPackage<ValueT>::Clone() const
 {
-	return GObjectP(new GPackage<ValueT>(m_nValue));
+	return GObjectPtr(new GPackage<ValueT>(m_nValue));
 }
 
 template <typename ValueT>

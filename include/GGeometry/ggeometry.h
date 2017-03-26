@@ -24,7 +24,7 @@ namespace gsystem { // gsystem
 		class GEnvelope;
 		class GCoordinate;
 		class GCoordinateSequence;
-		typedef GSharedPointer<GGeometry> GGeometryP;
+		typedef GSharedPointer<GGeometry> GGeometryPtr;
 	} // namespace gsystem.geom
 } // namespace gsystem
 
@@ -101,7 +101,7 @@ public:
 	**
 	** @name	Dimension
 	** @brief	获取当前对象的维度
-	** @return	{gint} 维度，其值等于枚举 {G_GEOMETRY_DIMENSION}
+	** @return	{guint} 维度，其值等于枚举 {G_GEOMETRY_DIMENSION}
 	** @see		{G_GEOMETRY_DIMENSION}
 	**
 	****************************************************************************/

@@ -20,11 +20,11 @@ public:
 	virtual gsize Size() const = 0;
 	virtual gbool IsEmpty() const = 0;
 
-	//virtual DataT &ConstGetAt(gsize pos) = 0;
+	//virtual DataT &ConstGetAt(gsize pos) const = 0;
 	virtual DataT &GetAt(gsize pos) = 0;
 	virtual const DataT &GetAt(gsize pos) const = 0;
 
-	//virtual DataT *ConstCursorAt(gsize pos) = 0;
+	//virtual DataT *ConstCursorAt(gsize pos) const = 0;
 	virtual DataT *CursorAt(gsize pos) = 0;
 	virtual const DataT *CursorAt(gsize pos) const = 0;
 

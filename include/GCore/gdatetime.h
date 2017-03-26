@@ -114,7 +114,7 @@ public: // 日期时间计算
 	GDateTime &AddMilliseconds(gint ms);
 
 public: // Object
-	GObjectP Clone() const;
+	GObjectPtr Clone() const;
 	const GObject *Boxing() const;
 	gbool Unboxing(const GObject *obj);
 	GString ToString() const;

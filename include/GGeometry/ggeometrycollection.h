@@ -20,9 +20,9 @@ public:
 	****************************************************************************/
 	virtual gsize Size() const = 0;
 
-	virtual GGeometryP GetAt(gsize pos) = 0;
-	virtual const GGeometryP GetAt(gsize pos) const = 0;
-	virtual gvoid SetAt(gsize pos, const GGeometryP &geo) = 0;
+	virtual GGeometryPtr GetAt(gsize pos) = 0;
+	virtual const GGeometryPtr GetAt(gsize pos) const = 0;
+	virtual gvoid SetAt(gsize pos, const GGeometryPtr &geo) = 0;
 };
 
 #endif // _GEOMETRY_GEOMETRY_COLLECTION_H_

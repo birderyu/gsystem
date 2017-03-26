@@ -34,13 +34,13 @@ public:
 
 private:
 	// µ¥ÓÒÐý
-	gvoid SingleRotateRight(NodeT *);
+	gvoid SingleRotateRight(NodeT *node);
 	// µ¥×óÐý
-	gvoid SingleRotateLeft(NodeT *);
+	gvoid SingleRotateLeft(NodeT *node);
 	// Ë«ÓÒÐý
-	gvoid DoubleRotateRight(NodeT *);
+	gvoid DoubleRotateRight(NodeT *node);
 	// Ë«×óÐý
-	gvoid DoubleRotateLeft(NodeT *);
+	gvoid DoubleRotateLeft(NodeT *node);
 };
 
 } // namespace gsystem

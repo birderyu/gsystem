@@ -44,7 +44,7 @@ public:
 	ValueT Value() const;
 
 	// 从Object中继承的方法，其中ClassCode和Equals需要再次继承
-	GObjectP Clone() const;
+	GObjectPtr Clone() const;
 	const GObject *Boxing() const;
 	gbool Unboxing(const GObject *);
 	GString ToString() const;

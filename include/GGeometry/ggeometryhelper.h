@@ -9,7 +9,7 @@ namespace geom { // gsystem.geom
 class GAPI GGeometryHelper
 {
 public:
-	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GGeometryP &geo);
+	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GGeometryPtr &geo);
 	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GPointP &point);
 };
 

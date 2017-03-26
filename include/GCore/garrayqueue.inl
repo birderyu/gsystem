@@ -34,10 +34,7 @@ bool GArrayQueue<DataT>::push(T t)
 template <typename DataT>
 gbool GArrayQueue<DataT>::IsEmpty() const
 {
-	if (m_nFront == m_nRear)
-		return true;
-	else
-		return false;
+	return m_nFront == m_nRear;
 };
 
 template <typename DataT>

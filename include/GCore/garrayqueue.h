@@ -26,14 +26,16 @@ public:
 		
 	}
 
+	gbool IsEmpty() const;
+	int Size();         //队列的大小
+
 	gvoid Clear();
 	gvoid Dispose();
 
 	DataT front();          //队首元素
 	bool pop();         //出对
 	bool push(T t);     //入队
-	gbool IsEmpty() const;
-	int Size();         //队列的大小
+	
 
 private:
 	gsize m_nFront; // 队首
