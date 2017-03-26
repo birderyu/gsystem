@@ -272,14 +272,14 @@ struct GArgTypes<T1, T2>
 };
 
 template<typename T>
-struct GIsMemberFunctionPointer
+struct _GIsMemberFunctionPointer
 {
 	typedef GFalseType BoolType;
 };
 
 #define G_IS_MEMFUNPTR(CALL_OPT, CV_OPT, REF_OPT) \
 template<typename RetT, typename Arg0T, typename... ArgTs> \
-	struct GIsMemberFunctionPointer<RetT (CALL_OPT Arg0T::*)(ArgTs...) CV_OPT REF_OPT> \
+	struct _GIsMemberFunctionPointer<RetT (CALL_OPT Arg0T::*)(ArgTs...) CV_OPT REF_OPT> \
 		: GArgTypes<CV_OPT Arg0T *, ArgTs...> \
 	{ \
 	typedef GTrueType BoolType; \
@@ -290,9 +290,9 @@ template<typename RetT, typename Arg0T, typename... ArgTs> \
 _MEMBER_CALL_CV_REF(G_IS_MEMFUNPTR)
 #undef G_IS_MEMFUNPTR
 
-#define G_IS_MEMFUNPTR_ELLIPSIS(CV_OPT, REF_OPT) \
+#define G_IS_MEMFUNPTR_ELLIPSIS(CV_REF_OPT, X1) \
 template<typename RetT, typename Arg0T, typename... ArgTs> \
-	struct GIsMemberFunctionPointer<RetT (Arg0T::*)(ArgTs..., ...) CV_OPT REF_OPT> \
+	struct _GIsMemberFunctionPointer<RetT (Arg0T::*)(ArgTs..., ...) CV_REF_OPT> \
 	{ \
 	typedef GTrueType BoolType; \
 	typedef RetT ResultType; \
@@ -303,7 +303,7 @@ _CLASS_DEFINE_CV_REF(G_IS_MEMFUNPTR_ELLIPSIS)
 #undef G_IS_MEMFUNPTR_ELLIPSIS
 
 template<typename T, 
-	gbool PmfT = GIsMemberFunctionPointer<T>::BoolType::value>
+	gbool PmfT = _GIsMemberFunctionPointer<T>::BoolType::value>
 struct _GIsMemberObjectPointer
 	: GFalseType
 {

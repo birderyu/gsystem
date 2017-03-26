@@ -25,6 +25,15 @@ template <typename ClassT> ClassT *GAllocate(gsize n = 1) noexcept(false);
 template <typename ClassT> gvoid GDeallocate(ClassT *ptr) noexcept;
 template <typename ClassT> ClassT *GReallocate(ClassT *oldptr, gsize newsize) noexcept(false);
 
+template <typename ClassT>
+class GAllocator
+{
+public:
+	ClassT *Allocate(gsize n = 1) noexcept(false);
+	gvoid Deallocate(ClassT *ptr) noexcept;
+	ClassT *Reallocate(ClassT *oldptr, gsize newsize) noexcept(false);
+};
+
 } // namespace gsystem
 
 #include "gallocator.inl"
