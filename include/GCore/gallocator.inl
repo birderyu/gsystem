@@ -1,7 +1,7 @@
 #ifndef _CORE_ALLOCATOR_INLINE_
 #define _CORE_ALLOCATOR_INLINE_
 
-#include <new>
+#include <exception>
 
 namespace gsystem { // gsystem
 

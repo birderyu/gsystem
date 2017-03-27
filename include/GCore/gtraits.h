@@ -24,6 +24,57 @@
 #include "gtype.h"
 #include <type_traits>
 
+#define G_NON_MEMBER_CALL(FUNC, CV_REF_OPT, WEIRD_OPT) \
+	_EMIT_CDECL(FUNC, CV_REF_OPT, WEIRD_OPT) \
+	_EMIT_CLRCALL(FUNC, CV_REF_OPT, WEIRD_OPT) \
+	_EMIT_FASTCALL(FUNC, CV_REF_OPT, WEIRD_OPT) \
+	_EMIT_STDCALL(FUNC, CV_REF_OPT, WEIRD_OPT) \
+	_EMIT_VECTORCALL(FUNC, CV_REF_OPT, WEIRD_OPT)
+
+#define G_NON_MEMBER_CALL_CV(FUNC, REF_OPT, WEIRD_OPT) \
+	G_NON_MEMBER_CALL(FUNC, REF_OPT, WEIRD_OPT) \
+	G_NON_MEMBER_CALL(FUNC, const REF_OPT, true) \
+	G_NON_MEMBER_CALL(FUNC, volatile REF_OPT, true) \
+	G_NON_MEMBER_CALL(FUNC, const volatile REF_OPT, true)
+
+#define G_NON_MEMBER_CALL_CV_REF(FUNC) \
+	G_NON_MEMBER_CALL_CV(FUNC, , false) \
+	G_NON_MEMBER_CALL_CV(FUNC, &, true) \
+	G_NON_MEMBER_CALL_CV(FUNC, &&, true)
+
+#define G_MEMBER_CALL(FUNC, CV_OPT, REF_OPT) \
+	_EMIT_CDECL(FUNC, CV_OPT, REF_OPT) \
+	_EMIT_CLRCALL(FUNC, CV_OPT, REF_OPT) \
+	_EMIT_FASTCALL(FUNC, CV_OPT, REF_OPT) \
+	_EMIT_STDCALL(FUNC, CV_OPT, REF_OPT) \
+	_EMIT_THISCALL(FUNC, CV_OPT, REF_OPT) \
+	_EMIT_VECTORCALL(FUNC, CV_OPT, REF_OPT)
+
+#define G_MEMBER_CALL_CV(FUNC, REF_OPT) \
+	G_MEMBER_CALL(FUNC, , REF_OPT) \
+	G_MEMBER_CALL(FUNC, const, REF_OPT) \
+	G_MEMBER_CALL(FUNC, volatile, REF_OPT) \
+	G_MEMBER_CALL(FUNC, const volatile, REF_OPT)
+
+#define G_MEMBER_CALL_CV_REF(FUNC) \
+	G_MEMBER_CALL_CV(FUNC, ) \
+	G_MEMBER_CALL_CV(FUNC, &) \
+	G_MEMBER_CALL_CV(FUNC, &&)
+
+#define G_CLASS_DEFINE_CV_REF(CLASS) \
+	CLASS( , false) \
+	CLASS(const, true) \
+	CLASS(volatile, true) \
+	CLASS(const volatile, true) \
+	CLASS(&, true) \
+	CLASS(const &, true) \
+	CLASS(volatile &, true) \
+	CLASS(const volatile &, true) \
+	CLASS(&&, true) \
+	CLASS(const &&, true) \
+	CLASS(volatile &&, true) \
+	CLASS(const volatile &&, true)
+
 namespace gsystem { // gsystem
 					// 在这个代码片段内的萃取器，主要用于“移除类型信息”
 
@@ -287,7 +338,7 @@ template<typename RetT, typename Arg0T, typename... ArgTs> \
 	typedef Arg0T ClassType; \
 	};
 
-_MEMBER_CALL_CV_REF(G_IS_MEMFUNPTR)
+G_MEMBER_CALL_CV_REF(G_IS_MEMFUNPTR)
 #undef G_IS_MEMFUNPTR
 
 #define G_IS_MEMFUNPTR_ELLIPSIS(CV_REF_OPT, X1) \
@@ -299,7 +350,7 @@ template<typename RetT, typename Arg0T, typename... ArgTs> \
 	typedef Arg0T ClassType; \
 	};
 
-_CLASS_DEFINE_CV_REF(G_IS_MEMFUNPTR_ELLIPSIS)
+G_CLASS_DEFINE_CV_REF(G_IS_MEMFUNPTR_ELLIPSIS)
 #undef G_IS_MEMFUNPTR_ELLIPSIS
 
 template<typename T, 
@@ -648,7 +699,7 @@ template<typename RetT, typename... ArgTs> \
 	typedef RetT ResultType; \
 	};
 
-_NON_MEMBER_CALL(G_IS_FUNCTION)
+G_NON_MEMBER_CALL(G_IS_FUNCTION)
 #undef G_IS_FUNCTION
 
 template<typename RetT, typename... ArgTs>

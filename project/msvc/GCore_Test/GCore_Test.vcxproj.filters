@@ -26,9 +26,6 @@
     <ClInclude Include="binarytree_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ThreePrism.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="binaryheap_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -36,6 +33,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="array_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Volume3Prism.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

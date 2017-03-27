@@ -5,6 +5,7 @@
 #include "gdatetime.h"
 #include "gcstring.h"
 #include "gconstructor.h"
+#include <new>
 
 namespace gsystem { // gsystem
 
