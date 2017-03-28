@@ -14,8 +14,17 @@ class GStack
 public:
 	virtual ~GStack() = 0;
 
+	virtual gsize Size() const = 0;
+	virtual gbool IsEmpty() const = 0;
+
+	virtual gvoid Destroy() = 0;
+	virtual gvoid Clear() = 0;
+
+	// »Î’ª
 	virtual gbool Push(const DataT &data) = 0;
 	virtual gbool Push(DataT &&data) = 0;
+
+	// ≥ˆ’ª
 	virtual gbool Pop(DataT *data = GNULL) = 0;
 
 	virtual const DataT &Top() const = 0; // ’ª∂•

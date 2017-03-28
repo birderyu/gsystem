@@ -14,14 +14,23 @@ class GQueue
 public:
 	virtual ~GQueue() = 0;
 
+	virtual gsize Size() const = 0;
+	virtual gbool IsEmpty() const = 0;
+
+	virtual gvoid Destroy() = 0;
+	virtual gvoid Clear() = 0;
+
+	// 入队
 	virtual gbool EnQueue(const DataT &data) = 0;
 	virtual gbool EnQueue(DataT &&data) = 0;
+
+	// 出队
 	virtual gbool DeQueue(DataT *data = GNULL) = 0;
 
-	virtual const DataT &Front() const = 0; // 队首
-	virtual DataT &Front() = 0; // 队首
-	virtual const DataT &Rear() const = 0; // 队尾
-	virtual DataT &Rear() = 0; // 队尾
+	virtual const DataT &Head() const = 0; // 队首
+	virtual DataT &Head() = 0; // 队首
+	virtual const DataT &Tail() const = 0; // 队尾
+	virtual DataT &Tail() = 0; // 队尾
 };
 
 } // namespace gsystem

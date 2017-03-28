@@ -17,9 +17,10 @@ public:
 	~GListStack();
 
 public:
-	gbool IsEmpty() const;
-	gvoid Clear();//清空。     
 	gsize Size() const;
+	gbool IsEmpty() const;
+
+	gvoid Clear();
 	gvoid Dispose();
 
 	gbool Push(const DataT &data);

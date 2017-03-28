@@ -1,11 +1,15 @@
 #ifndef _CORE_LIST_QUEUE_H_
 #define _CORE_LIST_QUEUE_H_
 
+#include "gqueue.h"
+#include "gdoublelinkedlist.h"
+
 namespace gsystem { // gsystem
 
 /*基于链表的队列的ADT*/
-template <typename T>
+template <typename DataT>
 class GListQueue
+	: public GQueue<DataT>
 {
 public:
 	GListQueue() : phead(GNULL), pend(GNULL), count(0){

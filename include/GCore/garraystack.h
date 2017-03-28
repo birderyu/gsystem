@@ -22,21 +22,24 @@ public:
 	~GArrayStack();
 
 public:
-	gbool IsEmpty() const;
-	gvoid Clear();
 	gsize Size() const;
-	gbool IsFull() const;
-	gbool Resize(gsize capacity);
+	gbool IsEmpty() const;
+
+	gvoid Clear();
+	gvoid Dispose();
+	
 	gbool Push(const DataT &data);
 	gbool Push(DataT &&data);
 	gbool Pop(DataT *data = GNULL);
+
 	const DataT &Top() const;
 	DataT &Top();
 	const DataT &Bottom() const;
 	DataT &Bottom();
 
-	// Ïú»ÙÕ»
-	gvoid Dispose();
+private:
+	gbool Resize(gsize capacity);
+	gbool Fill() const;
 
 private:
 	GDynamicArray<DataT> m_tArray;

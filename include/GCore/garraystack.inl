@@ -89,7 +89,7 @@ GINLINE gsize GArrayStack<DataT>::Size() const
 }
 
 template<typename DataT>
-GINLINE gbool GArrayStack<DataT>::IsFull() const
+GINLINE gbool GArrayStack<DataT>::Fill() const
 {
 	if (m_TopCursor == NULL_POS)
 	{
@@ -109,7 +109,7 @@ GINLINE gbool GArrayStack<DataT>::Resize(gsize capacity)
 template<typename DataT>
 GINLINE gbool GArrayStack<DataT>::Push(const DataT &data)
 {
-	if (IsFull())
+	if (Fill())
 	{
 		return false;
 	}
@@ -129,7 +129,7 @@ GINLINE gbool GArrayStack<DataT>::Push(const DataT &data)
 template<typename DataT>
 GINLINE gbool GArrayStack<DataT>::Push(DataT &&data)
 {
-	if (IsFull())
+	if (Fill())
 	{
 		return false;
 	}
