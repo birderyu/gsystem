@@ -1,8 +1,7 @@
 ﻿#include "typedef_test.h"
 #include "binaryheap_test.h"
-#include "ghuffmantree.h"
-#include "gmap.h"
-#include "gstopwatch.h"
+#include "stack_test.h"
+#include "queue_test.h"
 
 using namespace gsystem;
 

@@ -207,7 +207,7 @@ GString GFilter_Ex::GFilterData::ToString() const
 gbool GFilter_Ex::GFilterData::Release()
 {
 	m_emUnionType = UNION_TYPE_ERROR;
-	m_tChildren.Dispose();
+	m_tChildren.Destroy();
 	m_tCell.Release();
 	return true;
 }

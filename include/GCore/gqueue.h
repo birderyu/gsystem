@@ -21,16 +21,14 @@ public:
 	virtual gvoid Clear() = 0;
 
 	// 入队
-	virtual gbool EnQueue(const DataT &data) = 0;
-	virtual gbool EnQueue(DataT &&data) = 0;
+	virtual gvoid EnQueue(const DataT &data) = 0;
+	virtual gvoid EnQueue(DataT &&data) = 0;
 
 	// 出队
-	virtual gbool DeQueue(DataT *data = GNULL) = 0;
+	virtual gvoid DeQueue(DataT *data = GNULL) = 0;
 
-	virtual const DataT &Head() const = 0; // 队首
-	virtual DataT &Head() = 0; // 队首
-	virtual const DataT &Tail() const = 0; // 队尾
-	virtual DataT &Tail() = 0; // 队尾
+	virtual const DataT &Head() const = 0;
+	virtual DataT &Head() = 0;
 };
 
 } // namespace gsystem

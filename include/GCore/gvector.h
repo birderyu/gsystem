@@ -10,8 +10,7 @@ namespace gsystem { // gsystem
 
 template <typename DataT>
 class GVector final
-	: virtual public GListT<GVector<DataT>>
-	, virtual public GArray<DataT>
+	: public GArray<DataT>
 	, virtual public GObject
 {
 public:
@@ -84,10 +83,6 @@ public:
 	friend class ConstIterator;
 
 public:
-	static const gsize MAX_SIZE = GListT<GVector<DataT>>::MAX_SIZE;
-	static const gsize NULL_POS = GListT<GVector<DataT>>::NULL_POS;
-
-public:
 	GVector();
 	explicit GVector(gsize size);
 	explicit GVector(gsize size, const DataT &data);
@@ -104,7 +99,7 @@ public:
 	gsize Capacity() const;
 	gbool IsEmpty() const;
 	gvoid Clear(); // 清空数组，不变销毁数据
-	gvoid Dispose(); // 销毁所有数据
+	gvoid Destroy(); // 销毁所有数据
 	//gvoid Collect(); // 回收垃圾
 
 	DataT &GetAt(gsize);

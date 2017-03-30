@@ -1,3 +1,18 @@
+/****************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file	gtype.h
+** @brief	全局类型定义
+** @author	birderyu
+** @contact	https://github.com/birderyu
+** @date	2015-12-30
+** @version	1.10
+**
+** 全局类型定义定义了一些平台无关性的数据类型，这些类型以小写字母g作为前缀。
+**
+****************************************************************************/
+
 #ifndef _CORE_TYPE_H_
 #define _CORE_TYPE_H_
 
@@ -9,81 +24,108 @@
 
 namespace gsystem { // gsystem
 
-typedef	void			gvoid;
-typedef	void *			gptr;
-typedef	const void *	gcptr;
+/****************************************************************************
+**
+** gtype.h
+**
+** @brief 字符和字符串类型
+**
+****************************************************************************/
 
-typedef	char			gchar;
-typedef	signed char		gschar;
-typedef	unsigned char	guchar;
-typedef char			gchar8;
-typedef char16_t		gchar16;
-typedef char32_t		gchar32;
-typedef	wchar_t			gwchar;
+typedef	char			gchar;		// 默认的字符类型
+typedef	signed char		gschar;		// 默认的有符号字符类型
+typedef	unsigned char	guchar;		// 默认的无符号字符类型
+typedef char			gchar8;		// 8位字符类型
+typedef char16_t		gchar16;	// 16位字符类型
+typedef char32_t		gchar32;	// 32位字符类型
+typedef	wchar_t			gwchar;		// 宽字符类型
 
-typedef	gchar *			gstring;
-typedef	const gchar *	gcstring;
-typedef	gchar8 *		gstring8;
-typedef	const gchar8 *	gcstring8;
-typedef	gchar16 *		gstring16;
-typedef	const gchar16 *	gcstring16;
-typedef	gchar32 *		gstring32;
-typedef	const gchar32 *	gcstring32;
-typedef	const gwchar*	gcwstring;
+typedef	gchar *			gstring;	// 字符串类型
+typedef	const gchar *	gcstring;	// 字符串常量类型
+typedef	gchar8 *		gstring8;	// 以8位字符为单元的字符串类型
+typedef	const gchar8 *	gcstring8;	// 以8位字符为单元的字符串常量类型
+typedef	gchar16 *		gstring16;	// 以16位字符为单元的字符串类型
+typedef	const gchar16 *	gcstring16;	// 以16位字符为单元的字符串常量类型
+typedef	gchar32 *		gstring32;	// 以32位字符为单元的字符串类型
+typedef	const gchar32 *	gcstring32;	// 以32位字符为单元的字符串常量类型
+typedef	gwchar*			gwstring;	// 以宽字符为单元的字符串类型
+typedef	const gwchar*	gcwstring;	// 以宽字符为单元的字符串常量类型
 
-typedef bool				gbool;
-typedef short				gshort;
-typedef unsigned short		gushort;
-typedef int					gint;
-typedef	unsigned int		guint;
-typedef long				glong;
-typedef	unsigned long		gulong;
-typedef float				gfloat;
-typedef double				gdouble;
+/****************************************************************************
+**
+** gtype.h
+**
+** @brief 基本类型
+**
+****************************************************************************/
 
+typedef	void				gvoid;			// void类型
+typedef bool				gbool;			// 布尔类型
+typedef short				gshort;			// 短整型
+typedef unsigned short		gushort;		// 无符号短整型
+typedef int					gint;			// 整型
+typedef	unsigned int		guint;			// 无符号整型
+typedef long				glong;			// 长整型
+typedef	unsigned long		gulong;			// 无符号长整型
+typedef float				gfloat;			// 浮点型
+typedef double				gdouble;		// 双精度浮点型
 #ifdef G_SYSTEM_WINDOWS
-	typedef __int64				glonglong;
-	typedef unsigned __int64	gulonglong;
-	typedef long double			glongdouble;
+typedef __int64				glonglong;		// 长长整型
+typedef unsigned __int64	gulonglong;		// 无符号长长整型
+typedef long double			glongdouble;	// 扩展精度浮点型
 #else // !G_SYSTEM_WINDOWS
-	typedef long long			glonglong;
-	typedef unsigned long long	gulonglong;
-	typedef long double			glongdouble;
+typedef long long			glonglong;		// 长长整型
+typedef unsigned long long	gulonglong;		// 无符号长长整型
+typedef long double			glongdouble;	// 扩展精度浮点型
 #endif // !G_SYSTEM_WINDOWS
 
+/****************************************************************************
+**
+** gtype.h
+**
+** @brief 自定义类型
+**
+****************************************************************************/
+
 #ifdef G_HAS_DECIMAL
-	typedef glongdouble		gdecimal;
+typedef glongdouble		gdecimal;	// 高精度浮点型
 #endif // G_HAS_DECIMAL
-
-typedef gschar		gsmall;
-typedef guchar		gusmall;
-typedef	gusmall		gbyte;
-typedef	gushort		gword;
-
-typedef gbyte *			gbytes;
-typedef const gbyte *	gcbytes;
-typedef gword *			gwords;
-typedef const gword *	gcword;
-
-// 实数类型
+typedef gschar			gsmall;		// 短短整型
+typedef guchar			gusmall;	// 无符号短短整型
+typedef	gusmall			gbyte;		// 字节类型
+typedef	gushort			gword;		// 字类型
+typedef gbyte *			gbytes;		// 字节数组类型
+typedef const gbyte *	gcbytes;	// 常量字节数组类型
+typedef gword *			gwords;		// 字数组类型
+typedef const gword *	gcword;		// 常量字数组类型
 #ifdef G_REAL_USE_FLOAT
-	typedef gfloat	greal;
+typedef gfloat			greal;		// 实数类型
 #else // !G_REAL_USE_FLOAT
-	typedef gdouble	greal;
+typedef gdouble			greal;		// 实数类型
 #endif // G_REAL_USE_FLOAT
+typedef gsmall			gint8;		// 8位整型
+typedef gusmall			guint8;		// 无符号8位整型
+typedef gshort			gint16;		// 16位整型
+typedef gushort			guint16;	// 无符号16位整型
+typedef gint			gint32;		// 32位整型
+typedef guint			guint32;	// 无符号32位整型
+typedef glonglong		gint64;		// 64位整型
+typedef gulonglong		guint64;	// 无符号64位整型
 
-typedef gsmall		gint8;
-typedef gusmall		guint8;
-typedef gshort		gint16;
-typedef gushort		guint16;
-typedef gint		gint32;
-typedef guint		guint32;
-typedef glonglong	gint64;
-typedef gulonglong	guint64;
+/****************************************************************************
+**
+** gtype.h
+**
+** @brief 其他类型
+**
+****************************************************************************/
 
-typedef ptrdiff_t	gaddress;
-typedef size_t		gsize;
-typedef time_t		gtime;		// 时间戳类型
+typedef	gvoid *			gptr;		// 通用指针类型
+typedef	const gvoid *	gcptr;		// 指向常量的通用指针类型
+typedef size_t			gsize;		// 长度类型
+typedef gsize			gaddress;	// 指针值类型
+typedef ptrdiff_t		gptrdiff;	// 指针偏移类型
+typedef time_t			gtime;		// 时间戳类型
 
 } // namespace gsystem
 

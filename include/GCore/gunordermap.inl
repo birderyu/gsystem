@@ -38,7 +38,7 @@ GINLINE gbool GUnorderMap<KeyT, ValueT, HashT, CompareT>::IsEmpty() const
 template<typename KeyT, typename ValueT, typename HashT, typename CompareT>
 GINLINE gvoid GUnorderMap<KeyT, ValueT, HashT, CompareT>::Clear()
 {
-	m_tTable.Dispose();
+	m_tTable.Destroy();
 }
 
 template<typename KeyT, typename ValueT, typename HashT, typename CompareT>

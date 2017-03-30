@@ -56,7 +56,7 @@ GINLINE GBinaryTree<NodeT> &GBinaryTree<NodeT>::operator=(GBinaryTree<NodeT> &&t
 template<typename NodeT>
 GINLINE GBinaryTree<NodeT>::~GBinaryTree()
 {
-	Dispose();
+	Destroy();
 }
 
 template<typename NodeT>
@@ -64,7 +64,7 @@ GINLINE gvoid GBinaryTree<NodeT>::SetRoot(NodeT *pNode)
 {
 	if (!m_pRoot)
 	{
-		Dispose();
+		Destroy();
 	}
 	m_pRoot = pNode;
 }
@@ -78,7 +78,7 @@ GINLINE gvoid GBinaryTree<NodeT>::CopyFrom(const GBinaryTree<NodeT> &tTree)
 	}
 	if (m_pRoot != GNULL)
 	{
-		Dispose();
+		Destroy();
 	}
 	if (GNULL != tTree.m_pRoot)
 	{
@@ -92,7 +92,7 @@ GINLINE gvoid GBinaryTree<NodeT>::CopyFrom(const GBinaryTree<NodeT> &tTree)
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::Dispose()
+GINLINE gvoid GBinaryTree<NodeT>::Destroy()
 {
 	DestroySubTree(m_pRoot);
 	m_pRoot = GNULL;

@@ -27,14 +27,50 @@ struct GHashTableNode
 };
 
 // 一个默认的哈希桶
-// 哈希桶用于处理哈希冲突，默认的哈希桶采用链表的方式处理哈希冲突
+// 哈希桶用于处理哈希冲突，默认的哈希桶采用单向链表的方式处理哈希冲突
 template<typename KeyT, typename ValueT, 
 	typename CompareT, typename NodeT>
-struct GHashTableSlot
+class GHashTableSlot
+	: public GNewT<GHashTableSlot<KeyT, ValueT, CompareT, NodeT>>
 {
+public:
 	typedef NodeT Node;
 	typedef GList<NodeT *> Nodes;
 	typedef GList<const NodeT *> ConstNodes;
+	typedef GHashTableSlot HashSlot;
+
+public:
+	GHashTableSlot(gbool unique);
+	GHashTableSlot(const GHashTableSlot &slot);
+	GHashTableSlot(GHashTableSlot &&slot);
+	GHashTableSlot &operator=(const GHashTableSlot &slot);
+	GHashTableSlot &operator=(GHashTableSlot &&slot);
+	~GHashTableSlot();
+
+	gbool IsEmpty() const;
+	gsize Size() const;
+
+	NodeT *FirstNode();
+	const NodeT *FirstNode() const;
+	NodeT *NextNode(NodeT *node);
+	const NodeT *NextNode(const NodeT *node) const;
+
+	gbool Search(const KeyT &key, gbool unique, Nodes &nodes);
+	gbool Search(const KeyT &key, gbool unique, ConstNodes &nodes) const;
+
+	NodeT *SearchFirst(const KeyT &key);
+	const NodeT *SearchFirst(const KeyT &key) const;
+	gbool Contains(const KeyT &key) const;
+
+	gsize Delete(const KeyT &key, gbool unique);
+	gbool DeleteAt(NodeT *node, NodeT *preNode);
+
+	gbool Equals(const HashSlot &slot) const;
+
+private:
+	static const CompareT m_fCompare;
+	NodeT *m_pHead;
+	gsize m_nSize;
 };
 
 /// 哈希表
@@ -366,7 +402,7 @@ public:
 	gsize Size() const;
 	gbool IsEmpty() const;
 
-	gvoid Dispose();
+	gvoid Destroy();
 
 	gbool Contains(const KeyT &key) const;
 

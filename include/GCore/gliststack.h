@@ -11,27 +11,27 @@ template<typename DataT>
 class GListStack 
 	: public GStack<DataT>
 {
-public:   
+public:
 	GListStack();
-	GListStack(const DataT&);
-	~GListStack();
+	GListStack(const GListStack<DataT> &stack);
+	GListStack(GListStack<DataT> &&stack);
+	GListStack<DataT>& operator=(const GListStack<DataT> &stack);
+	GListStack<DataT>& operator=(GListStack<DataT> &&stack);
 
 public:
 	gsize Size() const;
 	gbool IsEmpty() const;
 
 	gvoid Clear();
-	gvoid Dispose();
+	gvoid Destroy();
 
-	gbool Push(const DataT &data);
-	gbool Push(DataT &&data);
+	gvoid Push(const DataT &data);
+	gvoid Push(DataT &&data);
 
-	gbool Pop(DataT *data = GNULL);
+	gvoid Pop(DataT *data = GNULL);
 
 	const DataT &Top() const;
 	DataT &Top();
-	const DataT &Bottom() const;
-	DataT &Bottom();
 
 private:
 	GDoubleLinkedList<DataT> m_tList;

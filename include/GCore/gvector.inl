@@ -198,9 +198,9 @@ GINLINE gvoid GVector<DataT>::Clear()
 }
 
 template <typename DataT>
-gvoid GVector<DataT>::Dispose()
+gvoid GVector<DataT>::Destroy()
 {
-	m_tArray.Dispose();
+	m_tArray.Destroy();
 	m_nHead = NULL_POS;
 	m_nTail = 0;
 }
@@ -478,7 +478,7 @@ GINLINE gvoid GVector<DataT>::Append(GVector<DataT> &&arr)
 	}
 
 	// 后续处理，直接将arr销毁
-	arr.Dispose();
+	arr.Destroy();
 }
 
 template <typename DataT>

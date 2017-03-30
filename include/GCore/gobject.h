@@ -125,12 +125,6 @@ public:
 	****************************************************************************/
 	virtual GBytes ToBytes() const;
 
-	/*
-	virtual gbool FromString(const GString &str);
-	virtual GBytes ToBytes() const;
-	virtual gbool FromBytes(const GBytes &bytes);
-	*/
-
 	/****************************************************************************
 	**
 	** GObject

@@ -24,7 +24,7 @@ public:
 
 	gbool Reserve(gsize);
 	gvoid Clear();
-	gvoid Dispose();
+	gvoid Destroy();
 
 	GStringBuffer &Append(gchar);
 	GStringBuffer &Append(gcstring);

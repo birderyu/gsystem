@@ -45,9 +45,9 @@ gvoid GByteBuffer::Clear()
 	m_tBytes.Clear();
 }
 
-gvoid GByteBuffer::Dispose()
+gvoid GByteBuffer::Destroy()
 {
-	m_tBytes.Dispose();
+	m_tBytes.Destroy();
 }
 
 gbool GByteBuffer::IsEmpty() const

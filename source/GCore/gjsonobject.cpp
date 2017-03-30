@@ -17,7 +17,7 @@ GJsonObject::GJsonObject(const GString &jsonStr)
 {
 	if (!Parse(jsonStr))
 	{
-		Dispose();
+		Destroy();
 	}
 }
 
@@ -28,7 +28,7 @@ GJsonObject::GJsonObject(const GJsonObject &jsonObj)
 
 GJsonObject::~GJsonObject()
 {
-	Dispose();
+	Destroy();
 }
 
 gbool GJsonObject::Valid() const
@@ -70,7 +70,7 @@ GString GJsonObject::ToString() const
 
 gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage *msg)
 {
-	Dispose(); // 若已有数据，则先销毁
+	Destroy(); // 若已有数据，则先销毁
 	GString parse_msg; // 如果发生了错误，返回可能的原因
 	gsize _cursor = 0;
 	if (cursor)
@@ -109,7 +109,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 				msg->SetErrorCursor(_cursor);
 				msg->SetErrorMessage("非法的字符");
 			}
-			Dispose();
+			Destroy();
 			return false;
 		}
 		else if (G_CHAR_IS_SPACE(c))
@@ -132,7 +132,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 					msg->SetErrorCursor(_cursor);
 					msg->SetErrorMessage("非法的构造字符");
 				}
-				Dispose();
+				Destroy();
 				return false;
 			}
 
@@ -162,7 +162,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 					msg->SetErrorCursor(_cursor);
 					msg->SetErrorMessage("非法的构造字符");
 				}
-				Dispose();
+				Destroy();
 				return false;
 			}
 
@@ -181,7 +181,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 					*cursor = _cursor;
 				}
 				delete pair;
-				Dispose();
+				Destroy();
 				return false;
 			}
 
@@ -203,7 +203,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 						msg->SetErrorMessage("非法的构造字符");
 					}
 					delete pair;
-					Dispose();
+					Destroy();
 					return false;
 				}
 			}
@@ -221,7 +221,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 	if (!success)
 	{
 		// 操作失败，清理内存
-		Dispose();
+		Destroy();
 	}
 
 	if (cursor)
@@ -249,7 +249,7 @@ gbool GJsonObject::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessa
 	return success;
 }
 
-gvoid GJsonObject::Dispose()
+gvoid GJsonObject::Destroy()
 {
 	for (GMap<GString, GJsonPair*>::Iterator iter = m_tJsonPairs.Begin();
 		iter != m_tJsonPairs.End(); iter++)

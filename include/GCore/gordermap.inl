@@ -38,7 +38,7 @@ GINLINE gbool GOrderMap<KeyT, ValueT, CompareT>::IsEmpty() const
 template<typename KeyT, typename ValueT, typename CompareT>
 GINLINE gvoid GOrderMap<KeyT, ValueT, CompareT>::Clear()
 {
-	m_tTree.Dispose();
+	m_tTree.Destroy();
 	m_nSize = 0;
 }
 

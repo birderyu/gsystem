@@ -15,7 +15,7 @@ GJsonPair::GJsonPair()
 
 GJsonPair::~GJsonPair()
 {
-	Dispose();
+	Destroy();
 }
 
 gbool GJsonPair::Valid() const
@@ -59,7 +59,7 @@ GString GJsonPair::ToString() const
 
 gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage *msg)
 {
-	Dispose(); // 若已有数据，则先销毁
+	Destroy(); // 若已有数据，则先销毁
 	GString parse_msg; // 如果发生了错误，返回可能的原因
 	gsize _cursor = 0;
 	if (cursor)
@@ -86,7 +86,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 				msg->SetErrorCursor(_cursor);
 				msg->SetErrorMessage("字符串提前结束");
 			}
-			Dispose();
+			Destroy();
 			return false;
 		}
 		else if (!G_CHAR_IS_ASCII(c))
@@ -102,7 +102,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 				msg->SetErrorCursor(_cursor);
 				msg->SetErrorMessage("非法的字符");
 			}
-			Dispose();
+			Destroy();
 			return false;
 		}
 		else if (G_CHAR_IS_SPACE(c))
@@ -124,7 +124,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 				msg->SetErrorCursor(_cursor);
 				msg->SetErrorMessage("非法的构造字符");
 			}
-			Dispose();
+			Destroy();
 			return false;
 		}
 		else if (c == ':')
@@ -142,7 +142,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 					msg->SetErrorCursor(_cursor);
 					msg->SetErrorMessage("非法的构造字符");
 				}
-				Dispose();
+				Destroy();
 				return false;
 			}
 			else
@@ -158,7 +158,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 						*cursor = _cursor;
 					}
 					delete value;
-					Dispose();
+					Destroy();
 					return false;
 				}
 
@@ -183,7 +183,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 					msg->SetErrorCursor(_cursor);
 					msg->SetErrorMessage("非法的构造字符");
 				}
-				Dispose();
+				Destroy();
 				return false;
 			}
 			else
@@ -209,7 +209,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 							msg->SetErrorCursor(_cursor);
 							msg->SetErrorMessage("非法的构造字符");
 						}
-						Dispose();
+						Destroy();
 						return false;
 					}
 
@@ -232,7 +232,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 	if (!success)
 	{
 		// 操作失败，清理内存
-		Dispose();
+		Destroy();
 	}
 
 	if (cursor)
@@ -260,7 +260,7 @@ gbool GJsonPair::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage
 	return success;
 }
 
-gvoid GJsonPair::Dispose()
+gvoid GJsonPair::Destroy()
 {
 	if (m_pValue)
 	{

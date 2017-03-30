@@ -33,7 +33,7 @@ template <typename DataT> GINLINE
 DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, GTrueType) noexcept(false)
 {
 	DataT *new_arr = GAllocate<DataT>(copy_size);
-	GMemCopy(new_arr, copy_arr + copy_start, copy_size);
+	GMemCopy(new_arr, copy_arr + copy_start, sizeof(DataT) * copy_size);
 	return new_arr;
 }
 
@@ -56,7 +56,7 @@ DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_
 	DataT *new_arr = GAllocate<DataT>(size);
 	gsize new_copy_size = size - start;
 	gsize real_copy_size = copy_size < new_copy_size ? copy_size : new_copy_size;
-	GMemCopy(new_arr + start, copy_arr + copy_start, real_copy_size);
+	GMemCopy(new_arr + start, copy_arr + copy_start, sizeof(DataT) * real_copy_size);
 	return new_arr;
 }
 
@@ -503,9 +503,9 @@ DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) noexcept(f
 	DataT *new_arr = GAllocate<DataT>(size - 1);
 	if (pos > 0)
 	{
-		GMemCopy(new_arr, arr, pos);
+		GMemCopy(new_arr, arr, sizeof(DataT) * pos);
 	}
-	GMemCopy(new_arr + pos, arr + pos + 1, size - pos - 1);
+	GMemCopy(new_arr + pos, arr + pos + 1, sizeof(DataT) * (size - pos - 1));
 
 	// 销毁旧的数组
 	GArrays::DestoryArray<DataT>(arr, size);
@@ -584,7 +584,7 @@ gvoid _GArrayClear(DataT *arr, gsize size, GFalseType) noexcept
 template <typename DataT> GINLINE 
 gvoid _GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, GTrueType)
 {
-	GMemCopy(arr, copy_arr, size);
+	GMemCopy(arr, copy_arr, sizeof(DataT) * size);
 }
 
 /// DataT不是内置类型，先析构，在调用拷贝构造
@@ -611,7 +611,7 @@ DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy
 		arr = GAllocate<DataT>(copy_size);
 	}
 
-	GMemCopy(arr, copy_arr, copy_size);
+	GMemCopy(arr, copy_arr, sizeof(DataT) * copy_size);
 	return arr;
 }
 

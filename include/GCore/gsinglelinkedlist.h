@@ -51,23 +51,23 @@ public:
 	
 	gvoid Invert();
 
-	gbool InsertBefore(gsize pos, const DataT &data);
-	gbool InsertBefore(gsize pos, DataT &&data);
+	gvoid InsertBefore(gsize pos, const DataT &data);
+	gvoid InsertBefore(gsize pos, DataT &&data);
 
-	gbool InsertBefore(NodeT *node, const DataT &data);
-	gbool InsertBefore(NodeT *node, DataT &&data);
+	gvoid InsertBefore(NodeT *node, const DataT &data);
+	gvoid InsertBefore(NodeT *node, DataT &&data);
 
-	gbool InsertAfter(gsize pos, const DataT &data);
-	gbool InsertAfter(gsize pos, DataT &&data);
+	gvoid InsertAfter(gsize pos, const DataT &data);
+	gvoid InsertAfter(gsize pos, DataT &&data);
 
-	gbool InsertAfter(NodeT *node, const DataT &data);
-	gbool InsertAfter(NodeT *node, DataT &&data);
+	gvoid InsertAfter(NodeT *node, const DataT &data);
+	gvoid InsertAfter(NodeT *node, DataT &&data);
 
-	gbool AddFirst(const DataT &data);
-	gbool AddFirst(DataT &&data);
+	gvoid AddFirst(const DataT &data);
+	gvoid AddFirst(DataT &&data);
 
-	gbool AddLast(const DataT &data);
-	gbool AddLast(DataT &&data);
+	gvoid AddLast(const DataT &data);
+	gvoid AddLast(DataT &&data);
 
 	gvoid Remove(const NodeT *node);
 	virtual gvoid RemoveAt(gsize pos);

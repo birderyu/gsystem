@@ -32,7 +32,7 @@ public:
 	gvoid Reserve(gsize);
 	gvoid Resize(gsize);
 	gvoid Clear();
-	gvoid Dispose();
+	gvoid Destroy();
 
 	gbool IsEmpty() const;
 	gsize Size() const;

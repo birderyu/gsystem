@@ -68,7 +68,7 @@ GINLINE GDynamicArray<DataT>::GDynamicArray(const GArray<DataT> &array, gsize st
 template <typename DataT>
 GINLINE GDynamicArray<DataT>::~GDynamicArray()
 {
-	Dispose();
+	Destroy();
 }
 
 template <typename DataT>
@@ -95,7 +95,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize size)
 	if (size <= 0)
 	{
 		// 直接清空数组
-		Dispose();
+		Destroy();
 		return true;
 	}
 
@@ -117,7 +117,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
 	if (size <= 0)
 	{
 		// 直接清空数组
-		Dispose();
+		Destroy();
 		return true;
 	}
 
@@ -138,7 +138,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize si
 	if (new_size <= 0)
 	{
 		// 直接清空数组
-		Dispose();
+		Destroy();
 		return true;
 	}
 
@@ -160,7 +160,7 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize si
 	if (new_size <= 0)
 	{
 		// 直接清空数组
-		Dispose();
+		Destroy();
 		return true;
 	}
 
@@ -184,7 +184,7 @@ gvoid GDynamicArray<DataT>::Clear()
 }
 
 template <typename DataT>
-GINLINE gvoid GDynamicArray<DataT>::Dispose()
+GINLINE gvoid GDynamicArray<DataT>::Destroy()
 {
 	GArrays::DestoryArray<DataT>(m_pData, m_nSize);
 	m_pData = GNULL;
@@ -242,7 +242,7 @@ GINLINE gbool GDynamicArray<DataT>::RemoveAt(gsize pos)
 	{
 		if (0 == pos)
 		{
-			Dispose();
+			Destroy();
 			return true;
 		}
 		return false;
@@ -261,10 +261,17 @@ GINLINE GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(const GDynamicArra
 	}
 	if (arr.IsEmpty())
 	{
-		Dispose();
+		Destroy();
 		return *this;
 	}
-	m_pData = GArrays::CopyArrayFrom<DataT>(m_pData, m_nSize, arr.m_pData, arr.m_nSize);
+	if (m_pData)
+	{
+		m_pData = GArrays::CopyArrayFrom<DataT>(m_pData, m_nSize, arr.m_pData, arr.m_nSize);
+	}
+	else
+	{
+		m_pData = GArrays::CreateArray<DataT>(arr.m_pData, 0, arr.m_nSize);
+	}
 	m_nSize = arr.m_nSize;
 	return *this;
 }
@@ -276,7 +283,7 @@ GINLINE GDynamicArray<DataT> &GDynamicArray<DataT>::operator=(GDynamicArray<Data
 	{
 		return *this;
 	}
-	Dispose();
+	Destroy();
 	m_pData = arr.m_pData;
 	m_nSize = arr.m_nSize;
 	arr.m_pData = GNULL;
@@ -357,7 +364,7 @@ GINLINE gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
 	}
 	gsize size = 0;
 	archive >> size;
-	Dispose(); // 清空所有数据
+	Destroy(); // 清空所有数据
 	if (!Resize(size))
 	{
 		return false;

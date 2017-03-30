@@ -238,9 +238,11 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(GSeries<T, LOCAL
 		break;
 	case G_ARRAY_DATA_GLOBAL_TYPE:
 	{
+		m_pArray = arr.m_pArray;
+		m_pStart = m_pArray;
+
 		// 值，arr数据必须置空
 		arr.m_nType = G_ARRAY_DATA_LOCAL_TYPE;
-
 		arr.m_pStart = arr.m_tArray;
 		arr.m_nCapacity = arr.MIN_CAPACITY;
 		arr.m_nSize = 0;
@@ -467,7 +469,7 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Clear()
 }
 
 template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Dispose()
+GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Destroy()
 {
 	// 释放内存
 	Free();

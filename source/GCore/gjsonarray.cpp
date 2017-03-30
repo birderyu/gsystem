@@ -14,7 +14,7 @@ GJsonArray::GJsonArray()
 
 GJsonArray::~GJsonArray()
 {
-	Dispose();
+	Destroy();
 }
 
 gbool GJsonArray::Valid() const
@@ -56,7 +56,7 @@ GString GJsonArray::ToString() const
 
 gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage *msg)
 {
-	Dispose(); // 若已有数据，则先销毁
+	Destroy(); // 若已有数据，则先销毁
 	GString parse_msg; // 如果发生了错误，返回可能的原因
 	gsize _cursor = 0;
 	if (cursor)
@@ -95,7 +95,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 				msg->SetErrorCursor(_cursor);
 				msg->SetErrorMessage("非法的字符");
 			}
-			Dispose();
+			Destroy();
 			return false;
 		}
 		else if (G_CHAR_IS_SPACE(c))
@@ -118,7 +118,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 					msg->SetErrorCursor(_cursor);
 					msg->SetErrorMessage("非法的构造字符");
 				}
-				Dispose();
+				Destroy();
 				return false;
 			}
 
@@ -148,7 +148,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 					msg->SetErrorCursor(_cursor);
 					msg->SetErrorMessage("非法的构造字符");
 				}
-				Dispose();
+				Destroy();
 				return false;
 			}
 
@@ -167,7 +167,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 					*cursor = _cursor;
 				}
 				delete value;
-				Dispose();
+				Destroy();
 				return false;
 			}
 
@@ -189,7 +189,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 						msg->SetErrorMessage("非法的构造字符");
 					}
 					delete value;
-					Dispose();
+					Destroy();
 					return false;
 				}
 			}
@@ -206,7 +206,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 	if (!success)
 	{
 		// 操作失败，清理内存
-		Dispose();
+		Destroy();
 	}
 
 	if (cursor)
@@ -234,7 +234,7 @@ gbool GJsonArray::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 	return success;
 }
 
-gvoid GJsonArray::Dispose()
+gvoid GJsonArray::Destroy()
 {
 	for (GList<GJsonValue*>::Iterator iter = m_tJsonValues.Begin();
 		iter != m_tJsonValues.End(); iter++)

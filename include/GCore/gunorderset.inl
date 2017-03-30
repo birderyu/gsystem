@@ -38,7 +38,7 @@ GINLINE gbool GUnorderSet<KeyT, HashT, CompareT>::IsEmpty() const
 template<typename KeyT, typename HashT, typename CompareT>
 GINLINE gvoid GUnorderSet<KeyT, HashT, CompareT>::Clear()
 {
-	m_tTable.Dispose();
+	m_tTable.Destroy();
 }
 
 template<typename KeyT, typename HashT, typename CompareT>

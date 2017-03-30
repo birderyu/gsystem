@@ -61,7 +61,7 @@ public:
 	gvoid Clear();
 
 	// 销毁数组并将数组置空
-	gvoid Dispose();
+	gvoid Destroy();
 
 	// 将一个数组添加到末尾
 	gvoid Append(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &series);

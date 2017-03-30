@@ -28,10 +28,10 @@ public:
 	// 数组是否为空
 	gbool IsEmpty() const;
 
-	// 重分配数组的长度，可能会造成内存泄漏
+	// 重分配数组的长度
 	gbool Resize(gsize new_size);
 
-	// 重分配数组的长度，并将多出来的元素赋默认值t，可能会造成内存泄漏
+	// 重分配数组的长度，并将多出来的元素赋默认值t
 	gbool Resize(gsize new_size, const DataT &data);
 
 	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第0位
@@ -42,7 +42,7 @@ public:
 	gvoid Clear();
 
 	// 销毁数组
-	gvoid Dispose();
+	gvoid Destroy();
 
 	DataT &GetAt(gsize);
 	const DataT &GetAt(gsize) const;

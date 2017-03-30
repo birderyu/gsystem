@@ -21,16 +21,14 @@ public:
 	virtual gvoid Clear() = 0;
 
 	// ÈëÕ»
-	virtual gbool Push(const DataT &data) = 0;
-	virtual gbool Push(DataT &&data) = 0;
+	virtual gvoid Push(const DataT &data) = 0;
+	virtual gvoid Push(DataT &&data) = 0;
 
 	// ³öÕ»
-	virtual gbool Pop(DataT *data = GNULL) = 0;
+	virtual gvoid Pop(DataT *data = GNULL) = 0;
 
 	virtual const DataT &Top() const = 0; // Õ»¶¥
 	virtual DataT &Top() = 0; // Õ»¶¥
-	virtual const DataT &Bottom() const = 0; // Õ»µ×
-	virtual DataT &Bottom() = 0; // Õ»µ×
 };
 
 } // namespace gsystem

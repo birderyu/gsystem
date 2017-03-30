@@ -53,7 +53,7 @@ public:
 	gbool Parse(const GString &jsonStr, gsize *cursor = GNULL, GJsonParserMessage *msg = GNULL);
 
 private:
-	gvoid Dispose();
+	gvoid Destroy();
 	GList<GJsonValue*> m_tJsonValues;
 };
 

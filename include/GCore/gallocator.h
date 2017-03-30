@@ -21,10 +21,12 @@
 
 namespace gsystem { // gsystem
 
+// 全局的空间分配器，相当于GMalloc、GCalloc和GRealloc
 template <typename ClassT> ClassT *GAllocate(gsize n = 1) noexcept(false);
 template <typename ClassT> gvoid GDeallocate(ClassT *ptr) noexcept;
 template <typename ClassT> ClassT *GReallocate(ClassT *oldptr, gsize newsize) noexcept(false);
 
+// 一个默认的空间分配器
 template <typename ClassT>
 class GAllocator
 {

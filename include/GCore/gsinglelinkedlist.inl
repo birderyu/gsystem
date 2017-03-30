@@ -145,13 +145,9 @@ GINLINE gvoid GSingleLinkedList<DataT, NodeT>::Invert()
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const DataT &data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const DataT &data)
 {
-	if (pos == NULL_POS)
-	{
-		return false;
-	}
-
+	GASSERT(pos != NULL_POS);
 	if (GNULL == m_pFirst || 0 == pos)
 	{
 		return AddFirst(data);
@@ -165,27 +161,15 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, const Dat
 		pTmpNode2 = pTmpNode1;
 		pTmpNode1 = pTmpNode1->m_pNext;
 	}
-
-	NodeT *pNewNode = new NodeT(data);
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = pTmpNode1;
 	pTmpNode2->m_pNext = pNewNode;
-
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, DataT &&data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, DataT &&data)
 {
-	if (pos == NULL_POS)
-	{
-		return false;
-	}
-
+	GASSERT(pos != NULL_POS);
 	if (GNULL == m_pFirst || 0 == pos)
 	{
 		return AddFirst(GForward<DataT>(data));
@@ -201,25 +185,15 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(gsize pos, DataT &&d
 	}
 
 	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = pTmpNode1;
 	pTmpNode2->m_pNext = pNewNode;
-
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
 {	
-	if (!node)
-	{
-		return false;
-	}
-
+	GASSERT(node);
 	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = GNULL;
 	while (pTmpNode1)
@@ -234,14 +208,10 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const D
 	if (pTmpNode1 == GNULL)
 	{
 		// 查找不到，不做任何操作
-		return false;
+		return;
 	}
 	
 	NodeT *pNewNode = new NodeT(data);
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = node;
 	if (pTmpNode2)
 	{
@@ -252,17 +222,12 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, const D
 		m_pFirst = pNewNode;
 	}
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &&data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &&data)
 {
-	if (!node)
-	{
-		return false;
-	}
-
+	GASSERT(node);
 	NodeT *pTmpNode1 = m_pFirst;
 	NodeT *pTmpNode2 = GNULL;
 	while (pTmpNode1)
@@ -277,14 +242,10 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &
 	if (pTmpNode1 == GNULL)
 	{
 		// 查找不到，不做任何操作
-		return false;
+		return;
 	}
 
 	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = node;
 	if (pTmpNode2)
 	{
@@ -295,11 +256,10 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &
 		m_pFirst = pNewNode;
 	}
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const DataT &data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const DataT &data)
 {
 	if (GNULL == m_pFirst)
 	{
@@ -314,19 +274,13 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, const Data
 	}
 
 	NodeT *pNewNode = new NodeT(data);
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = pTmpNode->m_pNext;
 	pTmpNode->m_pNext = pNewNode;
-
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, DataT &&data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, DataT &&data)
 {
 	if (GNULL == m_pFirst)
 	{
@@ -341,93 +295,59 @@ GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertAfter(gsize pos, DataT &&da
 	}
 
 	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = pTmpNode->m_pNext;
 	pTmpNode->m_pNext = pNewNode;
-
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, const DataT &data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, const DataT &data)
 {
-	if (GNULL == node)
-	{
-		return false;
-	}
-
+	GASSERT(node);
 	NodeT *pNewNode = new NodeT(data);
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = node->m_pNext;
 	node->m_pNext = pNewNode;
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, DataT &&data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::InsertAfter(NodeT *node, DataT &&data)
 {
-	if (GNULL == node)
-	{
-		return false;
-	}
-
+	GASSERT(node);
 	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = node->m_pNext;
 	node->m_pNext = pNewNode;
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::AddFirst(const DataT &data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::AddFirst(const DataT &data)
 {
 	NodeT *pNewNode = new NodeT(data);
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = m_pFirst;
 	m_pFirst = pNewNode;
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::AddFirst(DataT &&data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::AddFirst(DataT &&data)
 {
 	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
-	if (!pNewNode)
-	{
-		return false;
-	}
 	pNewNode->m_pNext = m_pFirst;
 	m_pFirst = pNewNode;
 	++m_nSize;
-	return true;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::AddLast(const DataT &data)
 {
-	return InsertAfter(m_nSize - 1, data);
+	InsertAfter(m_nSize - 1, data);
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gbool GSingleLinkedList<DataT, NodeT>::AddLast(DataT &&data)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::AddLast(DataT &&data)
 {
-	return InsertAfter(m_nSize - 1, GForward<DataT>(data));
+	InsertAfter(m_nSize - 1, GForward<DataT>(data));
 }
 
 template<typename DataT, typename NodeT>

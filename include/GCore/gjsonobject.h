@@ -50,7 +50,7 @@ public:
 	gbool Parse(const GString &jsonStr, gsize *cursor = GNULL, GJsonParserMessage *msg = GNULL);
 
 private:
-	gvoid Dispose();
+	gvoid Destroy();
 	GMap<GString, GJsonPair*> m_tJsonPairs;
 };
 

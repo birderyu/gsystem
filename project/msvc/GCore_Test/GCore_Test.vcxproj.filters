@@ -38,5 +38,11 @@
     <ClInclude Include="Volume3Prism.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="stack_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="queue_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

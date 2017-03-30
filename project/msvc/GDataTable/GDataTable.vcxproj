@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\GDataTable\gdatapool.h" />
     <ClInclude Include="..\..\..\include\GDataTable\gdatatable.h" />
     <ClInclude Include="..\..\..\include\GDataTable\gfilter.h" />
     <ClInclude Include="..\..\..\include\GDataTable\gmetatable.h" />

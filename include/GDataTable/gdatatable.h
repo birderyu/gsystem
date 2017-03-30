@@ -7,7 +7,7 @@
 
 namespace gsystem {
 	namespace detail {
-		namespace table {
+		namespace data {
 			class GVirtualTable;
 			class GVirtualTableCursor;
 		}
@@ -15,7 +15,7 @@ namespace gsystem {
 }
 
 namespace gsystem {
-namespace table {
+namespace data {
 
 class GAPI GDataTable
 {

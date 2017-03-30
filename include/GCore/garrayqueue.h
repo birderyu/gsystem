@@ -12,34 +12,33 @@ class GArrayQueue
 	: public GQueue<DataT>
 {
 public:
-	//构造函数
-	GArrayQueue(gsize capacity)
-		: m_nFront(0)
-		, m_nRear(0)
-		, m_tArray(capacity)
-	{
-		
-	}
-	//析构函数
-	~GArrayQueue()
-	{
-		
-	}
+	GArrayQueue(gsize capacity = 0);
+	GArrayQueue(const GArrayQueue<DataT> &queue);
+	GArrayQueue(GArrayQueue<DataT> &&queue);
+	GArrayQueue<DataT>& operator=(const GArrayQueue<DataT> &queue);
+	GArrayQueue<DataT>& operator=(GArrayQueue<DataT> &&queue);
 
 	gbool IsEmpty() const;
-	int Size();         //队列的大小
+	gsize Size() const;
 
 	gvoid Clear();
-	gvoid Dispose();
+	gvoid Destroy();
 
-	DataT front();          //队首元素
-	bool pop();         //出对
-	bool push(T t);     //入队
+	gvoid EnQueue(const DataT &data);
+	gvoid EnQueue(DataT &&data);
+
+	gvoid DeQueue(DataT *data = GNULL);
+
+	const DataT &Head() const;
+	DataT &Head();
 	
+private:
+	gsize Capacity() const;
+	gvoid Reserve(gsize capacity);
 
 private:
-	gsize m_nFront; // 队首
-	gsize m_nRear;	// 队尾
+	gsize m_nHead; // 队首
+	gsize m_nTail; // 队尾的下一位
 	GDynamicArray<DataT> m_tArray;
 };
 

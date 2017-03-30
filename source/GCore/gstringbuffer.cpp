@@ -33,7 +33,7 @@ gvoid GStringBuffer::Clear()
 	// TODO
 }
 
-gvoid GStringBuffer::Dispose()
+gvoid GStringBuffer::Destroy()
 {
 	// TODO
 }

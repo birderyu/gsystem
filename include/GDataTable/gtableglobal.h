@@ -6,6 +6,12 @@
 #include "GCore/gdynamicarray.h"
 #include "gtableaction.h"
 
+namespace gsystem {
+	namespace table {
+
+	}
+}
+
 class GDataTable;
 class GDataView;
 template<typename TableT> class GTableCell;
@@ -15,6 +21,49 @@ template<typename TableT> class GTableRow;
 template<typename TableT> class GTableRows;
 template<typename TableT> class GTableColumn;
 template<typename TableT> class GTableColumns;
+
+enum class GFieldType
+{
+	Illgal = -1,
+	Boolean,
+	Byte,
+	Character8,
+	Character16,
+	Character32,
+	Integer8,
+	Integer16,
+	Integer32,
+	Integer64,
+	Float,
+	Double,
+	Decimal,
+	DateTime,
+	Bytes,
+	String,
+	String16,
+	String32,
+	Geometry,
+	Array,
+};
+
+enum class GIndexType
+{
+	Null = -1,
+	Attribute,	/// < 属性字段
+	Spatial,	/// < 空间字段
+};
+
+enum class GAttributeIndexType
+{
+	Order,		/// < 有序索引（默认）
+	Unorder,	/// < 无序索引
+};
+
+enum class GSpatialIndexType
+{
+	RTree,		/// < R树（默认）
+	GeoHash,	/// < GeoHash
+};
 
 // 表类型
 enum G_TABLE_TYPE

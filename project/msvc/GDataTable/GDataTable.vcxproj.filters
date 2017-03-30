@@ -111,6 +111,9 @@
     <ClInclude Include="..\..\..\private\GDataTable\gmemorytable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GDataTable\gdatapool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GDataTable\gfilter.cpp">

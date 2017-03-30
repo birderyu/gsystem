@@ -69,7 +69,7 @@ private:
 	gbool Parse_Object(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
 	gbool Parse_Null(const GString &jsonStr, gsize &cursor, GJsonParserMessage *msg);
 
-	gvoid Dispose();
+	gvoid Destroy();
 	GVariety m_tValue;
 	gbyte m_nType;
 };

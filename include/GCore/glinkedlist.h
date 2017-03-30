@@ -27,23 +27,23 @@ public:
 	// ·­×ª
 	virtual gvoid Invert() = 0;
 
-	virtual gbool InsertBefore(gsize pos, const DataT &data) = 0;
-	virtual gbool InsertBefore(gsize pos, DataT &&data) = 0;
+	virtual gvoid InsertBefore(gsize pos, const DataT &data) = 0;
+	virtual gvoid InsertBefore(gsize pos, DataT &&data) = 0;
 
-	virtual gbool InsertBefore(NodeT *node, const DataT &data) = 0;
-	virtual gbool InsertBefore(NodeT *node, DataT &&data) = 0;
+	virtual gvoid InsertBefore(NodeT *node, const DataT &data) = 0;
+	virtual gvoid InsertBefore(NodeT *node, DataT &&data) = 0;
 
-	virtual gbool InsertAfter(gsize pos, const DataT &data) = 0;
-	virtual gbool InsertAfter(gsize pos, DataT &&data) = 0;
+	virtual gvoid InsertAfter(gsize pos, const DataT &data) = 0;
+	virtual gvoid InsertAfter(gsize pos, DataT &&data) = 0;
 
-	virtual gbool InsertAfter(NodeT *node, const DataT &data) = 0;
-	virtual gbool InsertAfter(NodeT *node, DataT &&data) = 0;
+	virtual gvoid InsertAfter(NodeT *node, const DataT &data) = 0;
+	virtual gvoid InsertAfter(NodeT *node, DataT &&data) = 0;
 
-	virtual gbool AddFirst(const DataT &data) = 0;
-	virtual gbool AddFirst(DataT &&data) = 0;
+	virtual gvoid AddFirst(const DataT &data) = 0;
+	virtual gvoid AddFirst(DataT &&data) = 0;
 
-	virtual gbool AddLast(const DataT &data) = 0;
-	virtual gbool AddLast(DataT &&data) = 0;
+	virtual gvoid AddLast(const DataT &data) = 0;
+	virtual gvoid AddLast(DataT &&data) = 0;
 
 	virtual gvoid Remove(const NodeT *node) = 0;
 	virtual gvoid RemoveAt(gsize pos) = 0;

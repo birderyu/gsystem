@@ -15,7 +15,7 @@ GJsonValue::GJsonValue()
 
 GJsonValue::~GJsonValue()
 {
-	Dispose();
+	Destroy();
 }
 
 gbool GJsonValue::Valid()
@@ -84,7 +84,7 @@ GString GJsonValue::ToString() const
 
 gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessage *msg)
 {
-	Dispose(); // 若已有数据，则先销毁
+	Destroy(); // 若已有数据，则先销毁
 	gsize _cursor = 0;
 	if (cursor)
 	{
@@ -108,7 +108,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 			}
 			if (!success)
 			{
-				Dispose();
+				Destroy();
 			}
 			return success;
 		}
@@ -122,7 +122,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 			}
 			if (!success)
 			{
-				Dispose();
+				Destroy();
 			}
 			return success;
 		}
@@ -136,7 +136,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 			}
 			if (!success)
 			{
-				Dispose();
+				Destroy();
 			}
 			return success;
 		}
@@ -150,7 +150,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 			}
 			if (!success)
 			{
-				Dispose();
+				Destroy();
 			}
 			return success;
 		}
@@ -164,7 +164,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 			}
 			if (!success)
 			{
-				Dispose();
+				Destroy();
 			}
 			return success;
 		}
@@ -178,7 +178,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 			}
 			if (!success)
 			{
-				Dispose();
+				Destroy();
 			}
 			return success;
 		}
@@ -195,7 +195,7 @@ gbool GJsonValue::Parse(const GString &jsonStr, gsize *cursor, GJsonParserMessag
 				msg->SetErrorCursor(_cursor);
 				msg->SetErrorMessage("非法的字符");
 			}
-			Dispose();
+			Destroy();
 			return false;
 		}
 
@@ -472,7 +472,7 @@ gbool GJsonValue::Parse_Null(const GString &jsonStr, gsize &cursor, GJsonParserM
 	return m_nType == JSON_VALUE_TYPE_NULL;
 }
 
-gvoid GJsonValue::Dispose()
+gvoid GJsonValue::Destroy()
 {
 	if (m_tValue.GetType() == GVariety::VARIETY_TYPE_POINTER)
 	{

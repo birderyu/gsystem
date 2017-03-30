@@ -96,7 +96,7 @@ GINLINE G_HASH_TABLE_QUAL::GHashTable(G_HASH_TABLE_QUAL &&table)
 G_HASH_TABLE_TEMPLATE
 GINLINE G_HASH_TABLE_QUAL::~GHashTable()
 {
-	Dispose();
+	Destroy();
 }
 
 G_HASH_TABLE_TEMPLATE
@@ -106,7 +106,7 @@ GINLINE G_HASH_TABLE_QUAL &G_HASH_TABLE_QUAL::operator=(const G_HASH_TABLE_QUAL 
 	{
 		return *this;
 	}
-	Dispose();
+	Destroy();
 
 	m_nFactor = table.m_nFactor;
 	m_bUnique = table.m_bUnique;
@@ -141,7 +141,7 @@ GINLINE G_HASH_TABLE_QUAL &G_HASH_TABLE_QUAL::operator=(G_HASH_TABLE_QUAL &&tabl
 	{
 		return *this;
 	}
-	Dispose();
+	Destroy();
 
 	m_nFactor = table.m_nFactor;
 	m_bUnique = table.m_bUnique;
@@ -173,7 +173,7 @@ GINLINE gbool G_HASH_TABLE_QUAL::IsEmpty() const
 }
 
 G_HASH_TABLE_TEMPLATE
-GINLINE gvoid G_HASH_TABLE_QUAL::Dispose()
+GINLINE gvoid G_HASH_TABLE_QUAL::Destroy()
 {
 	gsize size = m_tBuckets.Size();
 	for (gsize i = 0; i < size; i++)
@@ -504,7 +504,8 @@ GINLINE gbool G_HASH_TABLE_QUAL::HashSlotEquals(const typename G_HASH_TABLE_QUAL
 }
 
 G_HASH_TABLE_TEMPLATE
-GINLINE gvoid G_HASH_TABLE_QUAL::Inflate(gsize module)
+GINLINE 
+gvoid G_HASH_TABLE_QUAL::Inflate(gsize module)
 {
 	gsize new_module = RoundUpToPowerOf2(module);
 	m_nThreshold = new_module * m_nFactor;

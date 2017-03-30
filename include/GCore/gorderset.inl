@@ -38,7 +38,7 @@ GINLINE gbool GOrderSet<KeyT, CompareT>::IsEmpty() const
 template < typename KeyT, typename CompareT>
 GINLINE gvoid GOrderSet<KeyT, CompareT>::Clear()
 {
-	m_tTree.Dispose();
+	m_tTree.Destroy();
 	m_nSize = 0;
 }
 
