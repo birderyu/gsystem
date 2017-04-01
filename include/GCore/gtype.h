@@ -126,6 +126,8 @@ typedef size_t			gsize;		// 长度类型
 typedef gsize			gaddress;	// 指针值类型
 typedef ptrdiff_t		gptrdiff;	// 指针偏移类型
 typedef time_t			gtime;		// 时间戳类型
+typedef max_align_t		gmaxalign;
+typedef nullptr_t		gnullptr;
 
 } // namespace gsystem
 

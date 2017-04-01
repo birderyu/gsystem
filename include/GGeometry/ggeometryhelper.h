@@ -10,7 +10,7 @@ class GAPI GGeometryHelper
 {
 public:
 	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GGeometryPtr &geo);
-	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GPointP &point);
+	template<typename GeometryT> static GSharedPointer<GeometryT> ConvertTo(GPointPtr &point);
 };
 
 }

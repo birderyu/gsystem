@@ -11,7 +11,7 @@ GINLINE GSharedPointer<GeometryT> GGeometryHelper::ConvertTo(GGeometryPtr &geo)
 }
 
 template<typename GeometryT>
-GINLINE GSharedPointer<GeometryT> GGeometryHelper::ConvertTo(GPointP &point)
+GINLINE GSharedPointer<GeometryT> GGeometryHelper::ConvertTo(GPointPtr &point)
 {
 	return point.DynamicConvertTo<GeometryT>();
 }

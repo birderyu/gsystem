@@ -46,9 +46,9 @@ public:
 	virtual gvoid AddLast(DataT &&data) = 0;
 
 	virtual gvoid Remove(const NodeT *node) = 0;
-	virtual gvoid RemoveAt(gsize pos) = 0;
-	virtual gvoid RemoveFirst() = 0;
-	virtual gvoid RemoveLast() = 0;
+	virtual gvoid RemoveAt(gsize pos, DataT *data = GNULL) = 0;
+	virtual gvoid RemoveFirst(DataT *data = GNULL) = 0;
+	virtual gvoid RemoveLast(DataT *data = GNULL) = 0;
 	virtual gvoid RemoveAll() = 0;
 
 	virtual NodeT *GetFirstNode() = 0;

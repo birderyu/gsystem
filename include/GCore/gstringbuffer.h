@@ -22,7 +22,7 @@ public:
 	GStringBuffer(const GStringBuffer &);
 	~GStringBuffer();
 
-	gbool Reserve(gsize);
+	gvoid Reserve(gsize);
 	gvoid Clear();
 	gvoid Destroy();
 

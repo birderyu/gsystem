@@ -85,17 +85,7 @@ gvoid GListQueue<DataT>::EnQueue(DataT &&data)
 template <typename DataT> GINLINE
 gvoid GListQueue<DataT>::DeQueue(DataT *data)
 {
-	if (IsEmpty())
-	{
-		return;
-	}
-
-	if (data)
-	{
-		*data = GMove(m_tList.GetFirstData());
-	}
-
-	m_tList.RemoveFirst();
+	m_tList.RemoveFirst(data);
 }
 
 template <typename DataT> GINLINE

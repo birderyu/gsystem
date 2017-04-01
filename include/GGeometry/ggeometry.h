@@ -153,7 +153,6 @@ public:
 	//virtual GGeometryP Difference(const GGeometry &geo) const = 0;
 };
 
-
 }
 }
 

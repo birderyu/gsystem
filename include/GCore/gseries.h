@@ -1,15 +1,12 @@
 /// 为了使得串结构（String）更加高效，构建了数据结构GSeries
 /// GSeries作为所有串结构的内核（GString、GWString、GBytes），拥有以下特点：
-/// 1）为了支持串在大部分使用场景中其长度都不大，支持
+/// 1）为了支持串在大部分使用场景中其长度都不大
 /// 2）为了支持串在大部分时间其实用于只读操作的情景，支持COW（copy-on-write，写时拷贝），
-#ifndef _CORE_ARRAY_DATA_H_
-#define _CORE_ARRAY_DATA_H_
+#ifndef _CORE_SERIES_H_
+#define _CORE_SERIES_H_
 
+#include "garray.h"
 #include "garrays.h"
-
-#define G_ARRAY_DATA_LOCAL_TYPE		0
-#define G_ARRAY_DATA_GLOBAL_TYPE	1
-#define G_ARRAY_DATA_REFERENCE_TYPE	2
 
 namespace gsystem { // gsystem
 
@@ -28,8 +25,14 @@ public:
 	static_assert(MIN_CAPACITY > 0, "MIN_CAPACITY must greater than zero.");
 
 public:
+	static GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> CopyOf(const T *copy_arr, gsize copy_size);
+	static GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> ReferenceOf(const T *ref_arr, gsize ref_size);
+
+public:
 	GSeries(gsize capacity = 0);
-	GSeries(const T *copy_arr, gsize copy_size, gbool is_reference = false);
+	GSeries(const T *copy_arr, gsize copy_size);
+	GSeries(const GArray<T> &copy_arr);
+	GSeries(GArray<T> &&move_arr);
 	GSeries(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr);
 	GSeries(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr);
 	~GSeries();
@@ -73,6 +76,11 @@ public:
 	T &operator[](gsize pos);
 
 private:
+	// 注意，这三个函数的调用需要慎重，这是因为这三个函数仅做了初始化，未对原来的数据做内存回收
+	gvoid CopyConstruct(const T *copy_arr, gsize copy_size);
+	gvoid MoveConstruct(T *&move_arr, gsize move_size);
+	gvoid ReferenceConstruct(const T *ref_arr, gsize ref_size);
+
 	gvoid Free(); // 销毁数据
 
 	gbool IsReference() const;
@@ -99,8 +107,4 @@ GAPI typedef GSeries<gwchar, 4, true, L'\0'>	GWStringData;
 
 #include "gseries.inl"
 
-#undef G_ARRAY_DATA_REFERENCE_TYPE
-#undef G_ARRAY_DATA_GLOBAL_TYPE
-#undef G_ARRAY_DATA_LOCAL_TYPE
-
-#endif // _CORE_ARRAY_DATA_H_
+#endif // _CORE_SERIES_H_

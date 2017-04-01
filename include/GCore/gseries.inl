@@ -1,5 +1,11 @@
-#ifndef _CORE_ARRAY_DATA_INLINE_
-#define _CORE_ARRAY_DATA_INLINE_
+#ifndef _CORE_SERIES_INLINE_
+#define _CORE_SERIES_INLINE_
+
+#define G_SERIES_TYPE_LOCAL		0
+#define G_SERIES_TYPE_GLOBAL	1
+#define G_SERIES_TYPE_REFERENCE	2
+#define G_SERIES_TEMPLATE		template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
+#define G_SERIES_QUAL			GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>
 
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
@@ -136,19 +142,35 @@ GINLINE gvoid GSeriesHelper<true>::SetEndFlag(T *arr, gsize size, T &&end_flag)
 
 namespace gsystem { // gsystem
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(gsize capacity)
+G_SERIES_TEMPLATE GINLINE
+G_SERIES_QUAL G_SERIES_QUAL::CopyOf(const T *copy_arr, gsize copy_size)
+{
+	G_SERIES_QUAL _series;
+	_series.CopyConstruct(copy_arr, copy_size);
+	return _series;
+}
+
+G_SERIES_TEMPLATE GINLINE
+G_SERIES_QUAL G_SERIES_QUAL::ReferenceOf(const T *ref_arr, gsize ref_size)
+{
+	G_SERIES_QUAL _series;
+	_series.ReferenceConstruct(ref_arr, ref_size);
+	return _series;
+}
+
+G_SERIES_TEMPLATE GINLINE
+G_SERIES_QUAL::GSeries(gsize capacity)
 	: m_nSize(0), m_pStart(GNULL)
 {
 	if (capacity <= MIN_CAPACITY)
 	{
-		m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+		m_nType = G_SERIES_TYPE_LOCAL;
 		m_nCapacity = MIN_CAPACITY;
 		m_pStart = m_tArray;
 	}
 	else
 	{
-		m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
+		m_nType = G_SERIES_TYPE_GLOBAL;
 		m_nCapacity = capacity;
 		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(capacity);
 		m_pStart = m_pArray;
@@ -156,41 +178,26 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(gsize capacity)
 	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(const T *copy_arr, gsize copy_size, gbool is_reference)
-	: m_nSize(copy_size), m_pStart(GNULL)
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL::GSeries(const T *copy_arr, gsize copy_size)
 {
-	if (is_reference)
-	{
-		// 引用拷贝
-		m_nType = G_ARRAY_DATA_REFERENCE_TYPE;
-		m_nCapacity = 0;
-		m_nSize = copy_size;
-		m_pStart = const_cast<T *>(copy_arr);
-	}
-	else
-	{
-		// 值拷贝
-		if (copy_size <= MIN_CAPACITY)
-		{
-			m_nType = G_ARRAY_DATA_LOCAL_TYPE;
-			m_nCapacity = MIN_CAPACITY;
-			detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, copy_size, copy_arr);
-			m_pStart = m_tArray;
-		}
-		else
-		{
-			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
-			m_nCapacity = copy_size;
-			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(copy_arr, copy_size);
-			m_pStart = m_pArray;
-		}
-		detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
-	}
+	CopyConstruct(copy_arr, copy_size);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr)
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL::GSeries(const GArray<T> &copy_arr)
+{
+	CopyConstruct(copy_arr.FirstCursor(), copy_arr.Size());
+}
+
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL::GSeries(GArray<T> &&move_arr)
+{
+	// TODO
+}
+
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL::GSeries(const G_SERIES_QUAL &arr)
 	: m_nSize(arr.m_nSize)
 	, m_nCapacity(arr.m_nSize)
 	, m_nType(arr.m_nType)
@@ -198,19 +205,19 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(const GSeries<T,
 {
 	switch (arr.m_nType)
 	{
-	case G_ARRAY_DATA_LOCAL_TYPE:
+	case G_SERIES_TYPE_LOCAL:
 	{
 		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
 		m_pStart = m_tArray;
 	}
 		break;
-	case G_ARRAY_DATA_GLOBAL_TYPE:
+	case G_SERIES_TYPE_GLOBAL:
 	{
 		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(arr.m_pStart, arr.m_nSize);
 		m_pStart = m_pArray;
 	}
 		break;
-	case G_ARRAY_DATA_REFERENCE_TYPE:
+	case G_SERIES_TYPE_REFERENCE:
 	{
 		m_pStart = m_pArray;
 	}
@@ -221,8 +228,8 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(const GSeries<T,
 	}
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr)
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL::GSeries(G_SERIES_QUAL &&arr)
 	: m_nSize(arr.m_nSize)
 	, m_nCapacity(arr.m_nCapacity)
 	, m_nType(arr.m_nType)
@@ -230,29 +237,29 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(GSeries<T, LOCAL
 {
 	switch (arr.m_nType)
 	{
-	case G_ARRAY_DATA_LOCAL_TYPE:
+	case G_SERIES_TYPE_LOCAL:
 	{
 		m_pStart = m_tArray;
 		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_pStart, arr.m_nSize, arr.m_pStart);
 	}
 		break;
-	case G_ARRAY_DATA_GLOBAL_TYPE:
+	case G_SERIES_TYPE_GLOBAL:
 	{
 		m_pArray = arr.m_pArray;
 		m_pStart = m_pArray;
 
 		// 值，arr数据必须置空
-		arr.m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+		arr.m_nType = G_SERIES_TYPE_LOCAL;
 		arr.m_pStart = arr.m_tArray;
 		arr.m_nCapacity = arr.MIN_CAPACITY;
 		arr.m_nSize = 0;
 	}
 		break;
-	case G_ARRAY_DATA_REFERENCE_TYPE:
+	case G_SERIES_TYPE_REFERENCE:
 	{
 		// 引用，arr数据无需置空
-		m_pArray = arr.m_pStart;
-		m_pStart = m_pArray;
+		m_pArray = GNULL;
+		m_nCapacity = 0;
 	}
 		break;
 	default:
@@ -261,32 +268,32 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GSeries(GSeries<T, LOCAL
 	}
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::~GSeries()
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL::~GSeries()
 {
 	Free();
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gsize GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Size() const
+G_SERIES_TEMPLATE
+GINLINE gsize G_SERIES_QUAL::Size() const
 {
 	return m_nSize;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gsize GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Capacity() const
+G_SERIES_TEMPLATE
+GINLINE gsize G_SERIES_QUAL::Capacity() const
 {
 	return m_nCapacity;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gbool GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::IsEmpty() const
+G_SERIES_TEMPLATE
+GINLINE gbool G_SERIES_QUAL::IsEmpty() const
 {
 	return m_nSize == 0;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Resize(gsize size)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Resize(gsize size)
 {
 	if (IsReference())
 	{
@@ -310,16 +317,16 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Resize(gsize size)
 			return;
 		}
 
-		if (m_nType == G_ARRAY_DATA_LOCAL_TYPE)
+		if (m_nType == G_SERIES_TYPE_LOCAL)
 		{
 			// 需要将local type扩展成global type
 			T *arr = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(size, m_tArray, m_nSize);
 			m_nCapacity = size;
 			m_pArray = arr;
-			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
+			m_nType = G_SERIES_TYPE_GLOBAL;
 			m_pStart = m_pArray;
 		}
-		else if (m_nType == G_ARRAY_DATA_GLOBAL_TYPE)
+		else if (m_nType == G_SERIES_TYPE_GLOBAL)
 		{
 			// 数组扩容
 			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::ResizeSeries<T>(m_pArray, m_nCapacity, size);
@@ -329,8 +336,8 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Resize(gsize size)
 	}
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Reserve(gsize capacity)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Reserve(gsize capacity)
 {
 	if (IsReference())
 	{
@@ -346,12 +353,12 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Reserve(gsize capa
 			return;
 		}
 
-		if (m_nType == G_ARRAY_DATA_LOCAL_TYPE)
+		if (m_nType == G_SERIES_TYPE_LOCAL)
 		{
 			// 需要将local type扩展成global type
 			T *arr = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(capacity, m_tArray, m_nSize);
 			m_pArray = arr;
-			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
+			m_nType = G_SERIES_TYPE_GLOBAL;
 			m_pStart = m_pArray;
 		}
 		else
@@ -363,97 +370,97 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Reserve(gsize capa
 	}
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ConstGetAt(gsize pos) const
+G_SERIES_TEMPLATE
+GINLINE const T &G_SERIES_QUAL::ConstGetAt(gsize pos) const
 {
 	GASSERT(pos < m_nSize);
 	return m_pStart[pos];
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GetAt(gsize pos) const
+G_SERIES_TEMPLATE
+GINLINE const T &G_SERIES_QUAL::GetAt(gsize pos) const
 {
 	GASSERT(pos < m_nSize);
 	return m_pStart[pos];
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE T &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::GetAt(gsize pos)
+G_SERIES_TEMPLATE
+GINLINE T &G_SERIES_QUAL::GetAt(gsize pos)
 {
 	ToValue(m_nSize);
 	GASSERT(pos < m_nSize);
 	return m_pStart[pos];
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T *GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ConstCursorAt(gsize pos) const
+G_SERIES_TEMPLATE
+GINLINE const T *G_SERIES_QUAL::ConstCursorAt(gsize pos) const
 {
 	return m_pStart + pos;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T *GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::CursorAt(gsize pos) const
+G_SERIES_TEMPLATE
+GINLINE const T *G_SERIES_QUAL::CursorAt(gsize pos) const
 {
 	return m_pStart + pos;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE T *GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::CursorAt(gsize pos)
+G_SERIES_TEMPLATE
+GINLINE T *G_SERIES_QUAL::CursorAt(gsize pos)
 {
 	ToValue(m_nSize);
 	return m_pStart + pos;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T *GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ConstStart() const
+G_SERIES_TEMPLATE
+GINLINE const T *G_SERIES_QUAL::ConstStart() const
 {
 	return m_pStart;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T *GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Start() const
+G_SERIES_TEMPLATE
+GINLINE const T *G_SERIES_QUAL::Start() const
 {
 	return m_pStart;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE T *GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Start()
+G_SERIES_TEMPLATE
+GINLINE T *G_SERIES_QUAL::Start()
 {
 	ToValue(m_nSize);
 	return m_pStart;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::SetAt(gsize pos, const T &data)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::SetAt(gsize pos, const T &data)
 {
 	ToValue(m_nSize);
 	GASSERT(pos < m_nSize);
 	m_pStart[pos] = data;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::SetAt(gsize pos, T &&data)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::SetAt(gsize pos, T &&data)
 {
 	ToValue(m_nSize);
 	GASSERT(pos < m_nSize);
 	m_pStart[pos] = GForward<T>(data);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Clear()
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Clear()
 {
 	switch (m_nType)
 	{
-	case G_ARRAY_DATA_LOCAL_TYPE:
-	case G_ARRAY_DATA_GLOBAL_TYPE:
+	case G_SERIES_TYPE_LOCAL:
+	case G_SERIES_TYPE_GLOBAL:
 	{
 		detail::series::GSeriesHelper<HAS_END_FLAG>::ClearSeries<T>(m_pArray, m_nCapacity);
 	}
 		break;
-	case G_ARRAY_DATA_REFERENCE_TYPE:
+	case G_SERIES_TYPE_REFERENCE:
 	{
 		// 将引用转换为一个空的local type
-		m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+		m_nType = G_SERIES_TYPE_LOCAL;
 		m_nSize = 0;
 		m_nCapacity = MIN_CAPACITY;
 		m_pStart = m_tArray;
@@ -468,22 +475,22 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Clear()
 	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Destroy()
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Destroy()
 {
 	// 释放内存
 	Free();
 
 	// 将数组转换为local type并置空
-	m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+	m_nType = G_SERIES_TYPE_LOCAL;
 	m_nSize = 0;
 	m_nCapacity = MIN_CAPACITY;
 	m_pStart = m_tArray;
 	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Append(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &series)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Append(const G_SERIES_QUAL &series)
 {
 	ToValue(m_nSize + series.m_nSize); // 转换成值类型
 	Reserve(m_nSize + series.m_nSize);
@@ -491,8 +498,8 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Append(const GSeri
 	m_nSize += series.m_nSize;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Append(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&series)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Append(G_SERIES_QUAL &&series)
 {
 	ToValue(m_nSize + series.m_nSize); // 转换成值类型
 	Reserve(m_nSize + series.m_nSize);
@@ -500,8 +507,8 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Append(GSeries<T, 
 	m_nSize += series.m_nSize;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::operator=(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr)
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL &G_SERIES_QUAL::operator=(const G_SERIES_QUAL &arr)
 {
 	if (this == &arr)
 	{
@@ -520,19 +527,19 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 	}
 
 	// arr不是引用型
-	if (m_nType == G_ARRAY_DATA_LOCAL_TYPE)
+	if (m_nType == G_SERIES_TYPE_LOCAL)
 	{
 		// 数组原本是local type
 		if (arr.m_nSize > m_nCapacity)
 		{
 			// 将local type扩展成global type，仅需分配内存，不需要创建元素
 			m_nCapacity = arr.m_nSize;
-			m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
+			m_nType = G_SERIES_TYPE_GLOBAL;
 			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(arr.m_nSize);
 			m_pStart = m_pArray;
 		}
 	}
-	else if (m_nType == G_ARRAY_DATA_GLOBAL_TYPE)
+	else if (m_nType == G_SERIES_TYPE_GLOBAL)
 	{
 		// 数组原本是global type
 		// 当m_nCapacity >= arr.m_nSize时，说明原数组的容量已经能够容纳下新的数组，因此无需重新分配内存
@@ -545,20 +552,20 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 			{
 				// 新的数组将采用local type，无需分配内存
 				m_nCapacity = MIN_CAPACITY;
-				m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+				m_nType = G_SERIES_TYPE_LOCAL;
 				m_pStart = m_tArray;
 			}
 			else
 			{
 				// 新的数组将采用global type，需要分配内存
 				m_nCapacity = arr.m_nSize;
-				m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
+				m_nType = G_SERIES_TYPE_GLOBAL;
 				m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(arr.m_nSize);
 				m_pStart = m_pArray;
 			}
 		}
 	}
-	else if (m_nType == G_ARRAY_DATA_REFERENCE_TYPE)
+	else if (m_nType == G_SERIES_TYPE_REFERENCE)
 	{
 		// 数组原本是reference，分配内存并复制
 		m_nSize = arr.m_nSize;
@@ -568,13 +575,13 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 
 		switch (arr.m_nType)
 		{
-		case G_ARRAY_DATA_LOCAL_TYPE:
+		case G_SERIES_TYPE_LOCAL:
 		{
 			detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
 			m_pStart = m_tArray;
 		}
 		break;
-		case G_ARRAY_DATA_GLOBAL_TYPE:
+		case G_SERIES_TYPE_GLOBAL:
 		{
 			m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries(arr.m_pStart, arr.m_nSize);
 			m_pStart = m_pArray;
@@ -595,8 +602,8 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 	detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom(m_pStart, arr.m_nSize, arr.m_pStart);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::operator=(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr)
+G_SERIES_TEMPLATE
+GINLINE G_SERIES_QUAL &G_SERIES_QUAL::operator=(G_SERIES_QUAL &&arr)
 {
 	if (this == &arr)
 	{
@@ -623,25 +630,26 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 
 	switch (arr.m_nType)
 	{
-	case G_ARRAY_DATA_LOCAL_TYPE:
+	case G_SERIES_TYPE_LOCAL:
 	{
 		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, arr.m_nSize, arr.m_pStart);
 		m_pStart = m_tArray;
 	}
 		break;
-	case G_ARRAY_DATA_GLOBAL_TYPE:
+	case G_SERIES_TYPE_GLOBAL:
 	{
 		m_pArray = arr.m_pArray;
 		m_pStart = m_pArray;
 		// arr数据置空
-		arr.m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+		arr.m_nType = G_SERIES_TYPE_LOCAL;
 		arr.m_pStart = arr.m_tArray;
 		arr.m_nCapacity = arr.MIN_CAPACITY;
 		arr.m_nSize = 0;
 	}
 		break;
-	case G_ARRAY_DATA_REFERENCE_TYPE:
+	case G_SERIES_TYPE_REFERENCE:
 	{
+		m_pArray = GNULL;
 		m_pStart = arr.m_pStart;
 	}
 		break;
@@ -651,37 +659,80 @@ GINLINE GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &GSeries<T, LOCAL_SIZE, H
 	}
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE const T &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::operator[](gsize pos) const
+G_SERIES_TEMPLATE
+GINLINE const T &G_SERIES_QUAL::operator[](gsize pos) const
 {
 	return ConstGetAt(pos);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE T &GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::operator[](gsize pos)
+G_SERIES_TEMPLATE
+GINLINE T &G_SERIES_QUAL::operator[](gsize pos)
 {
-	ToValue(m_nSize);
 	return GetAt(pos);
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Free()
+G_SERIES_TEMPLATE GINLINE
+gvoid G_SERIES_QUAL::CopyConstruct(const T *copy_arr, gsize copy_size)
+{
+	if (copy_size <= MIN_CAPACITY)
+	{
+		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, copy_size, copy_arr);
+		m_nType = G_SERIES_TYPE_LOCAL;
+		m_nCapacity = MIN_CAPACITY;
+		m_nSize = copy_size;
+		m_pStart = m_tArray;
+	}
+	else
+	{
+		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(copy_arr, copy_size);
+		m_nType = G_SERIES_TYPE_GLOBAL;
+		m_nCapacity = copy_size;
+		m_nSize = copy_size;
+		m_pStart = m_pArray;
+	}
+	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+}
+
+G_SERIES_TEMPLATE GINLINE
+gvoid G_SERIES_QUAL::MoveConstruct(T *&move_arr, gsize move_size)
+{
+	m_nType = G_SERIES_TYPE_GLOBAL;
+	m_nCapacity = copy_size;
+	m_nSize = copy_size;
+	m_pArray = move_arr;
+	m_pStart = m_pArray;
+	move_arr = GNULL;
+	detail::series::GSeriesHelper<HAS_END_FLAG>::SetEndFlag<T>(m_pStart, m_nSize, END_FLAG);
+}
+
+G_SERIES_TEMPLATE GINLINE
+gvoid G_SERIES_QUAL::ReferenceConstruct(const T *ref_arr, gsize ref_size)
+{
+	m_nType = G_SERIES_TYPE_REFERENCE;
+	m_nCapacity = 0;
+	m_nSize = ref_size;
+	m_pStart = const_cast<T *>(ref_arr);
+	m_pArray = GNULL;
+}
+
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::Free()
 {
 	switch (m_nType)
 	{
-	case G_ARRAY_DATA_LOCAL_TYPE:
+	case G_SERIES_TYPE_LOCAL:
 	{
 		// 只析构元素，不释放内存
 		detail::series::GSeriesHelper<HAS_END_FLAG>::ClearSeries<T>(m_pArray, m_nCapacity);
 	}
 	break;
-	case G_ARRAY_DATA_GLOBAL_TYPE:
+	case G_SERIES_TYPE_GLOBAL:
 	{
 		// 析构元素后，释放内存
 		detail::series::GSeriesHelper<HAS_END_FLAG>::DestorySeries<T>(m_pArray, m_nCapacity);
 	}
 	break;
-	case G_ARRAY_DATA_REFERENCE_TYPE:
+	case G_SERIES_TYPE_REFERENCE:
 	{
 		// 引用，不做操作
 	}
@@ -692,14 +743,14 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::Free()
 	}
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gbool GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::IsReference() const
+G_SERIES_TEMPLATE
+GINLINE gbool G_SERIES_QUAL::IsReference() const
 {
-	return m_nType == G_ARRAY_DATA_REFERENCE_TYPE;
+	return m_nType == G_SERIES_TYPE_REFERENCE;
 }
 
-template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
-GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ToValue(gsize capacity)
+G_SERIES_TEMPLATE
+GINLINE gvoid G_SERIES_QUAL::ToValue(gsize capacity)
 {
 	if (!IsReference())
 	{
@@ -711,14 +762,14 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ToValue(gsize capa
 
 	if (capacity <= MIN_CAPACITY)
 	{
-		m_nType = G_ARRAY_DATA_LOCAL_TYPE;
+		m_nType = G_SERIES_TYPE_LOCAL;
 		m_nCapacity = MIN_CAPACITY;
 		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_tArray, real_size, m_pStart);
 		m_pStart = m_tArray;
 	}
 	else
 	{
-		m_nType = G_ARRAY_DATA_GLOBAL_TYPE;
+		m_nType = G_SERIES_TYPE_GLOBAL;
 		m_nCapacity = capacity;
 		m_pArray = detail::series::GSeriesHelper<HAS_END_FLAG>::CreateSeries<T>(capacity);
 		detail::series::GSeriesHelper<HAS_END_FLAG>::CopySeriesFrom<T>(m_pArray, real_size, m_pStart);
@@ -731,4 +782,10 @@ GINLINE gvoid GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>::ToValue(gsize capa
 
 } // namespace gsystem
 
-#endif // _CORE_ARRAY_DATA_INLINE_
+#undef G_SERIES_QUAL
+#undef G_SERIES_TEMPLATE
+#undef G_SERIES_TYPE_REFERENCE
+#undef G_SERIES_TYPE_GLOBAL
+#undef G_SERIES_TYPE_LOCAL
+
+#endif // _CORE_SERIES_INLINE_

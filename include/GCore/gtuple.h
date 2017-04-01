@@ -22,8 +22,12 @@ public:
 	GPair(const GPair<T1, T2> &pair);
 	GPair(GPair<T1, T2> &&pair);
 
+	const volatile T1& First() const volatile;
+	volatile T1 &First() volatile;
 	const T1 &First() const;
 	T1 &First();
+	const volatile T2& First() const volatile;
+	volatile T2 &First() volatile;
 	const T2 &Second() const;
 	T2 &Second();
 
@@ -38,7 +42,7 @@ template<typename T1, typename T2> GPair<T1, T2> GMakePair(const T1 &first, T2 &
 template<typename T1, typename T2> GPair<T1, T2> GMakePair(T1 &&first, const T2 &second);
 template<typename T1, typename T2> GPair<T1, T2> GMakePair(T1 &&first, T2 &&second);
 
-/// 元组
+// 元组
 template<typename ...TS> class GTuple;
 template<> class GTuple<> {};
 typedef GTuple<> GNullTuple;
@@ -330,6 +334,139 @@ gvoid GTupleSet(GTuple<TS...> &tuple_, typename GTupleAt<N, GTuple<TS...> >::Val
 		= static_cast<BaseTupleType &>(tuple_).Head();
 	cur_val = GMove(val);
 }
+
+struct GZeroThenVariadicArgs {};
+struct GOneThenVariadicArgs {};
+
+template<typename T1, typename T2,
+	gbool = GIsEmpty<T1>::value && !GIsFinal<T1>::value>
+class GCompressedPair final
+	: private T1
+{
+private:
+	T2 m_tValue2;
+	typedef T1 BaseType;
+
+public:
+	template<typename... Arg2Ts>
+	constexpr explicit GCompressedPair(GZeroThenVariadicArgs, Arg2Ts&&... arg2s)
+		: T1(), m_tValue2(GForward<Arg2Ts>(arg2s)...)
+	{
+	}
+
+	template<typename Arg1T, typename... Arg2Ts>
+	GCompressedPair(GOneThenVariadicArgs,
+		Arg1T&& arg1, Arg2Ts&&... arg2s)
+		: T1(GForward<Arg1T>(arg1)),
+		m_tValue2(GForward<Arg2Ts>(arg2s)...)
+	{
+	}
+
+
+	T1 &First() noexcept
+	{
+		return *this;
+	}
+
+	const T1 &First() const noexcept
+	{
+		return *this;
+	}
+
+	volatile T1 &First() volatile noexcept
+	{
+		return *this;
+	}
+
+	const volatile T1& First() const volatile noexcept
+	{
+		return *this;
+	}
+
+	T2 &Second() noexcept
+	{
+		return m_tValue2;
+	}
+
+	const T2 &Second() const noexcept
+	{
+		return m_tValue2;
+	}
+
+	volatile T2 &Second() volatile noexcept
+	{
+		return m_tValue2;
+	}
+
+	const volatile T2 &Second() const volatile noexcept
+	{
+		return m_tValue2;
+	}
+};
+
+template<typename T1, typename T2>
+class GCompressedPair<T1, T2, false> final
+	: private GPair<T1, T2>
+{
+private:
+	typedef GPair<T1, T2> BaseType;
+
+public:
+	template<typename... Arg2Ts>
+	constexpr explicit GCompressedPair(GZeroThenVariadicArgs, Arg2Ts&&... arg2s)
+		: GPair<T1, T2>(T1(), T2(GForward<Arg2Ts>(arg2s)...))
+	{
+
+	}
+
+	template<typename Arg1T, typename... Arg2Ts>
+	GCompressedPair(GOneThenVariadicArgs,
+		Arg1T&& arg1, Arg2Ts&&... arg2s)
+		: GPair(T1(GForward<Arg1T>(arg1)),
+			T2(GForward<Arg2Ts>(arg2s)...))
+	{
+	}
+
+	T1 &First() noexcept
+	{
+		return BaseType::First();
+	}
+
+	const T1 &First() const noexcept
+	{
+		return BaseType::First();
+	}
+
+	volatile T1 &First() volatile noexcept
+	{
+		return BaseType::First();
+	}
+
+	const volatile T1& First() const volatile noexcept
+	{
+		return BaseType::First();
+	}
+
+	T2 &Second() noexcept
+	{
+		return BaseType::Second();
+	}
+
+	const T2 &Second() const noexcept
+	{
+		return BaseType::Second();
+	}
+
+	volatile T2 &Second() volatile noexcept
+	{
+		return BaseType::Second();
+	}
+
+	const volatile T2 &Second() const volatile noexcept
+	{
+		return BaseType::Second();
+	}
+};
 
 } // namespace gsystem
 

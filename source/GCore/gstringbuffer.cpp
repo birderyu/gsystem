@@ -22,10 +22,9 @@ GStringBuffer::~GStringBuffer()
 	// TODO
 }
 
-gbool GStringBuffer::Reserve(gsize)
+gvoid GStringBuffer::Reserve(gsize)
 {
 	// TODO
-	return false;
 }
 
 gvoid GStringBuffer::Clear()

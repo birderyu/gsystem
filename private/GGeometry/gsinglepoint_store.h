@@ -3,7 +3,6 @@
 
 #include "ggeometryglobal.h"
 #include "gcoordinate.h"
-#include "GCore/gbytes.h"
 
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
@@ -16,12 +15,13 @@ public:
 	enum { COORD_VALUE_SIZE = DIMENSION, };
 
 public:
-	gvoid Initialize();
-	gvoid Initialize(greal x);
-	gvoid Initialize(greal x, greal y);
-	gvoid Initialize(greal x, greal y, greal z);
-	gvoid Initialize(const GCoordinate &c);
-	gvoid Initialize(const GSinglePoint_Store<DIMENSION> &p_s);
+	GSinglePoint_Store();
+	GSinglePoint_Store(greal x);
+	GSinglePoint_Store(greal x, greal y);
+	GSinglePoint_Store(greal x, greal y, greal z);
+	GSinglePoint_Store(const GCoordinate &c);
+	GSinglePoint_Store(const GSinglePoint_Store<DIMENSION> &p_s);
+	GSinglePoint_Store(GSinglePoint_Store<DIMENSION> &&p_s);
 
 	greal &X();
 	greal  X() const;
@@ -35,9 +35,6 @@ public:
 	gvoid SetY(greal y);
 	gvoid SetZ(greal z);
 	gvoid SetCoordinate(const GCoordinate &c);
-
-	//gvoid Import(const GBytes &byte);
-	//gvoid Export(GBytes &byte) const;
 
 private:
 	greal m_aCoord[COORD_VALUE_SIZE];

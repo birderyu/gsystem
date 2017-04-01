@@ -19,15 +19,15 @@ public:
 	****************************************************************************/
 	virtual greal Length() const = 0;
 
-	virtual GPointP StartPoint() = 0;
-	virtual const GPointP StartPoint() const = 0;
-	virtual GPointP EndPoint() = 0;
-	virtual const GPointP EndPoint() const = 0;
+	virtual GPointPtr StartPoint() = 0;
+	virtual const GPointPtr StartPoint() const = 0;
+	virtual GPointPtr EndPoint() = 0;
+	virtual const GPointPtr EndPoint() const = 0;
 
 	virtual gsize PointCount() const = 0;
-	virtual GPointP GetPointAt(gsize pos) = 0;
-	virtual const GPointP GetPointAt(gsize pos) const = 0;
-	virtual gvoid SetPointAt(gsize pos, const GPointP &poi) = 0;
+	virtual GPointPtr GetPointAt(gsize pos) = 0;
+	virtual const GPointPtr GetPointAt(gsize pos) const = 0;
+	virtual gvoid SetPointAt(gsize pos, const GPointPtr &poi) = 0;
 
 	// ÊÇ·ñ±ÕºÏ
 	virtual gbool IsClosed() const = 0;

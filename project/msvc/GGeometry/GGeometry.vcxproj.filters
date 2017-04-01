@@ -93,9 +93,6 @@
     <ClInclude Include="..\..\..\include\GGeometry\gpolygon.h">
       <Filter>头文件\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\gpolyline.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\grectangle.h">
       <Filter>头文件\Interface</Filter>
     </ClInclude>
@@ -125,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\private\GGeometry\gsinglepointwithlength_store.h">
       <Filter>头文件\_private\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\glinestring.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\private\GGeometry\glinestring_impl.h">
+      <Filter>头文件\_private\Implement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +161,9 @@
       <Filter>头文件\_private\Implement</Filter>
     </None>
     <None Include="..\..\..\include\GGeometry\gsinglepoint_store.inl">
+      <Filter>头文件\_private\Store</Filter>
+    </None>
+    <None Include="..\..\..\private\GGeometry\gmultipoint_store.inl">
       <Filter>头文件\_private\Store</Filter>
     </None>
   </ItemGroup>

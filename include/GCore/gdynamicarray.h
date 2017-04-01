@@ -29,14 +29,16 @@ public:
 	gbool IsEmpty() const;
 
 	// 重分配数组的长度
-	gbool Resize(gsize new_size);
+	gvoid Resize(gsize new_size);
 
 	// 重分配数组的长度，并将多出来的元素赋默认值t
-	gbool Resize(gsize new_size, const DataT &data);
+	gvoid Resize(gsize new_size, const DataT &data);
 
-	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第0位
-	gbool Resize(gsize new_size, gsize start, gsize size, gsize new_start = 0);
-	gbool Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data);
+	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第new_start位
+	gvoid Resize(gsize new_size, gsize start, gsize size, gsize new_start = 0);
+
+	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第new_start位，其余元素使用data赋初始值
+	gvoid Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data);
 
 	// 清空数组，不释放内存
 	gvoid Clear();

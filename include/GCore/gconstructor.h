@@ -29,7 +29,7 @@ namespace gsystem { // gsystem
 template <typename ClassT> gvoid GConstruct(ClassT *ptr);
 template <typename ClassT> gvoid GConstruct(ClassT *ptr, const ClassT &copyable);
 template <typename ClassT> gvoid GConstruct(ClassT *ptr, ClassT &&moveable);
-template <typename ClassT, typename... ArgsT> gvoid GConstruct(ClassT *ptr, ArgsT&& ...args);
+template <typename ClassT, typename... ArgTs> gvoid GConstruct(ClassT *ptr, ArgTs&& ...args);
 template <typename ClassT> gvoid GDestruct(ClassT *ptr);
 
 template <typename ClassT> gvoid GDefaultConstruct(ClassT *ptr);

@@ -7,44 +7,44 @@ namespace geom { // gsystem.detail.geom
 
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GGeometryFactory *factory)
-: m_pFactory(factory)
+: m_pFactory(factory), m_tStore()
 {
-	m_tStore.Initialize();
+
 }
 
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GGeometryFactory *factory, greal x)
-: m_pFactory(factory)
+: m_pFactory(factory), m_tStore(x)
 {
-	m_tStore.Initialize(x);
+	
 }
 
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GGeometryFactory *factory, greal x, greal y)
-: m_pFactory(factory)
+: m_pFactory(factory), m_tStore(x, y)
 {
-	m_tStore.Initialize(x, y);
+	
 }
 
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GGeometryFactory *factory, greal x, greal y, greal z)
-: m_pFactory(factory)
+: m_pFactory(factory), m_tStore(x, y, z)
 {
-	m_tStore.Initialize(x, y, z);
+	
 }
 
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GGeometryFactory *factory, const GCoordinate &c)
-: m_pFactory(factory)
+: m_pFactory(factory), m_tStore(c)
 {
-	m_tStore.Initialize(c);
+	
 }
 
 template<gsize DIMENSION>
 inline GPoint_Impl<DIMENSION>::GPoint_Impl(const GPoint_Impl<DIMENSION> &p)
-: m_pFactory(p.m_pFactory)
+: m_pFactory(p.m_pFactory), m_tStore(p.m_tStore)
 {
-	m_tStore.Initialize(p.m_tStore);
+	
 }
 
 template<gsize DIMENSION>

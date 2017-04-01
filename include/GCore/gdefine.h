@@ -79,6 +79,9 @@
 
 #define GNULL nullptr
 
+#define GNOEXCEPT		noexcept
+#define GNOEXCEPT_OP(x)	noexcept(x)
+
 #define G_BEGIN_NAMESPACE	//namespace geonova {
 #define G_END_NAMESPACE		//}
 

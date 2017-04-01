@@ -84,84 +84,74 @@ GINLINE gbool GDynamicArray<DataT>::IsEmpty() const
 		|| m_nSize <= 0;
 }
 
-template <typename DataT>
-GINLINE gbool GDynamicArray<DataT>::Resize(gsize size)
+template <typename DataT> GINLINE
+gvoid GDynamicArray<DataT>::Resize(gsize size)
 {
 	if (m_nSize == size)
 	{
-		return true;
+		return;
 	}
 
 	if (size <= 0)
 	{
 		// 直接清空数组
-		Destroy();
-		return true;
+		return Destroy();
 	}
 
 	// 当数组不存在时，会构建新的数组
 	m_pData = GArrays::ResizeArray<DataT>(m_pData, m_nSize, size);
-
 	m_nSize = size;
-	return true;
 }
 
-template <typename DataT>
-GINLINE gbool GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
+template <typename DataT> GINLINE 
+gvoid GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
 {
 	if (m_nSize == size)
 	{
-		return true;
+		return;
 	}
 
 	if (size <= 0)
 	{
 		// 直接清空数组
-		Destroy();
-		return true;
+		return Destroy();
 	}
 
 	m_pData = GArrays::ResizeArray<DataT>(m_pData, m_nSize, size, data);
-
 	m_nSize = size;
-	return true;
 }
 
-template <typename DataT>
-GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start)
+template <typename DataT> GINLINE
+gvoid GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start)
 {
 	if (new_size == m_nSize && start == 0 && size == m_nSize)
 	{
-		return true;
+		return;
 	}
 	
 	if (new_size <= 0)
 	{
 		// 直接清空数组
-		Destroy();
-		return true;
+		return Destroy();
 	}
 
 	// 重新分配内存
 	m_pData = GArrays::ResizeArray<DataT>(m_pData, start, size, new_size, new_start);
-
 	m_nSize = new_size;
-	return true;
 }
 
-template <typename DataT>
-GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data)
+template <typename DataT> GINLINE
+gvoid GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data)
 {
 	if (new_size == m_nSize && start == 0 && size == m_nSize)
 	{
-		return true;
+		return;
 	}
 
 	if (new_size <= 0)
 	{
 		// 直接清空数组
-		Destroy();
-		return true;
+		return Destroy();
 	}
 
 	if (!m_pData)
@@ -174,7 +164,6 @@ GINLINE gbool GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize si
 		m_pData = GArrays::ResizeArray<DataT>(m_pData, start, size, new_size, new_start);
 	}
 	m_nSize = new_size;
-	return true;
 }
 
 template <typename DataT>

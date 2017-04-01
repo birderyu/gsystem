@@ -124,11 +124,11 @@ template<typename DataT, typename CompareT>
 template<typename ArrT>
 GINLINE gvoid GBinaryHeap<DataT, CompareT>::AppendT(const ArrT &arr, gsize start, gsize size)
 {
-	if (size <= 0 ||
-		!Reserve(m_nSize + size))
+	if (size <= 0)
 	{
 		return;
 	}
+	Reserve(m_nSize + size);
 	if (m_nSize <= 0)
 	{
 		// 初始化
@@ -192,19 +192,19 @@ GINLINE gsize GBinaryHeap<DataT, CompareT>::Capacity() const
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gbool GBinaryHeap<DataT, CompareT>::Reserve(gsize size)
+GINLINE gvoid GBinaryHeap<DataT, CompareT>::Reserve(gsize size)
 {
 	gsize capacity = Capacity();
 	if (size <= capacity)
 	{
-		return true;
+		return;
 	}
 	if (size - capacity < m_nAddSize)
 	{
 		// 按照扩容步长进行扩容
 		size = capacity + m_nAddSize;
 	}
-	return m_tHeap.Resize(size + 1);
+	m_tHeap.Resize(size + 1);
 }
 
 template<typename DataT, typename CompareT>
@@ -213,10 +213,7 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::Insert(const DataT &data)
 	gsize capacity = Capacity();
 	if (capacity <= m_nSize)
 	{
-		if (!Reserve(m_nSize + 1))
-		{
-			return;
-		}
+		Reserve(m_nSize + 1);
 	}
 
 	gsize pos = ++m_nSize;

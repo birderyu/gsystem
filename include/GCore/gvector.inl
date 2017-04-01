@@ -1,6 +1,8 @@
 #ifndef _CORE_VECTOR_INLINE_
 #define _CORE_VECTOR_INLINE_
 
+#include "gutility.h"
+
 namespace gsystem { // gsystem
 
 template <typename DataT>
@@ -75,14 +77,14 @@ GINLINE GVector<DataT> &GVector<DataT>::operator=(GVector<DataT> &&datas)
 	return *this;
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::Reserve(gsize capacity)
+template <typename DataT> GINLINE
+gvoid GVector<DataT>::Reserve(gsize capacity)
 {
-	return Reserve(capacity, 0);
+	Reserve(capacity, 0);
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::Reserve(gsize capacity, gsize start)
+template <typename DataT> GINLINE
+gvoid GVector<DataT>::Reserve(gsize capacity, gsize start)
 {
 	gsize old_capacity = Capacity();
 	if (capacity <= old_capacity)
@@ -90,56 +92,36 @@ GINLINE gbool GVector<DataT>::Reserve(gsize capacity, gsize start)
 		if (start == 0)
 		{
 			// 无需扩容
-			return true;
+			return;
 		}
 	}
 
 	gsize old_size = Size();
 	if (m_nHead == NULL_POS)
 	{
-		if (!m_tArray.Resize(capacity))
-		{
-			return false;
-		}
+		m_tArray.Resize(capacity);
 	}
 	else
 	{
 		// 删去前面的无用元素
-		if (!m_tArray.Resize(capacity, m_nHead, old_size, start))
-		{
-			return false;
-		}
+		m_tArray.Resize(capacity, m_nHead, old_size, start);
+		m_nHead = start;
+		m_nTail = old_size + start;
 	}
-	
-
-	if (start == 0)
-	{
-		m_nHead = NULL_POS;
-	}
-	else
-	{
-		m_nHead = start - 1;
-	}
-	m_nTail = old_size + start;
-	return true;
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::Resize(gsize size)
+template <typename DataT> GINLINE
+gvoid GVector<DataT>::Resize(gsize size)
 {
 	if (size > Capacity())
 	{
-		if (!Reserve(size))
-		{
-			return false;
-		}
+		Reserve(size);
 	}
 	if (m_nHead == NULL_POS)
 	{
 		m_nHead = 0;
 	}
 	m_nTail = size - m_nHead;
-	return true;
 }
 
 template <typename DataT>
@@ -266,9 +248,7 @@ GINLINE gvoid GVector<DataT>::PushBack(const DataT &data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
-	// 为了处理head指向null_pos的问题，必须使用Resize来处理
-	m_tArray[m_nTail] = data;
-	Resize(++old_size); 
+	m_tArray[m_nTail++] = data;
 	if (m_nHead == NULL_POS)
 	{
 		m_nHead = 0;
@@ -287,8 +267,7 @@ GINLINE gvoid GVector<DataT>::PushBack(DataT &&data)
 	}
 
 	// 为了处理head指向null_pos的问题，必须使用Resize来处理
-	m_tArray[m_nTail] = GForward<DataT>(data);
-	Resize(++old_size);
+	m_tArray[m_nTail++] = GForward<DataT>(data);
 	if (m_nHead == NULL_POS)
 	{
 		m_nHead = 0;
@@ -477,8 +456,7 @@ GINLINE gvoid GVector<DataT>::Append(GVector<DataT> &&arr)
 		m_tArray[m_nTail++] = GMove(arr[i]);
 	}
 
-	// 后续处理，直接将arr销毁
-	arr.Destroy();
+	// arr.Destroy(); // 为了节省时间，不需要将arr销毁
 }
 
 template <typename DataT>

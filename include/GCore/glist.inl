@@ -59,12 +59,12 @@ GINLINE GList<DataT> &GList<DataT>::operator=(GList<DataT> &&list)
 }
 
 template <typename DataT>
-GINLINE gbool GList<DataT>::Resize(gsize size)
+GINLINE gvoid GList<DataT>::Resize(gsize size)
 {
 	gsize cur_size = Size();
 	if (size == cur_size)
 	{
-		return true;
+		return;
 	}
 	else if (size > cur_size)
 	{
@@ -97,6 +97,12 @@ GINLINE gbool GList<DataT>::IsEmpty() const
 
 template <typename DataT>
 GINLINE gvoid GList<DataT>::Clear()
+{
+	m_tList.RemoveAll();
+}
+
+template <typename DataT>
+GINLINE gvoid GList<DataT>::Destroy()
 {
 	m_tList.RemoveAll();
 }
@@ -150,15 +156,15 @@ GINLINE gvoid GList<DataT>::PushFront(DataT &&data)
 }
 
 template <typename DataT>
-GINLINE gvoid GList<DataT>::PopBack()
+GINLINE gvoid GList<DataT>::PopBack(DataT *data)
 {
-	m_tList.RemoveLast();
+	m_tList.RemoveLast(data);
 }
 
 template <typename DataT>
-GINLINE gvoid GList<DataT>::PopFront()
+GINLINE gvoid GList<DataT>::PopFront(DataT *data)
 {
-	m_tList.RemoveFirst();
+	m_tList.RemoveFirst(data);
 }
 
 template <typename DataT>

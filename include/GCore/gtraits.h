@@ -261,6 +261,9 @@ struct GIntegralConstant
 typedef GIntegralConstant<gbool, true>	GTrueType;
 typedef GIntegralConstant<gbool, false> GFalseType;
 
+template<gbool DefValue>
+using GBoolConstant = GIntegralConstant<gbool, DefValue>;
+
 template<gbool>
 struct GCatBase
 	: GFalseType{};
@@ -382,6 +385,13 @@ struct GIsMemberFunctionPointer
 {
 };
 
+template<typename T>
+struct GIsMemberPointer
+	: GCatBase<GIsMemberObjectPointer<T>::value
+	|| GIsMemberFunctionPointer<T>::value>
+{
+};
+
 namespace detail { // gsystem.detail
 namespace traits { // gsystem.detail.traits
 
@@ -496,6 +506,24 @@ struct GIsArithmetic
 template<typename T>
 struct GIsPointer
 	: detail::traits::_GIsPointer<typename GRemoveConstVolatile<T>::Type>
+{
+};
+
+template<typename BaseT, typename DerT>
+struct GIsBaseOf
+	: GCatBase<__is_base_of(BaseT, DerT)>
+{
+};
+
+template<typename T>
+struct GIsEmpty
+	: GCatBase<__is_empty(T)>
+{
+};
+
+template<typename T>
+struct GIsFinal
+	: GCatBase<__is_final(T)>
 {
 };
 
@@ -763,6 +791,228 @@ public:
 		>::Type
 	>::Type Type;
 };
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<typename T>
+struct GAlwaysFalse
+{
+	static constexpr gbool value = false;
+};
+
+struct GInvokerPmfObject
+{
+	template<typename DecayedT, typename Arg1T, typename... Arg2Ts>
+	static auto Call(DecayedT pmf, Arg1T &&arg1, Arg2Ts&&... args2)
+		-> decltype((GForward<Arg1T>(arg1).*pmf)(GForward<Arg2Ts>(args2)...))
+	{
+		return ((GForward<Arg1T>(arg1).*pmf)(GForward<Arg2Ts>(args2)...));
+	}
+};
+
+struct GInvokerPmfPointer
+{
+	template<typename DecayedT, typename Arg1T, typename... Arg2Ts>
+	static auto Call(DecayedT pmf, Arg1T &&arg1, Arg2Ts&&... args2)
+		-> decltype(((*GForward<Arg1T>(arg1)).*pmf)(GForward<Arg2Ts>(args2)...))
+	{
+		return (((*GForward<Arg1T>(arg1)).*pmf)(GForward<Arg2Ts>(args2)...));
+	}
+};
+
+struct GInvokerPmdObject
+{
+	template<typename DecayedT, typename T>
+	static auto Call(DecayedT pmd, T &&arg)
+		-> decltype(GForward<T>(arg).*pmd)
+	{
+		return (GForward<T>(arg).*pmd);
+	}
+};
+
+struct GInvokerPmdPointer
+{
+	template<typename DecayedT, typename T>
+	static auto Call(DecayedT pmd, T &&arg)
+		-> decltype((*GForward<T>(arg)).*pmd)
+	{
+		return ((*GForward<T>(arg)).*pmd);
+	}
+};
+
+struct GInvokerFunctor
+{
+	template<typename CallableT, typename... ArgTs>
+	static auto Call(CallableT &&obj, ArgTs&&... args)
+		-> decltype(GForward<CallableT>(obj)(GForward<ArgTs>(args)...))
+	{
+		return (GForward<CallableT>(obj)(GForward<ArgTs>(args)...));
+	}
+};
+
+template<typename CallableT, typename Arg1T,
+	typename DecayedT = typename GDecay<CallableT>::Type,
+	gbool IS_PMF = GIsMemberFunctionPointer<DecayedT>::value,
+	gbool IS_PMD = GIsMemberObjectPointer<DecayedT>::value>
+struct GInvoker1;
+
+template<typename CallableT, typename ArgT, typename DecayedT>
+struct GInvoker1<CallableT, ArgT, DecayedT, true, false>
+	: GConditional<
+		GIsBaseOf<
+			typename _GIsMemberFunctionPointer<DecayedT>::ClassType,
+			typename GDecay<ArgT>::Type>::value,
+		GInvokerPmfObject,
+		GInvokerPmfPointer>::Type
+{
+};
+
+template<typename CallableT, typename ArgT, typename DecayedT>
+struct GInvoker1<CallableT, ArgT, DecayedT, false, true>
+	: GConditional<
+		GIsBaseOf<
+		typename _GIsMemberObjectPointer<DecayedT>::ClassType,
+		typename GDecay<ArgT>::Type>::value,
+	GInvokerPmdObject,
+	GInvokerPmdObject>::Type
+{
+};
+
+template<typename CallableT, typename ArgT, typename DecayedT>
+struct GInvoker1<CallableT, ArgT, DecayedT, false, false>
+	: GInvokerFunctor
+{
+};
+
+template<typename CallableT, typename... ArgTs>
+struct GInvoker;
+
+template<typename CallableT>
+struct GInvoker<CallableT>
+	: GInvokerFunctor
+{
+};
+
+template<typename CallableT, typename Arg1T, typename... Arg2Ts>
+struct GInvoker<CallableT, Arg1T, Arg2Ts...>
+	: GInvoker1<CallableT, Arg1T>
+{
+};
+
+} // namespace gsystem.detail.traits
+} // namespace gsystem.detail
+
+template<typename CallableT, typename... ArgTs> GINLINE
+auto GInvoke(CallableT &&obj, ArgTs&&... args)
+-> decltype(detail::traits::GInvoker<CallableT, ArgTs...>::Call(
+	GForward<CallableT>(obj), GForward<ArgTs>(args)...))
+{
+	return (detail::traits::GInvoker<CallableT, ArgTs...>::Call(
+		GForward<CallableT>(obj), GForward<ArgTs>(args)...));
+}
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<typename...>
+struct GParamTester
+{
+	typedef gvoid Type;
+};
+
+template<typename T,
+	gbool = GIsVoid<T>::value>
+struct GForced
+{
+};
+
+struct GUnforced
+{
+};
+
+template<typename T, typename... Ts> GINLINE
+gvoid GInvokeRet(GForced<T, true>, Ts&&... vals)
+{
+	GInvoke(GForward<Ts>(vals)...);
+}
+
+template<typename RetT, typename... Ts> GINLINE
+RetT GInvokeRet(GForced<RetT, false>, Ts&&... vals)
+{
+	return GInvoke(GForward<Ts>(vals)...);
+}
+
+template<typename... Ts> GINLINE
+auto GInvokeRet(GForced<GUnforced, false>, Ts&&... vals)
+	-> decltype(GInvoke(GForward<Ts>(vals)...))
+{
+	return GInvoke(GForward<Ts>(vals)...);
+}
+
+struct GUniqueTagResultOf {};
+
+template<typename VoidT, typename... ArgTs>
+struct _GResultOf
+{
+};
+
+template<class... ArgTs>
+struct _GResultOf<
+	GParamTester<
+	GUniqueTagResultOf,
+	decltype(GInvoke(GDeclval<ArgTs>()...))>,
+	ArgTs...>
+{
+	typedef decltype(GInvoke(GDeclval<ArgTs>()...)) Type;
+};
+
+} // namespace gsystem.detail.traits
+} // namespace gsystem.detail
+
+template<typename CallableT>
+struct GResultOf
+{
+	static_assert(detail::traits::GAlwaysFalse<CallableT>::value,
+		"GResultOf<CallableT> is invalid; use "
+		"GResultOf<CallableT(zero or more argument types)> instead.");
+};
+
+#define G_RESULT_OF(CALL_OPT, X1, X2) \
+	template<typename CallableT, typename... ArgTs> \
+	struct GResultOf<CallableT CALL_OPT (ArgTs...)> \
+		: detail::traits::_GResultOf<gvoid, CallableT, ArgTs...> \
+	{ \
+	};
+
+G_NON_MEMBER_CALL(G_RESULT_OF, , )
+#undef G_RESULT_OF
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<typename T> GINLINE
+T *_GAddressOf(T &val, GTrueType) noexcept
+{
+	return val;
+}
+
+template<typename T> GINLINE
+T *_GAddressOf(T &val, GFalseType) noexcept
+{
+	return (reinterpret_cast<T *>(
+		&const_cast<gchar&>(
+			reinterpret_cast<const volatile gchar&>(val))));
+}
+
+} // namespace gsystem.detail.traits
+} // namespace gsystem.detail
+
+template<typename T> GINLINE
+T *GAddressOf(T &val) noexcept
+{
+	return detail::traits::_GAddressOf(val, GIsFunction<T>());
+}
 
 } // namespace gsystem
 

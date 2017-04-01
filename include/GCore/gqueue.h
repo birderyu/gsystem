@@ -1,15 +1,13 @@
 #ifndef _CORE_QUEUE_H_
 #define _CORE_QUEUE_H_
 
-#include "gstructure.h"
 #include "gobject.h"
 
 namespace gsystem { // gsystem
 
 template<typename DataT>
 class GQueue
-	: public GListT<GQueue<DataT>>
-	, virtual public GObject
+	: virtual public GObject
 {
 public:
 	virtual ~GQueue() = 0;

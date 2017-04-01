@@ -3,6 +3,60 @@
 
 namespace gsystem { // gsystem
 
+template <typename DataT> GINLINE
+DataT &GArray<DataT>::First()
+{
+	GASSERT(!IsEmpty());
+	return GetAt(0);
+}
+
+template <typename DataT> GINLINE
+const DataT &GArray<DataT>::First() const
+{
+	GASSERT(!IsEmpty());
+	return GetAt(0);
+}
+
+template <typename DataT> GINLINE
+DataT &GArray<DataT>::Last()
+{
+	GASSERT(!IsEmpty());
+	return GetAt(Size() - 1);
+}
+
+template <typename DataT> GINLINE
+const DataT &GArray<DataT>::Last() const
+{
+	GASSERT(!IsEmpty());
+	return GetAt(Size() - 1);
+}
+
+template <typename DataT> GINLINE
+DataT *GArray<DataT>::FirstCursor()
+{
+	return CursorAt(0);
+}
+
+template <typename DataT> GINLINE
+const DataT *GArray<DataT>::FirstCursor() const
+{
+	return CursorAt(0);
+}
+
+template <typename DataT> GINLINE
+DataT *GArray<DataT>::LastCursor()
+{
+	GASSERT(!IsEmpty());
+	return CursorAt(Size() - 1);
+}
+
+template <typename DataT> GINLINE
+const DataT *GArray<DataT>::LastCursor() const
+{
+	GASSERT(!IsEmpty());
+	return CursorAt(Size() - 1);
+}
+
 template <typename DataT>
 GINLINE gbool GArray<DataT>::Contains(const DataT &data) const
 {

@@ -388,13 +388,13 @@ GINLINE gvoid GSingleLinkedList<DataT, NodeT>::Remove(const NodeT *node)
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
 {
 	GASSERT(pos < m_nSize);
 
 	if (0 == pos)
 	{
-		RemoveFirst();
+		RemoveFirst(data);
 		return;
 	}
 
@@ -406,13 +406,18 @@ GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 		pTmpNode1 = pTmpNode1->m_pNext;
 	}
 	pTmpNode2->m_pNext = pTmpNode1->m_pNext;
+	if (data)
+	{
+		// 将元素移走，而非拷贝
+		*data = GMove(pTmpNode1->m_tData);
+	}
 	delete pTmpNode1;
 	pTmpNode1 = GNULL;
 	--m_nSize;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveFirst()
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveFirst(DataT *data)
 {
 	if (!m_pFirst)
 	{
@@ -421,17 +426,21 @@ GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveFirst()
 
 	NodeT *pTmpNode = m_pFirst;
 	m_pFirst = m_pFirst->m_pNext;
-
+	if (data)
+	{
+		// 将元素移走，而非拷贝
+		*data = GMove(pTmpNode->m_tData);
+	}
 	delete pTmpNode;
 	--m_nSize;
 	return;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveLast()
+GINLINE gvoid GSingleLinkedList<DataT, NodeT>::RemoveLast(DataT *data)
 {
 	GASSERT(0 != m_nSize);
-	RemoveAt(m_nSize - 1);
+	RemoveAt(m_nSize - 1, data);
 }
 
 template<typename DataT, typename NodeT>

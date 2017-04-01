@@ -13,7 +13,6 @@
 #ifndef _CORE_STRING_H_
 #define _CORE_STRING_H_
 
-#include "gstructure.h"
 #include "garray.h"
 #include "gseries.h"
 
@@ -25,7 +24,6 @@ namespace gsystem { // gsystem
 namespace gsystem { // gsystem
 
 enum class GEncode
-	: guint
 {
 	Unicode,
 	GBK,
@@ -41,8 +39,7 @@ enum class GEncode
 **
 ****************************************************************************/
 class GAPI GString final 
-	: public GListT<GString>
-	, virtual public GArray<gchar>
+	: public GArray<gchar>
 	, virtual public GObject
 {
 	friend class GVariety;

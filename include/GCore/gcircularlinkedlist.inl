@@ -65,7 +65,7 @@ GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<Data
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
+GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
 {
 	GASSERT(pos < m_nSize);
 
@@ -74,6 +74,11 @@ GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 	{
 		m_pFirst = m_pFirst->m_pNext;
 		m_pCursor = GNULL;
+		if (data)
+		{
+			// 将元素移走，而非拷贝
+			*data = GMove(pTmpNode1->m_tData);
+		}
 		delete pTmpNode1;
 		pTmpNode1 = GNULL;
 		--m_nSize;
@@ -89,6 +94,11 @@ GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos)
 	pTmpNode2->m_pNext = pTmpNode1->m_pNext;
 
 	m_pCursor = pTmpNode2;
+	if (data)
+	{
+		// 将元素移走，而非拷贝
+		*data = GMove(pTmpNode1->m_tData);
+	}
 	delete pTmpNode1;
 	pTmpNode1 = GNULL;
 	--m_nSize;

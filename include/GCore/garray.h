@@ -31,6 +31,16 @@ public:
 	virtual DataT &operator[](gsize pos) = 0;
 	virtual const DataT &operator[](gsize pos) const = 0;
 
+	DataT &First();
+	const DataT &First() const;
+	DataT &Last();
+	const DataT &Last() const;
+
+	DataT *FirstCursor();
+	const DataT *FirstCursor() const;
+	DataT *LastCursor();
+	const DataT *LastCursor() const;
+
 	gbool Contains(const DataT &) const;
 	gsize FirstIndexOf(const DataT &) const;
 	gsize LastIndexOf(const DataT &) const;

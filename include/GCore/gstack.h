@@ -1,15 +1,13 @@
 #ifndef _CORE_STACK_H_
 #define _CORE_STACK_H_
 
-#include "gstructure.h"
 #include "gobject.h"
 
 namespace gsystem { // gsystem
 
 template<typename DataT>
 class GStack 
-	: public GListT<GStack<DataT>>
-	, virtual public GObject
+	: virtual public GObject
 {
 public:
 	virtual ~GStack() = 0;

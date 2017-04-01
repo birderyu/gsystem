@@ -43,7 +43,7 @@ public:
 	gsize Size() const;
 	gsize Capacity() const;
 
-	gbool Reserve(gsize);
+	gvoid Reserve(gsize);
 
 	gvoid Insert(const DataT &data);
 	gbool Pop(DataT *data = GNULL);

@@ -3,11 +3,6 @@
 
 #include "gmath.h"
 
-#include <stdio.h>
-#include <math.h>
-#include <assert.h>
-#include <stdlib.h>
-
 #define RTREE_DONT_USE_MEMPOOLS // This version does not contain a fixed memory allocator, fill in lines with EXAMPLE to implement one.
 #define RTREE_USE_SPHERICAL_VOLUME // Better split classification, may be slower on some systems
 
@@ -29,11 +24,19 @@ namespace gsystem { // gsystem
 ///        Instead of using a callback function for returned results, I recommend and efficient pre-sized, grow-only memory
 ///        array similar to MFC CArray or STL Vector for returning search query result.
 ///
-template<typename DATATYPE, typename ELEMTYPE, 
-	gsize NUMDIMS, typename ELEMTYPEREAL = ELEMTYPE, 
-	gsize TMAXNODES = 8, gsize TMINNODES = TMAXNODES / 2>
+template<typename DATATYPE, 
+	typename ELEMTYPE, 
+	gsize NUMDIMS, 
+	typename ELEMTYPEREAL = ELEMTYPE, 
+	gsize TMAXNODES = 8, 
+	gsize TMINNODES = TMAXNODES / 2>
 class GRTree
 {
+	static_assert(TMAXNODES > TMINNODES, "TMAXNODES should be greater than TMINNODES.");
+	static_assert(TMINNODES > 0, "TMINNODES should be greater than zero.");
+	static_assert(sizeof(DATATYPE) == sizeof(gvoid*) || sizeof(DATATYPE) == sizeof(gint32),
+		"We only support machine word size simple data type eg. integer index or object pointer. Since we are storing as union with non data branch");
+
 protected:
 	struct Node;  // Fwd decl.  Used by other internal structs and iterator
 
@@ -60,13 +63,13 @@ public:
 	/// \param a_resultCallback Callback function to return result.  Callback should return 'true' to continue searching
 	/// \param a_context User context to pass as parameter to a_resultCallback
 	/// \return Returns the number of entries found
-	int Search(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], bool __cdecl a_resultCallback(DATATYPE a_data, void* a_context), void* a_context);
+	gsize Search(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], gbool __cdecl a_resultCallback(DATATYPE a_data, gptr a_context), gptr a_context);
 
 	/// Remove all entries from tree
-	void RemoveAll();
+	gvoid RemoveAll();
 
 	/// Count the data elements in this container.  This is slow as no internal counter is maintained.
-	int Count();
+	gsize Count();
 
 	/// Iterator is not remove safe.
 	class Iterator
@@ -78,7 +81,7 @@ public:
 		struct StackElement
 		{
 			Node* m_node;
-			int m_branchIndex;
+			gint m_branchIndex;
 		};
 
 	public:
@@ -88,10 +91,10 @@ public:
 		~Iterator()                                   { }
 
 		/// Is iterator invalid
-		bool IsNull()                                 { return (m_tos <= 0); }
+		gbool IsNull()                                 { return (m_tos <= 0); }
 
 		/// Is iterator pointing to valid data
-		bool IsNotNull()                              { return (m_tos > 0); }
+		gbool IsNotNull()                              { return (m_tos > 0); }
 
 		/// Access the current data element. Caller must be sure iterator is not NULL first.
 		DATATYPE& operator*()
@@ -110,16 +113,16 @@ public:
 		}
 
 		/// Find the next data element
-		bool operator++()                             { return FindNextData(); }
+		gbool operator++()                             { return FindNextData(); }
 
 		/// Get the bounds for this node
-		void GetBounds(ELEMTYPE a_min[NUMDIMS], ELEMTYPE a_max[NUMDIMS])
+		gvoid GetBounds(ELEMTYPE a_min[NUMDIMS], ELEMTYPE a_max[NUMDIMS])
 		{
 			GASSERT(IsNotNull());
 			StackElement& curTos = m_stack[m_tos - 1];
 			Branch& curBranch = curTos.m_node->m_branch[curTos.m_branchIndex];
 
-			for (int index = 0; index < NUMDIMS; ++index)
+			for (gsize index = 0; index < NUMDIMS; ++index)
 			{
 				a_min[index] = curBranch.m_rect.m_min[index];
 				a_max[index] = curBranch.m_rect.m_max[index];
@@ -129,10 +132,10 @@ public:
 	private:
 
 		/// Reset iterator
-		void Init()                                   { m_tos = 0; }
+		gvoid Init()                                   { m_tos = 0; }
 
 		/// Find the next data element in the tree (For internal use only)
-		bool FindNextData()
+		gbool FindNextData()
 		{
 			for (;;)
 			{
@@ -175,7 +178,7 @@ public:
 		}
 
 		/// Push node and branch onto iteration stack (For internal use only)
-		void Push(Node* a_node, int a_branchIndex)
+		gvoid Push(Node* a_node, gint a_branchIndex)
 		{
 			m_stack[m_tos].m_node = a_node;
 			m_stack[m_tos].m_branchIndex = a_branchIndex;
@@ -192,7 +195,7 @@ public:
 		}
 
 		StackElement m_stack[MAX_STACK];              ///< Stack as we are doing iteration instead of recursion
-		int m_tos;                                    ///< Top Of Stack index
+		gint m_tos;                                   ///< Top Of Stack index
 
 		friend GRTree; // Allow hiding of non-public functions while allowing manipulation by logical owner
 	};
@@ -253,12 +256,13 @@ protected:
 
 	/// Node for each branch level
 	struct Node
+		: public GNewT<Node>
 	{
-		bool IsInternalNode()                         { return (m_level > 0); } // Not a leaf, but a internal node
-		bool IsLeaf()                                 { return (m_level == 0); } // A leaf, contains data
+		gbool IsInternalNode()                         { return (m_level > 0); } // Not a leaf, but a internal node
+		gbool IsLeaf()                                 { return (m_level == 0); } // A leaf, contains data
 
-		int m_count;                                  ///< Count
-		int m_level;                                  ///< Leaf is zero, others positive
+		gint m_count;                                  ///< Count
+		gint m_level;                                  ///< Leaf is zero, others positive
 		Branch m_branch[TMAXNODES];                    ///< Branch
 	};
 
@@ -272,51 +276,51 @@ protected:
 	/// Variables for finding a split partition
 	struct PartitionVars
 	{
-		int m_partition[TMAXNODES + 1];
-		int m_total;
-		int m_minFill;
-		int m_taken[TMAXNODES + 1];
-		int m_count[2];
+		gint m_partition[TMAXNODES + 1];
+		gint m_total;
+		gint m_minFill;
+		gint m_taken[TMAXNODES + 1];
+		gint m_count[2];
 		Rect m_cover[2];
 		ELEMTYPEREAL m_area[2];
 
 		Branch m_branchBuf[TMAXNODES + 1];
-		int m_branchCount;
+		gint m_branchCount;
 		Rect m_coverSplit;
 		ELEMTYPEREAL m_coverSplitArea;
 	};
 
 	Node* AllocNode();
-	void FreeNode(Node* a_node);
-	void InitNode(Node* a_node);
-	void InitRect(Rect* a_rect);
-	bool InsertRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, Node** a_newNode, int a_level);
-	bool InsertRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root, int a_level);
+	gvoid FreeNode(Node* a_node);
+	gvoid InitNode(Node* a_node);
+	gvoid InitRect(Rect* a_rect);
+	gbool InsertRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, Node** a_newNode, gint a_level);
+	gbool InsertRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root, gint a_level);
 	Rect NodeCover(Node* a_node);
-	bool AddBranch(Branch* a_branch, Node* a_node, Node** a_newNode);
-	void DisconnectBranch(Node* a_node, int a_index);
-	int PickBranch(Rect* a_rect, Node* a_node);
+	gbool AddBranch(Branch* a_branch, Node* a_node, Node** a_newNode);
+	gvoid DisconnectBranch(Node* a_node, gint a_index);
+	gint PickBranch(Rect* a_rect, Node* a_node);
 	Rect CombineRect(Rect* a_rectA, Rect* a_rectB);
-	void SplitNode(Node* a_node, Branch* a_branch, Node** a_newNode);
+	gvoid SplitNode(Node* a_node, Branch* a_branch, Node** a_newNode);
 	ELEMTYPEREAL RectSphericalVolume(Rect* a_rect);
 	ELEMTYPEREAL RectVolume(Rect* a_rect);
 	ELEMTYPEREAL CalcRectVolume(Rect* a_rect);
-	void GetBranches(Node* a_node, Branch* a_branch, PartitionVars* a_parVars);
-	void ChoosePartition(PartitionVars* a_parVars, int a_minFill);
-	void LoadNodes(Node* a_nodeA, Node* a_nodeB, PartitionVars* a_parVars);
-	void InitParVars(PartitionVars* a_parVars, int a_maxRects, int a_minFill);
-	void PickSeeds(PartitionVars* a_parVars);
-	void Classify(int a_index, int a_group, PartitionVars* a_parVars);
-	bool RemoveRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root);
-	bool RemoveRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, ListNode** a_listNode);
+	gvoid GetBranches(Node* a_node, Branch* a_branch, PartitionVars* a_parVars);
+	gvoid ChoosePartition(PartitionVars* a_parVars, gint a_minFill);
+	gvoid LoadNodes(Node* a_nodeA, Node* a_nodeB, PartitionVars* a_parVars);
+	gvoid InitParVars(PartitionVars* a_parVars, gint a_maxRects, gint a_minFill);
+	gvoid PickSeeds(PartitionVars* a_parVars);
+	gvoid Classify(gint a_index, gint a_group, PartitionVars* a_parVars);
+	gbool RemoveRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root);
+	gbool RemoveRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, ListNode** a_listNode);
 	ListNode* AllocListNode();
-	void FreeListNode(ListNode* a_listNode);
-	bool Overlap(Rect* a_rectA, Rect* a_rectB);
-	void ReInsert(Node* a_node, ListNode** a_listNode);
-	bool Search(Node* a_node, Rect* a_rect, int& a_foundCount, bool __cdecl a_resultCallback(DATATYPE a_data, void* a_context), void* a_context);
-	void RemoveAllRec(Node* a_node);
-	void Reset();
-	void CountRec(Node* a_node, gsize& a_count);
+	gvoid FreeListNode(ListNode* a_listNode);
+	gbool Overlap(Rect* a_rectA, Rect* a_rectB);
+	gvoid ReInsert(Node* a_node, ListNode** a_listNode);
+	gbool Search(Node* a_node, Rect* a_rect, gsize& a_foundCount, gbool __cdecl a_resultCallback(DATATYPE a_data, gptr a_context), gptr a_context);
+	gvoid RemoveAllRec(Node* a_node);
+	gvoid Reset();
+	gvoid CountRec(Node* a_node, gsize& a_count);
 
 	Node* m_root;                                    ///< Root of tree
 	ELEMTYPEREAL m_unitSphereVolume;                 ///< Unit sphere constant for required number of dimensions

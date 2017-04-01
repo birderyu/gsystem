@@ -3,6 +3,9 @@
 
 #include "ggeometry.h"
 
+namespace gsystem { // gsystem
+namespace geom { // gsystem.geom
+
 class GAPI GPoint
 	: virtual public GGeometry
 {
@@ -21,6 +24,9 @@ public:
 	virtual gvoid SetZ(greal z) = 0;
 };
 
-typedef GSharedPointer<GPoint> GPointP;
+typedef GSharedPointer<GPoint> GPointPtr;
+
+}
+}
 
 #endif // _GEOMETRY_POINT_H_

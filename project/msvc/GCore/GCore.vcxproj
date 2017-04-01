@@ -169,6 +169,7 @@
     <ClInclude Include="..\..\..\include\GCore\garrays.h" />
     <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gdatetimedefine.h" />
+    <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
     <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glog.h" />
@@ -192,7 +193,6 @@
     <ClInclude Include="..\..\..\include\GCore\gconstructor.h" />
     <ClInclude Include="..\..\..\include\GCore\gcriticalsection.h" />
     <ClInclude Include="..\..\..\include\GCore\gcstring.h" />
-    <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
     <ClInclude Include="..\..\..\include\GCore\gevent.h" />
     <ClInclude Include="..\..\..\include\GCore\gfile.h" />
     <ClInclude Include="..\..\..\include\GCore\gfinal.h" />
@@ -255,6 +255,7 @@
     <ClInclude Include="..\..\..\include\GCore\gtextfile.h" />
     <ClInclude Include="..\..\..\include\GCore\gthread.h" />
     <ClInclude Include="..\..\..\include\GCore\gtimer.h" />
+    <ClInclude Include="..\..\..\include\GCore\gtrietree.h" />
     <ClInclude Include="..\..\..\include\GCore\gtuple.h" />
     <ClInclude Include="..\..\..\include\GCore\guniquepointer.h" />
     <ClInclude Include="..\..\..\include\GCore\gunordermap.h" />
@@ -401,6 +402,9 @@
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\garrays.inl" />
+    <None Include="..\..\..\include\GCore\gbtree.inl" />
+    <None Include="..\..\..\include\GCore\gdeque.inl" />
+    <None Include="..\..\..\include\GCore\ggraph.inl" />
     <None Include="..\..\..\include\GCore\ghuffmantree.inl">
       <FileType>Document</FileType>
     </None>

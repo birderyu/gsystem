@@ -11,6 +11,11 @@ class GGraph
 public:
 	GGraph(gsize vcount);
 	gvoid AddEdge(const EdgeT &edge);
+
+	gsize NodeCount() const;
+	gsize EdgeCount() const;
+
+	gbool ContainsNode(const NodeT &node) const;
 };
 
 typedef struct graph *Graph;
@@ -199,5 +204,7 @@ void *data)
 }
 
 } // namespace gsystem
+
+#include "ggraph.inl"
 
 #endif // _CORE_GRAPH_H_

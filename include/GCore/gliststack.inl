@@ -85,17 +85,7 @@ GINLINE gvoid GListStack<DataT>::Push(DataT &&data)
 template<typename DataT>
 GINLINE gvoid GListStack<DataT>::Pop(DataT *data)
 {
-	if (IsEmpty())
-	{
-		return;
-	}
-
-	if (data)
-	{
-		*data = GMove(m_tList.GetFirstData());
-	}
-
-	m_tList.RemoveFirst();
+	m_tList.RemoveFirst(data);
 }
 
 template<typename DataT>

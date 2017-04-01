@@ -171,6 +171,7 @@
     <ClInclude Include="binarytree_test.h" />
     <ClInclude Include="gbkcode.h" />
     <ClInclude Include="queue_test.h" />
+    <ClInclude Include="series_test.h" />
     <ClInclude Include="stack_test.h" />
     <ClInclude Include="Volume3Prism.h" />
     <ClInclude Include="typedef_test.h" />

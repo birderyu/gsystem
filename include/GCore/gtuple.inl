@@ -54,6 +54,18 @@ GINLINE GPair<T1, T2>::GPair(GPair<T1, T2> &&pair)
 }
 
 template<typename T1, typename T2>
+GINLINE const volatile T1 &GPair<T1, T2>::First() const volatile
+{
+	return m_tFirst;
+}
+
+template<typename T1, typename T2>
+GINLINE volatile T1 &GPair<T1, T2>::First() volatile
+{
+	return m_tFirst;
+}
+
+template<typename T1, typename T2>
 GINLINE const T1 &GPair<T1, T2>::First() const
 {
 	return m_tFirst;
@@ -66,9 +78,21 @@ GINLINE T1 &GPair<T1, T2>::First()
 }
 
 template<typename T1, typename T2>
+GINLINE const volatile T2 &GPair<T1, T2>::Second() const volatile
+{
+	return m_tSecond;
+}
+
+template<typename T1, typename T2>
+GINLINE volatile T2 &GPair<T1, T2>::Second() volatile
+{
+	return m_tSecond;
+}
+
+template<typename T1, typename T2>
 GINLINE const T2 &GPair<T1, T2>::Second() const
 {
-	return m_tFirst;
+	return m_tSecond;
 }
 
 template<typename T1, typename T2>

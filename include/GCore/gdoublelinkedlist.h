@@ -72,9 +72,9 @@ public:
 	gvoid AddLast(DataT &&data);
 
 	gvoid Remove(const NodeT *node);
-	gvoid RemoveAt(gsize pos);
-	gvoid RemoveFirst();
-	gvoid RemoveLast();
+	gvoid RemoveAt(gsize pos, DataT *data = GNULL);
+	gvoid RemoveFirst(DataT *data = GNULL);
+	gvoid RemoveLast(DataT *data = GNULL);
 	gvoid RemoveAll();
 
 	NodeT *GetFirstNode();

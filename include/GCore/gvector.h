@@ -2,6 +2,7 @@
 #ifndef _CORE_VECTOR_H_
 #define _CORE_VECTOR_H_
 
+#include "gdeque.h"
 #include "gdynamicarray.h"
 
 #define G_VECTOR_DEFAULT_CAPACITY 16
@@ -11,6 +12,7 @@ namespace gsystem { // gsystem
 template <typename DataT>
 class GVector final
 	: public GArray<DataT>
+	, public GDeque<DataT>
 	, virtual public GObject
 {
 public:
@@ -92,8 +94,8 @@ public:
 	GVector<DataT> &operator=(const GVector<DataT> &);
 	GVector<DataT> &operator=(GVector<DataT> &&);
 
-	gbool Reserve(gsize);
-	gbool Resize(gsize);
+	gvoid Reserve(gsize);
+	gvoid Resize(gsize);
 
 	gsize Size() const;
 	gsize Capacity() const;
@@ -163,7 +165,7 @@ public:
 private:
 	gsize RealPos(gsize pos) const;
 	gbool Valid() const;
-	gbool Reserve(gsize, gsize start);
+	gvoid Reserve(gsize, gsize start);
 
 	// ¶¯Ì¬Êý×é
 	GDynamicArray<DataT> m_tArray;

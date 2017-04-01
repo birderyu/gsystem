@@ -1,0 +1,4 @@
+#ifndef _GEOMETRY_MULTI_POINT_H_
+#define _GEOMETRY_MULTI_POINT_H_
+
+#endif // _GEOMETRY_MULTI_POINT_H_

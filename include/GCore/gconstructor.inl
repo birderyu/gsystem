@@ -97,10 +97,10 @@ GINLINE gvoid _GDestruct(ClassT *ptr, GFalseType)
 
 namespace gsystem { // gsystem
 
-template <typename ClassT, typename... ArgsT>
-GINLINE gvoid GConstruct(ClassT *ptr, ArgsT&& ...args)
+template <typename ClassT, typename... ArgTs>
+GINLINE gvoid GConstruct(ClassT *ptr, ArgTs&& ...args)
 {
-	new(ptr) ClassT(GForward<ArgsT>(args)...);
+	new(ptr) ClassT(GForward<ArgTs>(args)...);
 }
 
 template <typename ClassT> 

@@ -5,7 +5,7 @@ namespace gsystem { // gsystem
 
 template <typename DataT> GINLINE
 GArrayQueue<DataT>::GArrayQueue(gsize capacity)
-	: m_nHead(NULL_POS), m_nTail(0), m_tArray(capacity)
+	: m_nHead(GDynamicArray<DataT>::NULL_POS), m_nTail(0), m_tArray(capacity)
 {
 
 }
@@ -25,7 +25,7 @@ GArrayQueue<DataT>::GArrayQueue(GArrayQueue<DataT> &&queue)
 	, m_nTail(queue.m_nTail)
 	, m_tArray(GMove(queue.m_tArray))
 {
-	queue.m_nHead = NULL_POS;
+	queue.m_nHead = GDynamicArray<DataT>::NULL_POS;
 	queue.m_nTail = 0;
 }
 
@@ -52,7 +52,7 @@ GArrayQueue<DataT>& GArrayQueue<DataT>::operator=(GArrayQueue<DataT> &&queue)
 	m_tArray = GMove(queue.m_tArray);
 	m_nHead = queue.m_nHead;
 	m_nTail = queue.m_nTail;
-	queue.m_nHead = NULL_POS;
+	queue.m_nHead = GDynamicArray<DataT>::NULL_POS;
 	queue.m_nTail = 0;
 	return *this;
 }
@@ -66,7 +66,7 @@ gbool GArrayQueue<DataT>::IsEmpty() const
 template <typename DataT> GINLINE
 gsize GArrayQueue<DataT>::Size() const
 {
-	if (m_nHead == NULL_POS || m_nTail == 0)
+	if (m_nHead == GDynamicArray<DataT>::NULL_POS || m_nTail == 0)
 	{
 		return 0;
 	}
@@ -77,7 +77,7 @@ template <typename DataT> GINLINE
 gvoid GArrayQueue<DataT>::Clear()
 {
 	m_tArray.Clear();
-	m_nHead = NULL_POS;
+	m_nHead = GDynamicArray<DataT>::NULL_POS;
 	m_nTail = 0;
 }
 
@@ -85,7 +85,7 @@ template <typename DataT> GINLINE
 gvoid GArrayQueue<DataT>::Destroy()
 {
 	m_tArray.Destroy();
-	m_nHead = NULL_POS;
+	m_nHead = GDynamicArray<DataT>::NULL_POS;
 	m_nTail = 0;
 }
 
@@ -101,7 +101,7 @@ gvoid GArrayQueue<DataT>::EnQueue(const DataT &data)
 	}
 
 	m_tArray[m_nTail++] = data;
-	if (m_nHead == NULL_POS)
+	if (m_nHead == GDynamicArray<DataT>::NULL_POS)
 	{
 		m_nHead = 0;
 	}
@@ -119,7 +119,7 @@ gvoid GArrayQueue<DataT>::EnQueue(DataT &&data)
 	}
 
 	m_tArray[m_nTail++] = GForward<DataT>(data);
-	if (m_nHead == NULL_POS)
+	if (m_nHead == GDynamicArray<DataT>::NULL_POS)
 	{
 		m_nHead = 0;
 	}
@@ -147,14 +147,14 @@ gvoid GArrayQueue<DataT>::DeQueue(DataT *data)
 template <typename DataT> GINLINE
 const DataT &GArrayQueue<DataT>::Head() const
 {
-	GASSERT(m_nHead != NULL_POS);
+	GASSERT(m_nHead != GDynamicArray<DataT>::NULL_POS);
 	return m_tArray[m_nHead];
 }
 
 template <typename DataT> GINLINE
 DataT &GArrayQueue<DataT>::Head()
 {
-	GASSERT(m_nHead != NULL_POS);
+	GASSERT(m_nHead != GDynamicArray<DataT>::NULL_POS);
 	return m_tArray[m_nHead];
 }
 
@@ -162,7 +162,7 @@ template <typename DataT> GINLINE
 gsize GArrayQueue<DataT>::Capacity() const
 {
 	gsize arr_size = m_tArray.Size();
-	if (m_nHead == NULL_POS)
+	if (m_nHead == GDynamicArray<DataT>::NULL_POS)
 	{
 		return arr_size;
 	}
@@ -181,7 +181,7 @@ gvoid GArrayQueue<DataT>::Reserve(gsize capacity)
 	}
 
 	gsize old_size = Size();
-	if (m_nHead == NULL_POS)
+	if (m_nHead == GDynamicArray<DataT>::NULL_POS)
 	{
 		m_tArray.Resize(capacity);
 	}

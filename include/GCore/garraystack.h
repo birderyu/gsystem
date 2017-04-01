@@ -34,7 +34,7 @@ public:
 
 private:
 	gsize Capacity() const;
-	gbool Reserve(gsize capacity);
+	gvoid Reserve(gsize capacity);
 	gbool Fill() const;
 
 private:

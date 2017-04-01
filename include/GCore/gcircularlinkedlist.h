@@ -26,7 +26,7 @@ public:
 public:
 	Node *GetNext();
 	const Node *GetNext() const;
-	gvoid RemoveAt(gsize pos);
+	gvoid RemoveAt(gsize pos, DataT *data = GNULL);
 	gsize GetCurrentIndex() const;
 	Node *GetCurrentNode();
 	const Node *GetCurrentNode() const;

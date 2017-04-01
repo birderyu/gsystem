@@ -2,13 +2,14 @@
 #ifndef _CORE_LIST_H_
 #define _CORE_LIST_H_
 
+#include "gdeque.h"
 #include "gdoublelinkedlist.h"
 
 namespace gsystem { // gsystem
 
 template <typename DataT>
 class GList final
-	: public GListT<GList<DataT>>
+	: public GDeque<DataT>
 	, public GObject
 {
 public:
@@ -302,10 +303,11 @@ public:
 	GList<DataT> &operator=(const GList<DataT> &list);
 	GList<DataT> &operator=(GList<DataT> &&list);
 
-	gbool Resize(gsize);
+	gvoid Resize(gsize);
 	gsize Size() const;
 	gbool IsEmpty() const;
 	gvoid Clear();
+	gvoid Destroy();
 
 	DataT &GetAt(gsize);
 	const DataT &GetAt(gsize) const;
@@ -319,8 +321,8 @@ public:
 	gvoid PushFront(const DataT &data);
 	gvoid PushFront(DataT &&data);
 
-	gvoid PopBack();
-	gvoid PopFront();
+	gvoid PopBack(DataT *data = GNULL);
+	gvoid PopFront(DataT *data = GNULL);
 
 	gvoid Append(const DataT &data);
 	gvoid Append(DataT &&data);
