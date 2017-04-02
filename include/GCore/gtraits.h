@@ -453,7 +453,7 @@ struct _GIsIntegral<gulonglong>
 	: GTrueType{};
 
 /// 是否是浮点型
-template<class T>
+template<typename T>
 struct _GIsFloatingPoint
 	: GFalseType {};
 
@@ -571,7 +571,7 @@ namespace traits { // gsystem.detail.traits
 template<typename ToT, typename FromT>
 struct _GIsAssignable
 {
-	template<class DestT, class SrcT>
+	template<typename DestT, typename SrcT>
 	static decltype((gvoid)(GDeclval<DestT>() = GDeclval<SrcT>()), GTrueType()) Foo(gint);
 
 	template<typename DestT, typename SrcT>
@@ -628,7 +628,7 @@ struct GIsLvalueReference
 };
 
 template<typename T>
-struct GIsLvalueReference<T&>
+struct GIsLvalueReference<T &>
 	: GTrueType
 {
 };
@@ -640,8 +640,15 @@ struct GIsRvalueReference
 };
 
 template<typename T>
-struct GIsRvalueReference<T&&>
+struct GIsRvalueReference<T &&>
 	: GTrueType
+{
+};
+
+template<typename T>
+struct GIsReference
+	: GCatBase<GIsLvalueReference<T>::value
+	|| GIsRvalueReference<T>::value>
 {
 };
 
@@ -743,6 +750,14 @@ struct _GIsFunction<RetT(ArgTs..., ...)>
 template<typename T>
 struct GIsFunction
 	: detail::traits::_GIsFunction<T>::BoolType
+{
+};
+
+template<typename T>
+struct GIsObject
+	: GCatBase<!GIsFunction<T>::value
+	&& !GIsReference<T>::value
+	&& !GIsVoid<T>::value>
 {
 };
 
@@ -957,7 +972,7 @@ struct _GResultOf
 {
 };
 
-template<class... ArgTs>
+template<typename... ArgTs>
 struct _GResultOf<
 	GParamTester<
 	GUniqueTagResultOf,
@@ -1013,6 +1028,220 @@ T *GAddressOf(T &val) noexcept
 {
 	return detail::traits::_GAddressOf(val, GIsFunction<T>());
 }
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<typename T, typename = gvoid>
+struct GWeakResultType
+{
+};
+
+template<typename T>
+struct GWeakResultType<T, typename GParamTester<
+	typename T::ResultType>::Type>
+{
+	typedef typename T::ResultType ResultType;
+};
+
+template<typename T, typename = gvoid>
+struct GWeakArgumentType
+	: GWeakResultType<T>
+{
+};
+
+template<typename T>
+struct GWeakArgumentType<T, typename GParamTester<
+	typename T::ArgumentType>::Type>
+	: GWeakResultType<T>
+{
+	typedef typename T::ArgumentType ArgumentType;
+};
+
+template<typename T, typename = gvoid>
+struct GWeakBinaryArgs
+	: GWeakArgumentType<T>
+{
+};
+
+template<typename T>
+struct GWeakBinaryArgs<T, typename GParamTester<
+	typename T::FirstArgumentType,
+	typename T::SecondArgumentType>::Type>
+	: GWeakArgumentType<T>
+{
+	typedef typename T::FirstArgumentType FirstArgumentType;
+	typedef typename T::SecondArgumentType SecondArgumentType;
+};
+
+template<typename T>
+struct GWeakTypes
+{
+	typedef _GIsFunction<typename GRemovePointer<T>::Type> IsFOrPf;
+	typedef _GIsMemberFunctionPointer<typename GRemoveConstVolatile<T>::Type> GIsPmf;
+	typedef typename GConditional<IsFOrPf::BoolType::value, IsFOrPf,
+		typename GConditional<GIsPmf::BoolType::value, GIsPmf,
+		GWeakBinaryArgs<T> >::Type>::Type Type;
+};
+
+} // namespace gsystem.detail.traits
+} // namespace gsystem.detail
+
+template<typename T>
+class GReferenceWrapper
+	: public detail::traits::GWeakTypes<T>::Type
+{
+public:
+	static_assert(GIsObject<T>::value || GIsFunction<T>::value,
+		"GReferenceWrapper<T> requires T to be an object type "
+		"or a function type.");
+
+	typedef T Type;
+
+	GReferenceWrapper(T &val) noexcept
+		: m_pPtr(GAddressOf(val))
+	{
+	}
+
+	operator T&() const noexcept
+	{	// return reference
+		return *m_pPtr;
+	}
+
+	T& Get() const noexcept
+	{
+		return *m_pPtr;
+	}
+
+	template<typename... ArgTs>
+	auto operator()(ArgTs&&... args) const
+		-> decltype(GInvoke(Get(), GForward<ArgTs>(args)...))
+	{
+		return (GInvoke(Get(), GForward<ArgTs>(args)...));
+	}
+
+	GReferenceWrapper(T &&) = delete;
+
+private:
+	T *m_pPtr;
+};
+
+template<typename T> GINLINE
+GReferenceWrapper<T> ReferenceOf(T &val) noexcept
+{
+	return GReferenceWrapper<T>(val);
+}
+
+template<typename T>
+gvoid ReferenceOf(const T &&) = delete;
+
+template<typename T> GINLINE 
+GReferenceWrapper<T> ReferenceOf(GReferenceWrapper<T> val) noexcept
+{
+	return ReferenceOf(val.Get());
+}
+
+template<typename T> GINLINE
+GReferenceWrapper<const T> ConstReferenceOf(const T &val) noexcept
+{
+	return GReferenceWrapper<const T>(val);
+}
+
+template<typename T>
+gvoid ConstReferenceOf(const T &&) = delete;
+
+template<typename T> GINLINE
+GReferenceWrapper<const T> ConstReferenceOf(GReferenceWrapper<T> val) _NOEXCEPT
+{
+	return ConstReferenceOf(val.Get());
+}
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<typename T>
+struct GUnrefwrapHelper
+{
+	typedef T Type;
+	static const gbool is_refwrap = false;
+};
+
+template<typename T>
+struct GUnrefwrapHelper<GReferenceWrapper<T> >
+{
+	typedef T &Type;
+	static const gbool is_refwrap = true;
+};
+
+template<typename T>
+struct GUnrefwrap
+{
+	typedef typename GDecay<T>::Type U;
+	typedef typename GUnrefwrapHelper<U>::Type Type;
+	static const bool is_refwrap = GUnrefwrapHelper<U>::is_refwrap;
+};
+
+} // namespace gsystem.detail.traits
+} // namespace gsystem.detail
+
+template<typename T, T... VALS>
+struct GIntegerSequence
+{
+	static_assert(GIsIntegral<T>::value,
+		"GIntegerSequence<T, I...> requires T to be an integral type.");
+
+	typedef GIntegerSequence<T, VALS...> Type;
+	typedef T ValueType;
+
+	static constexpr gsize Size() noexcept
+	{
+		return sizeof...(VALS);
+	}
+};
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<gbool NEGATIVE, gbool ZERO, typename IntConT, typename IntSeqT>
+struct GMakeSequence
+{
+	static_assert(!NEGATIVE,
+		"GMakeSequence<T, N> requires N to be non-negative.");
+};
+
+template<typename T, T... VALS>
+struct GMakeSequence<false, true,
+	GIntegralConstant<T, 0>,
+	GIntegerSequence<T, VALS...> >
+	: GIntegerSequence<T, VALS...>
+{
+};
+
+template<typename T, T I, T... VALS>
+struct GMakeSequence<false, false,
+	GIntegralConstant<T, I>,
+	GIntegerSequence<T, VALS...> >
+	: GMakeSequence<false, I == 1,
+	GIntegralConstant<T, I - 1>,
+	GIntegerSequence<T, I - 1, VALS...> >
+{
+};
+
+} // namespace gsystem.detail.traits
+} // namespace gsystem.detail
+
+template<typename T, T SIZE>
+using GMakeIntegerSequence = typename detail::traits::GMakeSequence< SIZE < 0, SIZE == 0,
+	GIntegralConstant<T, SIZE>, GIntegerSequence<T> >::Type;
+
+template<gsize... VALS>
+using GIndexSequence = GIntegerSequence<gsize, VALS...>;
+
+template<gsize SIZE>
+using GMakeIndexSequence = GMakeIntegerSequence<gsize, SIZE>;
+
+template<typename... TS>
+using GIndexSequenceFor = GMakeIndexSequence<sizeof...(TS)>;
 
 } // namespace gsystem
 

@@ -3,10 +3,11 @@
 
 #include "gutility.h"
 #include "gnocopyable.h"
+#include <functional>
 
 namespace gsystem { // gsystem
 
-template<typename _Fty>
+template<typename FunT>
 class GFunction;
 
 namespace detail { // gsystem.detail
@@ -364,19 +365,143 @@ struct GGetFunctionImpl
 G_NON_MEMBER_CALL(G_GET_FUNCTION_IMPL, , )
 #undef G_GET_FUNCTION_IMPL
 
+template<gint N>
+struct GPlaceholder
+{
+};
+
+template<typename T>
+struct GIsPlaceholder
+	: GIntegralConstant<gint, 0>
+{
+};
+
+template<gint N>
+struct GIsPlaceholder<GPlaceholder<N> >
+	: GIntegralConstant<gint, N>
+{
+};
+
+template<typename T>
+struct GIsPlaceholder<const T>
+	: GIsPlaceholder<T>
+{
+};
+
+template<typename T>
+struct GIsPlaceholder<volatile T>
+	: GIsPlaceholder<T>
+{
+};
+
+template<typename T>
+struct GIsPlaceholder<const volatile T>
+	: GIsPlaceholder<T>
+{
+};
+
+template<typename RetT, typename FunT, typename... ArgTs>
+class GBinder;
+
+template<typename T>
+struct GIsBindExpression
+	: GFalseType {};
+
+template<typename RetT, typename FunT, typename... ArgTs>
+struct GIsBindExpression<GBinder<RetT, FunT, ArgTs...> >
+	: GTrueType {};
+
+template<typename T>
+struct GIsBindExpression<const T>
+	: GIsBindExpression<T>
+{
+};
+
+template<typename T>
+struct GIsBindExpression<volatile T>
+	: GIsBindExpression<T>
+{
+};
+
+template<typename T>
+struct GIsBindExpression<const volatile T>
+	: GIsBindExpression<T>
+{
+};
+
+/*
+template<typename T,
+	gbool = gsystem::detail::traits::GUnrefwrap<T>::is_refwrap,
+	gbool = GIsBindExpression<T>::value,
+	gint = GIsPlaceholder<T>::value>
+struct GSelectFixer;
+
+template<typename T>
+struct GSelectFixer<T, true, false, 0>
+{
+	template<typename UntupleT>
+	static T::Type &Fix(T &tid, UntupleT &&)
+	{
+		return tid.Get();
+	}
+};
+
+template<typename T>
+struct GSelectFixer<T, false, true, 0>
+{
+	template<class UntupleT, gsize... _Jx>
+	static auto Apply(T &tid, UntupleT &&u, GIntegerSequence<gsize, J...>)
+		-> decltype(tid(GTupleGet<J>(Move(u))...))
+	{
+		return (tid(GTupleGet<J>(Move(u))...));
+	}
+
+	template<class UntupleT>
+	static auto Fix(T &tid, UntupleT&& u)
+		-> decltype(Apply(tid, Move(u),
+			GMakeIntegerSequence<gsize, tuple_size<UntupleT>::value>()))
+	{	// call a nested bind expression
+		return (_Apply(tid, _STD move(u),
+			make_integer_sequence<size_t, tuple_size<UntupleT>::value>()));
+	}
+};
+
+template<typename T>
+struct GSelectFixer<T, false, false, 0>
+{	// identity fixer
+	template<class UntupleT>
+	static T& _Fix(T& _Tid, UntupleT&&)
+	{	// pass a bound argument as an lvalue (important!)
+		return (_Tid);
+	}
+};
+
+template<typename T, gint J>
+struct GSelectFixer<T, false, false, J>
+{	// placeholder fixer
+	static_assert(J > 0, "invalid is_placeholder value");
+
+	template<class UntupleT>
+	static auto _Fix(T& _Tid, UntupleT&& _Ut)
+		-> decltype(_STD get<J - 1>(_STD move(_Ut)))
+	{	// choose the Jth unbound argument (1-based indexing)
+		return (_STD get<J - 1>(_STD move(_Ut)));
+	}
+};
+*/
+
 } // namespace gsystem.detail.func
 } // namespace gsystem.detail
 
-/// std::function
-template<class _Fty>
+template<class FunT>
 class GFunction
-	: public detail::func::GGetFunctionImpl<_Fty>::Type
+	: public detail::func::GGetFunctionImpl<FunT>::Type
 {
 private:
-	typedef typename detail::func::GGetFunctionImpl<_Fty>::Type _Mybase;
+	typedef typename detail::func::GGetFunctionImpl<FunT>::Type BaseType;
 
 public:
-	typedef GFunction<_Fty> _Myt;
+	typedef GFunction<FunT> ThisType;
 
 public:
 	GFunction() noexcept
@@ -390,19 +515,19 @@ public:
 	}
 
 	template<typename FT,
-		typename InvResT = typename _Mybase::template GResultOfInvoking<FT &>,
-		typename = typename _Mybase::template GEnableIfReturnable<InvResT> >
-	GFunction(FT func)
+		typename InvResT = typename BaseType::template GResultOfInvoking<FT &>,
+		typename = typename BaseType::template GEnableIfReturnable<InvResT> >
+		GFunction(FT func)
 	{
 		this->Reset(GMove(func));
 	}
 
-	GFunction(const _Myt &right)
+	GFunction(const ThisType &right)
 	{
 		this->ResetCopy(right);
 	}
 
-	GFunction(_Myt &&right)
+	GFunction(ThisType &&right)
 	{
 		this->ResetMove(right);
 	}
@@ -412,13 +537,13 @@ public:
 
 	}
 
-	_Myt &operator=(const _Myt &right)
+	ThisType &operator=(const ThisType &right)
 	{
 		right.Swap(*this);
 		return *this;
 	}
 
-	_Myt &operator=(_Myt &&right)
+	ThisType &operator=(ThisType &&right)
 	{
 		if (this != &right)
 		{
@@ -429,20 +554,78 @@ public:
 	}
 
 	template<typename FT,
-		typename InvResT = typename _Mybase::template GResultOfInvoking<FT &>,
-		typename = typename _Mybase::template GEnableIfReturnable<InvResT> >
-	_Myt& operator=(FT &&func)
+		typename InvResT = typename BaseType::template GResultOfInvoking<FT &>,
+		typename = typename BaseType::template GEnableIfReturnable<InvResT> >
+		ThisType& operator=(FT &&func)
 	{
-		_Myt(GForward<FT>(func)).Swap(*this);
+		ThisType(GForward<FT>(func)).Swap(*this);
 		return *this;
 	}
 
-	_Myt& operator=(gnullptr) noexcept
+	ThisType& operator=(gnullptr) noexcept
 	{
 		this->Tidy();
 		return *this;
 	}
+
+	gvoid Swap(ThisType &right) noexcept
+	{
+		BaseType::Swap(right);
+	}
+
+	explicit operator bool() const noexcept
+	{
+		return (!IsEmpty());
+	}
+
+	const type_info &TargetType() const noexcept
+	{
+		return BaseType::TargetType();
+	}
+
+	template<typename FT>
+	FT *Target() noexcept
+	{
+		return (static_cast<FT *>(const_cast<gptr>(
+			BaseType::Target(typeid(FT)))));
+	}
+
+	template<typename FT>
+	const FT *Target() const noexcept
+	{
+		return (static_cast<const FT *>(BaseType::Target(typeid(FT))));
+	}
 };
+
+template<typename FunT> GINLINE
+gvoid Swap(GFunction<FunT> &left, GFunction<FunT> &right) noexcept
+{
+	left.Swap(right);
+}
+
+template<typename FunT> GINLINE
+gbool operator==(const GFunction<FunT> &func, gnullptr) noexcept
+{
+	return !func;
+}
+
+template<typename FunT> GINLINE
+gbool operator==(gnullptr, const GFunction<FunT> &func) noexcept
+{
+	return !func;
+}
+
+template<typename FunT> GINLINE
+gbool operator!=(const GFunction<FunT> &func, gnullptr) noexcept
+{
+	return !!func;
+}
+
+template<typename FunT> GINLINE
+gbool operator!=(gnullptr, const GFunction<FunT> &func) noexcept
+{
+	return !!func;
+}
 
 } // namespace gsystem
 
