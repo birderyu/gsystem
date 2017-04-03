@@ -45,7 +45,7 @@ const gsize _space_size_ = (_num_ptrs_ - 1) * sizeof (gptr);
 template<typename ImplT>
 struct GIsLarge
 	: GBoolConstant < _space_size_ < sizeof(ImplT)
-	|| !ImplT::_Nothrow_move::value> {};
+	|| !ImplT::NothrowMove::value> {};
 
 template<typename RetT, typename... ArgTs>
 class GFunctionBase
@@ -99,7 +99,7 @@ private:
 		ThisType *ptr = GAllocate<ThisType>();
 		try
 		{
-			GCopyConstruct<ThisType>(ptr, Callee());
+			GConstruct<ThisType>(ptr, Callee());
 		}
 		catch (...)
 		{
@@ -113,7 +113,7 @@ private:
 	BaseType *Clone(VoidT *where, GFalseType) const
 	{
 		ThisType *ptr = static_cast<ThisType *>(where);
-		GCopyConstruct<ThisType>(ptr, Callee());
+		GConstruct<ThisType>(ptr, Callee());
 		return ptr;
 	}
 
@@ -137,7 +137,7 @@ private:
 		return typeid(CallableT);
 	}
 
-	virtual gptr Get() const noexcept
+	virtual gcptr Get() const noexcept
 	{
 		return GAddressOf(Callee());
 	}
@@ -243,14 +243,9 @@ protected:
 			return;
 		}
 
-		typedef typename GDecay<FT>::Type DecayedT;
+		typedef typename GDecay<T>::Type DecayedT;
 		typedef GFunctionImpl<DecayedT, RetT, ArgTs...> MyImpl;
-		MyImpl *ptr = 0;
-
-		typedef _Wrap_alloc<_Alloc> _Alimpl0;
-		typedef typename _Alimpl0::template rebind<MyImpl>::other _Alimpl;
-		_Alimpl _Al(_Ax);
-
+		MyImpl *ptr = GNULL;
 		ResetImpl(GForward<T>(val), ptr, GIsLarge<MyImpl>());
 	}
 
@@ -271,7 +266,7 @@ protected:
 	}
 
 	template<typename T, typename ImplT>
-	gvoid ResetImpl(T &&val, GFalseType)
+	gvoid ResetImpl(T &&val, ImplT *, GFalseType)
 	{
 		ImplT *ptr = static_cast<ImplT *>(GetSpace());
 		GConstruct<ImplT>(ptr, GForward<T>(val));
@@ -517,7 +512,7 @@ public:
 	template<typename FT,
 		typename InvResT = typename BaseType::template GResultOfInvoking<FT &>,
 		typename = typename BaseType::template GEnableIfReturnable<InvResT> >
-		GFunction(FT func)
+	GFunction(FT func)
 	{
 		this->Reset(GMove(func));
 	}
@@ -556,7 +551,7 @@ public:
 	template<typename FT,
 		typename InvResT = typename BaseType::template GResultOfInvoking<FT &>,
 		typename = typename BaseType::template GEnableIfReturnable<InvResT> >
-		ThisType& operator=(FT &&func)
+	ThisType& operator=(FT &&func)
 	{
 		ThisType(GForward<FT>(func)).Swap(*this);
 		return *this;

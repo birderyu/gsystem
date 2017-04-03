@@ -258,11 +258,11 @@ struct GIntegralConstant
 	}
 };
 
-typedef GIntegralConstant<gbool, true>	GTrueType;
-typedef GIntegralConstant<gbool, false> GFalseType;
-
 template<gbool DefValue>
 using GBoolConstant = GIntegralConstant<gbool, DefValue>;
+
+typedef GBoolConstant<true>		GTrueType;
+typedef GBoolConstant<false>	GFalseType;
 
 template<gbool>
 struct GCatBase
@@ -381,7 +381,7 @@ struct GIsMemberObjectPointer
 
 template<typename T>
 struct GIsMemberFunctionPointer
-	: detail::traits::_GIsMemberObjectPointer<typename GRemoveConstVolatile<T>::Type>::BoolType
+	: detail::traits::_GIsMemberFunctionPointer<typename GRemoveConstVolatile<T>::Type>::BoolType
 {
 };
 
@@ -798,11 +798,11 @@ private:
 public:
 	typedef typename GConditional<
 		GIsArray<U>::value,
-		typename GRemoveExtent<U>::Type*,
+		typename GRemoveExtent<U>::Type *,
 		typename GConditional<
-		GIsFunction<U>::value,
-		typename GAddPointer<U>::type,
-		typename GRemoveConstVolatile<U>::Type
+			GIsFunction<U>::value,
+			typename GAddPointer<U>::Type,
+			typename GRemoveConstVolatile<U>::Type
 		>::Type
 	>::Type Type;
 };

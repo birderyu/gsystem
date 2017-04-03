@@ -100,7 +100,9 @@ namespace gsystem { // gsystem
 template <typename ClassT, typename... ArgTs>
 GINLINE gvoid GConstruct(ClassT *ptr, ArgTs&& ...args)
 {
-	new(ptr) ClassT(GForward<ArgTs>(args)...);
+	//::new(ptr) ClassT(GForward<ArgTs>(args)...);
+	::new(static_cast<gptr>(ptr)) 
+		ClassT(GForward<ArgTs>(args)...);
 }
 
 template <typename ClassT> 

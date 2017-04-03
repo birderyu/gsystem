@@ -8,8 +8,17 @@
 
 using namespace gsystem;
 
+gint foo(gint val)
+{
+	return val + 1;
+}
+
 gint main(gint argc, gchar *argv[])
 {
+	GFunction<gint(gint)> func(foo);
+	//func = foo;
+	gint val = func(10);
+
 	testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
 	system("pause");
