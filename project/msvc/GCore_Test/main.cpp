@@ -16,7 +16,7 @@ gint foo(gint val)
 gint main(gint argc, gchar *argv[])
 {
 	GFunction<gint(gint)> func(foo);
-	//func = foo;
+	//std::function<gint(gint)> func(foo);
 	gint val = func(10);
 
 	testing::InitGoogleTest(&argc, argv);
