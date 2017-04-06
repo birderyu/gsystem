@@ -2,7 +2,7 @@
 #ifndef _CORE_VOID_LOCK_H_
 #define _CORE_VOID_LOCK_H_
 
-#include "glock.h"
+#include "GCore/glock.h"
 
 namespace gsystem { // gsystem
 

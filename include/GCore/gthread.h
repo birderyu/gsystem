@@ -24,11 +24,11 @@ public:
 public:
 	GThread();
 
-	template<typename _Fn,
-		typename... _Args,
-		class = typename GEnableIf<
-		!GIsSame<typename GDecay<_Fn>::Type, GThread>::value>::Type>
-	GThread(_Fn&& _Fx, _Args&&... _Ax);
+	template<typename FunT,
+		typename... ArgTs,
+		typename = typename GEnableIf<
+		!GIsSame<typename GDecay<FunT>::Type, GThread>::value>::Type>
+	GThread(FunT &&func, ArgTs&&... args);
 	GThread(GThread &&thread);
 	~GThread();
 

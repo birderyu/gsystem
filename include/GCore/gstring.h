@@ -1,19 +1,6 @@
-/****************************************************************************
-**
-** GSystem: A quick, micro library of C++
-**
-** @author	birderyu
-** @contact	https://github.com/birderyu
-** @file	gstring.h
-** @date	2016-12-03
-** @brief	以8个字节为1个字符的字符串类型
-**
-****************************************************************************/
-
 #ifndef _CORE_STRING_H_
 #define _CORE_STRING_H_
 
-#include "garray.h"
 #include "gseries.h"
 
 namespace gsystem { // gsystem
@@ -23,24 +10,15 @@ namespace gsystem { // gsystem
 
 namespace gsystem { // gsystem
 
-enum class GEncode
-{
-	Unicode,
-	GBK,
-};
-
 /****************************************************************************
 **
-** gstring.h
-**
-** @class	GString
-** @module	GCore
 ** @brief	以8个字节为1个字符的字符串类型
+**
+** 该字符串中的字符，是以8个字节为单位的，因此它可以表示
 **
 ****************************************************************************/
 class GAPI GString final 
 	: public GArray<gchar>
-	, virtual public GObject
 {
 	friend class GVariety;
 	friend GAPI GString operator+(const GString &s1, const GString &s2);
@@ -53,28 +31,29 @@ class GAPI GString final
 
 public: // 常量定义
 	enum { CLASS_CODE = CLASS_CODE_STRING, };
-	static const gsize MAX_SIZE = GListT<GString>::MAX_SIZE;
-	static const gsize NULL_POS = GListT<GString>::NULL_POS;
 
 public: // 静态方法
-	static GString Number(gsmall num, gint nBase = 10);
-	static GString Number(gusmall num, gint nBase = 10);
-	static GString Number(gshort num, gint nBase = 10);
-	static GString Number(gushort num, gint nBase = 10);
-	static GString Number(gint num, gint nBase = 10);
-	static GString Number(guint num, gint nBase = 10);
-	static GString Number(glong num, gint nBase = 10);
-	static GString Number(gulong num, gint nBase = 10);
-	static GString Number(glonglong num, gint nBase = 10);
-	static GString Number(gulonglong num, gint nBase = 10);
-	static GString Number(gfloat num, gint nBase = 10);
-	static GString Number(gdouble num, gint nBase = 10);
-	static GString Number(gdecimal num, gint nBase = 10);
+	static GString Number(gsmall num, gint base = 10);
+	static GString Number(gusmall num, gint base = 10);
+	static GString Number(gshort num, gint base = 10);
+	static GString Number(gushort num, gint base = 10);
+	static GString Number(gint num, gint base = 10);
+	static GString Number(guint num, gint base = 10);
+	static GString Number(glong num, gint base = 10);
+	static GString Number(gulong num, gint base = 10);
+	static GString Number(glonglong num, gint base = 10);
+	static GString Number(gulonglong num, gint base = 10);
+	static GString Number(gfloat num, gint base = 10);
+	static GString Number(gdouble num, gint base = 10);
+	static GString Number(gdecimal num, gint base = 10);
+
+	static GString ReferenceOf(gcstring str);
+	static GString ReferenceOf(const GString &str);
 
 public: // 构造方法
 	GString();
 	GString(gchar c);
-	GString(const gchar *str);
+	GString(gcstring str);
 	GString(const GString &str);
 	GString(GString &&str);
 
@@ -93,7 +72,7 @@ public: // Array行为
 	gvoid Append(GString &&str);
 
 public: // 字符串行为
-	gbool Equals(const GString &, gbool bIsSensitive = true) const;
+	gbool Equals(const GString &str, gbool bIsSensitive = true) const;
 	GString Trim() const;
 	GString TrimLeft() const;
 	GString TrimRight() const;
@@ -101,8 +80,8 @@ public: // 字符串行为
 	GString ToLower() const;
 	gcstring CString() const;
 	GString &Replace(const GString &from, const GString &to, gbool bIsSensitive = true);
-	// bIgnoreEmpty：是否忽略空格; bIsSensitive：大小写是否敏感
-	GStringList Split(const GString &sSep, gbool bIgnoreEmpty = false, gbool bIsSensitive = true) const;
+	// ignoreEmpty：是否忽略空格; isSensitive：大小写是否敏感
+	GStringList Split(const GString &sep, gbool ignoreEmpty = false, gbool isSensitive = true) const;
 	gsize Find(gchar c, gsize start = 0, gbool bIsSensitive = true) const;
 	gsize Find(const GString &str, gsize start = 0, gbool bIsSensitive = true) const;
 	GString SubString(gsize start, gsize length) const;
@@ -135,7 +114,7 @@ public: // 运算符重载
 	gchar &operator[](gsize);
 
 private: // 私有方法
-	GString(const gchar *pStr, gsize size);
+	GString(gcstring str, gsize size);
 	GString(const GStringData &str);
 	GString(GStringData &&str);
 

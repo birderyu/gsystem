@@ -12,9 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\GConcurrent\gatomic.h" />
+    <ClInclude Include="..\..\..\include\GConcurrent\gquicklock.h" />
+    <ClInclude Include="..\..\..\include\GConcurrent\grwlock.h" />
+    <ClInclude Include="..\..\..\include\GConcurrent\gspinlock.h" />
+    <ClInclude Include="..\..\..\include\GConcurrent\gvoidlock.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\GConcurrent\gatomic.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\GConcurrent\gquicklock.cpp" />
+    <ClCompile Include="..\..\..\source\GConcurrent\gvoidlock.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BD1E3A01-CF95-45F1-9B36-056DCC72F907}</ProjectGuid>

@@ -4,6 +4,21 @@
 
 namespace gsystem { // gsystem
 
+GString GString::ReferenceOf(gcstring str)
+{
+	gsize size = GCString::Size(str);
+	if (size <= 0)
+	{
+		return GString();
+	}
+	return GString(GStringData::ReferenceOf(str, size));
+}
+
+GString GString::ReferenceOf(const GString &str)
+{
+	return ReferenceOf(str.CString());
+}
+
 GString::GString()
 {
 	
@@ -16,14 +31,14 @@ GString::GString(gchar c)
 	m_tString[0] = c;
 }
 
-GString::GString(const gchar *str)
+GString::GString(gcstring str)
 {
 	gsize size = GCString::Size(str);
 	m_tString.Resize(size);
 	GCString::Copy(str, size, m_tString.Start());
 }
 
-GString::GString(const gchar *str, gsize size)
+GString::GString(gcstring str, gsize size)
 	: m_tString(str, size)
 {
 	

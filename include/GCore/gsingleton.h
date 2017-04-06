@@ -17,8 +17,10 @@ public:
 			GLockGuard<LockT> lock(m_tLock);
 			if (m_pInstance == GNULL)
 			{
-				m_pInstance = new ClassT;
-				m_pInstance->Initialize();
+				// 特殊场景下，可能会有内存泄漏的风险
+				ClassT *ptr = new ClassT();
+				ptr->Initialize();
+				m_pInstance = ptr;
 				G_CALL_AT_EXIT(Destroy);
 			}
 			return *m_pInstance;

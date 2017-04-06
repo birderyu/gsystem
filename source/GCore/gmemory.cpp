@@ -3,22 +3,22 @@
 
 namespace gsystem { // gsystem
 
-gptr GMalloc(gsize size)
+gptr GMalloc(gsize size) GNOEXCEPT
 {
 	return dlmalloc(size);
 }
 
-gptr GCalloc(gsize n, gsize size)
+gptr GCalloc(gsize n, gsize size) GNOEXCEPT
 {
 	return dlcalloc(n, size);
 }
 
-gptr GRealloc(gptr oldptr, gsize newsize)
+gptr GRealloc(gptr oldptr, gsize newsize) GNOEXCEPT
 {
 	return dlrealloc(oldptr, newsize);
 }
 
-gvoid GFree(gptr pfree)
+gvoid GFree(gptr pfree) GNOEXCEPT
 {
 	dlfree(pfree);
 }

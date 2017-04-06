@@ -6,22 +6,22 @@ namespace detail { // gsystem.detail
 namespace string { // gsystem.detail.string
 
 template <typename T>
-GString GNumberToString(T nNum, gint nBase)
+GString GNumberToString(T num, gint base)
 {
 	std::ostringstream oss;
-	if (nBase == 2)
+	if (base == 2)
 	{
 
 	}
-	else if (nBase == 8)
+	else if (base == 8)
 	{
 		oss << std::oct;
 	}
-	else if (nBase == 10)
+	else if (base == 10)
 	{
 		oss << std::dec;
 	}
-	else if (nBase == 16)
+	else if (base == 16)
 	{
 		oss << std::hex;
 	}
@@ -29,7 +29,7 @@ GString GNumberToString(T nNum, gint nBase)
 	{
 		oss << std::dec;
 	}
-	oss << nNum;
+	oss << num;
 	return GString(oss.str().c_str());
 }
 
@@ -37,14 +37,14 @@ template <typename T>
 T GStringToNumber(const GString &str, gbool *isok)
 {
 	std::istringstream iss(str.CString());
-	T nNum;
+	T num;
 	if (isok) *isok = false;
 
-	if (iss >> nNum)
+	if (iss >> num)
 	{
 		if (isok) *isok = true;
 	}
-	return nNum;
+	return num;
 }
 
 } // namespace gsystem.detail.string
@@ -53,69 +53,69 @@ T GStringToNumber(const GString &str, gbool *isok)
 
 namespace gsystem { // gsystem
 
-GString GString::Number(gsmall nNum, gint nBase)
+GString GString::Number(gsmall num, gint base)
 {
-	return detail::string::GNumberToString<gsmall>(nNum, nBase);
+	return detail::string::GNumberToString<gsmall>(num, base);
 }
 
-GString GString::Number(gusmall nNum, gint nBase)
+GString GString::Number(gusmall num, gint base)
 {
-	return detail::string::GNumberToString<gusmall>(nNum, nBase);
+	return detail::string::GNumberToString<gusmall>(num, base);
 }
 
-GString GString::Number(gshort nNum, gint nBase)
+GString GString::Number(gshort num, gint base)
 {
-	return detail::string::GNumberToString<gshort>(nNum, nBase);
+	return detail::string::GNumberToString<gshort>(num, base);
 }
 
-GString GString::Number(gushort nNum, gint nBase)
+GString GString::Number(gushort num, gint base)
 {
-	return detail::string::GNumberToString<gushort>(nNum, nBase);
+	return detail::string::GNumberToString<gushort>(num, base);
 }
 
-GString GString::Number(gint nNum, gint nBase)
+GString GString::Number(gint num, gint base)
 {
-	return detail::string::GNumberToString<gint>(nNum, nBase);
+	return detail::string::GNumberToString<gint>(num, base);
 }
 
-GString GString::Number(guint nNum, gint nBase)
+GString GString::Number(guint num, gint base)
 {
-	return detail::string::GNumberToString<guint>(nNum, nBase);
+	return detail::string::GNumberToString<guint>(num, base);
 }
 
-GString GString::Number(glong nNum, gint nBase)
+GString GString::Number(glong num, gint base)
 {
-	return detail::string::GNumberToString<glong>(nNum, nBase);
+	return detail::string::GNumberToString<glong>(num, base);
 }
 
-GString GString::Number(gulong nNum, gint nBase)
+GString GString::Number(gulong num, gint base)
 {
-	return detail::string::GNumberToString<gulong>(nNum, nBase);
+	return detail::string::GNumberToString<gulong>(num, base);
 }
 
-GString GString::Number(glonglong nNum, gint nBase)
+GString GString::Number(glonglong num, gint base)
 {
-	return detail::string::GNumberToString<glonglong>(nNum, nBase);
+	return detail::string::GNumberToString<glonglong>(num, base);
 }
 
-GString GString::Number(gulonglong nNum, gint nBase)
+GString GString::Number(gulonglong num, gint base)
 {
-	return detail::string::GNumberToString<gulonglong>(nNum, nBase);
+	return detail::string::GNumberToString<gulonglong>(num, base);
 }
 
-GString GString::Number(gfloat nNum, gint nBase)
+GString GString::Number(gfloat num, gint base)
 {
-	return detail::string::GNumberToString<gfloat>(nNum, nBase);
+	return detail::string::GNumberToString<gfloat>(num, base);
 }
 
-GString GString::Number(gdouble nNum, gint nBase)
+GString GString::Number(gdouble num, gint base)
 {
-	return detail::string::GNumberToString<gdouble>(nNum, nBase);
+	return detail::string::GNumberToString<gdouble>(num, base);
 }
 
-GString GString::Number(gdecimal nNum, gint nBase)
+GString GString::Number(gdecimal num, gint base)
 {
-	return detail::string::GNumberToString<gdecimal>(nNum, nBase);
+	return detail::string::GNumberToString<gdecimal>(num, base);
 }
 
 gsmall GString::ToSmall(gbool *ok) const

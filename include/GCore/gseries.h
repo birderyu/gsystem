@@ -1,7 +1,21 @@
-/// 为了使得串结构（String）更加高效，构建了数据结构GSeries
-/// GSeries作为所有串结构的内核（GString、GWString、GBytes），拥有以下特点：
-/// 1）为了支持串在大部分使用场景中其长度都不大
-/// 2）为了支持串在大部分时间其实用于只读操作的情景，支持COW（copy-on-write，写时拷贝），
+
+/****************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file	gseries.h
+** @brief	序列数组结构
+** @author	birderyu
+** @contact	https://github.com/birderyu
+** @date	2016-12-03
+** @version	1.0.0
+**
+** 为了使得串结构（String）更加高效，构建了数据结构GSeries
+** GSeries作为所有串结构的内核（GString、GWString、GBytes），拥有以下特点：
+** 1）为了支持串在大部分使用场景中其长度都不大
+** 2）为了支持串在大部分时间其实用于只读操作的情景，支持COW（copy-on-write，写时拷贝）。
+**
+****************************************************************************/
 #ifndef _CORE_SERIES_H_
 #define _CORE_SERIES_H_
 
@@ -88,6 +102,7 @@ private:
 	// 将引用类型转换成值类型
 	gvoid ToValue(gsize capacity);
 
+private:
 	T *m_pStart;
 	gsize m_nSize;
 	gsize m_nCapacity;

@@ -26,10 +26,12 @@
 **
 ****************************************************************************/
 #if defined (_WIN32) || defined(_WIN64)
+/** @brief Windows操作系统 */
 # define G_SYSTEM_WINDOWS
 #endif // _WIN32 or _WIN64
 
 #ifdef _LINUX
+/** @brief Linux操作系统 */
 # define G_SYSTEM_LINUX
 #endif // _LINUX
 
@@ -43,10 +45,12 @@
 **
 ****************************************************************************/
 #ifdef _MSC_VER
+/** @brief MSVC编译器 */
 # define G_COMPILER_MSVC _MSC_VER
 #endif // _MSC_VER
 
 #ifdef __GNUC__
+/** @brief GCC编译器 */
 # define G_COMPILER_GCC
 #endif // __GNUC__
 

@@ -543,6 +543,23 @@ GINLINE gbool GVector<DataT>::EndWith(const DataT &data) const
 	return Last() == data;
 }
 
+template <typename DataT> GINLINE
+gvoid GVector<DataT>::RemoveAt(gsize pos)
+{
+	gsize old_size = Size();
+	GASSERT(old_size > 0);
+	m_tArray.RemoveAt(RealPos(pos));
+	if (old_size == 1 && m_nHead == 0)
+	{
+		m_nHead = NULL_POS;
+		m_nTail = 0;
+	}
+	else
+	{
+		--m_nTail;
+	}
+}
+
 template <typename DataT>
 GINLINE DataT *GVector<DataT>::Head()
 {

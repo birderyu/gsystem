@@ -17,7 +17,7 @@ template <typename ClassT>
 GINLINE gvoid _GDefaultConstruct(ClassT *ptr, GFalseType)
 {
 	// 有默认的构造函数，调用默认的构造函数
-	new(ptr)ClassT();
+	::new(static_cast<gptr>(ptr)) ClassT();
 }
 
 template <typename ClassT>
@@ -46,7 +46,7 @@ template <typename ClassT>
 GINLINE gvoid _GCopyConstruct(ClassT *ptr, const ClassT &copyable, GFalseType)
 {
 	// 有拷贝构造函数，调用拷贝构造函数
-	new(ptr)ClassT(copyable);
+	::new(static_cast<gptr>(ptr)) ClassT(copyable);
 }
 
 template <typename ClassT>
@@ -75,7 +75,7 @@ template <typename ClassT>
 GINLINE gvoid _GMoveConstruct(ClassT *ptr, ClassT &&moveable, GFalseType)
 {
 	// 有移动构造函数，调用移动构造函数，可能会退化为拷贝构造函数
-	new(ptr)ClassT(GForward<ClassT>(moveable));
+	::new(static_cast<gptr>(ptr)) ClassT(GForward<ClassT>(moveable));
 }
 
 template <typename ClassT>
@@ -100,7 +100,6 @@ namespace gsystem { // gsystem
 template <typename ClassT, typename... ArgTs>
 GINLINE gvoid GConstruct(ClassT *ptr, ArgTs&& ...args)
 {
-	//::new(ptr) ClassT(GForward<ArgTs>(args)...);
 	::new(static_cast<gptr>(ptr)) 
 		ClassT(GForward<ArgTs>(args)...);
 }

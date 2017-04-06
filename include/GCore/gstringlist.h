@@ -1,40 +1,27 @@
 #ifndef _CORE_STRING_LIST_H_
 #define _CORE_STRING_LIST_H_
 
-#include "gstringpool.h"
-#include "gmap.h"
+#include <new.h>
+#include "gstring.h"
+#include "gvector.h"
 
 namespace gsystem { // gsystem
-	class GString;
-} // namespace gsystem
-
-namespace gsystem { // gsystem
-
-enum G_STRING_TYPE
-{
-	STRING_TYPE_VALUE,
-	STRING_TYPE_REFERENCE,
-};
 
 class GAPI GStringList
 {
 public:
-	GString GetAt(gsize, G_STRING_TYPE emStrType = STRING_TYPE_VALUE) const;
-
-	gbool Add(const GString &);
-	gbool SetAt(gsize, const GString &);
-	gbool RemoveAt(gsize);
-
 	gsize Size() const;
+	gbool IsEmpty() const;
 
-	// 回收废弃不用的内存
-	// 视情况不同，会占用一定的时间
-	// 回收之后，引用型的String会失效
-	gbool Collect();
+	GString &GetAt(gsize pos);
+	const GString &GetAt(gsize pos) const;
+
+	gvoid Add(const GString &str);
+	gvoid Add(GString &&str);
+	gvoid SetAt(gsize pos, const GString &str);
 
 private:
-	GStringPool m_tPool;
-	GMap<gsize, gptr> m_t; // <下标，指针>
+	GDynamicArray<GString> m_tStrings;
 };
 
 } // namespace gsystem

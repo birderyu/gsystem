@@ -31,15 +31,41 @@
     <Filter Include="头文件\Atomic">
       <UniqueIdentifier>{9ce1c04f-4205-4d30-904a-7592c9574d9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Lock">
+      <UniqueIdentifier>{2e4727d0-420d-4b85-bc04-0e3ba5ac244b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Lock">
+      <UniqueIdentifier>{011205a9-5f1d-4142-b4a3-40457c617f16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\GConcurrent\gatomic.h">
       <Filter>头文件\Atomic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GConcurrent\gquicklock.h">
+      <Filter>头文件\Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GConcurrent\grwlock.h">
+      <Filter>头文件\Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GConcurrent\gspinlock.h">
+      <Filter>头文件\Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GConcurrent\gvoidlock.h">
+      <Filter>头文件\Lock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\GConcurrent\gatomic.inl">
       <Filter>头文件\_inline</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\GConcurrent\gquicklock.cpp">
+      <Filter>源文件\Lock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GConcurrent\gvoidlock.cpp">
+      <Filter>源文件\Lock</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -221,24 +221,19 @@ GINLINE const DataT &GDynamicArray<DataT>::operator[](gsize pos) const
 }
 
 template <typename DataT>
-GINLINE gbool GDynamicArray<DataT>::RemoveAt(gsize pos)
+GINLINE gvoid GDynamicArray<DataT>::RemoveAt(gsize pos)
 {
-	if (0 == m_nSize)
-	{
-		return false;
-	}
+	GASSERT(m_nSize > 0 && pos < m_nSize);
 	if (1 == m_nSize)
 	{
-		if (0 == pos)
-		{
-			Destroy();
-			return true;
-		}
-		return false;
+		// 直接销毁数组
+		Destroy();
 	}
-	m_pData = GArrays::RemoveArrayElementAt<DataT>(m_pData, m_nSize, pos);
-	m_nSize--;
-	return false;
+	else
+	{
+		m_pData = GArrays::RemoveArrayElementAt<DataT>(m_pData, m_nSize, pos);
+		m_nSize--;
+	}
 }
 
 template <typename DataT>

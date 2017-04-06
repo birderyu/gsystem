@@ -1,15 +1,16 @@
-#ifndef _CORE_QUICK_LOCK_H_
-#define _CORE_QUICK_LOCK_H_
+#ifndef _CONCURRENT_QUICK_LOCK_H_
+#define _CONCURRENT_QUICK_LOCK_H_
 
-#include "glock.h"
+#include "GCore/glock.h"
 
 #ifdef G_SYSTEM_WINDOWS
-#include "gcriticalsection.h"
+#include "GCore/gcriticalsection.h"
 #else // !G_SYSTEM_WINDOWS
-#include "gmutex.h"
+#include "GCore/gmutex.h"
 #endif // G_SYSTEM_WINDOWS
 
 namespace gsystem { // gsystem
+namespace sync { // gsystem.sync
 
 class GAPI GQuickLock final
 	: public GLock
@@ -26,6 +27,7 @@ private:
 #endif // G_SYSTEM_WINDOWS
 };
 
+} // namespace gsystem.sync
 } // namespace gsystem
 
-#endif // _CORE_QUICK_LOCK_H_
+#endif // _CONCURRENT_QUICK_LOCK_H_

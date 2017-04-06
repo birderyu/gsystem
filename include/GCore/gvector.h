@@ -149,7 +149,7 @@ public:
 	//Iterator Erase(const Iterator &iter);
 	//Iterator Erase(const Iterator &begin, const Iterator &end);
 
-	//gvoid RemoveAt(gsize);
+	gvoid RemoveAt(gsize pos);
 	//gvoid Remove(gsize start, gsize size);
 	//gvoid Remove(const DataT &);
 	//gsize FirstIndexOf(const DataT &);

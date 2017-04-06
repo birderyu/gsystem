@@ -1,9 +1,7 @@
-/// 字节数组 byte array（bytes）
+/// 字节串
 #ifndef _CORE_BYTES_H_
 #define _CORE_BYTES_H_
 
-#include "gstructure.h"
-#include "garray.h"
 #include "gseries.h"
 
 namespace gsystem { // gsystem
@@ -13,9 +11,7 @@ namespace gsystem { // gsystem
 namespace gsystem { // gsystem
 
 class GAPI GBytes final
-	: public GListT<GBytes>
-	, public GArray<gbyte>
-	, virtual public GObject
+	: public GArray<gbyte>
 {
 	friend class GByteBuffer;
 

@@ -2,15 +2,15 @@
 #ifndef _CORE_READ_WRITE_LOCK_H_
 #define _CORE_READ_WRITE_LOCK_H_
 
-#include "gtype.h"
+#include "GCore/gtype.h"
 
 namespace gsystem { // gsystem
 
-class GAPI GReadWriteLock
+class GAPI GRWLock
 {
 public:
-	GReadWriteLock();
-	virtual ~GReadWriteLock() = 0;
+	GRWLock();
+	virtual ~GRWLock() = 0;
 
 	// ¶ÁËø
 	virtual gbool LockRead() = 0;

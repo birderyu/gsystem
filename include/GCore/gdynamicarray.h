@@ -57,7 +57,7 @@ public:
 	const DataT &operator[](gsize) const;
 	
 	// 移除特定位置的元素
-	gbool RemoveAt(gsize);
+	gvoid RemoveAt(gsize pos);
 
 	// 拷贝和移动
 	GDynamicArray<DataT> &operator=(const GDynamicArray<DataT> &);

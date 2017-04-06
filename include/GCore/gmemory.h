@@ -1,5 +1,15 @@
-/// C风格的内存操作
-/// use dlmalloc
+/****************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file	gmemory.h
+** @brief	C风格内存操作的定义
+** @author	birderyu
+** @contact	https://github.com/birderyu
+** @date	2015-12-31
+** @version	1.0.0
+**
+****************************************************************************/
 
 #ifndef _CORE_MEMORY_H_
 #define _CORE_MEMORY_H_
@@ -10,41 +20,38 @@ namespace gsystem { // gsystem
 
 /****************************************************************************
 **
-** GNew
-**
 ** @name		GMalloc
 ** @brief		分配内存
 ** @param[in]	size {gsize} 分配内存的大小，单位字节
 ** @return		{gptr} 分配内存的首地址，若分配失败则返回GNULL
+** @note		该方法不会抛出异常，而是会在内存分配失败时返回一个空指针
 **
 ****************************************************************************/
-GAPI gptr GMalloc(gsize size);
+GAPI gptr GMalloc(gsize size) GNOEXCEPT;
 
 /****************************************************************************
-**
-** GNew
 **
 ** @name		GCalloc
 ** @brief		分配内存
 ** @param[in]	n {gsize} 分配内存的大小，单位个
 ** @param[in]	size {gsize} 分配内存的大小，单位字节
 ** @return		{gptr} 分配内存的首地址，大小为n*size个字节，若分配失败则返回GNULL
+** @note		该方法不会抛出异常，而是会在内存分配失败时返回一个空指针
 **
 ****************************************************************************/
-GAPI gptr GCalloc(gsize n, gsize size);
+GAPI gptr GCalloc(gsize n, gsize size) GNOEXCEPT;
 
 /****************************************************************************
-**
-** GNew
 **
 ** @name		GRealloc
 ** @brief		重新分配内存
 ** @param[in]	oldptr {gptr} 旧内存首地址
 ** @param[in]	newsize {gsize} 新内存的大小，单位字节
 ** @return		{gptr} 新分配内存的首地址，若分配失败则返回GNULL
+** @note		该方法不会抛出异常，而是会在内存分配失败时返回一个空指针
 **
 ****************************************************************************/
-GAPI gptr GRealloc(gptr oldptr, gsize newsize);
+GAPI gptr GRealloc(gptr oldptr, gsize newsize) GNOEXCEPT;
 
 /****************************************************************************
 **
@@ -55,11 +62,9 @@ GAPI gptr GRealloc(gptr oldptr, gsize newsize);
 ** @param[in]	pfree {gptr} 内存首地址
 **
 ****************************************************************************/
-GAPI gvoid GFree(gptr pfree);
+GAPI gvoid GFree(gptr pfree) GNOEXCEPT;
 
 /****************************************************************************
-**
-** GNew
 **
 ** @name		GMemCopy
 ** @brief		内存拷贝
@@ -73,8 +78,6 @@ GAPI gptr GMemCopy(gptr dst, gcptr src, gsize size);
 
 /****************************************************************************
 **
-** GNew
-**
 ** @name		GMemMove
 ** @brief		内存移动
 ** @param[in]	dst {gptr} 内存移动后的首地址
@@ -86,8 +89,6 @@ GAPI gptr GMemCopy(gptr dst, gcptr src, gsize size);
 GAPI gptr GMemMove(gptr dst, gcptr src, gsize size);
 
 /****************************************************************************
-**
-** GNew
 **
 ** @name		GMemSet
 ** @brief		内存设置

@@ -210,7 +210,6 @@
     <ClInclude Include="..\..\..\include\GCore\gordermultimap.h" />
     <ClInclude Include="..\..\..\include\GCore\gpath.h" />
     <ClInclude Include="..\..\..\include\GCore\gqueue.h" />
-    <ClInclude Include="..\..\..\include\GCore\gquicklock.h" />
     <ClInclude Include="..\..\..\include\GCore\gregister.h" />
     <ClInclude Include="..\..\..\include\GCore\gserialize.h" />
     <ClInclude Include="..\..\..\include\GCore\gdate.h" />
@@ -221,7 +220,6 @@
     <ClInclude Include="..\..\..\include\GCore\gdoublefloat.h" />
     <ClInclude Include="..\..\..\include\GCore\gdoublelinkedlist.h" />
     <ClInclude Include="..\..\..\include\GCore\gseriespool.h" />
-    <ClInclude Include="..\..\..\include\GCore\gspinlock.h" />
     <ClInclude Include="..\..\..\include\GCore\gstopwatch.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring16.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring32.h" />
@@ -264,13 +262,11 @@
     <ClInclude Include="..\..\..\include\GCore\gnew.h" />
     <ClInclude Include="..\..\..\include\GCore\gmemorystore.h" />
     <ClInclude Include="..\..\..\include\GCore\greferencecounter.h" />
-    <ClInclude Include="..\..\..\include\GCore\greadwritelock.h" />
     <ClInclude Include="..\..\..\include\GCore\gstdstringhelper.h" />
     <ClInclude Include="..\..\..\include\GCore\gstringlist.h" />
     <ClInclude Include="..\..\..\include\GCore\gstringpool.h" />
     <ClInclude Include="..\..\..\include\GCore\gutility.h" />
     <ClInclude Include="..\..\..\include\GCore\gvariant.h" />
-    <ClInclude Include="..\..\..\include\GCore\gvoidlock.h" />
     <ClInclude Include="..\..\..\include\GCore\gpackage.h" />
     <ClInclude Include="..\..\..\include\GCore\gredblacktree.h" />
     <ClInclude Include="..\..\..\include\GCore\gsort.h" />
@@ -304,6 +300,7 @@
     <ClInclude Include="..\..\..\include\GCore\gunsignedsmallinteger.h" />
     <ClInclude Include="..\..\..\include\GCore\gvariety.h" />
     <ClInclude Include="..\..\..\include\GCore\gvector.h" />
+    <ClInclude Include="..\..\..\include\GCore\gversion.h" />
     <ClInclude Include="..\..\..\include\GCore\gweakpointer.h" />
     <ClInclude Include="..\..\..\include\GCore\gwidecharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gfunctor.h" />
@@ -354,7 +351,6 @@
     <ClCompile Include="..\..\..\source\GCore\gobject.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gmemorystore.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gpath.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gquicklock.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gregister.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsemaphore.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gshortinteger.cpp" />
@@ -390,7 +386,6 @@
     <ClCompile Include="..\..\..\source\GCore\gunsignedshortinteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gunsignedsmallinteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gvariety.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gvoidlock.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gwidecharacter.cpp" />
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c" />
   </ItemGroup>

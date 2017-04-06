@@ -1,42 +1,44 @@
 #include "gstringlist.h"
-#include "gstring.h"
-#include "gcstring.h"
 
 namespace gsystem { // gsystem
 
-GString GStringList::GetAt(gsize pos, G_STRING_TYPE emStrType) const
+gsize GStringList::Size() const
 {
-	if (emStrType == STRING_TYPE_VALUE)
-	{
-		return GString((gchar*)(m_t.Find(pos).Value()));
-	}
-	else
-	{
-		// STRING_TYPE_REFERENCE
-		// TODO
-	}
-	return GString();
+	//return m_tStrings.Size();
+	return 0;
 }
 
-gbool GStringList::Add(const GString &str)
+gbool GStringList::IsEmpty() const
 {
-	if (str.IsEmpty())
-	{
-		return false;
-	}
-	gchar *ptr = (gchar*)m_tPool.Alloc(str.Size() + 1);
-	if (!ptr)
-	{
-		return false;
-	}
-	GCString::Copy(str.CString(), str.Size() + 1, ptr);
-	m_t.Insert(m_t.Size(), ptr);
+	//return m_tStrings.IsEmpty();
 	return true;
 }
 
-gsize GStringList::Size() const
+GString &GStringList::GetAt(gsize pos)
 {
-	return 0;
+	//return m_tStrings.GetAt(pos);
+	return GString();
+}
+
+const GString &GStringList::GetAt(gsize pos) const
+{
+	//return m_tStrings.GetAt(pos);
+	return GString();
+}
+
+gvoid GStringList::Add(const GString &str)
+{
+	//return m_tStrings.PushBack(str);
+}
+
+gvoid GStringList::Add(GString &&str)
+{
+	//return m_tStrings.PushBack(GForward<GString>(str));
+}
+
+gvoid GStringList::SetAt(gsize pos, const GString &str)
+{
+	//m_tStrings[pos] = str;
 }
 
 } // namespace gsystem

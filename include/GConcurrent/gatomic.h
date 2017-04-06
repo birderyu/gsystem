@@ -1,7 +1,7 @@
-#ifndef _CORE_ATOMIC_H_
-#define _CORE_ATOMIC_H_
+#ifndef _CONCURRENT_ATOMIC_H_
+#define _CONCURRENT_ATOMIC_H_
 
-#include "glockguard.h"
+#include "GCore/glockguard.h"
 
 #define G_USE_STD_ATOMIC
 
@@ -12,8 +12,19 @@
 #include "gquicklock.h"
 #endif // G_USE_STD_ATOMIC
 
-template <typename ElemT, typename LockT>
-class GAtomic_Ex;
+namespace gsystem { // gsystem
+	namespace sync { // gsystem.sync
+		namespace detail { // gsystem.sync.detail
+			namespace atom { // gsystem.sync.detail.atom
+				template <typename ElemT, typename LockT>
+				class GAtomic_Ex;
+			} // namespace gsystem.sync.detail.atom
+		} // namespace gsystem.sync.detail
+	} // namespace gsystem.sync
+} // namespace gsystem
+
+namespace gsystem { // gsystem
+namespace sync { // gsystem.sync
 
 // 原子操作类型
 // 原子操作类型与无锁类型并非完全等价
@@ -53,46 +64,14 @@ private:
 #ifdef G_USE_STD_ATOMIC
 	std::atomic<ElemT> m_tValue;
 #else // !G_USE_STD_ATOMIC
-	GAtomic_Ex<ElemT, LockT> m_tAtomic_Ex;
+	detail::atom::GAtomic_Ex<ElemT, LockT> m_tAtomic_Ex;
 	LockT m_tLock;
 #endif // G_USE_STD_ATOMIC
 };
 
-// 原子类型实现类
-template <typename ElemT, typename LockT>
-class GAtomic_Ex
-{
-public:
-	typedef typename GTypeTraits<ElemT>::ParameterType ValueType;
-
-public:
-	GAtomic_Ex(LockT &);
-	GAtomic_Ex(LockT &, ValueType);
-	GAtomic_Ex(const GAtomic_Ex<ElemT, LockT>&);
-
-	GAtomic_Ex<ElemT, LockT> &operator=(ValueType);
-	GAtomic_Ex<ElemT, LockT> &operator=(const GAtomic_Ex<ElemT, LockT> &);
-	ElemT operator++();
-	ElemT operator++(gint);
-	ElemT operator+=(ValueType);
-	ElemT operator--();
-	ElemT operator--(gint);
-	ElemT operator-=(ValueType);
-	gbool operator==(ValueType) const;
-	gbool operator!=(ValueType) const;
-	gbool operator>=(ValueType) const;
-	gbool operator>(ValueType) const;
-	gbool operator<=(ValueType) const;
-	gbool operator<(ValueType) const;
-	ElemT GetValue() const;
-	gvoid SetValue(ValueType);
-	LockT &GetLock();
-
-private:
-	LockT &m_rLock;
-	ElemT m_tValue;
-};
+} // namespace gsystem.sync
+} // namespace gsystem
 
 #include "gatomic.inl"
 
-#endif // _CORE_ATOMIC_H_
+#endif // _CONCURRENT_ATOMIC_H_

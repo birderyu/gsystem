@@ -1,8 +1,51 @@
-#ifndef _CORE_ATOMIC_INLINE_
-#define _CORE_ATOMIC_INLINE_
+#ifndef _CONCURRENT_ATOMIC_INLINE_
+#define _CONCURRENT_ATOMIC_INLINE_
+
+namespace gsystem { // gsystem
+namespace sync { // gsystem.sync
+namespace detail { // gsystem.sync.detail
+namespace atom { // gsystem.sync.detail.atom
+
+// 原子类型实现类
+template <typename ElemT, typename LockT>
+class GAtomic_Ex
+{
+public:
+	typedef typename GTypeTraits<ElemT>::ParameterType ValueType;
+
+public:
+	GAtomic_Ex(LockT &);
+	GAtomic_Ex(LockT &, ValueType);
+	GAtomic_Ex(const GAtomic_Ex<ElemT, LockT>&);
+
+	GAtomic_Ex<ElemT, LockT> &operator=(ValueType);
+	GAtomic_Ex<ElemT, LockT> &operator=(const GAtomic_Ex<ElemT, LockT> &);
+	ElemT operator++();
+	ElemT operator++(gint);
+	ElemT operator+=(ValueType);
+	ElemT operator--();
+	ElemT operator--(gint);
+	ElemT operator-=(ValueType);
+	gbool operator==(ValueType) const;
+	gbool operator!=(ValueType) const;
+	gbool operator>=(ValueType) const;
+	gbool operator>(ValueType) const;
+	gbool operator<=(ValueType) const;
+	gbool operator<(ValueType) const;
+	ElemT GetValue() const;
+	gvoid SetValue(ValueType);
+	LockT &GetLock();
+
+private:
+	LockT &m_rLock;
+	ElemT m_tValue;
+};
+
+} // namespace gsystem.sync.detail.atom
+} // namespace gsystem.sync.detail
 
 template <typename ElemT, typename LockT>
-inline GAtomic<ElemT, LockT>::GAtomic()
+GINLINE GAtomic<ElemT, LockT>::GAtomic()
 #ifdef G_USE_STD_ATOMIC
 #else
 : m_tAtomic_Ex(m_tLock)
@@ -12,7 +55,7 @@ inline GAtomic<ElemT, LockT>::GAtomic()
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic<ElemT, LockT>::GAtomic(typename GAtomic<ElemT, LockT>::ValueType val)
+GINLINE GAtomic<ElemT, LockT>::GAtomic(typename GAtomic<ElemT, LockT>::ValueType val)
 #ifdef G_USE_STD_ATOMIC
 : m_tValue(val)
 #else
@@ -23,7 +66,7 @@ inline GAtomic<ElemT, LockT>::GAtomic(typename GAtomic<ElemT, LockT>::ValueType 
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic<ElemT, LockT>::GAtomic(const GAtomic<ElemT, LockT> &val)
+GINLINE GAtomic<ElemT, LockT>::GAtomic(const GAtomic<ElemT, LockT> &val)
 #ifdef G_USE_STD_ATOMIC
 : m_tValue(val.m_tValue)
 #else
@@ -34,7 +77,7 @@ inline GAtomic<ElemT, LockT>::GAtomic(const GAtomic<ElemT, LockT> &val)
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic<ElemT, LockT> &GAtomic<ElemT, LockT>::operator=(typename GAtomic<ElemT, LockT>::ValueType val)
+GINLINE GAtomic<ElemT, LockT> &GAtomic<ElemT, LockT>::operator=(typename GAtomic<ElemT, LockT>::ValueType val)
 {
 #ifdef G_USE_STD_ATOMIC
 	m_tValue = val;
@@ -46,7 +89,7 @@ inline GAtomic<ElemT, LockT> &GAtomic<ElemT, LockT>::operator=(typename GAtomic<
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic<ElemT, LockT> &GAtomic<ElemT, LockT>::operator=(const GAtomic<ElemT, LockT> &val)
+GINLINE GAtomic<ElemT, LockT> &GAtomic<ElemT, LockT>::operator=(const GAtomic<ElemT, LockT> &val)
 {
 #ifdef G_USE_STD_ATOMIC
 	m_tValue = val.GetValue();
@@ -58,7 +101,7 @@ inline GAtomic<ElemT, LockT> &GAtomic<ElemT, LockT>::operator=(const GAtomic<Ele
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::operator++()
+GINLINE ElemT GAtomic<ElemT, LockT>::operator++()
 {
 #ifdef G_USE_STD_ATOMIC
 	return ++m_tValue;
@@ -68,7 +111,7 @@ inline ElemT GAtomic<ElemT, LockT>::operator++()
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::operator++(gint)
+GINLINE ElemT GAtomic<ElemT, LockT>::operator++(gint)
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue++;
@@ -78,7 +121,7 @@ inline ElemT GAtomic<ElemT, LockT>::operator++(gint)
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::operator+=(typename GAtomic<ElemT, LockT>::ValueType val)
+GINLINE ElemT GAtomic<ElemT, LockT>::operator+=(typename GAtomic<ElemT, LockT>::ValueType val)
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue += val;
@@ -88,7 +131,7 @@ inline ElemT GAtomic<ElemT, LockT>::operator+=(typename GAtomic<ElemT, LockT>::V
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::operator--()
+GINLINE ElemT GAtomic<ElemT, LockT>::operator--()
 {
 #ifdef G_USE_STD_ATOMIC
 	return --m_tValue;
@@ -98,7 +141,7 @@ inline ElemT GAtomic<ElemT, LockT>::operator--()
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::operator--(gint)
+GINLINE ElemT GAtomic<ElemT, LockT>::operator--(gint)
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue--;
@@ -108,7 +151,7 @@ inline ElemT GAtomic<ElemT, LockT>::operator--(gint)
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::operator-=(typename GAtomic<ElemT, LockT>::ValueType val)
+GINLINE ElemT GAtomic<ElemT, LockT>::operator-=(typename GAtomic<ElemT, LockT>::ValueType val)
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue -= val;
@@ -118,7 +161,7 @@ inline ElemT GAtomic<ElemT, LockT>::operator-=(typename GAtomic<ElemT, LockT>::V
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic<ElemT, LockT>::operator==(typename GAtomic<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic<ElemT, LockT>::operator==(typename GAtomic<ElemT, LockT>::ValueType val) const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue == val;
@@ -128,7 +171,7 @@ inline gbool GAtomic<ElemT, LockT>::operator==(typename GAtomic<ElemT, LockT>::V
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic<ElemT, LockT>::operator!=(typename GAtomic<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic<ElemT, LockT>::operator!=(typename GAtomic<ElemT, LockT>::ValueType val) const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue != val;
@@ -138,7 +181,7 @@ inline gbool GAtomic<ElemT, LockT>::operator!=(typename GAtomic<ElemT, LockT>::V
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic<ElemT, LockT>::operator>=(typename GAtomic<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic<ElemT, LockT>::operator>=(typename GAtomic<ElemT, LockT>::ValueType val) const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue >= val;
@@ -148,7 +191,7 @@ inline gbool GAtomic<ElemT, LockT>::operator>=(typename GAtomic<ElemT, LockT>::V
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic<ElemT, LockT>::operator>(typename GAtomic<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic<ElemT, LockT>::operator>(typename GAtomic<ElemT, LockT>::ValueType val) const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue > val;
@@ -158,7 +201,7 @@ inline gbool GAtomic<ElemT, LockT>::operator>(typename GAtomic<ElemT, LockT>::Va
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic<ElemT, LockT>::operator<=(typename GAtomic<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic<ElemT, LockT>::operator<=(typename GAtomic<ElemT, LockT>::ValueType val) const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue <= val;
@@ -168,7 +211,7 @@ inline gbool GAtomic<ElemT, LockT>::operator<=(typename GAtomic<ElemT, LockT>::V
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic<ElemT, LockT>::operator<(typename GAtomic<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic<ElemT, LockT>::operator<(typename GAtomic<ElemT, LockT>::ValueType val) const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue < val;
@@ -178,7 +221,7 @@ inline gbool GAtomic<ElemT, LockT>::operator<(typename GAtomic<ElemT, LockT>::Va
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic<ElemT, LockT>::GetValue() const
+GINLINE ElemT GAtomic<ElemT, LockT>::GetValue() const
 {
 #ifdef G_USE_STD_ATOMIC
 	return m_tValue.load();
@@ -188,7 +231,7 @@ inline ElemT GAtomic<ElemT, LockT>::GetValue() const
 }
 
 template <typename ElemT, typename LockT>
-inline gvoid GAtomic<ElemT, LockT>::SetValue(typename GAtomic<ElemT, LockT>::ValueType val)
+GINLINE gvoid GAtomic<ElemT, LockT>::SetValue(typename GAtomic<ElemT, LockT>::ValueType val)
 {
 #ifdef G_USE_STD_ATOMIC
 	m_tValue.store(val);
@@ -199,35 +242,38 @@ inline gvoid GAtomic<ElemT, LockT>::SetValue(typename GAtomic<ElemT, LockT>::Val
 
 #ifndef G_USE_STD_ATOMIC
 template <typename ElemT, typename LockT>
-inline LockT &GAtomic<ElemT, LockT>::GetLock()
+GINLINE LockT &GAtomic<ElemT, LockT>::GetLock()
 {
 	return m_tAtomic_Ex.GetLock();
 }
 #endif
 
+namespace detail { // gsystem.sync.detail
+namespace atom { // gsystem.sync.detail.atom
+
 template <typename ElemT, typename LockT>
-inline GAtomic_Ex<ElemT, LockT>::GAtomic_Ex(LockT &lock)
+GINLINE GAtomic_Ex<ElemT, LockT>::GAtomic_Ex(LockT &lock)
 : m_rLock(lock), m_tValue()
 {
 
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic_Ex<ElemT, LockT>::GAtomic_Ex(LockT &lock, typename GAtomic_Ex<ElemT, LockT>::ValueType val)
+GINLINE GAtomic_Ex<ElemT, LockT>::GAtomic_Ex(LockT &lock, typename GAtomic_Ex<ElemT, LockT>::ValueType val)
 : m_rLock(lock), m_tValue(val)
 {
 
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic_Ex<ElemT, LockT>::GAtomic_Ex(const GAtomic_Ex<ElemT, LockT>& val)
+GINLINE GAtomic_Ex<ElemT, LockT>::GAtomic_Ex(const GAtomic_Ex<ElemT, LockT>& val)
 : m_rLock(val.GetLock()), m_tValue(val.GetValue())
 {
 
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic_Ex<ElemT, LockT> &GAtomic_Ex<ElemT, LockT>::operator=(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
+GINLINE GAtomic_Ex<ElemT, LockT> &GAtomic_Ex<ElemT, LockT>::operator=(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	m_tValue = val;
@@ -235,7 +281,7 @@ inline GAtomic_Ex<ElemT, LockT> &GAtomic_Ex<ElemT, LockT>::operator=(typename GA
 }
 
 template <typename ElemT, typename LockT>
-inline GAtomic_Ex<ElemT, LockT> &GAtomic_Ex<ElemT, LockT>::operator=(const GAtomic_Ex<ElemT, LockT> &val)
+GINLINE GAtomic_Ex<ElemT, LockT> &GAtomic_Ex<ElemT, LockT>::operator=(const GAtomic_Ex<ElemT, LockT> &val)
 {
 	GAtomic_Ex<ElemT, LockT> tmp(val);
 
@@ -246,107 +292,112 @@ inline GAtomic_Ex<ElemT, LockT> &GAtomic_Ex<ElemT, LockT>::operator=(const GAtom
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::operator++()
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::operator++()
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return ++m_tValue;
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::operator++(gint)
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::operator++(gint)
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue++;
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::operator+=(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::operator+=(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue += val;
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::operator--()
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::operator--()
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return --m_tValue;
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::operator--(gint)
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::operator--(gint)
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue--;
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::operator-=(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::operator-=(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue -= val;
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic_Ex<ElemT, LockT>::operator==(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic_Ex<ElemT, LockT>::operator==(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue == val;
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic_Ex<ElemT, LockT>::operator!=(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic_Ex<ElemT, LockT>::operator!=(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
 	// GLockGuard<LockT> tLock(m_rLock);
 	return !(*this == val);
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic_Ex<ElemT, LockT>::operator>=(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic_Ex<ElemT, LockT>::operator>=(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue >= val;
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic_Ex<ElemT, LockT>::operator>(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic_Ex<ElemT, LockT>::operator>(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue > val;
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic_Ex<ElemT, LockT>::operator<=(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic_Ex<ElemT, LockT>::operator<=(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue <= val;
 }
 
 template <typename ElemT, typename LockT>
-inline gbool GAtomic_Ex<ElemT, LockT>::operator<(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
+GINLINE gbool GAtomic_Ex<ElemT, LockT>::operator<(typename GAtomic_Ex<ElemT, LockT>::ValueType val) const
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue < val;
 }
 
 template <typename ElemT, typename LockT>
-inline ElemT GAtomic_Ex<ElemT, LockT>::GetValue() const
+GINLINE ElemT GAtomic_Ex<ElemT, LockT>::GetValue() const
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	return m_tValue;
 }
 
 template <typename ElemT, typename LockT>
-inline gvoid GAtomic_Ex<ElemT, LockT>::SetValue(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
+GINLINE gvoid GAtomic_Ex<ElemT, LockT>::SetValue(typename GAtomic_Ex<ElemT, LockT>::ValueType val)
 {
 	GLockGuard<LockT> tLock(m_rLock);
 	m_tValue = val;
 }
 
 template <typename ElemT, typename LockT>
-inline LockT &GAtomic_Ex<ElemT, LockT>::GetLock()
+GINLINE LockT &GAtomic_Ex<ElemT, LockT>::GetLock()
 {
 	return m_rLock;
 }
 
-#endif // _CORE_ATOMIC_INLINE_
+} // namespace gsystem.sync.detail.atom
+} // namespace gsystem.sync.detail
+} // namespace gsystem.sync
+} // namespace gsystem
+
+#endif // _CONCURRENT_ATOMIC_INLINE_

@@ -318,12 +318,6 @@
     <ClInclude Include="..\..\..\include\GCore\gmutex.h">
       <Filter>头文件\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gvoidlock.h">
-      <Filter>头文件\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\greadwritelock.h">
-      <Filter>头文件\Thread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gsemaphore.h">
       <Filter>头文件\Thread</Filter>
     </ClInclude>
@@ -429,17 +423,11 @@
     <ClInclude Include="..\..\..\include\GCore\gevent.h">
       <Filter>头文件\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gquicklock.h">
-      <Filter>头文件\Thread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gnocopyable.h">
       <Filter>头文件\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gnomoveable.h">
       <Filter>头文件\Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gspinlock.h">
-      <Filter>头文件\Thread</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gallocator.h">
       <Filter>头文件\Template</Filter>
@@ -570,6 +558,9 @@
     <ClInclude Include="..\..\..\include\GCore\gtrietree.h">
       <Filter>头文件\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gversion.h">
+      <Filter>头文件\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">
@@ -665,9 +656,6 @@
     <ClCompile Include="..\..\..\source\GCore\glock.cpp">
       <Filter>源文件\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gvoidlock.cpp">
-      <Filter>源文件\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gendian.cpp">
       <Filter>源文件\Utility</Filter>
     </ClCompile>
@@ -727,9 +715,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gjsonobject.cpp">
       <Filter>源文件\Json</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gquicklock.cpp">
-      <Filter>源文件\Thread</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gmemory.cpp">
       <Filter>源文件\Global</Filter>
