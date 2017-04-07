@@ -14,8 +14,8 @@
 #ifndef _GEOMETRY_GEOMETRY_H_
 #define _GEOMETRY_GEOMETRY_H_
 
-#include "ggeometryglobal.h"
 #include "GCore/gobject.h"
+#include "ggeometryglobal.h"
 
 namespace gsystem { // gsystem
 	namespace geom { // gsystem.geom
@@ -33,11 +33,7 @@ namespace geom { // gsystem.geom
 
 /****************************************************************************
 **
-** ggeometry.h
-**
-** @class		GGeometry
 ** @brief		基础几何接口
-** @module		GGeometry
 **
 ** 基础几何类型是所有几何对象接口的基类，采用要素模型的思想进行了一层接口封装。
 **
@@ -51,8 +47,6 @@ public:
 public:
 	/****************************************************************************
 	**
-	** GGeometry
-	**
 	** @name	~GGeometry
 	** @brief	析构函数（destructor）
 	**
@@ -63,18 +57,14 @@ public:
 
 	/****************************************************************************
 	**
-	** GGeometry
-	**
 	** @name	Factory
 	** @brief	获取当前几何对象的工厂
-	** @return	{const GGeometryFactory *} 几何工厂
+	** @return	{const GGeometryFactory *} 几何对象工厂
 	**
 	****************************************************************************/
 	virtual const GGeometryFactory *Factory() const = 0;
 
 	/****************************************************************************
-	**
-	** GGeometry
 	**
 	** @name	Valid
 	** @brief	当前实例是否有效
@@ -85,54 +75,47 @@ public:
 
 	/****************************************************************************
 	**
-	** GGeometry
-	**
 	** @name	GeometryType
 	** @brief	获取当前对象的几何类型
-	** @return	{gint} 几何类型，其值等于枚举 {G_GEOMETRY_TYPE}
-	** @see		{G_GEOMETRY_TYPE}
+	** @return	{GGeometryType} 几何类型枚举
 	**
 	****************************************************************************/
-	virtual gint GeometryType() const = 0;
+	virtual GGeometryType GeometryType() const = 0;
 
 	/****************************************************************************
-	**
-	** GGeometry
 	**
 	** @name	Dimension
 	** @brief	获取当前对象的维度
-	** @return	{guint} 维度，其值等于枚举 {G_GEOMETRY_DIMENSION}
-	** @see		{G_GEOMETRY_DIMENSION}
+	** @return	{GDimension} 维度枚举
 	**
 	****************************************************************************/
-	virtual guint Dimension() const = 0;
+	virtual GDimension Dimension() const = 0;
 
 	/****************************************************************************
 	**
-	** GGeometry
-	**
 	** @name	Envelope
-	** @brief	获取当前几何对象的外包
+	** @brief	生成当前几何对象的外包
 	** @return	{GEnvelope} 外包
-	** @see		{GEnvelope}
 	**
 	****************************************************************************/
 	virtual GEnvelope Envelope() const = 0;
 
 	/****************************************************************************
 	**
-	** GGeometry
-	**
 	** @name	CoordinateSequence
-	** @brief	获取当前几何对象的坐标序列
+	** @brief	生成当前几何对象的坐标序列
 	** @return	{GCoordinateSequence} 坐标序列
-	** @see		{GCoordinateSequence}
 	**
 	****************************************************************************/
 	virtual GCoordinateSequence CoordinateSequence() const = 0;
-	
-	//virtual gbool IsEmpty() const = 0;
-	//virtual gbool IsSimple() const = 0;
+
+	virtual GDimension GetCoordinateDimension() const;
+	virtual gbool IsEmpty() const;
+	virtual gbool IsSimple() const;
+	virtual gbool IsRing() const;
+
+	virtual GGeometryPtr CloneGeometry() const;
+
 	//virtual gbool Clear() = 0;
 	//virtual GGeometryP Flatten() const = 0; // 从三维变成二维
 

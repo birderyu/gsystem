@@ -1,7 +1,6 @@
 #ifndef _CORE_STRING_LIST_H_
 #define _CORE_STRING_LIST_H_
 
-#include <new.h>
 #include "gstring.h"
 #include "gvector.h"
 

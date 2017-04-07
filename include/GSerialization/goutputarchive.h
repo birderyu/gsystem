@@ -1,7 +1,7 @@
 #ifndef _CORE_OUTPUT_ARCHIVE_H_
 #define _CORE_OUTPUT_ARCHIVE_H_
 
-#include "garchive.h"
+#include "gbasearchive.h"
 
 class GOutputStream;
 

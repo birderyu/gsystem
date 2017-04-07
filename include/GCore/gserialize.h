@@ -3,7 +3,70 @@
 
 #include "gfunctor.h"
 
+namespace gsystem {
+	class GArchive;
+}
+
 namespace gsystem { // gsystem
+
+namespace detail {
+
+// 判断一个类是否有Serialize方法
+// gbool b = GHasSerializeFunction<Class>::value;
+template<typename T>
+struct GHasSerializeFunction {
+
+	//template<typename U, gbool(U::*)(GArchive &archive) const>
+	template<typename U, gvoid(U::*)() const>
+	struct Matcher;
+
+	template<typename U>
+	static gint8 Foo(Matcher<U, &U::AA> *);
+	//static gint8 Foo(Matcher<U, &U::Serialize> *);
+
+	template<typename U>
+	static gint32 Foo(...);
+
+	enum { value = sizeof(Foo<T>(GNULL)) == sizeof(gint8) };
+};
+
+template<typename T>
+struct GHasDeserializeFunction {
+
+	template<typename U, gbool(U::*)(GArchive &archive)>
+	struct Matcher;
+
+	template<typename U>
+	static gint8 Foo(Matcher<U, &U::Deserialize> *);
+
+	template<typename U>
+	static gint32 Foo(...);
+
+	enum { value = sizeof(Foo<T>(GNULL)) == sizeof(gint8) };
+};
+
+template <typename ArchiveT, typename DataT, gbool>
+struct GSerializeFunction {};
+
+template <typename ArchiveT, typename DataT>
+struct GSerializeFunction<ArchiveT, DataT, true>
+{
+	gbool Serialize(ArchiveT &archive) const
+	{
+		return v.Serialize(archive);
+	}
+};
+
+template <typename ArchiveT, typename DataT>
+struct GSerializeFunction<ArchiveT, DataT, false>
+{
+	gbool Serialize(ArchiveT &archive) const
+	{
+		throw "you should not serialize an object whitout Serialize function.";
+	}
+};
+
+}
 
 /// Serialize函数
 template<typename ArchiveT, typename DataT>

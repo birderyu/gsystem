@@ -1,10 +1,10 @@
 #ifndef _CORE_INPUT_ARCHIVE_H_
 #define _CORE_INPUT_ARCHIVE_H_
 
-#include "garchive.h"
+#include "gbasearchive.h"
 
 class GAPI GInputArchive
-	: public GArchive
+	: public GBaseArchive
 {
 public:
 	GInputArchive(GStream &);

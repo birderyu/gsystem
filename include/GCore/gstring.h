@@ -59,6 +59,7 @@ public: // 构造方法
 
 public: // Array行为
 	gsize Size() const;
+	gsize Length() const; // 字符的长度
 	gbool IsEmpty() const;
 	gchar &GetAt(gsize pos);
 	const gchar &GetAt(gsize pos) const;

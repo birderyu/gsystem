@@ -4,6 +4,12 @@
 #include "ggeometry.h"
 
 namespace gsystem { // gsystem
+	namespace geom { // gsystem.geom
+		class GSpatialReference;
+	} // namespace gsystem.geom
+} // namespace gsystem
+
+namespace gsystem { // gsystem
 namespace geom { // gsystem.geom
 
 class GAPI GGeometryFactory 
@@ -29,9 +35,12 @@ public:
 	GGeometryPtr CreatePoint3D(greal x, greal y, greal z) const;
 	GGeometryPtr CreatePoint3D(const GCoordinate &coord) const;
 #endif
+
+private:
+	GSpatialReference *m_pSpatialReference;
 };
 
-}
-}
+} // namespace gsystem.geom
+} // namespace gsystem
 
 #endif // _GEOMETRY_GEOMETRY_FACTORY_H_

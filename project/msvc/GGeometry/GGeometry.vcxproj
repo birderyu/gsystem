@@ -32,6 +32,7 @@
     <ClInclude Include="..\..\..\include\GGeometry\grectangle.h" />
     <ClInclude Include="..\..\..\include\GGeometry\gring.h" />
     <ClInclude Include="..\..\..\include\GGeometry\gsegment.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\gspatialreference.h" />
     <ClInclude Include="..\..\..\include\GGeometry\gsurface.h" />
     <ClInclude Include="..\..\..\include\GGeometry\gtriangle.h" />
     <ClInclude Include="..\..\..\private\GGeometry\gdoublepoint_store.h" />

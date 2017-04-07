@@ -17,8 +17,8 @@ struct GSelectConvertible
 template<typename T, typename T1, typename ...TS>
 struct GSelectConvertible<T, T1, TS...>
 {
-	enum { exist = GConvertible<T, T1>::value || GSelectConvertible<T, TS...>::exist };
-	using Type = typename GConditional<GConvertible<T, T1>::value, T1, typename GSelectConvertible<T, TS...>::Type>::Type;
+	enum { exist = GIsConvertible<T, T1>::value || GSelectConvertible<T, TS...>::exist };
+	using Type = typename GConditional<GIsConvertible<T, T1>::value, T1, typename GSelectConvertible<T, TS...>::Type>::Type;
 };
 
 /// 从类型列表TS中选出类型T，若不存在则返回T本身
@@ -155,7 +155,7 @@ template <typename T, typename R = gvoid>
 struct GGetVisitorResultType
 {
 	template <typename T2> static R Foo(...);
-	template <typename T2> static typename T2::result_type Foo(typename T2::result_type *v);
+	template <typename T2> static typename T2::ResultType Foo(typename T2::ResultType *v);
 
 	using Type = decltype(Foo<T>(GNULL));
 };
@@ -174,7 +174,7 @@ struct g_check_visitor_func<V, T, TS...>
 	static T &GetFakeValRef();
 	using func_t = decltype(GDeclval<V>()(GetFakeValRef()));
 
-	enum { value = GConvertible<ret_t, func_t>::value && g_check_visitor_func<V, TS...>::value };
+	enum { value = GIsConvertible<ret_t, func_t>::value && g_check_visitor_func<V, TS...>::value };
 };
 
 template<typename T, typename V>

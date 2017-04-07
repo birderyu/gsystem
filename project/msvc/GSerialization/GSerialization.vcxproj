@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\GSerialization\garchive.h" />
+    <ClInclude Include="..\..\..\include\GSerialization\gbasearchive.h" />
     <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferinputoutputstream.h" />
     <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferinputstream.h" />
     <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferoutputstream.h" />

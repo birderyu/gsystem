@@ -509,10 +509,55 @@ struct GIsPointer
 {
 };
 
+template<typename T>
+struct GIsClass
+	: GCatBase<__is_class(T)>
+{
+};
+
+namespace detail { // gsystem.detail
+namespace traits { // gsystem.detail.traits
+
+template<typename BaseT, typename DerT, gbool = (GIsClass<BaseT>::value && GIsClass<DerT>::value)>
+class _GIsBaseOf 
+{
+	template <typename T>
+	static gint8 Helper(DerT, T);
+
+	static gint16 Helper(BaseT, gint);
+
+	struct Conv 
+	{
+		operator DerT();
+		operator BaseT() const;
+	};
+
+public:
+	static const gbool value = sizeof(Helper(Conv(), 0)) == sizeof(gint8);
+};
+
+template <typename BaseT, typename DerT>
+class _GIsBaseOf<BaseT, DerT, false>
+{
+public:
+	static const gbool value = GIsSame<BaseT, DerT>::value;
+};
+
+template <typename BaseT>
+class _GIsBaseOf<BaseT, BaseT, true> {
+public:
+	static const gbool value = true;
+};
+
+} // namespace gsystem.detail
+} // namespace gsystem.detail.traits
+
 template<typename BaseT, typename DerT>
 struct GIsBaseOf
+	//: GCatBase<detail::traits::_GIsBaseOf<BaseT, DerT>::value>
 	: GCatBase<__is_base_of(BaseT, DerT)>
 {
+	
 };
 
 template<typename T>

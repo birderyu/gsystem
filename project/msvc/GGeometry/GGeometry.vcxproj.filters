@@ -25,9 +25,6 @@
     <Filter Include="头文件\_inline">
       <UniqueIdentifier>{db5f1c4b-0335-4e9a-87be-2a8f20ae2584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Interface">
-      <UniqueIdentifier>{da9769b3-c699-4aa5-97c4-f5f6c3e12a7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\_private\Implement">
       <UniqueIdentifier>{004fc2f7-0742-4dab-a05d-d5f7439aebb9}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,12 @@
     </Filter>
     <Filter Include="源文件\Interface\2D">
       <UniqueIdentifier>{a14a816a-ceac-450b-8ced-db7fb9472ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Model">
+      <UniqueIdentifier>{da9769b3-c699-4aa5-97c4-f5f6c3e12a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\SRS">
+      <UniqueIdentifier>{950b56bc-92bd-4628-a69d-4080d3ad3d05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +61,7 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\ggeometry.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\ggeometryhelper.h">
       <Filter>头文件</Filter>
@@ -70,43 +73,43 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gbody.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gcurve.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\ggeometrycollection.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gline.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gmultipoint.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gpath.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gpoint.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gpolygon.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\grectangle.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gring.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gsegment.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gsurface.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\gtriangle.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\GGeometry\gpoint_impl.h">
       <Filter>头文件\_private\Implement</Filter>
@@ -124,10 +127,13 @@
       <Filter>头文件\_private\Store</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\glinestring.h">
-      <Filter>头文件\Interface</Filter>
+      <Filter>头文件\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\GGeometry\glinestring_impl.h">
       <Filter>头文件\_private\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\gspatialreference.h">
+      <Filter>头文件\SRS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

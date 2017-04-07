@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\GCore\garchive.h" />
     <ClInclude Include="..\..\..\include\GCore\gallocator.h" />
     <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
     <ClInclude Include="..\..\..\include\GCore\garrays.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glog.h" />
+    <ClInclude Include="..\..\..\include\GCore\gserializable.h" />
     <ClInclude Include="..\..\..\include\GCore\gseries.h" />
     <ClInclude Include="..\..\..\include\GCore\garrayqueue.h" />
     <ClInclude Include="..\..\..\include\GCore\garraystack.h" />

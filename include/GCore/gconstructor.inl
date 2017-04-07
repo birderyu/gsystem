@@ -2,6 +2,7 @@
 #define _CORE_CONSTRUCTOR_INLINE_
 
 #include "gtraits.h"
+#include <new>
 
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail

@@ -561,6 +561,12 @@
     <ClInclude Include="..\..\..\include\GCore\gversion.h">
       <Filter>头文件\Global</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gserializable.h">
+      <Filter>头文件\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\garchive.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">

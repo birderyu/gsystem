@@ -123,9 +123,6 @@
     <ClInclude Include="..\..\..\include\GSerialization\goutputstream.h">
       <Filter>头文件\Stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GSerialization\garchive.h">
-      <Filter>头文件\Archive</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GSerialization\gbinaryinputarchive.h">
       <Filter>头文件\Archive</Filter>
     </ClInclude>
@@ -154,6 +151,9 @@
       <Filter>头文件\Archive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GSerialization\gxmloutputarchive.h">
+      <Filter>头文件\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GSerialization\gbasearchive.h">
       <Filter>头文件\Archive</Filter>
     </ClInclude>
   </ItemGroup>
