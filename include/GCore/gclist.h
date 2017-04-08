@@ -12,16 +12,16 @@
 #ifndef _CORE_CIRCULAR_LINKED_LIST_H_
 #define _CORE_CIRCULAR_LINKED_LIST_H_
 
-#include "gsinglelinkedlist.h"
+#include "gslist.h"
 
 namespace gsystem { // gsystem
 
-template<typename DataT, typename NodeT = GSingleLinkedListNode<DataT>>
-class GCircularLinkedList 
-	: public GSingleLinkedList<DataT, NodeT>
+template<typename DataT, typename NodeT = GSListNode<DataT>>
+class GCList 
+	: public GSList<DataT, NodeT>
 {
 public:
-	GCircularLinkedList();
+	GCList();
 
 public:
 	Node *GetNext();
@@ -37,6 +37,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gcircularlinkedlist.inl"
+#include "gclist.inl"
 
 #endif // _CORE_CIRCULAR_LINKED_LIST_H_

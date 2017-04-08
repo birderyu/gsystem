@@ -2,7 +2,7 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gbinarytree.h
+** @file	gbintree.h
 ** @brief	该文件包含了二叉树节点的定义、二叉树的定义及实现
 ** @author	birderyu
 ** @contact	https://github.com/birderyu
@@ -17,7 +17,7 @@
 #define _CORE_BINARY_TREE_H_
 
 #include "gobject.h"
-#include "gstructure.h"
+#include "gstruct.h"
 #include "gnew.h"
 #include "glist.h"
 
@@ -25,69 +25,49 @@ namespace gsystem { // gsystem
 
 /****************************************************************************
 **
-** gbinarytree.h
-**
-** @class		GBinaryTreeNode
 ** @brief		一个默认的二叉树节点
-** @module		GCore
 **
-** 所有的二叉树节点节点都应该直接派生自GBinaryTreeNodeT，这是一个
+** 所有的二叉树节点节点都应该直接派生自GBinTreeNodeT，这是一个
 ** 奇异递归模板（CRTP）。
 **
-** @see GBinaryTreeNodeT<NodeT>
-**
 ****************************************************************************/
-struct GBinaryTreeNode 
-	: public GBinaryTreeNodeT<GBinaryTreeNode>
-	, public GNewT<GBinaryTreeNode>
+struct GBinTreeNode 
+	: public GBinTreeNodeT<GBinTreeNode>
+	, public GNewT<GBinTreeNode>
 {
 	/****************************************************************************
 	**
-	** GBinaryTreeNode
-	**
-	** @name		GBinaryTreeNode
+	** @name		GBinTreeNode
 	** @brief		构造函数（constructor）
-	** @param[in]	parent:	双亲节点，默认为NULL
-	** @param[in]	left:	左孩子节点，默认为NULL
-	** @param[in]	right:	右孩子节点，默认为NULL
+	** @param[in]	parent:	双亲节点，默认为GNULL
+	** @param[in]	left:	左孩子节点，默认为GNULL
+	** @param[in]	right:	右孩子节点，默认为GNULL
 	**
 	****************************************************************************/
-	GBinaryTreeNode(GBinaryTreeNode *parent = GNULL, 
-		GBinaryTreeNode *left = GNULL, 
-		GBinaryTreeNode *right = GNULL);
+	GBinTreeNode(GBinTreeNode *parent = GNULL, 
+		GBinTreeNode *left = GNULL, 
+		GBinTreeNode *right = GNULL);
 };
 
 /****************************************************************************
 **
-** gbinarytree.h
-**
-** @class		GBinaryTree
 ** @brief		二叉树
-** @module		GCore
 **
 ** 为了增加二叉树的可扩展性，可以由外部指定其节点对象NodeT，但该
-** NodeT必须派生自GBinaryTreeNodeT，这是一个奇异递归模板（CRTP）。
-** 默认情况下，使用GBinaryTreeNode作为节点即可。
-**
-** @see GBinaryTreeNode
-** @see GBinaryTreeNodeT<NodeT>
+** NodeT必须派生自GBinTreeNodeT，这是一个奇异递归模板（CRTP）。
+** 默认情况下，使用GBinTreeNode作为节点即可。
 **
 ****************************************************************************/
-template<typename NodeT = GBinaryTreeNode>
-class GBinaryTree 
+template<typename NodeT = GBinTreeNode>
+class GBinTree 
 	: public GObject
 {
-public:
-	enum { CLASS_CODE = CLASS_CODE_BINARY_TREE, };
-
 public:
 	typedef NodeT Node;
 	typedef GList<NodeT *> Nodes;
 	typedef GList<const NodeT *> ConstNodes;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name	funtype
 	** @brief	访问节点的函数指针的定义
@@ -98,8 +78,6 @@ public:
 public:
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		GBinaryTree
 	** @brief		构造函数（constructor）
 	** @param[in]	root: 根节点，默认为NULL
@@ -107,33 +85,27 @@ public:
 	** 默认情况下构造一棵空树
 	**
 	****************************************************************************/
-	GBinaryTree(NodeT *root = GNULL);
+	GBinTree(NodeT *root = GNULL);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		GBinaryTree
 	** @brief		拷贝构造函数（copy constructor）
 	** @param[in]	tree {const GBinaryTree<NodeT> &tree} 另一棵二叉树的引用
 	**
 	****************************************************************************/
-	GBinaryTree(const GBinaryTree<NodeT> &tree);
+	GBinTree(const GBinTree<NodeT> &tree);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		GBinaryTree
 	** @brief		移动构造函数（move constructor）
 	** @param[in]	tree {GBinaryTree<NodeT> &&} 另一棵二叉树的引用（右值引用）
 	**
 	****************************************************************************/
-	GBinaryTree(GBinaryTree<NodeT> &&tree);
+	GBinTree(GBinTree<NodeT> &&tree);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name	~GBinaryTree
 	** @brief	析构函数（destructor）
@@ -142,11 +114,9 @@ public:
 	** 由于GBinaryTree需要作为所有二叉树的基类，因此其析构函数必须是虚拟的（virtual）。
 	**
 	****************************************************************************/
-	virtual ~GBinaryTree();
+	virtual ~GBinTree();
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		CopyFrom
 	** @brief		从另一棵树拷贝数据
@@ -156,11 +126,9 @@ public:
 	** 深拷贝（deep copy）。
 	**
 	****************************************************************************/
-	gvoid CopyFrom(const GBinaryTree<NodeT> &tree);
+	gvoid CopyFrom(const GBinTree<NodeT> &tree);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		SetRoot
 	** @brief		设置根节点
@@ -173,8 +141,6 @@ public:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		Destroy
 	** @brief		销毁树
 	**
@@ -186,8 +152,6 @@ public:
 public:
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name	Root
 	** @brief	获取根节点
 	** @return	根节点指针的引用
@@ -196,8 +160,6 @@ public:
 	NodeT *&Root();
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name	Root
 	** @brief	获取根节点
@@ -208,8 +170,6 @@ public:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name	IsEmpty
 	** @brief	判断二叉树是否为空
 	** @return	若为空则返回true，否则返回false
@@ -218,8 +178,6 @@ public:
 	gbool IsEmpty() const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name	NodeCount
 	** @brief	返回节点的个数
@@ -230,8 +188,6 @@ public:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name	LeafCount
 	** @brief	返回叶子节点的个数
 	** @return	叶子节点的个数
@@ -240,8 +196,6 @@ public:
 	gsize LeafCount() const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name	Depth
 	** @brief	返回树的深度
@@ -254,8 +208,6 @@ public:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		PreOrderTraverse
 	** @brief		先（根）序遍历
 	** @param[in]	访问节点的函数指针
@@ -265,8 +217,6 @@ public:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		InOrderTraverse
 	** @brief		中（根）序遍历
 	** @param[in]	访问节点的函数指针
@@ -275,8 +225,6 @@ public:
 	template<typename VisitorT> gvoid InOrderTraverse(VisitorT &visitor) const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		PostOrderTraverse
 	** @brief		后（根）序遍历
@@ -288,19 +236,15 @@ public:
 public:
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		operator=
 	** @brief		拷贝操作符
 	** @param[in]	tree: 另一棵二叉树的引用
 	** @return		自己的引用
 	**
 	****************************************************************************/
-	GBinaryTree<NodeT> &operator=(const GBinaryTree<NodeT> &tree);
+	GBinTree<NodeT> &operator=(const GBinTree<NodeT> &tree);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		operator=
 	** @brief		移动操作符
@@ -308,11 +252,9 @@ public:
 	** @return		自己的引用
 	**
 	****************************************************************************/
-	GBinaryTree<NodeT> &operator=(GBinaryTree<NodeT> &&tree);
+	GBinTree<NodeT> &operator=(GBinTree<NodeT> &&tree);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		operator==
 	** @brief		等号运算符
@@ -324,11 +266,9 @@ public:
 	** 2）空树与空树相等。
 	**
 	****************************************************************************/
-	gbool operator==(const GBinaryTree<NodeT> &tree) const;
+	gbool operator==(const GBinTree<NodeT> &tree) const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		operator!=
 	** @brief		不等号运算符
@@ -336,12 +276,10 @@ public:
 	** @return		若两个树不相等，则返回true，否则返回false
 	**
 	****************************************************************************/
-	gbool operator!=(const GBinaryTree<NodeT> &tree) const;
+	gbool operator!=(const GBinTree<NodeT> &tree) const;
 
 protected:
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		DestroySubTree
 	** @brief		销毁一棵子树
@@ -351,8 +289,6 @@ protected:
 	gvoid DestroySubTree(NodeT *);
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		CopySubTree
 	** @brief		拷贝一棵子树
@@ -364,8 +300,6 @@ protected:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		PreOrderTraverse
 	** @brief		先（根）序遍历一棵子树
 	** @param[in]	node:	子树的根节点
@@ -375,8 +309,6 @@ protected:
 	template<typename VisitorT> gvoid PreOrderTraverse(const NodeT *node, VisitorT &visitor) const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		InOrderTraverse
 	** @brief		中（根）序遍历一棵子树
@@ -388,8 +320,6 @@ protected:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		PostOrderTraverse
 	** @brief		后（根）序遍历一棵子树
 	** @param[in]	node:	子树的根节点
@@ -399,8 +329,6 @@ protected:
 	template<typename VisitorT> gvoid PostOrderTraverse(const NodeT *node, VisitorT &visitor) const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		NodeCount
 	** @brief		返回一棵子树中节点的个数
@@ -412,8 +340,6 @@ protected:
 
 	/****************************************************************************
 	**
-	** GBinaryTree
-	**
 	** @name		LeafCount
 	** @brief		返回一棵子树中叶子节点的个数
 	** @param[in]	node:		子树的根节点
@@ -423,8 +349,6 @@ protected:
 	gvoid LeafCount(const NodeT *node, gsize &unCount) const;
 
 	/****************************************************************************
-	**
-	** GBinaryTree
 	**
 	** @name		Depth
 	** @brief		返回一棵子树的深度
@@ -443,6 +367,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gbinarytree.inl"
+#include "gbintree.inl"
 
 #endif // _CORE_BINARY_TREE_H_

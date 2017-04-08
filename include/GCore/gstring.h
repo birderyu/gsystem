@@ -29,9 +29,6 @@ class GAPI GString final
 	friend GAPI gbool operator<(const GString &s1, const GString &s2);
 	friend GAPI gbool operator<=(const GString &s1, const GString &s2);
 
-public: // 常量定义
-	enum { CLASS_CODE = CLASS_CODE_STRING, };
-
 public: // 静态方法
 	static GString Number(gsmall num, gint base = 10);
 	static GString Number(gusmall num, gint base = 10);

@@ -21,7 +21,7 @@ GSignedCharacter::~GSignedCharacter()
 
 guint GSignedCharacter::ClassCode() const
 {
-	return GSignedCharacter::CLASS_CODE;
+	return static_cast<guint>(GClassCode::SignedCharacter);
 }
 
 } // namespace gsystem

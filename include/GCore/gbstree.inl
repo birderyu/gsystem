@@ -4,55 +4,45 @@
 namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT>
-GINLINE GBinarySortTreeNode<KeyT, ValueT>::GBinarySortTreeNode(
+GINLINE GBSTreeNode<KeyT, ValueT>::GBSTreeNode(
 	const KeyT &key,
 	const ValueT &value,
-	GBinarySortTreeNode<KeyT, ValueT> *parent,
-	GBinarySortTreeNode<KeyT, ValueT> *left,
-	GBinarySortTreeNode<KeyT, ValueT> *right)
-	: GBinaryTreeNodeT<GBinarySortTreeNode<KeyT, ValueT>>(parent, left, right)
+	GBSTreeNode<KeyT, ValueT> *parent,
+	GBSTreeNode<KeyT, ValueT> *left,
+	GBSTreeNode<KeyT, ValueT> *right)
+	: GBinTreeNodeT<GBSTreeNode<KeyT, ValueT>>(parent, left, right)
 	, GPairNodeT<KeyT, ValueT>(key, value)
 {
 
 }
 
 template<typename KeyT, typename ValueT>
-GINLINE GBinarySortTreeNode<KeyT, ValueT>::GBinarySortTreeNode(
+GINLINE GBSTreeNode<KeyT, ValueT>::GBSTreeNode(
 	const KeyT &key,
 	ValueT &&value,
-	GBinarySortTreeNode<KeyT, ValueT> *parent,
-	GBinarySortTreeNode<KeyT, ValueT> *left,
-	GBinarySortTreeNode<KeyT, ValueT> *right)
-	: GBinaryTreeNodeT<GBinarySortTreeNode<KeyT, ValueT>>(parent, left, right)
+	GBSTreeNode<KeyT, ValueT> *parent,
+	GBSTreeNode<KeyT, ValueT> *left,
+	GBSTreeNode<KeyT, ValueT> *right)
+	: GBinTreeNodeT<GBSTreeNode<KeyT, ValueT>>(parent, left, right)
 	, GPairNodeT<KeyT, ValueT>(key, GForward<ValueT>(value))
 {
 
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-const typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Tree GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::m_gTree;
+const typename GBSTree<KeyT, ValueT, CompareT, NodeT>::Tree GBSTree<KeyT, ValueT, CompareT, NodeT>::m_gTree;
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-const CompareT GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::m_fCompare;
+const CompareT GBSTree<KeyT, ValueT, CompareT, NodeT>::m_fCompare;
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::~GBinarySortTree()
+GINLINE GBSTree<KeyT, ValueT, CompareT, NodeT>::~GBSTree()
 {
 
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::FirstNode()
-{
-	if (!m_pRoot)
-	{
-		return GNULL;
-	}
-	return m_pRoot->First();
-}
-
-template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE const NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::FirstNode() const
+GINLINE NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::FirstNode()
 {
 	if (!m_pRoot)
 	{
@@ -62,7 +52,17 @@ GINLINE const NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::FirstNode()
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode()
+GINLINE const NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::FirstNode() const
+{
+	if (!m_pRoot)
+	{
+		return GNULL;
+	}
+	return m_pRoot->First();
+}
+
+template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+GINLINE NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::LastNode()
 {
 	if (!m_pRoot)
 	{
@@ -72,7 +72,7 @@ GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode()
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE const NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode() const
+GINLINE const NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::LastNode() const
 {
 	if (!m_pRoot)
 	{
@@ -82,7 +82,7 @@ GINLINE const NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::LastNode() 
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains(const KeyT &key) const
+GINLINE gbool GBSTree<KeyT, ValueT, CompareT, NodeT>::Contains(const KeyT &key) const
 {
 	NodeT *root = m_pRoot;
 	if (!root)
@@ -98,7 +98,7 @@ GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains(const Key
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key)
+GINLINE NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key)
 {
 	NodeT *root = m_pRoot;
 	if (!root)
@@ -114,7 +114,7 @@ GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE const NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key) const
+GINLINE const NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Find(const KeyT &key) const
 {
 	const NodeT *root = m_pRoot;
 	if (!root)
@@ -131,7 +131,7 @@ GINLINE const NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find(const 
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 template<typename FilterT>
-GINLINE typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Nodes GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Search(FilterT &filter)
+GINLINE typename GBSTree<KeyT, ValueT, CompareT, NodeT>::Nodes GBSTree<KeyT, ValueT, CompareT, NodeT>::Search(FilterT &filter)
 {
 	Nodes nodes;
 	Search_Recursive(m_pRoot, filter, nodes);
@@ -140,7 +140,7 @@ GINLINE typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Nodes GBinarySo
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 template<typename FilterT> 
-GINLINE typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::ConstNodes GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Search(FilterT &filter) const
+GINLINE typename GBSTree<KeyT, ValueT, CompareT, NodeT>::ConstNodes GBSTree<KeyT, ValueT, CompareT, NodeT>::Search(FilterT &filter) const
 {
 	ConstNodes nodes;
 	Search_Recursive(m_pRoot, filter, nodes);
@@ -148,7 +148,7 @@ GINLINE typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::ConstNodes GBin
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value, gbool *realInsert)
+GINLINE NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, const ValueT &value, gbool *realInsert)
 {
 	NodeT *node = GNULL;
 	gbool _realInsert = false;
@@ -167,7 +167,7 @@ GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, ValueT &&value, gbool *realInsert)
+GINLINE NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT &key, ValueT &&value, gbool *realInsert)
 {
 	NodeT *node = GNULL;
 	gbool _realInsert = false;
@@ -186,7 +186,7 @@ GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert(const KeyT
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key, gbool *realDelete)
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT &key, gbool *realDelete)
 {
 	gbool _realDelete = false;
 
@@ -203,7 +203,7 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(const KeyT 
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(NodeT *delete_point, gbool *realDelete)
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Delete(NodeT *delete_point, gbool *realDelete)
 {
 	// 非递归删除节点
 	if (!delete_point)
@@ -262,7 +262,7 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete(NodeT *dele
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::NodeEquals(const NodeT *node1, const NodeT *node2) const
+GINLINE gbool GBSTree<KeyT, ValueT, CompareT, NodeT>::NodeEquals(const NodeT *node1, const NodeT *node2) const
 {
 	if (GNULL == node1 && GNULL == node2)
 	{
@@ -279,7 +279,7 @@ GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::NodeEquals(const N
 //////////////////////////////////////////////////////////////////////////
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Unrecursive(const KeyT &key, NodeT *node) const
+GINLINE gbool GBSTree<KeyT, ValueT, CompareT, NodeT>::Contains_Unrecursive(const KeyT &key, NodeT *node) const
 {
 	while (node)
 	{
@@ -301,7 +301,7 @@ GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Unrecursi
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(const KeyT &key, NodeT *node)
+GINLINE NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(const KeyT &key, NodeT *node)
 {
 	while (node)
 	{
@@ -323,7 +323,7 @@ GINLINE NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE const NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(const KeyT &key, const NodeT *node) const
+GINLINE const NodeT* GBSTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecursive(const KeyT &key, const NodeT *node) const
 {
 	while (node)
 	{
@@ -345,7 +345,7 @@ GINLINE const NodeT* GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Unrecu
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
 {
 	NodeT* insert_point = GNULL; // 插入位置的双亲节点
 	while (node)
@@ -399,7 +399,7 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive(const KeyT &key, ValueT &&value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive(const KeyT &key, ValueT &&value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
 {
 	NodeT* insert_point = GNULL; // 插入位置的双亲节点
 	while (node)
@@ -453,7 +453,7 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Unrecursive
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Unrecursive(const KeyT &key, NodeT *node, gbool &realDelete)
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Delete_Unrecursive(const KeyT &key, NodeT *node, gbool &realDelete)
 {
 	NodeT* delete_point = Find_Unrecursive(key, node);
 	if (!delete_point)
@@ -506,7 +506,7 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Unrecursive
 
 //////////////////////////////////////////////////////////////////////////
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Recursive(const KeyT &key, NodeT *node) const
+GINLINE gbool GBSTree<KeyT, ValueT, CompareT, NodeT>::Contains_Recursive(const KeyT &key, NodeT *node) const
 {
 	if (!node)
 	{
@@ -525,7 +525,7 @@ GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Contains_Recursive
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, NodeT *node)
+GINLINE NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, NodeT *node)
 {
 	if (!node)
 	{
@@ -544,7 +544,7 @@ GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(co
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE const NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, const NodeT *node) const
+GINLINE const NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Find_Recursive(const KeyT &key, const NodeT *node) const
 {
 	if (!node)
 	{
@@ -564,8 +564,8 @@ GINLINE const NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Find_Recurs
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 template<typename FilterT>
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Search_Recursive(NodeT *node, FilterT &filter,
-	typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Nodes &nodes)
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Search_Recursive(NodeT *node, FilterT &filter,
+	typename GBSTree<KeyT, ValueT, CompareT, NodeT>::Nodes &nodes)
 {
 	if (GNULL == node)
 	{
@@ -588,8 +588,8 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Search_Recursive(N
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
 template<typename FilterT> 
-GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Search_Recursive(const NodeT *node, FilterT &filter,
-	typename GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::ConstNodes &nodes) const
+GINLINE gvoid GBSTree<KeyT, ValueT, CompareT, NodeT>::Search_Recursive(const NodeT *node, FilterT &filter,
+	typename GBSTree<KeyT, ValueT, CompareT, NodeT>::ConstNodes &nodes) const
 {
 	if (GNULL == node)
 	{
@@ -611,7 +611,7 @@ GINLINE gvoid GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Search_Recursive(c
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
+GINLINE NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(const KeyT &key, const ValueT &value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
 {
 	if (GNULL == node)
 	{
@@ -663,7 +663,7 @@ GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(const KeyT &key, ValueT &&value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
+GINLINE NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(const KeyT &key, ValueT &&value, NodeT *node, NodeT *&node_ins, gbool &realInsert)
 {
 	if (GNULL == node)
 	{
@@ -715,7 +715,7 @@ GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Insert_Recursive(
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Recursive(const KeyT &key, NodeT *node, gbool &realDelete)
+GINLINE NodeT *GBSTree<KeyT, ValueT, CompareT, NodeT>::Delete_Recursive(const KeyT &key, NodeT *node, gbool &realDelete)
 {
 	if (GNULL == node)
 	{
@@ -781,7 +781,7 @@ GINLINE NodeT *GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::Delete_Recursive(
 }
 
 template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-GINLINE gbool GBinarySortTree<KeyT, ValueT, CompareT, NodeT>::SwitchNode(NodeT *node1, NodeT *node2)
+GINLINE gbool GBSTree<KeyT, ValueT, CompareT, NodeT>::SwitchNode(NodeT *node1, NodeT *node2)
 {
 	if (!node1 || !node2)
 	{

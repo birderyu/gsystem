@@ -2,7 +2,7 @@
 #define _CORE_DATE_H_
 
 #include "gobject.h"
-#include "gdatetimedefine.h"
+#include "gdtdef.h"
 
 namespace gsystem { // gsystem
 	class GDateTime;

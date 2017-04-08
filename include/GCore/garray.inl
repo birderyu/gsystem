@@ -115,12 +115,6 @@ GINLINE gsize GArray<DataT>::CountOf(const DataT &data) const
 	return count;
 }
 
-template <typename DataT>
-GINLINE guint GArray<DataT>::ClassCode() const
-{
-	return GArray<DataT>::CLASS_CODE;
-}
-
 }  // namespace gsystem
 
 #endif // _CORE_ARRAY_INLINE_

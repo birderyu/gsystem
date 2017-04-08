@@ -132,9 +132,6 @@ private:
 	gbool SetValue(gsize row, gsize col, const GVariety &);
 	gbool SetValue(gsize row, gsize col, GVariety &&);
 
-public:
-	enum { CLASS_CODE = CLASS_CODE_TABLE, };
-
 private:
 	GDataTable(GVirtualTable *);
 	GVirtualTable *m_pVirtualTable;

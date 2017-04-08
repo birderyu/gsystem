@@ -250,7 +250,7 @@ public:
 		GMoveConstruct<CT>((CT *)data_, GForward<T>(v));
 	}
 
-	GVariant(const GVariant<TS...> &v) noexcept(
+	GVariant(const GVariant<TS...> &v) GNOEXCEPT(
 		detail::variant::GCheckTypeList<GIsNothrowCopyConstructible, TS...>::value)
 	{
 		if (v.type_ == 0) return;
@@ -258,7 +258,7 @@ public:
 		type_ = v.type_;
 	}
 
-	GVariant(GVariant<TS...> &&v) noexcept(
+	GVariant(GVariant<TS...> &&v) GNOEXCEPT(
 		detail::variant::GCheckTypeList<GIsNothrowMoveConstructible, TS...>::value)
 	{
 		if (v.type_ == 0) return; 
@@ -360,7 +360,7 @@ public:
 		return *this;
 	}
 	
-	GVariant &operator=(GVariant<TS...> &&v) noexcept(
+	GVariant &operator=(GVariant<TS...> &&v) GNOEXCEPT(
 		detail::variant::GCheckTypeList<GIsNothrowMoveConstructible, TS...>::value &&
 		detail::variant::GCheckTypeList<GIsNothrowMoveAssignable, TS...>::value)
 	{
@@ -406,7 +406,7 @@ public:
 	}
 
 	template <typename T> 
-	T *GetPointer() noexcept
+	T *GetPointer() GNOEXCEPT
 	{
 		static_assert(GTypeExist<T, TS...>::exist, 
 			"invalid type for the variant.");
@@ -417,7 +417,7 @@ public:
 	}
 
 	template <typename T> 
-	const T *GetConstPointer() const noexcept
+	const T *GetConstPointer() const GNOEXCEPT
 	{
 		static_assert(GTypeExist<T, TS...>::exist,
 			"invalid type for the variant.");
@@ -428,7 +428,7 @@ public:
 	}
 
 	template <typename T> 
-	T GetValue() const noexcept
+	T GetValue() const GNOEXCEPT
 	{
 		return *GetConstPointer<T>();
 	}

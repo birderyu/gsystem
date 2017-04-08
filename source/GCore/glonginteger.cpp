@@ -35,7 +35,7 @@ GLongInteger::GLongInteger(const GLongInteger &val)
 
 guint GLongInteger::ClassCode() const
 {
-	return GLongInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::LongInteger);
 }
 
 } // namespace gsystem

@@ -9,9 +9,6 @@ class GAPI GBoolean
 	: public GPackage<gbool>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_BOOLEAN, };
-
-public:
 	static GBoolean ValueOf(const GString &);
 
 public:

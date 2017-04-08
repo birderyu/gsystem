@@ -222,7 +222,7 @@ struct GAddRvalueReference
 };
 
 template<typename T>
-typename GAddRvalueReference<T>::Type GDeclval() noexcept;
+typename GAddRvalueReference<T>::Type GDeclval() GNOEXCEPT;
 /*
 {
 return std::declval<T>();
@@ -252,7 +252,7 @@ struct GIntegralConstant
 		return (value);
 	}
 
-	constexpr ValueType operator()() const noexcept
+	constexpr ValueType operator()() const GNOEXCEPT
 	{
 		return (value);
 	}
@@ -415,6 +415,14 @@ struct _GIsIntegral<gschar>
 template<>
 struct _GIsIntegral<guchar>
 	: GTrueType{};
+
+template<>
+struct _GIsIntegral<gchar16>
+	: GTrueType {};
+
+template<>
+struct _GIsIntegral<gchar32>
+	: GTrueType {};
 
 template<>
 struct _GIsIntegral<gwchar>
@@ -1052,13 +1060,13 @@ namespace detail { // gsystem.detail
 namespace traits { // gsystem.detail.traits
 
 template<typename T> GINLINE
-T *_GAddressOf(T &val, GTrueType) noexcept
+T *_GAddressOf(T &val, GTrueType) GNOEXCEPT
 {
 	return val;
 }
 
 template<typename T> GINLINE
-T *_GAddressOf(T &val, GFalseType) noexcept
+T *_GAddressOf(T &val, GFalseType) GNOEXCEPT
 {
 	return (reinterpret_cast<T *>(
 		&const_cast<gchar&>(
@@ -1069,7 +1077,7 @@ T *_GAddressOf(T &val, GFalseType) noexcept
 } // namespace gsystem.detail
 
 template<typename T> GINLINE
-T *GAddressOf(T &val) noexcept
+T *GAddressOf(T &val) GNOEXCEPT
 {
 	return detail::traits::_GAddressOf(val, GIsFunction<T>());
 }
@@ -1143,17 +1151,17 @@ public:
 
 	typedef T Type;
 
-	GReferenceWrapper(T &val) noexcept
+	GReferenceWrapper(T &val) GNOEXCEPT
 		: m_pPtr(GAddressOf(val))
 	{
 	}
 
-	operator T&() const noexcept
+	operator T&() const GNOEXCEPT
 	{	// return reference
 		return *m_pPtr;
 	}
 
-	T& Get() const noexcept
+	T& Get() const GNOEXCEPT
 	{
 		return *m_pPtr;
 	}
@@ -1172,7 +1180,7 @@ private:
 };
 
 template<typename T> GINLINE
-GReferenceWrapper<T> ReferenceOf(T &val) noexcept
+GReferenceWrapper<T> ReferenceOf(T &val) GNOEXCEPT
 {
 	return GReferenceWrapper<T>(val);
 }
@@ -1181,13 +1189,13 @@ template<typename T>
 gvoid ReferenceOf(const T &&) = delete;
 
 template<typename T> GINLINE 
-GReferenceWrapper<T> ReferenceOf(GReferenceWrapper<T> val) noexcept
+GReferenceWrapper<T> ReferenceOf(GReferenceWrapper<T> val) GNOEXCEPT
 {
 	return ReferenceOf(val.Get());
 }
 
 template<typename T> GINLINE
-GReferenceWrapper<const T> ConstReferenceOf(const T &val) noexcept
+GReferenceWrapper<const T> ConstReferenceOf(const T &val) GNOEXCEPT
 {
 	return GReferenceWrapper<const T>(val);
 }
@@ -1238,7 +1246,7 @@ struct GIntegerSequence
 	typedef GIntegerSequence<T, VALS...> Type;
 	typedef T ValueType;
 
-	static constexpr gsize Size() noexcept
+	static constexpr gsize Size() GNOEXCEPT
 	{
 		return sizeof...(VALS);
 	}

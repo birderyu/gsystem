@@ -57,9 +57,6 @@
     <ClInclude Include="..\..\..\include\GGeometry\ggeometryfactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryglobal.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GGeometry\ggeometry.h">
       <Filter>头文件\Model</Filter>
     </ClInclude>
@@ -135,6 +132,9 @@
     <ClInclude Include="..\..\..\include\GGeometry\gspatialreference.h">
       <Filter>头文件\SRS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GGeometry\ggeodef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GGeometry\gcoordinate.cpp">
@@ -149,14 +149,14 @@
     <ClCompile Include="..\..\..\source\GGeometry\ggeometryfactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GGeometry\ggeometryglobal.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GGeometry\ggeometry.cpp">
       <Filter>源文件\Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GGeometry\gpoint.cpp">
       <Filter>源文件\Interface\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GGeometry\ggeodef.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

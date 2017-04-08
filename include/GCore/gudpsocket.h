@@ -12,11 +12,11 @@ public:
 	GUdpSocket();
 
 	gbool Open(gbool resue = false);
-	gbool Open(const GSockAddress &addr, gbool resue = false);
+	gbool Open(const GSocketAddress &addr, gbool resue = false);
 	gvoid Close();
 
-	gbool SendTo(gcbytes buf, gsize size, const GSockAddress &peer);
-	gint RecvFrom(gbytes buf, gsize max_size, GSockAddress &peer);
+	gbool SendTo(gcbytes buf, gsize size, const GSocketAddress &peer);
+	gint RecvFrom(gbytes buf, gsize max_size, GSocketAddress &peer);
 };
 
 } // namespace gsystem

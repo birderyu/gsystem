@@ -90,7 +90,7 @@ GSingleFloat::GSingleFloat(const GSingleFloat &val)
 
 guint GSingleFloat::ClassCode() const
 {
-	return GSingleFloat::CLASS_CODE;
+	return static_cast<guint>(GClassCode::SingleFloat);
 }
 
 gbool GSingleFloat::IsNaN() const

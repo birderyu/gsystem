@@ -10,12 +10,12 @@ namespace gsystem { // gsystem
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 
-class GBinaryFile_Ex
+class GBinFile_Ex
 	: public GFile_Ex
 {
 public:
-	GBinaryFile_Ex(const GString &sFileName);
-	virtual ~GBinaryFile_Ex();
+	GBinFile_Ex(const GString &sFileName);
+	virtual ~GBinFile_Ex();
 
 	gbyte Format() const;
 

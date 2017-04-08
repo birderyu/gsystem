@@ -9,12 +9,13 @@ namespace gsystem { // gsystem
 
 namespace gsystem { // gsystem
 
-class GSerializable
+class GAPI GSerializable
 {
 public:
-	virtual guint ClassCode() const { return 0; }
-	virtual gbool Serialize(GArchive &archive) const { return false; }
-	virtual gbool Deserialize(GArchive &archive) { return false; }
+	virtual ~GSerializable() = 0;
+	virtual guint ClassCode() const = 0;
+	virtual gbool Serialize(GArchive &archive) const = 0;
+	virtual gbool Deserialize(GArchive &archive) = 0;
 };
 
 } // namespace gsystem

@@ -9,9 +9,6 @@ class GAPI GWideCharacter
 	: public GPackage<gwchar>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_WIND_CHARACTER, };
-
-public:
 	GWideCharacter(gwchar val);
 	GWideCharacter(const GWideCharacter &);
 

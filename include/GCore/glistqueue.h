@@ -2,7 +2,7 @@
 #define _CORE_LIST_QUEUE_H_
 
 #include "gqueue.h"
-#include "gdoublelinkedlist.h"
+#include "gdlist.h"
 
 namespace gsystem { // gsystem
 
@@ -34,7 +34,7 @@ public:
 	DataT &Head();
 
 private:
-	GDoubleLinkedList<DataT> m_tList;
+	GDList<DataT> m_tList;
 };
 
 } // namespace gsystem

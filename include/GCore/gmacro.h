@@ -2,23 +2,21 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gdefine.h
+** @file	gmacro.h
 ** @brief	全局宏定义
 ** @author	birderyu
 ** @contact	https://github.com/birderyu/GSystem
 ** @date	2015-12-31
 ** @version	1.0
 **
-** 全局宏定义了一些全局的宏常量，并根据不同操作系统和不同编译器做出相应的调整。
+** 全局宏定义了一些全局的宏，并根据不同操作系统和不同编译器做出相应的调整。
 **
 ****************************************************************************/
 
-#ifndef _CORE_DEFINE_H_
-#define _CORE_DEFINE_H_
+#ifndef _CORE_MACRO_H_
+#define _CORE_MACRO_H_
 
 /****************************************************************************
-**
-** gdefine.h
 **
 ** 操作系统
 ** G_SYSTEM_WINDOWS:	Windows
@@ -36,8 +34,6 @@
 #endif // _LINUX
 
 /****************************************************************************
-**
-** gdefine.h
 **
 ** 编译器
 ** G_COMPILER_MSVC: MSVC
@@ -84,7 +80,9 @@
 #define GNULL nullptr
 
 #define GNOEXCEPT		noexcept
-#define GNOEXCEPT_OP(x)	noexcept(x)
+#define GEXCEPT(x)		noexcept(x)
+//#define GNOEXCEPT		throw ()
+//#define GEXCEPT(x)
 
 #define G_BEGIN_NAMESPACE	//namespace geonova {
 #define G_END_NAMESPACE		//}
@@ -147,11 +145,6 @@ extern "C"{
 
 #define G_HAS_DECIMAL
 
-// 
-#ifndef GINTERFACE
-#	define GINTERFACE	struct
-#endif // !GINTERFACE
-
 #ifndef GINLINE
 #	define GINLINE	inline
 #endif // !GINLINE
@@ -192,4 +185,4 @@ extern "C"{
 // 若需要所有的功能，则应该定义如下的宏
 //#define G_NEED_ALL_FUNCTION
 
-#endif // _CORE_DEFINE_H_
+#endif // _CORE_MACRO_H_

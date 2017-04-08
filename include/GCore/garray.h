@@ -1,7 +1,7 @@
 #ifndef _CORE_ARRAY_H_
 #define _CORE_ARRAY_H_
 
-#include "gstructure.h"
+#include "gstruct.h"
 #include "gobject.h"
 
 namespace gsystem { // gsystem
@@ -11,9 +11,6 @@ class GArray
 	: public GListT<GArray<DataT>>
 	, virtual public GObject
 {
-public:
-	enum { CLASS_CODE = CLASS_CODE_ARRAY, };
-
 public:
 	virtual ~GArray() = 0 {}
 
@@ -45,9 +42,6 @@ public:
 	gsize FirstIndexOf(const DataT &) const;
 	gsize LastIndexOf(const DataT &) const;
 	gsize CountOf(const DataT &) const;
-
-	///
-	virtual guint ClassCode() const;
 };
 
 } // namespace gsystem

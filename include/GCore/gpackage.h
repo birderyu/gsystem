@@ -15,6 +15,7 @@
 #define _CORE_PACKAGE_H_
 
 #include "gobject.h"
+#include "gserializable.h"
 
 namespace gsystem { // gsystem
 	class GString;
@@ -24,13 +25,11 @@ namespace gsystem { // gsystem
 
 template <typename ValueT>
 class GPackage 
-	: public GObject
+	: virtual public GObject
+	, virtual public GSerializable
 {
 public:
 	typedef typename ValueT ValueType;
-
-public:
-	enum { CLASS_CODE = CLASS_CODE_PACKAGE, };
 
 public:
 	static GPackage<ValueT> ValueOf(ValueType); 
@@ -49,14 +48,14 @@ public:
 	gbool Unboxing(const GObject *);
 	GString ToString() const;
 	GString ToString(gint base) const;
-	virtual guint ClassCode() const;
 	guint HashCode() const;
 	virtual gbool Equals(const GObject *) const;
 	gbool Equals(ValueType) const;
 	gbool Equals(const GPackage<ValueT> &) const;
-	gbool Serializable() const;
-	template<typename ArchiveT> gbool Serialize(ArchiveT &) const;
-	template<typename ArchiveT> gbool Deserialize(ArchiveT &);
+
+	virtual guint ClassCode() const;
+	gbool Serialize(GArchive &archive) const;
+	gbool Deserialize(GArchive &archive);
 
 	// 运算符重载
 	GPackage<ValueT> &operator=(ValueType);
@@ -75,14 +74,9 @@ class GNumber
 	: public GPackage<ValueT>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_NUMBER, };
-
-public:
 	GNumber(ValueType);
 	GNumber(const GNumber<ValueT> &);
 	virtual ~GNumber();
-
-	virtual guint ClassCode() const;
 
 	// 运算符重载
 	ValueT operator+(ValueType);

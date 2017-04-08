@@ -9,9 +9,6 @@ class GAPI GInteger
 	: public GNumber<gint>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_INTEGER, };
-
-public:
 	static const gsize MAX_VALUE = G_INT32_MAX;
 	static const gsize MIN_VALUE = G_INT32_MIN;
 

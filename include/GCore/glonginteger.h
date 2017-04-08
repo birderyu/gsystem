@@ -9,9 +9,6 @@ class GAPI GLongInteger
 	: public GNumber<glong>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_LONG_INTEGER, };
-
-public:
 	static gint MaxValue();
 	static gint MinValue();
 	static GLongInteger ValueOf(const GString &);

@@ -1,7 +1,7 @@
 #ifndef _GEOMETRY_COORDINATE_H_
 #define _GEOMETRY_COORDINATE_H_
 
-#include "ggeometryglobal.h"
+#include "ggeodef.h"
 #include "GCore/gobject.h"
 
 namespace gsystem { // gsystem

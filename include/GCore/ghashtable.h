@@ -4,7 +4,7 @@
 #include "ghash.h"
 #include "glist.h"
 #include "gdynamicarray.h"
-#include "gstructure.h"
+#include "gstruct.h"
 #include "gnocopyable.h"
 #include "gnew.h"
 

@@ -3,35 +3,35 @@
 
 namespace gsystem { // gsystem
 
-GINLINE GBinaryTreeNode::GBinaryTreeNode(GBinaryTreeNode *parent, GBinaryTreeNode *left, GBinaryTreeNode *right)
-: GBinaryTreeNodeT<GBinaryTreeNode>(parent, left, right)
+GINLINE GBinTreeNode::GBinTreeNode(GBinTreeNode *parent, GBinTreeNode *left, GBinTreeNode *right)
+: GBinTreeNodeT<GBinTreeNode>(parent, left, right)
 {
 
 }
 
 template<typename NodeT>
-GINLINE GBinaryTree<NodeT>::GBinaryTree(NodeT *pRoot)
+GINLINE GBinTree<NodeT>::GBinTree(NodeT *pRoot)
 : m_pRoot(pRoot)
 {
 	
 }
 
 template<typename NodeT>
-GINLINE GBinaryTree<NodeT>::GBinaryTree(const GBinaryTree<NodeT> &tTree)
+GINLINE GBinTree<NodeT>::GBinTree(const GBinTree<NodeT> &tTree)
 : m_pRoot(GNULL)
 {
 	CopyFrom(tTree);
 }
 
 template<typename NodeT>
-GINLINE GBinaryTree<NodeT>::GBinaryTree(GBinaryTree<NodeT> &&tree)
+GINLINE GBinTree<NodeT>::GBinTree(GBinTree<NodeT> &&tree)
 : m_pRoot(tree.m_pRoot)
 {
 	tree.m_pRoot = GNULL;
 }
 
 template<typename NodeT>
-GINLINE GBinaryTree<NodeT> &GBinaryTree<NodeT>::operator=(const GBinaryTree<NodeT> &tree)
+GINLINE GBinTree<NodeT> &GBinTree<NodeT>::operator=(const GBinTree<NodeT> &tree)
 {
 	if (this == &tree)
 	{
@@ -42,7 +42,7 @@ GINLINE GBinaryTree<NodeT> &GBinaryTree<NodeT>::operator=(const GBinaryTree<Node
 }
 
 template<typename NodeT>
-GINLINE GBinaryTree<NodeT> &GBinaryTree<NodeT>::operator=(GBinaryTree<NodeT> &&tree)
+GINLINE GBinTree<NodeT> &GBinTree<NodeT>::operator=(GBinTree<NodeT> &&tree)
 {
 	if (this == &tree)
 	{
@@ -54,13 +54,13 @@ GINLINE GBinaryTree<NodeT> &GBinaryTree<NodeT>::operator=(GBinaryTree<NodeT> &&t
 }
 
 template<typename NodeT>
-GINLINE GBinaryTree<NodeT>::~GBinaryTree()
+GINLINE GBinTree<NodeT>::~GBinTree()
 {
 	Destroy();
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::SetRoot(NodeT *pNode)
+GINLINE gvoid GBinTree<NodeT>::SetRoot(NodeT *pNode)
 {
 	if (!m_pRoot)
 	{
@@ -70,7 +70,7 @@ GINLINE gvoid GBinaryTree<NodeT>::SetRoot(NodeT *pNode)
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::CopyFrom(const GBinaryTree<NodeT> &tTree)
+GINLINE gvoid GBinTree<NodeT>::CopyFrom(const GBinTree<NodeT> &tTree)
 {
 	if (this == &tTree)
 	{
@@ -92,53 +92,53 @@ GINLINE gvoid GBinaryTree<NodeT>::CopyFrom(const GBinaryTree<NodeT> &tTree)
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::Destroy()
+GINLINE gvoid GBinTree<NodeT>::Destroy()
 {
 	DestroySubTree(m_pRoot);
 	m_pRoot = GNULL;
 }
 
 template<typename NodeT>
-GINLINE gbool GBinaryTree<NodeT>::IsEmpty() const
+GINLINE gbool GBinTree<NodeT>::IsEmpty() const
 {
 	return GNULL == m_pRoot;
 }
 
 template<typename NodeT>
-GINLINE NodeT*& GBinaryTree<NodeT>::Root()
+GINLINE NodeT*& GBinTree<NodeT>::Root()
 {
 	return *(&(m_pRoot));
 }
 
 template<typename NodeT>
-GINLINE NodeT* GBinaryTree<NodeT>::Root() const
+GINLINE NodeT* GBinTree<NodeT>::Root() const
 {
 	return m_pRoot;
 }
 
 template<typename NodeT>
 template<typename VisitorT>  
-GINLINE gvoid GBinaryTree<NodeT>::PreOrderTraverse(VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PreOrderTraverse(VisitorT &visitor) const
 {
 	PreOrderTraverse(m_pRoot, visitor);
 }
 
 template<typename NodeT>
 template<typename VisitorT>
-GINLINE gvoid GBinaryTree<NodeT>::InOrderTraverse(VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::InOrderTraverse(VisitorT &visitor) const
 {
 	InOrderTraverse(m_pRoot, visitor);
 }
 
 template<typename NodeT>
 template<typename VisitorT>
-GINLINE gvoid GBinaryTree<NodeT>::PostOrderTraverse(VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PostOrderTraverse(VisitorT &visitor) const
 {
 	PostOrderTraverse(m_pRoot, visitor);
 }
 
 template<typename NodeT>
-GINLINE gsize GBinaryTree<NodeT>::NodeCount() const
+GINLINE gsize GBinTree<NodeT>::NodeCount() const
 {
 	std::pair
 	gsize unCount = 0;
@@ -147,7 +147,7 @@ GINLINE gsize GBinaryTree<NodeT>::NodeCount() const
 }
 
 template<typename NodeT>
-GINLINE gsize GBinaryTree<NodeT>::LeafCount() const
+GINLINE gsize GBinTree<NodeT>::LeafCount() const
 {
 	gsize unCount = 0;
 	LeafCount(m_pRoot, unCount);
@@ -155,25 +155,25 @@ GINLINE gsize GBinaryTree<NodeT>::LeafCount() const
 }
 
 template<typename NodeT>
-GINLINE gsize GBinaryTree<NodeT>::Depth() const
+GINLINE gsize GBinTree<NodeT>::Depth() const
 {
 	return Depth(m_pRoot);
 }
 
 template<typename NodeT>
-GINLINE gbool GBinaryTree<NodeT>::operator==(const GBinaryTree<NodeT> &tree) const
+GINLINE gbool GBinTree<NodeT>::operator==(const GBinTree<NodeT> &tree) const
 {
 	return TreeEquals(m_pRoot, tree.m_pRoot);
 }
 
 template<typename NodeT>
-GINLINE gbool GBinaryTree<NodeT>::operator!=(const GBinaryTree<NodeT> &tree) const
+GINLINE gbool GBinTree<NodeT>::operator!=(const GBinTree<NodeT> &tree) const
 {
 	return !(*this == tree);
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::DestroySubTree(NodeT *node)
+GINLINE gvoid GBinTree<NodeT>::DestroySubTree(NodeT *node)
 {
 	if (node)
 	{
@@ -184,7 +184,7 @@ GINLINE gvoid GBinaryTree<NodeT>::DestroySubTree(NodeT *node)
 }
 
 template<typename NodeT>
-GINLINE NodeT *GBinaryTree<NodeT>::CopySubTree(NodeT *node)
+GINLINE NodeT *GBinTree<NodeT>::CopySubTree(NodeT *node)
 {
 	if (!node)
 	{
@@ -198,7 +198,7 @@ GINLINE NodeT *GBinaryTree<NodeT>::CopySubTree(NodeT *node)
 
 template<typename NodeT>
 template<typename VisitorT>
-GINLINE gvoid GBinaryTree<NodeT>::PreOrderTraverse(const NodeT *node, VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PreOrderTraverse(const NodeT *node, VisitorT &visitor) const
 {
 	if (node)
 	{
@@ -210,7 +210,7 @@ GINLINE gvoid GBinaryTree<NodeT>::PreOrderTraverse(const NodeT *node, VisitorT &
 
 template<typename NodeT>
 template<typename VisitorT>
-GINLINE gvoid GBinaryTree<NodeT>::InOrderTraverse(const NodeT *node, VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::InOrderTraverse(const NodeT *node, VisitorT &visitor) const
 {
 	if (node)
 	{
@@ -222,7 +222,7 @@ GINLINE gvoid GBinaryTree<NodeT>::InOrderTraverse(const NodeT *node, VisitorT &v
 
 template<typename NodeT>
 template<typename VisitorT>
-GINLINE gvoid GBinaryTree<NodeT>::PostOrderTraverse(const NodeT *node, VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PostOrderTraverse(const NodeT *node, VisitorT &visitor) const
 {
 	if (node)
 	{
@@ -233,7 +233,7 @@ GINLINE gvoid GBinaryTree<NodeT>::PostOrderTraverse(const NodeT *node, VisitorT 
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::NodeCount(const NodeT *node, gsize &unCount) const
+GINLINE gvoid GBinTree<NodeT>::NodeCount(const NodeT *node, gsize &unCount) const
 {
 	if (GNULL == node)
 	{
@@ -254,7 +254,7 @@ GINLINE gvoid GBinaryTree<NodeT>::NodeCount(const NodeT *node, gsize &unCount) c
 }
 
 template<typename NodeT>
-GINLINE gvoid GBinaryTree<NodeT>::LeafCount(const NodeT *node, gsize &unCount) const
+GINLINE gvoid GBinTree<NodeT>::LeafCount(const NodeT *node, gsize &unCount) const
 {
 	if (node)
 	{
@@ -268,7 +268,7 @@ GINLINE gvoid GBinaryTree<NodeT>::LeafCount(const NodeT *node, gsize &unCount) c
 }
 
 template<typename NodeT>
-GINLINE gsize GBinaryTree<NodeT>::Depth(const NodeT *node) const
+GINLINE gsize GBinTree<NodeT>::Depth(const NodeT *node) const
 {
 	gsize unDepthLeft;
 	gsize unDepthRight;
@@ -284,7 +284,7 @@ GINLINE gsize GBinaryTree<NodeT>::Depth(const NodeT *node) const
 }
 
 template<typename NodeT>
-GINLINE gbool GBinaryTree<NodeT>::TreeEquals(const NodeT *node1, const NodeT *node2) const
+GINLINE gbool GBinTree<NodeT>::TreeEquals(const NodeT *node1, const NodeT *node2) const
 {
 	return NodeEquals(node1, node2)
 		&& TreeEquals(node1->m_pLeft, node2->m_pLeft)
@@ -292,7 +292,7 @@ GINLINE gbool GBinaryTree<NodeT>::TreeEquals(const NodeT *node1, const NodeT *no
 }
 
 template<typename NodeT>
-GINLINE gbool GBinaryTree<NodeT>::NodeEquals(const NodeT *node1, const NodeT *node2) const
+GINLINE gbool GBinTree<NodeT>::NodeEquals(const NodeT *node1, const NodeT *node2) const
 {
 	if (GNULL == node1 && GNULL == node2)
 	{

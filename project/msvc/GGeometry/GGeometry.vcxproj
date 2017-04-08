@@ -19,7 +19,7 @@
     <ClInclude Include="..\..\..\include\GGeometry\ggeometry.h" />
     <ClInclude Include="..\..\..\include\GGeometry\ggeometrycollection.h" />
     <ClInclude Include="..\..\..\include\GGeometry\ggeometryhelper.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryglobal.h" />
+    <ClInclude Include="..\..\..\include\GGeometry\ggeodef.h" />
     <ClInclude Include="..\..\..\include\GGeometry\ggeometryfactory.h" />
     <ClInclude Include="..\..\..\include\GGeometry\ggeometryinterface.h" />
     <ClInclude Include="..\..\..\include\GGeometry\ggeometrypool.h" />
@@ -48,7 +48,7 @@
     <ClCompile Include="..\..\..\source\GGeometry\genvelope.cpp" />
     <ClCompile Include="..\..\..\source\GGeometry\ggeometry.cpp" />
     <ClCompile Include="..\..\..\source\GGeometry\ggeometryfactory.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\ggeometryglobal.cpp" />
+    <ClCompile Include="..\..\..\source\GGeometry\ggeodef.cpp" />
     <ClCompile Include="..\..\..\source\GGeometry\gpoint.cpp" />
   </ItemGroup>
   <ItemGroup>

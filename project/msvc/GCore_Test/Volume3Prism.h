@@ -15,7 +15,7 @@ class Volume3Prism
 public:
 	// 求一个不规则三棱柱的体积
 	// 三棱柱的顶面和底面可以不平行，但侧面需要竖直
-	inline static double volume(double xa, double ya, double za,
+	GINLINE static double volume(double xa, double ya, double za,
 		double xb, double yb, double zb,
 		double xc, double yc, double zc,
 		double xa1, double ya1, double za1,

@@ -80,7 +80,7 @@ GLongDoubleFloat::GLongDoubleFloat(const GLongDoubleFloat &val)
 
 guint GLongDoubleFloat::ClassCode() const
 {
-	return GLongDoubleFloat::CLASS_CODE;
+	return static_cast<guint>(GClassCode::LongDoubleFloat);
 }
 
 gbool GLongDoubleFloat::IsNaN() const

@@ -6,13 +6,13 @@ namespace detail { // gsystem.detail
 namespace geom { // gsystem.detail.geom
 
 template<gsize DIMENSION>
-inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store()
+GINLINE GSinglePoint_Store<DIMENSION>::GSinglePoint_Store()
 {
 	GMemSet(m_aCoord, 0, sizeof(greal)* DIMENSION);
 }
 
 template<gsize DIMENSION>
-inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x)
+GINLINE GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = 0;
@@ -20,7 +20,7 @@ inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x)
 }
 
 template<gsize DIMENSION>
-inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x, greal y)
+GINLINE GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x, greal y)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
@@ -28,7 +28,7 @@ inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x, greal y)
 }
 
 template<gsize DIMENSION>
-inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x, greal y, greal z)
+GINLINE GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x, greal y, greal z)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
@@ -36,80 +36,80 @@ inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(greal x, greal y, greal
 }
 
 template<gsize DIMENSION>
-inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(const GCoordinate &c)
+GINLINE GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(const GCoordinate &c)
 {
 	gsize real_size = DIMENSION < G_COORDINATE_SIZE ? DIMENSION : G_COORDINATE_SIZE;
 	GMemCopy(m_aCoord, c.Cursor(), sizeof(greal) * real_size);
 }
 
 template<gsize DIMENSION>
-inline GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(const GSinglePoint_Store<DIMENSION> &p_s)
+GINLINE GSinglePoint_Store<DIMENSION>::GSinglePoint_Store(const GSinglePoint_Store<DIMENSION> &p_s)
 {
 	GMemCopy(m_aCoord, p_s.m_aCoord, sizeof(greal) * DIMENSION);
 }
 
 template<gsize DIMENSION>
-inline greal &GSinglePoint_Store<DIMENSION>::X()
+GINLINE greal &GSinglePoint_Store<DIMENSION>::X()
 {
 	return m_aCoord[0];
 }
 
 template<gsize DIMENSION>
-inline greal GSinglePoint_Store<DIMENSION>::X() const
+GINLINE greal GSinglePoint_Store<DIMENSION>::X() const
 {
 	return m_aCoord[0];
 }
 
 template<gsize DIMENSION>
-inline greal &GSinglePoint_Store<DIMENSION>::Y()
+GINLINE greal &GSinglePoint_Store<DIMENSION>::Y()
 {
 	return m_aCoord[1];
 }
 
 template<gsize DIMENSION>
-inline greal GSinglePoint_Store<DIMENSION>::Y() const
+GINLINE greal GSinglePoint_Store<DIMENSION>::Y() const
 {
 	return m_aCoord[1];
 }
 
 template<gsize DIMENSION>
-inline greal &GSinglePoint_Store<DIMENSION>::Z()
+GINLINE greal &GSinglePoint_Store<DIMENSION>::Z()
 {
 	return m_aCoord[2];
 }
 
 template<gsize DIMENSION>
-inline greal GSinglePoint_Store<DIMENSION>::Z() const
+GINLINE greal GSinglePoint_Store<DIMENSION>::Z() const
 {
 	return m_aCoord[2];
 }
 
 template<gsize DIMENSION>
-inline GCoordinate GSinglePoint_Store<DIMENSION>::Coordinate() const
+GINLINE GCoordinate GSinglePoint_Store<DIMENSION>::Coordinate() const
 {
 	return GCoordinate(m_aCoord, DIMENSION);
 }
 
 template<gsize DIMENSION>
-inline gvoid GSinglePoint_Store<DIMENSION>::SetX(greal x)
+GINLINE gvoid GSinglePoint_Store<DIMENSION>::SetX(greal x)
 {
 	m_aCoord[0] = x;
 }
 
 template<gsize DIMENSION>
-inline gvoid GSinglePoint_Store<DIMENSION>::SetY(greal y)
+GINLINE gvoid GSinglePoint_Store<DIMENSION>::SetY(greal y)
 {
 	m_aCoord[1] = y;
 }
 
 template<gsize DIMENSION>
-inline gvoid GSinglePoint_Store<DIMENSION>::SetZ(greal z)
+GINLINE gvoid GSinglePoint_Store<DIMENSION>::SetZ(greal z)
 {
 	m_aCoord[2] = z;
 }
 
 template<gsize DIMENSION>
-inline gvoid GSinglePoint_Store<DIMENSION>::SetCoordinate(const GCoordinate &c)
+GINLINE gvoid GSinglePoint_Store<DIMENSION>::SetCoordinate(const GCoordinate &c)
 {
 	gsize real_size = DIMENSION < G_COORDINATE_SIZE ? DIMENSION : G_COORDINATE_SIZE;
 	GMemCopy(m_aCoord, c.Cursor(), sizeof(greal)* real_size);
@@ -118,55 +118,55 @@ inline gvoid GSinglePoint_Store<DIMENSION>::SetCoordinate(const GCoordinate &c)
 //////////////////////////////////////////////////////////////////////////
 
 template<>
-inline GSinglePoint_Store<1>::GSinglePoint_Store(greal x)
+GINLINE GSinglePoint_Store<1>::GSinglePoint_Store(greal x)
 {
 	m_aCoord[0] = x;
 }
 
 template<>
-inline GSinglePoint_Store<1>::GSinglePoint_Store(greal x, greal y)
+GINLINE GSinglePoint_Store<1>::GSinglePoint_Store(greal x, greal y)
 {
 	m_aCoord[0] = x;
 }
 
 template<>
-inline GSinglePoint_Store<1>::GSinglePoint_Store(greal x, greal y, greal z)
+GINLINE GSinglePoint_Store<1>::GSinglePoint_Store(greal x, greal y, greal z)
 {
 	m_aCoord[0] = x;
 }
 
 template<>
-inline greal &GSinglePoint_Store<1>::Y()
+GINLINE greal &GSinglePoint_Store<1>::Y()
 {
 	return GGeometryGlobal::_g_n_coordinate_y_;
 }
 
 template<>
-inline greal GSinglePoint_Store<1>::Y() const
+GINLINE greal GSinglePoint_Store<1>::Y() const
 {
 	return GGeometryGlobal::_g_n_coordinate_y_;
 }
 
 template<>
-inline greal &GSinglePoint_Store<1>::Z()
+GINLINE greal &GSinglePoint_Store<1>::Z()
 {
 	return GGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline greal GSinglePoint_Store<1>::Z() const
+GINLINE greal GSinglePoint_Store<1>::Z() const
 {
 	return GGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline gvoid GSinglePoint_Store<1>::SetY(greal y)
+GINLINE gvoid GSinglePoint_Store<1>::SetY(greal y)
 {
 	
 }
 
 template<>
-inline gvoid GSinglePoint_Store<1>::SetZ(greal z)
+GINLINE gvoid GSinglePoint_Store<1>::SetZ(greal z)
 {
 	
 }
@@ -174,40 +174,40 @@ inline gvoid GSinglePoint_Store<1>::SetZ(greal z)
 //////////////////////////////////////////////////////////////////////////
 
 template<>
-inline GSinglePoint_Store<2>::GSinglePoint_Store(greal x)
+GINLINE GSinglePoint_Store<2>::GSinglePoint_Store(greal x)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = 0;
 }
 
 template<>
-inline GSinglePoint_Store<2>::GSinglePoint_Store(greal x, greal y)
+GINLINE GSinglePoint_Store<2>::GSinglePoint_Store(greal x, greal y)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
 }
 
 template<>
-inline GSinglePoint_Store<2>::GSinglePoint_Store(greal x, greal y, greal z)
+GINLINE GSinglePoint_Store<2>::GSinglePoint_Store(greal x, greal y, greal z)
 {
 	m_aCoord[0] = x;
 	m_aCoord[1] = y;
 }
 
 template<>
-inline greal &GSinglePoint_Store<2>::Z()
+GINLINE greal &GSinglePoint_Store<2>::Z()
 {
 	return GGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline greal GSinglePoint_Store<2>::Z() const
+GINLINE greal GSinglePoint_Store<2>::Z() const
 {
 	return GGeometryGlobal::_g_n_coordinate_z_;
 }
 
 template<>
-inline gvoid GSinglePoint_Store<2>::SetZ(greal z)
+GINLINE gvoid GSinglePoint_Store<2>::SetZ(greal z)
 {
 
 }

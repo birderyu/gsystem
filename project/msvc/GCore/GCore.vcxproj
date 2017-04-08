@@ -169,7 +169,8 @@
     <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
     <ClInclude Include="..\..\..\include\GCore\garrays.h" />
     <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
-    <ClInclude Include="..\..\..\include\GCore\gdatetimedefine.h" />
+    <ClInclude Include="..\..\..\include\GCore\gclasscode.h" />
+    <ClInclude Include="..\..\..\include\GCore\gdtdef.h" />
     <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
     <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
@@ -180,10 +181,10 @@
     <ClInclude Include="..\..\..\include\GCore\garraystack.h" />
     <ClInclude Include="..\..\..\include\GCore\gatom.h" />
     <ClInclude Include="..\..\..\include\GCore\gavltree.h" />
-    <ClInclude Include="..\..\..\include\GCore\gbinaryfile.h" />
-    <ClInclude Include="..\..\..\include\GCore\gbinaryheap.h" />
-    <ClInclude Include="..\..\..\include\GCore\gbinarysorttree.h" />
-    <ClInclude Include="..\..\..\include\GCore\gbinarytree.h" />
+    <ClInclude Include="..\..\..\include\GCore\gbinfile.h" />
+    <ClInclude Include="..\..\..\include\GCore\gbinheap.h" />
+    <ClInclude Include="..\..\..\include\GCore\gbstree.h" />
+    <ClInclude Include="..\..\..\include\GCore\gbintree.h" />
     <ClInclude Include="..\..\..\include\GCore\gbitset.h" />
     <ClInclude Include="..\..\..\include\GCore\gboolean.h" />
     <ClInclude Include="..\..\..\include\GCore\gbtree.h" />
@@ -191,7 +192,7 @@
     <ClInclude Include="..\..\..\include\GCore\gbyte.h" />
     <ClInclude Include="..\..\..\include\GCore\gbytes.h" />
     <ClInclude Include="..\..\..\include\GCore\gcharacter.h" />
-    <ClInclude Include="..\..\..\include\GCore\gcircularlinkedlist.h" />
+    <ClInclude Include="..\..\..\include\GCore\gclist.h" />
     <ClInclude Include="..\..\..\include\GCore\gconstructor.h" />
     <ClInclude Include="..\..\..\include\GCore\gcriticalsection.h" />
     <ClInclude Include="..\..\..\include\GCore\gcstring.h" />
@@ -220,12 +221,12 @@
     <ClInclude Include="..\..\..\include\GCore\glinkedlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glongdoublefloat.h" />
     <ClInclude Include="..\..\..\include\GCore\gdoublefloat.h" />
-    <ClInclude Include="..\..\..\include\GCore\gdoublelinkedlist.h" />
+    <ClInclude Include="..\..\..\include\GCore\gdlist.h" />
     <ClInclude Include="..\..\..\include\GCore\gseriespool.h" />
     <ClInclude Include="..\..\..\include\GCore\gstopwatch.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring16.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring32.h" />
-    <ClInclude Include="..\..\..\include\GCore\gstructure.h" />
+    <ClInclude Include="..\..\..\include\GCore\gstruct.h" />
     <ClInclude Include="..\..\..\include\GCore\gsinglefloat.h" />
     <ClInclude Include="..\..\..\include\GCore\ggraph.h" />
     <ClInclude Include="..\..\..\include\GCore\ghash.h" />
@@ -270,20 +271,20 @@
     <ClInclude Include="..\..\..\include\GCore\gutility.h" />
     <ClInclude Include="..\..\..\include\GCore\gvariant.h" />
     <ClInclude Include="..\..\..\include\GCore\gpackage.h" />
-    <ClInclude Include="..\..\..\include\GCore\gredblacktree.h" />
+    <ClInclude Include="..\..\..\include\GCore\grbtree.h" />
     <ClInclude Include="..\..\..\include\GCore\gsort.h" />
     <ClInclude Include="..\..\..\include\GCore\gdynamicarray.h" />
     <ClInclude Include="..\..\..\include\GCore\glockguard.h" />
-    <ClInclude Include="..\..\..\include\GCore\gdefine.h" />
+    <ClInclude Include="..\..\..\include\GCore\gmacro.h" />
     <ClInclude Include="..\..\..\include\GCore\gendian.h" />
     <ClInclude Include="..\..\..\include\GCore\gglobal.h" />
-    <ClInclude Include="..\..\..\include\GCore\gsinglelinkedlist.h" />
+    <ClInclude Include="..\..\..\include\GCore\gslist.h" />
     <ClInclude Include="..\..\..\include\GCore\gmath.h" />
     <ClInclude Include="..\..\..\include\GCore\gmemorypool.h" />
     <ClInclude Include="..\..\..\include\GCore\gmutex.h" />
     <ClInclude Include="..\..\..\include\GCore\gobject.h" />
     <ClInclude Include="..\..\..\include\GCore\gsemaphore.h" />
-    <ClInclude Include="..\..\..\include\GCore\gsockaddress.h" />
+    <ClInclude Include="..\..\..\include\GCore\gsocketaddress.h" />
     <ClInclude Include="..\..\..\include\GCore\gsocket.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring.h" />
     <ClInclude Include="..\..\..\include\GCore\gtcpsocket.h" />
@@ -307,7 +308,7 @@
     <ClInclude Include="..\..\..\include\GCore\gwidecharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gfunctor.h" />
     <ClInclude Include="..\..\..\include\GCore\gxmlnode.h" />
-    <ClInclude Include="..\..\..\private\GCore\gbinaryfile_ex.h" />
+    <ClInclude Include="..\..\..\private\GCore\gbinfile_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gfile_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gjsonparser.h" />
     <ClInclude Include="..\..\..\private\GCore\gsockaddress_ex.h" />
@@ -318,8 +319,9 @@
     <ClInclude Include="..\..\..\thirds\GCore\dlmalloc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GCore\gbinaryfile_ex.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gbinaryfile.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\garchive.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gbinfile_ex.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gbinfile.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gblock.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gboolean.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gbyte.cpp" />
@@ -355,11 +357,12 @@
     <ClCompile Include="..\..\..\source\GCore\gpath.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gregister.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsemaphore.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gserializable.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gshortinteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsignedcharacter.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsinglefloat.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsmallinteger.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gsockaddress.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gsocketaddress.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsockaddress_ex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsocket.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsocket_ex.cpp" />
@@ -408,6 +411,7 @@
     <None Include="..\..\..\include\GCore\gmemorypool.inl">
       <FileType>Document</FileType>
     </None>
+    <None Include="..\..\..\include\GCore\gserialize.inl" />
     <None Include="..\..\..\include\GCore\gseries.inl">
       <FileType>Document</FileType>
     </None>
@@ -420,7 +424,7 @@
     <None Include="..\..\..\include\GCore\gatom.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gbinaryheap.inl">
+    <None Include="..\..\..\include\GCore\gbinheap.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gbytes.inl">
@@ -432,9 +436,6 @@
     <None Include="..\..\..\include\GCore\gendian.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\glinkedlist.inl">
-      <FileType>Document</FileType>
-    </None>
     <None Include="..\..\..\include\GCore\glist.inl">
       <FileType>Document</FileType>
     </None>
@@ -444,16 +445,16 @@
     <None Include="..\..\..\include\GCore\glockguard.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gbinarysorttree.inl">
+    <None Include="..\..\..\include\GCore\gbstree.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gbinarytree.inl">
+    <None Include="..\..\..\include\GCore\gbintree.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gcircularlinkedlist.inl">
+    <None Include="..\..\..\include\GCore\gclist.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gdoublelinkedlist.inl">
+    <None Include="..\..\..\include\GCore\gdlist.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gdynamicarray.inl">
@@ -489,13 +490,13 @@
     <None Include="..\..\..\include\GCore\gstack.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gstructure.inl">
+    <None Include="..\..\..\include\GCore\gstruct.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gpackage.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gredblacktree.inl">
+    <None Include="..\..\..\include\GCore\grbtree.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\greferencecounter.inl">
@@ -504,7 +505,7 @@
     <None Include="..\..\..\include\GCore\gsharedpointer.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gsinglelinkedlist.inl">
+    <None Include="..\..\..\include\GCore\gslist.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gstaticarray.inl">

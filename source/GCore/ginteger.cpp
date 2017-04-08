@@ -35,7 +35,7 @@ GInteger::GInteger(const GInteger &val)
 
 guint GInteger::ClassCode() const
 {
-	return GInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::Integer);
 }
 
 } // namespace gsystem

@@ -4,14 +4,14 @@
 namespace gsystem { // gsystem
 
 template<typename DataT, typename NodeT>
-GINLINE GCircularLinkedList<DataT, NodeT>::GCircularLinkedList()
+GINLINE GCList<DataT, NodeT>::GCList()
 : m_pCursor(GNULL)
 {
 
 }
 
 template<typename DataT, typename NodeT>
-GINLINE typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetNext()
+GINLINE typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetNext()
 {
 	GASSERT(0 != m_nSize);
 
@@ -24,7 +24,7 @@ GINLINE typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, Nod
 }
 
 template<typename DataT, typename NodeT>
-GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetNext() const
+GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetNext() const
 {
 	GASSERT(0 != m_nSize);
 
@@ -37,7 +37,7 @@ GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<Data
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gsize GCircularLinkedList<DataT, NodeT>::GetCurrentIndex() const
+GINLINE gsize GCList<DataT, NodeT>::GetCurrentIndex() const
 {
 	GASSERT(0 != m_nSize);
 
@@ -53,19 +53,19 @@ GINLINE gsize GCircularLinkedList<DataT, NodeT>::GetCurrentIndex() const
 }
 
 template<typename DataT, typename NodeT>
-GINLINE typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetCurrentNode()
+GINLINE typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetCurrentNode()
 {
 	return m_pCursor;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCircularLinkedList<DataT, NodeT>::GetCurrentNode() const
+GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetCurrentNode() const
 {
 	return m_pCursor;
 }
 
 template<typename DataT, typename NodeT>
-GINLINE gvoid GCircularLinkedList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
+GINLINE gvoid GCList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
 {
 	GASSERT(pos < m_nSize);
 

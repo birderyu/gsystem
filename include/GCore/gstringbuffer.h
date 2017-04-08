@@ -2,7 +2,7 @@
 #define _CORE_STRING_BUFFER_H_
 
 #include "gobject.h"
-#include "gstructure.h"
+#include "gstruct.h"
 #include "gvector.h"
 #include "gstring.h"
 

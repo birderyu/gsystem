@@ -14,6 +14,7 @@ class GVector final
 	: public GArray<DataT>
 	, public GDeque<DataT>
 	, virtual public GObject
+	, virtual public GSerializable
 {
 public:
 	class ConstIterator;
@@ -21,29 +22,29 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		inline Iterator() : m_pData(GNULL) {}
-		inline Iterator(DataT *data) : m_pData(data) {}
-		inline explicit Iterator(const Iterator &iter) : m_pData(iter.m_pData) {}
+		GINLINE Iterator() : m_pData(GNULL) {}
+		GINLINE Iterator(DataT *data) : m_pData(data) {}
+		GINLINE explicit Iterator(const Iterator &iter) : m_pData(iter.m_pData) {}
 
-		inline DataT &operator*() const { return *m_pData; }
-		inline DataT *operator->() const { return m_pData; }
-		inline DataT &operator[](gsize pos) const { return *(m_pData + pos); }
-		inline bool operator==(const Iterator &iter) const { return m_pData == iter.m_pData; }
-		inline bool operator!=(const Iterator &iter) const { return m_pData != iter.m_pData; }
-		inline bool operator<(const Iterator &iter) const { return m_pData < iter.m_pData; }
-		inline bool operator<=(const Iterator &iter) const { return m_pData <= iter.m_pData; }
-		inline bool operator>(const Iterator &iter) const { return m_pData > iter.m_pData; }
-		inline bool operator>=(const Iterator &iter) const { return m_pData >= iter.m_pData; }
-		inline Iterator &operator++() { ++m_pData; return *this; }
-		inline Iterator  operator++(gint) { DataT *data = m_pData; ++m_pData; return data; }
-		inline Iterator &operator--() { m_pData--; return *this; }
-		inline Iterator  operator--(gint) { DataT *data = m_pData; m_pData--; return data; }
-		inline Iterator &operator+=(gint i) { m_pData += i; return *this; }
-		inline Iterator &operator-=(gint i) { m_pData -= i; return *this; }
-		inline Iterator  operator+(gint i) const { return Iterator(m_pData + i); }
-		inline Iterator  operator-(gint i) const { return Iterator(m_pData - i); }
-		inline gint operator-(const Iterator &iter) const { return m_pData - iter.m_pData; }
-		inline operator DataT*() const { return m_pData; }
+		GINLINE DataT &operator*() const { return *m_pData; }
+		GINLINE DataT *operator->() const { return m_pData; }
+		GINLINE DataT &operator[](gsize pos) const { return *(m_pData + pos); }
+		GINLINE bool operator==(const Iterator &iter) const { return m_pData == iter.m_pData; }
+		GINLINE bool operator!=(const Iterator &iter) const { return m_pData != iter.m_pData; }
+		GINLINE bool operator<(const Iterator &iter) const { return m_pData < iter.m_pData; }
+		GINLINE bool operator<=(const Iterator &iter) const { return m_pData <= iter.m_pData; }
+		GINLINE bool operator>(const Iterator &iter) const { return m_pData > iter.m_pData; }
+		GINLINE bool operator>=(const Iterator &iter) const { return m_pData >= iter.m_pData; }
+		GINLINE Iterator &operator++() { ++m_pData; return *this; }
+		GINLINE Iterator  operator++(gint) { DataT *data = m_pData; ++m_pData; return data; }
+		GINLINE Iterator &operator--() { m_pData--; return *this; }
+		GINLINE Iterator  operator--(gint) { DataT *data = m_pData; m_pData--; return data; }
+		GINLINE Iterator &operator+=(gint i) { m_pData += i; return *this; }
+		GINLINE Iterator &operator-=(gint i) { m_pData -= i; return *this; }
+		GINLINE Iterator  operator+(gint i) const { return Iterator(m_pData + i); }
+		GINLINE Iterator  operator-(gint i) const { return Iterator(m_pData - i); }
+		GINLINE gint operator-(const Iterator &iter) const { return m_pData - iter.m_pData; }
+		GINLINE operator DataT*() const { return m_pData; }
 
 	private:
 		DataT *m_pData;
@@ -53,29 +54,29 @@ public:
 	{
 		friend class Iterator;
 	public:
-		inline ConstIterator() : m_pData(GNULL) {}
-		inline ConstIterator(const DataT *data) : m_pData(data) {}
-		inline explicit ConstIterator(const Iterator &iter) : m_pData(iter.m_pData) {}
+		GINLINE ConstIterator() : m_pData(GNULL) {}
+		GINLINE ConstIterator(const DataT *data) : m_pData(data) {}
+		GINLINE explicit ConstIterator(const Iterator &iter) : m_pData(iter.m_pData) {}
 
-		inline const DataT &operator*() const { return *m_pData; }
-		inline const DataT *operator->() const { return m_pData; }
-		inline const DataT &operator[](gsize pos) const { return *(m_pData + pos); }
-		inline gbool operator==(const ConstIterator &citer) const { return m_pData == citer.m_pData; }
-		inline gbool operator!=(const ConstIterator &citer) const { return m_pData != citer.m_pData; }
-		inline gbool operator<(const ConstIterator &citer) const { return m_pData < citer.m_pData; }
-		inline gbool operator<=(const ConstIterator &citer) const { return m_pData <= citer.m_pData; }
-		inline gbool operator>(const ConstIterator &citer) const { return m_pData > citer.m_pData; }
-		inline gbool operator>=(const ConstIterator &citer) const { return m_pData >= citer.m_pData; }
-		inline ConstIterator &operator++() { ++m_pData; return *this; }
-		inline ConstIterator  operator++(gint) { const DataT *n = m_pData; ++m_pData; return n; }
-		inline ConstIterator &operator--() { m_pData--; return *this; }
-		inline ConstIterator  operator--(gint) { const DataT *data = m_pData; m_pData--; return data; }
-		inline ConstIterator &operator+=(gint i) { m_pData += i; return *this; }
-		inline ConstIterator &operator-=(gint i) { m_pData -= i; return *this; }
-		inline ConstIterator  operator+(gint i) const { return ConstIterator(m_pData + i); }
-		inline ConstIterator  operator-(gint i) const { return ConstIterator(m_pData - i); }
-		inline int operator-(const ConstIterator &citer) const { return m_pData - citer.m_pData; }
-		inline operator const DataT*() const { return m_pData; }
+		GINLINE const DataT &operator*() const { return *m_pData; }
+		GINLINE const DataT *operator->() const { return m_pData; }
+		GINLINE const DataT &operator[](gsize pos) const { return *(m_pData + pos); }
+		GINLINE gbool operator==(const ConstIterator &citer) const { return m_pData == citer.m_pData; }
+		GINLINE gbool operator!=(const ConstIterator &citer) const { return m_pData != citer.m_pData; }
+		GINLINE gbool operator<(const ConstIterator &citer) const { return m_pData < citer.m_pData; }
+		GINLINE gbool operator<=(const ConstIterator &citer) const { return m_pData <= citer.m_pData; }
+		GINLINE gbool operator>(const ConstIterator &citer) const { return m_pData > citer.m_pData; }
+		GINLINE gbool operator>=(const ConstIterator &citer) const { return m_pData >= citer.m_pData; }
+		GINLINE ConstIterator &operator++() { ++m_pData; return *this; }
+		GINLINE ConstIterator  operator++(gint) { const DataT *n = m_pData; ++m_pData; return n; }
+		GINLINE ConstIterator &operator--() { m_pData--; return *this; }
+		GINLINE ConstIterator  operator--(gint) { const DataT *data = m_pData; m_pData--; return data; }
+		GINLINE ConstIterator &operator+=(gint i) { m_pData += i; return *this; }
+		GINLINE ConstIterator &operator-=(gint i) { m_pData -= i; return *this; }
+		GINLINE ConstIterator  operator+(gint i) const { return ConstIterator(m_pData + i); }
+		GINLINE ConstIterator  operator-(gint i) const { return ConstIterator(m_pData - i); }
+		GINLINE int operator-(const ConstIterator &citer) const { return m_pData - citer.m_pData; }
+		GINLINE operator const DataT*() const { return m_pData; }
 
 	private:
 		const DataT *m_pData;
@@ -161,6 +162,10 @@ public:
 	const DataT *Tail() const;
 
 	//gvoid MemCopyFrom(const GVector<DataT> &);
+
+	guint ClassCode() const;
+	gbool Serialize(GArchive &archive) const;
+	gbool Deserialize(GArchive &archive);
 
 private:
 	gsize RealPos(gsize pos) const;

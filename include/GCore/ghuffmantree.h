@@ -14,13 +14,13 @@
 #ifndef _CORE_HUFFMAN_TREE_H_
 #define _CORE_HUFFMAN_TREE_H_
 
-#include "gbinarytree.h"
+#include "gbintree.h"
 
 namespace gsystem { // gsystem
 
 template<typename DataT>
 class GHuffmanTreeNode 
-	: public GBinaryTreeNodeT<GHuffmanTreeNode<DataT>>
+	: public GBinTreeNodeT<GHuffmanTreeNode<DataT>>
 	, public GDataNodeT<DataT>
 	, public GNewT<GHuffmanTreeNode<DataT>>
 {
@@ -30,7 +30,7 @@ public:
 		GHuffmanTreeNode<DataT> *parent = GNULL,
 		GHuffmanTreeNode<DataT> *left = GNULL,
 		GHuffmanTreeNode<DataT> *right = GNULL)
-		: GBinaryTreeNodeT<GHuffmanTreeNode<DataT>>(parent, left, right)
+		: GBinTreeNodeT<GHuffmanTreeNode<DataT>>(parent, left, right)
 		, GDataNodeT<DataT>(data)
 	{
 
@@ -40,7 +40,7 @@ public:
 template<typename DataT,
 	typename CompareT = GLessThanF<DataT>>
 class GHuffmanTree
-	: GBinaryTree<GHuffmanTreeNode<DataT>>
+	: GBinTree<GHuffmanTreeNode<DataT>>
 {
 private:
 	struct HuffmanCompareF

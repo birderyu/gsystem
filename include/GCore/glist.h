@@ -3,7 +3,7 @@
 #define _CORE_LIST_H_
 
 #include "gdeque.h"
-#include "gdoublelinkedlist.h"
+#include "gdlist.h"
 
 namespace gsystem { // gsystem
 
@@ -35,13 +35,13 @@ public:
 	{
 		friend class ConstIterator;
 	public:
-		inline Iterator() : m_pNode(GNULL) {}
-		inline Iterator(GListNode *node) : m_pNode(node) {}
-		inline Iterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
+		GINLINE Iterator() : m_pNode(GNULL) {}
+		GINLINE Iterator(GListNode *node) : m_pNode(node) {}
+		GINLINE Iterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
-		inline DataT &operator*() const { return m_pNode->m_tData; }
-		inline DataT *operator->() const { return &m_pNode->m_tData; }
-		inline DataT &operator[](gsize i) const 
+		GINLINE DataT &operator*() const { return m_pNode->m_tData; }
+		GINLINE DataT *operator->() const { return &m_pNode->m_tData; }
+		GINLINE DataT &operator[](gsize i) const 
 		{ 
 			GListNode *node = m_pNode;
 			while (node && i)
@@ -52,45 +52,45 @@ public:
 			GASSERT(node);
 			return node->m_tData;
 		}
-		inline gbool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
-		inline gbool operator!=(const Iterator &iter) const { return m_pNode != iter.m_pNode; }
-		inline gbool operator<(const Iterator &iter) const { return m_pNode < iter.m_pNode; }
-		inline gbool operator<=(const Iterator &iter) const { return m_pNode <= iter.m_pNode; }
-		inline gbool operator>(const Iterator &iter) const { return m_pNode > iter.m_pNode; }
-		inline gbool operator>=(const Iterator &iter) const { return m_pNode >= iter.m_pNode; }
-		inline gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
-		inline gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
-		inline gbool operator<(const ConstIterator &citer) const { return m_pNode < citer.m_pNode; }
-		inline gbool operator<=(const ConstIterator &citer) const { return m_pNode <= citer.m_pNode; }
-		inline gbool operator>(const ConstIterator &citer) const { return m_pNode > citer.m_pNode; }
-		inline gbool operator>=(const ConstIterator &citer) const { return m_pNode >= citer.m_pNode; }
-		inline Iterator &operator++() 
+		GINLINE gbool operator==(const Iterator &iter) const { return m_pNode == iter.m_pNode; }
+		GINLINE gbool operator!=(const Iterator &iter) const { return m_pNode != iter.m_pNode; }
+		GINLINE gbool operator<(const Iterator &iter) const { return m_pNode < iter.m_pNode; }
+		GINLINE gbool operator<=(const Iterator &iter) const { return m_pNode <= iter.m_pNode; }
+		GINLINE gbool operator>(const Iterator &iter) const { return m_pNode > iter.m_pNode; }
+		GINLINE gbool operator>=(const Iterator &iter) const { return m_pNode >= iter.m_pNode; }
+		GINLINE gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
+		GINLINE gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
+		GINLINE gbool operator<(const ConstIterator &citer) const { return m_pNode < citer.m_pNode; }
+		GINLINE gbool operator<=(const ConstIterator &citer) const { return m_pNode <= citer.m_pNode; }
+		GINLINE gbool operator>(const ConstIterator &citer) const { return m_pNode > citer.m_pNode; }
+		GINLINE gbool operator>=(const ConstIterator &citer) const { return m_pNode >= citer.m_pNode; }
+		GINLINE Iterator &operator++() 
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->m_pNext; 
 			return *this; 
 		}
-		inline Iterator operator++(gint)
+		GINLINE Iterator operator++(gint)
 		{
 			GASSERT(m_pNode);
 			GListNode *node = m_pNode; 
 			m_pNode = m_pNode->m_pNext; 
 			return node; 
 		}
-		inline Iterator &operator--() 
+		GINLINE Iterator &operator--() 
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->m_pPrevious; 
 			return *this; 
 		}
-		inline Iterator operator--(gint) 
+		GINLINE Iterator operator--(gint) 
 		{
 			GASSERT(m_pNode);
 			GListNode *node = m_pNode; 
 			m_pNode = m_pNode->m_pPrevious; 
 			return node; 
 		}
-		inline Iterator &operator+=(gsize i)
+		GINLINE Iterator &operator+=(gsize i)
 		{
 			while (i && m_pNode)
 			{
@@ -99,7 +99,7 @@ public:
 			}
 			return *this;
 		}
-		inline Iterator &operator-=(gsize i) 
+		GINLINE Iterator &operator-=(gsize i) 
 		{ 
 			while (i && m_pNode)
 			{
@@ -108,7 +108,7 @@ public:
 			}
 			return *this;
 		}
-		inline Iterator operator+(gsize i) const
+		GINLINE Iterator operator+(gsize i) const
 		{
 			GListNode *node = m_pNode;
 			while (node && i)
@@ -118,7 +118,7 @@ public:
 			}
 			return Iterator(node);
 		}
-		inline Iterator operator-(gsize i) const
+		GINLINE Iterator operator-(gsize i) const
 		{
 			GListNode *node = m_pNode;
 			while (node && i)
@@ -128,7 +128,7 @@ public:
 			}
 			return Iterator(node);
 		}
-		inline gint operator-(const Iterator &iter) const
+		GINLINE gint operator-(const Iterator &iter) const
 		{
 			GListNode *pnode = m_pNode;
 			GListNode *nnode = m_pNode;
@@ -168,14 +168,14 @@ public:
 	{
 		friend class Iterator;
 	public:
-		inline ConstIterator() : m_pNode(GNULL) {}
-		inline ConstIterator(const GListNode *node) : m_pNode(const_cast<GListNode*>(node)) {}
-		inline ConstIterator(const ConstIterator &citer) : m_pNode(iter.m_pNode) {}
-		explicit inline ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
+		GINLINE ConstIterator() : m_pNode(GNULL) {}
+		GINLINE ConstIterator(const GListNode *node) : m_pNode(const_cast<GListNode*>(node)) {}
+		GINLINE ConstIterator(const ConstIterator &citer) : m_pNode(iter.m_pNode) {}
+		explicit GINLINE ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
-		inline const DataT &operator*() const { return m_pNode->m_tData; }
-		inline const DataT *operator->() const { return &m_pNode->m_tData; }
-		inline const DataT &operator[](gsize i) const
+		GINLINE const DataT &operator*() const { return m_pNode->m_tData; }
+		GINLINE const DataT *operator->() const { return &m_pNode->m_tData; }
+		GINLINE const DataT &operator[](gsize i) const
 		{
 			const GListNode *node = m_pNode;
 			while (node && i)
@@ -186,39 +186,39 @@ public:
 			GASSERT(node);
 			return node->m_tData;
 		}
-		inline gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
-		inline gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
-		inline gbool operator<(const ConstIterator &citer) const { return m_pNode < citer.m_pNode; }
-		inline gbool operator<=(const ConstIterator &citer) const { return m_pNode <= citer.m_pNode; }
-		inline gbool operator>(const ConstIterator &citer) const { return m_pNode > citer.m_pNode; }
-		inline gbool operator>=(const ConstIterator &citer) const { return m_pNode >= citer.m_pNode; }
-		inline ConstIterator &operator++()
+		GINLINE gbool operator==(const ConstIterator &citer) const { return m_pNode == citer.m_pNode; }
+		GINLINE gbool operator!=(const ConstIterator &citer) const { return m_pNode != citer.m_pNode; }
+		GINLINE gbool operator<(const ConstIterator &citer) const { return m_pNode < citer.m_pNode; }
+		GINLINE gbool operator<=(const ConstIterator &citer) const { return m_pNode <= citer.m_pNode; }
+		GINLINE gbool operator>(const ConstIterator &citer) const { return m_pNode > citer.m_pNode; }
+		GINLINE gbool operator>=(const ConstIterator &citer) const { return m_pNode >= citer.m_pNode; }
+		GINLINE ConstIterator &operator++()
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->m_pNext;
 			return *this;
 		}
-		inline ConstIterator operator++(gint)
+		GINLINE ConstIterator operator++(gint)
 		{
 			GASSERT(m_pNode);
 			const GListNode *node = m_pNode;
 			m_pNode = m_pNode->m_pNext;
 			return node;
 		}
-		inline ConstIterator &operator--()
+		GINLINE ConstIterator &operator--()
 		{
 			GASSERT(m_pNode);
 			m_pNode = m_pNode->m_pPrevious;
 			return *this;
 		}
-		inline ConstIterator operator--(gint)
+		GINLINE ConstIterator operator--(gint)
 		{
 			GASSERT(m_pNode);
 			const GListNode *node = m_pNode;
 			m_pNode = m_pNode->m_pPrevious;
 			return node;
 		}
-		inline ConstIterator &operator+=(gsize i)
+		GINLINE ConstIterator &operator+=(gsize i)
 		{
 			while (i && m_pNode)
 			{
@@ -227,7 +227,7 @@ public:
 			}
 			return *this;
 		}
-		inline ConstIterator &operator-=(gsize i)
+		GINLINE ConstIterator &operator-=(gsize i)
 		{
 			while (i && m_pNode)
 			{
@@ -236,7 +236,7 @@ public:
 			}
 			return *this;
 		}
-		inline ConstIterator operator+(gsize i) const
+		GINLINE ConstIterator operator+(gsize i) const
 		{
 			const GListNode *node = m_pNode;
 			while (node && i)
@@ -246,7 +246,7 @@ public:
 			}
 			return ConstIterator(node);
 		}
-		inline ConstIterator operator-(gsize i) const
+		GINLINE ConstIterator operator-(gsize i) const
 		{
 			const GListNode *node = m_pNode;
 			while (node && i)
@@ -256,7 +256,7 @@ public:
 			}
 			return ConstIterator(node);
 		}
-		inline gint operator-(const ConstIterator &citer) const
+		GINLINE gint operator-(const ConstIterator &citer) const
 		{
 			const GListNode *pnode = m_pNode;
 			const GListNode *nnode = m_pNode;
@@ -346,7 +346,7 @@ public:
 	gbool EndWith(const DataT &) const;
 
 private:
-	GDoubleLinkedList<DataT, GListNode> m_tList;
+	GDList<DataT, GListNode> m_tList;
 };
 
 } // namespace gsystem

@@ -3,7 +3,7 @@
 
 #include "gobject.h"
 #include "gserialize.h"
-#include "gstructure.h"
+#include "gstruct.h"
 
 namespace gsystem { // gsystem
 
@@ -14,8 +14,6 @@ class GLinkedList
 	, public GObject
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_LINKED_LIST, };
-
 	typedef NodeT Node;
 
 public:
@@ -89,13 +87,8 @@ public:
 
 	virtual DataT &operator[](gsize pos) = 0;
 	virtual const DataT &operator[](gsize pos) const = 0;
-
-	///
-	virtual guint ClassCode() const;
 };
 
 } // namespace gsystem
-
-#include "glinkedlist.inl"
 
 #endif // _CORE_LINKED_LIST_H_

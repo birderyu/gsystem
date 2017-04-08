@@ -16,7 +16,7 @@
 #ifndef _CORE_TYPE_H_
 #define _CORE_TYPE_H_
 
-#include "gdefine.h"
+#include "gmacro.h"
 
 #if !defined (time_t) || !defined(ptrdiff_t) || !defined(max_align_t)
 #include <cstddef>

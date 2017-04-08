@@ -9,9 +9,6 @@ class GAPI GUnsignedShortInteger
 	: public GNumber<gushort>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_SHORT_INTEGER, };
-
-public:
 	static gushort MaxValue();
 	static gushort MinValue();
 	static GUnsignedShortInteger ValueOf(const GString &);

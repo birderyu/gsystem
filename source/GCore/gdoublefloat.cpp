@@ -80,7 +80,7 @@ GDoubleFloat::GDoubleFloat(const GDoubleFloat &val)
 
 guint GDoubleFloat::ClassCode() const
 {
-	return GDoubleFloat::CLASS_CODE;
+	return static_cast<guint>(GClassCode::DoubleFloat);
 }
 
 gbool GDoubleFloat::IsNaN() const

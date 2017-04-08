@@ -1,5 +1,6 @@
 #include "gregister.h"
 #include "gstring.h"
+#include "gclasscode.h"
 
 namespace gsystem { // gsystem
 
@@ -20,11 +21,7 @@ gbool GRegister::Register(const GString &sClassName, guint nClassCode)
 
 gvoid GRegister::Initialize()
 {
-	Register("Object", CLASS_CODE_OBJECT);
-	Register("Package", CLASS_CODE_PACKAGE);
-	Register("Number", CLASS_CODE_NUMBER);
-	Register("Byte", CLASS_CODE_BYTE);
-	Register("Bool", CLASS_CODE_BOOLEAN);
+	
 }
 
 } // namespace gsystem

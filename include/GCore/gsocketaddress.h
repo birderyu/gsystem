@@ -12,20 +12,20 @@ namespace gsystem { // gsystem
 
 namespace gsystem { // gsystem
 
-class GAPI GSockAddress 
+class GAPI GSocketAddress 
 {
 	friend class GSocket;
 	friend class GTcpSocket;
 	friend class GUdpSocket;
 
 public:
-	explicit GSockAddress();
-	explicit GSockAddress(const GString &ip, guint16 port);
-	GSockAddress(const GSockAddress &addr);
-	GSockAddress(GSockAddress &&addr);
+	explicit GSocketAddress();
+	explicit GSocketAddress(const GString &ip, guint16 port);
+	GSocketAddress(const GSocketAddress &addr);
+	GSocketAddress(GSocketAddress &&addr);
 
 
-	~GSockAddress();
+	~GSocketAddress();
 	gvoid SetIP(const GString &ip);
 	gvoid SetIP(guint ip);
 	gvoid SetPortID(guint16 nPort);

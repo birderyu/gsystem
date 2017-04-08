@@ -1,4 +1,4 @@
-#include "gbinaryfile_ex.h"
+#include "gbinfile_ex.h"
 #include "gfile.h"
 #include "gbytes.h"
 
@@ -7,23 +7,23 @@
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 
-GBinaryFile_Ex::GBinaryFile_Ex(const GString &sFileName)
+GBinFile_Ex::GBinFile_Ex(const GString &sFileName)
 : GFile_Ex(sFileName)
 {
 
 }
 
-GBinaryFile_Ex::~GBinaryFile_Ex()
+GBinFile_Ex::~GBinFile_Ex()
 {
 
 }
 
-gbyte GBinaryFile_Ex::Format() const
+gbyte GBinFile_Ex::Format() const
 {
 	return GFile::BINARY_FILE;
 }
 
-gbool GBinaryFile_Ex::GetByte(gbyte &b)
+gbool GBinFile_Ex::GetByte(gbyte &b)
 {
 	if (EndOfFile() || !CanRead())
 	{
@@ -40,7 +40,7 @@ gbool GBinaryFile_Ex::GetByte(gbyte &b)
 	return true;
 }
 
-gbool GBinaryFile_Ex::PutByte(gbyte b)
+gbool GBinFile_Ex::PutByte(gbyte b)
 {
 	if (!Valid() || !CanWrite())
 	{
@@ -54,7 +54,7 @@ gbool GBinaryFile_Ex::PutByte(gbyte b)
 	return false;
 }
 
-gbool GBinaryFile_Ex::Read(gsize size, GBytes &bytes)
+gbool GBinFile_Ex::Read(gsize size, GBytes &bytes)
 {
 	if (EndOfFile() || !CanRead() || size <= 0)
 	{
@@ -76,7 +76,7 @@ gbool GBinaryFile_Ex::Read(gsize size, GBytes &bytes)
 	return true;
 }
 
-gbool GBinaryFile_Ex::ReadAll(GBytes &bytes)
+gbool GBinFile_Ex::ReadAll(GBytes &bytes)
 {
 	if (!Valid() || !CanRead())
 	{
@@ -113,7 +113,7 @@ gbool GBinaryFile_Ex::ReadAll(GBytes &bytes)
 	return true;
 }
 
-gbool GBinaryFile_Ex::Write(const GBytes &bytes)
+gbool GBinFile_Ex::Write(const GBytes &bytes)
 {
 	if (!Valid() || !CanWrite())
 	{
@@ -126,7 +126,7 @@ gbool GBinaryFile_Ex::Write(const GBytes &bytes)
 	return true;
 }
 
-gcstring GBinaryFile_Ex::OpenMode() const
+gcstring GBinFile_Ex::OpenMode() const
 {
 	switch(m_nOpenMode)
 	{

@@ -9,9 +9,6 @@ class GAPI GLongDoubleFloat
 	: public GNumber<glongdouble>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_LONG_DOUBLE_FLOAT, };
-
-public:
 	static glongdouble MaxValue();
 	static glongdouble MinValue();
 	static glongdouble Epsilon();

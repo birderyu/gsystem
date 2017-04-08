@@ -40,7 +40,7 @@ GUnsignedSmallInteger::~GUnsignedSmallInteger()
 
 guint GUnsignedSmallInteger::ClassCode() const
 {
-	return GUnsignedSmallInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::UnsignedSmallInteger);
 }
 
 } // namespace gsystem

@@ -1,7 +1,7 @@
 #ifndef _CORE_HUFFMAN_TREE_INLINE_
 #define _CORE_HUFFMAN_TREE_INLINE_
 
-#include "gbinaryheap.h"
+#include "gbinheap.h"
 
 namespace gsystem { // gsystem
 
@@ -11,7 +11,7 @@ typename GHuffmanTree<DataT, CompareT>::HuffmanCompareF GHuffmanTree<DataT, Comp
 template<typename DataT, typename CompareT> GINLINE 
 gvoid GHuffmanTree<DataT, CompareT>::Append(const GArray<DataT> &arr, gsize start, gsize size)
 {
-	GBinaryHeap<GHuffmanTreeNode<DataT> *, HuffmanCompareF> heap;
+	GBinHeap<GHuffmanTreeNode<DataT> *, HuffmanCompareF> heap;
 	for (gsize i = start; i < start + size; i++)
 	{
 		GHuffmanTreeNode<DataT> *node = new GHuffmanTreeNode<DataT>(arr[i]);

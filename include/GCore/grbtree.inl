@@ -2,21 +2,21 @@
 #define _CORE_RED_BLACK_TREE_INLINE_
 
 #define G_RED_BLACK_TREE_NODE_TEMPLATE	template<typename KeyT, typename ValueT>
-#define G_RED_BLACK_TREE_NODE_QUAL		GRedBlackTreeNode<KeyT, ValueT>
+#define G_RED_BLACK_TREE_NODE_QUAL		GRBTreeNode<KeyT, ValueT>
 #define G_RED_BLACK_TREE_TEMPLATE		template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-#define G_RED_BLACK_TREE_QUAL			GRedBlackTree<KeyT, ValueT, CompareT, NodeT>
+#define G_RED_BLACK_TREE_QUAL			GRBTree<KeyT, ValueT, CompareT, NodeT>
 
 namespace gsystem { // gsystem
 
 G_RED_BLACK_TREE_NODE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRedBlackTreeNode(
+GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRBTreeNode(
 	const KeyT &key,
 	const ValueT &value,
 	G_RED_BLACK_TREE_NODE_QUAL *parent,
 	G_RED_BLACK_TREE_NODE_QUAL *left,
 	G_RED_BLACK_TREE_NODE_QUAL *right,
 	gsmall color)
-	: GBinaryTreeNodeT<G_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
+	: GBinTreeNodeT<G_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
 	, GPairNodeT<KeyT, ValueT>(key, value)
 	, m_nColor(color)
 {
@@ -24,13 +24,13 @@ GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRedBlackTreeNode(
 }
 
 G_RED_BLACK_TREE_NODE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRedBlackTreeNode(
+GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRBTreeNode(
 	const KeyT &key, ValueT &&value,
 	G_RED_BLACK_TREE_NODE_QUAL *parent,
 	G_RED_BLACK_TREE_NODE_QUAL *left,
 	G_RED_BLACK_TREE_NODE_QUAL *right,
 	gsmall color)
-	: GBinaryTreeNodeT<G_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
+	: GBinTreeNodeT<G_RED_BLACK_TREE_NODE_QUAL>(parent, left, right)
 	, GPairNodeT<KeyT, ValueT>(key, GForward<ValueT>(value))
 	, m_nColor(color)
 {
@@ -38,7 +38,7 @@ GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRedBlackTreeNode(
 }
 
 G_RED_BLACK_TREE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_QUAL::~GRedBlackTree()
+GINLINE G_RED_BLACK_TREE_QUAL::~GRBTree()
 {
 
 }

@@ -2,7 +2,7 @@
 #ifndef _CORE_ORDER_MAP_H_
 #define _CORE_ORDER_MAP_H_
 
-#include "gredblacktree.h"
+#include "grbtree.h"
 
 #define G_ORDER_MAP_NODE_RED	0
 #define G_ORDER_MAP_NODE_BLACK	1
@@ -16,7 +16,7 @@ class GOrderMap
 {
 public:
 	struct GOrderMapNode
-		: public GBinaryTreeNodeT<GOrderMapNode>
+		: public GBinTreeNodeT<GOrderMapNode>
 		, public GPairNodeT<KeyT, ValueT>
 		, public GNewT<GOrderMapNode>
 	{
@@ -29,7 +29,7 @@ public:
 			GOrderMapNode *left = GNULL,
 			GOrderMapNode *right = GNULL,
 			gsmall color = G_ORDER_MAP_NODE_RED)
-			: GBinaryTreeNodeT<GOrderMapNode>(parent, left, right)
+			: GBinTreeNodeT<GOrderMapNode>(parent, left, right)
 			, GPairNodeT<KeyT, ValueT>(key, value)
 			, m_nColor(color)
 		{
@@ -42,7 +42,7 @@ public:
 			GOrderMapNode *left = GNULL,
 			GOrderMapNode *right = GNULL,
 			gsmall color = G_ORDER_MAP_NODE_RED)
-			: GBinaryTreeNodeT<GOrderMapNode>(parent, left, right)
+			: GBinTreeNodeT<GOrderMapNode>(parent, left, right)
 			, GPairNodeT<KeyT, ValueT>(key, GForward<ValueT>(value))
 			, m_nColor(color)
 		{
@@ -348,7 +348,7 @@ public:
 	//const ValueT &operator[](const KeyT &) const;
 
 private:
-	GRedBlackTree<KeyT, ValueT, CompareT, GOrderMapNode> m_tTree;
+	GRBTree<KeyT, ValueT, CompareT, GOrderMapNode> m_tTree;
 	gsize m_nSize;
 };
 

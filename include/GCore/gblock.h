@@ -4,7 +4,7 @@
 #ifndef _CORE_BLOCK_H_
 #define _CORE_BLOCK_H_
 
-#include "gstructure.h"
+#include "gstruct.h"
 
 namespace gsystem { // gsystem
 

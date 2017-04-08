@@ -2,7 +2,8 @@
 #define _CORE_DATE_TIME_H_
 
 #include "gobject.h"
-#include "gdatetimedefine.h"
+#include "gserializable.h"
+#include "gdtdef.h"
 
 namespace gsystem { // gsystem
 	class GDate;
@@ -20,7 +21,8 @@ namespace gsystem { // gsystem
 // └───┘└─┘└─┘└─┘└───┘  └─┘└─┘└─┘      └───┘
 //   年   月  日 星期 年天    时  分  秒        毫秒
 class GAPI GDateTime final 
-	: public GObject
+	: virtual public GObject
+	, virtual public GSerializable
 {
 	friend class GDate;
 	friend class GTime;
@@ -32,9 +34,6 @@ class GAPI GDateTime final
 	friend GAPI gbool operator<(const GDateTime &dt1, const GDateTime &dt2);
 	friend GAPI gbool operator<=(const GDateTime &dt1, const GDateTime &dt2);
 
-public:
-	enum { CLASS_CODE = CLASS_CODE_DATE_TIME, };
-	
 public: // 静态方法
 	static GDateTime Now();
 	static GDateTime Parse(const GString &time);
@@ -119,12 +118,12 @@ public: // Object
 	gbool Unboxing(const GObject *obj);
 	GString ToString() const;
 	GBytes ToBytes() const;
-	guint ClassCode() const;
 	guint HashCode() const;
 	gbool Equals(const GObject *obj) const;
-	gbool Serializable() const;
-	template<typename ArchiveT> gbool Serialize(ArchiveT &archive) const;
-	template<typename ArchiveT> gbool Deserialize(ArchiveT &archive);
+
+	guint ClassCode() const;
+	gbool Serialize(GArchive &archive) const;
+	gbool Deserialize(GArchive &archive);
 
 public: // 符号重载
 	GDateTime &operator=(const GDateTime &datetime);
@@ -142,34 +141,6 @@ private: // 私有成员
 private:
 	static GDateTime Birderyu_Birthday();
 };
-
-template<typename ArchiveT>
-GINLINE gbool GDateTime::Serialize(ArchiveT &archive) const
-{
-	if (!archive.Input())
-	{
-		return false;
-	}
-
-	archive.PushCode(ClassCode());
-	archive.Attach(m_tDateTime, G_DATE_TIME_SIZE);
-	return true;
-}
-
-template<typename ArchiveT>
-GINLINE gbool GDateTime::Deserialize(ArchiveT &archive)
-{
-	if (!archive.Output())
-	{
-		return false;
-	}
-	if (archive.PopCode() != ClassCode())
-	{
-		return false;
-	}
-	archive.Detach(m_tDateTime, G_DATE_TIME_SIZE);
-	return true;
-}
 
 GAPI gbool operator==(const GDateTime &dt1, const GDateTime &dt2);
 GAPI gbool operator!=(const GDateTime &dt1, const GDateTime &dt2);

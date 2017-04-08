@@ -13,8 +13,16 @@ public:
 	virtual ~GArchive() = 0;
 
 public:
+	virtual gbool Input() const = 0;
+	virtual gbool Output() const = 0;
+
+public:
 	virtual gvoid PushCode(guint code) = 0;
 	virtual guint PopCode() = 0;
+
+public:
+	virtual GArchive &Attach(gcbytes bytes, gsize size) = 0;
+	virtual GArchive &Detach(gbytes bytes, gsize size) = 0;
 
 public:
 	virtual GArchive &operator << (gbool) = 0;

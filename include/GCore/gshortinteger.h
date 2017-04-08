@@ -9,9 +9,6 @@ class GAPI GShortInteger
 	: public GNumber<gshort>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_SHORT_INTEGER, };
-
-public:
 	static gshort MaxValue();
 	static gshort MinValue();
 	static GShortInteger ValueOf(const GString &);

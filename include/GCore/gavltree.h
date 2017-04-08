@@ -3,13 +3,13 @@
 #ifndef _CORE_AVL_TREE_H_
 #define _CORE_AVL_TREE_H_
 
-#include "gbinarysorttree.h"
+#include "gbstree.h"
 
 namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT>
 struct GAvlTreeNode
-	: public GBinaryTreeNodeT<GAvlTreeNode<KeyT, ValueT>>
+	: public GBinTreeNodeT<GAvlTreeNode<KeyT, ValueT>>
 	, public GPairNodeT<KeyT, ValueT>
 	, public GNewT<GAvlTreeNode<KeyT, ValueT>>
 {
@@ -25,7 +25,7 @@ template < typename KeyT, typename ValueT,
 	typename CompareT = GCompareToF<KeyT >,
 	typename NodeT = GAvlTreeNode < KeyT, ValueT >>
 class GAvlTree
-	: public GBinarySortTree<KeyT, ValueT, CompareT, NodeT>
+	: public GBSTree<KeyT, ValueT, CompareT, NodeT>
 {
 public:
 	virtual ~GAvlTree();

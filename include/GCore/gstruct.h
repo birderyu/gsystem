@@ -44,13 +44,13 @@ struct GPreviousNextNodeT
 
 /// ¶þ²æÊ÷½Úµã
 template<typename NodeT>
-struct GBinaryTreeNodeT
+struct GBinTreeNodeT
 {
 	NodeT *m_pParent;	// Ë«Ç×
 	NodeT *m_pLeft;		// ×óº¢×Ó
 	NodeT *m_pRight;	// ÓÒº¢×Ó
 
-	GBinaryTreeNodeT(NodeT *parent, NodeT *left, NodeT *right);
+	GBinTreeNodeT(NodeT *parent, NodeT *left, NodeT *right);
 
 	// ×óÐÖµÜ
 	const NodeT *LeftSibling() const;
@@ -112,6 +112,6 @@ struct GDummyNodeT
 
 } // namespace gsystem
 
-#include "gstructure.inl"
+#include "gstruct.inl"
 
 #endif // _CORE_STRUCTURE_H_

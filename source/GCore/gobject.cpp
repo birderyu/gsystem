@@ -53,12 +53,6 @@ GBytes GObject::ToBytes() const
 	return GBytes();
 }
 
-guint GObject::ClassCode() const
-{
-	// 返回默认的ClassCode
-	return GObject::ClassCode();
-}
-
 guint GObject::HashCode() const
 {
 	// 默认情况下，返回指针所指地址的数字值
@@ -69,12 +63,6 @@ gbool GObject::Equals(const GObject *obj) const
 {
 	// 默认情况下，比较指针数字值
 	return this == obj;
-}
-
-gbool GObject::Serializable() const
-{
-	// 默认情况下，不允许序列化
-	return false;
 }
 
 } // namespace gsystem

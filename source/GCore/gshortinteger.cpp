@@ -40,7 +40,7 @@ GShortInteger::~GShortInteger()
 
 guint GShortInteger::ClassCode() const
 {
-	return GShortInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::ShortInteger);
 }
 
 } // namespace gsystem

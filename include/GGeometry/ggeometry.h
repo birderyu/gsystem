@@ -15,7 +15,7 @@
 #define _GEOMETRY_GEOMETRY_H_
 
 #include "GCore/gobject.h"
-#include "ggeometryglobal.h"
+#include "ggeodef.h"
 
 namespace gsystem { // gsystem
 	namespace geom { // gsystem.geom
@@ -39,11 +39,9 @@ namespace geom { // gsystem.geom
 **
 ****************************************************************************/
 class GAPI GGeometry 
-	: public GObject
+	: virtual public GObject
+	, virtual public GSerializable
 {
-public:
-	enum { CLASS_CODE = CLASS_CODE_GEOMETRY, };
-
 public:
 	/****************************************************************************
 	**

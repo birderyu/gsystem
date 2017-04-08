@@ -17,23 +17,23 @@ public:
 	typedef const ElemT* iterator;
 	typedef const ElemT* const_iterator;
 
-	GInitializerList() noexcept
+	GInitializerList() GNOEXCEPT
 		: m_pFirst(0), m_pLast(0)
 	{
 	}
 
 	GInitializerList(const ElemT *first_arg,
-		const ElemT *last_arg) noexcept
+		const ElemT *last_arg) GNOEXCEPT
 		: m_pFirst(first_arg), m_pLast(last_arg)
 	{
 	}
 
-	const ElemT *Begin() const noexcept
+	const ElemT *Begin() const GNOEXCEPT
 	{
 		return (m_pFirst);
 	}
 
-	const ElemT *End() const noexcept
+	const ElemT *End() const GNOEXCEPT
 	{
 		return (m_pLast);
 	}

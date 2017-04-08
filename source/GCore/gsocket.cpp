@@ -1,6 +1,6 @@
 #include "gsocket.h"
 #include "gsocket_ex.h"
-#include "gsockaddress.h"
+#include "gsocketaddress.h"
 #include "gsockaddress_ex.h"
 
 namespace gsystem { // gsystem
@@ -46,18 +46,18 @@ gbool GSocket::SetReuseAddress(gbool nResue)
 	return m_pSocket_Ex->SetReuseAddress(nResue);
 }
 
-GSockAddress GSocket::GetPeerAddr() const
+GSocketAddress GSocket::GetPeerAddr() const
 {
 	GASSERT(m_pSocket_Ex);
-	GSockAddress addr;
+	GSocketAddress addr;
 	m_pSocket_Ex->GetPeerAddr(*addr.m_pSockAddress_Ex);
 	return addr;
 }
 
-GSockAddress GSocket::GetLocalAddr() const
+GSocketAddress GSocket::GetLocalAddr() const
 {
 	GASSERT(m_pSocket_Ex);
-	GSockAddress addr;
+	GSocketAddress addr;
 	m_pSocket_Ex->GetLocalAddr(*addr.m_pSockAddress_Ex);
 	return addr;
 }

@@ -1,6 +1,6 @@
 #include "gtcpsocket.h"
 #include "gtcpsocket_ex.h"
-#include "gsockaddress.h"
+#include "gsocketaddress.h"
 
 namespace gsystem { // gsystem
 
@@ -16,7 +16,7 @@ gbool GTcpSocket::Open(gbool resue)
 	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Open(resue);
 }
 
-gbool GTcpSocket::Open(const GSockAddress &addr, gbool resue)
+gbool GTcpSocket::Open(const GSocketAddress &addr, gbool resue)
 {
 	GASSERT(m_pSocket_Ex);
 	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Open(addr.m_pSockAddress_Ex, resue);
@@ -40,7 +40,7 @@ gbool GTcpSocket::Accept(const GTcpSocket &peer)
 	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Accept((detail::GTcpSocket_Ex*)peer.m_pSocket_Ex);
 }
 
-gbool GTcpSocket::Connect(const GSockAddress &addr)
+gbool GTcpSocket::Connect(const GSocketAddress &addr)
 {
 	GASSERT(m_pSocket_Ex);
 	return ((detail::GTcpSocket_Ex*)m_pSocket_Ex)->Connect(addr.m_pSockAddress_Ex);

@@ -16,39 +16,39 @@ class GSeriesHelper
 {
 public:
 	template<typename T> 
-	GINLINE static T *CreateSeries(gsize size) noexcept(false)
+	GINLINE static T *CreateSeries(gsize size) GEXCEPT(false)
 	{
 		return GArrays::CreateArray<T>(size);
 	}
 
 	/// 拷贝创建一个数组
 	template<typename T> 
-	GINLINE static T *CreateSeries(const T *copy_arr, gsize copy_size) noexcept(false)
+	GINLINE static T *CreateSeries(const T *copy_arr, gsize copy_size) GEXCEPT(false)
 	{
 		return GArrays::CreateArray<T>(copy_arr, 0, copy_size);
 	}
 
 	/// 创建一个长度为size的数组，并用copy_arr去初始化新的数据
 	template<typename T> 
-	GINLINE static T *CreateSeries(gsize size, const T *copy_arr, gsize copy_size) noexcept(false)
+	GINLINE static T *CreateSeries(gsize size, const T *copy_arr, gsize copy_size) GEXCEPT(false)
 	{
 		return GArrays::CreateArray<T>(size, 0, copy_arr, 0, copy_size);
 	}
 
 	template<typename T> 
-	GINLINE static gvoid DestorySeries(T *arr, gsize size) noexcept(false)
+	GINLINE static gvoid DestorySeries(T *arr, gsize size) GEXCEPT(false)
 	{
 		GArrays::DestoryArray<T>(arr, size);
 	}
 
 	template<typename T> 
-	GINLINE static gvoid ClearSeries(T *arr, gsize size) noexcept(false)
+	GINLINE static gvoid ClearSeries(T *arr, gsize size) GEXCEPT(false)
 	{
 		GArrays::ClearArray<T>(arr, size);
 	}
 
 	template<typename T> 
-	GINLINE static T *ResizeSeries(T *old_arr, gsize old_size, gsize new_size) noexcept(false)
+	GINLINE static T *ResizeSeries(T *old_arr, gsize old_size, gsize new_size) GEXCEPT(false)
 	{
 		return GArrays::ResizeArray<T>(old_arr, old_size, new_size);
 	}
@@ -75,42 +75,42 @@ public:
 
 template<>
 template<typename T>
-GINLINE T *GSeriesHelper<true>::CreateSeries(gsize size) noexcept(false)
+GINLINE T *GSeriesHelper<true>::CreateSeries(gsize size) GEXCEPT(false)
 {
 	return GArrays::CreateArray<T>(size + 1);
 }
 
 template<>
 template<typename T>
-GINLINE T *GSeriesHelper<true>::CreateSeries(const T *copy_arr, gsize copy_size) noexcept(false)
+GINLINE T *GSeriesHelper<true>::CreateSeries(const T *copy_arr, gsize copy_size) GEXCEPT(false)
 {
 	return GArrays::CreateArray<T>(copy_arr, 0, copy_size + 1);
 }
 
 template<>
 template<typename T>
-GINLINE T *GSeriesHelper<true>::CreateSeries(gsize size, const T *copy_arr, gsize copy_size) noexcept(false)
+GINLINE T *GSeriesHelper<true>::CreateSeries(gsize size, const T *copy_arr, gsize copy_size) GEXCEPT(false)
 {
 	return GArrays::CreateArray<T>(size + 1, 0, copy_arr, 0, copy_size + 1);
 }
 
 template<>
 template<typename T>
-GINLINE gvoid GSeriesHelper<true>::DestorySeries(T *arr, gsize size) noexcept(false)
+GINLINE gvoid GSeriesHelper<true>::DestorySeries(T *arr, gsize size) GEXCEPT(false)
 {
 	GArrays::DestoryArray<T>(arr, size + 1);
 }
 
 template<>
 template<typename T>
-GINLINE gvoid GSeriesHelper<true>::ClearSeries(T *arr, gsize size) noexcept(false)
+GINLINE gvoid GSeriesHelper<true>::ClearSeries(T *arr, gsize size) GEXCEPT(false)
 {
 	GArrays::ClearArray<T>(arr, size + 1);
 }
 
 template<>
 template<typename T>
-GINLINE T *GSeriesHelper<true>::ResizeSeries(T *old_arr, gsize old_size, gsize new_size) noexcept(false)
+GINLINE T *GSeriesHelper<true>::ResizeSeries(T *old_arr, gsize old_size, gsize new_size) GEXCEPT(false)
 {
 	return GArrays::ResizeArray<T>(old_arr, old_size + 1, new_size + 1);
 }

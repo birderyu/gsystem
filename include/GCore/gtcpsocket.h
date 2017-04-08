@@ -12,7 +12,7 @@ public:
 	GTcpSocket();
 
 	gbool Open(gbool resue = false);
-	gbool Open(const GSockAddress &addr, gbool resue = false);
+	gbool Open(const GSocketAddress &addr, gbool resue = false);
 	gvoid Close();
 
 	// 服务器
@@ -20,7 +20,7 @@ public:
 	gbool Accept(const GTcpSocket &peer);
 
 	// 客户端
-	gbool Connect(const GSockAddress &addr);
+	gbool Connect(const GSocketAddress &addr);
 
 	// 发送接收，返回值为字节的数量
 	gint Send(gcbytes buf, gsize size);

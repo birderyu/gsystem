@@ -600,6 +600,62 @@ GINLINE const DataT *GVector<DataT>::Tail() const
 	return m_tArray.CursorAt(m_nTail);
 }
 
+template <typename DataT> GINLINE
+guint GVector<DataT>::ClassCode() const
+{
+	return static_cast<guint>(GClassCode::Vector);
+}
+
+template <typename DataT> GINLINE
+gbool GVector<DataT>::Serialize(GArchive &archive) const
+{
+	if (!archive.Input())
+	{
+		return false;
+	}
+
+	archive.PushCode(ClassCode());
+	gsize size = Size();
+	archive << size;
+
+	for (gsize i = 0; i < size; i++)
+	{
+		if (!GSerialize<DataT>(archive, GetAt(i)))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+template <typename DataT> GINLINE
+gbool GVector<DataT>::Deserialize(GArchive &archive)
+{
+	if (!archive.Output())
+	{
+		return false;
+	}
+	if (archive.PopCode() != ClassCode())
+	{
+		return false;
+	}
+	gsize size = 0;
+	archive >> size;
+	Destroy(); // 清空所有数据
+	Resize(size);
+
+	for (gsize i = 0; i < size; i++)
+	{
+		if (!GDeserialize<DataT>(archive, GetAt(i)))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 } // namespace gsystem
 
 #endif // _CORE_VECTOR_INLINE_

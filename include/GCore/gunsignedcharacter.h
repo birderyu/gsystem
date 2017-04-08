@@ -9,9 +9,6 @@ class GAPI GUnsignedCharacter
 	: public GNumber<guchar>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_CHARACTER, };
-
-public:
 	GUnsignedCharacter(guchar val = '\0');
 	GUnsignedCharacter(const GUnsignedCharacter &);
 	virtual guint ClassCode() const;

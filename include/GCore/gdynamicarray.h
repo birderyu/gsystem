@@ -3,16 +3,15 @@
 #define _CORE_DYNAMIC_ARRAY_H_
 
 #include "garray.h"
+#include "gserializable.h"
 
 namespace gsystem { // gsystem
 
 template <typename DataT>
 class GDynamicArray final
 	: public GArray<DataT>
+	, public GSerializable
 {
-public:
-	enum { CLASS_CODE = CLASS_CODE_DYNAMIC_ARRAY, };
-
 public:
 	GDynamicArray();
 	GDynamicArray(gsize size);
@@ -68,9 +67,8 @@ public:
 
 	///
 	guint ClassCode() const;
-	gbool Serializable() const;
-	template<typename ArchiveT> gbool Serialize(ArchiveT &) const;
-	template<typename ArchiveT> gbool Deserialize(ArchiveT &);
+	gbool Serialize(GArchive &archive) const;
+	gbool Deserialize(GArchive &archive);
 
 private:
 	DataT *m_pData;

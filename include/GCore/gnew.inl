@@ -4,7 +4,7 @@
 namespace gsystem { // gsystem
 
 template<typename ClassT>
-GINLINE gptr GNewT<ClassT>::operator new(gsize size) noexcept(false)
+GINLINE gptr GNewT<ClassT>::operator new(gsize size) GEXCEPT(false)
 {
 	gptr ptr = GMalloc(size);
 	if (GNULL == ptr)
@@ -15,7 +15,7 @@ GINLINE gptr GNewT<ClassT>::operator new(gsize size) noexcept(false)
 }
 
 template<typename ClassT>
-GINLINE gvoid GNewT<ClassT>::operator delete(gptr ptr) noexcept
+GINLINE gvoid GNewT<ClassT>::operator delete(gptr ptr) GNOEXCEPT
 {
 	GFree(ptr);
 }

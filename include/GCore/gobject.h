@@ -15,7 +15,6 @@
 #define _CORE_OBJECT_H_
 
 #include "gtype.h"
-#include "gglobal.h"
 
 // 前置声明
 namespace gsystem { // gsystem
@@ -40,11 +39,6 @@ namespace gsystem { // gsystem
 ****************************************************************************/
 class GAPI GObject
 {
-public:
-	enum { 
-		CLASS_CODE = CLASS_CODE_OBJECT, ///< GObject的ClassCode
-	};
-
 public:
 	/****************************************************************************
 	**
@@ -111,15 +105,6 @@ public:
 	/****************************************************************************
 	**
 	** @name	ClassCode
-	** @brief	获取当前对象的类序列号（ClassCode）
-	** @return	{guint} 类序列号
-	**
-	****************************************************************************/
-	virtual guint ClassCode() const;
-
-	/****************************************************************************
-	**
-	** @name	ClassCode
 	** @brief	获取当前对象的哈希码（HashCode）
 	** @return	{guint} 哈希码值
 	**
@@ -135,43 +120,6 @@ public:
 	**
 	****************************************************************************/
 	virtual gbool Equals(const GObject *obj) const;
-
-	/****************************************************************************
-	**
-	** @name	Serializable
-	** @brief	当前对象是否支持序列化
-	** @return	{gbool} 若支持序列化，则返回true，否则返回false
-	**
-	** 若对象支持序列化，则应提供序列化（Serialize）和反序列化（Deserialize）的方法，
-	** 这两个方法是模板方法（template），需要传入序列化的档案类（ArchiveT），并需要
-	** 模块GSerialization的支持。
-	**
-	****************************************************************************/
-	virtual gbool Serializable() const;
-
-	/****************************************************************************
-	**
-	** @name		Serialize
-	** @brief		序列化
-	** @param[out]	archive {ArchiveT &} 归档类
-	** @return		{gbool} 序列化是否成功
-	**
-	** 将当前对象的数据序列化到档案中，需要序列化模块GSerialization的支持
-	**
-	****************************************************************************/
-	//template<typename ArchiveT> gbool Serialize(ArchiveT &archive) const;
-
-	/****************************************************************************
-	**
-	** @name		Deserialize
-	** @brief		反序列化
-	** @param[in]	archive {ArchiveT &} 归档类
-	** @return		{gbool} 反序列化是否成功
-	**
-	** 将档案反序列化为当前对象的数据，需要序列化模块GSerialization的支持
-	**
-	****************************************************************************/
-	//template<typename ArchiveT> gbool Deserialize(ArchiveT &archive);
 };
 
 } // namespace gsystem

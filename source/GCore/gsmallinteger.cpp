@@ -35,7 +35,7 @@ GSmallInteger::GSmallInteger(const GSmallInteger &val)
 
 guint GSmallInteger::ClassCode() const
 {
-	return GSmallInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::SmallInteger);
 }
 
 } // namespace gsystem

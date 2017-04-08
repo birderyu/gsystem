@@ -9,9 +9,6 @@ class GAPI GUnsignedLongLongInteger
 	: public GNumber<gulonglong>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_LONG_LONG_INTEGER, };
-
-public:
 	static gulonglong MaxValue();
 	static gulonglong MinValue();
 	static GUnsignedLongLongInteger ValueOf(const GString &);

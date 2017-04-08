@@ -4,10 +4,10 @@
 namespace gsystem { // gsystem
 
 template<typename DataT, typename CompareT>
-CompareT GBinaryHeap<DataT, CompareT>::m_fCompare;
+CompareT GBinHeap<DataT, CompareT>::m_fCompare;
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(gsize capacity, gsize add_size)
+GINLINE GBinHeap<DataT, CompareT>::GBinHeap(gsize capacity, gsize add_size)
  : m_nSize(0), m_tHeap(capacity + 1), m_nAddSize(add_size)
 {
 	if (m_nAddSize <= 0)
@@ -17,7 +17,7 @@ GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(gsize capacity, gsize add_size
 }
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(const GArray<DataT> &arr, gsize add_size)
+GINLINE GBinHeap<DataT, CompareT>::GBinHeap(const GArray<DataT> &arr, gsize add_size)
 :m_nSize(arr.Size()), m_tHeap(arr.Size() + 1), m_nAddSize(add_size)
 {
 	if (m_nAddSize <= 0)
@@ -28,7 +28,7 @@ GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(const GArray<DataT> &arr, gsiz
 }
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(DataT *arr, gsize size, gsize add_size)
+GINLINE GBinHeap<DataT, CompareT>::GBinHeap(DataT *arr, gsize size, gsize add_size)
 :m_nSize(size), m_tHeap(size + 1), m_nAddSize(add_size)
 {
 	if (m_nAddSize <= 0)
@@ -39,21 +39,21 @@ GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(DataT *arr, gsize size, gsize 
 }
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(const GBinaryHeap<DataT, CompareT> &heap)
+GINLINE GBinHeap<DataT, CompareT>::GBinHeap(const GBinHeap<DataT, CompareT> &heap)
 :m_nSize(heap.m_nSize), m_tHeap(heap.m_tHeap), m_nAddSize(G_BINARY_HEAP_DEFAULT_ADD_SIZE)
 {
 
 }
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT>::GBinaryHeap(GBinaryHeap<DataT, CompareT> &&heap)
+GINLINE GBinHeap<DataT, CompareT>::GBinHeap(GBinHeap<DataT, CompareT> &&heap)
 :m_nSize(heap.m_nSize), m_tHeap(GMove(heap.m_tHeap)), m_nAddSize(G_BINARY_HEAP_DEFAULT_ADD_SIZE)
 {
 	heap.m_nSize = 0;
 }
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT> &GBinaryHeap<DataT, CompareT>::operator=(const GBinaryHeap<DataT, CompareT> &heap)
+GINLINE GBinHeap<DataT, CompareT> &GBinHeap<DataT, CompareT>::operator=(const GBinHeap<DataT, CompareT> &heap)
 {
 	if (this == &heap)
 	{
@@ -65,7 +65,7 @@ GINLINE GBinaryHeap<DataT, CompareT> &GBinaryHeap<DataT, CompareT>::operator=(co
 }
 
 template<typename DataT, typename CompareT>
-GINLINE GBinaryHeap<DataT, CompareT> &GBinaryHeap<DataT, CompareT>::operator=(GBinaryHeap<DataT, CompareT> &&heap)
+GINLINE GBinHeap<DataT, CompareT> &GBinHeap<DataT, CompareT>::operator=(GBinHeap<DataT, CompareT> &&heap)
 {
 	if (this == &heap)
 	{
@@ -78,51 +78,51 @@ GINLINE GBinaryHeap<DataT, CompareT> &GBinaryHeap<DataT, CompareT>::operator=(GB
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Append(const GArray<DataT> &arr)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Append(const GArray<DataT> &arr)
 {
 	Append(arr, 0, arr.Size());
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Append(const GArray<DataT> &arr, gsize start, gsize size)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Append(const GArray<DataT> &arr, gsize start, gsize size)
 {
 	AppendT<GArray<DataT>>(arr, start, size);
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Append(DataT *arr, gsize arr_size)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Append(DataT *arr, gsize arr_size)
 {
 	Append(arr, 0, arr_size);
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Append(DataT *arr, gsize start, gsize size)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Append(DataT *arr, gsize start, gsize size)
 {
 	AppendT<DataT*>(arr, start, size);
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Append(const GBinaryHeap<DataT, CompareT> &heap)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Append(const GBinHeap<DataT, CompareT> &heap)
 {
 	Append(heap.m_tHeap);
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Append(const GBinaryHeap<DataT, CompareT> &heap, gsize start, gsize size)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Append(const GBinHeap<DataT, CompareT> &heap, gsize start, gsize size)
 {
 	Append(heap.m_tHeap, start, size);
 }
 
 template<typename DataT, typename CompareT>
 template<typename ArrT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::AppendT(const ArrT &arr)
+GINLINE gvoid GBinHeap<DataT, CompareT>::AppendT(const ArrT &arr)
 {
 	AppendT<ArrT>(arr, 0, arr.Size());
 }
 
 template<typename DataT, typename CompareT>
 template<typename ArrT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::AppendT(const ArrT &arr, gsize start, gsize size)
+GINLINE gvoid GBinHeap<DataT, CompareT>::AppendT(const ArrT &arr, gsize start, gsize size)
 {
 	if (size <= 0)
 	{
@@ -174,25 +174,25 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::AppendT(const ArrT &arr, gsize start
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gbool GBinaryHeap<DataT, CompareT>::IsEmpty() const
+GINLINE gbool GBinHeap<DataT, CompareT>::IsEmpty() const
 {
 	return m_nSize == 0;
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gsize GBinaryHeap<DataT, CompareT>::Size() const
+GINLINE gsize GBinHeap<DataT, CompareT>::Size() const
 {
 	return m_nSize;
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gsize GBinaryHeap<DataT, CompareT>::Capacity() const
+GINLINE gsize GBinHeap<DataT, CompareT>::Capacity() const
 {
 	return m_tHeap.Size() - 1;
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Reserve(gsize size)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Reserve(gsize size)
 {
 	gsize capacity = Capacity();
 	if (size <= capacity)
@@ -208,7 +208,7 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::Reserve(gsize size)
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Insert(const DataT &data)
+GINLINE gvoid GBinHeap<DataT, CompareT>::Insert(const DataT &data)
 {
 	gsize capacity = Capacity();
 	if (capacity <= m_nSize)
@@ -227,7 +227,7 @@ GINLINE gvoid GBinaryHeap<DataT, CompareT>::Insert(const DataT &data)
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gbool GBinaryHeap<DataT, CompareT>::Pop(DataT *data)
+GINLINE gbool GBinHeap<DataT, CompareT>::Pop(DataT *data)
 {
 	if (m_nSize == 0)
 	{
@@ -267,14 +267,14 @@ GINLINE gbool GBinaryHeap<DataT, CompareT>::Pop(DataT *data)
 }
 
 template<typename DataT, typename CompareT>
-GINLINE DataT GBinaryHeap<DataT, CompareT>::Top() const
+GINLINE DataT GBinHeap<DataT, CompareT>::Top() const
 {
 	GASSERT(m_nSize > 0);
 	return m_tHeap[1];
 }
 
 template<typename DataT, typename CompareT>
-GINLINE gvoid GBinaryHeap<DataT, CompareT>::Output() const
+GINLINE gvoid GBinHeap<DataT, CompareT>::Output() const
 {
 	cout << "The " << m_nSize
 		<< " elements are" << endl;

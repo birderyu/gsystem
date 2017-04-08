@@ -9,9 +9,6 @@ class GAPI GCharacter
 	: public GPackage<gchar>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_CHARACTER, };
-
-public:
 	GCharacter(gchar val = '\0');
 	GCharacter(const GCharacter &);
 

@@ -9,9 +9,6 @@ class GAPI GSignedCharacter
 	: public GPackage<gschar>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_SIGNED_CHARACTER, };
-
-public:
 	GSignedCharacter(gschar val = '\0');
 	GSignedCharacter(const GSignedCharacter &);
 	virtual ~GSignedCharacter();

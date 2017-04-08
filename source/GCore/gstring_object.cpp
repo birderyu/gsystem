@@ -1,4 +1,5 @@
 #include "gstring.h"
+#include "gclasscode.h"
 
 namespace gsystem { // gsystem
 
@@ -9,7 +10,7 @@ const GObject *GString::Boxing() const
 
 guint GString::ClassCode() const
 {
-	return GString::CLASS_CODE;
+	return static_cast<guint>(GClassCode::String);
 }
 
 GString GString::ToString() const

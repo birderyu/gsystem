@@ -363,42 +363,42 @@ public:
 	}
 
 
-	T1 &First() noexcept
+	T1 &First() GNOEXCEPT
 	{
 		return *this;
 	}
 
-	const T1 &First() const noexcept
+	const T1 &First() const GNOEXCEPT
 	{
 		return *this;
 	}
 
-	volatile T1 &First() volatile noexcept
+	volatile T1 &First() volatile GNOEXCEPT
 	{
 		return *this;
 	}
 
-	const volatile T1& First() const volatile noexcept
+	const volatile T1& First() const volatile GNOEXCEPT
 	{
 		return *this;
 	}
 
-	T2 &Second() noexcept
+	T2 &Second() GNOEXCEPT
 	{
 		return m_tValue2;
 	}
 
-	const T2 &Second() const noexcept
+	const T2 &Second() const GNOEXCEPT
 	{
 		return m_tValue2;
 	}
 
-	volatile T2 &Second() volatile noexcept
+	volatile T2 &Second() volatile GNOEXCEPT
 	{
 		return m_tValue2;
 	}
 
-	const volatile T2 &Second() const volatile noexcept
+	const volatile T2 &Second() const volatile GNOEXCEPT
 	{
 		return m_tValue2;
 	}
@@ -427,42 +427,42 @@ public:
 	{
 	}
 
-	T1 &First() noexcept
+	T1 &First() GNOEXCEPT
 	{
 		return BaseType::First();
 	}
 
-	const T1 &First() const noexcept
+	const T1 &First() const GNOEXCEPT
 	{
 		return BaseType::First();
 	}
 
-	volatile T1 &First() volatile noexcept
+	volatile T1 &First() volatile GNOEXCEPT
 	{
 		return BaseType::First();
 	}
 
-	const volatile T1& First() const volatile noexcept
+	const volatile T1& First() const volatile GNOEXCEPT
 	{
 		return BaseType::First();
 	}
 
-	T2 &Second() noexcept
+	T2 &Second() GNOEXCEPT
 	{
 		return BaseType::Second();
 	}
 
-	const T2 &Second() const noexcept
+	const T2 &Second() const GNOEXCEPT
 	{
 		return BaseType::Second();
 	}
 
-	volatile T2 &Second() volatile noexcept
+	volatile T2 &Second() volatile GNOEXCEPT
 	{
 		return BaseType::Second();
 	}
 
-	const volatile T2 &Second() const volatile noexcept
+	const volatile T2 &Second() const volatile GNOEXCEPT
 	{
 		return BaseType::Second();
 	}

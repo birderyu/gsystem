@@ -14,19 +14,19 @@ namespace detail { // gsystem.detail
 namespace func { // gsystem.detail.func
 
 template<typename T> GINLINE
-gbool GTestCallable(const T &arg, GTrueType) noexcept
+gbool GTestCallable(const T &arg, GTrueType) GNOEXCEPT
 {
 	return (!!arg);
 }
 
 template<typename T> GINLINE
-gbool GTestCallable(const T &, GFalseType) noexcept
+gbool GTestCallable(const T &, GFalseType) GNOEXCEPT
 {
 	return (true);
 }
 
 template<typename T> GINLINE
-gbool GTestCallable(const T &arg) noexcept
+gbool GTestCallable(const T &arg) GNOEXCEPT
 {
 	GCatBase<GIsMemberPointer<T>::value || (GIsPointer<T>::value
 		&& GIsFunction<typename GRemovePointer<T>::Type>::value)> testable;
@@ -34,7 +34,7 @@ gbool GTestCallable(const T &arg) noexcept
 }
 
 template<typename T> GINLINE
-gbool GTestCallable(const GFunction<T> &arg) noexcept
+gbool GTestCallable(const GFunction<T> &arg) GNOEXCEPT
 {
 	return (!!arg);
 }
@@ -55,16 +55,16 @@ public:
 	virtual GFunctionBase<RetT, ArgTs...> *Copy(gptr) const = 0;
 	virtual GFunctionBase<RetT, ArgTs...> *Move(gptr) = 0;
 	virtual RetT DoCall(ArgTs&&...) = 0;
-	virtual gvoid DeleteThis(gbool) noexcept = 0;
+	virtual gvoid DeleteThis(gbool) GNOEXCEPT = 0;
 
-	virtual const type_info &TargetType() const noexcept = 0;
-	const gptr Target(const type_info &info) const noexcept
+	virtual const type_info &TargetType() const GNOEXCEPT = 0;
+	const gptr Target(const type_info &info) const GNOEXCEPT
 	{
 		return (TargetType() == info ? Get() : 0);
 	}
 
 private:
-	virtual gcptr Get() const noexcept = 0;
+	virtual gcptr Get() const GNOEXCEPT = 0;
 };
 
 template<typename CallableT, typename RetT, typename... ArgTs>
@@ -82,7 +82,7 @@ public:
 
 	}
 
-	~GFunctionImpl() noexcept
+	~GFunctionImpl() GNOEXCEPT
 	{
 
 	}
@@ -132,17 +132,17 @@ private:
 			GForward<ArgTs>(args)...));
 	}
 
-	virtual const type_info &TargetType() const noexcept
+	virtual const type_info &TargetType() const GNOEXCEPT
 	{
 		return typeid(CallableT);
 	}
 
-	virtual gcptr Get() const noexcept
+	virtual gcptr Get() const GNOEXCEPT
 	{
 		return GAddressOf(Callee());
 	}
 
-	virtual gvoid DeleteThis(gbool deallocate) noexcept
+	virtual gvoid DeleteThis(gbool deallocate) GNOEXCEPT
 	{
 		GDestruct<ThisType>(this);
 		if (deallocate)
@@ -153,12 +153,12 @@ private:
 
 	CallableT m_tCallable;
 
-	CallableT& Callee() noexcept
+	CallableT& Callee() GNOEXCEPT
 	{
 		return m_tCallable;
 	}
 
-	const CallableT& Callee() const noexcept
+	const CallableT& Callee() const GNOEXCEPT
 	{
 		return m_tCallable;
 	}
@@ -173,12 +173,12 @@ public:
 	typedef GFunctionClass<RetT, ArgTs...> ThisType;
 	typedef GFunctionBase<RetT, ArgTs...> PtrType;
 
-	GFunctionClass() noexcept
+	GFunctionClass() GNOEXCEPT
 	{
 		Set(GNULL);
 	}
 
-	~GFunctionClass() noexcept
+	~GFunctionClass() GNOEXCEPT
 	{
 		Tidy();
 	}
@@ -198,7 +198,7 @@ protected:
 	using GEnableIfReturnable = GEnableIf<
 		GIsConvertible<T, RetT>::value || GIsVoid<RetT>::value>;
 
-	gbool IsEmpty() const noexcept
+	gbool IsEmpty() const GNOEXCEPT
 	{
 		return (GetImpl() == GNULL);
 	}
@@ -273,7 +273,7 @@ protected:
 		Set(ptr);
 	}
 
-	gvoid Tidy() noexcept
+	gvoid Tidy() GNOEXCEPT
 	{
 		if (!IsEmpty())
 		{
@@ -282,7 +282,7 @@ protected:
 		}
 	}
 
-	gvoid Swap(ThisType &right) noexcept
+	gvoid Swap(ThisType &right) GNOEXCEPT
 	{
 		if (!IsLocal() && !right.IsLocal())
 		{
@@ -299,18 +299,18 @@ protected:
 		}
 	}
 
-	const type_info &TargetType() const noexcept
+	const type_info &TargetType() const GNOEXCEPT
 	{
 		return (GetImpl() ? GetImpl()->TargetType() : typeid(gvoid));
 	}
 
-	gcptr Target(const type_info &info) const noexcept
+	gcptr Target(const type_info &info) const GNOEXCEPT
 	{
 		return (GetImpl() ? GetImpl()->Target(info) : GNULL);
 	}
 
 private:
-	gbool IsLocal() const noexcept
+	gbool IsLocal() const GNOEXCEPT
 	{
 		return (GetImpl() == GetSpace());
 	}
@@ -324,22 +324,22 @@ private:
 
 	Storage m_tStorage;
 	enum { _EEN_IMPL = _num_ptrs_ - 1 };
-	PtrType *GetImpl() const noexcept
+	PtrType *GetImpl() const GNOEXCEPT
 	{
 		return (m_tStorage.m_pPtrs[_num_ptrs_ - 1]);
 	}
 
-	gvoid Set(PtrType *ptr) noexcept
+	gvoid Set(PtrType *ptr) GNOEXCEPT
 	{
 		m_tStorage.m_pPtrs[_num_ptrs_ - 1] = ptr;
 	}
 
-	gptr GetSpace() noexcept
+	gptr GetSpace() GNOEXCEPT
 	{
 		return &m_tStorage;
 	}
 
-	gcptr GetSpace() const noexcept
+	gcptr GetSpace() const GNOEXCEPT
 	{
 		return &m_tStorage;
 	}
@@ -499,12 +499,12 @@ public:
 	typedef GFunction<FunT> ThisType;
 
 public:
-	GFunction() noexcept
+	GFunction() GNOEXCEPT
 	{
 
 	}
 
-	GFunction(gnullptr) noexcept
+	GFunction(gnullptr) GNOEXCEPT
 	{
 
 	}
@@ -527,7 +527,7 @@ public:
 		this->ResetMove(right);
 	}
 
-	~GFunction() noexcept
+	~GFunction() GNOEXCEPT
 	{
 
 	}
@@ -557,67 +557,67 @@ public:
 		return *this;
 	}
 
-	ThisType& operator=(gnullptr) noexcept
+	ThisType& operator=(gnullptr) GNOEXCEPT
 	{
 		this->Tidy();
 		return *this;
 	}
 
-	gvoid Swap(ThisType &right) noexcept
+	gvoid Swap(ThisType &right) GNOEXCEPT
 	{
 		BaseType::Swap(right);
 	}
 
-	explicit operator bool() const noexcept
+	explicit operator bool() const GNOEXCEPT
 	{
 		return (!IsEmpty());
 	}
 
-	const type_info &TargetType() const noexcept
+	const type_info &TargetType() const GNOEXCEPT
 	{
 		return BaseType::TargetType();
 	}
 
 	template<typename FT>
-	FT *Target() noexcept
+	FT *Target() GNOEXCEPT
 	{
 		return (static_cast<FT *>(const_cast<gptr>(
 			BaseType::Target(typeid(FT)))));
 	}
 
 	template<typename FT>
-	const FT *Target() const noexcept
+	const FT *Target() const GNOEXCEPT
 	{
 		return (static_cast<const FT *>(BaseType::Target(typeid(FT))));
 	}
 };
 
 template<typename FunT> GINLINE
-gvoid Swap(GFunction<FunT> &left, GFunction<FunT> &right) noexcept
+gvoid Swap(GFunction<FunT> &left, GFunction<FunT> &right) GNOEXCEPT
 {
 	left.Swap(right);
 }
 
 template<typename FunT> GINLINE
-gbool operator==(const GFunction<FunT> &func, gnullptr) noexcept
+gbool operator==(const GFunction<FunT> &func, gnullptr) GNOEXCEPT
 {
 	return !func;
 }
 
 template<typename FunT> GINLINE
-gbool operator==(gnullptr, const GFunction<FunT> &func) noexcept
+gbool operator==(gnullptr, const GFunction<FunT> &func) GNOEXCEPT
 {
 	return !func;
 }
 
 template<typename FunT> GINLINE
-gbool operator!=(const GFunction<FunT> &func, gnullptr) noexcept
+gbool operator!=(const GFunction<FunT> &func, gnullptr) GNOEXCEPT
 {
 	return !!func;
 }
 
 template<typename FunT> GINLINE
-gbool operator!=(gnullptr, const GFunction<FunT> &func) noexcept
+gbool operator!=(gnullptr, const GFunction<FunT> &func) GNOEXCEPT
 {
 	return !!func;
 }

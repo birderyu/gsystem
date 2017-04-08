@@ -15,7 +15,7 @@ GCharacter::GCharacter(const GCharacter &val)
 
 guint GCharacter::ClassCode() const
 {
-	return GCharacter::CLASS_CODE;
+	return static_cast<guint>(GClassCode::Character);
 }
 
 } // namespace gsystem

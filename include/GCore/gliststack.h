@@ -3,7 +3,7 @@
 #define _CORE_LIST_STACK_H_
 
 #include "gstack.h"
-#include "gdoublelinkedlist.h"
+#include "gdlist.h"
 
 namespace gsystem { // gsystem
 
@@ -34,7 +34,7 @@ public:
 	DataT &Top();
 
 private:
-	GDoubleLinkedList<DataT> m_tList;
+	GDList<DataT> m_tList;
 };
 
 } // namespace gsystem

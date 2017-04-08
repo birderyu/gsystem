@@ -9,9 +9,6 @@ class GAPI GSingleFloat
 	: public GNumber<gfloat>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_SINGLE_FLOAT, };
-
-public:
 	static gfloat MaxValue();
 	static gfloat MinValue();
 	static gfloat Epsilon();

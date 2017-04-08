@@ -16,7 +16,7 @@ GByte::GByte(const GByte &val)
 
 guint GByte::ClassCode() const
 {
-	return GByte::CLASS_CODE;
+	return static_cast<guint>(GClassCode::Byte);
 }
 
 } // namespace gsystem

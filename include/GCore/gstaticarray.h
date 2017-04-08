@@ -11,9 +11,6 @@ class GStaticArray final
 	: public GArray<DataT>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_STATIC_ARRAY, };
-
-public:
 	GStaticArray();
 	GStaticArray(const DataT &);
 
@@ -28,12 +25,6 @@ public:
 
 	DataT *operator+=(gsize);
 	const DataT *operator+=(gsize) const;
-
-	/// 
-	guint ClassCode() const;
-	gbool Serializable() const;
-	template<typename ArchiveT> gbool Serialize(ArchiveT &) const;
-	template<typename ArchiveT> gbool Deserialize(ArchiveT &);
 
 private:
 	DataT m_pData[ARRAY_SIZE];

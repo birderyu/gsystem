@@ -32,8 +32,8 @@ template<typename ClassT>
 class GNewT
 {
 public:
-	static gptr operator new(gsize) noexcept(false);
-	static gvoid operator delete(gptr) noexcept;
+	static gptr operator new(gsize) GEXCEPT(false);
+	static gvoid operator delete(gptr)GNOEXCEPT;
 };
 
 // 线程不安全

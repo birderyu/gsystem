@@ -9,12 +9,6 @@ class GAPI GDoubleFloat
 	: public GNumber<gdouble>
 {
 public:
-	enum 
-	{ 
-		CLASS_CODE = CLASS_CODE_DOUBLE_FLOAT, 
-	};
-
-public:
 	static gdouble MaxValue();
 	static gdouble MinValue();
 	static gdouble Epsilon();

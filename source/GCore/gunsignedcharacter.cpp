@@ -16,7 +16,7 @@ GUnsignedCharacter::GUnsignedCharacter(const GUnsignedCharacter &val)
 
 guint GUnsignedCharacter::ClassCode() const
 {
-	return GUnsignedCharacter::CLASS_CODE;
+	return static_cast<guint>(GClassCode::UnsignedCharacter);
 }
 
 } // namespace gsystem

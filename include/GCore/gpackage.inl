@@ -4,6 +4,8 @@
 #include "gstring.h"
 #include "ghash.h"
 #include "gsharedpointer.h"
+#include "gserialize.h"
+#include "gclasscode.h"
 
 namespace gsystem { // gsystem
 
@@ -60,26 +62,8 @@ GINLINE const GObject *GPackage<ValueT>::Boxing() const
 template <typename ValueT>
 GINLINE gbool GPackage<ValueT>::Unboxing(const GObject *pObj)
 {
-	if (!pObj)
-	{
-		return false;
-	}
-	if (pObj == this)
-	{
-		return true;
-	}
-	if (pObj->ClassCode() != ClassCode())
-	{
-		return false;
-	}
-
-	const GPackage<ValueT> *pPackage = dynamic_cast<const GPackage<ValueT>*>(pObj);
-	if (!pPackage)
-	{
-		return false;
-	}
-	m_nValue = pPackage->m_nValue;
-	return true;
+	// TODO
+	return false;
 }
 
 template <typename ValueT>
@@ -103,7 +87,7 @@ GINLINE guint GPackage<ValueT>::HashCode() const
 template <typename ValueT>
 GINLINE guint GPackage<ValueT>::ClassCode() const
 {
-	return GPackage<ValueT>::CLASS_CODE;
+	return G_ERROR_CLASS_CODE;
 }
 
 template <typename ValueT>
@@ -117,11 +101,6 @@ GINLINE gbool GPackage<ValueT>::Equals(const GObject *pObj) const
 	{
 		return true;
 	}
-	if (pObj->ClassCode() != ClassCode())
-	{
-		return false;
-	}
-
 	const GPackage<ValueT> *pPackage = dynamic_cast<const GPackage<ValueT>*>(pObj);
 	if (!pPackage)
 	{
@@ -137,14 +116,7 @@ GINLINE gbool GPackage<ValueT>::Equals(typename GPackage<ValueT>::ValueType val)
 }
 
 template <typename ValueT>
-GINLINE gbool GPackage<ValueT>::Serializable() const
-{
-	return true;
-}
-
-template <typename ValueT>
-template <typename ArchiveT>
-gbool GPackage<ValueT>::Serialize(ArchiveT &archive) const
+gbool GPackage<ValueT>::Serialize(GArchive &archive) const
 {
 	archive.PushCode(ClassCode());
 	archive << m_nValue;
@@ -152,8 +124,7 @@ gbool GPackage<ValueT>::Serialize(ArchiveT &archive) const
 }
 
 template <typename ValueT>
-template <typename ArchiveT>
-gbool GPackage<ValueT>::Deserialize(ArchiveT &archive)
+gbool GPackage<ValueT>::Deserialize(GArchive &archive)
 {
 	if (archive.PopCode() != ClassCode())
 	{
@@ -225,12 +196,6 @@ template <typename ValueT>
 GINLINE GNumber<ValueT>::~GNumber()
 {
 
-}
-
-template <typename ValueT>
-GINLINE guint GNumber<ValueT>::ClassCode() const
-{
-	return GNumber<ValueT>::CLASS_CODE;
 }
 
 template <typename ValueT>

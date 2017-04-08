@@ -2,6 +2,8 @@
 #define _CORE_DYNAMIC_ARRAY_INLINE_
 
 #include "garrays.h"
+#include "gserialize.h"
+#include "gclasscode.h"
 
 namespace gsystem { // gsystem
 
@@ -300,18 +302,11 @@ gbool GDynamicArray<DataT>::operator==(const GDynamicArray<DataT> &arr)
 template <typename DataT>
 GINLINE guint GDynamicArray<DataT>::ClassCode() const
 {
-	return GDynamicArray<DataT>::CLASS_CODE;
+	return static_cast<guint>(GClassCode::DynamicArray);
 }
 
 template <typename DataT>
-GINLINE gbool GDynamicArray<DataT>::Serializable() const
-{
-	return true;
-}
-
-template <typename DataT>
-template<typename ArchiveT> 
-GINLINE gbool GDynamicArray<DataT>::Serialize(ArchiveT &archive) const
+GINLINE gbool GDynamicArray<DataT>::Serialize(GArchive &archive) const
 {
 	if (!archive.Input())
 	{
@@ -322,10 +317,9 @@ GINLINE gbool GDynamicArray<DataT>::Serialize(ArchiveT &archive) const
 	gsize size = Size();
 	archive << size;
 
-	GSerializeF<ArchiveT, DataT> fSerialize;
 	for (gsize i = 0; i < size; i++)
 	{
-		if (!fSerialize(GetAt(i), archive))
+		if (!GSerialize<DataT>(archive, GetAt(i)))
 		{
 			return false;
 		}
@@ -335,8 +329,7 @@ GINLINE gbool GDynamicArray<DataT>::Serialize(ArchiveT &archive) const
 }
 
 template <typename DataT>
-template<typename ArchiveT> 
-GINLINE gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
+GINLINE gbool GDynamicArray<DataT>::Deserialize(GArchive &archive)
 {
 	if (!archive.Output())
 	{
@@ -349,15 +342,11 @@ GINLINE gbool GDynamicArray<DataT>::Deserialize(ArchiveT &archive)
 	gsize size = 0;
 	archive >> size;
 	Destroy(); // 清空所有数据
-	if (!Resize(size))
-	{
-		return false;
-	}
+	Resize(size);
 
-	GDeserializeF<ArchiveT, DataT> fDeserialize;
 	for (gsize i = 0; i < size; i++)
 	{
-		if (!fDeserialize(GetAt(i), archive))
+		if (!GDeserialize<DataT>(archive, GetAt(i)))
 		{
 			return false;
 		}

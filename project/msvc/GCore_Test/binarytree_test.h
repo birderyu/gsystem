@@ -1,8 +1,8 @@
 #pragma once
 #include <gtest/gtest.h>
-#include "gbinarytree.h"
-#include "gbinarysorttree.h"
-#include "gredblacktree.h"
+#include "gbintree.h"
+#include "gbstree.h"
+#include "grbtree.h"
 #include "gstring.h"
 
 TEST(RedBlackTreeTest, HandleNoneZeroInput)

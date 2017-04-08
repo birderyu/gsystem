@@ -2,7 +2,7 @@
 #ifndef _CORE_STREAM_H_
 #define _CORE_STREAM_H_
 
-#include "GCore/gglobal.h"
+#include "GCore/gtype.h"
 
 namespace gsystem {
 namespace stream {

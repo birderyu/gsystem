@@ -9,9 +9,6 @@ class GAPI GUnsignedInteger
 	: public GNumber<guint>
 {
 public:
-	enum { CLASS_CODE = CLASS_CODE_UNSIGNED_INTEGER, };
-
-public:
 	static guint MaxValue();
 	static guint MinValue();
 	static GUnsignedInteger ValueOf(const GString &);

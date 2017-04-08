@@ -10,7 +10,7 @@ namespace arrays { // gsystem.detail.arrays
 
 /// DataT具有内置的构造函数，无需构造，仅分配内存
 template <typename DataT> GINLINE 
-DataT *_GArrayCreate(gsize size, GTrueType) noexcept(false)
+DataT *_GArrayCreate(gsize size, GTrueType) GEXCEPT(false)
 {
 	/// 创建结束不需要构造
 	return GAllocate<DataT>(size);
@@ -18,7 +18,7 @@ DataT *_GArrayCreate(gsize size, GTrueType) noexcept(false)
 
 /// DataT不具有内置的构造函数，分配内存之后，依次调用元素的构造函数
 template <typename DataT> GINLINE 
-DataT *_GArrayCreate(gsize size, GFalseType) noexcept(false)
+DataT *_GArrayCreate(gsize size, GFalseType) GEXCEPT(false)
 {
 	DataT *arr = GAllocate<DataT>(size);
 	for (gsize i = 0; i < size; i++)
@@ -30,7 +30,7 @@ DataT *_GArrayCreate(gsize size, GFalseType) noexcept(false)
 
 /// DataT是内置类型，直接使用内存拷贝操作完成拷贝处理逻辑
 template <typename DataT> GINLINE 
-DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, GTrueType) noexcept(false)
+DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, GTrueType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(copy_size);
 	GMemCopy(new_arr, copy_arr + copy_start, sizeof(DataT) * copy_size);
@@ -39,7 +39,7 @@ DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, G
 
 /// DataT不是内置类型，调用拷贝操作构造函数处理
 template <typename DataT> GINLINE 
-DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, GFalseType) noexcept(false)
+DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(copy_size);
 	for (gsize i = 0; i < copy_size; i++)
@@ -51,7 +51,7 @@ DataT *_GArrayCreate(const DataT *copy_arr, gsize copy_start, gsize copy_size, G
 
 /// DataT是内置类型，直接使用内存拷贝操作完成拷贝处理逻辑，其余元素无需构造，仅分配内存
 template <typename DataT> GINLINE 
-DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size, GTrueType) noexcept(false)
+DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size, GTrueType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(size);
 	gsize new_copy_size = size - start;
@@ -62,7 +62,7 @@ DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_
 
 /// DataT不是内置类型，调用拷贝操作构造函数处理
 template <typename DataT> GINLINE 
-DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size, GFalseType) noexcept(false)
+DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(size);
 	gsize new_copy_size = size - start;
@@ -96,14 +96,14 @@ DataT *_GArrayCreate(gsize size, gsize start, const DataT *copy_arr, gsize copy_
 
 /// DataT具有内置的移动构造函数，且当前类型是内置类型，直接调用内存操作完成数组元素数目的调整
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GTrueType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GTrueType) GEXCEPT(false)
 {
 	return GReallocate<DataT>(old_arr, new_size);
 }
 
 /// DataT具有内置的移动构造函数，且当前类型是不内置类型，使用拷贝操作代替移动操作
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GFalseType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	if (old_size < new_size)
@@ -132,7 +132,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GFalseType
 
 /// DataT具有内置的移动构造函数，由于要析构元素，此时分两种情况考虑
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GTrueType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GTrueType) GEXCEPT(false)
 {
 	/// 根据DataT是否是内置类型，调用不同的处理逻辑
 	return __GArrayResize(old_arr, old_size, new_size,
@@ -141,7 +141,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GTrueType) 
 
 /// DataT不具有内置的移动构造函数，调用移动构造完成数组元素的构造，多出来的元素调用默认构造函数
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GFalseType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	if (old_size < new_size)
@@ -170,7 +170,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, GFalseType)
 
 /// DataT具有内置的移动构造函数，且当前类型是内置类型，优先使用内存操作
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GTrueType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GTrueType) GEXCEPT(false)
 {
 	DataT *new_arr = GReallocate<DataT>(old_arr, new_size);
 	if (old_size < new_size)
@@ -185,7 +185,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const Data
 
 /// DataT具有内置的移动构造函数，且当前类型是不内置类型，使用拷贝操作代替移动操作
 template <typename DataT> GINLINE
-DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GFalseType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	if (old_size < new_size)
@@ -214,7 +214,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const Data
 
 /// DataT具有内置的移动构造函数，此时分两种情况考虑
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GTrueType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GTrueType) GEXCEPT(false)
 {
 	/// 根据DataT是否是内置类型，调用不同的处理逻辑
 	return __GArrayResize(old_arr, old_size, new_size, copyable,
@@ -223,7 +223,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT
 
 /// DataT不具有内置的移动构造函数，使用移动操作
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GFalseType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	if (old_size < new_size)
@@ -252,7 +252,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_size, gsize new_size, const DataT
 
 /// DataT具有内置的移动构造函数，且当前类型是内置类型，优先使用等号操作
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GTrueType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GTrueType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	gsize new_real_size = new_start + old_size;
@@ -280,7 +280,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new
 
 /// DataT具有内置的移动构造函数，且当前类型是不内置类型，使用拷贝操作代替移动操作
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GFalseType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	gsize new_real_size = new_start + old_size;
@@ -320,7 +320,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new
 
 /// DataT具有内置的移动构造函数，此时分两种情况考虑
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GTrueType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GTrueType) GEXCEPT(false)
 {
 	/// 根据DataT是否是内置类型，调用不同的处理逻辑
 	return __GArrayResize(old_arr, old_start, old_size, new_size, new_start,
@@ -329,7 +329,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_
 
 /// DataT不具有内置的移动构造函数，使用移动操作
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GFalseType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	gsize new_real_size = new_start + old_size;
@@ -369,7 +369,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_
 
 /// DataT具有内置的移动构造函数，且当前类型是内置类型，优先使用等号操作
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GTrueType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GTrueType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	gsize new_real_size = new_start + old_size;
@@ -409,7 +409,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new
 
 /// DataT具有内置的移动构造函数，且当前类型是不内置类型，使用拷贝操作代替移动操作
 template <typename DataT> GINLINE 
-DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GFalseType) noexcept(false)
+DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	gsize new_real_size = new_start + old_size;
@@ -449,7 +449,7 @@ DataT *__GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new
 
 /// DataT具有内置的移动构造函数，此时分两种情况考虑
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GTrueType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GTrueType) GEXCEPT(false)
 {
 	/// 根据DataT是否是内置类型，调用不同的处理逻辑
 	return __GArrayResize(old_arr, old_start, old_size, new_size, new_start, copyable,
@@ -458,7 +458,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_
 
 /// DataT不具有内置的移动构造函数，使用移动操作
 template <typename DataT> GINLINE 
-DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GFalseType) noexcept(false)
+DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(new_size);
 	gsize new_real_size = new_start + old_size;
@@ -498,7 +498,7 @@ DataT *_GArrayResize(DataT *old_arr, gsize old_start, gsize old_size, gsize new_
 
 /// DataT具有内置的移动构造函数，且当前类型是内置类型，使用内存拷贝
 template <typename DataT> GINLINE 
-DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) noexcept(false)
+DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(size - 1);
 	if (pos > 0)
@@ -514,7 +514,7 @@ DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) noexcept(f
 
 /// DataT具有内置的移动构造函数，且当前类型是内置类型，使用拷贝操作
 template <typename DataT> GINLINE 
-DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GFalseType) noexcept(false)
+DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(size - 1);
 	for (gsize i = 0; i < pos; i++)
@@ -533,7 +533,7 @@ DataT *__GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GFalseType) noexcept(
 
 /// DataT具有内置的移动构造函数，此时分两种情况考虑
 template <typename DataT> GINLINE 
-DataT *_GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) noexcept(false)
+DataT *_GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) GEXCEPT(false)
 {
 	/// 根据DataT是否是内置类型，调用不同的处理逻辑
 	return __GArrayRemoveAt(arr, size, pos,
@@ -542,7 +542,7 @@ DataT *_GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GTrueType) noexcept(fa
 
 /// DataT不具有内置的移动构造函数，使用移动操作
 template <typename DataT> GINLINE 
-DataT *_GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GFalseType) noexcept(false)
+DataT *_GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GFalseType) GEXCEPT(false)
 {
 	DataT *new_arr = GAllocate<DataT>(size - 1);
 	for (gsize i = 0; i < pos; i++)
@@ -561,14 +561,14 @@ DataT *_GArrayRemoveAt(DataT *arr, gsize size, gsize pos, GFalseType) noexcept(f
 
 /// DataT不具有内置的析构函数，不析构
 template <typename DataT> GINLINE 
-gvoid _GArrayClear(DataT *arr, gsize size, GTrueType) noexcept
+gvoid _GArrayClear(DataT *arr, gsize size, GTrueType) GNOEXCEPT
 {
 
 }
 
 /// DataT不具有内置的析构函数，依次调用析构函数
 template <typename DataT> GINLINE 
-gvoid _GArrayClear(DataT *arr, gsize size, GFalseType) noexcept
+gvoid _GArrayClear(DataT *arr, gsize size, GFalseType) GNOEXCEPT
 {
 	if (!arr)
 	{
@@ -589,7 +589,7 @@ gvoid _GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, GTrueType)
 
 /// DataT不是内置类型，先析构，在调用拷贝构造
 template <typename DataT> GINLINE 
-gvoid _GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, GFalseType) noexcept(false)
+gvoid _GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, GFalseType) GEXCEPT(false)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -603,7 +603,7 @@ gvoid _GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, GFalseType)
 
 /// DataT是内置类型，无需析构，并直接使用内存拷贝
 template <typename DataT> GINLINE 
-DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size, GTrueType) noexcept(false)
+DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size, GTrueType) GEXCEPT(false)
 {
 	if (size != copy_size)
 	{
@@ -617,7 +617,7 @@ DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy
 
 /// DataT不是内置类型，先析构，再调用拷贝构造
 template <typename DataT> GINLINE 
-DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size, GFalseType) noexcept(false)
+DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size, GFalseType) GEXCEPT(false)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -642,7 +642,7 @@ DataT *_GArrayCopyFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy
 namespace gsystem { // gsystem
 
 template <typename DataT> GINLINE
-DataT *GArrays::CreateArray(gsize size) noexcept(false)
+DataT *GArrays::CreateArray(gsize size) GEXCEPT(false)
 {
 	GASSERT(size > 0);
 
@@ -652,7 +652,7 @@ DataT *GArrays::CreateArray(gsize size) noexcept(false)
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::CreateArray(gsize size, const DataT &copyable) noexcept(false)
+DataT *GArrays::CreateArray(gsize size, const DataT &copyable) GEXCEPT(false)
 {
 	GASSERT(size > 0);
 
@@ -666,7 +666,7 @@ DataT *GArrays::CreateArray(gsize size, const DataT &copyable) noexcept(false)
 }
 
 template <typename DataT> GINLINE 
-DataT *GArrays::CreateArray(const DataT *copy_arr, gsize copy_start, gsize copy_size) noexcept(false)
+DataT *GArrays::CreateArray(const DataT *copy_arr, gsize copy_start, gsize copy_size) GEXCEPT(false)
 {
 	// 若copy_arr不存在，或者copy_start超过了范围，则会报错
 	GASSERT(copy_arr && copy_start < copy_size);
@@ -677,7 +677,7 @@ DataT *GArrays::CreateArray(const DataT *copy_arr, gsize copy_start, gsize copy_
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::CreateArray(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size) noexcept(false)
+DataT *GArrays::CreateArray(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size) GEXCEPT(false)
 {
 	GASSERT(start < size && copy_arr && copy_start < copy_size);
 
@@ -687,7 +687,7 @@ DataT *GArrays::CreateArray(gsize size, gsize start, const DataT *copy_arr, gsiz
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size) noexcept(false)
+DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size) GEXCEPT(false)
 {
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
 	return detail::arrays::_GArrayResize<DataT>(old_arr, old_size, new_size,
@@ -695,7 +695,7 @@ DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size) noex
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable) noexcept(false)
+DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable) GEXCEPT(false)
 {
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
 	return detail::arrays::_GArrayResize<DataT>(old_arr, old_size, new_size, copyable,
@@ -703,7 +703,7 @@ DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_size, gsize new_size, cons
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start) noexcept(false)
+DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start) GEXCEPT(false)
 {
 	GASSERT(old_start < old_size);
 
@@ -713,7 +713,7 @@ DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsi
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable) noexcept(false)
+DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable) GEXCEPT(false)
 {
 	// 判断DataT是否具有移动构造函数，以判断是否需要调用不同的函数
 	return detail::arrays::_GArrayResize<DataT>(old_arr, old_start, old_size, new_size, new_start, copyable,
@@ -721,7 +721,7 @@ DataT *GArrays::ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsi
 }
 
 template <typename DataT> GINLINE
-DataT *GArrays::RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) noexcept(false)
+DataT *GArrays::RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) GEXCEPT(false)
 {
 	GASSERT(size > 0 && pos < size);
 
@@ -731,14 +731,14 @@ DataT *GArrays::RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) noexcept
 }
 
 template <typename DataT> GINLINE
-gvoid GArrays::ClearArray(DataT *arr, gsize size) noexcept
+gvoid GArrays::ClearArray(DataT *arr, gsize size) GNOEXCEPT
 {
 	detail::arrays::_GArrayClear(arr, size,
 		GTypeTraits<DataT>::TrivialDestructible());
 }
 
 template <typename DataT> GINLINE
-gvoid GArrays::DestoryArray(DataT *arr, gsize size) noexcept
+gvoid GArrays::DestoryArray(DataT *arr, gsize size) GNOEXCEPT
 {
 	// 判断DataT是否具有析构函数，以判断是否需要调用不同的函数
 	detail::arrays::_GArrayClear(arr, size,
@@ -749,7 +749,7 @@ gvoid GArrays::DestoryArray(DataT *arr, gsize size) noexcept
 }
 
 template <typename DataT> GINLINE
-gvoid GArrays::CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) noexcept(false)
+gvoid GArrays::CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) GEXCEPT(false)
 {
 	GASSERT(arr && copy_arr);
 
@@ -759,7 +759,7 @@ gvoid GArrays::CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) noex
 }
 
 template <typename DataT> GINLINE 
-DataT *GArrays::CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size) noexcept(false)
+DataT *GArrays::CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size) GEXCEPT(false)
 {
 	GASSERT(arr && copy_arr);
 

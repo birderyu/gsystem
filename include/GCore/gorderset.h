@@ -2,7 +2,7 @@
 #ifndef _CORE_ORDER_SET_H_
 #define _CORE_ORDER_SET_H_
 
-#include "gredblacktree.h"
+#include "grbtree.h"
 
 #define G_ORDER_SET_NODE_RED	0
 #define G_ORDER_SET_NODE_BLACK	1
@@ -15,7 +15,7 @@ class GOrderSet
 {
 public:
 	struct GOrderSetNode
-		: public GBinaryTreeNodeT<GOrderSetNode>
+		: public GBinTreeNodeT<GOrderSetNode>
 		, public GPairNodeT<KeyT, GDummyNodeT>
 		, public GNewT<GOrderSetNode>
 	{
@@ -28,7 +28,7 @@ public:
 			GOrderSetNode *left = GNULL,
 			GOrderSetNode *right = GNULL,
 			gsmall color = G_ORDER_SET_NODE_RED)
-			: GBinaryTreeNodeT<GOrderSetNode>(parent, left, right)
+			: GBinTreeNodeT<GOrderSetNode>(parent, left, right)
 			, GPairNodeT<KeyT, GDummyNodeT>(key, value)
 			, m_nColor(color)
 		{
@@ -41,7 +41,7 @@ public:
 			GOrderSetNode *left = GNULL,
 			GOrderSetNode *right = GNULL,
 			gsmall color = G_ORDER_SET_NODE_RED)
-			: GBinaryTreeNodeT<GOrderSetNode>(parent, left, right)
+			: GBinTreeNodeT<GOrderSetNode>(parent, left, right)
 			, GPairNodeT<KeyT, GDummyNodeT>(key, GForward<GDummyNodeT>(value))
 			, m_nColor(color)
 		{
@@ -359,7 +359,7 @@ public:
 	GOrderSet<KeyT, CompareT> &operator=(GOrderSet<KeyT, CompareT> &&);
 
 private:
-	GRedBlackTree<KeyT, GDummyNodeT, CompareT, GOrderSetNode> m_tTree;
+	GRBTree<KeyT, GDummyNodeT, CompareT, GOrderSetNode> m_tTree;
 	gsize m_nSize;
 };
 

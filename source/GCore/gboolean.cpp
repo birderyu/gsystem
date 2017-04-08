@@ -29,7 +29,7 @@ GBoolean::GBoolean(const GBoolean &val)
 
 guint GBoolean::ClassCode() const
 {
-	return GBoolean::CLASS_CODE;
+	return static_cast<guint>(GClassCode::Boolean);
 }
 
 } // namespace gsystem

@@ -1,7 +1,7 @@
 #ifndef _GEOMETRY_SINGLE_POINT_STORE_H_
 #define _GEOMETRY_SINGLE_POINT_STORE_H_
 
-#include "ggeometryglobal.h"
+#include "ggeodef.h"
 #include "gcoordinate.h"
 
 namespace gsystem { // gsystem

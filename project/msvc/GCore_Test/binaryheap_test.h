@@ -1,7 +1,7 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <windows.h>
-#include "gbinaryheap.h"
+#include "gbinheap.h"
 #include "gdynamicarray.h"
 
 /// 产生随机数

@@ -18,7 +18,7 @@
 #include "gtype.h"
 
 namespace gsystem { // gsystem
-	class GSockAddress;
+	class GSocketAddress;
 	namespace detail { // gsystem.detail
 		class GSocket_Ex;
 	} // namespace gsystem.detail
@@ -54,7 +54,7 @@ public:
 	virtual ~GSocket() = 0;
 
 	virtual gbool Open(gbool resue = false) = 0;
-	virtual gbool Open(const GSockAddress &addr, gbool resue = false) = 0;
+	virtual gbool Open(const GSocketAddress &addr, gbool resue = false) = 0;
 	virtual gvoid Close() = 0;
 
 	gbool SetRecvTimeout(gint msecs);
@@ -65,8 +65,8 @@ public:
 
 	gbool SetReuseAddress(gbool resue);
 
-	GSockAddress GetPeerAddr() const;
-	GSockAddress GetLocalAddr() const;
+	GSocketAddress GetPeerAddr() const;
+	GSocketAddress GetLocalAddr() const;
 
 protected:
 	detail::GSocket_Ex *m_pSocket_Ex;

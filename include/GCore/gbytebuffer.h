@@ -4,30 +4,26 @@
 #ifndef _CORE_BUFFER_H_
 #define _CORE_BUFFER_H_
 
-#include "gobject.h"
-#include "gstructure.h"
-#include "gseries.h"
+#include "gvector.h"
 
 namespace gsystem { // gsystem
 	class GBytes;
 } // namespace gsystem
 
 #define G_BYTES_DEFAULT_CAPACITY 1024
-#define G_BYTES_DEFAULT_ADD_SIZE 512
 
 namespace gsystem { // gsystem
 
 class GAPI GByteBuffer final
 	: public GListT<GByteBuffer>
-	, public GObject
+	, virtual public GObject
+	, virtual public GSerializable
 {
 	friend class GBytes;
 
 public:
-	GByteBuffer(gsize capacity = G_BYTES_DEFAULT_CAPACITY,
-		gsize add_size = G_BYTES_DEFAULT_ADD_SIZE);
+	GByteBuffer(gsize capacity = G_BYTES_DEFAULT_CAPACITY);
 	GByteBuffer(const GByteBuffer &tBytes);
-	~GByteBuffer();
 
 	gvoid Reserve(gsize);
 	gvoid Resize(gsize);
@@ -49,53 +45,16 @@ public:
 	gbyte &operator[](gsize);
 	const gbyte &operator[](gsize) const;
 
-	/*
-	/// 写入二进制字节流
-	GByteBuffer &operator<<(gbool);
-	GByteBuffer &operator<<(gchar);
-	GByteBuffer &operator<<(gschar);
-	GByteBuffer &operator<<(guchar);
-	GByteBuffer &operator<<(gwchar);
-	GByteBuffer &operator<<(gshort);
-	GByteBuffer &operator<<(gushort);
-	GByteBuffer &operator<<(gint);
-	GByteBuffer &operator<<(guint);
-	GByteBuffer &operator<<(glong);
-	GByteBuffer &operator<<(gulong);
-	GByteBuffer &operator<<(glonglong);
-	GByteBuffer &operator<<(gulonglong);
-	GByteBuffer &operator<<(gfloat);
-	GByteBuffer &operator<<(gdouble);
-	GByteBuffer &operator<<(gdecimal);
-	GByteBuffer &operator<<(const GString &);
-
-	/// 从二进制字节流中写出
-	GByteBuffer &operator >> (gbool &);
-	GByteBuffer &operator >> (gchar &);
-	GByteBuffer &operator >> (gschar &);
-	GByteBuffer &operator >> (guchar &);
-	GByteBuffer &operator >> (gwchar &);
-	GByteBuffer &operator >> (gshort &);
-	GByteBuffer &operator >> (gushort &);
-	GByteBuffer &operator >> (gint &);
-	GByteBuffer &operator >> (guint &);
-	GByteBuffer &operator >> (glong &);
-	GByteBuffer &operator >> (gulong &);
-	GByteBuffer &operator >> (glonglong &);
-	GByteBuffer &operator >> (gulonglong &);
-	GByteBuffer &operator >> (gfloat &);
-	GByteBuffer &operator >> (gdouble &);
-	GByteBuffer &operator >> (gdecimal &);
-	*/
+	guint ClassCode() const;
+	gbool Serialize(GArchive &archive) const;
+	gbool Deserialize(GArchive &archive);
 
 private:
-	GBytesData m_tBytes;
-	gsize m_nAddSize;
+	GVector<gbyte> m_tBytes;
 };
 
 } // namespace gsystem
 
-#undef G_BYTES_DEFAULT_ADD_SIZE
 #undef G_BYTES_DEFAULT_CAPACITY
 
 #endif // _CORE_BUFFER_H_

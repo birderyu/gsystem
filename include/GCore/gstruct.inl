@@ -21,14 +21,14 @@ GINLINE GPreviousNextNodeT<NodeT>::GPreviousNextNodeT(NodeT *previous, NodeT *ne
 
 //////////////////////////////////////////////////////////////////////////
 template<typename NodeT>
-GINLINE GBinaryTreeNodeT<NodeT>::GBinaryTreeNodeT(NodeT *parent, NodeT *left, NodeT *right)
+GINLINE GBinTreeNodeT<NodeT>::GBinTreeNodeT(NodeT *parent, NodeT *left, NodeT *right)
 : m_pParent(parent), m_pLeft(left), m_pRight(left)
 {
 
 }
 
 template<typename NodeT>
-GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::LeftSibling() const
+GINLINE const NodeT *GBinTreeNodeT<NodeT>::LeftSibling() const
 {
 	if (m_pParent)
 	{
@@ -38,7 +38,7 @@ GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::LeftSibling() const
 }
 
 template<typename NodeT>
-GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::RightSibling() const
+GINLINE const NodeT *GBinTreeNodeT<NodeT>::RightSibling() const
 {
 	if (m_pParent)
 	{
@@ -48,7 +48,7 @@ GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::RightSibling() const
 }
 
 template<typename NodeT>
-GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Next() const
+GINLINE const NodeT *GBinTreeNodeT<NodeT>::Next() const
 {
 	const NodeT *node = GNULL;
 	if (m_pRight)
@@ -78,7 +78,7 @@ GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Next() const
 }
 
 template<typename NodeT>
-GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Next()
+GINLINE NodeT *GBinTreeNodeT<NodeT>::Next()
 {
 	NodeT *node = GNULL;
 	if (m_pRight)
@@ -108,7 +108,7 @@ GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Next()
 }
 
 template<typename NodeT>
-GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Previous() const
+GINLINE const NodeT *GBinTreeNodeT<NodeT>::Previous() const
 {
 	const NodeT *node = GNULL;
 	if (m_pLeft)
@@ -138,7 +138,7 @@ GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Previous() const
 }
 
 template<typename NodeT>
-GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Previous()
+GINLINE NodeT *GBinTreeNodeT<NodeT>::Previous()
 {
 	NodeT *node = GNULL;
 	if (m_pLeft)
@@ -168,7 +168,7 @@ GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Previous()
 }
 
 template<typename NodeT>
-GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::First() const
+GINLINE const NodeT *GBinTreeNodeT<NodeT>::First() const
 {
 	if (!m_pLeft)
 	{
@@ -183,7 +183,7 @@ GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::First() const
 }
 
 template<typename NodeT>
-GINLINE NodeT *GBinaryTreeNodeT<NodeT>::First()
+GINLINE NodeT *GBinTreeNodeT<NodeT>::First()
 {
 	if (!m_pLeft)
 	{
@@ -198,7 +198,7 @@ GINLINE NodeT *GBinaryTreeNodeT<NodeT>::First()
 }
 
 template<typename NodeT>
-GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Last() const
+GINLINE const NodeT *GBinTreeNodeT<NodeT>::Last() const
 {
 	if (!m_pRight)
 	{
@@ -213,7 +213,7 @@ GINLINE const NodeT *GBinaryTreeNodeT<NodeT>::Last() const
 }
 
 template<typename NodeT>
-GINLINE NodeT *GBinaryTreeNodeT<NodeT>::Last()
+GINLINE NodeT *GBinTreeNodeT<NodeT>::Last()
 {
 	if (!m_pRight)
 	{

@@ -5,6 +5,8 @@
 #include "gdate.h"
 #include "gtime.h"
 #include "gsharedpointer.h"
+#include "garchive.h"
+#include "gclasscode.h"
 
 #ifdef G_SYSTEM_WINDOWS 
 #	ifndef WIN32_LEAN_AND_MEAN
@@ -1034,11 +1036,6 @@ GBytes GDateTime::ToBytes() const
 	return GBytes(m_tDateTime, G_DATE_TIME_SIZE);
 }
 
-guint GDateTime::ClassCode() const
-{
-	return GDateTime::CLASS_CODE;
-}
-
 guint GDateTime::HashCode() const
 {
 	gtime timestamp = Timestamp();
@@ -1055,8 +1052,36 @@ gbool GDateTime::Equals(const GObject *obj) const
 	return *this == *dt;
 }
 
-gbool GDateTime::Serializable() const
+guint GDateTime::ClassCode() const
 {
+	return static_cast<guint>(GClassCode::DateTime);
+}
+
+gbool GDateTime::Serialize(GArchive &archive) const
+{
+	if (!archive.Input())
+	{
+		// TODO，抛出异常
+		return false;
+	}
+
+	archive.PushCode(ClassCode());
+	archive.Attach(m_tDateTime, G_DATE_TIME_SIZE);
+	return true;
+}
+
+gbool GDateTime::Deserialize(GArchive &archive)
+{
+	if (!archive.Output())
+	{
+		return false;
+	}
+	if (archive.PopCode() != ClassCode())
+	{
+		// TODO，抛出异常
+		return false;
+	}
+	archive.Detach(m_tDateTime, G_DATE_TIME_SIZE);
 	return true;
 }
 

@@ -6,7 +6,7 @@
 namespace gsystem { // gsystem
 
 template <typename ClassT> GINLINE
-ClassT *GAllocate(gsize n) noexcept(false)
+ClassT *GAllocate(gsize n) GEXCEPT(false)
 {
 	ClassT *ptr = (ClassT *)GMalloc(n * sizeof(ClassT));
 	if (GNULL == ptr)
@@ -17,13 +17,13 @@ ClassT *GAllocate(gsize n) noexcept(false)
 }
 
 template <typename ClassT> GINLINE 
-gvoid GDeallocate(ClassT *ptr) noexcept
+gvoid GDeallocate(ClassT *ptr) GNOEXCEPT
 {
 	GFree(ptr);
 }
 
 template <typename ClassT> GINLINE 
-ClassT *GReallocate(ClassT *oldptr, gsize n) noexcept(false)
+ClassT *GReallocate(ClassT *oldptr, gsize n) GEXCEPT(false)
 {
 	ClassT *ptr = (ClassT *)GRealloc(oldptr, n * sizeof(ClassT));
 	if (GNULL == ptr)
@@ -34,19 +34,19 @@ ClassT *GReallocate(ClassT *oldptr, gsize n) noexcept(false)
 }
 
 template <typename ClassT> GINLINE
-ClassT *GAllocator<ClassT>::Allocate(gsize n) noexcept(false)
+ClassT *GAllocator<ClassT>::Allocate(gsize n) GEXCEPT(false)
 {
 	return GAllocate<ClassT>(n);
 }
 
 template <typename ClassT> GINLINE
-gvoid GAllocator<ClassT>::Deallocate(ClassT *ptr) noexcept
+gvoid GAllocator<ClassT>::Deallocate(ClassT *ptr) GNOEXCEPT
 {
 	GDeallocate<ClassT>(ptr);
 }
 
 template <typename ClassT> GINLINE
-ClassT *GAllocator<ClassT>::Reallocate(ClassT *oldptr, gsize n) noexcept(false)
+ClassT *GAllocator<ClassT>::Reallocate(ClassT *oldptr, gsize n) GEXCEPT(false)
 {
 	return GReallocate<ClassT>(oldptr, n);
 }

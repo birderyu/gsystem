@@ -40,7 +40,7 @@ GUnsignedLongLongInteger::~GUnsignedLongLongInteger()
 
 guint GUnsignedLongLongInteger::ClassCode() const
 {
-	return GUnsignedLongLongInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::UnsignedLongLongInteger);
 }
 
 } // namespace gsystem

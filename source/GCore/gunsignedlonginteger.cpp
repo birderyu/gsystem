@@ -35,7 +35,7 @@ GUnsignedLongInteger::GUnsignedLongInteger(const GUnsignedLongInteger &val)
 
 guint GUnsignedLongInteger::ClassCode() const
 {
-	return GUnsignedLongInteger::CLASS_CODE;
+	return static_cast<guint>(GClassCode::UnsignedLongInteger);
 }
 
 } // namespace gsystem

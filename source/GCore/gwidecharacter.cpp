@@ -15,7 +15,7 @@ GWideCharacter::GWideCharacter(const GWideCharacter &val)
 
 guint GWideCharacter::ClassCode() const
 {
-	return GWideCharacter::CLASS_CODE;
+	return static_cast<guint>(GClassCode::WindCharacter);
 }
 
 } // namespace gsystem

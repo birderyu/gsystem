@@ -2,54 +2,51 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gbinarysorttree.h
+** @file	gbstree.h
 ** @brief	该文件包含了二叉排序树的定义及实现
 ** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2016-08-07
 ** @version	1.0
-** @see		GBinaryTreeNode
-** @see		GBinaryTree
-** @see		GBinarySortTree
 **
 ****************************************************************************/
 
 #ifndef _CORE_BINARY_SORT_TREE_H_
 #define _CORE_BINARY_SORT_TREE_H_
 
-#include "gbinarytree.h"
+#include "gbintree.h"
 #include "gfunctor.h"
 
 namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT>
-struct GBinarySortTreeNode 
-	: public GBinaryTreeNodeT<GBinarySortTreeNode<KeyT, ValueT>>
+struct GBSTreeNode 
+	: public GBinTreeNodeT<GBSTreeNode<KeyT, ValueT>>
 	, public GPairNodeT<KeyT, ValueT>
-	, public GNewT<GBinarySortTreeNode<KeyT, ValueT>>
+	, public GNewT<GBSTreeNode<KeyT, ValueT>>
 {
-	GBinarySortTreeNode(
+	GBSTreeNode(
 		const KeyT &key = KeyT(),
 		const ValueT &value = ValueT(),
-		GBinarySortTreeNode<KeyT, ValueT> *parent = GNULL,
-		GBinarySortTreeNode<KeyT, ValueT> *left = GNULL,
-		GBinarySortTreeNode<KeyT, ValueT> *right = GNULL);
+		GBSTreeNode<KeyT, ValueT> *parent = GNULL,
+		GBSTreeNode<KeyT, ValueT> *left = GNULL,
+		GBSTreeNode<KeyT, ValueT> *right = GNULL);
 
-	GBinarySortTreeNode(
+	GBSTreeNode(
 		const KeyT &key, ValueT &&value,
-		GBinarySortTreeNode<KeyT, ValueT> *parent = GNULL,
-		GBinarySortTreeNode<KeyT, ValueT> *left = GNULL,
-		GBinarySortTreeNode<KeyT, ValueT> *right = GNULL);
+		GBSTreeNode<KeyT, ValueT> *parent = GNULL,
+		GBSTreeNode<KeyT, ValueT> *left = GNULL,
+		GBSTreeNode<KeyT, ValueT> *right = GNULL);
 };
 
 template<typename KeyT, typename ValueT,
 	typename CompareT = GCompareToF<KeyT >,
-	typename NodeT = GBinarySortTreeNode<KeyT, ValueT>>
-class GBinarySortTree 
-	: public GBinaryTree<NodeT>
+	typename NodeT = GBSTreeNode<KeyT, ValueT>>
+class GBSTree 
+	: public GBinTree<NodeT>
 {
 public:
-	typedef GBinarySortTree<KeyT, ValueT, CompareT, NodeT> Tree;
+	typedef GBSTree<KeyT, ValueT, CompareT, NodeT> Tree;
 	typedef NodeT Node;
 	typedef GList<NodeT *> Nodes;
 	typedef GList<const NodeT *> ConstNodes;
@@ -328,7 +325,7 @@ public:
 	};
 	
 public:
-	virtual ~GBinarySortTree();
+	virtual ~GBSTree();
 
 	NodeT *FirstNode();
 	const NodeT *FirstNode() const;
@@ -381,6 +378,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gbinarysorttree.inl"
+#include "gbstree.inl"
 
 #endif // _CORE_BINARY_SORT_TREE_H_
