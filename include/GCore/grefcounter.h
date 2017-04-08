@@ -7,13 +7,13 @@
 namespace gsystem { // gsystem
 
 template <typename ClassT>
-class GReferenceCounter 
-	: public GNewT<GReferenceCounter<ClassT>>
+class GRefCounter 
+	: public GNewT<GRefCounter<ClassT>>
 {
 public:
 	// count: 初始引用计数，默认为1
-	GReferenceCounter(ClassT *ptr, gsize count = 1);
-	~GReferenceCounter();
+	GRefCounter(ClassT *ptr, gsize count = 1);
+	~GRefCounter();
 	gsize Add();
 	gvoid Release();
 	gsize Count() const;
@@ -27,6 +27,6 @@ private:
 
 } // namespace gsystem
 
-#include "greferencecounter.inl"
+#include "grefcounter.inl"
 
 #endif // _CORE_REFERENCE_COUNTER_H_

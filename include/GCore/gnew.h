@@ -2,7 +2,7 @@
 #define _CORE_NEW_H_
 
 #include "gmemory.h"
-#include "gmemorypool.h"
+#include "gmempool.h"
 #include "glockguard.h"
 #include <new>
 
@@ -33,7 +33,7 @@ class GNewT
 {
 public:
 	static gptr operator new(gsize) GEXCEPT(false);
-	static gvoid operator delete(gptr)GNOEXCEPT;
+	static gvoid operator delete(gptr) GNOEXCEPT;
 };
 
 // 线程不安全
@@ -47,7 +47,7 @@ public:
 	static gvoid operator delete(gptr);
 
 private:
-	static GMemoryPool<sizeof(ClassT)> pool;
+	static GMemPool<sizeof(ClassT)> pool;
 };
 
 // 线程不安全
@@ -78,7 +78,7 @@ public:
 
 private:
 	static std::new_handler currentHandler;
-	static GMemoryPool<sizeof(ClassT)> pool;
+	static GMemPool<sizeof(ClassT)> pool;
 };
 
 // 线程安全
@@ -122,7 +122,7 @@ public:
 	static gvoid operator delete(gptr);
 
 private:
-	static GMemoryPool<sizeof(ClassT)> pool;
+	static GMemPool<sizeof(ClassT)> pool;
 	static LockT lock;
 };
 
@@ -139,7 +139,7 @@ public:
 
 private:
 	static std::new_handler currentHandler;
-	static GMemoryPool<sizeof(ClassT)> pool;
+	static GMemPool<sizeof(ClassT)> pool;
 	static LockT lock;
 };
 

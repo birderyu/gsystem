@@ -243,7 +243,7 @@
     <ClInclude Include="..\..\..\include\GCore\gorderset.h" />
     <ClInclude Include="..\..\..\include\GCore\grtree.h" />
     <ClInclude Include="..\..\..\include\GCore\gset.h" />
-    <ClInclude Include="..\..\..\include\GCore\gsharedpointer.h" />
+    <ClInclude Include="..\..\..\include\GCore\gsharedptr.h" />
     <ClInclude Include="..\..\..\include\GCore\gshortinteger.h" />
     <ClInclude Include="..\..\..\include\GCore\gsignedcharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gsingleton.h" />
@@ -258,13 +258,13 @@
     <ClInclude Include="..\..\..\include\GCore\gtimer.h" />
     <ClInclude Include="..\..\..\include\GCore\gtrietree.h" />
     <ClInclude Include="..\..\..\include\GCore\gtuple.h" />
-    <ClInclude Include="..\..\..\include\GCore\guniquepointer.h" />
+    <ClInclude Include="..\..\..\include\GCore\guniqueptr.h" />
     <ClInclude Include="..\..\..\include\GCore\gunordermap.h" />
     <ClInclude Include="..\..\..\include\GCore\gordermap.h" />
     <ClInclude Include="..\..\..\include\GCore\gblock.h" />
     <ClInclude Include="..\..\..\include\GCore\gnew.h" />
     <ClInclude Include="..\..\..\include\GCore\gmemorystore.h" />
-    <ClInclude Include="..\..\..\include\GCore\greferencecounter.h" />
+    <ClInclude Include="..\..\..\include\GCore\grefcounter.h" />
     <ClInclude Include="..\..\..\include\GCore\gstdstringhelper.h" />
     <ClInclude Include="..\..\..\include\GCore\gstringlist.h" />
     <ClInclude Include="..\..\..\include\GCore\gstringpool.h" />
@@ -280,7 +280,7 @@
     <ClInclude Include="..\..\..\include\GCore\gglobal.h" />
     <ClInclude Include="..\..\..\include\GCore\gslist.h" />
     <ClInclude Include="..\..\..\include\GCore\gmath.h" />
-    <ClInclude Include="..\..\..\include\GCore\gmemorypool.h" />
+    <ClInclude Include="..\..\..\include\GCore\gmempool.h" />
     <ClInclude Include="..\..\..\include\GCore\gmutex.h" />
     <ClInclude Include="..\..\..\include\GCore\gobject.h" />
     <ClInclude Include="..\..\..\include\GCore\gsemaphore.h" />
@@ -304,7 +304,7 @@
     <ClInclude Include="..\..\..\include\GCore\gvariety.h" />
     <ClInclude Include="..\..\..\include\GCore\gvector.h" />
     <ClInclude Include="..\..\..\include\GCore\gversion.h" />
-    <ClInclude Include="..\..\..\include\GCore\gweakpointer.h" />
+    <ClInclude Include="..\..\..\include\GCore\gweakptr.h" />
     <ClInclude Include="..\..\..\include\GCore\gwidecharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gfunctor.h" />
     <ClInclude Include="..\..\..\include\GCore\gxmlnode.h" />
@@ -408,7 +408,7 @@
     <None Include="..\..\..\include\GCore\ghuffmantree.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gmemorypool.inl">
+    <None Include="..\..\..\include\GCore\gmempool.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gserialize.inl" />
@@ -499,10 +499,10 @@
     <None Include="..\..\..\include\GCore\grbtree.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\greferencecounter.inl">
+    <None Include="..\..\..\include\GCore\grefcounter.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gsharedpointer.inl">
+    <None Include="..\..\..\include\GCore\gsharedptr.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gslist.inl">
@@ -517,7 +517,7 @@
     <None Include="..\..\..\include\GCore\gtuple.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\guniquepointer.inl">
+    <None Include="..\..\..\include\GCore\guniqueptr.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gunordermap.inl">

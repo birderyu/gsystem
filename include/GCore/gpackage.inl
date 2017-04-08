@@ -3,7 +3,7 @@
 
 #include "gstring.h"
 #include "ghash.h"
-#include "gsharedpointer.h"
+#include "gsharedptr.h"
 #include "gserialize.h"
 #include "gclasscode.h"
 

@@ -21,7 +21,7 @@ GINLINE gvoid GNewT<ClassT>::operator delete(gptr ptr) GNOEXCEPT
 }
 
 template<typename ClassT>
-GMemoryPool<sizeof(ClassT)> GNewInPoolT<ClassT>::pool;
+GMemPool<sizeof(ClassT)> GNewInPoolT<ClassT>::pool;
 
 template<typename ClassT>
 GINLINE gptr GNewInPoolT<ClassT>::operator new(gsize)
@@ -79,7 +79,7 @@ template<typename ClassT>
 std::new_handler GNewInPoolWithHandlerT<ClassT>::currentHandler;
 
 template<typename ClassT>
-GMemoryPool<sizeof(ClassT)> GNewInPoolWithHandlerT<ClassT>::pool;
+GMemPool<sizeof(ClassT)> GNewInPoolWithHandlerT<ClassT>::pool;
 
 template<typename ClassT>
 GINLINE gptr GNewInPoolWithHandlerT<ClassT>::operator new(gsize size)
@@ -168,7 +168,7 @@ template<typename ClassT, typename LockT>
 LockT GSafeNewInPoolT<ClassT, LockT>::lock;
 
 template<typename ClassT, typename LockT>
-GMemoryPool<sizeof(ClassT)> GSafeNewInPoolT<ClassT, LockT>::pool;
+GMemPool<sizeof(ClassT)> GSafeNewInPoolT<ClassT, LockT>::pool;
 
 template<typename ClassT, typename LockT>
 GINLINE gptr GSafeNewInPoolT<ClassT, LockT>::operator new(gsize)
@@ -201,7 +201,7 @@ template<typename ClassT, typename LockT>
 LockT GSafeNewInPoolWithHandlerT<ClassT, LockT>::lock;
 
 template<typename ClassT, typename LockT>
-GMemoryPool<sizeof(ClassT)> GSafeNewInPoolWithHandlerT<ClassT, LockT>::pool;
+GMemPool<sizeof(ClassT)> GSafeNewInPoolWithHandlerT<ClassT, LockT>::pool;
 
 template<typename ClassT, typename LockT>
 GINLINE std::new_handler GSafeNewInPoolWithHandlerT<ClassT, LockT>::set_new_handler(std::new_handler p)

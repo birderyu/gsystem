@@ -4,7 +4,7 @@
 #include "gstring.h"
 #include "gdate.h"
 #include "gtime.h"
-#include "gsharedpointer.h"
+#include "gsharedptr.h"
 #include "garchive.h"
 #include "gclasscode.h"
 

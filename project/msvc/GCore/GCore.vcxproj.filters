@@ -321,9 +321,6 @@
     <ClInclude Include="..\..\..\include\GCore\gmap.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmemorypool.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gmultimap.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
@@ -339,16 +336,7 @@
     <ClInclude Include="..\..\..\include\GCore\gorderset.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\greferencecounter.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gset.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsharedpointer.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\guniquepointer.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gunordermap.h">
@@ -361,9 +349,6 @@
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gvector.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gweakpointer.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\private\GCore\gfile_ex.h">
@@ -575,6 +560,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gclasscode.h">
       <Filter>头文件\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gmempool.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gsharedptr.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\guniqueptr.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gweakptr.h">
+      <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\grefcounter.h">
+      <Filter>头文件\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -850,9 +850,6 @@
     <None Include="..\..\..\include\GCore\gmath.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gmemorypool.inl">
-      <Filter>头文件\_inline</Filter>
-    </None>
     <None Include="..\..\..\include\GCore\gnew.inl">
       <Filter>头文件\_inline</Filter>
     </None>
@@ -868,16 +865,10 @@
     <None Include="..\..\..\include\GCore\gqueue.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\greferencecounter.inl">
-      <Filter>头文件\_inline</Filter>
-    </None>
     <None Include="..\..\..\include\GCore\grtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gseries.inl">
-      <Filter>头文件\_inline</Filter>
-    </None>
-    <None Include="..\..\..\include\GCore\gsharedpointer.inl">
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gsort.inl">
@@ -893,9 +884,6 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gtuple.inl">
-      <Filter>头文件\_inline</Filter>
-    </None>
-    <None Include="..\..\..\include\GCore\guniquepointer.inl">
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gunordermap.inl">
@@ -953,6 +941,18 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gdlist.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gmempool.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gsharedptr.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\guniqueptr.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\grefcounter.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

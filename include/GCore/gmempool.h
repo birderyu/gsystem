@@ -13,13 +13,13 @@ namespace gsystem { // gsystem
 template<gsize UNIT_SIZE,
 	guint16 INIT_SIZE = 512,
 	guint16 GROW_SIZE = 1024>
-class GAPI GMemoryPool
+class GAPI GMemPool
 {
 	static_assert(INIT_SIZE > 0, "memory pool initial size must greater than zero.");
 	static_assert(GROW_SIZE > 0, "memory pool grow size must greater than zero.");
 
 	// 内存池单元
-	struct GMemoryCell
+	struct GMemCell
 	{
 		// 该内存块的大小，以字节为单位
 		gsize m_nSize;
@@ -31,12 +31,12 @@ class GAPI GMemoryPool
 		guint16 m_nFirst;
 
 		// 指向下一个内存块
-		GMemoryCell *m_pNext;
+		GMemCell *m_pNext;
 
 		//用于标记分配单元开始的位置，分配单元从m_bData的位置开始
 		gbyte m_bData[1];
 
-		GMemoryCell(gsize unit_size, guint16 unit_amount)
+		GMemCell(gsize unit_size, guint16 unit_amount)
 			: m_nSize(unit_amount * unit_size)
 			, m_nFree(unit_amount - 1)   // 构造的时候，就已将第一个单元分配出去了，所以减一
 			, m_nFirst(1)                // 同上
@@ -52,7 +52,7 @@ class GAPI GMemoryPool
 			}
 		}
 
-		~GMemoryCell()
+		~GMemCell()
 		{
 			if (m_pNext)
 			{
@@ -77,12 +77,12 @@ class GAPI GMemoryPool
 	};
 
 public:
-	GMemoryPool()
+	GMemPool()
 		: m_pList(GNULL)
 	{
 
 	}
-	~GMemoryPool()
+	~GMemPool()
 	{
 		if (m_pList)
 		{
@@ -95,12 +95,12 @@ public:
 	{
 		if (!m_pList)
 		{
-			m_pList = new(m_nUnitSize, INIT_SIZE) GMemoryCell(m_nUnitSize, INIT_SIZE);
+			m_pList = new(m_nUnitSize, INIT_SIZE) GMemCell(m_nUnitSize, INIT_SIZE);
 			return (gptr)m_pList->m_bData;
 		}
 
 		// 找到符合条件的内存块
-		GMemoryCell* block = m_pList;
+		GMemCell* block = m_pList;
 		while (block && 0 == block->m_nFree)
 		{
 			block = block->m_pNext;
@@ -117,7 +117,7 @@ public:
 		else
 		{
 			// 没有找到，说明原来的内存块都满了，要再次分配
-			block = new(m_nUnitSize, GROW_SIZE) GMemoryCell(m_nUnitSize, GROW_SIZE);
+			block = new(m_nUnitSize, GROW_SIZE) GMemCell(m_nUnitSize, GROW_SIZE);
 
 			// 进行一次插入操作
 			block->m_pNext = m_pList;
@@ -135,8 +135,8 @@ public:
 			return;
 		}
 		//找到p所在的内存块
-		GMemoryCell* block = m_pList;
-		GMemoryCell* pre_block = GNULL;
+		GMemCell* block = m_pList;
+		GMemCell* pre_block = GNULL;
 		while (block != GNULL && (m_pList->m_bData > free || block->m_bData + block->m_nSize < free))
 		{
 			pre_block = block;
@@ -178,11 +178,11 @@ public:
 
 private:
 	const static gsize m_nUnitSize;
-	GMemoryCell *m_pList;	// 内存块链表
+	GMemCell *m_pList;	// 内存块链表
 };
 
 } // namespace gsystem
 
-#include "gmemorypool.inl"
+#include "gmempool.inl"
 
 #endif // _CORE_MEMORY_POOL_H_

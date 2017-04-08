@@ -21,8 +21,8 @@ namespace gsystem { // gsystem
 	class GObject;
 	class GString;
 	class GBytes;
-	template <typename ClassT> class GSharedPointer;
-	typedef GSharedPointer<GObject> GObjectPtr;
+	template <typename ClassT> class GSharedPtr;
+	typedef GSharedPtr<GObject> GObjectPtr;
 } // namespace gsystem
 
 namespace gsystem { // gsystem

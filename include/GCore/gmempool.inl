@@ -45,7 +45,7 @@ struct GAligment<4>
 namespace gsystem { // gsystem
 
 template<gsize UNIT_SIZE, guint16 INIT_SIZE, guint16 GROW_SIZE>
-const gsize GMemoryPool<UNIT_SIZE, INIT_SIZE, GROW_SIZE>::m_nUnitSize
+const gsize GMemPool<UNIT_SIZE, INIT_SIZE, GROW_SIZE>::m_nUnitSize
 	= detail::mempool::GAligment<UNIT_SIZE>::value;
 
 } // namespace gsystem

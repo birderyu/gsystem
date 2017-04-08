@@ -4,34 +4,34 @@
 namespace gsystem { // gsystem
 
 template <typename ClassT>
-GINLINE GUniquePointer<ClassT>::GUniquePointer(ClassT *ptr)
+GINLINE GUniquePtr<ClassT>::GUniquePtr(ClassT *ptr)
 	: m_pPointer(ptr)
 {
 
 }
 
 template <typename ClassT>
-GINLINE GUniquePointer<ClassT>::GUniquePointer(GUniquePointer<ClassT> &&ptr)
+GINLINE GUniquePtr<ClassT>::GUniquePtr(GUniquePtr<ClassT> &&ptr)
 	: m_pPointer(ptr.m_pPointer)
 {
 	ptr.m_pPointer = GNULL;
 }
 
 template <typename ClassT>
-GINLINE GUniquePointer<ClassT>::~GUniquePointer()
+GINLINE GUniquePtr<ClassT>::~GUniquePtr()
 {
 	delete m_pPointer;
 }
 
 template <typename ClassT>
-GINLINE gvoid GUniquePointer<ClassT>::Reset(ClassT *ptr)
+GINLINE gvoid GUniquePtr<ClassT>::Reset(ClassT *ptr)
 {
 	delete m_pPointer;
 	m_pPointer = ptr;
 }
 
 template <typename ClassT>
-GINLINE ClassT *GUniquePointer<ClassT>::Release()
+GINLINE ClassT *GUniquePtr<ClassT>::Release()
 {
 	ClassT *ptr = m_pPointer;
 	m_pPointer = GNULL;
@@ -39,13 +39,13 @@ GINLINE ClassT *GUniquePointer<ClassT>::Release()
 }
 
 template <typename ClassT>
-GINLINE GUniquePointer<ClassT>::operator gbool() const
+GINLINE GUniquePtr<ClassT>::operator gbool() const
 {
 	return m_pPointer != GNULL;
 }
 
 template <typename ClassT>
-GINLINE GUniquePointer<ClassT> &GUniquePointer<ClassT>::operator=(GUniquePointer<ClassT> &&ptr)
+GINLINE GUniquePtr<ClassT> &GUniquePtr<ClassT>::operator=(GUniquePtr<ClassT> &&ptr)
 {
 	if (this == &ptr)
 	{
@@ -57,33 +57,33 @@ GINLINE GUniquePointer<ClassT> &GUniquePointer<ClassT>::operator=(GUniquePointer
 }
 
 template <typename ClassT>
-GINLINE ClassT &GUniquePointer<ClassT>::operator*()
+GINLINE ClassT &GUniquePtr<ClassT>::operator*()
 {
 	return *m_pPointer;
 }
 
 template <typename ClassT>
-GINLINE const ClassT &GUniquePointer<ClassT>::operator*() const
+GINLINE const ClassT &GUniquePtr<ClassT>::operator*() const
 {
 	return *m_pPointer;
 }
 
 template <typename ClassT>
-GINLINE ClassT *GUniquePointer<ClassT>::operator->()
+GINLINE ClassT *GUniquePtr<ClassT>::operator->()
 {
 	return m_pPointer;
 }
 
 template <typename ClassT>
-GINLINE const ClassT *GUniquePointer<ClassT>::operator->() const
+GINLINE const ClassT *GUniquePtr<ClassT>::operator->() const
 {
 	return m_pPointer;
 }
 
 template<typename ClassT, typename... TS>
-GINLINE GUniquePointer<ClassT> GMakeUnique(TS&&... args)
+GINLINE GUniquePtr<ClassT> GMakeUnique(TS&&... args)
 {	// make a unique_ptr
-	return GUniquePointer<ClassT>(new ClassT(GForward<TS>(args)...));
+	return GUniquePtr<ClassT>(new ClassT(GForward<TS>(args)...));
 }
 
 } // namespace gsystem

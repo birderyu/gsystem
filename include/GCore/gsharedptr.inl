@@ -4,28 +4,28 @@
 namespace gsystem { // gsystem
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT>::GSharedPointer(ClassT *ptr, gsize count)
-: m_pRefCounter(new GReferenceCounter<ClassT>(ptr, count))
+GINLINE GSharedPtr<ClassT>::GSharedPtr(ClassT *ptr, gsize count)
+: m_pRefCounter(new GRefCounter<ClassT>(ptr, count))
 {
 
 }
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT>::GSharedPointer(const GSharedPointer<ClassT> &ptr)
+GINLINE GSharedPtr<ClassT>::GSharedPtr(const GSharedPtr<ClassT> &ptr)
 : m_pRefCounter(ptr.m_pRefCounter)
 {
 	m_pRefCounter->Add();
 }
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT>::GSharedPointer(GSharedPointer<ClassT> &&ptr)
+GINLINE GSharedPtr<ClassT>::GSharedPtr(GSharedPtr<ClassT> &&ptr)
 : m_pRefCounter(ptr.m_pRefCounter)
 {
 	ptr.m_pRefCounter = GNULL;
 }
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT>::~GSharedPointer()
+GINLINE GSharedPtr<ClassT>::~GSharedPtr()
 {
 	if (GNULL != m_pRefCounter)
 	{
@@ -34,33 +34,33 @@ GINLINE GSharedPointer<ClassT>::~GSharedPointer()
 }
 
 template <typename ClassT>
-GINLINE gvoid GSharedPointer<ClassT>::Reset(ClassT *ptr, gsize count)
+GINLINE gvoid GSharedPtr<ClassT>::Reset(ClassT *ptr, gsize count)
 {
 	if (GNULL != m_pRefCounter)
 	{
 		m_pRefCounter->Release();
 	}
-	m_pRefCounter = new GReferenceCounter<ClassT>(ptr, count);
+	m_pRefCounter = new GRefCounter<ClassT>(ptr, count);
 }
 
 template <typename ClassT>
 template <typename NexClassT>
-GINLINE GSharedPointer<NexClassT> GSharedPointer<ClassT>::DynamicConvertTo()
+GINLINE GSharedPtr<NexClassT> GSharedPtr<ClassT>::DynamicConvertTo()
 {
 	if (GNULL == m_pRefCounter || GNULL == m_pRefCounter->Pointer())
 	{
-		return GSharedPointer<NexClassT>(GNULL);
+		return GSharedPtr<NexClassT>(GNULL);
 	}
 	NexClassT *ptr = dynamic_cast<NexClassT*>(m_pRefCounter->Pointer());
 	if (GNULL == ptr)
 	{
-		return GSharedPointer<NexClassT>(GNULL);
+		return GSharedPtr<NexClassT>(GNULL);
 	}
-	return GSharedPointer<NexClassT>(ptr, m_pRefCounter->Add());
+	return GSharedPtr<NexClassT>(ptr, m_pRefCounter->Add());
 }
 
 template <typename ClassT>
-GINLINE gbool GSharedPointer<ClassT>::Shared() const
+GINLINE gbool GSharedPtr<ClassT>::Shared() const
 {
 	if (GNULL == m_pRefCounter)
 	{
@@ -70,14 +70,14 @@ GINLINE gbool GSharedPointer<ClassT>::Shared() const
 }
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT>::operator gbool() const
+GINLINE GSharedPtr<ClassT>::operator gbool() const
 {
 	return GNULL != m_pRefCounter &&
 		GNULL != m_pRefCounter->Pointer();
 }
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT> &GSharedPointer<ClassT>::operator=(const GSharedPointer<ClassT> &ptr)
+GINLINE GSharedPtr<ClassT> &GSharedPtr<ClassT>::operator=(const GSharedPtr<ClassT> &ptr)
 {
 	if (this == &ptr)
 	{
@@ -97,7 +97,7 @@ GINLINE GSharedPointer<ClassT> &GSharedPointer<ClassT>::operator=(const GSharedP
 }
 
 template <typename ClassT>
-GINLINE GSharedPointer<ClassT> &GSharedPointer<ClassT>::operator=(GSharedPointer<ClassT> &&ptr)
+GINLINE GSharedPtr<ClassT> &GSharedPtr<ClassT>::operator=(GSharedPtr<ClassT> &&ptr)
 {
 	if (this == &ptr)
 	{
@@ -113,21 +113,21 @@ GINLINE GSharedPointer<ClassT> &GSharedPointer<ClassT>::operator=(GSharedPointer
 }
 
 template <typename ClassT>
-GINLINE ClassT &GSharedPointer<ClassT>::operator*()
+GINLINE ClassT &GSharedPtr<ClassT>::operator*()
 {
 	GASSERT(m_pRefCounter);
 	return *(m_pRefCounter->Pointer());
 }
 
 template <typename ClassT>
-GINLINE const ClassT &GSharedPointer<ClassT>::operator*() const
+GINLINE const ClassT &GSharedPtr<ClassT>::operator*() const
 {
 	GASSERT(m_pRefCounter);
 	return *(m_pRefCounter->Pointer());
 }
 
 template <typename ClassT>
-GINLINE ClassT* GSharedPointer<ClassT>::operator->()
+GINLINE ClassT* GSharedPtr<ClassT>::operator->()
 {
 	if (GNULL == m_pRefCounter)
 	{
@@ -137,7 +137,7 @@ GINLINE ClassT* GSharedPointer<ClassT>::operator->()
 }
 
 template <typename ClassT>
-GINLINE const ClassT* GSharedPointer<ClassT>::operator->() const
+GINLINE const ClassT* GSharedPtr<ClassT>::operator->() const
 {
 	if (GNULL == m_pRefCounter)
 	{
@@ -147,9 +147,9 @@ GINLINE const ClassT* GSharedPointer<ClassT>::operator->() const
 }
 
 template<typename ClassT, typename... TS>
-GINLINE GSharedPointer<ClassT> GMakeShared(TS&&... args)
+GINLINE GSharedPtr<ClassT> GMakeShared(TS&&... args)
 {
-	return GSharedPointer<ClassT>(new ClassT(GForward<TS>(args)...), 1);
+	return GSharedPtr<ClassT>(new ClassT(GForward<TS>(args)...), 1);
 }
 
 } // namespace gsystem

@@ -7,18 +7,18 @@
 namespace gsystem { // gsystem
 
 template <typename ClassT>
-class GUniquePointer
+class GUniquePtr
 	: private GNocopyable
 {
 public:
-	GUniquePointer(ClassT *ptr = GNULL);
-	GUniquePointer(GUniquePointer<ClassT> &&ptr);
-	~GUniquePointer();
+	GUniquePtr(ClassT *ptr = GNULL);
+	GUniquePtr(GUniquePtr<ClassT> &&ptr);
+	~GUniquePtr();
 	gvoid Reset(ClassT *);
 	ClassT *Release();
 
 	operator gbool() const;
-	GUniquePointer<ClassT> &operator=(GUniquePointer<ClassT> &&ptr);
+	GUniquePtr<ClassT> &operator=(GUniquePtr<ClassT> &&ptr);
 	ClassT &operator*();
 	const ClassT &operator*() const;
 	ClassT *operator->();
@@ -28,10 +28,10 @@ private:
 	ClassT *m_pPointer;
 };
 
-template<typename ClassT, typename... TS> GUniquePointer<ClassT> GMakeUnique(TS&&... args);
+template<typename ClassT, typename... TS> GUniquePtr<ClassT> GMakeUnique(TS&&... args);
 
 } // namespace gsystem
 
-#include "guniquepointer.inl"
+#include "guniqueptr.inl"
 
 #endif // _CORE_UNIQUE_POINTER_H_
