@@ -2,6 +2,7 @@
 #define _CORE_STRING_H_
 
 #include "gseries.h"
+#include "gserializable.h"
 
 namespace gsystem { // gsystem
 	class GVariety;
@@ -19,6 +20,7 @@ namespace gsystem { // gsystem
 ****************************************************************************/
 class GAPI GString final 
 	: public GArray<gchar>
+	, virtual public GSerializable
 {
 	friend class GVariety;
 	friend GAPI GString operator+(const GString &s1, const GString &s2);
@@ -101,8 +103,12 @@ public: // 数字转换
 
 public: // Object
 	const GObject *Boxing() const;
-	guint ClassCode() const;
 	GString ToString() const;
+
+public: // Serializable
+	guint ClassCode() const;
+	gbool Serialize(GArchive &archive) const;
+	gbool Deserialize(GArchive &archive);
 
 public: // 运算符重载
 	GString &operator=(const GString &str);

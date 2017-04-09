@@ -21,7 +21,13 @@ public:
 	virtual guint PopCode() = 0;
 
 public:
+	virtual gvoid Start() = 0;
+	virtual gvoid Stop(gbool saving = true) = 0;
+
+public:
 	virtual GArchive &Attach(gcbytes bytes, gsize size) = 0;
+	virtual GArchive &Attach(gcstring str, gsize size) = 0;
+
 	virtual GArchive &Detach(gbytes bytes, gsize size) = 0;
 
 public:

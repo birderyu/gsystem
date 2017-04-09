@@ -1,5 +1,6 @@
 #include "gstring.h"
 #include "gclasscode.h"
+#include "garchive.h"
 
 namespace gsystem { // gsystem
 
@@ -8,14 +9,26 @@ const GObject *GString::Boxing() const
 	return dynamic_cast<const GObject *>(this);
 }
 
+GString GString::ToString() const
+{
+	return GString(m_tString);
+}
+
 guint GString::ClassCode() const
 {
 	return static_cast<guint>(GClassCode::String);
 }
 
-GString GString::ToString() const
+gbool GString::Serialize(GArchive &archive) const
 {
-	return GString(m_tString);
+	archive.Attach(CString(), Size());
+	return true;
+}
+
+gbool GString::Deserialize(GArchive &archive)
+{
+	// TODO
+	return false;
 }
 
 } // namespace gsystem

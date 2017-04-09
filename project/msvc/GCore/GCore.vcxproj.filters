@@ -115,6 +115,9 @@
     <Filter Include="源文件\Serialization">
       <UniqueIdentifier>{fb194a91-1f16-4a4a-afaf-533ca8c2aa7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Exception">
+      <UniqueIdentifier>{606bbb14-59b7-4cc3-b626-b752fd3602ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\thirds\GCore\dlmalloc.h">
@@ -575,6 +578,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\grefcounter.h">
       <Filter>头文件\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gexception.h">
+      <Filter>头文件\Exception</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

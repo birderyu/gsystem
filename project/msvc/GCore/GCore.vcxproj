@@ -173,6 +173,7 @@
     <ClInclude Include="..\..\..\include\GCore\gdtdef.h" />
     <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
     <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
+    <ClInclude Include="..\..\..\include\GCore\gexception.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\GCore\glog.h" />
     <ClInclude Include="..\..\..\include\GCore\gserializable.h" />
