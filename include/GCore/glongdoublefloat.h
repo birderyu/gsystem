@@ -27,7 +27,7 @@ public:
 	GLongDoubleFloat(glongdouble val = 0.0);
 	GLongDoubleFloat(const GLongDoubleFloat &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool IsNaN() const;
 };
 

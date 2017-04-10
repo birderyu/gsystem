@@ -17,7 +17,7 @@ public:
 	GLongInteger(glong val = 0L);
 	GLongInteger(const GLongInteger &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GLongInteger GLongInt;

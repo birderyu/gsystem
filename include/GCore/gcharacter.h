@@ -12,7 +12,7 @@ public:
 	GCharacter(gchar val = '\0');
 	GCharacter(const GCharacter &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GCharacter GChar;

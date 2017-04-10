@@ -78,7 +78,7 @@ GDoubleFloat::GDoubleFloat(const GDoubleFloat &val)
 
 }
 
-guint GDoubleFloat::ClassCode() const
+guint GDoubleFloat::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::DoubleFloat);
 }

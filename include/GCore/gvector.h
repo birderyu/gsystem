@@ -163,7 +163,7 @@ public:
 
 	//gvoid MemCopyFrom(const GVector<DataT> &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

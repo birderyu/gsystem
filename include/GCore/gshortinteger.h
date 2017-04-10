@@ -18,7 +18,7 @@ public:
 	GShortInteger(const GShortInteger &);
 	virtual ~GShortInteger();
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GShortInteger GShortInt;

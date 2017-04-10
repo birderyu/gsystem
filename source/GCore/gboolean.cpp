@@ -27,7 +27,7 @@ GBoolean::GBoolean(const GBoolean &val)
 
 }
 
-guint GBoolean::ClassCode() const
+guint GBoolean::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::Boolean);
 }

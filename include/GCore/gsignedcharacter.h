@@ -13,7 +13,7 @@ public:
 	GSignedCharacter(const GSignedCharacter &);
 	virtual ~GSignedCharacter();
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GSignedCharacter GSCharacter;

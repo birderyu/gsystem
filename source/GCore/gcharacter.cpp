@@ -13,7 +13,7 @@ GCharacter::GCharacter(const GCharacter &val)
 
 }
 
-guint GCharacter::ClassCode() const
+guint GCharacter::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::Character);
 }

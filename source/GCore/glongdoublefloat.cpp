@@ -78,7 +78,7 @@ GLongDoubleFloat::GLongDoubleFloat(const GLongDoubleFloat &val)
 
 }
 
-guint GLongDoubleFloat::ClassCode() const
+guint GLongDoubleFloat::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::LongDoubleFloat);
 }

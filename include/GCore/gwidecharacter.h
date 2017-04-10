@@ -12,7 +12,7 @@ public:
 	GWideCharacter(gwchar val);
 	GWideCharacter(const GWideCharacter &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GWideCharacter GWCharacter;

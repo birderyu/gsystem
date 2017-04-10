@@ -18,7 +18,7 @@ public:
 	GUnsignedInteger(const GUnsignedInteger &);
 	virtual ~GUnsignedInteger();
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GUnsignedInteger GUnsignedInt;

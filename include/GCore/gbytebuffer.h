@@ -45,7 +45,7 @@ public:
 	gbyte &operator[](gsize);
 	const gbyte &operator[](gsize) const;
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

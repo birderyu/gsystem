@@ -38,7 +38,7 @@ GUnsignedInteger::~GUnsignedInteger()
 
 }
 
-guint GUnsignedInteger::ClassCode() const
+guint GUnsignedInteger::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::UnsignedInteger);
 }

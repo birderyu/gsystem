@@ -85,7 +85,7 @@ GINLINE guint GPackage<ValueT>::HashCode() const
 }
 
 template <typename ValueT>
-GINLINE guint GPackage<ValueT>::ClassCode() const
+GINLINE guint GPackage<ValueT>::ClassCode() const GNOEXCEPT
 {
 	return G_ERROR_CLASS_CODE;
 }

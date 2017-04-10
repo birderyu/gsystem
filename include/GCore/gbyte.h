@@ -12,7 +12,7 @@ public:
 	GByte(gbyte val = 0);
 	GByte(const GByte &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 } // namespace gsystem

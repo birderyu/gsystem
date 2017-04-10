@@ -18,7 +18,7 @@ public:
 	GUnsignedLongLongInteger(const GUnsignedLongLongInteger &);
 	virtual ~GUnsignedLongLongInteger();
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GUnsignedLongLongInteger GUnsignedLongLongInt;

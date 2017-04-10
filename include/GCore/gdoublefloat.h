@@ -27,7 +27,7 @@ public:
 	GDoubleFloat(gdouble val = 0.0);
 	GDoubleFloat(const GDoubleFloat &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool IsNaN() const;
 };
 

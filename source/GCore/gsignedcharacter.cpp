@@ -19,7 +19,7 @@ GSignedCharacter::~GSignedCharacter()
 
 }
 
-guint GSignedCharacter::ClassCode() const
+guint GSignedCharacter::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::SignedCharacter);
 }

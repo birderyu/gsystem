@@ -38,7 +38,7 @@ GShortInteger::~GShortInteger()
 
 }
 
-guint GShortInteger::ClassCode() const
+guint GShortInteger::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::ShortInteger);
 }

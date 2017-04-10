@@ -38,7 +38,7 @@ GLongLongInteger::~GLongLongInteger()
 
 }
 
-guint GLongLongInteger::ClassCode() const
+guint GLongLongInteger::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::LongLongInteger);
 }

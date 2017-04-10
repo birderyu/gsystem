@@ -121,7 +121,7 @@ public: // Object
 	guint HashCode() const;
 	gbool Equals(const GObject *obj) const;
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

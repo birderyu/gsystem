@@ -18,7 +18,7 @@ public:
 	GUnsignedShortInteger(const GUnsignedShortInteger &);
 	virtual ~GUnsignedShortInteger();
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GUnsignedShortInteger GUnsignedShortInt;

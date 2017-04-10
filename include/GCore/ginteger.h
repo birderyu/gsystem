@@ -20,7 +20,7 @@ public:
 	GInteger(gint val = 0);
 	GInteger(const GInteger &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GInteger GInt;

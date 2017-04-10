@@ -33,7 +33,7 @@ GUnsignedLongInteger::GUnsignedLongInteger(const GUnsignedLongInteger &val)
 
 }
 
-guint GUnsignedLongInteger::ClassCode() const
+guint GUnsignedLongInteger::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::UnsignedLongInteger);
 }

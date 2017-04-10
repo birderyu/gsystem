@@ -29,7 +29,7 @@ public:
 	GSingleFloat(gfloat val = 0.0F);
 	GSingleFloat(const GSingleFloat &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool IsNaN() const;
 };
 

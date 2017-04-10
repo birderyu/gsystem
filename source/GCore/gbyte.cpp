@@ -14,7 +14,7 @@ GByte::GByte(const GByte &val)
 
 }
 
-guint GByte::ClassCode() const
+guint GByte::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::Byte);
 }

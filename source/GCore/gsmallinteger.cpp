@@ -33,7 +33,7 @@ GSmallInteger::GSmallInteger(const GSmallInteger &val)
 
 }
 
-guint GSmallInteger::ClassCode() const
+guint GSmallInteger::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::SmallInteger);
 }

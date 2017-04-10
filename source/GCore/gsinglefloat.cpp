@@ -88,7 +88,7 @@ GSingleFloat::GSingleFloat(const GSingleFloat &val)
 
 }
 
-guint GSingleFloat::ClassCode() const
+guint GSingleFloat::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::SingleFloat);
 }

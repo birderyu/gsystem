@@ -118,6 +118,9 @@
     <Filter Include="头文件\Exception">
       <UniqueIdentifier>{606bbb14-59b7-4cc3-b626-b752fd3602ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Exception">
+      <UniqueIdentifier>{1be601c9-ca32-4d99-beaa-d13b192e83cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\thirds\GCore\dlmalloc.h">
@@ -582,6 +585,21 @@
     <ClInclude Include="..\..\..\include\GCore\gexception.h">
       <Filter>头文件\Exception</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\goutofmemoryexception.h">
+      <Filter>头文件\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\goutofrangeexception.h">
+      <Filter>头文件\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gsystemexception.h">
+      <Filter>头文件\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gexceptdef.h">
+      <Filter>头文件\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gunclassifiedexception.h">
+      <Filter>头文件\Exception</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">
@@ -805,6 +823,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gserializable.cpp">
       <Filter>源文件\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\gexception.cpp">
+      <Filter>源文件\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\gsystemexception.cpp">
+      <Filter>源文件\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\goutofmemoryexception.cpp">
+      <Filter>源文件\Exception</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

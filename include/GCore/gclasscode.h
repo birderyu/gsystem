@@ -49,6 +49,7 @@ enum class GClassCode
 	RedBlackTree,
 	String,
 	StringBuffer,
+	StringList,
 	Bytes,
 	ByteBuffer,
 	Vector,
@@ -60,6 +61,7 @@ enum class GClassCode
 	Date,
 	Time,
 	DateTime,
+	Exception,
 };
 
 }

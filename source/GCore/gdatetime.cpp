@@ -1052,7 +1052,7 @@ gbool GDateTime::Equals(const GObject *obj) const
 	return *this == *dt;
 }
 
-guint GDateTime::ClassCode() const
+guint GDateTime::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::DateTime);
 }

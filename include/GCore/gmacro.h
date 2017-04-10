@@ -98,6 +98,9 @@
 #	define GASSERT(e) do { } while ((false) && (e))
 #endif // GDEBUG
 
+#define GLINE __LINE__
+#define GFILE __FILE__
+
 #if defined (i386) || defined (__i386__) || defined (_M_IX86) || \
 	defined (vax) || defined (__alpha) || defined (__LITTLE_ENDIAN__) || \
 	defined (ARM) || defined (_M_IA64) || defined (_M_AMD64) || \

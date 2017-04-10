@@ -14,7 +14,7 @@ GString GString::ToString() const
 	return GString(m_tString);
 }
 
-guint GString::ClassCode() const
+guint GString::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::String);
 }

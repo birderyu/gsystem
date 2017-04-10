@@ -17,7 +17,7 @@ public:
 	GUnsignedLongInteger(gulong val = 0UL);
 	GUnsignedLongInteger(const GUnsignedLongInteger &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GUnsignedLongInteger GUnsignedLongInt;

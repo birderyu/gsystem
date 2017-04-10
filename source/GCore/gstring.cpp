@@ -1,6 +1,10 @@
 #include "gstring.h"
 #include "gstringlist.h"
 #include "gcstring.h"
+#include <stdarg.h>
+#include <stdio.h>
+
+#define G_STRING_FORMAT_BUFFER_SIZE 4096
 
 namespace gsystem { // gsystem
 
@@ -17,6 +21,18 @@ GString GString::ReferenceOf(gcstring str)
 GString GString::ReferenceOf(const GString &str)
 {
 	return ReferenceOf(str.CString());
+}
+
+GString GString::Format(gcstring format, ...)
+{
+	// TODO，模范QString自己实现一套
+	va_list ap;
+	va_start(ap, format);
+	gchar limit[G_STRING_FORMAT_BUFFER_SIZE];
+	limit[0] = '\0';
+	vsnprintf_s(limit, G_STRING_FORMAT_BUFFER_SIZE, format, ap);
+	va_end(ap);
+	return GString(limit);
 }
 
 GString::GString()

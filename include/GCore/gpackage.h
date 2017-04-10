@@ -53,7 +53,7 @@ public:
 	gbool Equals(ValueType) const;
 	gbool Equals(const GPackage<ValueT> &) const;
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

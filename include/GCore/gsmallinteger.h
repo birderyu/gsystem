@@ -17,7 +17,7 @@ public:
 	GSmallInteger(gsmall val = 0);
 	GSmallInteger(const GSmallInteger &);
 
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GSmallInteger GSmallInt;

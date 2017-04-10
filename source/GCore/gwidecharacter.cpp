@@ -13,7 +13,7 @@ GWideCharacter::GWideCharacter(const GWideCharacter &val)
 
 }
 
-guint GWideCharacter::ClassCode() const
+guint GWideCharacter::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::WindCharacter);
 }

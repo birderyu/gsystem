@@ -48,6 +48,7 @@ public: // 静态方法
 
 	static GString ReferenceOf(gcstring str);
 	static GString ReferenceOf(const GString &str);
+	static GString Format(gcstring format, ...);
 
 public: // 构造方法
 	GString();
@@ -106,7 +107,7 @@ public: // Object
 	GString ToString() const;
 
 public: // Serializable
-	guint ClassCode() const;
+	guint ClassCode() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

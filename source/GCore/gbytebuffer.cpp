@@ -92,7 +92,7 @@ const gbyte &GByteBuffer::operator[](gsize pos) const
 	return m_tBytes[pos];
 }
 
-guint GByteBuffer::ClassCode() const
+guint GByteBuffer::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::ByteBuffer);
 }

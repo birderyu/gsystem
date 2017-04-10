@@ -11,7 +11,7 @@ class GAPI GUnsignedCharacter
 public:
 	GUnsignedCharacter(guchar val = '\0');
 	GUnsignedCharacter(const GUnsignedCharacter &);
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GUnsignedCharacter GUCharacter;

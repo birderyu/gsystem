@@ -33,7 +33,7 @@ GInteger::GInteger(const GInteger &val)
 
 }
 
-guint GInteger::ClassCode() const
+guint GInteger::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::Integer);
 }

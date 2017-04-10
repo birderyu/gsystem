@@ -18,7 +18,7 @@ public:
 	GLongLongInteger(const GLongLongInteger &);
 	virtual ~GLongLongInteger();
 
-	virtual guint ClassCode() const;
+	virtual guint ClassCode() const GNOEXCEPT;
 };
 
 typedef GLongLongInteger GLongLongInt;

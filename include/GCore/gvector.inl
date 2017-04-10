@@ -601,7 +601,7 @@ GINLINE const DataT *GVector<DataT>::Tail() const
 }
 
 template <typename DataT> GINLINE
-guint GVector<DataT>::ClassCode() const
+guint GVector<DataT>::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::Vector);
 }

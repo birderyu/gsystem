@@ -4,11 +4,6 @@
 #include "binaryheap_test.h"
 #include "stack_test.h"
 #include "queue_test.h"
-#include "gfunctional.h"
-
-#include <string>
-#include "gserialize.h"
-#include "gserializable.h"
 
 using namespace gsystem;
 

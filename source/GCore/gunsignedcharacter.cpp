@@ -14,7 +14,7 @@ GUnsignedCharacter::GUnsignedCharacter(const GUnsignedCharacter &val)
 
 }
 
-guint GUnsignedCharacter::ClassCode() const
+guint GUnsignedCharacter::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::UnsignedCharacter);
 }

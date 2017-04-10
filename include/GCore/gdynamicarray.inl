@@ -300,7 +300,7 @@ gbool GDynamicArray<DataT>::operator==(const GDynamicArray<DataT> &arr)
 }
 
 template <typename DataT>
-GINLINE guint GDynamicArray<DataT>::ClassCode() const
+GINLINE guint GDynamicArray<DataT>::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::DynamicArray);
 }
