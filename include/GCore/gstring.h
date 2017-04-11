@@ -20,7 +20,7 @@ namespace gsystem { // gsystem
 ****************************************************************************/
 class GAPI GString final 
 	: public GArray<gchar>
-	, virtual public GSerializable
+	, public GSerializable
 {
 	friend class GVariety;
 	friend GAPI GString operator+(const GString &s1, const GString &s2);
@@ -108,6 +108,7 @@ public: // Object
 
 public: // Serializable
 	guint ClassCode() const GNOEXCEPT;
+	GString ClassName() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

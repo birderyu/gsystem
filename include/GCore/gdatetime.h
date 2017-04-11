@@ -122,6 +122,7 @@ public: // Object
 	gbool Equals(const GObject *obj) const;
 
 	guint ClassCode() const GNOEXCEPT;
+	GString ClassName() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

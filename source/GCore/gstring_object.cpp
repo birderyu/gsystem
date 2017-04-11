@@ -19,6 +19,11 @@ guint GString::ClassCode() const GNOEXCEPT
 	return static_cast<guint>(GClassCode::String);
 }
 
+GString GString::ClassName() const GNOEXCEPT
+{
+	return GString::ReferenceOf("gsystem::GString");
+}
+
 gbool GString::Serialize(GArchive &archive) const
 {
 	archive.Attach(CString(), Size());

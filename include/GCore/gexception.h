@@ -6,8 +6,8 @@
 #include "gstringlist.h"
 
 namespace gsystem {
-class GException;
-typedef GSharedPtr<GException> GExceptionPtr;
+	class GException;
+	typedef GSharedPtr<GException> GExceptionPtr;
 }
 
 namespace gsystem {
@@ -32,6 +32,7 @@ public:
 
 public:
 	guint ClassCode() const GNOEXCEPT;
+	GString ClassName() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

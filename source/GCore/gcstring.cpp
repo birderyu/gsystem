@@ -1,6 +1,7 @@
 #include "gcstring.h"
 #include "gmemory.h"
 #include <string.h>
+#include <ctype.h>
 
 #ifdef _MSC_VER
 #	ifndef G_USE_MSVC_STRCMP
@@ -239,6 +240,85 @@ gvoid GCString::MakeLower(gchar *c_str, gsize size)
 			c_str[i] += ('a' - 'A');
 		}
 	}
+}
+
+gint GCString::Matcher(gcstring src, gsize size, gchar ptn, gbool isSensitive)
+{
+	if (isSensitive)
+	{
+		ptn = G_CHAR_TO_LOWER(ptn);
+	}
+	for (gsize i = 0; i < size; ++i)
+	{
+		if (!isSensitive)
+		{
+			gchar _c = src[i];
+			_c = G_CHAR_TO_LOWER(_c);
+			if (_c == ptn)
+			{
+				return i;
+			}
+		}
+		else
+		{
+			if (src[i] == ptn)
+			{
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+
+gint GCString::Matcher(gcstring src, gsize slen, gcstring ptn, gsize plen, gbool isSensitive)
+{
+	if (plen == 0)
+	{
+		return -1;
+	}
+	if (plen == 1)
+	{
+		return GCString::Matcher(src, slen, ptn[0], isSensitive);
+	}
+
+	gsize i = 0, j = 0;
+	while (j < plen && i < slen) 
+	{
+		if (isSensitive)
+		{
+			// 大小写敏感
+			if (src[i] == ptn[j])
+			{
+				i++;
+				j++;
+			}
+			else
+			{
+				i = i - j + 1;
+				j = 0;
+			}
+		}
+		else
+		{
+			// 大小写不敏感
+			gchar c1 = G_CHAR_TO_UPPER(src[i]);
+			gchar c2 = G_CHAR_TO_UPPER(ptn[j]);
+			if (c1 == c2)
+			{
+				i++;
+				j++;
+			}
+			else
+			{
+				i = i - j + 1;
+				j = 0;
+			}
+		}
+	}
+	if (j == plen)
+		return i - plen;
+	else
+		return -1;
 }
 
 gbool GCString::Replace(const gchar *c_str, gsize len, 

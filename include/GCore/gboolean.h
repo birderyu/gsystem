@@ -16,6 +16,7 @@ public:
 	GBoolean(const GBoolean &);
 
 	guint ClassCode() const GNOEXCEPT;
+	GString ClassName() const GNOEXCEPT;
 };
 
 typedef GBoolean GBool;

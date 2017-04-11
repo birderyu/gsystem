@@ -25,7 +25,7 @@ GString GString::ReferenceOf(const GString &str)
 
 GString GString::Format(gcstring format, ...)
 {
-	// TODO，模范QString自己实现一套
+	// TODO，模仿QString自己实现一套
 	va_list ap;
 	va_start(ap, format);
 	gchar limit[G_STRING_FORMAT_BUFFER_SIZE];
@@ -272,23 +272,70 @@ GString &GString::Replace(const GString &from, const GString &to, gbool bIsSensi
 	return *this;
 }
 
-GStringList GString::Split(const GString &sSep, gbool bIgnoreEmpty, gbool bIsSensitive) const
+GStringList GString::Split(const GString &sep, gbool ignoreEmpty, gbool isSensitive) const
 {
-	// TODO
-	GStringList t;
-	return t;
+	GStringList strs;
+	if (sep.IsEmpty())
+	{
+		return strs;
+	}
+	GString str;
+	str.Reserve(Size() + sep.Size());
+	str.Append(*this);
+	str.Append(sep);
+	gsize size = str.Size();
+	for (gsize i = 0; i < size; ++i)
+	{
+		gsize pos = str.Find(sep, i, isSensitive);
+		if (pos < size)
+		{
+			if (ignoreEmpty)
+			{
+				// 忽略空格
+				GString res = SubString(i, pos - i).Trim();
+				if (!res.IsEmpty())
+				{
+					strs.Add(res);
+				}
+			}
+			else
+			{
+				strs.Add(SubString(i, pos - i));
+			}
+			i = pos + sep.Size() - 1;
+		}
+	}
+	return strs;
 }
 
-gsize GString::Find(gchar c, gsize start, gbool bIsSensitive) const
+gsize GString::Find(gchar c, gsize start, gbool isSensitive) const
 {
-	// TODO
-	return NULL_POS;
+	gsize size = Size();
+	if (start > size)
+	{
+		return NULL_POS;
+	}
+	gint pos = GCString::Matcher(CursorAt(start), size - start, c, isSensitive);
+	if (-1 == pos)
+	{
+		return NULL_POS;
+	}
+	return pos + start;
 }
 
-gsize GString::Find(const GString &str, gsize start, gbool bIsSensitive) const
+gsize GString::Find(const GString &str, gsize start, gbool isSensitive) const
 {
-	// TODO
-	return NULL_POS;
+	gsize size = Size();
+	if (start > size)
+	{
+		return NULL_POS;
+	}
+	gint pos = GCString::Matcher(CursorAt(start), size - start, str.CString(), str.Size(), isSensitive);
+	if (-1 == pos)
+	{
+		return NULL_POS;
+	}
+	return pos + start;
 }
 
 GString GString::SubString(gsize start, gsize size) const

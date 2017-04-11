@@ -17,6 +17,7 @@
 #include "gtype.h"
 
 namespace gsystem { // gsystem
+	class GString;
 	class GArchive;
 } // namespace gsystem
 
@@ -50,6 +51,15 @@ public:
 	**
 	****************************************************************************/
 	virtual guint ClassCode() const GNOEXCEPT = 0;
+
+	/****************************************************************************
+	**
+	** @name	ClassName
+	** @brief	返回当前类的类名
+	** @return	{GString} 类名
+	**
+	****************************************************************************/
+	//virtual GString ClassName() const GNOEXCEPT = 0;
 
 	/****************************************************************************
 	**

@@ -108,6 +108,11 @@ guint GException::ClassCode() const GNOEXCEPT
 	return static_cast<guint>(GClassCode::Exception);
 }
 
+GString GException::ClassName() const GNOEXCEPT
+{
+	return GString::ReferenceOf("gsystem::GException");
+}
+
 gbool GException::Serialize(GArchive &archive) const
 {
 	m_tMethodNames.Serialize(archive);

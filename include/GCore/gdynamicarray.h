@@ -4,6 +4,7 @@
 
 #include "garray.h"
 #include "gserializable.h"
+#include "gstring.h"
 
 namespace gsystem { // gsystem
 
@@ -67,6 +68,7 @@ public:
 
 	///
 	guint ClassCode() const GNOEXCEPT;
+	GString ClassName() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

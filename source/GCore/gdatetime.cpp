@@ -1057,6 +1057,11 @@ guint GDateTime::ClassCode() const GNOEXCEPT
 	return static_cast<guint>(GClassCode::DateTime);
 }
 
+GString GDateTime::ClassName() const GNOEXCEPT
+{
+	return GString::ReferenceOf("gsystem::GDateTime");
+}
+
 gbool GDateTime::Serialize(GArchive &archive) const
 {
 	if (!archive.Input())

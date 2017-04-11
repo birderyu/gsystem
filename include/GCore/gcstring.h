@@ -43,11 +43,17 @@ public:
 	static gvoid MakeUpper(gchar *c_str, gsize size);
 	static gvoid MakeLower(gchar *c_str, gsize size);
 
+	static gint Matcher(gcstring src, gsize size, gchar ptn, gbool isSensitive);
+	static gint Matcher(gcstring src, gsize slen, gcstring ptn, gsize plen, gbool isSensitive);
+
+	// Boyer-Moore匹配算法
+	//static gint BoyerMooreMatcher(gcstring src, gsize slen, gcstring ptn, gsize plen, gbool isSensitive);
+
 	// 注意：当返回值为false时，表示未做任何替换，此时c_str_out和out_len里的值可能是无效的
 	static gbool Replace(const gchar *c_str, gsize size,
 		const gchar *from, gsize from_size,
 		const gchar *to, gsize to_size,
-		gbool bIsSensitive,
+		gbool isSensitive,
 		gchar *c_str_out, gsize &out_size);
 };
 

@@ -11,7 +11,7 @@ GString &GString::operator=(const GString &str)
 	{
 		return *this;
 	}
-
+	
 	m_tString = str.m_tString;
 	return *this;
 }
@@ -59,6 +59,14 @@ gbool operator==(const GString &s1, const GString &s2)
 	if (&s1 == &s2)
 	{
 		return true;
+	}
+	if (s1.CString() == s2.CString())
+	{
+		return true;
+	}
+	if (s1.Size() != s2.Size())
+	{
+		return false;
 	}
 	return strcmp(s1.CString(), s2.CString()) == 0;
 }

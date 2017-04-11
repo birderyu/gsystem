@@ -32,4 +32,9 @@ guint GBoolean::ClassCode() const GNOEXCEPT
 	return static_cast<guint>(GClassCode::Boolean);
 }
 
+GString GBoolean::ClassName() const GNOEXCEPT
+{
+	return GString::ReferenceOf("gsystem::GBoolean");
+}
+
 } // namespace gsystem
