@@ -2,7 +2,7 @@
 #define _CORE_FILTER_H_
 
 #include "GCore/gobject.h"
-#include "GCore/gstring.h"
+#include "GCore/gstring8.h"
 
 class GFilter_Ex;
 

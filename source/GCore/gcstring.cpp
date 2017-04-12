@@ -23,7 +23,7 @@ gsystem::gint strncasecmp(const gsystem::gchar *s1, gsystem::gchar *s2, /*regist
 
 namespace gsystem { // gsystem
 
-gsize GCString::Size(gcstring c_str)
+gsize GCString::Size(gcstring8 c_str)
 {
 	if (GNULL == c_str)
 	{

@@ -3,7 +3,7 @@
 #define _CORE_TABLE_EX_H_
 
 #include "GCore/gglobal.h"
-#include "GCore/gstring.h"
+#include "GCore/gstring8.h"
 #include "GGeometry/ggeometry.h"
 #include "gtableglobal.h"
 

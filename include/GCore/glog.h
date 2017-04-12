@@ -4,10 +4,6 @@
 #include "gtextfile.h"
 
 namespace gsystem { // gsystem
-	class GString;
-} // namespace gsystem
-
-namespace gsystem { // gsystem
 namespace log { // gsystem.log
 
 class GAPI GLog

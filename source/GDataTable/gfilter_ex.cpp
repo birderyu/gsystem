@@ -1,14 +1,14 @@
 #include "gfilter_ex.h"
-#include "GCore/gstring.h"
+#include "GCore/gstring8.h"
 #include "GCore/gstringlist.h"
 #include "GCore/gliststack.h"
 
 // 支持的联合类型，按照优先级排列
-GStringList GFilter_Ex::m_tUnionSymbols;
+GStringListT GFilter_Ex::m_tUnionSymbols;
 gbool GFilter_Ex::m_bInitializeUnionSymbols = false;
 
 // 支持的比较类型，按优先级排列
-GStringList GFilter_Ex::m_tCompareSymbols;
+GStringListT GFilter_Ex::m_tCompareSymbols;
 gbool GFilter_Ex::m_bInitializeCompareSymbols = false;
 
 //////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ gbool GFilter_Ex::GFilterCell::SetFilter(const GString &sFilter)
 	gsize size = m_tCompareSymbols.Size();
 	for (gsize i = 0; i < size; i++)
 	{
-		GStringList tFilterList = sFilter.Split(m_tCompareSymbols.GetAt(i));
+		GStringListT tFilterList = sFilter.Split(m_tCompareSymbols.GetAt(i));
 		if (tFilterList.Size() != 2)
 		{
 			continue;
@@ -261,7 +261,7 @@ gbool GFilter_Ex::GFilterParse::ParseFilter(const GString &sFilter, G_UNION_TYPE
 	for (gsize i = 0; i < nUnionCount; i++)
 	{
 		GString sUnion = m_tUnionSymbols.GetAt(i);
-		GStringList tFilterList;
+		GStringListT tFilterList;
 		if (bHasBracket)
 		{
 			// 有括号
@@ -376,7 +376,7 @@ gbool GFilter_Ex::GFilterParse::ParseFilter_TrimBracket(GString &sFilter)
 	}
 }
 
-gbool GFilter_Ex::GFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringList &tFilterList)
+gbool GFilter_Ex::GFilterParse::ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringListT &tFilterList)
 {
 	gsize length = sFilter.Size();
 	GListStack<gchar> stack;

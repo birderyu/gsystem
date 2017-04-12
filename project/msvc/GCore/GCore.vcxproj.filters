@@ -411,19 +411,10 @@
     <ClInclude Include="..\..\..\include\GCore\gbytes.h">
       <Filter>头文件\String</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstring.h">
-      <Filter>头文件\String</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstringbuffer.h">
-      <Filter>头文件\String</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gstringlist.h">
       <Filter>头文件\String</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gstringpool.h">
-      <Filter>头文件\String</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbytebuffer.h">
       <Filter>头文件\String</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gbitset.h">
@@ -600,6 +591,18 @@
     <ClInclude Include="..\..\..\include\GCore\gunclassifiedexception.h">
       <Filter>头文件\Exception</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gcharset.h">
+      <Filter>头文件\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gstring8.h">
+      <Filter>头文件\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gstring.h">
+      <Filter>头文件\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gbasestring.h">
+      <Filter>头文件\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">
@@ -758,28 +761,7 @@
     <ClCompile Include="..\..\..\source\GCore\gbytes.cpp">
       <Filter>源文件\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstring.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstring_number.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstring_object.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstring_operator.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstringbuffer.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstringlist.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gstringpool.cpp">
-      <Filter>源文件\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gbytebuffer.cpp">
       <Filter>源文件\String</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\grunnable.cpp">
@@ -832,6 +814,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\goutofmemoryexception.cpp">
       <Filter>源文件\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\gstring8.cpp">
+      <Filter>源文件\String</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -986,6 +971,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\grefcounter.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gstringlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

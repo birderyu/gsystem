@@ -1,7 +1,7 @@
 ﻿#ifndef _CORE_SOCKETADDRESS_EX_H_
 #define _CORE_SOCKETADDRESS_EX_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 
 #ifdef G_SYSTEM_WINDOWS
 
@@ -54,10 +54,6 @@ namespace detail { // gsystem.detail
 #define GGetSocketOpt		getsockopt
 } // namespace gsystem.detail
 } // namespace gsystem
-
-namespace gsystem { // gsystem
-class GString;
-} // namespace gsystem.detail
 
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail

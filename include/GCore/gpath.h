@@ -1,11 +1,7 @@
 #ifndef _CORE_PATH_H_
 #define _CORE_PATH_H_
 
-#include "gtype.h"
-
-namespace gsystem { // gsystem
-	class GString;
-} // namespace gsystem
+#include "gglobal.h"
 
 namespace gsystem { // gsystem
 

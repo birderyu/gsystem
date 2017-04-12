@@ -14,10 +14,9 @@
 #ifndef _CORE_FILE_H_
 #define _CORE_FILE_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 
 namespace gsystem { // gsystem
-	class GString;
 	namespace detail { // gsystem.detail
 		class GFile_Ex;
 	} // namespace gsystem.detail

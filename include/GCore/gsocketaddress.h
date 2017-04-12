@@ -1,10 +1,9 @@
 #ifndef _CORE_SOCKET_ADDRESS_H_
 #define _CORE_SOCKET_ADDRESS_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 
 namespace gsystem { // gsystem
-	class GString;
 	namespace detail { // gsystem.detail
 		class GSockAddress_Ex;
 	} // namespace gsystem.detail

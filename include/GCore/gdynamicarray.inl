@@ -305,12 +305,6 @@ GINLINE guint GDynamicArray<DataT>::ClassCode() const GNOEXCEPT
 	return static_cast<guint>(GClassCode::DynamicArray);
 }
 
-template <typename DataT> GINLINE
-GString GDynamicArray<DataT>::ClassName() const GNOEXCEPT
-{
-	return GString::ReferenceOf("gsystem::GDynamicArray<T>");
-}
-
 template <typename DataT>
 GINLINE gbool GDynamicArray<DataT>::Serialize(GArchive &archive) const
 {

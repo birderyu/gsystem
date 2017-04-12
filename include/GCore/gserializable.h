@@ -14,10 +14,9 @@
 #ifndef _CORE_SERIALIZABLE_H_
 #define _CORE_SERIALIZABLE_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 
 namespace gsystem { // gsystem
-	class GString;
 	class GArchive;
 } // namespace gsystem
 

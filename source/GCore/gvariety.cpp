@@ -13,7 +13,7 @@ GVariety::GVariety(const gchar *val)
 	: m_nType(VARIETY_TYPE_STRING)
 {
 	gsize size = GCString::Size(val);
-	new(&m_strVal)GStringData(val, size);
+	new(&m_strVal)GString8Data(val, size);
 }
 
 GVariety::GVariety(const GString &val)
@@ -81,7 +81,7 @@ GVariety::GVariety(const GVariety &val)
 	case VARIETY_TYPE_STRING:
 		// 不能直接调用m_strVal = val.m_strVal，因为此时的m_strVal处于未确定的状态
 		// 直接构造一个m_strVal
-		GCopyConstruct<GStringData>(&m_strVal, val.m_strVal);
+		GCopyConstruct<GString8Data>(&m_strVal, val.m_strVal);
 		break;
 	case VARIETY_TYPE_POINTER:
 		m_pVal = val.m_pVal;
@@ -149,7 +149,7 @@ GVariety::GVariety(GVariety &&val)
 	case VARIETY_TYPE_STRING:
 		// 不能直接调用m_strVal = GMove(val.m_strVal)，因为此时的m_strVal处于未确定的状态
 		// 直接移动构造一个m_strVal
-		GMoveConstruct<GStringData>(&m_strVal, GMove(val.m_strVal));
+		GMoveConstruct<GString8Data>(&m_strVal, GMove(val.m_strVal));
 		break;
 	case VARIETY_TYPE_POINTER:
 		m_pVal = val.m_pVal;
@@ -172,7 +172,7 @@ gvoid GVariety::SetValue(const gchar *val)
 	{
 		Free();
 		m_nType = VARIETY_TYPE_STRING;
-		new(&m_strVal)GStringData(val, size);
+		new(&m_strVal)GString8Data(val, size);
 	}
 }
 
@@ -187,7 +187,7 @@ gvoid GVariety::SetValue(const GString &val)
 	{
 		Free();
 		m_nType = VARIETY_TYPE_STRING;
-		GCopyConstruct<GStringData>(&m_strVal, val.m_tString);
+		GCopyConstruct<GString8Data>(&m_strVal, val.m_tString);
 	}
 }
 
@@ -203,7 +203,7 @@ gvoid GVariety::SetValue(GString &&val)
 	{
 		Free();
 		m_nType = VARIETY_TYPE_STRING;
-		GMoveConstruct<GStringData>(&m_strVal, GMove(val.m_tString));
+		GMoveConstruct<GString8Data>(&m_strVal, GMove(val.m_tString));
 	}
 }
 
@@ -271,7 +271,7 @@ gvoid GVariety::SetValue(const GVariety &val)
 			m_ldVal = val.m_ldVal;
 			break;
 		case VARIETY_TYPE_STRING:
-			GCopyConstruct<GStringData>(&m_strVal, val.m_strVal);
+			GCopyConstruct<GString8Data>(&m_strVal, val.m_strVal);
 			break;
 		case VARIETY_TYPE_POINTER:
 			m_pVal = val.m_pVal;
@@ -1378,7 +1378,7 @@ gvoid GVariety::Free()
 	}
 	else if (m_nType == VARIETY_TYPE_STRING)
 	{
-		GDestruct<GStringData>(&m_strVal);
+		GDestruct<GString8Data>(&m_strVal);
 	}
 	else if (m_nType == VARIETY_TYPE_WSTRING)
 	{

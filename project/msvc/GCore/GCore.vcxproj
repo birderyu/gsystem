@@ -169,6 +169,8 @@
     <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
     <ClInclude Include="..\..\..\include\GCore\garrays.h" />
     <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
+    <ClInclude Include="..\..\..\include\GCore\gbasestring.h" />
+    <ClInclude Include="..\..\..\include\GCore\gcharset.h" />
     <ClInclude Include="..\..\..\include\GCore\gclasscode.h" />
     <ClInclude Include="..\..\..\include\GCore\gdtdef.h" />
     <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
@@ -192,7 +194,6 @@
     <ClInclude Include="..\..\..\include\GCore\gbitset.h" />
     <ClInclude Include="..\..\..\include\GCore\gboolean.h" />
     <ClInclude Include="..\..\..\include\GCore\gbtree.h" />
-    <ClInclude Include="..\..\..\include\GCore\gbytebuffer.h" />
     <ClInclude Include="..\..\..\include\GCore\gbyte.h" />
     <ClInclude Include="..\..\..\include\GCore\gbytes.h" />
     <ClInclude Include="..\..\..\include\GCore\gcharacter.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="..\..\..\include\GCore\gdlist.h" />
     <ClInclude Include="..\..\..\include\GCore\gseriespool.h" />
     <ClInclude Include="..\..\..\include\GCore\gstopwatch.h" />
+    <ClInclude Include="..\..\..\include\GCore\gstring.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring16.h" />
     <ClInclude Include="..\..\..\include\GCore\gstring32.h" />
     <ClInclude Include="..\..\..\include\GCore\gstruct.h" />
@@ -254,7 +256,6 @@
     <ClInclude Include="..\..\..\include\GCore\gsmallinteger.h" />
     <ClInclude Include="..\..\..\include\GCore\gstack.h" />
     <ClInclude Include="..\..\..\include\GCore\gstaticarray.h" />
-    <ClInclude Include="..\..\..\include\GCore\gstringbuffer.h" />
     <ClInclude Include="..\..\..\include\GCore\gsynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gsystemexception.h" />
     <ClInclude Include="..\..\..\include\GCore\gtable.h" />
@@ -292,7 +293,7 @@
     <ClInclude Include="..\..\..\include\GCore\gsemaphore.h" />
     <ClInclude Include="..\..\..\include\GCore\gsocketaddress.h" />
     <ClInclude Include="..\..\..\include\GCore\gsocket.h" />
-    <ClInclude Include="..\..\..\include\GCore\gstring.h" />
+    <ClInclude Include="..\..\..\include\GCore\gstring8.h" />
     <ClInclude Include="..\..\..\include\GCore\gtcpsocket.h" />
     <ClInclude Include="..\..\..\include\GCore\grunnable.h" />
     <ClInclude Include="..\..\..\include\GCore\gtime.h" />
@@ -331,7 +332,6 @@
     <ClCompile Include="..\..\..\source\GCore\gblock.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gboolean.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gbyte.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gbytebuffer.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gbytes.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gcharacter.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gcriticalsection.cpp" />
@@ -376,13 +376,8 @@
     <ClCompile Include="..\..\..\source\GCore\gsocket_ex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gstdstringhelper.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gstopwatch.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gstring.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gstringbuffer.cpp" />
+    <ClCompile Include="..\..\..\source\GCore\gstring8.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gstringpool.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gstringlist.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gstring_number.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gstring_object.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gstring_operator.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gsystemexception.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gtcpsocket.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gtcpsocket_ex.cpp" />
@@ -499,6 +494,7 @@
     <None Include="..\..\..\include\GCore\gstack.inl">
       <FileType>Document</FileType>
     </None>
+    <None Include="..\..\..\include\GCore\gstringlist.inl" />
     <None Include="..\..\..\include\GCore\gstruct.inl">
       <FileType>Document</FileType>
     </None>

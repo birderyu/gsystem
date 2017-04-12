@@ -14,12 +14,11 @@
 #ifndef _CORE_OBJECT_H_
 #define _CORE_OBJECT_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 
 // Ç°ÖÃÉùÃ÷
 namespace gsystem { // gsystem
 	class GObject;
-	class GString;
 	class GBytes;
 	template <typename ClassT> class GSharedPtr;
 	typedef GSharedPtr<GObject> GObjectPtr;

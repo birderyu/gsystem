@@ -40,8 +40,7 @@ typedef char16_t		gchar16;	// 16位字符类型
 typedef char32_t		gchar32;	// 32位字符类型
 typedef	wchar_t			gwchar;		// 宽字符类型
 
-typedef	gchar *			gstring;	// 字符串类型
-typedef	const gchar *	gcstring;	// 字符串常量类型
+
 typedef	gchar8 *		gstring8;	// 以8位字符为单元的字符串类型
 typedef	const gchar8 *	gcstring8;	// 以8位字符为单元的字符串常量类型
 typedef	gchar16 *		gstring16;	// 以16位字符为单元的字符串类型

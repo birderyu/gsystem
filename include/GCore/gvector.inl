@@ -607,12 +607,6 @@ guint GVector<DataT>::ClassCode() const GNOEXCEPT
 }
 
 template <typename DataT> GINLINE
-GString GVector<DataT>::ClassName() const GNOEXCEPT
-{
-	return GString::ReferenceOf("gsystem::GVector<T>");
-}
-
-template <typename DataT> GINLINE
 gbool GVector<DataT>::Serialize(GArchive &archive) const
 {
 	if (!archive.Input())

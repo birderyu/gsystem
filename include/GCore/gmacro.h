@@ -188,4 +188,8 @@ extern "C"{
 // 若需要所有的功能，则应该定义如下的宏
 //#define G_NEED_ALL_FUNCTION
 
+#define G_CHAR_BYTE_8
+#define G_CHAR_BYTE_16
+#define G_CHAR_BYTE_32
+
 #endif // _CORE_MACRO_H_

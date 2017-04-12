@@ -5,16 +5,10 @@
 #include "gseries.h"
 
 namespace gsystem { // gsystem
-	class GByteBuffer;
-} // namespace gsystem
-
-namespace gsystem { // gsystem
 
 class GAPI GBytes final
 	: public GArray<gbyte>
 {
-	friend class GByteBuffer;
-
 public:
 	/// 将一个算数类型值转换成字节数组，返回该值所占的字节数
 	/// 字节数组是大端的，可以直接用于网络字节序
@@ -29,8 +23,6 @@ public:
 	GBytes(const gbyte *bytes, gsize size);
 	GBytes(const GBytes &bytes);
 	GBytes(GBytes &&bytes);
-	explicit GBytes(const GByteBuffer &bytes);
-	explicit GBytes(GByteBuffer &&bytes);
 
 	gvoid Reserve(gsize capacity);
 	gvoid Resize(gsize size);
@@ -53,8 +45,6 @@ public:
 
 	GBytes &operator=(const GBytes &bytes);
 	GBytes &operator=(GBytes &&bytes);
-	GBytes &operator=(const GByteBuffer &bytes);
-	GBytes &operator=(GByteBuffer &&bytes);
 	gbyte &operator[](gsize);
 	const gbyte &operator[](gsize) const;
 

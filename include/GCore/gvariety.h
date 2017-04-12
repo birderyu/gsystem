@@ -5,7 +5,6 @@
 
 namespace gsystem { // gsystem
 	class GBytes;
-	class GString;
 	class GWString;
 	class GDateTime;
 } // namespace gsystem
@@ -219,7 +218,7 @@ private:
 		glongdouble		m_ldVal;
 		gptr		m_pVal;
 		GBytesData		m_bytesVal;
-		GStringData		m_strVal;
+		GString8Data		m_strVal;
 		GWStringData	m_wstrVal;
 		gbyte			m_timeVal[G_DATE_TIME_SIZE];
 	};

@@ -13,8 +13,7 @@ template <typename DataT>
 class GVector final
 	: public GArray<DataT>
 	, public GDeque<DataT>
-	, virtual public GObject
-	, virtual public GSerializable
+	, public GSerializable
 {
 public:
 	class ConstIterator;
@@ -164,7 +163,6 @@ public:
 	//gvoid MemCopyFrom(const GVector<DataT> &);
 
 	guint ClassCode() const GNOEXCEPT;
-	GString ClassName() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
 	gbool Deserialize(GArchive &archive);
 

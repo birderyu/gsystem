@@ -1,6 +1,5 @@
 #include "gbytes.h"
 #include "gutility.h"
-#include "gbytebuffer.h"
 
 namespace gsystem { // gsystem
 
@@ -25,18 +24,6 @@ GBytes::GBytes(GBytes &&bytes)
 	: m_tBytes(GMove(bytes.m_tBytes))
 {
 
-}
-
-GBytes::GBytes(const GByteBuffer &bytes)
-	: m_tBytes(bytes.m_tBytes)
-{
-	
-}
-
-GBytes::GBytes(GByteBuffer &&bytes)
-	: m_tBytes(GMove(bytes.m_tBytes))
-{
-	
 }
 
 gvoid GBytes::Reserve(gsize capacity)
@@ -130,18 +117,6 @@ GBytes &GBytes::operator=(GBytes &&bytes)
 	{
 		return *this;
 	}
-	m_tBytes = GForward<GBytesData>(bytes.m_tBytes);
-	return *this;
-}
-
-GBytes &GBytes::operator=(const GByteBuffer &bytes)
-{
-	m_tBytes = bytes.m_tBytes;
-	return *this;
-}
-
-GBytes &GBytes::operator=(GByteBuffer &&bytes)
-{
 	m_tBytes = GForward<GBytesData>(bytes.m_tBytes);
 	return *this;
 }

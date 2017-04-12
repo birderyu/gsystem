@@ -3,7 +3,7 @@
 #define _CORE_TEXT_STREAM_H_
 
 #include "gstream.h"
-#include "GCore/gstring.h"
+#include "GCore/gstring8.h"
 
 class GAPI GTextStream
 	: virtual public GStream

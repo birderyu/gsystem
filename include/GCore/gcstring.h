@@ -1,7 +1,7 @@
 #ifndef _CORE_C_STRING_HELPER_H_
 #define _CORE_C_STRING_HELPER_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 
 #define G_USE_MSVC_STRCMP
 
@@ -22,7 +22,7 @@ class GAPI GCString
 {
 public:
 	// 不包含'\0'的长度
-	static gsize Size(gcstring str);
+	static gsize Size(gcstring8 str);
 	static gsize Size(gcstring16 str);
 	static gsize Size(gcstring32 str);
 

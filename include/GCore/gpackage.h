@@ -18,10 +18,6 @@
 #include "gserializable.h"
 
 namespace gsystem { // gsystem
-	class GString;
-} // namespace gsystem
-
-namespace gsystem { // gsystem
 
 template <typename ValueT>
 class GPackage 

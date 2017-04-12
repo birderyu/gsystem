@@ -1,7 +1,7 @@
 #ifndef _CORE_ARCHIVE_H_
 #define _CORE_ARCHIVE_H_
 
-#include "gtype.h"
+#include "gglobal.h"
 #include "gnocopyable.h"
 
 namespace gsystem { // gsystem

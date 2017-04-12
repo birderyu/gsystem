@@ -3,7 +3,7 @@
 
 #include "GCore/gdynamicarray.h"
 #include "GCore/gvariety.h"
-#include "GCore/gstring.h"
+#include "GCore/gstring8.h"
 
 class GFilter_Ex
 {
@@ -86,7 +86,7 @@ private:
 		// 只分解第一级括号
 		// 如"(OID = 1 OR TYPE = 2) AND (NAME = ABC AND (CITY = 'BJ' OR SIZE = 100))"
 		// 变为"(OID = 1 OR TYPE = 2)" 和 "(NAME = ABC AND (CITY = 'BJ' OR SIZE = 100))"
-		static gbool ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringList &tFilterList);
+		static gbool ParseFilter_BreakUpBracketOnOneLevel(const GString &sFilter, const GString &sUnion, GStringListT &tFilterList);
 		// 
 		static gbool ParseFilter_ParseCompareType(const GString &sCompare, G_COMPARE_TYPE &emCompareType);
 		static gbool GetCompareString(G_COMPARE_TYPE emCompareType, GString &sCompare);
@@ -109,10 +109,10 @@ private:
 	GFilterData m_tFilterData;
 
 private:
-	static GStringList m_tUnionSymbols;
+	static GStringListT m_tUnionSymbols;
 	static gbool m_bInitializeUnionSymbols;
 
-	static GStringList m_tCompareSymbols;
+	static GStringListT m_tCompareSymbols;
 	static gbool m_bInitializeCompareSymbols;
 };
 

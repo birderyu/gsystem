@@ -1,7 +1,6 @@
 #ifndef _CORE_NEW_H_
 #define _CORE_NEW_H_
 
-#include "gmemory.h"
 #include "gmempool.h"
 #include "glockguard.h"
 #include <new>

@@ -1,9 +1,9 @@
 #ifndef _CORE_EXCEPTION_H_
 #define _CORE_EXCEPTION_H_
 
+#include "gstring.h"
 #include "gsharedptr.h"
 #include "gserializable.h"
-#include "gstringlist.h"
 
 namespace gsystem {
 	class GException;

@@ -17,6 +17,23 @@ GEncoding &GEncoding::Instance()
 	return *m_pEncoding;
 }
 
+gsize GEncoding::GetLengthOfUtf8String(gcstring8 utf8)
+{
+	gchar8 *c = (gchar8 *)utf8;
+	gsize len = 0;
+	while (*c)
+	{
+		guint8 offset = GetUnitSizeOfUtf8Character(c);
+		if (offset == 0)
+		{
+			return 0;
+		}
+		len++;
+		c += offset;
+	}
+	return len;
+}
+
 GEncoding *GEncoding::m_pEncoding = GNULL;
 
 GEncoding::GEncoding()
