@@ -406,6 +406,7 @@
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\garrays.inl" />
+    <None Include="..\..\..\include\GCore\gbasestring.inl" />
     <None Include="..\..\..\include\GCore\gbtree.inl" />
     <None Include="..\..\..\include\GCore\gdeque.inl" />
     <None Include="..\..\..\include\GCore\ggraph.inl" />

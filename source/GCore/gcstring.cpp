@@ -21,38 +21,54 @@ gsystem::gint strncasecmp(const gsystem::gchar *s1, gsystem::gchar *s2, /*regist
 #	endif // !G_USE_MSVC_STRCMP
 #endif
 
-namespace gsystem { // gsystem
+namespace gsystem {
+namespace detail {
+namespace cstring {
 
-gsize GCString::Size(gcstring8 c_str)
+template<typename StringT>
+gsize Size(StringT str)
 {
-	if (GNULL == c_str)
+	if (GNULL == str)
 	{
 		return 0;
 	}
-	return ::strlen(c_str);
+	gsize i = 0;
+	while (str[i++]) {}
+	return i - 1;
+}
+
+}
+}
+}
+
+namespace gsystem { // gsystem
+
+gsize GCString::Size(gcstring8 str)
+{
+	if (GNULL == str)
+	{
+		return 0;
+	}
+	return ::strlen(str);
 }
 
 gsize GCString::Size(gcstring16 str)
 {
-	gsize i = 0;
-	while (str[i++]) {}
-	return i - 1;
+	return detail::cstring::Size<gcstring16>(str);
 }
 
 gsize GCString::Size(gcstring32 str)
 {
-	gsize i = 0;
-	while (str[i++]) {}
-	return i - 1;
+	return detail::cstring::Size<gcstring32>(str);
 }
 
-gvoid GCString::Copy(gcstring src, gsize len, gstring dest)
+gvoid GCString::Copy(gcstring8 src, gsize size, gstring8 dest)
 {
-	GMemCopy(dest, src, len);
+	GMemCopy(dest, src, size);
 }
 
-gvoid GCString::Trim(const gchar *c_str, gsize size,
-	gchar *out_c_str, gsize &out_size)
+gvoid GCString::Trim(gcstring8 c_str, gsize size,
+	gstring8 out_c_str, gsize &out_size)
 {
 	out_size = 0;
 	if (size <= 0)
@@ -97,8 +113,8 @@ gvoid GCString::Trim(const gchar *c_str, gsize size,
 	out_c_str[out_size] = '\0';
 }
 
-gvoid GCString::TrimLeft(const gchar *c_str, gsize size,
-	gchar *out_c_str, gsize &out_size)
+gvoid GCString::TrimLeft(gcstring8 c_str, gsize size,
+	gstring8 out_c_str, gsize &out_size)
 {
 	out_size = 0;
 	if (size <= 0)
@@ -126,8 +142,8 @@ gvoid GCString::TrimLeft(const gchar *c_str, gsize size,
 	out_c_str[out_size] = '\0';
 }
 
-gvoid GCString::TrimRight(const gchar *c_str, gsize size,
-	gchar *out_c_str, gsize &out_size)
+gvoid GCString::TrimRight(gcstring8 c_str, gsize size,
+	gstring8 out_c_str, gsize &out_size)
 {
 	out_size = 0;
 	if (size <= 0)
@@ -156,13 +172,13 @@ gvoid GCString::TrimRight(const gchar *c_str, gsize size,
 	out_c_str[out_size] = '\0';
 }
 
-gvoid GCString::MakeTrim(gchar *c_str, gsize size, gsize &out_size)
+gvoid GCString::MakeTrim(gstring8 c_str, gsize size, gsize &out_size)
 {
 	MakeTrimLeft(c_str, size, out_size);
 	MakeTrimRight(c_str, out_size, out_size);
 }
 
-gvoid GCString::MakeTrimLeft(gchar *c_str, gsize size, gsize &out_size)
+gvoid GCString::MakeTrimLeft(gstring8 c_str, gsize size, gsize &out_size)
 {
 	out_size = 0;
 	if (size <= 0)
@@ -193,7 +209,7 @@ gvoid GCString::MakeTrimLeft(gchar *c_str, gsize size, gsize &out_size)
 	}
 }
 
-gvoid GCString::MakeTrimRight(gchar *c_str, gsize size, gsize &out_size)
+gvoid GCString::MakeTrimRight(gstring8 c_str, gsize size, gsize &out_size)
 {
 	out_size = size;
 	if (size <= 0)
@@ -220,7 +236,7 @@ gvoid GCString::MakeTrimRight(gchar *c_str, gsize size, gsize &out_size)
 	c_str[out_size] = '\0';
 }
 
-gvoid GCString::MakeUpper(gchar *c_str, gsize size)
+gvoid GCString::MakeUpper(gstring8 c_str, gsize size)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -231,7 +247,7 @@ gvoid GCString::MakeUpper(gchar *c_str, gsize size)
 	}
 }
 
-gvoid GCString::MakeLower(gchar *c_str, gsize size)
+gvoid GCString::MakeLower(gstring8 c_str, gsize size)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -242,7 +258,7 @@ gvoid GCString::MakeLower(gchar *c_str, gsize size)
 	}
 }
 
-gint GCString::Matcher(gcstring src, gsize size, gchar ptn, gbool isSensitive)
+gint GCString::Matcher(gcstring8 src, gsize size, gchar ptn, gbool isSensitive)
 {
 	if (isSensitive)
 	{
@@ -270,7 +286,7 @@ gint GCString::Matcher(gcstring src, gsize size, gchar ptn, gbool isSensitive)
 	return -1;
 }
 
-gint GCString::Matcher(gcstring src, gsize slen, gcstring ptn, gsize plen, gbool isSensitive)
+gint GCString::Matcher(gcstring8 src, gsize slen, gcstring8 ptn, gsize plen, gbool isSensitive)
 {
 	if (plen == 0)
 	{
@@ -321,11 +337,11 @@ gint GCString::Matcher(gcstring src, gsize slen, gcstring ptn, gsize plen, gbool
 		return -1;
 }
 
-gbool GCString::Replace(const gchar *c_str, gsize len, 
-	const gchar *from, gsize from_len,
-	const gchar *to, gsize to_len,
-	gbool bIsSensitive,
-	gchar *c_str_out, gsize &out_len)
+gbool GCString::Replace(gcstring8 c_str, gsize len,
+	gcstring8 from, gsize from_len,
+	gcstring8 to, gsize to_len,
+	gbool isSensitive,
+	gstring8 c_str_out, gsize &out_len)
 {
 	if (len <= 0 || from_len <= 0)
 	{
@@ -337,7 +353,7 @@ gbool GCString::Replace(const gchar *c_str, gsize len,
 	for (gsize i = 0; i <= len - from_len;)
 	{
 		gint ret = 0;
-		if (bIsSensitive)
+		if (isSensitive)
 		{
 			ret = ::strncmp(c_str + i, from, from_len);
 		}

@@ -3,6 +3,7 @@
 
 #include "gseries.h"
 #include "gserializable.h"
+#include "gcharset.h"
 
 // 字符串本地存储空间的字节数目
 #define G_BASE_STRING_LOCAL_BYTE_SIZE 8
@@ -15,9 +16,8 @@ class GBaseString
 	, public GSerializable
 {
 public:
-	typedef GBaseString<CharT>	BaseStringT
-	typedef	CharT *				StringT;
-	typedef	const CharT *		CStringT;
+	typedef	CharT *			StringT;
+	typedef	const CharT *	CStringT;
 
 private:
 	typedef GSeries<CharT, LocalSize(), true, 0> StringDataT;
@@ -28,10 +28,11 @@ public:
 	GBaseString(CStringT str);
 	GBaseString(const GBaseString<CharT> &str);
 	GBaseString(GBaseString<CharT> &&str);
-	~GBaseString() = 0;
+	virtual ~GBaseString() = 0;
 
 	gsize Size() const;
 	gsize Length() const; // 字符的长度
+	gbool IsEmpty() const;
 	CharT &GetAt(gsize pos);
 	const CharT &GetAt(gsize pos) const;
 	CharT *CursorAt(gsize);
@@ -40,20 +41,20 @@ public:
 	gvoid Reserve(gsize size);
 	gbool StartWith(CharT c) const;
 	gbool EndWith(CharT c) const;
-	gvoid Append(const BaseStringT &str);
-	gvoid Append(BaseStringT &&str);
-	gbool Equals(const BaseStringT &str, gbool isSensitive) const;
-	BaseStringT Trim() const;
-	BaseStringT TrimLeft() const;
-	BaseStringT TrimRight() const;
-	BaseStringT ToUpper() const;
-	BaseStringT ToLower() const;
+	gvoid Append(const GBaseString<CharT> &str);
+	gvoid Append(GBaseString<CharT> &&str);
+	gbool Equals(const GBaseString<CharT> &str, gbool isSensitive) const;
+	GBaseString<CharT> Trim() const;
+	GBaseString<CharT> TrimLeft() const;
+	GBaseString<CharT> TrimRight() const;
+	GBaseString<CharT> ToUpper() const;
+	GBaseString<CharT> ToLower() const;
 	CStringT CString() const;
-	BaseStringT &Replace(const BaseStringT &from, const BaseStringT &to, gbool isSensitive);
-	GStringListT<BaseStringT> Split(const BaseStringT &sep, gbool ignoreEmpty, gbool isSensitive) const;
+	GBaseString<CharT> &Replace(const GBaseString<CharT> &from, const GBaseString<CharT> &to, gbool isSensitive);
+	GStringListT<GBaseString<CharT>> Split(const GBaseString<CharT> &sep, gbool ignoreEmpty, gbool isSensitive) const;
 	gsize Find(CharT c, gsize start, gbool isSensitive) const;
-	gsize Find(const BaseStringT &str, gsize start, gbool isSensitive) const;
-	BaseStringT SubString(gsize start, gsize length) const;
+	gsize Find(const GBaseString<CharT> &str, gsize start, gbool isSensitive) const;
+	GBaseString<CharT> SubString(gsize start, gsize length) const;
 
 	gsmall ToSmall(gbool *bIsOk = GNULL) const;
 	gusmall ToUSmall(gbool *bIsOk = GNULL) const;
@@ -69,11 +70,11 @@ public:
 	gdouble ToDouble(gbool *bIsOk = GNULL) const;
 	glongdouble ToLongDouble(gbool *bIsOk = GNULL) const;
 
-	BaseStringT &operator=(const BaseStringT &str);
-	BaseStringT &operator=(BaseStringT &&sStr);
-	BaseStringT &operator=(CStringT str);
-	BaseStringT &operator=(CharT c);
-	BaseStringT &operator+=(const BaseStringT &sStr);
+	GBaseString<CharT> &operator=(const GBaseString<CharT> &str);
+	GBaseString<CharT> &operator=(GBaseString<CharT> &&sStr);
+	GBaseString<CharT> &operator=(CStringT str);
+	GBaseString<CharT> &operator=(CharT c);
+	GBaseString<CharT> &operator+=(const GBaseString<CharT> &sStr);
 	const CharT &operator[](gsize pos) const;
 	CharT &operator[](gsize pos);
 
@@ -84,10 +85,13 @@ private:
 	}
 
 protected:
-	BaseStringT(CStringT str, gsize size);
-	BaseStringT(const StringDataT &str);
-	BaseStringT(StringDataT &&str);
+	GBaseString(CStringT str, gsize size);
+	GBaseString(const StringDataT &str);
+	GBaseString(StringDataT &&str);
+
+protected:
 	StringDataT m_tString;
+	GCharSet m_emCharSet;
 };
 
 }

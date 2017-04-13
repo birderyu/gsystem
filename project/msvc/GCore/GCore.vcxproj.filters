@@ -591,9 +591,6 @@
     <ClInclude Include="..\..\..\include\GCore\gunclassifiedexception.h">
       <Filter>头文件\Exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gcharset.h">
-      <Filter>头文件\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gstring8.h">
       <Filter>头文件\String</Filter>
     </ClInclude>
@@ -601,6 +598,9 @@
       <Filter>头文件\String</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gbasestring.h">
+      <Filter>头文件\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gcharset.h">
       <Filter>头文件\String</Filter>
     </ClInclude>
   </ItemGroup>
@@ -974,6 +974,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gstringlist.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gbasestring.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>
