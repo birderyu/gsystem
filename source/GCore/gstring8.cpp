@@ -538,6 +538,7 @@ gbool GString8::Equals(const GString8 &str, gbool bIsSensitive) const
 	{
 		return *this == str;
 	}
+	// TODO
 	return false;
 }
 

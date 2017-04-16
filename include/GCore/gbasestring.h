@@ -30,6 +30,8 @@ public:
 	GBaseString(GBaseString<CharT> &&str);
 	virtual ~GBaseString() = 0;
 
+	CStringT CString() const;
+
 	gsize Size() const;
 	gsize Length() const; // ×Ö·ûµÄ³¤¶È
 	gbool IsEmpty() const;
@@ -43,15 +45,12 @@ public:
 	gbool EndWith(CharT c) const;
 	gvoid Append(const GBaseString<CharT> &str);
 	gvoid Append(GBaseString<CharT> &&str);
-	gbool Equals(const GBaseString<CharT> &str, gbool isSensitive) const;
 	GBaseString<CharT> Trim() const;
 	GBaseString<CharT> TrimLeft() const;
 	GBaseString<CharT> TrimRight() const;
 	GBaseString<CharT> ToUpper() const;
 	GBaseString<CharT> ToLower() const;
-	CStringT CString() const;
 	GBaseString<CharT> &Replace(const GBaseString<CharT> &from, const GBaseString<CharT> &to, gbool isSensitive);
-	GStringListT<GBaseString<CharT>> Split(const GBaseString<CharT> &sep, gbool ignoreEmpty, gbool isSensitive) const;
 	gsize Find(CharT c, gsize start, gbool isSensitive) const;
 	gsize Find(const GBaseString<CharT> &str, gsize start, gbool isSensitive) const;
 	GBaseString<CharT> SubString(gsize start, gsize length) const;
