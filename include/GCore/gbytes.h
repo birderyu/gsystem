@@ -45,8 +45,8 @@ public:
 
 	GBytes &operator=(const GBytes &bytes);
 	GBytes &operator=(GBytes &&bytes);
-	gbyte &operator[](gsize);
-	const gbyte &operator[](gsize) const;
+	gbyte &operator[](gsize pos);
+	const gbyte &operator[](gsize pos) const;
 
 private:
 	GBytesData m_tBytes;
