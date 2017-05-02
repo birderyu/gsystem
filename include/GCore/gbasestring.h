@@ -44,8 +44,8 @@ public:
 	gbool IsEmpty() const;
 	CharT &GetAt(gsize pos);
 	const CharT &GetAt(gsize pos) const;
-	CharT *CursorAt(gsize);
-	const CharT *CursorAt(gsize) const;
+	CharT *CursorAt(gsize pos);
+	const CharT *CursorAt(gsize pos) const;
 	gvoid Resize(gsize size);
 	gvoid Reserve(gsize size);
 	gbool StartWith(CharT c) const;
