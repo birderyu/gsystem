@@ -6,6 +6,7 @@
 namespace gsystem { // gsystem
 
 /// Ò»Ôªº¯Êý
+/// functor()
 template<typename ArgType,
 	typename ResultType>
 struct GUnaryF
