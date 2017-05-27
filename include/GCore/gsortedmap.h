@@ -1,17 +1,17 @@
 // ”––ÚMap
-#ifndef _CORE_ORDER_MAP_H_
-#define _CORE_ORDER_MAP_H_
+#ifndef _CORE_SORTED_MAP_H_
+#define _CORE_SORTED_MAP_H_
 
 #include "grbtree.h"
 
-#define G_ORDER_MAP_NODE_RED	0
-#define G_ORDER_MAP_NODE_BLACK	1
+#define G_SORTED_MAP_NODE_RED	0
+#define G_SORTED_MAP_NODE_BLACK	1
 
 namespace gsystem { // gsystem
 
 template<typename KeyT, typename ValueT,
 	typename CompareT = GCompareToF<KeyT >>
-class GOrderMap
+class GSortedMap
 	: public GObject
 {
 public:
@@ -28,7 +28,7 @@ public:
 			GOrderMapNode *parent = GNULL,
 			GOrderMapNode *left = GNULL,
 			GOrderMapNode *right = GNULL,
-			gsmall color = G_ORDER_MAP_NODE_RED)
+			gsmall color = G_SORTED_MAP_NODE_RED)
 			: GBinTreeNodeT<GOrderMapNode>(parent, left, right)
 			, GPairNodeT<KeyT, ValueT>(key, value)
 			, m_nColor(color)
@@ -41,7 +41,7 @@ public:
 			GOrderMapNode *parent = GNULL,
 			GOrderMapNode *left = GNULL,
 			GOrderMapNode *right = GNULL,
-			gsmall color = G_ORDER_MAP_NODE_RED)
+			gsmall color = G_SORTED_MAP_NODE_RED)
 			: GBinTreeNodeT<GOrderMapNode>(parent, left, right)
 			, GPairNodeT<KeyT, ValueT>(key, GForward<ValueT>(value))
 			, m_nColor(color)
@@ -305,9 +305,9 @@ public:
 	friend class ConstIterator;
 
 public:
-	GOrderMap();
-	GOrderMap(const GOrderMap<KeyT, ValueT, CompareT> &);
-	GOrderMap(GOrderMap<KeyT, ValueT, CompareT> &&);
+	GSortedMap();
+	GSortedMap(const GSortedMap<KeyT, ValueT, CompareT> &);
+	GSortedMap(GSortedMap<KeyT, ValueT, CompareT> &&);
 
 	gsize Size() const;
 	gbool IsEmpty() const;
@@ -340,10 +340,10 @@ public:
 	Iterator Insert(const KeyT &, ValueT &&);
 	Iterator Erase(const Iterator &);
 
-	GOrderMap<KeyT, ValueT, CompareT> &operator=(const GOrderMap<KeyT, ValueT, CompareT> &);
-	GOrderMap<KeyT, ValueT, CompareT> &operator=(GOrderMap<KeyT, ValueT, CompareT> &&);
-	gbool operator==(const GOrderMap<KeyT, ValueT, CompareT> &) const;
-	gbool operator!=(const GOrderMap<KeyT, ValueT, CompareT> &) const;
+	GSortedMap<KeyT, ValueT, CompareT> &operator=(const GSortedMap<KeyT, ValueT, CompareT> &);
+	GSortedMap<KeyT, ValueT, CompareT> &operator=(GSortedMap<KeyT, ValueT, CompareT> &&);
+	gbool operator==(const GSortedMap<KeyT, ValueT, CompareT> &) const;
+	gbool operator!=(const GSortedMap<KeyT, ValueT, CompareT> &) const;
 	//ValueT &operator[](const KeyT &);
 	//const ValueT &operator[](const KeyT &) const;
 
@@ -354,9 +354,9 @@ private:
 
 } // namespace gsystem
 
-#include "gordermap.inl"
+#include "gsortedmap.inl"
 
-#undef G_ORDER_MAP_NODE_BLACK
-#undef G_ORDER_MAP_NODE_RED
+#undef G_SORTED_MAP_NODE_BLACK
+#undef G_SORTED_MAP_NODE_RED
 
-#endif // _CORE_ORDER_MAP_H_
+#endif // _CORE_SORTED_MAP_H_

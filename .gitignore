@@ -48,5 +48,9 @@ lib/GSerialization_Testd.lib
 bin/GSerialization_Testd.exe
 lib/GSerialization_Test.lib
 bin/GSerialization_Test.exe
+lib/GExtrad.lib
+bin/GExtrad.dll
+lib/GExtra.lib
+bin/GExtra.dll
 bin/GTestd.lib
 bin/GTest.lib

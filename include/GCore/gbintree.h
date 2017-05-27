@@ -25,10 +25,9 @@ namespace gsystem { // gsystem
 
 /****************************************************************************
 **
-** @brief		一个默认的二叉树节点
+** @brief 一个默认的二叉树节点
 **
-** 所有的二叉树节点节点都应该直接派生自GBinTreeNodeT，这是一个
-** 奇异递归模板（CRTP）。
+** 所有的二叉树节点节点都应该直接派生自GBinTreeNodeT，这是一个奇异递归模板（CRTP）。
 **
 ****************************************************************************/
 struct GBinTreeNode 
@@ -37,11 +36,11 @@ struct GBinTreeNode
 {
 	/****************************************************************************
 	**
-	** @name		GBinTreeNode
-	** @brief		构造函数（constructor）
-	** @param[in]	parent:	双亲节点，默认为GNULL
-	** @param[in]	left:	左孩子节点，默认为GNULL
-	** @param[in]	right:	右孩子节点，默认为GNULL
+	** @name GBinTreeNode
+	** @brief 构造函数（constructor）
+	** @param[in] parent 双亲节点，默认为GNULL
+	** @param[in] left 左孩子节点，默认为GNULL
+	** @param[in] right 右孩子节点，默认为GNULL
 	**
 	****************************************************************************/
 	GBinTreeNode(GBinTreeNode *parent = GNULL, 
@@ -69,8 +68,8 @@ public:
 
 	/****************************************************************************
 	**
-	** @name	funtype
-	** @brief	访问节点的函数指针的定义
+	** @name funtype
+	** @brief 访问节点的函数指针的定义
 	**
 	****************************************************************************/
 	typedef gvoid(*funtype)(const NodeT &node);

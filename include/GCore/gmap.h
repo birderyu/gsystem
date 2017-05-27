@@ -4,13 +4,13 @@
 #define G_MAP_USER_ORDER
 
 #ifdef G_MAP_USER_ORDER
-#include "gordermap.h"
+#include "gsortedmap.h"
 namespace gsystem { // gsystem
 template < typename KeyT,
 	typename ValueT,
 	typename CompareT = GCompareToF < KeyT >>
 class GMap final
-	: public GOrderMap<KeyT, ValueT, CompareT> {};
+	: public GSortedMap<KeyT, ValueT, CompareT> {};
 } // namespace gsystem
 #else // !G_MAP_USER_ORDER
 #include "gunordermap.h"

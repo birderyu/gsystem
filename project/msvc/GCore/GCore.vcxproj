@@ -166,20 +166,16 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\GCore\garchive.h" />
     <ClInclude Include="..\..\..\include\GCore\gallocator.h" />
-    <ClInclude Include="..\..\..\include\GCore\gamazing.h" />
     <ClInclude Include="..\..\..\include\GCore\garrays.h" />
-    <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gbasestring.h" />
     <ClInclude Include="..\..\..\include\GCore\gcharset.h" />
     <ClInclude Include="..\..\..\include\GCore\gclasscode.h" />
     <ClInclude Include="..\..\..\include\GCore\gdtdef.h" />
     <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
-    <ClInclude Include="..\..\..\include\GCore\gencoding.h" />
     <ClInclude Include="..\..\..\include\GCore\gexceptdef.h" />
     <ClInclude Include="..\..\..\include\GCore\gexception.h" />
     <ClInclude Include="..\..\..\include\GCore\goutofrangeexception.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
-    <ClInclude Include="..\..\..\include\GCore\glog.h" />
     <ClInclude Include="..\..\..\include\GCore\goutofmemoryexception.h" />
     <ClInclude Include="..\..\..\include\GCore\gserializable.h" />
     <ClInclude Include="..\..\..\include\GCore\gseries.h" />
@@ -205,11 +201,6 @@
     <ClInclude Include="..\..\..\include\GCore\gfile.h" />
     <ClInclude Include="..\..\..\include\GCore\gfinal.h" />
     <ClInclude Include="..\..\..\include\GCore\gfunctional.h" />
-    <ClInclude Include="..\..\..\include\GCore\gjsonarray.h" />
-    <ClInclude Include="..\..\..\include\GCore\gjsonpair.h" />
-    <ClInclude Include="..\..\..\include\GCore\gjsonobject.h" />
-    <ClInclude Include="..\..\..\include\GCore\gjsonparsermessage.h" />
-    <ClInclude Include="..\..\..\include\GCore\gjsonvalue.h" />
     <ClInclude Include="..\..\..\include\GCore\glistqueue.h" />
     <ClInclude Include="..\..\..\include\GCore\gmemory.h" />
     <ClInclude Include="..\..\..\include\GCore\gnomoveable.h" />
@@ -256,7 +247,6 @@
     <ClInclude Include="..\..\..\include\GCore\gsmallinteger.h" />
     <ClInclude Include="..\..\..\include\GCore\gstack.h" />
     <ClInclude Include="..\..\..\include\GCore\gstaticarray.h" />
-    <ClInclude Include="..\..\..\include\GCore\gsynchronouslog.h" />
     <ClInclude Include="..\..\..\include\GCore\gsystemexception.h" />
     <ClInclude Include="..\..\..\include\GCore\gtable.h" />
     <ClInclude Include="..\..\..\include\GCore\gtextfile.h" />
@@ -267,7 +257,7 @@
     <ClInclude Include="..\..\..\include\GCore\gunclassifiedexception.h" />
     <ClInclude Include="..\..\..\include\GCore\guniqueptr.h" />
     <ClInclude Include="..\..\..\include\GCore\gunordermap.h" />
-    <ClInclude Include="..\..\..\include\GCore\gordermap.h" />
+    <ClInclude Include="..\..\..\include\GCore\gsortedmap.h" />
     <ClInclude Include="..\..\..\include\GCore\gblock.h" />
     <ClInclude Include="..\..\..\include\GCore\gnew.h" />
     <ClInclude Include="..\..\..\include\GCore\gmemorystore.h" />
@@ -314,7 +304,6 @@
     <ClInclude Include="..\..\..\include\GCore\gweakptr.h" />
     <ClInclude Include="..\..\..\include\GCore\gwidecharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gfunctor.h" />
-    <ClInclude Include="..\..\..\include\GCore\gxmlnode.h" />
     <ClInclude Include="..\..\..\private\GCore\gbinfile_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gfile_ex.h" />
     <ClInclude Include="..\..\..\private\GCore\gjsonparser.h" />
@@ -338,7 +327,6 @@
     <ClCompile Include="..\..\..\source\GCore\gcstring.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdate.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdatetime.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gencoding.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gexception.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile_ex.cpp" />
@@ -477,7 +465,7 @@
     <None Include="..\..\..\include\GCore\gnew.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gordermap.inl">
+    <None Include="..\..\..\include\GCore\gsortedmap.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gorderset.inl">

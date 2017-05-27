@@ -99,6 +99,7 @@ public:
 		static const gbyte FIT = 1;							// 满足条件（001）
 		static const gbyte TURN_LEFT = 2;					// 向左追踪（010）
 		static const gbyte TURN_RIGHT = 4;					// 向右追踪（100）
+
 		static const gbyte FIT_AND_TURN_LEFT = 3;			// 满足条件，并向左侧追踪（011）
 		static const gbyte FIT_AND_TURN_RIGHT = 5;			// 满足条件，并向右侧追踪（101）
 		static const gbyte FIT_AND_TURN_BOTH_SIDE = 7;		// 满足条件，并向两个方向追踪（111）

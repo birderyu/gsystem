@@ -70,15 +70,6 @@
     <Filter Include="头文件\Pattern">
       <UniqueIdentifier>{087959c5-fcd7-4766-9afa-ff103fa1e8d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Json">
-      <UniqueIdentifier>{fb346320-596c-4403-942e-e4a5166dec78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Application">
-      <UniqueIdentifier>{5f98c0c4-ed1c-44ae-957d-3f3d2dcd45bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Xml">
-      <UniqueIdentifier>{e174cf53-bdb6-454f-918f-e15034a39c6d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\Json">
       <UniqueIdentifier>{5cda6b33-c129-4dff-9d2c-4735aed3fff3}</UniqueIdentifier>
     </Filter>
@@ -93,9 +84,6 @@
     </Filter>
     <Filter Include="头文件\Tool">
       <UniqueIdentifier>{1d442519-a6c1-41ba-bef2-5f09661e83b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Log">
-      <UniqueIdentifier>{5ad05b35-6dfc-47ea-b00f-b81096185183}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Log">
       <UniqueIdentifier>{9d2d40dc-a83f-4b3d-9d09-c65ae67ca701}</UniqueIdentifier>
@@ -137,15 +125,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gregister.h">
       <Filter>头文件\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gjsonarray.h">
-      <Filter>头文件\Json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gjsonpair.h">
-      <Filter>头文件\Json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gjsonvalue.h">
-      <Filter>头文件\Json</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gsocket.h">
       <Filter>头文件\Net</Filter>
@@ -224,9 +203,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gsmallinteger.h">
       <Filter>头文件\Package</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gjsonparsermessage.h">
-      <Filter>头文件\Json</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\garray.h">
       <Filter>头文件\Structure</Filter>
@@ -312,12 +288,6 @@
     <ClInclude Include="..\..\..\include\GCore\gstdstringhelper.h">
       <Filter>头文件\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gxmlnode.h">
-      <Filter>头文件\Xml</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gamazing.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gblock.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
@@ -331,9 +301,6 @@
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gmemorystore.h">
-      <Filter>头文件\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gordermap.h">
       <Filter>头文件\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gordermultimap.h">
@@ -377,9 +344,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\private\GCore\gudpsocket_ex.h">
       <Filter>头文件\_private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gjsonobject.h">
-      <Filter>头文件\Json</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gevent.h">
       <Filter>头文件\Thread</Filter>
@@ -441,12 +405,6 @@
     <ClInclude Include="..\..\..\include\GCore\gtuple.h">
       <Filter>头文件\Template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsynchronouslog.h">
-      <Filter>头文件\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gasynchronouslog.h">
-      <Filter>头文件\Log</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gfile.h">
       <Filter>头文件\File</Filter>
     </ClInclude>
@@ -455,9 +413,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gdatetime.h">
       <Filter>头文件\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glog.h">
-      <Filter>头文件\Log</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gpath.h">
       <Filter>头文件\File</Filter>
@@ -479,9 +434,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gtable.h">
       <Filter>头文件\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gencoding.h">
-      <Filter>头文件\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\garrays.h">
       <Filter>头文件\Utility</Filter>
@@ -602,6 +554,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\GCore\gcharset.h">
       <Filter>头文件\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\gsortedmap.h">
+      <Filter>头文件\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -785,9 +740,6 @@
     <ClCompile Include="..\..\..\source\GCore\glog.cpp">
       <Filter>源文件\Log</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gencoding.cpp">
-      <Filter>源文件\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gcstring.cpp">
       <Filter>源文件\Utility</Filter>
     </ClCompile>
@@ -869,9 +821,6 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gnew.inl">
-      <Filter>头文件\_inline</Filter>
-    </None>
-    <None Include="..\..\..\include\GCore\gordermap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gorderset.inl">
@@ -977,6 +926,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\GCore\gbasestring.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\gsortedmap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>
