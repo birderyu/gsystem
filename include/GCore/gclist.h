@@ -37,6 +37,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gclist.inl"
+#include "inline/gclist.inl"
 
 #endif // _CORE_CIRCULAR_LINKED_LIST_H_

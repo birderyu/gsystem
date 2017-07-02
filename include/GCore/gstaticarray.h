@@ -32,6 +32,6 @@ private:
 
 } // namespace gsystem
 
-#include "gstaticarray.inl"
+#include "inline/gstaticarray.inl"
 
 #endif // _CORE_STATIC_ARRAY_H_

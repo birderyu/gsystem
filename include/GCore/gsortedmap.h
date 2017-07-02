@@ -354,7 +354,7 @@ private:
 
 } // namespace gsystem
 
-#include "gsortedmap.inl"
+#include "inline/gsortedmap.inl"
 
 #undef G_SORTED_MAP_NODE_BLACK
 #undef G_SORTED_MAP_NODE_RED

@@ -1,4 +1,0 @@
-#ifndef _CORE_GRAPH_INLINE_
-#define _CORE_GRAPH_INLINE_
-
-#endif // _CORE_GRAPH_INLINE_

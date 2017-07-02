@@ -19,6 +19,6 @@ private:
 
 } // namespace gsystem
 
-#include "glockguard.inl"
+#include "inline/glockguard.inl"
 
 #endif // _CORE_LOCK_GUARD_H_

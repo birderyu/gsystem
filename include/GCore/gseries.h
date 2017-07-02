@@ -122,6 +122,6 @@ GAPI typedef GSeries<gwchar, 4, true, 0>		GWStringData;
 
 } // namespace gsystem
 
-#include "gseries.inl"
+#include "inline/gseries.inl"
 
 #endif // _CORE_SERIES_H_

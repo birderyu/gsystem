@@ -44,6 +44,6 @@ private:
 
 } // namespace gsystem
 
-#include "garrayqueue.inl"
+#include "inline/garrayqueue.inl"
 
 #endif // _CORE_ARRAY_QUEUE_H_

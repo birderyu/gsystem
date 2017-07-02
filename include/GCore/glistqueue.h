@@ -39,6 +39,6 @@ private:
 
 } // namespace gsystem
 
-#include "glistqueue.inl"
+#include "inline/glistqueue.inl"
 
 #endif // _CORE_LIST_QUEUE_H_

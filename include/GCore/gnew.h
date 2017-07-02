@@ -144,6 +144,6 @@ private:
 
 } // namespace gsystem
 
-#include "gnew.inl"
+#include "inline/gnew.inl"
 
 #endif // _CORE_NEW_H_

@@ -112,6 +112,6 @@ struct GDummyNodeT
 
 } // namespace gsystem
 
-#include "gstruct.inl"
+#include "inline/gstruct.inl"
 
 #endif // _CORE_STRUCTURE_H_

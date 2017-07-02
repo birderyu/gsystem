@@ -48,6 +48,6 @@ private:
 
 } // namespace gsystem
 
-#include "gtable.inl"
+#include "inline/gtable.inl"
 
 #endif // _CORE_TABLE_H_

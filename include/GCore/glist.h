@@ -351,6 +351,6 @@ private:
 
 } // namespace gsystem
 
-#include "glist.inl"
+#include "inline/glist.inl"
 
 #endif // _CORE_LIST_H_

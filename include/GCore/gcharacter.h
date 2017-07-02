@@ -5,17 +5,17 @@
 
 namespace gsystem { // gsystem
 
-class GAPI GCharacter 
-	: public GPackage<gchar>
-{
-public:
-	GCharacter(gchar val = '\0');
-	GCharacter(const GCharacter &);
+	class GAPI GCharacter
+		: public GPackage<gchar>
+	{
+	public:
+		GCharacter(gchar val = '\0');
+		GCharacter(const GCharacter &);
 
-	guint ClassCode() const GNOEXCEPT;
-};
+		guint ClassCode() const GNOEXCEPT;
+	};
 
-typedef GCharacter GChar;
+	typedef GCharacter GChar;
 
 } // namespace gsystem
 

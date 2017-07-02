@@ -46,6 +46,6 @@ public:
 
 } // namespace gsystem
 
-#include "garray.inl"
+#include "inline/garray.inl"
 
 #endif // _CORE_ARRAY_H_

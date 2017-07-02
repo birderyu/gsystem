@@ -328,6 +328,6 @@ protected:
 
 } // namespace gsystem
 
-#include "grtree.inl"
+#include "inline/grtree.inl"
 
 #endif // _CORE_R_TREE_H_

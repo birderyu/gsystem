@@ -18,7 +18,7 @@ namespace gsystem { // gsystem
 namespace gsystem { // gsystem
 namespace geom { // gsystem.geom
 
-class GAPI GEnvelope
+class GAPI GEnvelope final
 	: public GObject
 {
 public:

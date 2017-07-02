@@ -227,6 +227,6 @@ private:
 
 } // namespace gsystem
 
-#include "gvariety.inl"
+#include "inline/gvariety.inl"
 
 #endif // _CORE_VARIETY_H_

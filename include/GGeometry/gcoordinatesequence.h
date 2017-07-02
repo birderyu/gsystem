@@ -8,7 +8,7 @@
 namespace gsystem { // gsystem
 namespace geom { // gsystem.geom
 
-class GAPI GCoordinateSequence
+class GAPI GCoordinateSequence final
 {
 public:
 	GCoordinateSequence();

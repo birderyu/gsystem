@@ -91,6 +91,6 @@ private:
 
 } // namespace gsystem
 
-#include "gbtree.inl"
+#include "inline/gbtree.inl"
 
 #endif // _CORE_B_TREE_H_

@@ -19,7 +19,7 @@ namespace gsystem { // gsystem
 ** 二进制文件类用于打开、创建、编辑一个二进制文件，它是文件类（GFile）的一个派生。
 **
 ****************************************************************************/
-class GAPI GBinFile
+class GAPI GBinFile final
 	: public GFile
 {
 public:

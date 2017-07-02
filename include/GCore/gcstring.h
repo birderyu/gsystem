@@ -17,6 +17,7 @@ GAPI gsystem::gint strncasecmp(const gsystem::gchar8 *s1, gsystem::gchar8 *s2, /
 
 namespace gsystem { // gsystem
 
+// 字符的操作
 class GAPI GCChar
 {
 	gchar8 ToLower(gchar8);
@@ -89,6 +90,7 @@ public:
 	// Boyer-Moore匹配算法
 	//static gint BoyerMooreMatcher(gcstring src, gsize slen, gcstring ptn, gsize plen, gbool isSensitive);
 
+	// 字符串替换
 	// 注意：当返回值为false时，表示未做任何替换，此时c_str_out和out_len里的值可能是无效的
 	static gbool Replace(gcstring8 src, gsize size,
 		gcstring8 from, gsize from_size,

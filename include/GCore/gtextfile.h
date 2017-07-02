@@ -11,7 +11,7 @@ namespace gsystem { // gsystem
 
 namespace gsystem { // gsystem
 
-class GAPI GTextFile 
+class GAPI GTextFile final
 	: public GFile
 {
 public:

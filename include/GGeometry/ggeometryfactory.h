@@ -32,8 +32,8 @@ public:
 	GGeometryPtr CreateLineString(const GCoordinateSequence &coords) const;
 
 #ifdef G_GEOMETRY_HAS_Z
-	GGeometryPtr CreatePoint3D(greal x, greal y, greal z) const;
-	GGeometryPtr CreatePoint3D(const GCoordinate &coord) const;
+	GPointPtr CreatePoint3D(greal x, greal y, greal z) const;
+	GPointPtr CreatePoint3D(const GCoordinate &coord) const;
 #endif
 
 private:

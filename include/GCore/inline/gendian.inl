@@ -1,0 +1,4 @@
+#ifndef _CORE_ENDIAN_INLINE_
+#define _CORE_ENDIAN_INLINE_
+
+#endif // _CORE_ENDIAN_INLINE_

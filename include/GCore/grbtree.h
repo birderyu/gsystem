@@ -87,7 +87,7 @@ protected:
 
 } // namespace gsystem
 
-#include "grbtree.inl"
+#include "inline/grbtree.inl"
 
 #undef G_RED_BLACK_TREE_NODE_BLACK
 #undef G_RED_BLACK_TREE_NODE_RED

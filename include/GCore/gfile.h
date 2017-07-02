@@ -52,8 +52,8 @@ public:
 
 	enum FILE_FORMAT
 	{
-		BINARY_FILE,
-		TEXT_FILE
+		BINARY_FILE,	/// 二进制文件
+		TEXT_FILE		/// 文本文件
 	};
 
 	enum SEEK_MODE

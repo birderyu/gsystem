@@ -7,7 +7,7 @@
 namespace gsystem { // gsystem
 
 /// 原子操作
-/// 仅支持guint、gulong、gulonglong以及与之等价类型（如guint32、guint64）的原子操作
+/// 仅支持整形数值的原子操作
 class GAtom
 {
 public:
@@ -24,16 +24,16 @@ public:
 	/// 返回target之前的值
 	template<typename T> static T ValuedCompareAndSwap(T *target, T comperand, T exchange);
 
-	/// 原子自增操作，返回新值，相当于++*var
+	/// 原子自增操作，返回新值，相当于++*target
 	template<typename T> static T IncrementAndFetch(T *target);
 
-	/// 原子自减操作，返回新值，相当于--*var
+	/// 原子自减操作，返回新值，相当于--*target
 	template<typename T> static T DecrementAndFetch(T *target);
 
-	/// 原子自增操作，返回旧值，相当于*var++
+	/// 原子自增操作，返回旧值，相当于*target++
 	template<typename T> static T FetchAndIncrement(T *target);
 
-	/// 原子自减操作，返回旧值，相当于*var--
+	/// 原子自减操作，返回旧值，相当于*target--
 	template<typename T> static T FetchAndDecrement(T *target);
 
 	/// FAA操作（fetch-and-add）
@@ -58,6 +58,6 @@ public:
 
 } // namespace gsystem
 
-#include "gatom.inl"
+#include "inline/gatom.inl"
 
 #endif // _CORE_ATOM_H_

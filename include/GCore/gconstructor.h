@@ -38,6 +38,6 @@ template <typename ClassT> gvoid GMoveConstruct(ClassT *ptr, ClassT &&moveable);
 
 } // namespace gsystem
 
-#include "gconstructor.inl"
+#include "inline/gconstructor.inl"
 
 #endif // _CORE_CONSTRUCTOR_H_

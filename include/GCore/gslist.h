@@ -115,6 +115,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gslist.inl"
+#include "inline/gslist.inl"
 
 #endif // _CORE_SINGLE_LINKED_LIST_H_

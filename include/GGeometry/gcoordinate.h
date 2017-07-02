@@ -7,7 +7,7 @@
 namespace gsystem { // gsystem
 namespace geom { // gsystem.geom
 
-class GAPI GCoordinate
+class GAPI GCoordinate final
 	: public GObject
 {
 	friend class GEnvelope;

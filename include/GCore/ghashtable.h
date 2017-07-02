@@ -451,7 +451,7 @@ private:
 
 } // namespace gsystem
 
-#include "ghashtable.inl"
+#include "inline/ghashtable.inl"
 
 #undef G_HASH_TABLE_DEFAULT_LOAD_FACTOR
 #undef G_HASH_TABLE_MAX_MODULE_SIZE

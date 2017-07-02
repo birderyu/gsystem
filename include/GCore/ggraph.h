@@ -205,6 +205,6 @@ void *data)
 
 } // namespace gsystem
 
-#include "ggraph.inl"
+#include "inline/ggraph.inl"
 
 #endif // _CORE_GRAPH_H_

@@ -118,6 +118,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gdlist.inl"
+#include "inline/gdlist.inl"
 
 #endif // _CORE_DOUBLE_LINKED_LIST_H_

@@ -110,6 +110,6 @@ private:
 } // namespace gsystem.detail
 } // namespace gsystem
 
-#include "gsort.inl"
+#include "inline/gsort.inl"
 
 #endif // _CORE_SORT_H_

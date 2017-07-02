@@ -183,6 +183,6 @@ private:
 
 } // namespace gsystem
 
-#include "gmempool.inl"
+#include "inline/gmempool.inl"
 
 #endif // _CORE_MEMORY_POOL_H_

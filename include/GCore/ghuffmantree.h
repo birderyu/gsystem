@@ -65,6 +65,6 @@ private:
 
 } // namespace gsystem
 
-#include "ghuffmantree.inl"
+#include "inline/ghuffmantree.inl"
 
 #endif // _CORE_HUFFMAN_TREE_H_

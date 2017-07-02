@@ -38,6 +38,6 @@ public:
 
 } // namespace gsystem
 
-#include "gallocator.inl"
+#include "inline/gallocator.inl"
 
 #endif // _CORE_ALLOCATOR_H_

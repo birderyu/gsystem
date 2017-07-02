@@ -31,6 +31,6 @@ public:
 
 } // namespace gsystem
 
-#include "gstack.inl"
+#include "inline/gstack.inl"
 
 #endif // _CORE_STACK_H_

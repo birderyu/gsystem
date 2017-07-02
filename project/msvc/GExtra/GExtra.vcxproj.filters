@@ -13,5 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\charset">
+      <UniqueIdentifier>{a7395359-2bc5-4ce2-83e7-8345048561cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\json">
+      <UniqueIdentifier>{6f0e5c81-8a8a-4f80-81c9-6dcfdc9ab125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\xml">
+      <UniqueIdentifier>{6ab93137-7bfa-4c72-9a2a-f4880f851af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\log">
+      <UniqueIdentifier>{46680b25-ed9c-49d3-a257-344d23da2002}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

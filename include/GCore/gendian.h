@@ -68,6 +68,6 @@ private:
 
 } // namespace gsystem
 
-#include "gendian.inl"
+#include "inline/gendian.inl"
 
 #endif // _CORE_ENDIAN_H_

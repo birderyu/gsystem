@@ -183,7 +183,7 @@ private:
 
 } // namespace gsystem
 
-#include "gvector.inl"
+#include "inline/gvector.inl"
 
 #undef G_VECTOR_DEFAULT_CAPACITY
 

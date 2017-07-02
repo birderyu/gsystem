@@ -470,6 +470,6 @@ public:
 
 } // namespace gsystem
 
-#include "gtuple.inl"
+#include "inline/gtuple.inl"
 
 #endif // _CORE_TUPLE_H_

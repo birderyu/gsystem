@@ -39,6 +39,6 @@ private:
 
 } // namespace gsystem
 
-#include "gliststack.inl"
+#include "inline/gliststack.inl"
 
 #endif // _CORE_LIST_STACK_H_

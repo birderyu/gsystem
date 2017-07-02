@@ -365,7 +365,7 @@ private:
 
 } // namespace gsystem
 
-#include "gorderset.inl"
+#include "inline/gorderset.inl"
 
 #undef G_ORDER_SET_NODE_BLACK
 #undef G_ORDER_SET_NODE_RED

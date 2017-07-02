@@ -54,6 +54,6 @@ private:
 
 } // namespace gsystem
 
-#include "gbytes.inl"
+#include "inline/gbytes.inl"
 
 #endif // _CORE_BYTES_H_

@@ -31,6 +31,6 @@ public:
 
 } // namespace gsystem
 
-#include "gqueue.inl"
+#include "inline/gqueue.inl"
 
 #endif // _CORE_QUEUE_H_

@@ -502,6 +502,6 @@ constexpr detail::variant::move_func_t GVariant<TS...>::m_move_assign[];
 
 } // namespace gsystem
 
-#include "gvariant.inl"
+#include "inline/gvariant.inl"
 
 #endif // _CORE_VARIANT_H_

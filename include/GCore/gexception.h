@@ -20,9 +20,9 @@ public:
 
 public:
 	virtual gvoid Raise() = 0;
-	GString ExceptionMessage() GNOEXCEPT;
-	GString Details() GNOEXCEPT;
-	GString StackTrace() GNOEXCEPT;
+	const GString &ExceptionMessage() const GNOEXCEPT;
+	const GString &Details() const GNOEXCEPT;
+	const GString &StackTrace() const GNOEXCEPT;
 	gvoid AddStackTraceInfo(const GString &methodName,
 		gsize lineNumber, const GString &fileName) GNOEXCEPT;
 	gvoid AddStackTraceInfo(const GString &methodName, const GString &methodParams,
@@ -42,12 +42,12 @@ protected:
 	/****************************************************************************
 	**
 	** @brief 构造异常对象
-	** @param[in] methodName {const GString &} 异常抛出方法名
-	** @param[in] lineNumber {gsize} 异常抛出行号
-	** @param[in] fileName {const GString &} 异常抛出文件
-	** @param[in] whatArguments {const GStringList *} 什么异常
-	** @param[in] whyMessageId {const GString &} 异常为什么产生的信息ID
-	** @param[in] whyArguments {const GStringList *} 异常为什么产生的相关参数
+	** @param [in] methodName {const GString &} 异常抛出方法名
+	** @param [in] lineNumber {gsize} 异常抛出行号
+	** @param [in] fileName {const GString &} 异常抛出文件
+	** @param [in] whatArguments {const GStringList *} 什么异常
+	** @param [in] whyMessageId {const GString &} 异常为什么产生的信息ID
+	** @param [in] whyArguments {const GStringList *} 异常为什么产生的相关参数
 	**
 	****************************************************************************/
 	GException(const GString &methodName, gsize lineNumber,

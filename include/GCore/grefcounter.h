@@ -1,4 +1,16 @@
-// 引用计数器
+/****************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file	grefcounter.h
+** @brief	引用计数器
+** @author	birderyu
+** @contact	https://github.com/birderyu
+** @date	2015-12-31
+** @version	1.0.0
+**
+****************************************************************************/
+
 #ifndef _CORE_REFERENCE_COUNTER_H_
 #define _CORE_REFERENCE_COUNTER_H_
 
@@ -6,27 +18,40 @@
 
 namespace gsystem { // gsystem
 
+/****************************************************************************
+**
+** @brief	引用计数器
+**
+****************************************************************************/
 template <typename ClassT>
 class GRefCounter 
 	: public GNewT<GRefCounter<ClassT>>
 {
 public:
-	// count: 初始引用计数，默认为1
-	GRefCounter(ClassT *ptr, gsize count = 1);
+	/****************************************************************************
+	**
+	** @name GRefCounter
+	** @brief 构造函数（constructor）
+	** @param[in] count {gsize} 初始化的一个数字
+	**
+	** 由于GObject需要作为所有资源类的基类，因此其析构函数必须是虚拟的（virtual）。
+	**
+	****************************************************************************/
+	GRefCounter(gsize count = 1);
+	GRefCounter(const GRefCounter &refCounter);
+	GRefCounter(GRefCounter &&refCounter);
 	~GRefCounter();
+
 	gsize Add();
-	gvoid Release();
+	gsize Release();
 	gsize Count() const;
-	ClassT *Pointer();
-	const ClassT *Pointer() const;
 
 private:
-	gsize m_nCount;
 	ClassT *m_pPointer;
 };
 
 } // namespace gsystem
 
-#include "grefcounter.inl"
+#include "inline/grefcounter.inl"
 
 #endif // _CORE_REFERENCE_COUNTER_H_

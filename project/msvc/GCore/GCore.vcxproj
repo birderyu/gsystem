@@ -23,12 +23,13 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
     <ProjectName>GCore</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -168,7 +169,7 @@
     <ClInclude Include="..\..\..\include\GCore\gallocator.h" />
     <ClInclude Include="..\..\..\include\GCore\garrays.h" />
     <ClInclude Include="..\..\..\include\GCore\gbasestring.h" />
-    <ClInclude Include="..\..\..\include\GCore\gcharset.h" />
+    <ClInclude Include="..\..\..\include\GCore\gcharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gclasscode.h" />
     <ClInclude Include="..\..\..\include\GCore\gdtdef.h" />
     <ClInclude Include="..\..\..\include\GCore\gdeque.h" />
@@ -192,7 +193,6 @@
     <ClInclude Include="..\..\..\include\GCore\gbtree.h" />
     <ClInclude Include="..\..\..\include\GCore\gbyte.h" />
     <ClInclude Include="..\..\..\include\GCore\gbytes.h" />
-    <ClInclude Include="..\..\..\include\GCore\gcharacter.h" />
     <ClInclude Include="..\..\..\include\GCore\gclist.h" />
     <ClInclude Include="..\..\..\include\GCore\gconstructor.h" />
     <ClInclude Include="..\..\..\include\GCore\gcriticalsection.h" />
@@ -330,12 +330,6 @@
     <ClCompile Include="..\..\..\source\GCore\gexception.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gfile_ex.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gjsonarray.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gjsonparsermessage.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gjsonobject.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gjsonpair.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\gjsonvalue.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\glog.cpp" />
     <ClCompile Include="..\..\..\source\GCore\glongdoublefloat.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gdoublefloat.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gendian.cpp" />

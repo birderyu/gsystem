@@ -366,6 +366,6 @@ protected:
 
 } // namespace gsystem
 
-#include "gbintree.inl"
+#include "inline/gbintree.inl"
 
 #endif // _CORE_BINARY_TREE_H_

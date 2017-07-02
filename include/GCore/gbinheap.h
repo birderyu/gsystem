@@ -138,7 +138,7 @@ public:
 
 } // namespace gsystem
 
-#include "gbinheap.inl"
+#include "inline/gbinheap.inl"
 
 #undef G_BINARY_HEAP_DEFAULT_ADD_SIZE
 #undef G_BINARY_HEAP_DEFAULT_CAPACITY

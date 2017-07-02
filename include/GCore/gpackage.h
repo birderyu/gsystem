@@ -99,6 +99,6 @@ public:
 
 } // namespace gsystem
 
-#include "gpackage.inl"
+#include "inline/gpackage.inl"
 
 #endif // _CORE_PACKAGE_H_

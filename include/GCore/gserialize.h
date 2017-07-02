@@ -29,6 +29,6 @@ gbool GDeserialize(GArchive &archive, DataT &v);
 
 } // namespace gsystem
 
-#include "gserialize.inl"
+#include "inline/gserialize.inl"
 
 #endif // _CORE_SERIALIZE_H_

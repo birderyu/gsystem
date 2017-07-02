@@ -32,6 +32,6 @@ template<typename ClassT, typename... TS> GUniquePtr<ClassT> GMakeUnique(TS&&...
 
 } // namespace gsystem
 
-#include "guniqueptr.inl"
+#include "inline/guniqueptr.inl"
 
 #endif // _CORE_UNIQUE_POINTER_H_

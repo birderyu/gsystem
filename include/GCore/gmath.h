@@ -81,6 +81,6 @@ private:
 
 } // namespace gsystem
 
-#include "gmath.inl"
+#include "inline/gmath.inl"
 
 #endif // _CORE_MATH_H_

@@ -17,6 +17,6 @@ template<typename T> gvoid GSwap(T &a, T &b);
 
 } // namespace gsystem
 
-#include "gutility.inl"
+#include "inline/gutility.inl"
 
 #endif // _CORE_UTILITY_H_

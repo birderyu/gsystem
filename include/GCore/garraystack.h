@@ -46,6 +46,6 @@ private:
 
 } // namespace gsystem
 
-#include "garraystack.inl"
+#include "inline/garraystack.inl"
 
 #endif // _CORE_ARRAY_STACK_H_

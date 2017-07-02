@@ -41,6 +41,6 @@ template<typename ClassT, typename... TS> GSharedPtr<ClassT> GMakeShared(TS&&...
 
 } // namespace gsystem
 
-#include "gsharedptr.inl"
+#include "inline/gsharedptr.inl"
 
 #endif // _CORE_SHARED_POINTER_H_

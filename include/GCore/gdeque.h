@@ -37,6 +37,6 @@ public:
 
 } // namespace gsystem
 
-#include "gdeque.inl"
+#include "inline/gdeque.inl"
 
 #endif // _CORE_DEQUE_H_

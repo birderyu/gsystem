@@ -50,6 +50,6 @@ private:
 
 } // namespace gsystem
 
-#include "gstringlist.inl"
+#include "inline/gstringlist.inl"
 
 #endif // _CORE_STRING_LIST_H_

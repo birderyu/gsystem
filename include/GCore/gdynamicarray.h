@@ -80,6 +80,6 @@ typedef GDynamicArray<gsize> GSizeArray;
 
 } // namespace gsystem
 
-#include "gdynamicarray.inl"
+#include "inline/gdynamicarray.inl"
 
 #endif // _CORE_DYNAMIC_ARRAY_H_
