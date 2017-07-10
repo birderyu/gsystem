@@ -22,11 +22,11 @@ class GAPI GCChar
 {
 	gchar8 ToLower(gchar8);
 	gchar16 ToLower(gchar16);
-	gchar16 ToLower(gchar16);
+	gchar32 ToLower(gchar32);
 
 	gchar8 ToUpper(gchar8);
 	gchar16 ToUpper(gchar16);
-	gchar16 ToUpper(gchar16);
+	gchar32 ToUpper(gchar32);
 };
 
 // C风格的字符串操作

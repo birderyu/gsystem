@@ -56,7 +56,7 @@ gsize GCString::Size(gcstring32 str)
 
 gvoid GCString::Copy(gcstring8 src, gstring8 dest)
 {
-	strcpy(dest, src);
+	Copy(src, Size(src) + 1, dest);
 }
 
 gvoid GCString::Copy(gcstring16 src, gstring16 dest)

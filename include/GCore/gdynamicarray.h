@@ -21,7 +21,6 @@ public:
 	GDynamicArray(const GArray<DataT> &arr, gsize start, gsize size);
 	~GDynamicArray();
 
-	// 获取数组的长度
 	gsize Size() const;
 
 	// 数组是否为空

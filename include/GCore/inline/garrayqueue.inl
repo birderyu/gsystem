@@ -90,7 +90,7 @@ gvoid GArrayQueue<DataT>::Destroy()
 }
 
 template <typename DataT> GINLINE
-gvoid GArrayQueue<DataT>::EnQueue(const DataT &data)
+gvoid GArrayQueue<DataT>::EnQueue(const DataT &value)
 {
 	gsize old_size = Size();
 	if (old_size >= Capacity())
@@ -100,7 +100,7 @@ gvoid GArrayQueue<DataT>::EnQueue(const DataT &data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
-	m_tArray[m_nTail++] = data;
+	m_tArray[m_nTail++] = value;
 	if (m_nHead == GDynamicArray<DataT>::NULL_POS)
 	{
 		m_nHead = 0;
@@ -108,7 +108,7 @@ gvoid GArrayQueue<DataT>::EnQueue(const DataT &data)
 }
 
 template <typename DataT> GINLINE
-gvoid GArrayQueue<DataT>::EnQueue(DataT &&data)
+gvoid GArrayQueue<DataT>::EnQueue(DataT &&value)
 {
 	gsize old_size = Size();
 	if (old_size >= Capacity())
@@ -118,7 +118,7 @@ gvoid GArrayQueue<DataT>::EnQueue(DataT &&data)
 		Reserve(old_size + (old_size / 2 + 1));
 	}
 
-	m_tArray[m_nTail++] = GForward<DataT>(data);
+	m_tArray[m_nTail++] = GForward<DataT>(value);
 	if (m_nHead == GDynamicArray<DataT>::NULL_POS)
 	{
 		m_nHead = 0;
@@ -126,16 +126,16 @@ gvoid GArrayQueue<DataT>::EnQueue(DataT &&data)
 }
 
 template <typename DataT> GINLINE
-gvoid GArrayQueue<DataT>::DeQueue(DataT *data)
+gvoid GArrayQueue<DataT>::DeQueue(DataT *value)
 {
 	if (IsEmpty())
 	{
 		return;
 	}
-	if (data)
+	if (value)
 	{
 		// 将元素移走，而非拷贝
-		*data = GMove(m_tArray[m_nHead]);
+		*value = GMove(m_tArray[m_nHead]);
 	}
 	// 销毁元素
 	GDestruct(&m_tArray[m_nHead]);

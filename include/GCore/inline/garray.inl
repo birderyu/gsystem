@@ -58,12 +58,12 @@ const DataT *GArray<DataT>::LastCursor() const
 }
 
 template <typename DataT>
-GINLINE gbool GArray<DataT>::Contains(const DataT &data) const
+GINLINE gbool GArray<DataT>::Contains(const DataT &value) const
 {
 	gsize size = Size();
 	for (gsize i = 0; i < size; i++)
 	{
-		if (GetAt(i) == data)
+		if (GetAt(i) == value)
 		{
 			return true;
 		}
@@ -72,12 +72,12 @@ GINLINE gbool GArray<DataT>::Contains(const DataT &data) const
 }
 
 template <typename DataT>
-GINLINE gsize GArray<DataT>::FirstIndexOf(const DataT &data) const
+GINLINE gsize GArray<DataT>::FirstIndexOf(const DataT &value) const
 {
 	gsize size = Size();
 	for (gsize i = 0; i < size; i++)
 	{
-		if (GetAt(i) == data)
+		if (GetAt(i) == value)
 		{
 			return i;
 		}
@@ -86,13 +86,13 @@ GINLINE gsize GArray<DataT>::FirstIndexOf(const DataT &data) const
 }
 
 template <typename DataT>
-GINLINE gsize GArray<DataT>::LastIndexOf(const DataT &data) const
+GINLINE gsize GArray<DataT>::LastIndexOf(const DataT &value) const
 {
 	gsize size = Size();
 	for (gsize i = size; i > 0; i--)
 	{
 		// 注意不能让i减到0
-		if (GetAt(i - 1) == data)
+		if (GetAt(i - 1) == value)
 		{
 			return i - 1;
 		}
@@ -101,13 +101,13 @@ GINLINE gsize GArray<DataT>::LastIndexOf(const DataT &data) const
 }
 
 template <typename DataT>
-GINLINE gsize GArray<DataT>::CountOf(const DataT &data) const
+GINLINE gsize GArray<DataT>::CountOf(const DataT &value) const
 {
 	gsize size = Size();
 	gsize count = 0;
 	for (gsize i = 0; i < size; i++)
 	{
-		if (GetAt(i) == data)
+		if (GetAt(i) == value)
 		{
 			count++;
 		}

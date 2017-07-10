@@ -37,17 +37,21 @@ public:
 	** 由于GObject需要作为所有资源类的基类，因此其析构函数必须是虚拟的（virtual）。
 	**
 	****************************************************************************/
-	GRefCounter(gsize count = 1);
+	GRefCounter(ClassT *ptr, gsize count = 1);
 	GRefCounter(const GRefCounter &refCounter);
 	GRefCounter(GRefCounter &&refCounter);
 	~GRefCounter();
 
 	gsize Add();
-	gsize Release();
+	gvoid Release();
 	gsize Count() const;
+
+	ClassT *Pointer();
+	const ClassT *Pointer() const;
 
 private:
 	ClassT *m_pPointer;
+	gsize m_nCount;
 };
 
 } // namespace gsystem

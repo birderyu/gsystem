@@ -122,9 +122,9 @@ GString8 GString8::Number(gdouble num, gint base)
 	return detail::string::GNumberToString<gdouble>(num, base);
 }
 
-GString8 GString8::Number(gdecimal num, gint base)
+GString8 GString8::Number(glongdouble num, gint base)
 {
-	return detail::string::GNumberToString<gdecimal>(num, base);
+	return detail::string::GNumberToString<glongdouble>(num, base);
 }
 
 gsmall GString8::ToSmall(gbool *ok) const

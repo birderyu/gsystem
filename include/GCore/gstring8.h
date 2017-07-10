@@ -1,5 +1,5 @@
-#ifndef _CORE_STRING_8BIT_H_
-#define _CORE_STRING_8BIT_H_
+#ifndef _CORE_STRING_8_BIT_H_
+#define _CORE_STRING_8_BIT_H_
 
 #include "gseries.h"
 #include "gserializable.h"
@@ -57,7 +57,7 @@ public: // 构造方法
 	GString8(const GString8 &str);
 	GString8(GString8 &&str);
 
-public: // Array行为
+public:
 	gsize Size() const;
 	gsize Length() const; // 字符的长度
 	gbool IsEmpty() const;
@@ -139,4 +139,4 @@ GAPI gbool operator<=(const GString8 &s1, const GString8 &s2);
 
 } // namespace gsystem
 
-#endif // _CORE_STRING_8BIT_H_
+#endif // _CORE_STRING_8_BIT_H_

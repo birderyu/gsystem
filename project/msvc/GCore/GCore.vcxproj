@@ -178,6 +178,7 @@
     <ClInclude Include="..\..\..\include\GCore\goutofrangeexception.h" />
     <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\GCore\goutofmemoryexception.h" />
+    <ClInclude Include="..\..\..\include\GCore\grwlock.h" />
     <ClInclude Include="..\..\..\include\GCore\gserializable.h" />
     <ClInclude Include="..\..\..\include\GCore\gseries.h" />
     <ClInclude Include="..\..\..\include\GCore\garrayqueue.h" />

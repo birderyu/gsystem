@@ -38,9 +38,9 @@ struct GBinTreeNode
 	**
 	** @name GBinTreeNode
 	** @brief 构造函数（constructor）
-	** @param[in] parent 双亲节点，默认为GNULL
-	** @param[in] left 左孩子节点，默认为GNULL
-	** @param[in] right 右孩子节点，默认为GNULL
+	** @param[in] parent {GBinTreeNode *} 双亲节点，默认为GNULL
+	** @param[in] left {GBinTreeNode *} 左孩子节点，默认为GNULL
+	** @param[in] right {GBinTreeNode *} 右孩子节点，默认为GNULL
 	**
 	****************************************************************************/
 	GBinTreeNode(GBinTreeNode *parent = GNULL, 

@@ -40,8 +40,9 @@ GException::~GException() GNOEXCEPT
 
 }
 
-GString GException::ExceptionMessage() GNOEXCEPT
+const GString &GException::ExceptionMessage() const GNOEXCEPT
 {
+	/*
 	if (m_sMessage.IsEmpty())
 	{
 		m_sMessage = FormatWhatMessage(m_tWhatArguments);
@@ -51,11 +52,13 @@ GString GException::ExceptionMessage() GNOEXCEPT
 			m_sMessage += FormatWhyMessage(m_tWhyArguments);
 		}
 	}
+	*/
 	return m_sMessage;
 }
 
-GString GException::Details() GNOEXCEPT
+const GString &GException::Details() const GNOEXCEPT
 {
+	/*
 	if (m_sDetails.IsEmpty())
 	{
 		m_sDetails = ExceptionMessage();
@@ -64,15 +67,18 @@ GString GException::Details() GNOEXCEPT
 		m_sDetails += "\n";
 		m_sDetails += FormatStackTrace();
 	}
+	*/
 	return m_sDetails;
 }
 
-GString GException::StackTrace() GNOEXCEPT
+const GString &GException::StackTrace() const GNOEXCEPT
 {
+	/*
 	if (m_sStackTrace.IsEmpty())
 	{
 		m_sStackTrace = FormatStackTrace();
 	}
+	*/
 	return m_sStackTrace;
 }
 

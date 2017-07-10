@@ -18,11 +18,6 @@
 
 namespace gsystem { // gsystem
 
-GObject::~GObject()
-{
-	// 析构函数必须定义为虚拟的，并提供一个默认的实现，否则会造成内存泄漏
-}
-
 GObjectPtr GObject::Clone() const
 {
 	// 默认情况下，返回一个空指针
@@ -31,8 +26,7 @@ GObjectPtr GObject::Clone() const
 
 const GObject *GObject::Boxing() const
 {
-	// 默认情况下，返回this指针，当继承情况比较复杂时，该方法失效
-	return this;
+	return dynamic_cast<const GObject *>(this);
 }
 
 gbool GObject::Unboxing(const GObject *)
@@ -59,10 +53,9 @@ guint GObject::HashCode() const
 	return (guint)this;
 }
 
-gbool GObject::Equals(const GObject *obj) const
+gbool GObject::Equals(const GObject &obj) const
 {
-	// 默认情况下，比较指针数字值
-	return this == obj;
+	return Boxing() == obj.Boxing();
 }
 
 } // namespace gsystem

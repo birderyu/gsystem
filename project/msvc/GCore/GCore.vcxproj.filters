@@ -549,6 +549,9 @@
     <ClInclude Include="..\..\..\include\GCore\gcharacter.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GCore\grwlock.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">

@@ -1,3 +1,16 @@
+/********************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file garrays.h
+** @brief æ•°ç»„å¸®åŠ©ç±»
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-24
+** @version 1.0.0
+**
+********************************************************************************/
+
 #ifndef _CORE_ARRAYS_H_
 #define _CORE_ARRAYS_H_
 
@@ -5,17 +18,25 @@
 
 namespace gsystem { // gsystem
 
+/********************************************************************************
+**
+** @brief æ•°ç»„å¸®åŠ©ç±»
+** 
+** æ•°ç»„å¸®åŠ©ç±»å°è£…äº†å‡ ä¸ªå¸¸ç”¨çš„Cé£æ ¼æ•°ç»„çš„é™æ€æ–¹æ³•
+**
+********************************************************************************/
 class GArrays
 {
 public:
 	/****************************************************************************
 	**
 	** @name CreateArray
-	** @brief ¾²Ì¬·½·¨£¬´´½¨Ò»¸ö³¤¶ÈÎªsizeµÄÊı×é
-	** @param [in] size {gsize} ´ı´´½¨µÄÊı×éµÄ³¤¶È
-	** @return {DataT *} ·µ»Ø´´½¨Êı×éµÄÊ×µØÖ·£¬Èô´´½¨Ê§°Ü£¬Ôò·µ»ØGNULL
+	** @brief é™æ€æ–¹æ³•ï¼Œåˆ›å»ºæ•°ç»„
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] size {gsize} æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @return {DataT *} è¿”å›åˆ›å»ºæ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥åˆ›å»ºå¤±è´¥ï¼Œåˆ™è¿”å›GNULL
 	**
-	** ´´½¨Ò»¸ö³¤¶ÈÎªsizeµÄÊı×é£¬»áµ÷ÓÃÃ¿Ò»¸öÔªËØµÄÄ¬ÈÏ¹¹Ôìº¯Êı¡£
+	** åˆ›å»ºä¸€ä¸ªå…ƒç´ ä¸ªæ•°ä¸ºsizeçš„æ•°ç»„ï¼Œä¼šè°ƒç”¨æ¯ä¸€ä¸ªå…ƒç´ çš„é»˜è®¤æ„é€ å‡½æ•°ã€‚
 	**
 	****************************************************************************/
 	template <typename DataT> static DataT *CreateArray(gsize size) GEXCEPT(false);
@@ -23,86 +44,208 @@ public:
 	/****************************************************************************
 	**
 	** @name CreateArray
-	** @brief ¾²Ì¬·½·¨£¬´´½¨Ò»¸ö³¤¶ÈÎªsizeµÄÊı×é£¬ÇÒ¶ÔÃ¿Ò»¸öÔªËØ¸³³õÊ¼Öµ
-	** @param [in] size {gsize} ´ı´´½¨µÄÊı×éµÄ³¤¶È
-	** @param [in] copyable {const DataT &} ±»¿½±´µÄÔªËØÖµ
-	** @return {DataT *} ·µ»Ø´´½¨Êı×éµÄÊ×µØÖ·£¬Èô´´½¨Ê§°Ü£¬Ôò·µ»ØGNULL
+	** @brief é™æ€æ–¹æ³•ï¼Œåˆ›å»ºæ•°ç»„ï¼Œå¹¶å¯¹æ•°ç»„çš„æ¯ä¸€ä¸ªå…ƒç´ èµ‹åˆå§‹å€¼
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] size {gsize} æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] copyable {const DataT &} åˆå§‹å€¼
+	** @return {DataT *} è¿”å›åˆ›å»ºæ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥åˆ›å»ºå¤±è´¥ï¼Œåˆ™è¿”å›GNULL
 	**
-	** ´´½¨Ò»¸ö³¤¶ÈÎªsizeµÄÊı×é£¬²¢ÒÀ´ÎÊ¹ÓÃcopyableÈ¥³õÊ¼»¯Êı×éÖĞµÄÃ¿Ò»¸öÔªËØ£¬ÔÚ³õÊ¼»¯µÄ¹ı³ÌÖĞ
-	**     »áµ÷ÓÃÃ¿Ò»¸öÔªËØµÄ¿½±´¹¹Ôìº¯Êı¡£
+	** åˆ›å»ºä¸€ä¸ªå…ƒç´ ä¸ªæ•°ä¸ºsizeçš„æ•°ç»„ï¼Œå¹¶ä¾æ¬¡ä½¿ç”¨copyableå»åˆå§‹åŒ–æ•°ç»„ä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ ï¼Œåœ¨åˆå§‹åŒ–çš„
+	** è¿‡ç¨‹ä¸­ä¼šè°ƒç”¨æ¯ä¸€ä¸ªå…ƒç´ çš„æ‹·è´æ„é€ å‡½æ•°ã€‚
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CreateArray(gsize size, const DataT &copyable) GEXCEPT(false);
+	template <typename DataT> static DataT *CreateArray(gsize size, 
+		const DataT &copyable) GEXCEPT(false);
 
 	/****************************************************************************
 	**
 	** @name CreateArray
-	** @brief ¾²Ì¬·½·¨£¬¿½±´´´½¨Ò»¸öÊı×éµÄÒ»²¿·ÖÔªËØ³ÉÎªÒ»¸öĞÂµÄÊı×é
-	** @param [in] copy_arr {const DataT *} ±»¿½±´µÄÊı×éµÄÊ×µØÖ·
-	** @param [in] copy_start_pos {gsize} ±»¿½±´Êı×éµÄÆğÊ¼Î´Öª
-	** @param [in] copy_size {gsize} Ï£Íû¿½±´µÄ³¤¶È
-	** @return {DataT *} ·µ»Ø´´½¨Êı×éµÄÊ×µØÖ·£¬Èô´´½¨Ê§°Ü£¬Ôò·µ»ØGNULL
+	** @brief é™æ€æ–¹æ³•ï¼Œæ‹·è´åˆ›å»ºæ•°ç»„çš„ä¸€éƒ¨åˆ†å…ƒç´ æˆä¸ºä¸€ä¸ªæ–°çš„æ•°ç»„
+	** @template DataT æ•°ç»„å…ƒç´ çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] copy_arr {const DataT *} è¢«æ‹·è´çš„æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] copy_start_pos {gsize} è¢«æ‹·è´æ•°ç»„çš„èµ·å§‹ä½ç½®
+	** @param [in] copy_size {gsize} å¸Œæœ›æ‹·è´çš„å…ƒç´ çš„ä¸ªæ•°
+	** @return {DataT *} è¿”å›åˆ›å»ºæ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥åˆ›å»ºå¤±è´¥ï¼Œåˆ™è¿”å›GNULL
 	**
-	** ½«Êı×écopy_arrµÚcopy_start_pos¸öÔªËØ£¨´Ó0¿ªÊ¼¼ÆÊı£©¿ªÊ¼µÄcopy_size¸öÔªËØ¿½±´³öÀ´²¢
-	**     ´´½¨Ò»¸öĞÂµÄÊı×é£¬ÔÚ³õÊ¼»¯ĞÂÊı×éµÄ¹ı³ÌÖĞ£¬»áµ÷ÓÃÃ¿Ò»¸öÔªËØµÄ¿½±´¹¹Ôìº¯Êı¡£
+	** å°†æ•°ç»„copy_arrç¬¬copy_start_posä¸ªå…ƒç´ ï¼ˆä»0å¼€å§‹è®¡æ•°ï¼‰å¼€å§‹çš„copy_sizeä¸ªå…ƒç´ æ‹·è´å‡ºæ¥å¹¶
+	** åˆ›å»ºä¸€ä¸ªæ–°çš„æ•°ç»„ï¼Œåœ¨åˆå§‹åŒ–æ–°æ•°ç»„çš„è¿‡ç¨‹ä¸­ï¼Œä¼šè°ƒç”¨æ¯ä¸€ä¸ªå…ƒç´ çš„æ‹·è´æ„é€ å‡½æ•°ã€‚
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CreateArray(const DataT *copy_arr, gsize copy_start_pos, gsize copy_size) GEXCEPT(false);
+	template <typename DataT> static DataT *CreateArray(const DataT *copy_arr, 
+		gsize copy_start_pos, gsize copy_size) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬´´½¨Ò»¸ö³¤¶ÈÎªsizeµÄÊı×é£¬²¢ÓÃcopy_arrµÄµÚcopy_startÆğµÄcopy_sizeÔªËØÈ¥³õÊ¼»¯ĞÂµÄÊı×éµÄµÚstart¿ªÊ¼µÄcopy_size¸öÔªËØ
-	/// ÆäÓàµÄÔªËØÊ¹ÓÃÄ¬ÈÏµÄ¹¹Ôìº¯Êı¹¹Ôì
-	template <typename DataT>
-	static DataT *CreateArray(gsize size, gsize start, const DataT *copy_arr, gsize copy_start, gsize copy_size) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name CreateArray
+	** @brief é™æ€æ–¹æ³•ï¼Œåˆ›å»ºæ•°ç»„ï¼Œå¹¶å°†ä¸€ä¸ªæ•°ç»„çš„ä¸€éƒ¨åˆ†å…ƒç´ æ‹·è´åˆ°æ–°åˆ›å»ºæ•°ç»„çš„æŒ‡å®šä½ç½®
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] size {gsize} åˆ›å»ºæ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] start {gsize} æ–°æ•°ç»„æ¥æ”¶å…ƒç´ çš„ä½ç½®
+	** @param [in] copy_arr {const DataT *} è¢«æ‹·è´çš„æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] copy_start {gsize} è¢«æ‹·è´æ•°ç»„çš„èµ·å§‹ä½ç½®
+	** @param [in] copy_size {gsize} å¸Œæœ›æ‹·è´çš„å…ƒç´ çš„ä¸ªæ•°
+	** @return {DataT *} è¿”å›åˆ›å»ºæ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥åˆ›å»ºå¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** åˆ›å»ºä¸€ä¸ªé•¿åº¦ä¸ºsizeçš„æ•°ç»„ï¼Œå¹¶ç”¨æ•°ç»„copy_arrçš„ç¬¬copy_startèµ·çš„copy_sizeå…ƒç´ å»åˆå§‹åŒ–æ–°
+	** åˆ›å»ºçš„æ•°ç»„çš„ç¬¬startå¼€å§‹çš„copy_sizeä¸ªå…ƒç´ 
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *CreateArray(gsize size, gsize start, 
+		const DataT *copy_arr, gsize copy_start, gsize copy_size) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬½«Êı×éold_arrµÄÊı×éÔªËØÊıÄ¿ÓÉold_sizeµ÷ÕûÎªnew_size
-	/// Èô¾ÉÊı×é²»´æÔÚ£¨old_arr == GNULL && old_size == 0£©£¬»á´´½¨Ò»¸ö³¤¶ÈÎªnew_sizeµÄĞÂµÄÊı×é
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬ÈôĞÂµÄÊı×éÔªËØÊıÄ¿´óÓÚÔ­ÓĞÊıÄ¿£¬»á´´½¨ĞÂµÄÔªËØ£¬·´Ö®»áÓĞ²¿·ÖÔªËØ±»Îö¹¹
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬»áÓÅÏÈµ÷ÓÃÒÆ¶¯¹¹Ôì
-	template <typename DataT>
-	static DataT *ResizeArray(DataT *old_arr, gsize old_size, gsize new_size) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name ResizeArray
+	** @brief é™æ€æ–¹æ³•ï¼Œé‡ç½®æ•°ç»„å…ƒç´ çš„ä¸ªæ•°
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] old_arr {DataT *} å¾…é‡ç½®çš„æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] old_size {gsize} å¾…é‡ç½®çš„æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] new_size {gsize} é‡ç½®åçš„æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @return {DataT *} é‡ç½®åçš„æ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥é‡ç½®å¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** å°†æ•°ç»„old_arrçš„æ•°ç»„å…ƒç´ æ•°ç›®ç”±old_sizeè°ƒæ•´ä¸ºnew_sizeï¼Œè‹¥æ—§æ•°ç»„ä¸å­˜åœ¨æˆ–å…ƒç´ ä¸ªæ•°ä¸ºç©ºï¼Œä¼š
+	** åˆ›å»ºä¸€ä¸ªé•¿åº¦ä¸ºnew_sizeçš„æ–°çš„æ•°ç»„ã€‚åœ¨é‡ç½®çš„è¿‡ç¨‹ä¸­ï¼Œè‹¥æ–°çš„æ•°ç»„å…ƒç´ ä¸ªæ•°å¤§äºåŸæœ‰ä¸ªæ•°ï¼Œä¼šåˆ›å»º
+	** æ–°çš„å…ƒç´ ï¼Œåä¹‹ä¼šæœ‰éƒ¨åˆ†å…ƒç´ è¢«ææ„ã€‚
+	** åœ¨è°ƒæ•´å¤§å°çš„è¿‡ç¨‹ä¸­ï¼Œä¼šä¼˜å…ˆè°ƒç”¨ç§»åŠ¨æ„é€ 
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_size, 
+		gsize new_size) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬½«Êı×éold_arrµÄÊı×éÔªËØÊıÄ¿ÓÉold_sizeµ÷ÕûÎªnew_size
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬ÈôĞÂµÄÊı×éÔªËØÊıÄ¿´óÓÚÔ­ÓĞÊıÄ¿£¬»áÓÃcopyableÈ¥³õÊ¼»¯ĞÂµÄÔªËØ£¬·´Ö®»áÓĞ²¿·ÖÔªËØ±»Îö¹¹
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬»áÓÅÏÈµ÷ÓÃÒÆ¶¯¹¹Ôì
-	template <typename DataT>
-	static DataT *ResizeArray(DataT *old_arr, gsize old_size, gsize new_size, const DataT &copyable) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name ResizeArray
+	** @brief é™æ€æ–¹æ³•ï¼Œé‡ç½®æ•°ç»„å…ƒç´ çš„ä¸ªæ•°ï¼Œå¹¶å¯¹æ–°åˆ›å»ºçš„å…ƒç´ èµ‹åˆå§‹å€¼
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] old_arr {DataT *} å¾…é‡ç½®çš„æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] old_size {gsize} å¾…é‡ç½®çš„æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] new_size {gsize} é‡ç½®åçš„æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] copyable {const DataT &} åˆå§‹å€¼
+	** @return {DataT *} é‡ç½®åçš„æ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥é‡ç½®å¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** å°†æ•°ç»„old_arrçš„æ•°ç»„å…ƒç´ æ•°ç›®ç”±old_sizeè°ƒæ•´ä¸ºnew_sizeï¼Œè‹¥æ—§æ•°ç»„ä¸å­˜åœ¨æˆ–å…ƒç´ ä¸ªæ•°ä¸ºç©ºï¼Œä¼š
+	** åˆ›å»ºä¸€ä¸ªé•¿åº¦ä¸ºnew_sizeçš„æ–°çš„æ•°ç»„ã€‚åœ¨é‡ç½®çš„è¿‡ç¨‹ä¸­ï¼Œè‹¥æ–°çš„æ•°ç»„å…ƒç´ ä¸ªæ•°å¤§äºåŸæœ‰ä¸ªæ•°ï¼Œä¼šç”¨
+	** copyableå»åˆå§‹åŒ–æ–°çš„å…ƒç´ ï¼Œåä¹‹ä¼šæœ‰éƒ¨åˆ†å…ƒç´ è¢«ææ„ã€‚
+	** åœ¨è°ƒæ•´å¤§å°çš„è¿‡ç¨‹ä¸­ï¼Œä¼šä¼˜å…ˆè°ƒç”¨ç§»åŠ¨æ„é€ 
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_size, 
+		gsize new_size, const DataT &copyable) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬½«Êı×éold_arrµÄÊı×éÔªËØÊıÄ¿µ÷ÕûÎªnew_size
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬½ö±£ÁôÔ­À´Êı×éµÄ´Óold_startÎ»¿ªÊ¼µÄold_size¸öÔªËØ£¬·ÅÖÃµ½ĞÂÊı×éµÄµÚnew_startÎ»
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬»áÓÅÏÈµ÷ÓÃÒÆ¶¯¹¹Ôì
-	template <typename DataT>
-	static DataT *ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name ResizeArray
+	** @brief é™æ€æ–¹æ³•ï¼Œé‡ç½®æ•°ç»„å…ƒç´ çš„ä¸ªæ•°ï¼Œå¹¶ä¸”ä»…ä¿ç•™åŸæ•°ç»„çš„éƒ¨åˆ†å…ƒç´ 
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] old_arr {DataT *} å¾…é‡ç½®çš„æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] old_start {gsize} å¾…é‡ç½®çš„æ•°ç»„éœ€è¦ä¿ç•™å…ƒç´ çš„ä½ç½®
+	** @param [in] old_size {gsize} å¾…é‡ç½®çš„æ•°ç»„éœ€è¦ä¿ç•™å…ƒç´ çš„ä¸ªæ•°
+	** @param [in] new_size {gsize} é‡ç½®åçš„æ•°ç»„æ”¾ç½®ä¿ç•™å…ƒç´ çš„ä½ç½®
+	** @param [in] new_start {gsize} é‡ç½®åçš„æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @return {DataT *} é‡ç½®åçš„æ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥é‡ç½®å¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** å°†æ•°ç»„old_arrçš„æ•°ç»„å…ƒç´ æ•°ç›®è°ƒæ•´ä¸ºnew_sizeã€‚åœ¨é‡ç½®çš„è¿‡ç¨‹ä¸­ï¼Œä»…ä¿ç•™åŸæ¥æ•°ç»„çš„ä»old_start
+	** ä½å¼€å§‹çš„old_sizeä¸ªå…ƒç´ ï¼Œå°†å…¶æ”¾ç½®åˆ°é‡ç½®åæ•°ç»„çš„ç¬¬new_startä½ã€‚
+	** åœ¨è°ƒæ•´å¤§å°çš„è¿‡ç¨‹ä¸­ï¼Œä¼šä¼˜å…ˆè°ƒç”¨ç§»åŠ¨æ„é€ 
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_start, 
+		gsize old_size, gsize new_size, gsize new_start) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬½«Êı×éold_arrµÄÊı×éÔªËØÊıÄ¿µ÷ÕûÎªnew_size
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬½ö±£ÁôÔ­À´Êı×éµÄ´Óold_startÎ»¿ªÊ¼µÄold_size¸öÔªËØ£¬·ÅÖÃµ½ĞÂÊı×éµÄµÚnew_startÎ»
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬ĞÂ´´½¨³öÀ´µÄÔªËØ£¬»áÊ¹ÓÃcopyable½øĞĞ³õÊ¼»¯
-	/// ÔÚµ÷Õû´óĞ¡µÄ¹ı³ÌÖĞ£¬»áÓÅÏÈµ÷ÓÃÒÆ¶¯¹¹Ôì
-	template <typename DataT>
-	static DataT *ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, gsize new_size, gsize new_start, const DataT &copyable) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name ResizeArray
+	** @brief é™æ€æ–¹æ³•ï¼Œé‡ç½®æ•°ç»„å…ƒç´ çš„ä¸ªæ•°ï¼Œå¹¶ä¸”ä»…ä¿ç•™åŸæ•°ç»„çš„éƒ¨åˆ†å…ƒç´ ï¼Œå¯¹æ–°åˆ›å»ºå‡ºæ¥çš„å…ƒç´ èµ‹åˆå§‹å€¼
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] old_arr {DataT *} å¾…é‡ç½®çš„æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] old_start {gsize} å¾…é‡ç½®çš„æ•°ç»„éœ€è¦ä¿ç•™å…ƒç´ çš„ä½ç½®
+	** @param [in] old_size {gsize} å¾…é‡ç½®çš„æ•°ç»„éœ€è¦ä¿ç•™å…ƒç´ çš„ä¸ªæ•°
+	** @param [in] new_size {gsize} é‡ç½®åçš„æ•°ç»„æ”¾ç½®ä¿ç•™å…ƒç´ çš„ä½ç½®
+	** @param [in] new_start {gsize} é‡ç½®åçš„æ•°ç»„çš„å…ƒç´ ä¸ªæ•°
+	** @param [in] copyable {const DataT &} åˆå§‹å€¼
+	** @return {DataT *} é‡ç½®åçš„æ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥é‡ç½®å¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** å°†æ•°ç»„old_arrçš„æ•°ç»„å…ƒç´ æ•°ç›®è°ƒæ•´ä¸ºnew_sizeã€‚åœ¨é‡ç½®çš„è¿‡ç¨‹ä¸­ï¼Œä»…ä¿ç•™åŸæ¥æ•°ç»„çš„ä»old_start
+	** ä½å¼€å§‹çš„old_sizeä¸ªå…ƒç´ ï¼Œå°†å…¶æ”¾ç½®åˆ°é‡ç½®åæ•°ç»„çš„ç¬¬new_startä½ã€‚è‹¥åœ¨é‡ç½®çš„è¿‡ç¨‹ä¸­æœ‰æ–°çš„å…ƒç´ 
+	** è¢«åˆ›å»ºå‡ºæ¥ï¼Œåˆ™ä½¿ç”¨copyableè¿›è¡Œåˆå§‹åŒ–ã€‚
+	** åœ¨è°ƒæ•´å¤§å°çš„è¿‡ç¨‹ä¸­ï¼Œä¼šä¼˜å…ˆè°ƒç”¨ç§»åŠ¨æ„é€ 
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, 
+		gsize new_size, gsize new_start, const DataT &copyable) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬ÒÆ³ıÊı×éÖĞµÄÄ³Ò»Î»ÔªËØ£¬»á¶ÔÒÆ³ıµôµÄÔªËØµ÷ÓÃÎö¹¹º¯Êı
-	template <typename DataT>
-	static DataT *RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name RemoveArrayElementAt
+	** @brief é™æ€æ–¹æ³•ï¼Œç§»é™¤æ•°ç»„æŒ‡å®šä½ç½®çš„å…ƒç´ 
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] arr {DataT *} æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] size {gsize} æ•°ç»„çš„é•¿åº¦
+	** @param [in] pos {gsize} å¾…ç§»é™¤å…ƒç´ çš„ä½ç½®ï¼Œä»0å¼€å§‹è®¡æ•°
+	** @return {DataT *} ç§»é™¤å…ƒç´ åçš„æ•°ç»„çš„é¦–åœ°å€ï¼Œè‹¥ç§»é™¤å¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** å¯¹ç§»é™¤æ‰çš„å…ƒç´ è°ƒç”¨ææ„å‡½æ•°
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬Ïú»ÙÒ»¸öÊı×é£¬²¢ÒÀ´Îµ÷ÓÃÃ¿Ò»¸öÔªËØµÄÎö¹¹º¯Êı
-	template <typename DataT>
-	static gvoid DestoryArray(DataT *arr, gsize size) GNOEXCEPT;
+	/****************************************************************************
+	**
+	** @name DestoryArray
+	** @brief é™æ€æ–¹æ³•ï¼Œé”€æ¯æ•°ç»„
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] arr {DataT *} æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] size {gsize} æ•°ç»„çš„é•¿åº¦
+	**
+	** ä¾æ¬¡è°ƒç”¨æ¯ä¸€ä¸ªå…ƒç´ çš„ææ„å‡½æ•°ï¼Œå¹¶é‡Šæ”¾å†…å­˜
+	**
+	****************************************************************************/
+	template <typename DataT> static gvoid DestoryArray(DataT *arr, gsize size) GNOEXCEPT;
 
-	/// ¾²Ì¬·½·¨£¬ÒÀ´Îµ÷ÓÃÃ¿Ò»¸öÔªËØµÄÎö¹¹º¯Êı£¬²»ÊÍ·ÅÄÚ´æ
-	template <typename DataT>
-	static gvoid ClearArray(DataT *arr, gsize size) GNOEXCEPT;
+	/****************************************************************************
+	**
+	** @name ClearArray
+	** @brief é™æ€æ–¹æ³•ï¼Œæ¸…ç©ºæ•°ç»„
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] arr {DataT *} æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] size {gsize} æ•°ç»„çš„é•¿åº¦
+	**
+	** ä¾æ¬¡è°ƒç”¨æ¯ä¸€ä¸ªå…ƒç´ çš„ææ„å‡½æ•°ï¼Œä½†ä¸é‡Šæ”¾å†…å­˜
+	**
+	****************************************************************************/
+	template <typename DataT> static gvoid ClearArray(DataT *arr, gsize size) GNOEXCEPT;
 
-	/// ¾²Ì¬·½·¨£¬½«Êı×écopy_arrµÄÄÚÈİ¿½±´µ½arrÖĞ
-	/// ±ØĞë±£Ö¤copy_arrÖÁÉÙ°üº¬ÁËsize¸öÔªËØ
-	template <typename DataT>
-	static gvoid CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name CopyArrayFrom
+	** @brief é™æ€æ–¹æ³•ï¼Œæ‹·è´æ•°ç»„å…ƒç´ 
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] arr {DataT *} æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] size {gsize} æ•°ç»„çš„é•¿åº¦
+	** @param [in] copy_arr {const DataT *} è¢«æ‹·è´çš„æ•°ç»„ï¼Œéœ€è‡³å°‘åŒ…å«sizeä¸ªå…ƒç´ 
+	**
+	** å°†æ•°ç»„copy_arrçš„å…ƒç´ æ‹·è´åˆ°arrä¸­ï¼Œarrçš„å…ƒç´ ä¸ªæ•°ä¸ä¼šæ”¹å˜
+	**
+	****************************************************************************/
+	template <typename DataT> static gvoid CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) GEXCEPT(false);
 
-	/// ¾²Ì¬·½·¨£¬½«Êı×écopy_arrµÄÄÚÈİ¿½±´µ½arrÖĞ
-	/// ÔÚ¿½±´µÄ¹ı³ÌÖĞ£¬arrµÄµØÖ·ºÍ³¤¶È»áËæ×Åcopy_arrµÄ²»Í¬¶ø¸Ä±ä
-	/// ÈôsizeÓëcopy_size²»Ò»ÖÂ£¬½«ÖØĞÂ·ÖÅäÄÚ´æ
-	/// ·µ»Ø¿½±´Ö®ºóµÄÊı¾İµÄµØÖ·
-	template <typename DataT>
-	static DataT *CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr, gsize copy_size) GEXCEPT(false);
+	/****************************************************************************
+	**
+	** @name CopyArrayFrom
+	** @brief é™æ€æ–¹æ³•ï¼Œæ‹·è´æ•°ç»„çš„éƒ¨åˆ†å…ƒç´ 
+	** @template DataT æ•°ç»„å…ƒç´ çš„ç±»å‹
+	** @param [in] arr {DataT *} æ•°ç»„çš„é¦–åœ°å€
+	** @param [in] size {gsize} æ•°ç»„çš„é•¿åº¦
+	** @param [in] copy_arr {const DataT *} è¢«æ‹·è´çš„æ•°ç»„
+	** @param [in] copy_size {gsize} è¢«æ‹·è´çš„æ•°ç»„çš„é•¿åº¦
+	** @return {DataT *} æ‹·è´å…ƒç´ ä¹‹åçš„æ•°ç»„é¦–åœ°å€ï¼Œè‹¥æ‹·è´å¤±è´¥ï¼Œåˆ™è¿”å›GNULL
+	**
+	** å°†æ•°ç»„copy_arrçš„å…ƒç´ æ‹·è´åˆ°arrä¸­ï¼Œåœ¨æ‹·è´çš„è¿‡ç¨‹ä¸­ï¼Œarrçš„åœ°å€å’Œé•¿åº¦ä¼šéšç€copy_arrçš„ä¸åŒè€Œæ”¹å˜ï¼Œ
+	** è‹¥sizeä¸copy_sizeä¸ä¸€è‡´ï¼Œå°†é‡æ–°åˆ†é…å†…å­˜
+	**
+	****************************************************************************/
+	template <typename DataT> static DataT *CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr, 
+		gsize copy_size) GEXCEPT(false);
 };
 
 }

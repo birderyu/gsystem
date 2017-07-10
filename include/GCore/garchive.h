@@ -1,3 +1,18 @@
+/********************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file garchive.h
+** @brief 档案接口
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2015-12-31
+** @version 1.0.0
+**
+** 档案对象用于支持流式序列化操作
+**
+********************************************************************************/
+
 #ifndef _CORE_ARCHIVE_H_
 #define _CORE_ARCHIVE_H_
 
@@ -6,68 +21,451 @@
 
 namespace gsystem { // gsystem
 
+/********************************************************************************
+**
+** @brief 档案
+**
+********************************************************************************/
 class GAPI GArchive
 	: private GNocopyable
 {
 public:
-	virtual ~GArchive() = 0;
+	/****************************************************************************
+	**
+	** @name ~GArchive
+	** @brief 析构函数（destructor）
+	**
+	****************************************************************************/
+	virtual ~GArchive() = 0 {}
 
-public:
+	/****************************************************************************
+	**
+	** @name Input
+	** @brief 判断档案是否可以进行输入操作
+	** @return {gbool} 若可以进行输入操作，则返回true，否则返回false
+	**
+	****************************************************************************/
 	virtual gbool Input() const = 0;
+
+	/****************************************************************************
+	**
+	** @name Output
+	** @brief 判断档案是否可以进行输出操作
+	** @return {gbool} 若可以进行输出操作，则返回true，否则返回false
+	**
+	****************************************************************************/
 	virtual gbool Output() const = 0;
 
-public:
+	/****************************************************************************
+	**
+	** @name PushCode
+	** @brief 将ClassCode压栈
+	** @param [in] code {guint} ClassCode
+	**
+	****************************************************************************/
 	virtual gvoid PushCode(guint code) = 0;
+
+	/****************************************************************************
+	**
+	** @name PopCode
+	** @brief 将ClassCode出栈
+	** @return {guint} ClassCode
+	**
+	****************************************************************************/
 	virtual guint PopCode() = 0;
 
-public:
-	virtual gvoid Start() = 0;
-	virtual gvoid Stop(gbool saving = true) = 0;
-
-public:
+	/****************************************************************************
+	**
+	** @name Attach
+	** @brief 将字节数组添加进档案
+	** @param [in] bytes {gcbytes} 字节数组
+	** @param [in] size {gsize} 字节数组的长度
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
 	virtual GArchive &Attach(gcbytes bytes, gsize size) = 0;
+
+	/****************************************************************************
+	**
+	** @name Attach
+	** @brief 将字符数组添加进档案
+	** @param [in] str {gcstring} 字符数组
+	** @param [in] size {gsize} 字符数组的长度
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
 	virtual GArchive &Attach(gcstring str, gsize size) = 0;
 
+	/****************************************************************************
+	**
+	** @name Detach
+	** @brief 从档案中输出size个字节存入字节数组
+	** @param [out] bytes {gbytes} 字节数组
+	** @param [in] size {gsize} 字节数组的长度
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
 	virtual GArchive &Detach(gbytes bytes, gsize size) = 0;
 
-public:
-	virtual GArchive &operator << (gbool) = 0;
-	virtual GArchive &operator << (gchar) = 0;
-	virtual GArchive &operator << (gschar) = 0;
-	virtual GArchive &operator << (guchar) = 0;
-	virtual GArchive &operator << (gchar16) = 0;
-	virtual GArchive &operator << (gchar32) = 0;
-	virtual GArchive &operator << (gwchar) = 0;
-	virtual GArchive &operator << (gshort) = 0;
-	virtual GArchive &operator << (gushort) = 0;
-	virtual GArchive &operator << (gint) = 0;
-	virtual GArchive &operator << (guint) = 0;
-	virtual GArchive &operator << (glong) = 0;
-	virtual GArchive &operator << (gulong) = 0;
-	virtual GArchive &operator << (glonglong) = 0;
-	virtual GArchive &operator << (gulonglong) = 0;
-	virtual GArchive &operator << (gfloat) = 0;
-	virtual GArchive &operator << (gdouble) = 0;
-	virtual GArchive &operator << (glongdouble) = 0;
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gbool} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gbool value) = 0;
 
-	virtual GArchive &operator >> (gbool &) = 0;
-	virtual GArchive &operator >> (gchar &) = 0;
-	virtual GArchive &operator >> (gschar &) = 0;
-	virtual GArchive &operator >> (guchar &) = 0;
-	virtual GArchive &operator >> (gchar16 &) = 0;
-	virtual GArchive &operator >> (gchar32 &) = 0;
-	virtual GArchive &operator >> (gwchar &) = 0;
-	virtual GArchive &operator >> (gshort &) = 0;
-	virtual GArchive &operator >> (gushort &) = 0;
-	virtual GArchive &operator >> (gint &) = 0;
-	virtual GArchive &operator >> (guint &) = 0;
-	virtual GArchive &operator >> (glong &) = 0;
-	virtual GArchive &operator >> (gulong &) = 0;
-	virtual GArchive &operator >> (glonglong &) = 0;
-	virtual GArchive &operator >> (gulonglong &) = 0;
-	virtual GArchive &operator >> (gfloat &) = 0;
-	virtual GArchive &operator >> (gdouble &) = 0;
-	virtual GArchive &operator >> (glongdouble &) = 0;
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gbool} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gchar value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gschar} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gschar value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {guchar} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(guchar value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gchar16} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gchar16 value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gchar32} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gchar32 value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gwchar} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gwchar value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gshort} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gshort value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gushort} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gushort value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gint} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gint value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {guint} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(guint value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {glong} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(glong value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gulong} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gulong value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {glonglong} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(glonglong value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gulonglong} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gulonglong value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gfloat} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gfloat value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {gdouble} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(gdouble value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator<<
+	** @brief 将值输入到档案中
+	** @param [in] value {glongdouble} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator<<(glongdouble value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gbool &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gbool &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gchar &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gchar &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gschar &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gschar &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {guchar &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(guchar &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gchar16 &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gchar16 &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gchar32 &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gchar32 &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gwchar &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gwchar &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gshort &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gshort &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gushort &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gushort &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gint &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gint &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {guint &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(guint &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {glong &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(glong &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gulong &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gulong &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {glonglong &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(glonglong &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gulonglong &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gulonglong &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gfloat &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gfloat &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {gdouble &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(gdouble &value) = 0;
+
+	/****************************************************************************
+	**
+	** @name operator>>
+	** @brief 从档案中输出一个值
+	** @param [out] value {glongdouble &} 值
+	** @return {GArchive &} 档案的引用
+	**
+	****************************************************************************/
+	virtual GArchive &operator>>(glongdouble &value) = 0;
 };
 
 } // namespace gsystem
