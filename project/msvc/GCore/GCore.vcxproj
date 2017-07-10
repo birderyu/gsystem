@@ -316,7 +316,6 @@
     <ClInclude Include="..\..\..\thirds\GCore\dlmalloc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GCore\garchive.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gbinfile_ex.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gbinfile.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gblock.cpp" />
@@ -466,16 +465,10 @@
     <None Include="..\..\..\include\GCore\gorderset.inl">
       <FileType>Document</FileType>
     </None>
-    <None Include="..\..\..\include\GCore\gqueue.inl">
-      <FileType>Document</FileType>
-    </None>
     <None Include="..\..\..\include\GCore\grtree.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gsort.inl">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="..\..\..\include\GCore\gstack.inl">
       <FileType>Document</FileType>
     </None>
     <None Include="..\..\..\include\GCore\gstringlist.inl" />
