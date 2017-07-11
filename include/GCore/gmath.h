@@ -69,9 +69,7 @@ public:
 	// 平方根
 	static gfloat Sqrt(gfloat v);
 	static gdouble Sqrt(gdouble v);
-#ifdef G_HAS_DECIMAL
-	static gdecimal Sqrt(gdecimal v);
-#endif // G_HAS_DECIMAL
+	static gdecimal Sqrt(glongdouble v);
 
 private:
 	GMath() {}

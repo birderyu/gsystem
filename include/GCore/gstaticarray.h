@@ -20,12 +20,6 @@ public:
 	DataT &GetAt(gsize);
 	const DataT &GetAt(gsize) const;
 
-	DataT &operator[](gsize);
-	const DataT &operator[](gsize) const;
-
-	DataT *operator+=(gsize);
-	const DataT *operator+=(gsize) const;
-
 private:
 	DataT m_pData[ARRAY_SIZE];
 };

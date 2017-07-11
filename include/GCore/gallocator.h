@@ -28,7 +28,8 @@ namespace gsystem { // gsystem
 ** @return {ClassT *} 分配内存空间的首地址
 **
 ********************************************************************************/
-template <typename ClassT> ClassT *GAllocate(gsize n = 1) GEXCEPT(false);
+template <typename ClassT> 
+ClassT *GAllocate(gsize n = 1) GEXCEPT(false);
 
 /********************************************************************************
 **
@@ -38,7 +39,8 @@ template <typename ClassT> ClassT *GAllocate(gsize n = 1) GEXCEPT(false);
 ** @param [in] ptr {ClassT *} 待释放内存空间的首地址
 **
 ********************************************************************************/
-template <typename ClassT> gvoid GDeallocate(ClassT *ptr) GNOEXCEPT;
+template <typename ClassT> 
+gvoid GDeallocate(ClassT *ptr) GNOEXCEPT;
 
 /********************************************************************************
 **
@@ -50,7 +52,8 @@ template <typename ClassT> gvoid GDeallocate(ClassT *ptr) GNOEXCEPT;
 ** @return {ClassT *} 重新分配后的内存空间的首地址
 **
 ********************************************************************************/
-template <typename ClassT> ClassT *GReallocate(ClassT *oldptr, gsize newsize) GEXCEPT(false);
+template <typename ClassT> 
+ClassT *GReallocate(ClassT *oldptr, gsize newsize) GEXCEPT(false);
 
 /********************************************************************************
 **

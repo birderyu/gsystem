@@ -218,8 +218,10 @@ public:
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
 	** @return {DataT &} 元素的引用
 	**
+	** 此方法的实现依赖于GetAt，因此不要在GetAt的实现中调用此方法
+	**
 	****************************************************************************/
-	virtual DataT &operator[](gsize pos) = 0;
+	DataT &operator[](gsize pos);
 
 	/****************************************************************************
 	**
@@ -228,8 +230,10 @@ public:
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
 	** @return {const DataT &} 元素的引用
 	**
+	** 此方法的实现依赖于GetAt，因此不要在GetAt的实现中调用此方法
+	**
 	****************************************************************************/
-	virtual const DataT &operator[](gsize pos) const = 0;
+	const DataT &operator[](gsize pos) const;
 };
 
 } // namespace gsystem

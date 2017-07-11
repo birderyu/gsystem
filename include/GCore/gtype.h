@@ -1,17 +1,15 @@
-/****************************************************************************
+/********************************************************************************
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gtype.h
-** @brief	全局类型定义
-** @author	birderyu
+** @file gtype.h
+** @brief 全局类型定义
+** @author birderyu
 ** @contact	https://github.com/birderyu
-** @date	2015-12-30
-** @version	1.10
+** @date 2015-12-30
+** @version 1.0.0
 **
-** 全局类型定义定义了一些平台无关性的数据类型，这些类型以小写字母g作为前缀。
-**
-****************************************************************************/
+********************************************************************************/
 
 #ifndef _CORE_TYPE_H_
 #define _CORE_TYPE_H_
@@ -24,21 +22,33 @@
 
 namespace gsystem { // gsystem
 
-/****************************************************************************
+/********************************************************************************
 **
-** gtype.h
+** @name gchar
+** @brief 默认的字符类型
 **
-** @brief 字符和字符串类型
-**
-****************************************************************************/
+********************************************************************************/
+typedef	char gchar;
 
-typedef	char			gchar;		// 默认的字符类型
-typedef	signed char		gschar;		// 默认的有符号字符类型
-typedef	unsigned char	guchar;		// 默认的无符号字符类型
-typedef char			gchar8;		// 8位字符类型
-typedef char16_t		gchar16;	// 16位字符类型
-typedef char32_t		gchar32;	// 32位字符类型
-typedef	wchar_t			gwchar;		// 宽字符类型
+/********************************************************************************
+**
+** @name gschar
+** @brief 默认的有符号字符类型
+**
+********************************************************************************/
+typedef	signed char gschar;
+
+/********************************************************************************
+**
+** @name guchar
+** @brief  默认的无符号字符类型
+**
+********************************************************************************/
+typedef	unsigned char guchar;
+typedef char gchar8;		// 8位字符类型
+typedef char16_t gchar16;	// 16位字符类型
+typedef char32_t gchar32;	// 32位字符类型
+typedef	wchar_t gwchar;		// 宽字符类型
 
 
 typedef	gchar8 *		gstring8;	// 以8位字符为单元的字符串类型
@@ -86,9 +96,7 @@ typedef long double			glongdouble;	// 扩展精度浮点型
 **
 ****************************************************************************/
 
-#ifdef G_HAS_DECIMAL
 typedef glongdouble		gdecimal;	// 高精度浮点型
-#endif // G_HAS_DECIMAL
 typedef gschar			gsmall;		// 短短整型
 typedef guchar			gusmall;	// 无符号短短整型
 typedef	gusmall			gbyte;		// 字节类型

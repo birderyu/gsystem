@@ -45,32 +45,6 @@ GINLINE const DataT &GStaticArray<DataT, ARRAY_SIZE>::GetAt(gsize pos) const
 	return m_pData[pos];
 }
 
-template <typename DataT, gsize ARRAY_SIZE>
-GINLINE DataT &GStaticArray<DataT, ARRAY_SIZE>::operator[](gsize pos)
-{
-	GASSERT(pos < ARRAY_SIZE);
-	return m_pData[pos];
-}
-
-template <typename DataT, gsize ARRAY_SIZE>
-GINLINE const DataT &GStaticArray<DataT, ARRAY_SIZE>::operator[](gsize pos) const
-{
-	GASSERT(pos < ARRAY_SIZE);
-	return m_pData[pos];
-}
-
-template <typename DataT, gsize ARRAY_SIZE>
-GINLINE DataT *GStaticArray<DataT, ARRAY_SIZE>::operator+=(gsize pos)
-{
-	return m_pData + pos;
-}
-
-template <typename DataT, gsize ARRAY_SIZE>
-GINLINE const DataT *GStaticArray<DataT, ARRAY_SIZE>::operator+=(gsize pos) const
-{
-	return m_pData + pos;
-}
-
 } // namespace gsystem
 
 #endif // _CORE_STATIC_ARRAY_INLINE_

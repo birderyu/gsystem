@@ -3,18 +3,17 @@
 
 #include "gseries.h"
 #include "gserializable.h"
-#include "gcharset.h"
 
-// ×Ö·û´®±¾µØ´æ´¢¿Õ¼äµÄ×Ö½ÚÊıÄ¿
+// å­—ç¬¦ä¸²æœ¬åœ°å­˜å‚¨ç©ºé—´çš„å­—èŠ‚æ•°ç›®
 #define G_BASE_STRING_LOCAL_BYTE_SIZE 8
 
 namespace gsystem {
 
 /****************************************************************************
 **
-** @brief	»ù´¡×Ö·û´®ÀàĞÍ
+** @brief	åŸºç¡€å­—ç¬¦ä¸²ç±»å‹
 **
-** »ù´¡×Ö·û´®ÀàĞÍ¿ÉÒÔ±íÊ¾
+** åŸºç¡€å­—ç¬¦ä¸²ç±»å‹å¯ä»¥è¡¨ç¤º
 **
 ****************************************************************************/
 template<typename CharT>
@@ -40,7 +39,7 @@ public:
 	CStringT CString() const;
 
 	gsize Size() const;
-	gsize Length() const; // ×Ö·ûµÄ³¤¶È
+	gsize Length() const; // å­—ç¬¦çš„é•¿åº¦
 	gbool IsEmpty() const;
 	CharT &GetAt(gsize pos);
 	const CharT &GetAt(gsize pos) const;
@@ -97,7 +96,6 @@ protected:
 
 protected:
 	StringDataT m_tString;
-	GCharSet m_emCharSet;
 };
 
 }

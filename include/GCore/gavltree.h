@@ -33,13 +33,13 @@ public:
 	virtual gvoid Delete(const KeyT &key);
 
 private:
-	// µ¥ÓÒĞı
+	// å•å³æ—‹
 	gvoid SingleRotateRight(NodeT *node);
-	// µ¥×óĞı
+	// å•å·¦æ—‹
 	gvoid SingleRotateLeft(NodeT *node);
-	// Ë«ÓÒĞı
+	// åŒå³æ—‹
 	gvoid DoubleRotateRight(NodeT *node);
-	// Ë«×óĞı
+	// åŒå·¦æ—‹
 	gvoid DoubleRotateLeft(NodeT *node);
 };
 

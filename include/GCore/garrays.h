@@ -39,7 +39,8 @@ public:
 	** 创建一个元素个数为size的数组，会调用每一个元素的默认构造函数。
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CreateArray(gsize size) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *CreateArray(gsize size) GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -54,8 +55,8 @@ public:
 	** 过程中会调用每一个元素的拷贝构造函数。
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CreateArray(gsize size, 
-		const DataT &copyable) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *CreateArray(gsize size, const DataT &copyable) GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -71,8 +72,9 @@ public:
 	** 创建一个新的数组，在初始化新数组的过程中，会调用每一个元素的拷贝构造函数。
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CreateArray(const DataT *copy_arr, 
-		gsize copy_start_pos, gsize copy_size) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *CreateArray(const DataT *copy_arr, gsize copy_start_pos, 
+		gsize copy_size) GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -90,8 +92,9 @@ public:
 	** 创建的数组的第start开始的copy_size个元素
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CreateArray(gsize size, gsize start, 
-		const DataT *copy_arr, gsize copy_start, gsize copy_size) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *CreateArray(gsize size, gsize start, const DataT *copy_arr, 
+		gsize copy_start, gsize copy_size) GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -109,8 +112,9 @@ public:
 	** 在调整大小的过程中，会优先调用移动构造
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_size, 
-		gsize new_size) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *ResizeArray(DataT *old_arr, gsize old_size, gsize new_size) 
+		GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -129,8 +133,9 @@ public:
 	** 在调整大小的过程中，会优先调用移动构造
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_size, 
-		gsize new_size, const DataT &copyable) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *ResizeArray(DataT *old_arr, gsize old_size, gsize new_size, 
+		const DataT &copyable) GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -140,8 +145,8 @@ public:
 	** @param [in] old_arr {DataT *} 待重置的数组的首地址
 	** @param [in] old_start {gsize} 待重置的数组需要保留元素的位置
 	** @param [in] old_size {gsize} 待重置的数组需要保留元素的个数
-	** @param [in] new_size {gsize} 重置后的数组放置保留元素的位置
-	** @param [in] new_start {gsize} 重置后的数组的元素个数
+	** @param [in] new_size {gsize} 重置后的数组的元素个数 
+	** @param [in] new_start {gsize} 重置后的数组放置保留元素的位置
 	** @return {DataT *} 重置后的数组的首地址，若重置失败，则返回GNULL
 	**
 	** 将数组old_arr的数组元素数目调整为new_size。在重置的过程中，仅保留原来数组的从old_start
@@ -149,8 +154,9 @@ public:
 	** 在调整大小的过程中，会优先调用移动构造
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_start, 
-		gsize old_size, gsize new_size, gsize new_start) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, 
+		gsize new_size, gsize new_start) GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -160,8 +166,8 @@ public:
 	** @param [in] old_arr {DataT *} 待重置的数组的首地址
 	** @param [in] old_start {gsize} 待重置的数组需要保留元素的位置
 	** @param [in] old_size {gsize} 待重置的数组需要保留元素的个数
-	** @param [in] new_size {gsize} 重置后的数组放置保留元素的位置
-	** @param [in] new_start {gsize} 重置后的数组的元素个数
+	** @param [in] new_size {gsize} 重置后的数组的元素个数
+	** @param [in] new_start {gsize} 重置后的数组放置保留元素的位置
 	** @param [in] copyable {const DataT &} 初始值
 	** @return {DataT *} 重置后的数组的首地址，若重置失败，则返回GNULL
 	**
@@ -171,7 +177,8 @@ public:
 	** 在调整大小的过程中，会优先调用移动构造
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, 
+	template <typename DataT> 
+	static DataT *ResizeArray(DataT *old_arr, gsize old_start, gsize old_size, 
 		gsize new_size, gsize new_start, const DataT &copyable) GEXCEPT(false);
 
 	/****************************************************************************
@@ -187,7 +194,9 @@ public:
 	** 对移除掉的元素调用析构函数
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) GEXCEPT(false);
+	template <typename DataT> 
+	static DataT *RemoveArrayElementAt(DataT *arr, gsize size, gsize pos) 
+		GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -200,7 +209,8 @@ public:
 	** 依次调用每一个元素的析构函数，并释放内存
 	**
 	****************************************************************************/
-	template <typename DataT> static gvoid DestoryArray(DataT *arr, gsize size) GNOEXCEPT;
+	template <typename DataT> 
+	static gvoid DestoryArray(DataT *arr, gsize size) GNOEXCEPT;
 
 	/****************************************************************************
 	**
@@ -213,7 +223,8 @@ public:
 	** 依次调用每一个元素的析构函数，但不释放内存
 	**
 	****************************************************************************/
-	template <typename DataT> static gvoid ClearArray(DataT *arr, gsize size) GNOEXCEPT;
+	template <typename DataT> 
+	static gvoid ClearArray(DataT *arr, gsize size) GNOEXCEPT;
 
 	/****************************************************************************
 	**
@@ -227,7 +238,9 @@ public:
 	** 将数组copy_arr的元素拷贝到arr中，arr的元素个数不会改变
 	**
 	****************************************************************************/
-	template <typename DataT> static gvoid CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) GEXCEPT(false);
+	template <typename DataT> 
+	static gvoid CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr) 
+		GEXCEPT(false);
 
 	/****************************************************************************
 	**
@@ -244,7 +257,8 @@ public:
 	** 若size与copy_size不一致，将重新分配内存
 	**
 	****************************************************************************/
-	template <typename DataT> static DataT *CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr, 
+	template <typename DataT> 
+	static DataT *CopyArrayFrom(DataT *arr, gsize size, const DataT *copy_arr, 
 		gsize copy_size) GEXCEPT(false);
 };
 

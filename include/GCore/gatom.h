@@ -1,4 +1,16 @@
-// ÕûĞÍµÄ¼òµ¥Ô­×Ó²Ù×÷
+/********************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file gatom.h
+** @brief åŸå­æ“ä½œå¸®åŠ©ç±»
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-24
+** @version 1.0.0
+**
+********************************************************************************/
+
 #ifndef _CORE_ATOM_H_
 #define _CORE_ATOM_H_
 
@@ -6,54 +18,179 @@
 
 namespace gsystem { // gsystem
 
-/// Ô­×Ó²Ù×÷
-/// ½öÖ§³ÖÕûĞÎÊıÖµµÄÔ­×Ó²Ù×÷
+/********************************************************************************
+**
+** @brief åŸå­æ“ä½œå¸®åŠ©ç±»
+**
+** åŸå­æ“ä½œå¸®åŠ©ç±»å°è£…äº†å‡ ä¸ªå¸¸ç”¨çš„é™æ€åŸå­æ–¹æ³•ï¼Œè¯¥ç±»ä»…æ”¯æŒæ•´å½¢æ•°å€¼çš„åŸå­æ“ä½œ
+**
+********************************************************************************/
 class GAtom
 {
 public:
-	/// CAS²Ù×÷£¨compare-and-swap£©
-	/// ½«targetµÄÖµÓëcomperand±È½Ï£¬ÈôÏàµÈ£¬Ôò½«targetµÄÖµÌæ»»Îªexchange£¬·ñÔò²»×ö²Ù×÷
-	/// Èô²Ù×÷³É¹¦£¬Ôò·µ»Øtrue£¬·ñÔò·µ»Øfalse
-	/// 
-	/// ÓÉÓÚwindowsÏÂÃ»ÓĞÌá¹©·µ»Ø²¼¶ûÀàĞÍµÄcasº¯Êı£¬Òò´ËÔÚwindowsÏÂÆäÊµÊÇÏÈµ÷ÓÃÁËValuedCompareAndSwap£¬ÔÙ±È½Ï½á¹û
-	/// Ğ§ÂÊÉÏÏà±ÈValuedCompareAndSwapÂÔÓĞÏÂ½µ
-	template<typename T> static gbool CompareAndSwap(T *target, T comperand, T exchange);
+	/****************************************************************************
+	**
+	** @name CompareAndSwap
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­CASæ“ä½œï¼ˆcompare-and-swapï¼‰
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @param [in] comperand {T} æ¯”è¾ƒå€¼
+	** @param [in] exchange {T} æ›¿æ¢å€¼
+	** @return {gbool *} è‹¥æ“ä½œæˆåŠŸï¼Œåˆ™è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	**
+	** å°†targetçš„å€¼ä¸comperandæ¯”è¾ƒï¼Œè‹¥ç›¸ç­‰ï¼Œåˆ™å°†targetçš„å€¼æ›¿æ¢ä¸ºexchangeï¼Œå¦åˆ™ä¸åšæ“ä½œã€‚
+	** ç”±äºwindowsä¸‹æ²¡æœ‰æä¾›è¿”å›å¸ƒå°”ç±»å‹çš„caså‡½æ•°ï¼Œå› æ­¤åœ¨windowsä¸‹å…¶å®æ˜¯å…ˆè°ƒç”¨äº†
+	** ValuedCompareAndSwapï¼Œå†æ¯”è¾ƒç»“æœï¼Œæ•ˆç‡ä¸Šç›¸æ¯”ValuedCompareAndSwapç•¥æœ‰ä¸‹é™
+	**
+	****************************************************************************/
+	template<typename T> 
+	static gbool CompareAndSwap(T *target, T comperand, T exchange);
 
-	/// ·µ»ØÖµµÄCAS²Ù×÷£¨valued compare-and-swap£©
-	/// ½«targetµÄÖµÓëcomperand±È½Ï£¬ÈôÏàµÈ£¬Ôò½«targetµÄÖµÌæ»»Îªexchange£¬·ñÔò²»×ö²Ù×÷
-	/// ·µ»ØtargetÖ®Ç°µÄÖµ
-	template<typename T> static T ValuedCompareAndSwap(T *target, T comperand, T exchange);
+	/****************************************************************************
+	**
+	** @name ValuedCompareAndSwap
+	** @brief é™æ€æ–¹æ³•ï¼Œå¸¦è¿”å›å€¼çš„åŸå­CASæ“ä½œï¼ˆvalued compare-and-swapï¼‰
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @param [in] comperand {T} æ¯”è¾ƒå€¼
+	** @param [in] exchange {T} æ›¿æ¢å€¼
+	** @return {T} è¿”å›targetä¹‹å‰çš„å€¼
+	**
+	** å°†targetçš„å€¼ä¸comperandæ¯”è¾ƒï¼Œè‹¥ç›¸ç­‰ï¼Œåˆ™å°†targetçš„å€¼æ›¿æ¢ä¸ºexchangeï¼Œå¦åˆ™ä¸åšæ“ä½œã€‚
+	** è¿”å›targetä¹‹å‰çš„æ—§å€¼
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T ValuedCompareAndSwap(T *target, T comperand, T exchange);
 
-	/// Ô­×Ó×ÔÔö²Ù×÷£¬·µ»ØĞÂÖµ£¬Ïàµ±ÓÚ++*target
-	template<typename T> static T IncrementAndFetch(T *target);
+	/****************************************************************************
+	**
+	** @name IncrementAndFetch
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­è‡ªå¢æ“ä½œï¼Œè¿”å›æ–°å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @return {T} è¿”å›targetè‡ªå¢ä¹‹åçš„æ–°å€¼
+	**
+	** ç›¸å½“äº--*target
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T IncrementAndFetch(T *target);
 
-	/// Ô­×Ó×Ô¼õ²Ù×÷£¬·µ»ØĞÂÖµ£¬Ïàµ±ÓÚ--*target
-	template<typename T> static T DecrementAndFetch(T *target);
+	/****************************************************************************
+	**
+	** @name DecrementAndFetch
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­è‡ªå‡æ“ä½œï¼Œè¿”å›æ–°å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @return {T} è¿”å›targetè‡ªå‡ä¹‹åçš„æ–°å€¼
+	**
+	** ç›¸å½“äº--*target
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T DecrementAndFetch(T *target);
 
-	/// Ô­×Ó×ÔÔö²Ù×÷£¬·µ»Ø¾ÉÖµ£¬Ïàµ±ÓÚ*target++
-	template<typename T> static T FetchAndIncrement(T *target);
+	/****************************************************************************
+	**
+	** @name FetchAndIncrement
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­è‡ªå¢æ“ä½œï¼Œè¿”å›æ—§å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @return {T} è¿”å›targetè‡ªå¢ä¹‹å‰çš„æ—§å€¼
+	**
+	** ç›¸å½“äº*target++
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T FetchAndIncrement(T *target);
 
-	/// Ô­×Ó×Ô¼õ²Ù×÷£¬·µ»Ø¾ÉÖµ£¬Ïàµ±ÓÚ*target--
-	template<typename T> static T FetchAndDecrement(T *target);
+	/****************************************************************************
+	**
+	** @name FetchAndDecrement
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­è‡ªå‡æ“ä½œï¼Œè¿”å›æ—§å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @return {T} è¿”å›targetè‡ªå‡ä¹‹å‰çš„æ—§å€¼
+	**
+	** ç›¸å½“äº*target--
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T FetchAndDecrement(T *target);
 
-	/// FAA²Ù×÷£¨fetch-and-add£©
-	/// Ôö¼ÓÒ»¸öÖµµ½target£¬·µ»ØÔ­±¾µÄÖµ
-	template<typename T> static T FetchAndAdd(T *target, T value);
+	/****************************************************************************
+	**
+	** @name FetchAndAdd
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­FAAæ“ä½œï¼ˆfetch-and-addï¼‰
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @param [in] value {T} å¢åŠ å€¼
+	** @return {T} è¿”å›targetå¢åŠ ä¹‹å‰çš„æ—§å€¼
+	**
+	** å¢åŠ ä¸€ä¸ªå€¼åˆ°targetï¼Œè¿”å›targetä¹‹å‰çš„æ—§å€¼
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T FetchAndAdd(T *target, T value);
 
-	/// FAS²Ù×÷£¨fetch-and-subtract£©
-	/// ´Ótarget¼õÈ¥Ò»¸öÖµ£¬·µ»ØÔ­±¾µÄÖµ
-	template<typename T> static T FetchAndSubtract(T *target, T value);
+	/****************************************************************************
+	**
+	** @name FetchAndSubtract
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­FASæ“ä½œï¼ˆfetch-and-subtractï¼‰
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @param [in] value {T} åˆ å‡å€¼
+	** @return {T} è¿”å›targetåˆ å‡ä¹‹å‰çš„æ—§å€¼
+	**
+	** ä»targetå‡å»ä¸€ä¸ªå€¼ï¼Œè¿”å›targetä¹‹å‰çš„æ—§å€¼
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T FetchAndSubtract(T *target, T value);
 
-	/// ½»»»Öµ£¬·µ»Ø¾ÉÖµ
-	template<typename T> static T Exchange(T *target, T value);
+	/****************************************************************************
+	**
+	** @name Exchange
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­äº¤æ¢ï¼Œè¿”å›æ—§å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @param [in] value {T} äº¤æ¢å€¼
+	** @return {T} è¿”å›targetäº¤æ¢ä¹‹å‰çš„æ—§å€¼
+	**
+	** å°†targetçš„å€¼ä¸valueäº¤æ¢ï¼Œè¿”å›targetä¹‹å‰çš„æ—§å€¼
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T Exchange(T *target, T value);
 
-	/// ÉèÖÃÖµ£¬·µ»ØĞÂÖµ
-	/// 
-	/// ÓÉÓÚÃ»ÓĞÌá¹©·µ»ØĞÂÖµµÄÔ­×Ó½»»»²Ù×÷£¬SetValueÆäÊµÊÇÊ¹ÓÃExchangeÀ´ÊµÏÖµÄ£¬Òò´ËÍÆ¼öÊ¹ÓÃExchange
-	template<typename T> static T SetValue(T *target, T value);
+	/****************************************************************************
+	**
+	** @name SetValue
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­è®¾ç½®ï¼Œè¿”å›æ–°å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @param [in] value {T} è®¾ç½®å€¼
+	** @return {T} è¿”å›targetè®¾ç½®ä¹‹å‰çš„æ—§å€¼
+	**
+	** å°†targetçš„å€¼è®¾ç½®ä¸ºvalueï¼Œè¿”å›targetè®¾ç½®ä¹‹åçš„æ–°å€¼ï¼Œç”±äºå„å¹³å°æ²¡æœ‰æä¾›è¿”å›æ–°å€¼çš„åŸå­
+	** äº¤æ¢æ“ä½œï¼ŒSetValueå…¶å®æ˜¯ä½¿ç”¨Exchangeæ¥å®ç°çš„ã€‚æ¨èä½¿ç”¨Exchange
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T SetValue(T *target, T value);
 
-	/// »ñÈ¡Öµ
-	template<typename T> static T GetValue(T *target);
+	/****************************************************************************
+	**
+	** @name GetValue
+	** @brief é™æ€æ–¹æ³•ï¼ŒåŸå­è·å–å€¼
+	** @template T åŸå­æ“ä½œçš„æ•°æ®ç±»å‹
+	** @param [in] target {T *} ç›®æ ‡å€¼
+	** @return {T} è¿”å›targetçš„å€¼
+	**
+	****************************************************************************/
+	template<typename T> 
+	static T GetValue(T *target);
 };
 
 } // namespace gsystem

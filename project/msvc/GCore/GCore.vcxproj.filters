@@ -82,9 +82,6 @@
     <Filter Include="源文件\package">
       <UniqueIdentifier>{0503ffbe-d709-4af1-89d3-1f728a999d53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\serialization">
-      <UniqueIdentifier>{fb194a91-1f16-4a4a-afaf-533ca8c2aa7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\string">
       <UniqueIdentifier>{e336a447-2bd8-4c68-a1d3-7aa5ab00e7aa}</UniqueIdentifier>
     </Filter>
@@ -728,9 +725,6 @@
     <ClCompile Include="..\..\..\source\GCore\gbinfile_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gserializable.cpp">
-      <Filter>源文件\serialization</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gexception.cpp">
       <Filter>源文件\exception</Filter>
     </ClCompile>
@@ -745,157 +739,160 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\include\GCore\gallocator.inl">
+    <None Include="..\..\..\include\GCore\inline\gallocator.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\garray.inl">
+    <None Include="..\..\..\include\GCore\inline\garray.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\garrayqueue.inl">
+    <None Include="..\..\..\include\GCore\inline\garrayqueue.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\garraystack.inl">
+    <None Include="..\..\..\include\GCore\inline\garrays.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gatom.inl">
+    <None Include="..\..\..\include\GCore\inline\garraystack.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gbytes.inl">
+    <None Include="..\..\..\include\GCore\inline\gatom.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gconstructor.inl">
+    <None Include="..\..\..\include\GCore\inline\gbasestring.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gdynamicarray.inl">
+    <None Include="..\..\..\include\GCore\inline\gbinheap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gendian.inl">
+    <None Include="..\..\..\include\GCore\inline\gbintree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\ghashtable.inl">
+    <None Include="..\..\..\include\GCore\inline\gbstree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\ghuffmantree.inl">
+    <None Include="..\..\..\include\GCore\inline\gbtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\glist.inl">
+    <None Include="..\..\..\include\GCore\inline\gbytes.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\glistqueue.inl">
+    <None Include="..\..\..\include\GCore\inline\gclist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gliststack.inl">
+    <None Include="..\..\..\include\GCore\inline\gconstructor.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\glockguard.inl">
+    <None Include="..\..\..\include\GCore\inline\gdeque.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gmath.inl">
+    <None Include="..\..\..\include\GCore\inline\gdlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gnew.inl">
+    <None Include="..\..\..\include\GCore\inline\gdynamicarray.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gorderset.inl">
+    <None Include="..\..\..\include\GCore\inline\gendian.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gpackage.inl">
+    <None Include="..\..\..\include\GCore\inline\ggraph.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\grtree.inl">
+    <None Include="..\..\..\include\GCore\inline\ghash.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gseries.inl">
+    <None Include="..\..\..\include\GCore\inline\ghashtable.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gsort.inl">
+    <None Include="..\..\..\include\GCore\inline\ghuffmantree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gstaticarray.inl">
+    <None Include="..\..\..\include\GCore\inline\glist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gtable.inl">
+    <None Include="..\..\..\include\GCore\inline\glistqueue.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gtuple.inl">
+    <None Include="..\..\..\include\GCore\inline\gliststack.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gunordermap.inl">
+    <None Include="..\..\..\include\GCore\inline\glockguard.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gunorderset.inl">
+    <None Include="..\..\..\include\GCore\inline\gmath.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gutility.inl">
+    <None Include="..\..\..\include\GCore\inline\gmempool.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gvariant.inl">
+    <None Include="..\..\..\include\GCore\inline\gnew.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gvariety.inl">
+    <None Include="..\..\..\include\GCore\inline\gorderset.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gvector.inl">
+    <None Include="..\..\..\include\GCore\inline\gpackage.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\garrays.inl">
+    <None Include="..\..\..\include\GCore\inline\grbtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gdeque.inl">
+    <None Include="..\..\..\include\GCore\inline\grefcounter.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gbtree.inl">
+    <None Include="..\..\..\include\GCore\inline\grtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\ggraph.inl">
+    <None Include="..\..\..\include\GCore\inline\gserialize.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gserialize.inl">
+    <None Include="..\..\..\include\GCore\inline\gseries.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gbinheap.inl">
+    <None Include="..\..\..\include\GCore\inline\gsharedptr.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gbintree.inl">
+    <None Include="..\..\..\include\GCore\inline\gslist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\grbtree.inl">
+    <None Include="..\..\..\include\GCore\inline\gsort.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gbstree.inl">
+    <None Include="..\..\..\include\GCore\inline\gsortedmap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gstruct.inl">
+    <None Include="..\..\..\include\GCore\inline\gstaticarray.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gclist.inl">
+    <None Include="..\..\..\include\GCore\inline\gstringlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gslist.inl">
+    <None Include="..\..\..\include\GCore\inline\gstruct.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gdlist.inl">
+    <None Include="..\..\..\include\GCore\inline\gtable.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gmempool.inl">
+    <None Include="..\..\..\include\GCore\inline\gtuple.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gsharedptr.inl">
+    <None Include="..\..\..\include\GCore\inline\guniqueptr.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\guniqueptr.inl">
+    <None Include="..\..\..\include\GCore\inline\gunordermap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\grefcounter.inl">
+    <None Include="..\..\..\include\GCore\inline\gunorderset.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gstringlist.inl">
+    <None Include="..\..\..\include\GCore\inline\gutility.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gbasestring.inl">
+    <None Include="..\..\..\include\GCore\inline\gvariant.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\gsortedmap.inl">
+    <None Include="..\..\..\include\GCore\inline\gvariety.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\GCore\inline\gvector.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

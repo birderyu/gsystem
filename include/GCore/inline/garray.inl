@@ -115,6 +115,18 @@ GINLINE gsize GArray<DataT>::CountOf(const DataT &value) const
 	return count;
 }
 
+template <typename DataT>
+GINLINE DataT &GArray<DataT>::operator[](gsize pos)
+{
+	return GetAt(pos);
+}
+
+template <typename DataT>
+GINLINE const DataT &GArray<DataT>::operator[](gsize pos) const
+{
+	return GetAt(pos);
+}
+
 }  // namespace gsystem
 
 #endif // _CORE_ARRAY_INLINE_

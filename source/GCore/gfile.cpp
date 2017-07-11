@@ -3,8 +3,8 @@
 
 namespace gsystem { // gsystem
 
-GFile::GFile(detail::GFile_Ex *pFile_Ex)
-: m_pFileEx(pFile_Ex)
+GFile::GFile(detail::GFile_Ex *file)
+: m_pFileEx(file)
 {
 
 }
@@ -47,10 +47,10 @@ GString &GFile::FileName()
 	return m_pFileEx->FileName();
 }
 
-gvoid GFile::SetFileName(const GString &sFileName)
+gvoid GFile::SetFileName(const GString &fileName)
 {
 	GASSERT(m_pFileEx);
-	m_pFileEx->SetFileName(sFileName);
+	m_pFileEx->SetFileName(fileName);
 }
 
 gbool GFile::Open(OPEN_MODE emOpenMode)

@@ -3,100 +3,110 @@
 
 namespace gsystem { // gsystem
 
-guint GHashing(gbool val)
+guint GHashing(gbool value)
 {
-	if (val)
+	if (value)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-guint GHashing(gchar val)
+guint GHashing(gchar value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gschar val)
+guint GHashing(gschar value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(guchar val)
+guint GHashing(guchar value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gwchar val)
+guint GHashing(gchar16 value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gshort val)
+guint GHashing(gchar32 value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gushort val)
+guint GHashing(gwchar value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gint val)
+guint GHashing(gshort value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(guint val)
+guint GHashing(gushort value)
 {
-	return val;
+	return static_cast<guint>(value);
 }
 
-guint GHashing(glong val)
+guint GHashing(gint value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gulong val)
+guint GHashing(guint value)
 {
-	return static_cast<guint>(val);
+	return value;
 }
 
-guint GHashing(glonglong val)
+guint GHashing(glong value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gulonglong val)
+guint GHashing(gulong value)
 {
-	return static_cast<guint>(val);
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gfloat)
+guint GHashing(glonglong value)
 {
-	return 0;
+	return static_cast<guint>(value);
 }
 
-guint GHashing(gdouble val)
+guint GHashing(gulonglong value)
+{
+	return static_cast<guint>(value);
+}
+
+guint GHashing(gfloat value)
+{
+	return GHashing(static_cast<gdouble>(value));
+}
+
+guint GHashing(gdouble value)
 {
 	gdouble e = 0;
-	gdouble tmp = val;
-	if (val < 0)
+	gdouble tmp = value;
+	if (value < 0)
 	{
-		tmp = -val;
+		tmp = -value;
 	}
-	e = GMath::Ceil(GMath::Log(val));
+	e = GMath::Ceil(GMath::Log(value));
 	return guint((G_INT64_MAX + 1.0) * tmp * GMath::Exp(-e));
 }
 
-guint GHashing(gdecimal)
+guint GHashing(glongdouble value)
 {
-	return 0;
+	return GHashing(static_cast<gdouble>(value));
 }
 
-guint GHashing(gptr)
+guint GHashing(gptr value)
 {
-	return 0;
+	return (guint) value;
 }
 
 } // namespace gsystem

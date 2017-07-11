@@ -136,13 +136,11 @@ gdouble GMath::Sqrt(gdouble v)
 	return sqrt(v);
 }
 
-#ifdef G_HAS_DECIMAL
-gdecimal GMath::Sqrt(gdecimal v)
+gdecimal GMath::Sqrt(glongdouble v)
 {
 	using std::sqrt;
 	return sqrt(v);
 }
-#endif // G_HAS_DECIMAL
 
 } // namespace gsystem
 

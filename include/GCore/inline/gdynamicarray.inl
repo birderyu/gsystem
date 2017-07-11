@@ -26,14 +26,14 @@ GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size)
 }
 
 template <typename DataT>
-GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size, const DataT &data)
+GINLINE GDynamicArray<DataT>::GDynamicArray(gsize size, const DataT &copyable)
 : m_pData(GNULL), m_nSize(size)
 {
 	if (m_nSize <= 0)
 	{
 		return;
 	}
-	m_pData = GArrays::CreateArray<DataT>(m_nSize, data);
+	m_pData = GArrays::CreateArray<DataT>(m_nSize, copyable);
 }
 
 template <typename DataT>
@@ -106,7 +106,7 @@ gvoid GDynamicArray<DataT>::Resize(gsize size)
 }
 
 template <typename DataT> GINLINE 
-gvoid GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
+gvoid GDynamicArray<DataT>::Resize(gsize size, const DataT &copyable)
 {
 	if (m_nSize == size)
 	{
@@ -119,7 +119,7 @@ gvoid GDynamicArray<DataT>::Resize(gsize size, const DataT &data)
 		return Destroy();
 	}
 
-	m_pData = GArrays::ResizeArray<DataT>(m_pData, m_nSize, size, data);
+	m_pData = GArrays::ResizeArray<DataT>(m_pData, m_nSize, size, copyable);
 	m_nSize = size;
 }
 
@@ -143,7 +143,7 @@ gvoid GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsiz
 }
 
 template <typename DataT> GINLINE
-gvoid GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data)
+gvoid GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &copyable)
 {
 	if (new_size == m_nSize && start == 0 && size == m_nSize)
 	{
@@ -158,7 +158,7 @@ gvoid GDynamicArray<DataT>::Resize(gsize new_size, gsize start, gsize size, gsiz
 
 	if (!m_pData)
 	{
-		m_pData = GArrays::CreateArray<DataT>(new_start, data);
+		m_pData = GArrays::CreateArray<DataT>(new_start, copyable);
 	}
 	else
 	{
@@ -206,20 +206,6 @@ template <typename DataT>
 GINLINE const DataT *GDynamicArray<DataT>::CursorAt(gsize pos) const
 {
 	return m_pData + pos;
-}
-
-template <typename DataT>
-GINLINE DataT &GDynamicArray<DataT>::operator[](gsize pos)
-{
-	GASSERT(pos < m_nSize);
-	return *(m_pData + pos);
-}
-
-template <typename DataT>
-GINLINE const DataT &GDynamicArray<DataT>::operator[](gsize pos) const
-{
-	GASSERT(pos < m_nSize);
-	return *(m_pData + pos);
 }
 
 template <typename DataT>

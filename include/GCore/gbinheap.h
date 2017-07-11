@@ -1,4 +1,16 @@
-// ʹ�������ʾ�Ķ����
+/********************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file gbinheap.h
+** @brief 二叉堆
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-24
+** @version 1.0.0
+**
+********************************************************************************/
+
 #ifndef _CORE_BINARY_HEAP_H_
 #define _CORE_BINARY_HEAP_H_
 
@@ -10,12 +22,34 @@
 
 namespace gsystem { // gsystem
 
+/********************************************************************************
+**
+** @brief 二叉堆
+** @template {DataT} 元素的类型
+** @template {CompareT} 函数对象，比较元素的类型
+**
+** 使用数组实现的二叉堆，其中参数CompareT是一个形为 
+** gbool operator()(const DataT &left, const DataT &right) 的函数对象，用于比较两个值
+** 的大小。若CompareT为GLessThanF，则说明使用小于运算符比较二者值的大小，即当 left < right
+** 为true时，返回true，否则返回false。若CompareT为GGreaterThanF，则刚好相反。
+**
+********************************************************************************/
 template<typename DataT, typename CompareT>
 class GBinHeap
 	: public GListT<GBinHeap<DataT, CompareT>>
 	, public GObject
 {
 public:
+	/****************************************************************************
+	**
+	** @name GBinHeap
+	** @brief 构造函数（constructor）
+	** @param [in] capacity {gsize} 预分配二叉堆元素的数量
+	** @param [in] add_size {gsize} 二叉堆每次内存增长的数量
+	**
+	** 构造一个默认的二叉堆，并为其预分配capacity个元素的空间
+	**
+	****************************************************************************/
 	GBinHeap(gsize capacity = G_BINARY_HEAP_DEFAULT_CAPACITY, 
 		gsize add_size = G_BINARY_HEAP_DEFAULT_ADD_SIZE);
 	GBinHeap(const GArray<DataT> &arr, 
@@ -35,7 +69,7 @@ public:
 	gvoid Append(const GBinHeap<DataT, CompareT> &);
 	gvoid Append(const GBinHeap<DataT, CompareT> &heap, gsize start, gsize size);
 
-	// ģ�����ӷ��������������κ���������Ϊ����
+	// 模板添加方法，可以添加任何有数组行为的类
 	template<typename ArrT> gvoid AppendT(const ArrT &arr);
 	template<typename ArrT> gvoid AppendT(const ArrT &arr, gsize start, gsize size);
 

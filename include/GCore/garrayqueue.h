@@ -34,7 +34,7 @@ public:
 	**
 	** @name GArrayQueue
 	** @brief 构造函数（constructor）
-	** @param[in] capacity {gsize} 队列元素的预分配数量，默认为0
+	** @param[in] capacity {gsize} 预分配队列元素的数量，默认为0
 	**
 	** 构造一个默认的队列，并为其预分配capacity个元素的空间
 	**
@@ -84,7 +84,7 @@ public:
 	** @name Size
 	** @brief 获取队列元素的数量
 	** @return {gsize} 元素的数量
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	gsize Size() const;
@@ -94,7 +94,7 @@ public:
 	** @name IsEmpty
 	** @brief 判断队列是否为空
 	** @return {gbool} 若元素的数量为0，则返回true，否则返回false
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	gbool IsEmpty() const;
@@ -103,7 +103,7 @@ public:
 	**
 	** @name Destroy
 	** @brief 销毁队列
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	** 清空队列的数组，并且释放内存空间
 	**
@@ -114,7 +114,7 @@ public:
 	**
 	** @name Clear
 	** @brief 清空队列
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	** 仅清空队列的数组，不释放内存空间
 	**
@@ -126,7 +126,7 @@ public:
 	** @name EnQueue
 	** @brief 入队
 	** @param [in] value {const DataT &} 值
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	gvoid EnQueue(const DataT &value);
@@ -136,7 +136,7 @@ public:
 	** @name EnQueue
 	** @brief 入队
 	** @param [in] value {DataT &&} 值
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	gvoid EnQueue(DataT &&value);
@@ -146,7 +146,7 @@ public:
 	** @name DeQueue
 	** @brief 出队
 	** @param [out] value {DataT *} 用于接受出队的值
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	gvoid DeQueue(DataT *value = GNULL);
@@ -156,7 +156,7 @@ public:
 	** @name Head
 	** @brief 获取队首元素
 	** @return {const DataT &} 队首元素的引用
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	const DataT &Head() const;
@@ -166,7 +166,7 @@ public:
 	** @name Head
 	** @brief 获取队首元素
 	** @return {DataT &} 队首元素的引用
-	** @see gsystem::GQueue
+	** @see GQueue
 	**
 	****************************************************************************/
 	DataT &Head();

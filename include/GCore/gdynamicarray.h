@@ -1,4 +1,16 @@
-// 动态数组
+/********************************************************************************
+**
+** GSystem: A quick, micro library of C++
+**
+** @file gdynamicarray.h
+** @brief 动态数组
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-24
+** @version 1.0.0
+**
+********************************************************************************/
+
 #ifndef _CORE_DYNAMIC_ARRAY_H_
 #define _CORE_DYNAMIC_ARRAY_H_
 
@@ -7,74 +19,326 @@
 
 namespace gsystem { // gsystem
 
+/********************************************************************************
+**
+** @brief 动态数组
+** @template {DataT} 数组元素的类型
+**
+** 动态数组可以动态地分配内存空间
+**
+********************************************************************************/
 template <typename DataT>
 class GDynamicArray final
 	: public GArray<DataT>
 	, public GSerializable
 {
 public:
+	/****************************************************************************
+	**
+	** @name GDynamicArray
+	** @brief 构造函数（constructor）
+	**
+	** 构造一个空数组
+	**
+	****************************************************************************/
 	GDynamicArray();
+
+	/****************************************************************************
+	**
+	** @name GDynamicArray
+	** @brief 构造函数（constructor）
+	** @param[in] size {gsize} 元素的数量
+	**
+	** 构造一个包含size个元素的数组，会依次调用每个元素的构造函数
+	**
+	****************************************************************************/
 	GDynamicArray(gsize size);
-	GDynamicArray(gsize size, const DataT &data);
+
+	/****************************************************************************
+	**
+	** @name GDynamicArray
+	** @brief 构造函数（constructor）
+	** @param[in] size {gsize} 元素的数量
+	** @param[in] copyable {const DataT &} 初始值
+	**
+	** 构造一个包含size个元素的数组，对于每一个元素赋初始值copyable
+	**
+	****************************************************************************/
+	GDynamicArray(gsize size, const DataT &copyable);
+
+	/****************************************************************************
+	**
+	** @name GDynamicArray
+	** @brief 拷贝构造函数（copy constructor）
+	** @param[in] arr {const GDynamicArray<DataT> &} 数组
+	**
+	****************************************************************************/
 	GDynamicArray(const GDynamicArray<DataT> &arr);
+
+	/****************************************************************************
+	**
+	** @name GDynamicArray
+	** @brief 移动构造函数（move constructor）
+	** @param[in] arr {GDynamicArray<DataT> &&} 数组
+	**
+	****************************************************************************/
 	GDynamicArray(GDynamicArray<DataT> &&arr);
+
+	/****************************************************************************
+	**
+	** @name operator=
+	** @brief 拷贝运算符
+	** @param[in] arr {const GDynamicArray<DataT> &} 数组
+	** @return {GDynamicArray<DataT> &} 数组的引用
+	**
+	****************************************************************************/
+	GDynamicArray<DataT> &operator=(const GDynamicArray<DataT> &arr);
+
+	/****************************************************************************
+	**
+	** @name operator=
+	** @brief 移动运算符
+	** @param[in] arr {GDynamicArray<DataT> &&} 数组
+	** @return {GDynamicArray<DataT> &} 数组的引用
+	**
+	****************************************************************************/
+	GDynamicArray<DataT> &operator=(GDynamicArray<DataT> &&arr);
+
+	/****************************************************************************
+	**
+	** @name GDynamicArray
+	** @brief 构造函数（constructor）
+	** @param[in] copyable {const GArray<DataT> &} 数组
+	** @param[in] start {gsize} 数组的起始数量
+	** @param[in] size {gsize} 数组的长度
+	**
+	** 拷贝数组arr从start开始的size个元素，构造一个新的动态数组
+	**
+	****************************************************************************/
 	GDynamicArray(const GArray<DataT> &arr, gsize start, gsize size);
+
+	/****************************************************************************
+	**
+	** @name ~GDynamicArray
+	** @brief 析构函数（destructor）
+	**
+	****************************************************************************/
 	~GDynamicArray();
 
+	/****************************************************************************
+	**
+	** @name Size
+	** @brief 获取数组元素的数量
+	** @return {gsize} 元素的数量
+	** @see GArray
+	**
+	****************************************************************************/
 	gsize Size() const;
 
-	// 数组是否为空
+	/****************************************************************************
+	**
+	** @name IsEmpty
+	** @brief 判断数组是否为空
+	** @return {gbool} 若元素的数量为0，则返回true，否则返回false
+	** @see GArray
+	**
+	****************************************************************************/
 	gbool IsEmpty() const;
 
-	// 重分配数组的长度
+	/****************************************************************************
+	**
+	** @name GetAt
+	** @brief 获取指定位置的元素
+	** @param [in] pos {gsize} 元素的下标，从0开始计数
+	** @return {DataT &} 元素的引用
+	** @see GArray
+	**
+	****************************************************************************/
+	DataT &GetAt(gsize pos);
+
+	/****************************************************************************
+	**
+	** @name GetAt
+	** @brief 获取指定位置的元素
+	** @param [in] pos {gsize} 元素的下标，从0开始计数
+	** @return {const DataT &} 元素的引用
+	** @see GArray
+	**
+	****************************************************************************/
+	const DataT &GetAt(gsize pos) const;
+
+	/****************************************************************************
+	**
+	** @name CursorAt
+	** @brief 获取指定位置的元素的光标
+	** @param [in] pos {gsize} 元素的下标，从0开始计数
+	** @return {DataT *} 元素的指针
+	** @see GArray
+	**
+	****************************************************************************/
+	DataT *CursorAt(gsize pos);
+
+	/****************************************************************************
+	**
+	** @name CursorAt
+	** @brief 获取指定位置的元素的光标
+	** @param [in] pos {gsize} 元素的下标，从0开始计数
+	** @return {const DataT *} 元素的指针
+	** @see GArray
+	**
+	****************************************************************************/
+	const DataT *CursorAt(gsize pos) const;
+
+	/****************************************************************************
+	**
+	** @name Resize
+	** @brief 重置数组元素的个数
+	** @param [in] new_size {gsize} 重置后的数组的元素个数
+	**
+	****************************************************************************/
 	gvoid Resize(gsize new_size);
 
-	// 重分配数组的长度，并将多出来的元素赋默认值t
-	gvoid Resize(gsize new_size, const DataT &data);
+	/****************************************************************************
+	**
+	** @name Resize
+	** @brief 重置数组元素的个数，并对新创建的元素赋初始值
+	** @param [in] new_size {gsize} 重置后的数组的元素个数
+	** @param [in] copyable {const DataT &} 初始值
+	**
+	****************************************************************************/
+	gvoid Resize(gsize new_size, const DataT &copyable);
 
-	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第new_start位
+	/****************************************************************************
+	**
+	** @name Resize
+	** @brief 重置数组元素的个数，并且仅保留原数组的部分元素
+	** @param [in] new_size {gsize} 重置后的数组的元素个数
+	** @param [in] start {gsize} 需要保留原数组的首位
+	** @param [in] size {gsize} 需要保留原数组的元素个数
+	** @param [in] new_start {gsize} 重置后的数组放置保留元素的位置
+	**
+	** 重置数组元素的个数，并保留原来从start开始的size个元素作为新数组的第new_start位
+	**
+	****************************************************************************/
 	gvoid Resize(gsize new_size, gsize start, gsize size, gsize new_start = 0);
 
-	// 重分配数组长度，并保留原来从start开始的size个元素作为新数组的第new_start位，其余元素使用data赋初始值
-	gvoid Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &data);
+	/****************************************************************************
+	**
+	** @name Resize
+	** @brief 重置数组元素的个数，并且仅保留原数组的部分元素，对新创建出来的元素赋初始值
+	** @param [in] new_size {gsize} 重置后的数组的元素个数
+	** @param [in] start {gsize} 需要保留原数组的首位
+	** @param [in] size {gsize} 需要保留原数组的元素个数
+	** @param [in] new_start {gsize} 重置后的数组放置保留元素的位置
+	** @param [in] copyable {const DataT &} 初始值
+	**
+	** 重置数组元素的个数，并保留原来从start开始的size个元素作为新数组的第new_start位，在重置
+	** 的过程中，若有新创建的元素，则用copyable赋初始值
+	**
+	****************************************************************************/
+	gvoid Resize(gsize new_size, gsize start, gsize size, gsize new_start, const DataT &copyable);
 
-	// 清空数组，不释放内存
-	gvoid Clear();
-
-	// 销毁数组
+	/****************************************************************************
+	**
+	** @name Destroy
+	** @brief 销毁数组
+	**
+	** 依次调用每一个元素的析构函数，并释放内存
+	**
+	****************************************************************************/
 	gvoid Destroy();
 
-	DataT &GetAt(gsize);
-	const DataT &GetAt(gsize) const;
+	/****************************************************************************
+	**
+	** @name Clear
+	** @brief 清空数组
+	**
+	** 依次调用每一个元素的析构函数，但不释放内存
+	**
+	****************************************************************************/
+	gvoid Clear();
 
-	DataT *CursorAt(gsize);
-	const DataT *CursorAt(gsize) const;
-
-	// 通过下标访问和修改数组元素
-	DataT &operator[](gsize);
-	const DataT &operator[](gsize) const;
-	
-	// 移除特定位置的元素
+	/****************************************************************************
+	**
+	** @name RemoveAt
+	** @brief 移除数组指定位置的元素
+	** @param [in] pos {gsize} 待移除元素的位置，从0开始计数
+	**
+	****************************************************************************/
 	gvoid RemoveAt(gsize pos);
 
-	// 拷贝和移动
-	GDynamicArray<DataT> &operator=(const GDynamicArray<DataT> &);
-	GDynamicArray<DataT> &operator=(GDynamicArray<DataT> &&);
+	/****************************************************************************
+	**
+	** @name operator==
+	** @brief 判断数组是否相等
+	** @param [in] arr {const GDynamicArray<DataT> &} 数组
+	** @return {gbool} 若数组相等，则返回true，否则返回false
+	**
+	****************************************************************************/
+	gbool operator==(const GDynamicArray<DataT> &arr);
 
-	// 相等
-	gbool operator==(const GDynamicArray<DataT> &);
-
-	///
+	/****************************************************************************
+	**
+	** @name ClassCode
+	** @brief 返回当前类的类序列号
+	** @return {guint} 类序列号
+	** @see GSerializable
+	**
+	****************************************************************************/
 	guint ClassCode() const GNOEXCEPT;
+
+	/****************************************************************************
+	**
+	** @name Serialize
+	** @brief 序列化
+	** @param [in] archive {GArchive &} 档案
+	** @return {gbool} 序列化成功，则返回true，否则返回false
+	** @see GSerializable
+	**
+	****************************************************************************/
 	gbool Serialize(GArchive &archive) const;
+
+	/****************************************************************************
+	**
+	** @name Deserialize
+	** @brief 反序列化
+	** @param [in] archive {GArchive &} 档案
+	** @return {gbool} 反序列化成功，则返回true，否则返回false
+	** @see GSerializable
+	**
+	****************************************************************************/
 	gbool Deserialize(GArchive &archive);
 
 private:
+	/****************************************************************************
+	**
+	** 数组的首地址
+	**
+	****************************************************************************/
 	DataT *m_pData;
+
+	/****************************************************************************
+	**
+	** 数组元素的长度
+	**
+	****************************************************************************/
 	gsize m_nSize;
 };
 
+/********************************************************************************
+**
+** @name GIntegerArray
+** @brief 整形数组
+**
+********************************************************************************/
 typedef GDynamicArray<gint> GIntegerArray;
+
+/********************************************************************************
+**
+** @name GSizeArray
+** @brief 尺寸类型数组
+**
+********************************************************************************/
 typedef GDynamicArray<gsize> GSizeArray;
 
 } // namespace gsystem
