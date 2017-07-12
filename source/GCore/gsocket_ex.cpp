@@ -141,7 +141,7 @@ gbool GSocket_Ex::SetReuseAddress(gbool resue)
 	gint opt = resue ? 1 : 0;
 	socklen_t len = sizeof(opt);
 	if (GSetSocketOpt(m_hSocket, SOL_SOCKET, SO_REUSEADDR,
-		(char*)&opt, len) < 0)
+		(gchar*)&opt, len) < 0)
 	{
 		return false;
 	}

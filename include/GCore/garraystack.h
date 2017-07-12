@@ -34,7 +34,7 @@ public:
 	**
 	** @name GArrayStack
 	** @brief 构造函数（constructor）
-	** @param[in] capacity {gsize} 预分配栈元素的数量，默认为0
+	** @param [in] capacity {gsize} 预分配栈元素的数量，默认为0
 	**
 	** 构造一个默认的栈，并为其预分配capacity个元素的空间
 	**
@@ -45,7 +45,7 @@ public:
 	**
 	** @name GArrayStack
 	** @brief 拷贝构造函数（copy constructor）
-	** @param[in] stack {const GArrayStack<DataT> &} 栈
+	** @param [in] stack {const GArrayStack<DataT> &} 栈
 	**
 	****************************************************************************/
 	GArrayStack(const GArrayStack<DataT> &stack);
@@ -54,7 +54,7 @@ public:
 	**
 	** @name GArrayStack
 	** @brief 移动构造函数（move constructor）
-	** @param[in] stack {GArrayStack<DataT> &&} 栈
+	** @param [in] stack {GArrayStack<DataT> &&} 栈
 	**
 	****************************************************************************/
 	GArrayStack(GArrayStack<DataT> &&stack);
@@ -63,7 +63,7 @@ public:
 	**
 	** @name operator=
 	** @brief 拷贝运算符
-	** @param[in] stack {const GArrayStack<DataT> &} 栈
+	** @param [in] stack {const GArrayStack<DataT> &} 栈
 	** @return {GArrayStack<DataT> &} 栈的引用
 	**
 	****************************************************************************/
@@ -73,7 +73,7 @@ public:
 	**
 	** @name operator=
 	** @brief 移动运算符
-	** @param[in] stack {GArrayStack<DataT> &&} 栈
+	** @param [in] stack {GArrayStack<DataT> &&} 栈
 	** @return {GArrayStack<DataT> &} 栈的引用
 	**
 	****************************************************************************/

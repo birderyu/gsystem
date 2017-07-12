@@ -47,7 +47,7 @@ public:
 	**
 	** @name GDynamicArray
 	** @brief 构造函数（constructor）
-	** @param[in] size {gsize} 元素的数量
+	** @param [in] size {gsize} 元素的数量
 	**
 	** 构造一个包含size个元素的数组，会依次调用每个元素的构造函数
 	**
@@ -58,8 +58,8 @@ public:
 	**
 	** @name GDynamicArray
 	** @brief 构造函数（constructor）
-	** @param[in] size {gsize} 元素的数量
-	** @param[in] copyable {const DataT &} 初始值
+	** @param [in] size {gsize} 元素的数量
+	** @param [in] copyable {const DataT &} 初始值
 	**
 	** 构造一个包含size个元素的数组，对于每一个元素赋初始值copyable
 	**
@@ -70,7 +70,7 @@ public:
 	**
 	** @name GDynamicArray
 	** @brief 拷贝构造函数（copy constructor）
-	** @param[in] arr {const GDynamicArray<DataT> &} 数组
+	** @param [in] arr {const GDynamicArray<DataT> &} 数组
 	**
 	****************************************************************************/
 	GDynamicArray(const GDynamicArray<DataT> &arr);
@@ -79,7 +79,7 @@ public:
 	**
 	** @name GDynamicArray
 	** @brief 移动构造函数（move constructor）
-	** @param[in] arr {GDynamicArray<DataT> &&} 数组
+	** @param [in] arr {GDynamicArray<DataT> &&} 数组
 	**
 	****************************************************************************/
 	GDynamicArray(GDynamicArray<DataT> &&arr);
@@ -88,7 +88,7 @@ public:
 	**
 	** @name operator=
 	** @brief 拷贝运算符
-	** @param[in] arr {const GDynamicArray<DataT> &} 数组
+	** @param [in] arr {const GDynamicArray<DataT> &} 数组
 	** @return {GDynamicArray<DataT> &} 数组的引用
 	**
 	****************************************************************************/
@@ -98,7 +98,7 @@ public:
 	**
 	** @name operator=
 	** @brief 移动运算符
-	** @param[in] arr {GDynamicArray<DataT> &&} 数组
+	** @param [in] arr {GDynamicArray<DataT> &&} 数组
 	** @return {GDynamicArray<DataT> &} 数组的引用
 	**
 	****************************************************************************/
@@ -108,9 +108,9 @@ public:
 	**
 	** @name GDynamicArray
 	** @brief 构造函数（constructor）
-	** @param[in] copyable {const GArray<DataT> &} 数组
-	** @param[in] start {gsize} 数组的起始数量
-	** @param[in] size {gsize} 数组的长度
+	** @param [in] copyable {const GArray<DataT> &} 数组
+	** @param [in] start {gsize} 数组的起始数量
+	** @param [in] size {gsize} 数组的长度
 	**
 	** 拷贝数组arr从start开始的size个元素，构造一个新的动态数组
 	**

@@ -629,9 +629,6 @@
     <ClCompile Include="..\..\..\source\GCore\ghash.cpp">
       <Filter>源文件\template</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\glock.cpp">
-      <Filter>源文件\thread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\GCore\gendian.cpp">
       <Filter>源文件\utility</Filter>
     </ClCompile>

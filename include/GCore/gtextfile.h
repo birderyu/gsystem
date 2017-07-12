@@ -48,8 +48,8 @@ public:
 	**
 	** @name Read
 	** @brief 读取文本文件的部分内容，并将其存入一个字符串
-	** @param[in] size {gsize} 读取的字符数
-	** @param[out] content {GString &} 字符串
+	** @param [in] size {gsize} 读取的字符数
+	** @param [out] content {GString &} 字符串
 	** @return {gbool} 若读取成功，则返回true，否则返回false
 	**
 	****************************************************************************/
@@ -82,7 +82,7 @@ protected:
 	**
 	** @name GTextFile
 	** @brief 构造函数（constructor）
-	** @param[in] file {detail::GTextFile_Ex *} 文本文件私有实现体
+	** @param [in] file {detail::GTextFile_Ex *} 文本文件私有实现体
 	**
 	****************************************************************************/
 	GTextFile(detail::GTextFile_Ex *file);

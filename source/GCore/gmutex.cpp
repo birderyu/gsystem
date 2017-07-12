@@ -9,10 +9,10 @@
 
 namespace gsystem { // gsystem
 
-GMutex::GMutex()
+GMutex::GMutex(gbool reentrant)
 : m_pHandle(GNULL)
 {
-	Initialize();
+	Initialize(reentrant);
 }
 
 GMutex::~GMutex()
@@ -57,7 +57,7 @@ gvoid GMutex::Unlock()
 	::ReleaseMutex((HANDLE)m_pHandle);
 }
 
-gbool GMutex::Initialize()
+gbool GMutex::Initialize(gbool reentrant)
 {
 	m_pHandle = ::CreateMutex(GNULL, false, GNULL);
 	if (m_pHandle == GNULL)

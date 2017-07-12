@@ -34,7 +34,7 @@ public:
 	**
 	** @name GArrayQueue
 	** @brief 构造函数（constructor）
-	** @param[in] capacity {gsize} 预分配队列元素的数量，默认为0
+	** @param [in] capacity {gsize} 预分配队列元素的数量，默认为0
 	**
 	** 构造一个默认的队列，并为其预分配capacity个元素的空间
 	**
@@ -45,7 +45,7 @@ public:
 	**
 	** @name GArrayQueue
 	** @brief 拷贝构造函数（copy constructor）
-	** @param[in] queue {const GArrayQueue<DataT> &} 队列
+	** @param [in] queue {const GArrayQueue<DataT> &} 队列
 	**
 	****************************************************************************/
 	GArrayQueue(const GArrayQueue<DataT> &queue);
@@ -54,7 +54,7 @@ public:
 	**
 	** @name GArrayQueue
 	** @brief 移动构造函数（move constructor）
-	** @param[in] queue {GArrayQueue<DataT> &&} 队列
+	** @param [in] queue {GArrayQueue<DataT> &&} 队列
 	**
 	****************************************************************************/
 	GArrayQueue(GArrayQueue<DataT> &&queue);
@@ -63,7 +63,7 @@ public:
 	**
 	** @name operator=
 	** @brief 拷贝运算符
-	** @param[in] queue {const GArrayQueue<DataT> &} 队列
+	** @param [in] queue {const GArrayQueue<DataT> &} 队列
 	** @return {GArrayQueue<DataT> &} 队列的引用
 	**
 	****************************************************************************/
@@ -73,7 +73,7 @@ public:
 	**
 	** @name operator=
 	** @brief 移动运算符
-	** @param[in] queue {GArrayQueue<DataT> &&} 队列
+	** @param [in] queue {GArrayQueue<DataT> &&} 队列
 	** @return {GArrayQueue<DataT> &} 队列的引用
 	**
 	****************************************************************************/

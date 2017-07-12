@@ -257,7 +257,7 @@ protected:
 	**
 	** @name GFile
 	** @brief 构造函数（constructor）
-	** @param[in] file {detail::GFile_Ex *} 文件私有实现体
+	** @param [in] file {detail::GFile_Ex *} 文件私有实现体
 	**
 	****************************************************************************/
 	GFile(detail::GFile_Ex *file);

@@ -49,8 +49,8 @@ public:
 	**
 	** @name Read
 	** @brief 读取二进制文件的部分内容，并将其存入一个字节串
-	** @param[in] size {gsize} 读取的字节数
-	** @param[out] bytes {GBytes &} 字节串
+	** @param [in] size {gsize} 读取的字节数
+	** @param [out] bytes {GBytes &} 字节串
 	** @return {gbool} 若读取成功，则返回true，否则返回false
 	**
 	****************************************************************************/
@@ -83,7 +83,7 @@ protected:
 	**
 	** @name GBinFile
 	** @brief 构造函数（constructor）
-	** @param[in] file {detail::GBinFile_Ex *} 二进制文件私有实现体
+	** @param [in] file {detail::GBinFile_Ex *} 二进制文件私有实现体
 	**
 	****************************************************************************/
 	GBinFile(detail::GBinFile_Ex *file);

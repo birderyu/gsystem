@@ -335,7 +335,6 @@
     <ClCompile Include="..\..\..\source\GCore\gendian.cpp" />
     <ClCompile Include="..\..\..\source\GCore\ghash.cpp" />
     <ClCompile Include="..\..\..\source\GCore\ginteger.cpp" />
-    <ClCompile Include="..\..\..\source\GCore\glock.cpp" />
     <ClCompile Include="..\..\..\source\GCore\glonginteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\glonglonginteger.cpp" />
     <ClCompile Include="..\..\..\source\GCore\gmath.cpp" />
