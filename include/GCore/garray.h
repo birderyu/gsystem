@@ -24,12 +24,12 @@ namespace gsystem { // gsystem
 /********************************************************************************
 **
 ** @brief 数组
-** @template {DataT} 数组元素的类型
+** @template T {type} 数组元素的类型
 **
 ********************************************************************************/
-template <typename DataT>
+template <typename T>
 class GArray
-	: public GListT<GArray<DataT>>
+	: public GListT<GArray<T>>
 	, virtual public GObject
 {
 public:
@@ -64,176 +64,176 @@ public:
 	** @name GetAt
 	** @brief 获取指定位置的元素
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
-	** @return {DataT &} 元素的引用
+	** @return {T &} 元素的引用
 	**
 	****************************************************************************/
-	virtual DataT &GetAt(gsize pos) = 0;
+	virtual T &GetAt(gsize pos) = 0;
 
 	/****************************************************************************
 	**
 	** @name GetAt
 	** @brief 获取指定位置的元素
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
-	** @return {const DataT &} 元素的引用
+	** @return {const T &} 元素的引用
 	**
 	****************************************************************************/
-	virtual const DataT &GetAt(gsize pos) const = 0;
+	virtual const T &GetAt(gsize pos) const = 0;
 
 	/****************************************************************************
 	**
 	** @name CursorAt
 	** @brief 获取指定位置的元素的光标
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
-	** @return {DataT *} 元素的指针
+	** @return {T *} 元素的指针
 	**
 	****************************************************************************/
-	virtual DataT *CursorAt(gsize pos) = 0;
+	virtual T *CursorAt(gsize pos) = 0;
 
 	/****************************************************************************
 	**
 	** @name CursorAt
 	** @brief 获取指定位置的元素的光标
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
-	** @return {const DataT *} 元素的指针
+	** @return {const T *} 元素的指针
 	**
 	****************************************************************************/
-	virtual const DataT *CursorAt(gsize pos) const = 0;
+	virtual const T *CursorAt(gsize pos) const = 0;
 
 	/****************************************************************************
 	**
 	** @name First
 	** @brief 获取第一个元素
-	** @return {DataT &} 元素的引用
+	** @return {T &} 元素的引用
 	**
 	****************************************************************************/
-	DataT &First();
+	T &First();
 
 	/****************************************************************************
 	**
 	** @name First
 	** @brief 获取第一个元素
-	** @return {const DataT &} 元素的引用
+	** @return {const T &} 元素的引用
 	**
 	****************************************************************************/
-	const DataT &First() const;
+	const T &First() const;
 
 	/****************************************************************************
 	**
 	** @name Last
 	** @brief 获取最后一个元素
-	** @return {DataT &} 元素的引用
+	** @return {T &} 元素的引用
 	**
 	****************************************************************************/
-	DataT &Last();
+	T &Last();
 
 	/****************************************************************************
 	**
 	** @name Last
 	** @brief 获取最后一个元素
-	** @return {const DataT &} 元素的引用
+	** @return {const T &} 元素的引用
 	**
 	****************************************************************************/
-	const DataT &Last() const;
+	const T &Last() const;
 
 	/****************************************************************************
 	**
 	** @name FirstCursor
 	** @brief 获取第一个元素的指针
-	** @return {DataT *} 元素的引用
+	** @return {T *} 元素的引用
 	**
 	****************************************************************************/
-	DataT *FirstCursor();
+	T *FirstCursor();
 
 	/****************************************************************************
 	**
 	** @name FirstCursor
 	** @brief 获取第一个元素的指针
-	** @return {const DataT *} 元素的引用
+	** @return {const T *} 元素的引用
 	**
 	****************************************************************************/
-	const DataT *FirstCursor() const;
+	const T *FirstCursor() const;
 	
 	/****************************************************************************
 	**
 	** @name LastCursor
 	** @brief 获取最后一个元素的指针
-	** @return {DataT *} 元素的引用
+	** @return {T *} 元素的引用
 	**
 	****************************************************************************/
-	DataT *LastCursor();
+	T *LastCursor();
 
 	/****************************************************************************
 	**
 	** @name LastCursor
 	** @brief 获取最后一个元素的指针
-	** @return {const DataT *} 元素的引用
+	** @return {const T *} 元素的引用
 	**
 	****************************************************************************/
-	const DataT *LastCursor() const;
+	const T *LastCursor() const;
 
 	/****************************************************************************
 	**
 	** @name Contains
 	** @brief 判断数组是否包含值
-	** @param [in] value {const DataT &} 值的引用
+	** @param [in] value {const T &} 值的引用
 	** @return {gbool} 若包含该值，则返回true，否则返回false
 	**
 	****************************************************************************/
-	gbool Contains(const DataT &value) const;
+	gbool Contains(const T &value) const;
 
 	/****************************************************************************
 	**
 	** @name Contains
 	** @brief 获取数组第一次出现值的下标
-	** @param [in] value {const DataT &} 值的引用
+	** @param [in] value {const T &} 值的引用
 	** @return {gsize} 值的下标，从0开始计数
 	**
 	****************************************************************************/
-	gsize FirstIndexOf(const DataT &value) const;
+	gsize FirstIndexOf(const T &value) const;
 
 	/****************************************************************************
 	**
 	** @name LastIndexOf
 	** @brief 获取数组从最后开始第一次出现值的下标
-	** @param [in] value {const DataT &} 值的引用
+	** @param [in] value {const T &} 值的引用
 	** @return {gsize} 值的下标，从0开始计数
 	**
 	****************************************************************************/
-	gsize LastIndexOf(const DataT &value) const;
+	gsize LastIndexOf(const T &value) const;
 
 	/****************************************************************************
 	**
 	** @name CountOf
 	** @brief 判断数组中值的次数
-	** @param [in] value {const DataT &} 值的引用
+	** @param [in] value {const T &} 值的引用
 	** @return {gsize} 返回该值在数组中出现的次数
 	**
 	****************************************************************************/
-	gsize CountOf(const DataT &value) const;
+	gsize CountOf(const T &value) const;
 
 	/****************************************************************************
 	**
 	** @name operator[]
 	** @brief 获取指定位置的元素
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
-	** @return {DataT &} 元素的引用
+	** @return {T &} 元素的引用
 	**
 	** 此方法的实现依赖于GetAt，因此不要在GetAt的实现中调用此方法
 	**
 	****************************************************************************/
-	DataT &operator[](gsize pos);
+	T &operator[](gsize pos);
 
 	/****************************************************************************
 	**
 	** @name operator[]
 	** @brief 获取指定位置的元素
 	** @param [in] pos {gsize} 元素的下标，从0开始计数
-	** @return {const DataT &} 元素的引用
+	** @return {const T &} 元素的引用
 	**
 	** 此方法的实现依赖于GetAt，因此不要在GetAt的实现中调用此方法
 	**
 	****************************************************************************/
-	const DataT &operator[](gsize pos) const;
+	const T &operator[](gsize pos) const;
 };
 
 } // namespace gsystem

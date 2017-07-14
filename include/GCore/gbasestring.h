@@ -2,7 +2,6 @@
 #define _CORE_BASE_STRING_H_
 
 #include "gseries.h"
-#include "gserializable.h"
 
 // 字符串本地存储空间的字节数目
 #define G_BASE_STRING_LOCAL_BYTE_SIZE 8
@@ -18,15 +17,15 @@ namespace gsystem {
 ****************************************************************************/
 template<typename CharT>
 class GBaseString
-	: public GArray<CharT>
-	, public GSerializable
 {
+
+private:
+	const static gsize LOCAL_SIZE = G_BASE_STRING_LOCAL_BYTE_SIZE / sizeof(CharT);
+	typedef GSeries<CharT, LOCAL_SIZE, true, 0> StringDataT;
+
 public:
 	typedef	CharT *			StringT;
 	typedef	const CharT *	CStringT;
-
-private:
-	typedef GSeries<CharT, LocalSize(), true, 0> StringDataT;
 
 public:
 	GBaseString();
@@ -34,12 +33,10 @@ public:
 	GBaseString(CStringT str);
 	GBaseString(const GBaseString<CharT> &str);
 	GBaseString(GBaseString<CharT> &&str);
-	virtual ~GBaseString() = 0;
 
 	CStringT CString() const;
 
 	gsize Size() const;
-	gsize Length() const; // 字符的长度
 	gbool IsEmpty() const;
 	CharT &GetAt(gsize pos);
 	const CharT &GetAt(gsize pos) const;
@@ -83,11 +80,8 @@ public:
 	const CharT &operator[](gsize pos) const;
 	CharT &operator[](gsize pos);
 
-private:
-	constexpr static gsize LocalSize()
-	{
-		return G_BASE_STRING_LOCAL_BYTE_SIZE / sizeof(CharT);
-	}
+	gbool Equals(const GBaseString<CharT> &str, gbool isSensitive) const;
+	GStringListT<GBaseString<CharT>> Split(const GBaseString<CharT> &sep, gbool ignoreEmpty, gbool isSensitive) const;
 
 protected:
 	GBaseString(CStringT str, gsize size);
@@ -99,6 +93,8 @@ protected:
 };
 
 }
+
+#include "inline/gbasestring.inl"
 
 #undef G_BASE_STRING_LOCAL_BYTE_SIZE
 

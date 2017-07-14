@@ -1,21 +1,21 @@
 
-/****************************************************************************
+/********************************************************************************
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gseries.h
-** @brief	序列数组结构
-** @author	birderyu
-** @contact	https://github.com/birderyu
-** @date	2016-12-03
-** @version	1.0.0
+** @file gseries.h
+** @brief 序列数组结构
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2016-12-03
+** @version 1.0.0
 **
-** 为了使得串结构（String）更加高效，构建了数据结构GSeries
-** GSeries作为所有串结构的内核（GString、GWString、GBytes），拥有以下特点：
-** 1）为了支持串操作在大部分使用场景中，其长度都不大（如字符串中，短字符串频繁出现）；
+** 为了使得串结构（String）更加高效，构建了高效利用栈空间的数据结构GSeries，它拥有以下特点：
+** 1）为了支持串操作在大部分使用场景中，其长度都不大（如字符串中，短字符串频繁出现），将元素数
+** 量较小的数组数据存储在本地空间（栈空间）中；
 ** 2）为了支持串在大部分时间其实用于只读操作的情景，支持COW（copy-on-write，写时拷贝）。
 **
-****************************************************************************/
+********************************************************************************/
 #ifndef _CORE_SERIES_H_
 #define _CORE_SERIES_H_
 
@@ -24,14 +24,20 @@
 
 namespace gsystem { // gsystem
 
-/// 当使用一个数组来存储数据时，针对这个数组有以下处理：
-/// 为了增加数组的初始化数据，当数据量小于MIN_SIZE时，数据存储在本地空间上，反之在全局空间中开辟内存
-/// 当数据量大于MIN_SIZE时，允许预开辟一些额外的内存，实际内存的大小存储在m_pArray的前几位空间中
-/// m_nType用以表示当前对象
+/********************************************************************************
+**
+** @brief 序列数组
+** @template T {type} 数组元素的类型
+** @template LOCAL_SIZE {gsize} 本地空间的大小
+** @template HAS_END_FLAG {gbool} 是否包含结束标志，如C风格字符串将字符0作为结束标志，
+**     默认为false
+** @template END_FLAG {T} 结束标志，当HAS_END_FLAG为true时有效
+**
+********************************************************************************/
 template<typename T, 
 	gsize LOCAL_SIZE,
-	gbool HAS_END_FLAG, 
-	T END_FLAG>
+	gbool HAS_END_FLAG = false, 
+	T END_FLAG = T()>
 class GSeries
 {
 public:
@@ -44,12 +50,15 @@ public:
 
 public:
 	GSeries(gsize capacity = 0);
-	GSeries(const T *copy_arr, gsize copy_size);
-	GSeries(const GArray<T> &copy_arr);
-	GSeries(GArray<T> &&move_arr);
+	GSeries(const T *arr, gsize size);
+	GSeries(const GArray<T> &arr);
+	GSeries(GArray<T> &&arr);
 	GSeries(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr);
 	GSeries(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr);
 	~GSeries();
+
+	GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &operator=(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr);
+	GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &operator=(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr);
 
 	gsize Size() const;
 	gsize Capacity() const;
@@ -84,8 +93,6 @@ public:
 	gvoid Append(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &series);
 	gvoid Append(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&series);
 
-	GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &operator=(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr);
-	GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &operator=(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr);
 	const T &operator[](gsize pos) const;
 	T &operator[](gsize pos);
 

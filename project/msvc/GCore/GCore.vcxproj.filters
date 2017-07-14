@@ -734,6 +734,9 @@
     <ClCompile Include="..\..\..\source\GCore\gstring8.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\GCore\gstring16.cpp">
+      <Filter>源文件\string</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\include\GCore\inline\gallocator.inl">

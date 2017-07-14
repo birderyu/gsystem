@@ -1,6 +1,8 @@
 #ifndef _CORE_BASE_STRING_INLINE_
 #define _CORE_BASE_STRING_INLINE_
 
+#include "gcstring.h"
+
 namespace gsystem {
 
 template<typename CharT> GINLINE
@@ -18,7 +20,7 @@ GBaseString<CharT>::GBaseString(CharT c)
 }
 
 template<typename CharT> GINLINE
-GBaseString<CharT>::GBaseString(typname GBaseString<CharT>::CStringT str)
+GBaseString<CharT>::GBaseString(typename GBaseString<CharT>::CStringT str)
 {
 	gsize size = GCString::Size(str);
 	m_tString.Resize(size);
@@ -26,22 +28,22 @@ GBaseString<CharT>::GBaseString(typname GBaseString<CharT>::CStringT str)
 }
 
 template<typename CharT> GINLINE
-GBaseString<CharT>::GBaseString(typname GBaseString<CharT>::CStringT str, gsize size)
+GBaseString<CharT>::GBaseString(typename GBaseString<CharT>::CStringT str, gsize size)
 	: m_tString(str, size)
 {
 
 }
 
 template<typename CharT> GINLINE
-GBaseString<CharT>::GBaseString(const typname GBaseString<CharT>::StringDataT &str)
+GBaseString<CharT>::GBaseString(const typename GBaseString<CharT>::StringDataT &str)
 	: m_tString(str)
 {
 
 }
 
 template<typename CharT> GINLINE
-GBaseString<CharT>::GBaseString(typname GBaseString<CharT>::StringDataT &&str)
-	: m_tString(GForward<typname GBaseString<CharT>::StringDataT>(str))
+GBaseString<CharT>::GBaseString(typename GBaseString<CharT>::StringDataT &&str)
+	: m_tString(GForward<typename GBaseString<CharT>::StringDataT>(str))
 {
 
 }
@@ -60,15 +62,8 @@ GBaseString<CharT>::GBaseString(GBaseString<CharT> &&str)
 
 }
 
-
 template<typename CharT> GINLINE
-GBaseString<CharT>::~GBaseString()
-{
-
-}
-
-template<typename CharT> GINLINE
-CStringT GBaseString<CharT>::CString() const
+typename GBaseString<CharT>::CStringT GBaseString<CharT>::CString() const
 {
 	return m_tString.Start();
 }
@@ -76,13 +71,6 @@ CStringT GBaseString<CharT>::CString() const
 template<typename CharT> GINLINE
 gsize GBaseString<CharT>::Size() const
 {
-	return m_tString.Size();
-}
-
-template<typename CharT> GINLINE
-gsize GBaseString<CharT>::Length() const
-{
-	// TODO
 	return m_tString.Size();
 }
 
@@ -251,19 +239,32 @@ GBaseString<CharT> &GBaseString<CharT>::Replace(const GBaseString<CharT> &from, 
 }
 
 template<typename CharT> GINLINE
-GStringListT<GBaseString<CharT>> Split(const GBaseString<CharT> &sep, gbool ignoreEmpty, gbool isSensitive) const
+GStringListT<GBaseString<CharT>> GBaseString<CharT>::Split(const GBaseString<CharT> &sep, gbool ignoreEmpty, gbool isSensitive) const
 {
-
+	// TODO
+	return GStringListT<GBaseString<CharT>>();
 }
 
 template<typename CharT> GINLINE
-gsize Find(CharT c, gsize start, gbool isSensitive) const;
+gsize GBaseString<CharT>::Find(CharT c, gsize start, gbool isSensitive) const
+{
+	// TODO
+	return 0;
+}
 
 template<typename CharT> GINLINE
-gsize Find(const GBaseString<CharT> &str, gsize start, gbool isSensitive) const;
+gsize GBaseString<CharT>::Find(const GBaseString<CharT> &str, gsize start, gbool isSensitive) const
+{
+	// TODO
+	return 0;
+}
 
 template<typename CharT> GINLINE
-GBaseString<CharT> SubString(gsize start, gsize length) const;
+GBaseString<CharT> GBaseString<CharT>::SubString(gsize start, gsize length) const
+{
+	// TODO
+	return GBaseString<CharT>();
+}
 
 template<> GINLINE
 gcstring8 GBaseString<gchar8>::CString() const

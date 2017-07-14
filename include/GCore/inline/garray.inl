@@ -3,62 +3,62 @@
 
 namespace gsystem { // gsystem
 
-template <typename DataT> GINLINE
-DataT &GArray<DataT>::First()
+template<typename T> GINLINE
+T &GArray<T>::First()
 {
 	GASSERT(!IsEmpty());
 	return GetAt(0);
 }
 
-template <typename DataT> GINLINE
-const DataT &GArray<DataT>::First() const
+template<typename T> GINLINE
+const T &GArray<T>::First() const
 {
 	GASSERT(!IsEmpty());
 	return GetAt(0);
 }
 
-template <typename DataT> GINLINE
-DataT &GArray<DataT>::Last()
+template<typename T> GINLINE
+T &GArray<T>::Last()
 {
 	GASSERT(!IsEmpty());
 	return GetAt(Size() - 1);
 }
 
-template <typename DataT> GINLINE
-const DataT &GArray<DataT>::Last() const
+template<typename T> GINLINE
+const T &GArray<T>::Last() const
 {
 	GASSERT(!IsEmpty());
 	return GetAt(Size() - 1);
 }
 
-template <typename DataT> GINLINE
-DataT *GArray<DataT>::FirstCursor()
+template<typename T> GINLINE
+T *GArray<T>::FirstCursor()
 {
 	return CursorAt(0);
 }
 
-template <typename DataT> GINLINE
-const DataT *GArray<DataT>::FirstCursor() const
+template<typename T> GINLINE
+const T *GArray<T>::FirstCursor() const
 {
 	return CursorAt(0);
 }
 
-template <typename DataT> GINLINE
-DataT *GArray<DataT>::LastCursor()
+template<typename T> GINLINE
+T *GArray<T>::LastCursor()
 {
 	GASSERT(!IsEmpty());
 	return CursorAt(Size() - 1);
 }
 
-template <typename DataT> GINLINE
-const DataT *GArray<DataT>::LastCursor() const
+template<typename T> GINLINE
+const T *GArray<T>::LastCursor() const
 {
 	GASSERT(!IsEmpty());
 	return CursorAt(Size() - 1);
 }
 
-template <typename DataT>
-GINLINE gbool GArray<DataT>::Contains(const DataT &value) const
+template<typename T>
+GINLINE gbool GArray<T>::Contains(const T &value) const
 {
 	gsize size = Size();
 	for (gsize i = 0; i < size; i++)
@@ -71,8 +71,8 @@ GINLINE gbool GArray<DataT>::Contains(const DataT &value) const
 	return false;
 }
 
-template <typename DataT>
-GINLINE gsize GArray<DataT>::FirstIndexOf(const DataT &value) const
+template<typename T>
+GINLINE gsize GArray<T>::FirstIndexOf(const T &value) const
 {
 	gsize size = Size();
 	for (gsize i = 0; i < size; i++)
@@ -85,8 +85,8 @@ GINLINE gsize GArray<DataT>::FirstIndexOf(const DataT &value) const
 	return NULL_POS;
 }
 
-template <typename DataT>
-GINLINE gsize GArray<DataT>::LastIndexOf(const DataT &value) const
+template<typename T>
+GINLINE gsize GArray<T>::LastIndexOf(const T &value) const
 {
 	gsize size = Size();
 	for (gsize i = size; i > 0; i--)
@@ -100,8 +100,8 @@ GINLINE gsize GArray<DataT>::LastIndexOf(const DataT &value) const
 	return NULL_POS;
 }
 
-template <typename DataT>
-GINLINE gsize GArray<DataT>::CountOf(const DataT &value) const
+template<typename T>
+GINLINE gsize GArray<T>::CountOf(const T &value) const
 {
 	gsize size = Size();
 	gsize count = 0;
@@ -115,14 +115,14 @@ GINLINE gsize GArray<DataT>::CountOf(const DataT &value) const
 	return count;
 }
 
-template <typename DataT>
-GINLINE DataT &GArray<DataT>::operator[](gsize pos)
+template<typename T> GINLINE
+T &GArray<T>::operator[](gsize pos)
 {
 	return GetAt(pos);
 }
 
-template <typename DataT>
-GINLINE const DataT &GArray<DataT>::operator[](gsize pos) const
+template<typename T> GINLINE
+const T &GArray<T>::operator[](gsize pos) const
 {
 	return GetAt(pos);
 }

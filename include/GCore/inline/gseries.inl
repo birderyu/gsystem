@@ -7,6 +7,8 @@
 #define G_SERIES_TEMPLATE		template<typename T, gsize LOCAL_SIZE, gbool HAS_END_FLAG, T END_FLAG>
 #define G_SERIES_QUAL			GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG>
 
+#include "gutility.h"
+
 namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 namespace series { // gsystem.detail.series

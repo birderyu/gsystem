@@ -1,7 +1,7 @@
 #ifndef _CORE_STRING_16_BIT_H_
 #define _CORE_STRING_16_BIT_H_
 
-#include "gseries.h"
+#include "gbasestring.h"
 #include "gserializable.h"
 
 namespace gsystem { // gsystem
@@ -39,7 +39,15 @@ public: // ¾²Ì¬·½·¨
 	static GString16 Number(gdouble num, gint base = 10);
 	static GString16 Number(glongdouble num, gint base = 10);
 
+public:
+	GString16();
+	GString16(gchar16 c);
+	GString16(gcstring16 str);
+	GString16(const GString16 &str);
+	GString16(GString16 &&str);
 
+private:
+	GBaseString<gchar16> m_tBaseString;
 };
 
 }

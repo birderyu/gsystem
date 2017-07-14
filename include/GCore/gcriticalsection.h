@@ -2,12 +2,12 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gcriticalsection.h
-** @brief	基础对象类型的定义
-** @author	birderyu
-** @contact	https://github.com/birderyu
-** @date	2017-1-22
-** @version	1.0
+** @file gcriticalsection.h
+** @brief 临界区
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-22
+** @version 1.0
 **
 ****************************************************************************/
 #ifndef _CORE_CRITICAL_SECTION_H_
@@ -21,11 +21,7 @@ namespace gsystem { // gsystem
 
 /****************************************************************************
 **
-** gobject.h
-**
-** @class		GCriticalSection
-** @brief		临界区
-** @module		GCore
+** @brief 临界区
 **
 ** 临界区也称关键代码段，其优点是速度较快，这是因为它的工作位于用户态，因此开销小于互斥量，
 ** 为了提高性能，如果临界区已经被其它线程持有时，它可以先原地自旋，当自旋一定次数后还不能
