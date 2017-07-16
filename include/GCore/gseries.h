@@ -28,7 +28,7 @@ namespace gsystem { // gsystem
 **
 ** @brief 序列数组
 ** @template T {type} 数组元素的类型
-** @template LOCAL_SIZE {gsize} 本地空间的大小
+** @template LOCAL_SIZE {gsize} 本地空间的元素个数
 ** @template HAS_END_FLAG {gbool} 是否包含结束标志，如C风格字符串将字符0作为结束标志，
 **     默认为false
 ** @template END_FLAG {T} 结束标志，当HAS_END_FLAG为true时有效

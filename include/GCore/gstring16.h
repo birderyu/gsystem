@@ -47,7 +47,7 @@ public:
 	GString16(GString16 &&str);
 
 private:
-	GBaseString<gchar16> m_tBaseString;
+	GBaseString<gchar16, 8> m_tBaseString;
 };
 
 }

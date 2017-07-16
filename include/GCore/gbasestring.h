@@ -3,24 +3,18 @@
 
 #include "gseries.h"
 
-// 字符串本地存储空间的字节数目
-#define G_BASE_STRING_LOCAL_BYTE_SIZE 8
-
 namespace gsystem {
 
 /****************************************************************************
 **
-** @brief	基础字符串类型
-**
-** 基础字符串类型可以表示
+** @brief 基础字符串类型
 **
 ****************************************************************************/
-template<typename CharT>
+template<typename CharT, gsize LOCAL_SIZE>
 class GBaseString
 {
 
 private:
-	const static gsize LOCAL_SIZE = G_BASE_STRING_LOCAL_BYTE_SIZE / sizeof(CharT);
 	typedef GSeries<CharT, LOCAL_SIZE, true, 0> StringDataT;
 
 public:
@@ -31,8 +25,8 @@ public:
 	GBaseString();
 	GBaseString(CharT c);
 	GBaseString(CStringT str);
-	GBaseString(const GBaseString<CharT> &str);
-	GBaseString(GBaseString<CharT> &&str);
+	GBaseString(const GBaseString<CharT, LOCAL_SIZE> &str);
+	GBaseString(GBaseString<CharT, LOCAL_SIZE> &&str);
 
 	CStringT CString() const;
 
@@ -46,17 +40,17 @@ public:
 	gvoid Reserve(gsize size);
 	gbool StartWith(CharT c) const;
 	gbool EndWith(CharT c) const;
-	gvoid Append(const GBaseString<CharT> &str);
-	gvoid Append(GBaseString<CharT> &&str);
-	GBaseString<CharT> Trim() const;
-	GBaseString<CharT> TrimLeft() const;
-	GBaseString<CharT> TrimRight() const;
-	GBaseString<CharT> ToUpper() const;
-	GBaseString<CharT> ToLower() const;
-	GBaseString<CharT> &Replace(const GBaseString<CharT> &from, const GBaseString<CharT> &to, gbool isSensitive);
+	gvoid Append(const GBaseString<CharT, LOCAL_SIZE> &str);
+	gvoid Append(GBaseString<CharT, LOCAL_SIZE> &&str);
+	GBaseString<CharT, LOCAL_SIZE> Trim() const;
+	GBaseString<CharT, LOCAL_SIZE> TrimLeft() const;
+	GBaseString<CharT, LOCAL_SIZE> TrimRight() const;
+	GBaseString<CharT, LOCAL_SIZE> ToUpper() const;
+	GBaseString<CharT, LOCAL_SIZE> ToLower() const;
+	GBaseString<CharT, LOCAL_SIZE> &Replace(const GBaseString<CharT, LOCAL_SIZE> &from, const GBaseString<CharT, LOCAL_SIZE> &to, gbool isSensitive);
 	gsize Find(CharT c, gsize start, gbool isSensitive) const;
-	gsize Find(const GBaseString<CharT> &str, gsize start, gbool isSensitive) const;
-	GBaseString<CharT> SubString(gsize start, gsize length) const;
+	gsize Find(const GBaseString<CharT, LOCAL_SIZE> &str, gsize start, gbool isSensitive) const;
+	GBaseString<CharT, LOCAL_SIZE> SubString(gsize start, gsize length) const;
 
 	gsmall ToSmall(gbool *bIsOk = GNULL) const;
 	gusmall ToUSmall(gbool *bIsOk = GNULL) const;
@@ -72,16 +66,16 @@ public:
 	gdouble ToDouble(gbool *bIsOk = GNULL) const;
 	glongdouble ToLongDouble(gbool *bIsOk = GNULL) const;
 
-	GBaseString<CharT> &operator=(const GBaseString<CharT> &str);
-	GBaseString<CharT> &operator=(GBaseString<CharT> &&sStr);
-	GBaseString<CharT> &operator=(CStringT str);
-	GBaseString<CharT> &operator=(CharT c);
-	GBaseString<CharT> &operator+=(const GBaseString<CharT> &sStr);
+	GBaseString<CharT, LOCAL_SIZE> &operator=(const GBaseString<CharT, LOCAL_SIZE> &str);
+	GBaseString<CharT, LOCAL_SIZE> &operator=(GBaseString<CharT, LOCAL_SIZE> &&sStr);
+	GBaseString<CharT, LOCAL_SIZE> &operator=(CStringT str);
+	GBaseString<CharT, LOCAL_SIZE> &operator=(CharT c);
+	GBaseString<CharT, LOCAL_SIZE> &operator+=(const GBaseString<CharT, LOCAL_SIZE> &sStr);
 	const CharT &operator[](gsize pos) const;
 	CharT &operator[](gsize pos);
 
-	gbool Equals(const GBaseString<CharT> &str, gbool isSensitive) const;
-	GStringListT<GBaseString<CharT>> Split(const GBaseString<CharT> &sep, gbool ignoreEmpty, gbool isSensitive) const;
+	gbool Equals(const GBaseString<CharT, LOCAL_SIZE> &str, gbool isSensitive) const;
+	GStringListT<GBaseString<CharT, LOCAL_SIZE>> Split(const GBaseString<CharT, LOCAL_SIZE> &sep, gbool ignoreEmpty, gbool isSensitive) const;
 
 protected:
 	GBaseString(CStringT str, gsize size);
@@ -95,7 +89,5 @@ protected:
 }
 
 #include "inline/gbasestring.inl"
-
-#undef G_BASE_STRING_LOCAL_BYTE_SIZE
 
 #endif // _CORE_BASE_STRING_H_
