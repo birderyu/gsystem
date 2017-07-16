@@ -8,7 +8,6 @@
 #include "gstring.h"
 #include "gcstring.h"
 #include "gstringlist.h"
-#include "gencoding.h"
 
 using namespace gsystem;
 
