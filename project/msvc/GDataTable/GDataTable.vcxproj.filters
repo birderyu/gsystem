@@ -36,93 +36,93 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\GDataTable\gdatatable.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gdatatable.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gdataview.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gdataview.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtableaction.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtableaction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtableglobal.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtableglobal.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtabledataIndex.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtabledataIndex.h">
       <Filter>头文件\index</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtableindex.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtableindex.h">
       <Filter>头文件\index</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablespatialindex.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablespatialindex.h">
       <Filter>头文件\index</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gfilter.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gfilter.h">
       <Filter>头文件\filter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtableattribute.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtableattribute.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablecell.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablecell.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablecolumn.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablecolumn.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablecolumns.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablecolumns.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablefield.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablefield.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablefields.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablefields.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtableobject.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtableobject.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablerow.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablerow.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gtablerows.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gtablerows.h">
       <Filter>头文件\attribute</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gfilter_ex.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gfilter_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gvirtualtable.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gvirtualtable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gvarianttable.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gvarianttable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gsimpletable.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gsimpletable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gserialtable.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gserialtable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gobjecttable.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gobjecttable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gmetatable.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gmetatable.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GDataTable\gmemorytable.h">
+    <ClInclude Include="..\..\..\private\gdatatable\gmemorytable.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GDataTable\gdatapool.h">
+    <ClInclude Include="..\..\..\include\gdatatable\gdatapool.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GDataTable\gfilter.cpp">
+    <ClCompile Include="..\..\..\source\gdatatable\gfilter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GDataTable\gfilter_ex.cpp">
+    <ClCompile Include="..\..\..\source\gdatatable\gfilter_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GDataTable\gmemorytable.cpp">
+    <ClCompile Include="..\..\..\source\gdatatable\gmemorytable.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
   </ItemGroup>

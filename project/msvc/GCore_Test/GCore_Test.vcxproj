@@ -22,7 +22,7 @@
     <ProjectGuid>{E65C8832-92BC-4757-93E6-C1186200CC81}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>GCore_Test</ProjectName>
+    <ProjectName>gcore_test</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

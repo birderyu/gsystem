@@ -3,35 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GCore", "GCore\GCore.vcxproj", "{248D9550-B9EC-4A1C-B914-9E17B2483266}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gcore", "gcore\gcore.vcxproj", "{248D9550-B9EC-4A1C-B914-9E17B2483266}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDataTable", "GDataTable\GDataTable.vcxproj", "{74598484-054A-44F3-A111-66DB314D98FC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gdatatable", "gdatatable\gdatatable.vcxproj", "{74598484-054A-44F3-A111-66DB314D98FC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{83739D3A-0014-4C50-93DC-13D96F6886CB} = {83739D3A-0014-4C50-93DC-13D96F6886CB}
 		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GGeometry", "GGeometry\GGeometry.vcxproj", "{83739D3A-0014-4C50-93DC-13D96F6886CB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ggeometry", "ggeometry\ggeometry.vcxproj", "{83739D3A-0014-4C50-93DC-13D96F6886CB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GSerialization", "GSerialization\GSerialization.vcxproj", "{08D9DEAA-06A7-44FF-80C7-AAD74E4C03EF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gserialization", "gserialization\gserialization.vcxproj", "{08D9DEAA-06A7-44FF-80C7-AAD74E4C03EF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{69A72910-D55B-40B0-AF74-3CBE660E8012}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GTest", "GTest\GTest.vcxproj", "{72090282-FD52-4286-BAC9-0031C0AA4414}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "gtest\gtest.vcxproj", "{72090282-FD52-4286-BAC9-0031C0AA4414}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GCore_Test", "GCore_Test\GCore_Test.vcxproj", "{E65C8832-92BC-4757-93E6-C1186200CC81}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gcore_Test", "gcore_test\gcore_test.vcxproj", "{E65C8832-92BC-4757-93E6-C1186200CC81}"
 	ProjectSection(ProjectDependencies) = postProject
 		{248D9550-B9EC-4A1C-B914-9E17B2483266} = {248D9550-B9EC-4A1C-B914-9E17B2483266}
 		{72090282-FD52-4286-BAC9-0031C0AA4414} = {72090282-FD52-4286-BAC9-0031C0AA4414}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GExtra", "GExtra\GExtra.vcxproj", "{C1150DC5-3B95-4853-8D87-82F53D823D56}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gextra", "gextra\gextra.vcxproj", "{C1150DC5-3B95-4853-8D87-82F53D823D56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dynamic", "dynamic", "{0F020C8E-F223-4CF0-B406-AC68D5523C7B}"
 EndProject

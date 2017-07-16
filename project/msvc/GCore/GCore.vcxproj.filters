@@ -102,797 +102,797 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\thirds\GCore\dlmalloc.h">
+    <ClInclude Include="..\..\..\thirds\gcore\dlmalloc.h">
       <Filter>头文件\_thirds</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtype.h">
+    <ClInclude Include="..\..\..\include\gcore\gtype.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gnew.h">
+    <ClInclude Include="..\..\..\include\gcore\gnew.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gobject.h">
+    <ClInclude Include="..\..\..\include\gcore\gobject.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gregister.h">
+    <ClInclude Include="..\..\..\include\gcore\gregister.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsocket.h">
+    <ClInclude Include="..\..\..\include\gcore\gsocket.h">
       <Filter>头文件\net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtcpsocket.h">
+    <ClInclude Include="..\..\..\include\gcore\gtcpsocket.h">
       <Filter>头文件\net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gudpsocket.h">
+    <ClInclude Include="..\..\..\include\gcore\gudpsocket.h">
       <Filter>头文件\net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gboolean.h">
+    <ClInclude Include="..\..\..\include\gcore\gboolean.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbyte.h">
+    <ClInclude Include="..\..\..\include\gcore\gbyte.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdoublefloat.h">
+    <ClInclude Include="..\..\..\include\gcore\gdoublefloat.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\ginteger.h">
+    <ClInclude Include="..\..\..\include\gcore\ginteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glongdoublefloat.h">
+    <ClInclude Include="..\..\..\include\gcore\glongdoublefloat.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glonginteger.h">
+    <ClInclude Include="..\..\..\include\gcore\glonginteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glonglonginteger.h">
+    <ClInclude Include="..\..\..\include\gcore\glonglonginteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gnumber.h">
+    <ClInclude Include="..\..\..\include\gcore\gnumber.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gpackage.h">
+    <ClInclude Include="..\..\..\include\gcore\gpackage.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gshortinteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gshortinteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsignedcharacter.h">
+    <ClInclude Include="..\..\..\include\gcore\gsignedcharacter.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsinglefloat.h">
+    <ClInclude Include="..\..\..\include\gcore\gsinglefloat.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gfinal.h">
+    <ClInclude Include="..\..\..\include\gcore\gfinal.h">
       <Filter>头文件\pattern</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsingleton.h">
+    <ClInclude Include="..\..\..\include\gcore\gsingleton.h">
       <Filter>头文件\pattern</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gwidecharacter.h">
+    <ClInclude Include="..\..\..\include\gcore\gwidecharacter.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunsignedsmallinteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gunsignedsmallinteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunsignedshortinteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gunsignedshortinteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunsignedlonglonginteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gunsignedlonglonginteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunsignedlonginteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gunsignedlonginteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunsignedinteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gunsignedinteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunsignedcharacter.h">
+    <ClInclude Include="..\..\..\include\gcore\gunsignedcharacter.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsmallinteger.h">
+    <ClInclude Include="..\..\..\include\gcore\gsmallinteger.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\garray.h">
+    <ClInclude Include="..\..\..\include\gcore\garray.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\garrayqueue.h">
+    <ClInclude Include="..\..\..\include\gcore\garrayqueue.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\garraystack.h">
+    <ClInclude Include="..\..\..\include\gcore\garraystack.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gavltree.h">
+    <ClInclude Include="..\..\..\include\gcore\gavltree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbtree.h">
+    <ClInclude Include="..\..\..\include\gcore\gbtree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdynamicarray.h">
+    <ClInclude Include="..\..\..\include\gcore\gdynamicarray.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\ggraph.h">
+    <ClInclude Include="..\..\..\include\gcore\ggraph.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\ghashtable.h">
+    <ClInclude Include="..\..\..\include\gcore\ghashtable.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\ghuffmantree.h">
+    <ClInclude Include="..\..\..\include\gcore\ghuffmantree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glinkedlist.h">
+    <ClInclude Include="..\..\..\include\gcore\glinkedlist.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glistqueue.h">
+    <ClInclude Include="..\..\..\include\gcore\glistqueue.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gliststack.h">
+    <ClInclude Include="..\..\..\include\gcore\gliststack.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gqueue.h">
+    <ClInclude Include="..\..\..\include\gcore\gqueue.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\grtree.h">
+    <ClInclude Include="..\..\..\include\gcore\grtree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstack.h">
+    <ClInclude Include="..\..\..\include\gcore\gstack.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstaticarray.h">
+    <ClInclude Include="..\..\..\include\gcore\gstaticarray.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gfunctor.h">
+    <ClInclude Include="..\..\..\include\gcore\gfunctor.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\ghash.h">
+    <ClInclude Include="..\..\..\include\gcore\ghash.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtraits.h">
+    <ClInclude Include="..\..\..\include\gcore\gtraits.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gcriticalsection.h">
+    <ClInclude Include="..\..\..\include\gcore\gcriticalsection.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glock.h">
+    <ClInclude Include="..\..\..\include\gcore\glock.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glockguard.h">
+    <ClInclude Include="..\..\..\include\gcore\glockguard.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmutex.h">
+    <ClInclude Include="..\..\..\include\gcore\gmutex.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsemaphore.h">
+    <ClInclude Include="..\..\..\include\gcore\gsemaphore.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gendian.h">
+    <ClInclude Include="..\..\..\include\gcore\gendian.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmath.h">
+    <ClInclude Include="..\..\..\include\gcore\gmath.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsort.h">
+    <ClInclude Include="..\..\..\include\gcore\gsort.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstdstringhelper.h">
+    <ClInclude Include="..\..\..\include\gcore\gstdstringhelper.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gblock.h">
+    <ClInclude Include="..\..\..\include\gcore\gblock.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\glist.h">
+    <ClInclude Include="..\..\..\include\gcore\glist.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmap.h">
+    <ClInclude Include="..\..\..\include\gcore\gmap.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmultimap.h">
+    <ClInclude Include="..\..\..\include\gcore\gmultimap.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmemorystore.h">
+    <ClInclude Include="..\..\..\include\gcore\gmemorystore.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gordermultimap.h">
+    <ClInclude Include="..\..\..\include\gcore\gordermultimap.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gorderset.h">
+    <ClInclude Include="..\..\..\include\gcore\gorderset.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gset.h">
+    <ClInclude Include="..\..\..\include\gcore\gset.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunordermap.h">
+    <ClInclude Include="..\..\..\include\gcore\gunordermap.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunordermultimap.h">
+    <ClInclude Include="..\..\..\include\gcore\gunordermultimap.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunorderset.h">
+    <ClInclude Include="..\..\..\include\gcore\gunorderset.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gvector.h">
+    <ClInclude Include="..\..\..\include\gcore\gvector.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gfile_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gfile_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gjsonparser.h">
+    <ClInclude Include="..\..\..\private\gcore\gjsonparser.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gsockaddress_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gsockaddress_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gsocket_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gsocket_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gtcpsocket_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gtcpsocket_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gtextfile_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gtextfile_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gudpsocket_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gudpsocket_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gevent.h">
+    <ClInclude Include="..\..\..\include\gcore\gevent.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gnocopyable.h">
+    <ClInclude Include="..\..\..\include\gcore\gnocopyable.h">
       <Filter>头文件\pattern</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gnomoveable.h">
+    <ClInclude Include="..\..\..\include\gcore\gnomoveable.h">
       <Filter>头文件\pattern</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gallocator.h">
+    <ClInclude Include="..\..\..\include\gcore\gallocator.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gconstructor.h">
+    <ClInclude Include="..\..\..\include\gcore\gconstructor.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmemory.h">
+    <ClInclude Include="..\..\..\include\gcore\gmemory.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gatom.h">
+    <ClInclude Include="..\..\..\include\gcore\gatom.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gvariety.h">
+    <ClInclude Include="..\..\..\include\gcore\gvariety.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gvariant.h">
+    <ClInclude Include="..\..\..\include\gcore\gvariant.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbytes.h">
+    <ClInclude Include="..\..\..\include\gcore\gbytes.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstringlist.h">
+    <ClInclude Include="..\..\..\include\gcore\gstringlist.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstringpool.h">
+    <ClInclude Include="..\..\..\include\gcore\gstringpool.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbitset.h">
+    <ClInclude Include="..\..\..\include\gcore\gbitset.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gfunctional.h">
+    <ClInclude Include="..\..\..\include\gcore\gfunctional.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gutility.h">
+    <ClInclude Include="..\..\..\include\gcore\gutility.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gseries.h">
+    <ClInclude Include="..\..\..\include\gcore\gseries.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gseriespool.h">
+    <ClInclude Include="..\..\..\include\gcore\gseriespool.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\grunnable.h">
+    <ClInclude Include="..\..\..\include\gcore\grunnable.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gthread.h">
+    <ClInclude Include="..\..\..\include\gcore\gthread.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtuple.h">
+    <ClInclude Include="..\..\..\include\gcore\gtuple.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gfile.h">
+    <ClInclude Include="..\..\..\include\gcore\gfile.h">
       <Filter>头文件\file</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdate.h">
+    <ClInclude Include="..\..\..\include\gcore\gdate.h">
       <Filter>头文件\time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdatetime.h">
+    <ClInclude Include="..\..\..\include\gcore\gdatetime.h">
       <Filter>头文件\time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gpath.h">
+    <ClInclude Include="..\..\..\include\gcore\gpath.h">
       <Filter>头文件\file</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstopwatch.h">
+    <ClInclude Include="..\..\..\include\gcore\gstopwatch.h">
       <Filter>头文件\time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtime.h">
+    <ClInclude Include="..\..\..\include\gcore\gtime.h">
       <Filter>头文件\time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtimer.h">
+    <ClInclude Include="..\..\..\include\gcore\gtimer.h">
       <Filter>头文件\time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtextfile.h">
+    <ClInclude Include="..\..\..\include\gcore\gtextfile.h">
       <Filter>头文件\file</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\ginitializerlist.h">
+    <ClInclude Include="..\..\..\include\gcore\ginitializerlist.h">
       <Filter>头文件\template</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtable.h">
+    <ClInclude Include="..\..\..\include\gcore\gtable.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\garrays.h">
+    <ClInclude Include="..\..\..\include\gcore\garrays.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstring16.h">
+    <ClInclude Include="..\..\..\include\gcore\gstring16.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstring32.h">
+    <ClInclude Include="..\..\..\include\gcore\gstring32.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gcstring.h">
+    <ClInclude Include="..\..\..\include\gcore\gcstring.h">
       <Filter>头文件\utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdeque.h">
+    <ClInclude Include="..\..\..\include\gcore\gdeque.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gtrietree.h">
+    <ClInclude Include="..\..\..\include\gcore\gtrietree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gversion.h">
+    <ClInclude Include="..\..\..\include\gcore\gversion.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\garchive.h">
+    <ClInclude Include="..\..\..\include\gcore\garchive.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdtdef.h">
+    <ClInclude Include="..\..\..\include\gcore\gdtdef.h">
       <Filter>头文件\time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbinheap.h">
+    <ClInclude Include="..\..\..\include\gcore\gbinheap.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbintree.h">
+    <ClInclude Include="..\..\..\include\gcore\gbintree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\grbtree.h">
+    <ClInclude Include="..\..\..\include\gcore\grbtree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbstree.h">
+    <ClInclude Include="..\..\..\include\gcore\gbstree.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstruct.h">
+    <ClInclude Include="..\..\..\include\gcore\gstruct.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gclist.h">
+    <ClInclude Include="..\..\..\include\gcore\gclist.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gslist.h">
+    <ClInclude Include="..\..\..\include\gcore\gslist.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gdlist.h">
+    <ClInclude Include="..\..\..\include\gcore\gdlist.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmacro.h">
+    <ClInclude Include="..\..\..\include\gcore\gmacro.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsocketaddress.h">
+    <ClInclude Include="..\..\..\include\gcore\gsocketaddress.h">
       <Filter>头文件\net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbinfile.h">
+    <ClInclude Include="..\..\..\include\gcore\gbinfile.h">
       <Filter>头文件\file</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\private\GCore\gbinfile_ex.h">
+    <ClInclude Include="..\..\..\private\gcore\gbinfile_ex.h">
       <Filter>头文件\_private</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gserializable.h">
+    <ClInclude Include="..\..\..\include\gcore\gserializable.h">
       <Filter>头文件\serialization</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gserialize.h">
+    <ClInclude Include="..\..\..\include\gcore\gserialize.h">
       <Filter>头文件\serialization</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gglobal.h">
+    <ClInclude Include="..\..\..\include\gcore\gglobal.h">
       <Filter>头文件\global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gclasscode.h">
+    <ClInclude Include="..\..\..\include\gcore\gclasscode.h">
       <Filter>头文件\serialization</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gmempool.h">
+    <ClInclude Include="..\..\..\include\gcore\gmempool.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsharedptr.h">
+    <ClInclude Include="..\..\..\include\gcore\gsharedptr.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\guniqueptr.h">
+    <ClInclude Include="..\..\..\include\gcore\guniqueptr.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gweakptr.h">
+    <ClInclude Include="..\..\..\include\gcore\gweakptr.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\grefcounter.h">
+    <ClInclude Include="..\..\..\include\gcore\grefcounter.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gexception.h">
+    <ClInclude Include="..\..\..\include\gcore\gexception.h">
       <Filter>头文件\exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\goutofmemoryexception.h">
+    <ClInclude Include="..\..\..\include\gcore\goutofmemoryexception.h">
       <Filter>头文件\exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\goutofrangeexception.h">
+    <ClInclude Include="..\..\..\include\gcore\goutofrangeexception.h">
       <Filter>头文件\exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsystemexception.h">
+    <ClInclude Include="..\..\..\include\gcore\gsystemexception.h">
       <Filter>头文件\exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gexceptdef.h">
+    <ClInclude Include="..\..\..\include\gcore\gexceptdef.h">
       <Filter>头文件\exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gunclassifiedexception.h">
+    <ClInclude Include="..\..\..\include\gcore\gunclassifiedexception.h">
       <Filter>头文件\exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstring8.h">
+    <ClInclude Include="..\..\..\include\gcore\gstring8.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gstring.h">
+    <ClInclude Include="..\..\..\include\gcore\gstring.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gbasestring.h">
+    <ClInclude Include="..\..\..\include\gcore\gbasestring.h">
       <Filter>头文件\string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gsortedmap.h">
+    <ClInclude Include="..\..\..\include\gcore\gsortedmap.h">
       <Filter>头文件\tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\gcharacter.h">
+    <ClInclude Include="..\..\..\include\gcore\gcharacter.h">
       <Filter>头文件\package</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GCore\grwlock.h">
+    <ClInclude Include="..\..\..\include\gcore\grwlock.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GCore\dlmalloc.c">
+    <ClCompile Include="..\..\..\source\gcore\dlmalloc.c">
       <Filter>源文件\_thirds</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gobject.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gobject.cpp">
       <Filter>源文件\global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gregister.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gregister.cpp">
       <Filter>源文件\template</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsocket.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsocket.cpp">
       <Filter>源文件\net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gtcpsocket.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gtcpsocket.cpp">
       <Filter>源文件\net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gudpsocket.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gudpsocket.cpp">
       <Filter>源文件\net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gboolean.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gboolean.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gbyte.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gbyte.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gcharacter.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gcharacter.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gdoublefloat.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gdoublefloat.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\ginteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\ginteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\glongdoublefloat.cpp">
+    <ClCompile Include="..\..\..\source\gcore\glongdoublefloat.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\glonginteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\glonginteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\glonglonginteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\glonglonginteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gshortinteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gshortinteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsignedcharacter.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsignedcharacter.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsinglefloat.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsinglefloat.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gwidecharacter.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gwidecharacter.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gunsignedsmallinteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gunsignedsmallinteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gunsignedshortinteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gunsignedshortinteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gunsignedlonglonginteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gunsignedlonglonginteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gunsignedlonginteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gunsignedlonginteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gunsignedinteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gunsignedinteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gunsignedcharacter.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gunsignedcharacter.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsmallinteger.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsmallinteger.cpp">
       <Filter>源文件\package</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\ghash.cpp">
+    <ClCompile Include="..\..\..\source\gcore\ghash.cpp">
       <Filter>源文件\template</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gendian.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gendian.cpp">
       <Filter>源文件\utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gmath.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gmath.cpp">
       <Filter>源文件\utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstdstringhelper.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gstdstringhelper.cpp">
       <Filter>源文件\utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gcriticalsection.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gcriticalsection.cpp">
       <Filter>源文件\thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsemaphore.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsemaphore.cpp">
       <Filter>源文件\thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gmutex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gmutex.cpp">
       <Filter>源文件\thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gfile.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gfile.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gmemorystore.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gmemorystore.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gpath.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gpath.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gtextfile.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gtextfile.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gfile_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gfile_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsockaddress_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsockaddress_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsocket_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsocket_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gtcpsocket_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gtcpsocket_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gtextfile_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gtextfile_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gudpsocket_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gudpsocket_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gmemory.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gmemory.cpp">
       <Filter>源文件\global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gblock.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gblock.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gvariety.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gvariety.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gbytes.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gbytes.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstringpool.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gstringpool.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\grunnable.cpp">
+    <ClCompile Include="..\..\..\source\gcore\grunnable.cpp">
       <Filter>源文件\thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gthread.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gthread.cpp">
       <Filter>源文件\thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstopwatch.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gstopwatch.cpp">
       <Filter>源文件\time</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gdatetime.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gdatetime.cpp">
       <Filter>源文件\time</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gdate.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gdate.cpp">
       <Filter>源文件\time</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gtime.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gtime.cpp">
       <Filter>源文件\time</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gcstring.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gcstring.cpp">
       <Filter>源文件\utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsocketaddress.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsocketaddress.cpp">
       <Filter>源文件\net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gbinfile.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gbinfile.cpp">
       <Filter>源文件\tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gbinfile_ex.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gbinfile_ex.cpp">
       <Filter>源文件\_private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gexception.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gexception.cpp">
       <Filter>源文件\exception</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gsystemexception.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gsystemexception.cpp">
       <Filter>源文件\exception</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\goutofmemoryexception.cpp">
+    <ClCompile Include="..\..\..\source\gcore\goutofmemoryexception.cpp">
       <Filter>源文件\exception</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstring8.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gstring8.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\GCore\gstring16.cpp">
+    <ClCompile Include="..\..\..\source\gcore\gstring16.cpp">
       <Filter>源文件\string</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\include\GCore\inline\gallocator.inl">
+    <None Include="..\..\..\include\gcore\inline\gallocator.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\garray.inl">
+    <None Include="..\..\..\include\gcore\inline\garray.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\garrayqueue.inl">
+    <None Include="..\..\..\include\gcore\inline\garrayqueue.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\garrays.inl">
+    <None Include="..\..\..\include\gcore\inline\garrays.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\garraystack.inl">
+    <None Include="..\..\..\include\gcore\inline\garraystack.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gatom.inl">
+    <None Include="..\..\..\include\gcore\inline\gatom.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gbasestring.inl">
+    <None Include="..\..\..\include\gcore\inline\gbasestring.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gbinheap.inl">
+    <None Include="..\..\..\include\gcore\inline\gbinheap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gbintree.inl">
+    <None Include="..\..\..\include\gcore\inline\gbintree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gbstree.inl">
+    <None Include="..\..\..\include\gcore\inline\gbstree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gbtree.inl">
+    <None Include="..\..\..\include\gcore\inline\gbtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gbytes.inl">
+    <None Include="..\..\..\include\gcore\inline\gbytes.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gclist.inl">
+    <None Include="..\..\..\include\gcore\inline\gclist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gconstructor.inl">
+    <None Include="..\..\..\include\gcore\inline\gconstructor.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gdeque.inl">
+    <None Include="..\..\..\include\gcore\inline\gdeque.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gdlist.inl">
+    <None Include="..\..\..\include\gcore\inline\gdlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gdynamicarray.inl">
+    <None Include="..\..\..\include\gcore\inline\gdynamicarray.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gendian.inl">
+    <None Include="..\..\..\include\gcore\inline\gendian.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\ggraph.inl">
+    <None Include="..\..\..\include\gcore\inline\ggraph.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\ghash.inl">
+    <None Include="..\..\..\include\gcore\inline\ghash.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\ghashtable.inl">
+    <None Include="..\..\..\include\gcore\inline\ghashtable.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\ghuffmantree.inl">
+    <None Include="..\..\..\include\gcore\inline\ghuffmantree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\glist.inl">
+    <None Include="..\..\..\include\gcore\inline\glist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\glistqueue.inl">
+    <None Include="..\..\..\include\gcore\inline\glistqueue.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gliststack.inl">
+    <None Include="..\..\..\include\gcore\inline\gliststack.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\glockguard.inl">
+    <None Include="..\..\..\include\gcore\inline\glockguard.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gmath.inl">
+    <None Include="..\..\..\include\gcore\inline\gmath.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gmempool.inl">
+    <None Include="..\..\..\include\gcore\inline\gmempool.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gnew.inl">
+    <None Include="..\..\..\include\gcore\inline\gnew.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gorderset.inl">
+    <None Include="..\..\..\include\gcore\inline\gorderset.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gpackage.inl">
+    <None Include="..\..\..\include\gcore\inline\gpackage.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\grbtree.inl">
+    <None Include="..\..\..\include\gcore\inline\grbtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\grefcounter.inl">
+    <None Include="..\..\..\include\gcore\inline\grefcounter.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\grtree.inl">
+    <None Include="..\..\..\include\gcore\inline\grtree.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gserialize.inl">
+    <None Include="..\..\..\include\gcore\inline\gserialize.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gseries.inl">
+    <None Include="..\..\..\include\gcore\inline\gseries.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gsharedptr.inl">
+    <None Include="..\..\..\include\gcore\inline\gsharedptr.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gslist.inl">
+    <None Include="..\..\..\include\gcore\inline\gslist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gsort.inl">
+    <None Include="..\..\..\include\gcore\inline\gsort.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gsortedmap.inl">
+    <None Include="..\..\..\include\gcore\inline\gsortedmap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gstaticarray.inl">
+    <None Include="..\..\..\include\gcore\inline\gstaticarray.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gstringlist.inl">
+    <None Include="..\..\..\include\gcore\inline\gstringlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gstruct.inl">
+    <None Include="..\..\..\include\gcore\inline\gstruct.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gtable.inl">
+    <None Include="..\..\..\include\gcore\inline\gtable.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gtuple.inl">
+    <None Include="..\..\..\include\gcore\inline\gtuple.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\guniqueptr.inl">
+    <None Include="..\..\..\include\gcore\inline\guniqueptr.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gunordermap.inl">
+    <None Include="..\..\..\include\gcore\inline\gunordermap.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gunorderset.inl">
+    <None Include="..\..\..\include\gcore\inline\gunorderset.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gutility.inl">
+    <None Include="..\..\..\include\gcore\inline\gutility.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gvariant.inl">
+    <None Include="..\..\..\include\gcore\inline\gvariant.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gvariety.inl">
+    <None Include="..\..\..\include\gcore\inline\gvariety.inl">
       <Filter>头文件\_inline</Filter>
     </None>
-    <None Include="..\..\..\include\GCore\inline\gvector.inl">
+    <None Include="..\..\..\include\gcore\inline\gvector.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

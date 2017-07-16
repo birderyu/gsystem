@@ -11,43 +11,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\GDataTable\gdatapool.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gdatatable.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gfilter.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gmetatable.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtableaction.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtableattribute.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablecell.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablecolumn.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablecolumns.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtabledataIndex.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablefield.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablefields.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtableglobal.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtableindex.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtableobject.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablerow.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablerows.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gtablespatialindex.h" />
-    <ClInclude Include="..\..\..\include\GDataTable\gdataview.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gfilter_ex.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gmemorytable.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gobjecttable.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gserialtable.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gsimpletable.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gvarianttable.h" />
-    <ClInclude Include="..\..\..\private\GDataTable\gvirtualtable.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gdatapool.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gdatatable.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gfilter.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gmetatable.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtableaction.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtableattribute.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablecell.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablecolumn.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablecolumns.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtabledataIndex.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablefield.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablefields.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtableglobal.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtableindex.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtableobject.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablerow.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablerows.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gtablespatialindex.h" />
+    <ClInclude Include="..\..\..\include\gdatatable\gdataview.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gfilter_ex.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gmemorytable.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gobjecttable.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gserialtable.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gsimpletable.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gvarianttable.h" />
+    <ClInclude Include="..\..\..\private\gdatatable\gvirtualtable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GDataTable\gfilter.cpp" />
-    <ClCompile Include="..\..\..\source\GDataTable\gfilter_ex.cpp" />
-    <ClCompile Include="..\..\..\source\GDataTable\gmemorytable.cpp" />
+    <ClCompile Include="..\..\..\source\gdatatable\gfilter.cpp" />
+    <ClCompile Include="..\..\..\source\gdatatable\gfilter_ex.cpp" />
+    <ClCompile Include="..\..\..\source\gdatatable\gmemorytable.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{74598484-054A-44F3-A111-66DB314D98FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>GDataTable</ProjectName>
+    <ProjectName>gdatatable</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

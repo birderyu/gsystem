@@ -11,63 +11,63 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\GGeometry\gaffineoperator.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gbody.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gcoordinate.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gcoordinatesequence.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gcurve.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\genvelope.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometry.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometrycollection.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryhelper.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeodef.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryfactory.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryinterface.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryioexception.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometrypool.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometryreader.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\ggeometrywriter.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\glinearring.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\glinestring.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gmultipoint.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gpath.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gpoint.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gpolygon.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\grectangle.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\grelationaloperator.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gring.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gsegment.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gspatialreference.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gsurface.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gtopologicaloperator.h" />
-    <ClInclude Include="..\..\..\include\GGeometry\gtriangle.h" />
-    <ClInclude Include="..\..\..\private\GGeometry\gdoublepoint_store.h" />
-    <ClInclude Include="..\..\..\private\GGeometry\glinestring_impl.h" />
-    <ClInclude Include="..\..\..\private\GGeometry\gmultipoint_store.h" />
-    <ClInclude Include="..\..\..\private\GGeometry\gpoint_impl.h" />
-    <ClInclude Include="..\..\..\private\GGeometry\gsinglepoint_store.h" />
-    <ClInclude Include="..\..\..\private\GGeometry\gsinglepointwithlength_store.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gaffineoperator.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gbody.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gcoordinate.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gcoordinatesequence.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gcurve.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\genvelope.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometry.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometrycollection.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometryhelper.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeodef.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometryfactory.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometryinterface.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometryioexception.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometrypool.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometryreader.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\ggeometrywriter.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\glinearring.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\glinestring.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gmultipoint.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gpath.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gpoint.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gpolygon.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\grectangle.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\grelationaloperator.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gring.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gsegment.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gspatialreference.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gsurface.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gtopologicaloperator.h" />
+    <ClInclude Include="..\..\..\include\ggeometry\gtriangle.h" />
+    <ClInclude Include="..\..\..\private\ggeometry\gdoublepoint_store.h" />
+    <ClInclude Include="..\..\..\private\ggeometry\glinestring_impl.h" />
+    <ClInclude Include="..\..\..\private\ggeometry\gmultipoint_store.h" />
+    <ClInclude Include="..\..\..\private\ggeometry\gpoint_impl.h" />
+    <ClInclude Include="..\..\..\private\ggeometry\gsinglepoint_store.h" />
+    <ClInclude Include="..\..\..\private\ggeometry\gsinglepointwithlength_store.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GGeometry\gcoordinate.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\gcoordinatesequence.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\genvelope.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\ggeometry.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\ggeometryfactory.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\ggeodef.cpp" />
-    <ClCompile Include="..\..\..\source\GGeometry\gpoint.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\gcoordinate.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\gcoordinatesequence.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\genvelope.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\ggeometry.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\ggeometryfactory.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\ggeodef.cpp" />
+    <ClCompile Include="..\..\..\source\ggeometry\gpoint.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\include\GGeometry\ggeometryhelper.inl" />
-    <None Include="..\..\..\include\GGeometry\gsinglepoint_store.inl" />
-    <None Include="..\..\..\private\GGeometry\gmultipoint_store.inl" />
-    <None Include="..\..\..\private\GGeometry\gpoint_impl.inl" />
+    <None Include="..\..\..\include\ggeometry\ggeometryhelper.inl" />
+    <None Include="..\..\..\include\ggeometry\gsinglepoint_store.inl" />
+    <None Include="..\..\..\private\ggeometry\gmultipoint_store.inl" />
+    <None Include="..\..\..\private\ggeometry\gpoint_impl.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83739D3A-0014-4C50-93DC-13D96F6886CB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>GGeometry</ProjectName>
+    <ProjectName>ggeometry</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

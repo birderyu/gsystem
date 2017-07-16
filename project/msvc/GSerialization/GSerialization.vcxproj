@@ -11,63 +11,63 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\GSerialization\gbasearchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferinputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferinputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinarybufferstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryfilebufferinputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryfilebufferinputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryfilebufferoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryfileinputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryfileinputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryfileoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryinputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinaryoutputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbinarystream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gbufferstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gfilestream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\ginputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\ginputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\ginputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gjsoninputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gjsonoutputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\goutputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\goutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextbufferinputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextbufferinputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextbufferoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextbufferstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextfilebufferinputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextfilebufferinputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextfilebufferoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextfileinputoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextfileinputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextfileoutputstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextinputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextoutputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gtextstream.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gxmlinputarchive.h" />
-    <ClInclude Include="..\..\..\include\GSerialization\gxmloutputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbasearchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinarybufferinputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinarybufferinputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinarybufferoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinarybufferstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryfilebufferinputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryfilebufferinputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryfilebufferoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryfileinputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryfileinputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryfileoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryinputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinaryoutputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbinarystream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gbufferstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gfilestream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\ginputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\ginputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\ginputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gjsoninputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gjsonoutputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\goutputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\goutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextbufferinputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextbufferinputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextbufferoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextbufferstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextfilebufferinputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextfilebufferinputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextfilebufferoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextfileinputoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextfileinputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextfileoutputstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextinputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextoutputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gtextstream.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gxmlinputarchive.h" />
+    <ClInclude Include="..\..\..\include\gserialization\gxmloutputarchive.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GSerialization\gbinarybufferstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\gbinarystream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\gbufferstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\gfilestream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\ginputoutputstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\ginputstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\goutputstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\gstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\gtextbufferstream.cpp" />
-    <ClCompile Include="..\..\..\source\GSerialization\gtextstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gbinarybufferstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gbinarystream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gbufferstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gfilestream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\ginputoutputstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\ginputstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\goutputstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gtextbufferstream.cpp" />
+    <ClCompile Include="..\..\..\source\gserialization\gtextstream.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{08D9DEAA-06A7-44FF-80C7-AAD74E4C03EF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>GSerialization</ProjectName>
+    <ProjectName>gserialization</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

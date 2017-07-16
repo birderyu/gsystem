@@ -25,7 +25,7 @@
     <ProjectGuid>{72090282-FD52-4286-BAC9-0031C0AA4414}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>GTest</ProjectName>
+    <ProjectName>gtest</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

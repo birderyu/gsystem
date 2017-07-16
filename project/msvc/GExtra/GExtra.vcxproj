@@ -22,7 +22,7 @@
     <ProjectGuid>{C1150DC5-3B95-4853-8D87-82F53D823D56}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CBase</RootNamespace>
-    <ProjectName>GExtra</ProjectName>
+    <ProjectName>gextra</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

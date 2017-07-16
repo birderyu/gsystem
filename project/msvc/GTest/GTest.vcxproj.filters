@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\GTest\gtest-all.cc">
+    <ClCompile Include="..\..\..\source\gtest\gtest-all.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
