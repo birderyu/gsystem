@@ -2,13 +2,13 @@
 
 namespace gsystem {
 
-GSystemException::GSystemException() GNOEXCEPT
+gsystemException::gsystemException() GNOEXCEPT
 	: GException()
 {
 
 }
 
-GSystemException::GSystemException(const GString &methodName, gsize lineNumber,
+gsystemException::gsystemException(const GString &methodName, gsize lineNumber,
 	const GString &fileName, const GStringList *whatArguments,
 	const GString &whyMessageId, const GStringList *whyArguments) GNOEXCEPT
 	: GException(methodName, lineNumber, fileName,
@@ -17,7 +17,7 @@ GSystemException::GSystemException(const GString &methodName, gsize lineNumber,
 
 }
 
-GSystemException::~GSystemException()
+gsystemException::~gsystemException()
 {
 
 }

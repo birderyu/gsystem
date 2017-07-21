@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file gtype.h
 ** @brief 全局类型定义

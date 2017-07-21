@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file	gconstructor.h
 ** @brief	对象构造器

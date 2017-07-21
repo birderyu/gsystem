@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file glinkedlist.h
 ** @brief 链表接口

@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file	gbintree.h
 ** @brief	该文件包含了二叉树节点的定义、二叉树的定义及实现

@@ -1,6 +1,6 @@
 ﻿/****************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file	gpackage.h
 ** @brief	基础类型封装类的定义

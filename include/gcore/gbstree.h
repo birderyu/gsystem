@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file	gbstree.h
 ** @brief	该文件包含了二叉排序树的定义及实现

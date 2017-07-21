@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file gjsonobject.h
 ** @brief Json对象类型的定义

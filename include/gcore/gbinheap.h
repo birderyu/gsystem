@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file gbinheap.h
 ** @brief 二叉堆

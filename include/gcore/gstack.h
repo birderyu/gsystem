@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file gstack.h
 ** @brief 栈接口

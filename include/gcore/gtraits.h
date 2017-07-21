@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file	gtraits.h
 ** @brief	萃取器
@@ -9,7 +9,7 @@
 ** @date	2016-12-31
 ** @version	1.0
 **
-** 萃取器用于在编译期间获取类型信息，在GSystem提供了许多不同功能的萃取器，它们可以用来：
+** 萃取器用于在编译期间获取类型信息，在gsystem提供了许多不同功能的萃取器，它们可以用来：
 ** 1）移除类型信息（Remove Traits），如移除const修饰符、移除引用等，这些萃取器往往以
 ** GRemove作为前缀；2）添加类型信息（Add Traits），如添加const修饰符、添加（左值或右
 ** 值）引用等，这些萃取器往往以GAdd作为前缀；3）判断类型信息（If Traits），如判断一个类

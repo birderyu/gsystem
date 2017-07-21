@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @author	birderyu
 ** @contact	https://github.com/birderyu

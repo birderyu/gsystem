@@ -3,7 +3,7 @@
 namespace gsystem {
 
 GOutOfMemoryException::GOutOfMemoryException() GNOEXCEPT
-	: GSystemException()
+	: gsystemException()
 {
 
 }
@@ -12,7 +12,7 @@ GOutOfMemoryException::GOutOfMemoryException(
 	const GString &methodName, gsize lineNumber, 
 	const GString &fileName, const GStringList *whatArguments,
 	const GString &whyMessageId, const GStringList *whyArguments) GNOEXCEPT
-	: GSystemException(methodName, lineNumber, fileName, 
+	: gsystemException(methodName, lineNumber, fileName, 
 		whatArguments, whyMessageId, whyArguments)
 {
 

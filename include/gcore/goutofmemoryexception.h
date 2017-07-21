@@ -6,7 +6,7 @@
 namespace gsystem {
 
 class GAPI GOutOfMemoryException
-	: public GSystemException
+	: public gsystemException
 {
 public:
 	GOutOfMemoryException(const GString &methodName, gsize lineNumber,

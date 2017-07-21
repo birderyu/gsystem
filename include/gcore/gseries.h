@@ -1,7 +1,7 @@
 
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file gseries.h
 ** @brief 序列数组结构

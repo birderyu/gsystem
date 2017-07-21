@@ -19,7 +19,7 @@
     } \
     catch (std::exception &ex) \
     { \
-        exception = gsystem::GSystemException::Create(e, methodName, GLINE, GFILE); \
+        exception = gsystem::gsystemException::Create(e, methodName, GLINE, GFILE); \
     } \
     catch (...) \
     { \

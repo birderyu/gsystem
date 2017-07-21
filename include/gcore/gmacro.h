@@ -1,11 +1,11 @@
 /********************************************************************************
 **
-** GSystem: A quick, micro library of C++
+** gsystem: A quick, micro library of C++
 **
 ** @file gmacro.h
 ** @brief 全局宏定义
 ** @author birderyu
-** @contact https://github.com/birderyu/GSystem
+** @contact https://github.com/birderyu/gsystem
 ** @date 2015-12-31
 ** @version 0.5.0
 **
