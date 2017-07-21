@@ -27,7 +27,7 @@ public:
 		}
 	};
 	typedef GUnorderMapNode Node;
-	typedef GHashTable<KeyT, ValueT, HashT, CompareT, GUnorderMapNode> Table;
+	typedef GHashTable<KeyT, ValueT, HashT, CompareT, GUnorderMapNode, GListSlot<KeyT, ValueT, CompareT, GUnorderMapNode>> Table;
 	typedef GUnorderMap<KeyT, ValueT, HashT, CompareT> Map;
 
 public:

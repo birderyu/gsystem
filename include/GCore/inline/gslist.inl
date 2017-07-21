@@ -3,28 +3,44 @@
 
 namespace gsystem { // gsystem
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>::GSList()
+template<typename T> GINLINE
+GSListNode<T>::GSListNode(const T &value, GSListNode<T> *next)
+	: GNextNodeT<GSListNode<T>>(next)
+	, GValueNodeT<T>(value)
+{
+
+}
+
+template<typename T> GINLINE
+GSListNode<T>::GSListNode(T &&value, GSListNode<T> *next)
+	: GNextNodeT<GSListNode<T>>(next)
+	, GValueNodeT<T>(GForward<T>(value))
+{
+
+}
+
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>::GSList()
 : m_nSize(0), m_pFirst(GNULL)
 {
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>::GSList(const DataT &data)
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>::GSList(const T &value)
 : m_nSize(0), m_pFirst(GNULL)
 {
-	AddFirst(data);
+	AddFirst(value);
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>::GSList(DataT &&data)
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>::GSList(T &&value)
 : m_nSize(0), m_pFirst(GNULL)
 {
-	AddFirst(GForward<DataT>(data));
+	AddFirst(GForward<T>(value));
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>::GSList(const GSList<DataT, NodeT> &list)
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>::GSList(const GSList<T, NodeT> &list)
 : m_nSize(0), m_pFirst(GNULL)
 {
 	NodeT *node = list.m_pFirst;
@@ -47,16 +63,16 @@ GINLINE GSList<DataT, NodeT>::GSList(const GSList<DataT, NodeT> &list)
 	}
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>::GSList(GSList<DataT, NodeT> &&list)
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>::GSList(GSList<T, NodeT> &&list)
 : m_nSize(list.m_nSize), m_pFirst(list.m_pFirst)
 {
 	list.m_nSize = 0;
 	list.m_pFirst = GNULL;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>& GSList<DataT, NodeT>::operator=(const GSList<DataT, NodeT> &list)
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>& GSList<T, NodeT>::operator=(const GSList<T, NodeT> &list)
 {
 	if (this == &list)
 	{
@@ -89,8 +105,8 @@ GINLINE GSList<DataT, NodeT>& GSList<DataT, NodeT>::operator=(const GSList<DataT
 	return *this;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>& GSList<DataT, NodeT>::operator=(GSList<DataT, NodeT> &&list)
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>& GSList<T, NodeT>::operator=(GSList<T, NodeT> &&list)
 {
 	if (this == &list)
 	{
@@ -109,48 +125,304 @@ GINLINE GSList<DataT, NodeT>& GSList<DataT, NodeT>::operator=(GSList<DataT, Node
 	return *this;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE GSList<DataT, NodeT>::~GSList()
+template<typename T, typename NodeT>
+GINLINE GSList<T, NodeT>::~GSList()
 {
 	RemoveAll();
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gsize GSList<DataT, NodeT>::Size() const
+template<typename T, typename NodeT>
+GINLINE gsize GSList<T, NodeT>::Size() const
 {
 	return m_nSize;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gbool GSList<DataT, NodeT>::IsEmpty() const
+template<typename T, typename NodeT>
+GINLINE gbool GSList<T, NodeT>::IsEmpty() const
 {
 	return 0 == m_nSize;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::Invert()
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::GetFirstNode()
 {
-	if (m_nSize <= 1) return;
-
-	NodeT *cur_node = m_pFirst, *pre_node = GNULL, *next_node = m_pFirst;
-	for (gsize i = 1; i <= m_nSize; i++)
-	{
-		next_node = cur_node->m_pNext;
-		cur_node->m_pNext = pre_node;
-		pre_node = cur_node;
-		cur_node = next_node;
-	}
-	m_pFirst = pre_node;
-	return;
+	return m_pFirst;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(gsize pos, const DataT &data)
+template<typename T, typename NodeT> GINLINE
+const NodeT *GSList<T, NodeT>::GetFirstNode() const
+{
+	return m_pFirst;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::GetLastNode()
+{
+	NodeT *pTmpNode1 = m_pFirst;
+	NodeT *pTmpNode2 = GNULL;
+	while (pTmpNode1)
+	{
+		pTmpNode2 = pTmpNode1;
+		pTmpNode1 = pTmpNode1->m_pNext;
+	}
+	return pTmpNode2;
+}
+
+template<typename T, typename NodeT> GINLINE
+const NodeT *GSList<T, NodeT>::GetLastNode() const
+{
+	const NodeT *pTmpNode1 = m_pFirst;
+	const NodeT *pTmpNode2 = GNULL;
+	while (pTmpNode1)
+	{
+		pTmpNode2 = pTmpNode1;
+		pTmpNode1 = pTmpNode1->m_pNext;
+	}
+	return pTmpNode2;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::GetNodeBefore(const NodeT *node)
+{
+	NodeT *pnode = m_pFirst;
+	while (pnode)
+	{
+		if (pnode->m_pNext == node)
+		{
+			return pnode;
+		}
+	}
+	return GNULL;
+}
+
+template<typename T, typename NodeT> GINLINE
+const NodeT *GSList<T, NodeT>::GetNodeBefore(const NodeT *node) const
+{
+	const NodeT *pnode = m_pFirst;
+	while (pnode)
+	{
+		if (pnode->m_pNext == node)
+		{
+			return pnode;
+		}
+	}
+	return GNULL;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::GetNodeAfter(const NodeT *node)
+{
+	if (node == GNULL)
+	{
+		return GNULL;
+	}
+	return node->m_pNext;
+}
+
+template<typename T, typename NodeT> GINLINE
+const NodeT *GSList<T, NodeT>::GetNodeAfter(const NodeT *node) const
+{
+	if (node == GNULL)
+	{
+		return GNULL;
+	}
+	return node->m_pNext;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::GetNodeAt(gsize pos)
+{
+	GASSERT(pos < m_nSize);
+	NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+	return pTmpNode;
+}
+
+template<typename T, typename NodeT> GINLINE
+const NodeT *GSList<T, NodeT>::GetNodeAt(gsize pos) const
+{
+	GASSERT(pos < m_nSize);
+	const NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+	return pTmpNode;
+}
+
+template<typename T, typename NodeT>
+GINLINE T &GSList<T, NodeT>::GetFirstValue()
+{
+	GASSERT(m_pFirst);
+	return m_pFirst->m_tData;
+}
+
+template<typename T, typename NodeT>
+GINLINE const T &GSList<T, NodeT>::GetFirstValue() const
+{
+	GASSERT(m_pFirst);
+	return m_pFirst->m_tData;
+}
+
+template<typename T, typename NodeT>
+GINLINE T &GSList<T, NodeT>::GetLastValue()
+{
+	NodeT *pTail = GetLastNode();
+	GASSERT(pTail);
+	return pTail->m_tData;
+}
+
+template<typename T, typename NodeT>
+GINLINE const T &GSList<T, NodeT>::GetLastValue() const
+{
+	const NodeT *pTail = GetLastNode();
+	GASSERT(pTail);
+	return pTail->m_tData;
+}
+
+template<typename T, typename NodeT>
+GINLINE T &GSList<T, NodeT>::GetValueAt(gsize pos)
+{
+	NodeT *node = GetNodeAt(pos);
+	GASSERT(node);
+	return node->m_tData;
+}
+
+template<typename T, typename NodeT>
+GINLINE const T &GSList<T, NodeT>::GetValueAt(gsize pos) const
+{
+	const NodeT *node = GetNodeAt(pos);
+	GASSERT(node);
+	return node->m_tData;
+}
+
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::SetValueAt(gsize pos, const T &value)
+{
+	GASSERT(pos < m_nSize);
+	NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+	pTmpNode->m_tData = value;
+}
+
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::SetValueAt(gsize pos, T &&value)
+{
+	GASSERT(pos < m_nSize);
+	NodeT *pTmpNode = m_pFirst;
+	for (gsize i = 0; i < pos; ++i)
+	{
+		pTmpNode = pTmpNode->m_pNext;
+	}
+	pTmpNode->m_tData = GForward<T>(value);
+}
+
+template<typename T, typename NodeT>
+GINLINE gsize GSList<T, NodeT>::FirstIndexOf(const T &value) const
+{
+	NodeT *node = m_pFirst;
+	for (gsize i = 0; i < m_nSize; ++i)
+	{
+		if (node == GNULL)
+		{
+			break;
+		}
+		if (value == node->m_tData)
+			return i;
+		node = node->m_pNext;
+	}
+	return NULL_POS;
+}
+
+template<typename T, typename NodeT>
+GINLINE gsize GSList<T, NodeT>::LastIndexOf(const T &value) const
+{
+	NodeT *node = m_pFirst;
+	gsize lastIndex = NULL_POS;
+	for (gsize i = 0; i < m_nSize; ++i)
+	{
+		if (node == GNULL)
+		{
+			break;
+		}
+		if (value == node->m_tData)
+			lastIndex = i;
+		node = node->m_pNext;
+	}
+	return NULL_POS;
+}
+
+template<typename T, typename NodeT>
+GINLINE NodeT *GSList<T, NodeT>::Find(const T &value)
+{
+	NodeT *node = m_pFirst;
+	while (node)
+	{
+		if (value == node->m_tData)
+			return node;
+		node = node->m_pNext;
+	}
+	return node;
+}
+
+template<typename T, typename NodeT>
+GINLINE const NodeT *GSList<T, NodeT>::Find(const T &value) const
+{
+	const NodeT *node = m_pFirst;
+	while (node)
+	{
+		if (value == node->m_tData)
+			return node;
+		node = node->m_pNext;
+	}
+	return node;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::AddFirst(const T &value)
+{
+	NodeT *node = new NodeT(value);
+	node->m_pNext = m_pFirst;
+	m_pFirst = node;
+	++m_nSize;
+	return node;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::AddFirst(T &&value)
+{
+	NodeT *node = new NodeT(GForward<T>(value));
+	node->m_pNext = m_pFirst;
+	m_pFirst = node;
+	++m_nSize;
+	return node;
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::AddLast(const T &value)
+{
+	return InsertAfter(m_nSize - 1, value);
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::AddLast(T &&value)
+{
+	return InsertAfter(m_nSize - 1, GForward<T>(value));
+}
+
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertBefore(gsize pos, const T &value)
 {
 	GASSERT(pos != NULL_POS);
 	if (GNULL == m_pFirst || 0 == pos)
 	{
-		return AddFirst(data);
+		return AddFirst(value);
 	}
 
 	GASSERT(pos < m_nSize);
@@ -161,18 +433,20 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(gsize pos, const DataT &data)
 		pTmpNode2 = pTmpNode1;
 		pTmpNode1 = pTmpNode1->m_pNext;
 	}
+	NodeT *pNewNode = new NodeT(value);
 	pNewNode->m_pNext = pTmpNode1;
 	pTmpNode2->m_pNext = pNewNode;
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(gsize pos, DataT &&data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertBefore(gsize pos, T &&value)
 {
 	GASSERT(pos != NULL_POS);
 	if (GNULL == m_pFirst || 0 == pos)
 	{
-		return AddFirst(GForward<DataT>(data));
+		return AddFirst(GForward<T>(value));
 	}
 
 	GASSERT(pos < m_nSize);
@@ -184,14 +458,15 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(gsize pos, DataT &&data)
 		pTmpNode1 = pTmpNode1->m_pNext;
 	}
 
-	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	NodeT *pNewNode = new NodeT(GForward<T>(value));
 	pNewNode->m_pNext = pTmpNode1;
 	pTmpNode2->m_pNext = pNewNode;
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertBefore(NodeT *node, const T &value)
 {	
 	GASSERT(node);
 	NodeT *pTmpNode1 = m_pFirst;
@@ -208,10 +483,10 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
 	if (pTmpNode1 == GNULL)
 	{
 		// 查找不到，不做任何操作
-		return;
+		return GNULL;
 	}
 	
-	NodeT *pNewNode = new NodeT(data);
+	NodeT *pNewNode = new NodeT(value);
 	pNewNode->m_pNext = node;
 	if (pTmpNode2)
 	{
@@ -222,10 +497,11 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(NodeT *node, const DataT &data)
 		m_pFirst = pNewNode;
 	}
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &&data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertBefore(NodeT *node, T &&value)
 {
 	GASSERT(node);
 	NodeT *pTmpNode1 = m_pFirst;
@@ -242,10 +518,10 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &&data)
 	if (pTmpNode1 == GNULL)
 	{
 		// 查找不到，不做任何操作
-		return;
+		return GNULL;
 	}
 
-	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	NodeT *pNewNode = new NodeT(GForward<T>(value));
 	pNewNode->m_pNext = node;
 	if (pTmpNode2)
 	{
@@ -256,14 +532,15 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertBefore(NodeT *node, DataT &&data)
 		m_pFirst = pNewNode;
 	}
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertAfter(gsize pos, const DataT &data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertAfter(gsize pos, const T &value)
 {
 	if (GNULL == m_pFirst)
 	{
-		return AddFirst(data);
+		return AddFirst(value);
 	}
 
 	GASSERT(pos < m_nSize);
@@ -273,18 +550,19 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertAfter(gsize pos, const DataT &data)
 		pTmpNode = pTmpNode->m_pNext;
 	}
 
-	NodeT *pNewNode = new NodeT(data);
+	NodeT *pNewNode = new NodeT(value);
 	pNewNode->m_pNext = pTmpNode->m_pNext;
 	pTmpNode->m_pNext = pNewNode;
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertAfter(gsize pos, DataT &&data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertAfter(gsize pos, T &&value)
 {
 	if (GNULL == m_pFirst)
 	{
-		return AddFirst(GForward<DataT>(data));
+		return AddFirst(GForward<T>(value));
 	}
 
 	GASSERT(pos < m_nSize);
@@ -294,64 +572,37 @@ GINLINE gvoid GSList<DataT, NodeT>::InsertAfter(gsize pos, DataT &&data)
 		pTmpNode = pTmpNode->m_pNext;
 	}
 
-	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	NodeT *pNewNode = new NodeT(GForward<T>(value));
 	pNewNode->m_pNext = pTmpNode->m_pNext;
 	pTmpNode->m_pNext = pNewNode;
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertAfter(NodeT *node, const DataT &data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertAfter(NodeT *node, const T &value)
 {
 	GASSERT(node);
-	NodeT *pNewNode = new NodeT(data);
+	NodeT *pNewNode = new NodeT(value);
 	pNewNode->m_pNext = node->m_pNext;
 	node->m_pNext = pNewNode;
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::InsertAfter(NodeT *node, DataT &&data)
+template<typename T, typename NodeT> GINLINE
+NodeT *GSList<T, NodeT>::InsertAfter(NodeT *node, T &&value)
 {
 	GASSERT(node);
-	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
+	NodeT *pNewNode = new NodeT(GForward<T>(value));
 	pNewNode->m_pNext = node->m_pNext;
 	node->m_pNext = pNewNode;
 	++m_nSize;
+	return pNewNode;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::AddFirst(const DataT &data)
-{
-	NodeT *pNewNode = new NodeT(data);
-	pNewNode->m_pNext = m_pFirst;
-	m_pFirst = pNewNode;
-	++m_nSize;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::AddFirst(DataT &&data)
-{
-	NodeT *pNewNode = new NodeT(GForward<DataT>(data));
-	pNewNode->m_pNext = m_pFirst;
-	m_pFirst = pNewNode;
-	++m_nSize;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::AddLast(const DataT &data)
-{
-	InsertAfter(m_nSize - 1, data);
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::AddLast(DataT &&data)
-{
-	InsertAfter(m_nSize - 1, GForward<DataT>(data));
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::Remove(const NodeT *node)
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::Remove(const NodeT *node)
 {
 	if (!node || m_nSize <= 0)
 	{
@@ -387,14 +638,14 @@ GINLINE gvoid GSList<DataT, NodeT>::Remove(const NodeT *node)
 	--m_nSize;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::RemoveAt(gsize pos, T *value)
 {
 	GASSERT(pos < m_nSize);
 
 	if (0 == pos)
 	{
-		RemoveFirst(data);
+		RemoveFirst(value);
 		return;
 	}
 
@@ -406,18 +657,18 @@ GINLINE gvoid GSList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
 		pTmpNode1 = pTmpNode1->m_pNext;
 	}
 	pTmpNode2->m_pNext = pTmpNode1->m_pNext;
-	if (data)
+	if (value)
 	{
 		// 将元素移走，而非拷贝
-		*data = GMove(pTmpNode1->m_tData);
+		*value = GMove(pTmpNode1->m_tData);
 	}
 	delete pTmpNode1;
 	pTmpNode1 = GNULL;
 	--m_nSize;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::RemoveFirst(DataT *data)
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::RemoveFirst(T *value)
 {
 	if (!m_pFirst)
 	{
@@ -426,25 +677,25 @@ GINLINE gvoid GSList<DataT, NodeT>::RemoveFirst(DataT *data)
 
 	NodeT *pTmpNode = m_pFirst;
 	m_pFirst = m_pFirst->m_pNext;
-	if (data)
+	if (value)
 	{
 		// 将元素移走，而非拷贝
-		*data = GMove(pTmpNode->m_tData);
+		*value = GMove(pTmpNode->m_tData);
 	}
 	delete pTmpNode;
 	--m_nSize;
 	return;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::RemoveLast(DataT *data)
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::RemoveLast(T *value)
 {
 	GASSERT(0 != m_nSize);
-	RemoveAt(m_nSize - 1, data);
+	RemoveAt(m_nSize - 1, value);
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::RemoveAll()
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::RemoveAll()
 {
 	if (m_nSize <= 0)
 	{
@@ -463,179 +714,25 @@ GINLINE gvoid GSList<DataT, NodeT>::RemoveAll()
 	m_nSize = 0;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE NodeT *GSList<DataT, NodeT>::GetFirstNode()
+template<typename T, typename NodeT>
+GINLINE gvoid GSList<T, NodeT>::Invert()
 {
-	return m_pFirst;
-}
+	if (m_nSize <= 1) return;
 
-template<typename DataT, typename NodeT>
-GINLINE const NodeT *GSList<DataT, NodeT>::GetFirstNode() const
-{
-	return m_pFirst;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE NodeT *GSList<DataT, NodeT>::GetLastNode()
-{
-	NodeT *pTmpNode1 = m_pFirst;
-	NodeT *pTmpNode2 = GNULL;
-	while (pTmpNode1)
+	NodeT *cur_node = m_pFirst, *pre_node = GNULL, *next_node = m_pFirst;
+	for (gsize i = 1; i <= m_nSize; i++)
 	{
-		pTmpNode2 = pTmpNode1;
-		pTmpNode1 = pTmpNode1->m_pNext;
+		next_node = cur_node->m_pNext;
+		cur_node->m_pNext = pre_node;
+		pre_node = cur_node;
+		cur_node = next_node;
 	}
-	return pTmpNode2;
+	m_pFirst = pre_node;
+	return;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE const NodeT *GSList<DataT, NodeT>::GetLastNode() const
-{
-	const NodeT *pTmpNode1 = m_pFirst;
-	const NodeT *pTmpNode2 = GNULL;
-	while (pTmpNode1)
-	{
-		pTmpNode2 = pTmpNode1;
-		pTmpNode1 = pTmpNode1->m_pNext;
-	}
-	return pTmpNode2;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE NodeT *GSList<DataT, NodeT>::GetNodeAt(gsize pos)
-{
-	GASSERT(pos < m_nSize);
-	NodeT *pTmpNode = m_pFirst;
-	for (gsize i = 0; i < pos; ++i)
-	{
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	return pTmpNode;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE const NodeT *GSList<DataT, NodeT>::GetNodeAt(gsize pos) const
-{
-	GASSERT(pos < m_nSize);
-	const NodeT *pTmpNode = m_pFirst;
-	for (gsize i = 0; i < pos; ++i)
-	{
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	return pTmpNode;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE DataT &GSList<DataT, NodeT>::GetFirstData()
-{
-	GASSERT(m_pFirst);
-	return m_pFirst->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE const DataT &GSList<DataT, NodeT>::GetFirstData() const
-{
-	GASSERT(m_pFirst);
-	return m_pFirst->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE DataT &GSList<DataT, NodeT>::GetLastData()
-{
-	NodeT *pTail = GetLastNode();
-	GASSERT(pTail);
-	return pTail->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE const DataT &GSList<DataT, NodeT>::GetLastData() const
-{
-	const NodeT *pTail = GetLastNode();
-	GASSERT(pTail);
-	return pTail->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE DataT &GSList<DataT, NodeT>::GetDataAt(gsize pos)
-{
-	NodeT *node = GetNodeAt(pos);
-	GASSERT(node);
-	return node->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE const DataT &GSList<DataT, NodeT>::GetDataAt(gsize pos) const
-{
-	const NodeT *node = GetNodeAt(pos);
-	GASSERT(node);
-	return node->m_tData;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::SetDataAt(gsize pos, const DataT &data)
-{
-	GASSERT(pos < m_nSize);
-	NodeT *pTmpNode = m_pFirst;
-	for (gsize i = 0; i < pos; ++i)
-	{
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	pTmpNode->m_tData = data;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gvoid GSList<DataT, NodeT>::SetDataAt(gsize pos, DataT &&data)
-{
-	GASSERT(pos < m_nSize);
-	NodeT *pTmpNode = m_pFirst;
-	for (gsize i = 0; i < pos; ++i)
-	{
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	pTmpNode->m_tData = GForward<DataT>(data);
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gsize GSList<DataT, NodeT>::IndexOf(const DataT &data) const
-{
-	NodeT *pTmpNode = m_pFirst;
-	for (gsize i = 0; i < m_nSize; ++i)
-	{
-		if (data == pTmpNode->m_tData)
-			return i;
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	return NULL_POS;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE NodeT *GSList<DataT, NodeT>::Find(const DataT &data)
-{
-	NodeT *pTmpNode = m_pFirst;
-	while (pTmpNode)
-	{
-		if (data == pTmpNode->m_tData)
-			return pTmpNode;
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	return pTmpNode;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE const NodeT *GSList<DataT, NodeT>::Find(const DataT &data) const
-{
-	const NodeT *pTmpNode = m_pFirst;
-	while (pTmpNode)
-	{
-		if (data == pTmpNode->m_tData)
-			return pTmpNode;
-		pTmpNode = pTmpNode->m_pNext;
-	}
-	return pTmpNode;
-}
-
-template<typename DataT, typename NodeT>
-GINLINE gsize GSList<DataT, NodeT>::IndexOfCircle() const
+template<typename T, typename NodeT>
+GINLINE gsize GSList<T, NodeT>::IndexOfCircle() const
 {
 	if (0 == m_nSize)
 	{
@@ -677,8 +774,8 @@ GINLINE gsize GSList<DataT, NodeT>::IndexOfCircle() const
 	return i;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE NodeT *GSList<DataT, NodeT>::FindCircle()
+template<typename T, typename NodeT>
+GINLINE NodeT *GSList<T, NodeT>::FindCircle()
 {
 	if (0 == m_nSize)
 	{
@@ -712,8 +809,8 @@ GINLINE NodeT *GSList<DataT, NodeT>::FindCircle()
 	return p1;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE const NodeT *GSList<DataT, NodeT>::FindCircle() const
+template<typename T, typename NodeT>
+GINLINE const NodeT *GSList<T, NodeT>::FindCircle() const
 {
 	if (0 == m_nSize)
 	{
@@ -747,8 +844,8 @@ GINLINE const NodeT *GSList<DataT, NodeT>::FindCircle() const
 	return p1;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gsize GSList<DataT, NodeT>::IndexOfCross(const GLinkedList<DataT, NodeT> &list)
+template<typename T, typename NodeT>
+GINLINE gsize GSList<T, NodeT>::IndexOfCross(const GLinkedList<T, NodeT> &list)
 {
 	if (0 == m_nSize || 0 == list.Size())
 	{
@@ -775,18 +872,6 @@ GINLINE gsize GSList<DataT, NodeT>::IndexOfCross(const GLinkedList<DataT, NodeT>
 	pTail->m_pNext = GNULL;
 	m_nSize -= list.Size();
 	return i;
-}
-
-template<typename DataT, typename NodeT>
-DataT &GSList<DataT, NodeT>::operator[](gsize pos)
-{
-	return GetDataAt(pos);
-}
-
-template<typename DataT, typename NodeT>
-const DataT &GSList<DataT, NodeT>::operator[](gsize pos) const
-{
-	return GetDataAt(pos);
 }
 
 } // namespace gsystem

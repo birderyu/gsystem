@@ -1,8 +1,8 @@
 #ifndef _CORE_R_TREE_INLINE_
 #define _CORE_R_TREE_INLINE_
 
-#define G_RTREE_TEMPLATE	template<typename DATATYPE, typename ELEMTYPE, gsize NUMDIMS, typename ELEMTYPEREAL, gsize TMAXNODES, gsize TMINNODES>
-#define G_RTREE_QUAL		GRTree<DATATYPE, ELEMTYPE, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>
+#define G_RTREE_TEMPLATE	template<typename DataT, typename ElemT, gsize NUMDIMS, typename ELEMTYPEREAL, gsize TMAXNODES, gsize TMINNODES>
+#define G_RTREE_QUAL		GRTree<DataT, ElemT, NUMDIMS, ELEMTYPEREAL, TMAXNODES, TMINNODES>
 
 namespace gsystem { // gsystem
 
@@ -32,7 +32,7 @@ G_RTREE_QUAL::~GRTree()
 }
 
 G_RTREE_TEMPLATE GINLINE
-gvoid G_RTREE_QUAL::Insert(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], const DATATYPE& a_dataId)
+gvoid G_RTREE_QUAL::Insert(const ElemT a_min[NUMDIMS], const ElemT a_max[NUMDIMS], const DataT& a_dataId)
 {
 #ifdef GDEBUG
 	for (gsize index = 0; index < NUMDIMS; ++index)
@@ -53,7 +53,7 @@ gvoid G_RTREE_QUAL::Insert(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[N
 }
 
 G_RTREE_TEMPLATE GINLINE
-gvoid G_RTREE_QUAL::Remove(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], const DATATYPE& a_dataId)
+gvoid G_RTREE_QUAL::Remove(const ElemT a_min[NUMDIMS], const ElemT a_max[NUMDIMS], const DataT& a_dataId)
 {
 #ifdef GDEBUG
 	for (gsize index = 0; index < NUMDIMS; ++index)
@@ -74,7 +74,7 @@ gvoid G_RTREE_QUAL::Remove(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[N
 }
 
 G_RTREE_TEMPLATE GINLINE
-gsize G_RTREE_QUAL::Search(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], gbool __cdecl a_resultCallback(DATATYPE a_data, gptr a_context), gptr a_context)
+gsize G_RTREE_QUAL::Search(const ElemT a_min[NUMDIMS], const ElemT a_max[NUMDIMS], gbool __cdecl a_resultCallback(DataT a_data, gptr a_context), gptr a_context)
 {
 #ifdef GDEBUG
 	for (gsize index = 0; index < NUMDIMS; ++index)
@@ -219,8 +219,8 @@ gvoid G_RTREE_QUAL::InitRect(Rect* a_rect)
 {
 	for (gsize index = 0; index < NUMDIMS; ++index)
 	{
-		a_rect->m_min[index] = (ELEMTYPE)0;
-		a_rect->m_max[index] = (ELEMTYPE)0;
+		a_rect->m_min[index] = (ElemT)0;
+		a_rect->m_max[index] = (ElemT)0;
 	}
 }
 
@@ -232,7 +232,7 @@ gvoid G_RTREE_QUAL::InitRect(Rect* a_rect)
 // The level argument specifies the number of steps up from the leaf
 // level to insert; e.g. a data rectangle goes in at level = 0.
 G_RTREE_TEMPLATE GINLINE
-gbool G_RTREE_QUAL::InsertRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, Node** a_newNode, gint a_level)
+gbool G_RTREE_QUAL::InsertRectRec(Rect* a_rect, const DataT& a_id, Node* a_node, Node** a_newNode, gint a_level)
 {
 	GASSERT(a_rect && a_node && a_newNode);
 	GASSERT(a_level >= 0 && a_level <= a_node->m_level);
@@ -282,7 +282,7 @@ gbool G_RTREE_QUAL::InsertRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_no
 // InsertRect2 does the recursion.
 //
 G_RTREE_TEMPLATE GINLINE
-gbool G_RTREE_QUAL::InsertRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root, gint a_level)
+gbool G_RTREE_QUAL::InsertRect(Rect* a_rect, const DataT& a_id, Node** a_root, gint a_level)
 {
 	GASSERT(a_rect && a_root);
 	GASSERT(a_level >= 0 && a_level <= (*a_root)->m_level);
@@ -743,7 +743,7 @@ gvoid G_RTREE_QUAL::Classify(gint a_index, gint a_group, PartitionVars* a_parVar
 // Returns 1 if record not found, 0 if success.
 // RemoveRect provides for eliminating the root.
 G_RTREE_TEMPLATE GINLINE
-gbool G_RTREE_QUAL::RemoveRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root)
+gbool G_RTREE_QUAL::RemoveRect(Rect* a_rect, const DataT& a_id, Node** a_root)
 {
 	GASSERT(a_rect && a_root);
 	GASSERT(*a_root);
@@ -796,7 +796,7 @@ gbool G_RTREE_QUAL::RemoveRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root
 // merges branches on the way back up.
 // Returns 1 if record not found, 0 if success.
 G_RTREE_TEMPLATE GINLINE
-gbool G_RTREE_QUAL::RemoveRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, ListNode** a_listNode)
+gbool G_RTREE_QUAL::RemoveRectRec(Rect* a_rect, const DataT& a_id, Node* a_node, ListNode** a_listNode)
 {
 	GASSERT(a_rect && a_node && a_listNode);
 	GASSERT(a_node->m_level >= 0);
@@ -872,7 +872,7 @@ gvoid G_RTREE_QUAL::ReInsert(Node* a_node, ListNode** a_listNode)
 
 // Search in an index tree or subtree for all data retangles that overlap the argument rectangle.
 G_RTREE_TEMPLATE GINLINE
-gbool G_RTREE_QUAL::Search(Node* a_node, Rect* a_rect, gsize& a_foundCount, gbool __cdecl a_resultCallback(DATATYPE a_data, gptr a_context), gptr a_context)
+gbool G_RTREE_QUAL::Search(Node* a_node, Rect* a_rect, gsize& a_foundCount, gbool __cdecl a_resultCallback(DataT a_data, gptr a_context), gptr a_context)
 {
 	GASSERT(a_node);
 	GASSERT(a_node->m_level >= 0);
@@ -897,7 +897,7 @@ gbool G_RTREE_QUAL::Search(Node* a_node, Rect* a_rect, gsize& a_foundCount, gboo
 		{
 			if (Overlap(a_rect, &a_node->m_branch[index].m_rect))
 			{
-				DATATYPE& id = a_node->m_branch[index].m_data;
+				DataT& id = a_node->m_branch[index].m_data;
 
 				// NOTE: There are different ways to return results.  Here's where to modify
 				if (&a_resultCallback)

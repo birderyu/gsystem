@@ -186,7 +186,7 @@ public:
 	** @name Contains
 	** @brief 获取数组第一次出现值的下标
 	** @param [in] value {const T &} 值的引用
-	** @return {gsize} 值的下标，从0开始计数
+	** @return {gsize} 值的下标，从0开始计数，若无则返回NULL_POS
 	**
 	****************************************************************************/
 	gsize FirstIndexOf(const T &value) const;
@@ -196,7 +196,7 @@ public:
 	** @name LastIndexOf
 	** @brief 获取数组从最后开始第一次出现值的下标
 	** @param [in] value {const T &} 值的引用
-	** @return {gsize} 值的下标，从0开始计数
+	** @return {gsize} 值的下标，从0开始计数，若无则返回NULL_POS
 	**
 	****************************************************************************/
 	gsize LastIndexOf(const T &value) const;

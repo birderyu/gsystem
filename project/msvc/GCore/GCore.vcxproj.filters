@@ -549,6 +549,9 @@
     <ClInclude Include="..\..\..\include\gcore\grwlock.h">
       <Filter>头文件\thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\gcore\giterator.h">
+      <Filter>头文件\structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\gcore\dlmalloc.c">
@@ -893,6 +896,9 @@
       <Filter>头文件\_inline</Filter>
     </None>
     <None Include="..\..\..\include\gcore\inline\gvector.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
+    <None Include="..\..\..\include\gcore\inline\glinkedlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
   </ItemGroup>

@@ -14,8 +14,8 @@ namespace gsystem { // gsystem
 ///
 /// This modified, templated C++ version by Greg Douglas at Auran (http://www.auran.com)
 ///
-/// DATATYPE Referenced data, should be int, void*, obj* etc. no larger than sizeof<void*> and simple type
-/// ELEMTYPE Type of element such as int or float
+/// DataT Referenced data, should be int, void*, obj* etc. no larger than sizeof<void*> and simple type
+/// ElemT Type of element such as int or float
 /// NUMDIMS Number of dimensions such as 2 or 3
 /// ELEMTYPEREAL Type of element that allows fractional and large values such as float or double, for use in volume calcs
 ///
@@ -24,17 +24,17 @@ namespace gsystem { // gsystem
 ///        Instead of using a callback function for returned results, I recommend and efficient pre-sized, grow-only memory
 ///        array similar to MFC CArray or STL Vector for returning search query result.
 ///
-template<typename DATATYPE, 
-	typename ELEMTYPE, 
+template<typename DataT, 
+	typename ElemT, 
 	gsize NUMDIMS, 
-	typename ELEMTYPEREAL = ELEMTYPE, 
+	typename ELEMTYPEREAL = ElemT, 
 	gsize TMAXNODES = 8, 
 	gsize TMINNODES = TMAXNODES / 2>
 class GRTree
 {
 	static_assert(TMAXNODES > TMINNODES, "TMAXNODES should be greater than TMINNODES.");
 	static_assert(TMINNODES > 0, "TMINNODES should be greater than zero.");
-	static_assert(sizeof(DATATYPE) == sizeof(gvoid*) || sizeof(DATATYPE) == sizeof(gint32),
+	static_assert(sizeof(DataT) == sizeof(gvoid*) || sizeof(DataT) == sizeof(gint32),
 		"We only support machine word size simple data type eg. integer index or object pointer. Since we are storing as union with non data branch");
 
 protected:
@@ -48,13 +48,13 @@ public:
 	/// \param a_min Min of bounding rect
 	/// \param a_max Max of bounding rect
 	/// \param a_dataId Positive Id of data.  Maybe zero, but negative numbers not allowed.
-	gvoid Insert(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], const DATATYPE& a_dataId);
+	gvoid Insert(const ElemT a_min[NUMDIMS], const ElemT a_max[NUMDIMS], const DataT& a_dataId);
 
 	/// Remove entry
 	/// \param a_min Min of bounding rect
 	/// \param a_max Max of bounding rect
 	/// \param a_dataId Positive Id of data.  Maybe zero, but negative numbers not allowed.
-	gvoid Remove(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], const DATATYPE& a_dataId);
+	gvoid Remove(const ElemT a_min[NUMDIMS], const ElemT a_max[NUMDIMS], const DataT& a_dataId);
 
 	/// Find all within search rectangle
 	/// \param a_min Min of search bounding rect
@@ -63,7 +63,7 @@ public:
 	/// \param a_resultCallback Callback function to return result.  Callback should return 'true' to continue searching
 	/// \param a_context User context to pass as parameter to a_resultCallback
 	/// \return Returns the number of entries found
-	gsize Search(const ELEMTYPE a_min[NUMDIMS], const ELEMTYPE a_max[NUMDIMS], gbool __cdecl a_resultCallback(DATATYPE a_data, gptr a_context), gptr a_context);
+	gsize Search(const ElemT a_min[NUMDIMS], const ElemT a_max[NUMDIMS], gbool __cdecl a_resultCallback(DataT a_data, gptr a_context), gptr a_context);
 
 	/// Remove all entries from tree
 	gvoid RemoveAll();
@@ -97,7 +97,7 @@ public:
 		gbool IsNotNull()                              { return (m_tos > 0); }
 
 		/// Access the current data element. Caller must be sure iterator is not NULL first.
-		DATATYPE& operator*()
+		DataT& operator*()
 		{
 			GASSERT(IsNotNull());
 			StackElement& curTos = m_stack[m_tos - 1];
@@ -105,7 +105,7 @@ public:
 		}
 
 		/// Access the current data element. Caller must be sure iterator is not NULL first.
-		const DATATYPE& operator*() const
+		const DataT& operator*() const
 		{
 			GASSERT(IsNotNull());
 			StackElement& curTos = m_stack[m_tos - 1];
@@ -116,7 +116,7 @@ public:
 		gbool operator++()                             { return FindNextData(); }
 
 		/// Get the bounds for this node
-		gvoid GetBounds(ELEMTYPE a_min[NUMDIMS], ELEMTYPE a_max[NUMDIMS])
+		gvoid GetBounds(ElemT a_min[NUMDIMS], ElemT a_max[NUMDIMS])
 		{
 			GASSERT(IsNotNull());
 			StackElement& curTos = m_stack[m_tos - 1];
@@ -230,15 +230,15 @@ public:
 	bool IsNull(Iterator& a_it)                     { return a_it.IsNull(); }
 
 	/// Get object at iterator position
-	DATATYPE& GetAt(Iterator& a_it)                 { return *a_it; }
+	DataT& GetAt(Iterator& a_it)                 { return *a_it; }
 
 protected:
 
 	/// Minimal bounding rectangle (n-dimensional)
 	struct Rect
 	{
-		ELEMTYPE m_min[NUMDIMS];                      ///< Min dimensions of bounding box 
-		ELEMTYPE m_max[NUMDIMS];                      ///< Max dimensions of bounding box 
+		ElemT m_min[NUMDIMS];                      ///< Min dimensions of bounding box 
+		ElemT m_max[NUMDIMS];                      ///< Max dimensions of bounding box 
 	};
 
 	/// May be data or may be another subtree
@@ -250,7 +250,7 @@ protected:
 		union
 		{
 			Node* m_child;                              ///< Child node
-			DATATYPE m_data;                            ///< Data Id or Ptr
+			DataT m_data;                            ///< Data Id or Ptr
 		};
 	};
 
@@ -294,8 +294,8 @@ protected:
 	gvoid FreeNode(Node* a_node);
 	gvoid InitNode(Node* a_node);
 	gvoid InitRect(Rect* a_rect);
-	gbool InsertRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, Node** a_newNode, gint a_level);
-	gbool InsertRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root, gint a_level);
+	gbool InsertRectRec(Rect* a_rect, const DataT& a_id, Node* a_node, Node** a_newNode, gint a_level);
+	gbool InsertRect(Rect* a_rect, const DataT& a_id, Node** a_root, gint a_level);
 	Rect NodeCover(Node* a_node);
 	gbool AddBranch(Branch* a_branch, Node* a_node, Node** a_newNode);
 	gvoid DisconnectBranch(Node* a_node, gint a_index);
@@ -311,13 +311,13 @@ protected:
 	gvoid InitParVars(PartitionVars* a_parVars, gint a_maxRects, gint a_minFill);
 	gvoid PickSeeds(PartitionVars* a_parVars);
 	gvoid Classify(gint a_index, gint a_group, PartitionVars* a_parVars);
-	gbool RemoveRect(Rect* a_rect, const DATATYPE& a_id, Node** a_root);
-	gbool RemoveRectRec(Rect* a_rect, const DATATYPE& a_id, Node* a_node, ListNode** a_listNode);
+	gbool RemoveRect(Rect* a_rect, const DataT& a_id, Node** a_root);
+	gbool RemoveRectRec(Rect* a_rect, const DataT& a_id, Node* a_node, ListNode** a_listNode);
 	ListNode* AllocListNode();
 	gvoid FreeListNode(ListNode* a_listNode);
 	gbool Overlap(Rect* a_rectA, Rect* a_rectB);
 	gvoid ReInsert(Node* a_node, ListNode** a_listNode);
-	gbool Search(Node* a_node, Rect* a_rect, gsize& a_foundCount, gbool __cdecl a_resultCallback(DATATYPE a_data, gptr a_context), gptr a_context);
+	gbool Search(Node* a_node, Rect* a_rect, gsize& a_foundCount, gbool __cdecl a_resultCallback(DataT a_data, gptr a_context), gptr a_context);
 	gvoid RemoveAllRec(Node* a_node);
 	gvoid Reset();
 	gvoid CountRec(Node* a_node, gsize& a_count);

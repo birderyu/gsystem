@@ -7,22 +7,21 @@
 
 namespace gsystem { // gsystem
 
-template <typename DataT>
+template <typename T>
 class GList final
-	: public GDeque<DataT>
-	, public GObject
+	: public GDeque<T>
 {
 public:
 	struct GListNode
 		: public GPreviousNextNodeT<GListNode>
-		, public GDataNodeT<DataT>
+		, public GValueNodeT<T>
 		, public GNewT<GListNode>
 	{
-		GListNode(const DataT &data = DataT(),
+		GListNode(const T &data = T(),
 			GListNode *previous = GNULL,
 			GListNode *next = GNULL)
 			: GPreviousNextNodeT<GListNode>(previous, next)
-			, GDataNodeT<DataT>(data)
+			, GValueNodeT<T>(data)
 		{
 
 		}
@@ -39,9 +38,9 @@ public:
 		GINLINE Iterator(GListNode *node) : m_pNode(node) {}
 		GINLINE Iterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
-		GINLINE DataT &operator*() const { return m_pNode->m_tData; }
-		GINLINE DataT *operator->() const { return &m_pNode->m_tData; }
-		GINLINE DataT &operator[](gsize i) const 
+		GINLINE T &operator*() const { return m_pNode->m_tData; }
+		GINLINE T *operator->() const { return &m_pNode->m_tData; }
+		GINLINE T &operator[](gsize i) const 
 		{ 
 			GListNode *node = m_pNode;
 			while (node && i)
@@ -157,7 +156,7 @@ public:
 					j--;
 				}
 			}
-			return GList<DataT>::NULL_POS;
+			return GList<T>::NULL_POS;
 		}
 
 	private:
@@ -173,9 +172,9 @@ public:
 		GINLINE ConstIterator(const ConstIterator &citer) : m_pNode(iter.m_pNode) {}
 		explicit GINLINE ConstIterator(const Iterator &iter) : m_pNode(iter.m_pNode) {}
 
-		GINLINE const DataT &operator*() const { return m_pNode->m_tData; }
-		GINLINE const DataT *operator->() const { return &m_pNode->m_tData; }
-		GINLINE const DataT &operator[](gsize i) const
+		GINLINE const T &operator*() const { return m_pNode->m_tData; }
+		GINLINE const T *operator->() const { return &m_pNode->m_tData; }
+		GINLINE const T &operator[](gsize i) const
 		{
 			const GListNode *node = m_pNode;
 			while (node && i)
@@ -284,7 +283,7 @@ public:
 					j--;
 				}
 			}
-			return GList<DataT>::NULL_POS;
+			return GList<T>::NULL_POS;
 		}
 
 	private:
@@ -296,12 +295,12 @@ public:
 
 public:
 	GList();
-	explicit GList(gsize size, const DataT &data = DataT());
-	GList(const GList<DataT> &list);
-	GList(GList<DataT> &&list);
+	explicit GList(gsize size, const T &data = T());
+	GList(const GList &list);
+	GList(GList &&list);
 
-	GList<DataT> &operator=(const GList<DataT> &list);
-	GList<DataT> &operator=(GList<DataT> &&list);
+	GList &operator=(const GList &list);
+	GList &operator=(GList &&list);
 
 	gvoid Resize(gsize);
 	gsize Size() const;
@@ -309,26 +308,26 @@ public:
 	gvoid Clear();
 	gvoid Destroy();
 
-	DataT &GetAt(gsize);
-	const DataT &GetAt(gsize) const;
+	T &GetAt(gsize);
+	const T &GetAt(gsize) const;
 
-	DataT &operator[](gsize);
-	const DataT &operator[](gsize) const;
+	T &operator[](gsize);
+	const T &operator[](gsize) const;
 
-	gvoid PushBack(const DataT &data);
-	gvoid PushBack(DataT &&data);
+	gvoid PushBack(const T &data);
+	gvoid PushBack(T &&data);
 
-	gvoid PushFront(const DataT &data);
-	gvoid PushFront(DataT &&data);
+	gvoid PushFront(const T &data);
+	gvoid PushFront(T &&data);
 
-	gvoid PopBack(DataT *data = GNULL);
-	gvoid PopFront(DataT *data = GNULL);
+	gvoid PopBack(T *data = GNULL);
+	gvoid PopFront(T *data = GNULL);
 
-	gvoid Append(const DataT &data);
-	gvoid Append(DataT &&data);
+	gvoid Append(const T &data);
+	gvoid Append(T &&data);
 
-	gvoid Append(const GList<DataT> &);
-	gvoid Append(GList<DataT> &&);
+	gvoid Append(const GList<T> &);
+	gvoid Append(GList<T> &&);
 
 	Iterator Begin();
 	ConstIterator Begin() const;
@@ -337,16 +336,16 @@ public:
 	ConstIterator End() const;
 	ConstIterator ConstEnd() const;
 
-	DataT &First();
-	const DataT &First() const;
-	DataT &Last();
-	const DataT &Last() const;
+	T &First();
+	const T &First() const;
+	T &Last();
+	const T &Last() const;
 
-	gbool StartWith(const DataT &) const;
-	gbool EndWith(const DataT &) const;
+	gbool StartWith(const T &) const;
+	gbool EndWith(const T &) const;
 
 private:
-	GDList<DataT, GListNode> m_tList;
+	GDList<T, GListNode> m_tList;
 };
 
 } // namespace gsystem

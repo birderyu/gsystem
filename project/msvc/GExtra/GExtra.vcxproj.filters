@@ -25,5 +25,31 @@
     <Filter Include="头文件\log">
       <UniqueIdentifier>{46680b25-ed9c-49d3-a257-344d23da2002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\geojson">
+      <UniqueIdentifier>{510d0125-93b9-4a87-bee1-794476b1482f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\gextra\gjsonarray.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gextra\gjsonobject.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gextra\gjsonpair.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gextra\gjsonparsermessage.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gextra\gjsonvalue.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gextra\ggeojson.h">
+      <Filter>头文件\geojson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gextra\gjsonparseexception.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

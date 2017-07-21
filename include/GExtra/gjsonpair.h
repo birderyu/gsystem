@@ -2,13 +2,12 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gjsonpair.h
-** @brief	Json名称/值对类型的定义
-** @author	birderyu
-** @contact	https://github.com/birderyu
-** @date	2017-1-3
-** @version	1.0
-** @see		GJsonPair
+** @file gjsonpair.h
+** @brief Json名称/值对类型的定义
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-3
+** @version 0.5.0
 **
 ** Json数据的书写格式是：名称/值对。
 ** 名称/值对包括字段名称（在双引号中），后面写一个冒号，然后是值：

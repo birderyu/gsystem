@@ -228,9 +228,16 @@ GINLINE NodeT *GBinTreeNodeT<NodeT>::Last()
 }
 
 //////////////////////////////////////////////////////////////////////////
-template<typename DataT>
-GINLINE GDataNodeT<DataT>::GDataNodeT(const DataT &data)
-: m_tData(data)
+template<typename T>
+GINLINE GValueNodeT<T>::GValueNodeT(const T &value)
+	: m_tData(value)
+{
+
+}
+
+template<typename T>
+GINLINE GValueNodeT<T>::GValueNodeT(T &&value)
+	: m_tData(GForward<T>(value))
 {
 
 }

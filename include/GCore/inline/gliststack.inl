@@ -91,13 +91,13 @@ GINLINE gvoid GListStack<DataT>::Pop(DataT *data)
 template<typename DataT>
 GINLINE const DataT &GListStack<DataT>::Top() const
 {
-	return m_tList.GetFirstData();
+	return m_tList.GetFirstValue();
 }
 
 template<typename DataT>
 GINLINE DataT &GListStack<DataT>::Top()
 {
-	return m_tList.GetFirstData();
+	return m_tList.GetFirstValue();
 }
 
 } // namespace gsystem

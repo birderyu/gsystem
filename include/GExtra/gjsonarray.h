@@ -2,13 +2,12 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gjsonarray.h
-** @brief	Json数组类型的定义
-** @author	birderyu
-** @contact	https://github.com/birderyu
-** @date	2017-1-3
-** @version	1.0
-** @see		GJsonArray
+** @file gjsonarray.h
+** @brief Json数组
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-3
+** @version 0.5.0
 **
 ** Json数组在方括号中书写：
 ** 数组可包含多个对象：
@@ -42,6 +41,8 @@ namespace json { // gsystem.json
 class GAPI GJsonArray
 	: public GObject
 {
+	friend class GJsonObject;
+
 public:
 	GJsonArray();
 	~GJsonArray();
@@ -53,6 +54,7 @@ public:
 	gbool Parse(const GString &jsonStr, gsize *cursor = GNULL, GJsonParserMessage *msg = GNULL);
 
 private:
+	gbool Parse(const GString &jsonStr, gsize *cursor);
 	gvoid Destroy();
 	GList<GJsonValue*> m_tJsonValues;
 };

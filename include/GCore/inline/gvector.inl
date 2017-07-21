@@ -5,15 +5,15 @@
 
 namespace gsystem { // gsystem
 
-template <typename DataT>
-GINLINE GVector<DataT>::GVector()
+template <typename T>
+GINLINE GVector<T>::GVector()
 : m_tArray(0), m_nHead(NULL_POS), m_nTail(0)
 {
 
 }
 
-template <typename DataT>
-GINLINE GVector<DataT>::GVector(gsize size)
+template <typename T>
+GINLINE GVector<T>::GVector(gsize size)
 : m_tArray(size), m_nHead(0), m_nTail(size)
 {
 	if (size <= 0)
@@ -23,8 +23,8 @@ GINLINE GVector<DataT>::GVector(gsize size)
 	}
 }
 
-template <typename DataT>
-GINLINE GVector<DataT>::GVector(gsize size, const DataT &data)
+template <typename T>
+GINLINE GVector<T>::GVector(gsize size, const T &data)
 : m_tArray(size, data), m_nHead(0), m_nTail(size)
 {
 	if (size <= 0)
@@ -34,8 +34,8 @@ GINLINE GVector<DataT>::GVector(gsize size, const DataT &data)
 	}
 }
 
-template <typename DataT>
-GINLINE GVector<DataT>::GVector(const GVector<DataT> &datas)
+template <typename T>
+GINLINE GVector<T>::GVector(const GVector<T> &datas)
 : m_tArray(datas.m_tArray, datas.m_nHead, datas.Size()), m_nHead(0), m_nTail(datas.Size())
 {
 	if (datas.Size() == 0)
@@ -45,8 +45,8 @@ GINLINE GVector<DataT>::GVector(const GVector<DataT> &datas)
 	}
 }
 
-template <typename DataT>
-GINLINE GVector<DataT>::GVector(GVector<DataT> &&datas)
+template <typename T>
+GINLINE GVector<T>::GVector(GVector<T> &&datas)
 : m_tArray(GMove(datas.m_tArray))
 , m_nHead(datas.m_nHead)
 , m_nTail(datas.m_nTail)
@@ -55,8 +55,8 @@ GINLINE GVector<DataT>::GVector(GVector<DataT> &&datas)
 	datas.m_nTail = 0;
 }
 
-template <typename DataT>
-GINLINE GVector<DataT> &GVector<DataT>::operator=(const GVector<DataT> &datas)
+template <typename T>
+GINLINE GVector<T> &GVector<T>::operator=(const GVector<T> &datas)
 {
 	if (this == &datas)
 	{
@@ -66,8 +66,8 @@ GINLINE GVector<DataT> &GVector<DataT>::operator=(const GVector<DataT> &datas)
 	return *this;
 }
 
-template <typename DataT>
-GINLINE GVector<DataT> &GVector<DataT>::operator=(GVector<DataT> &&datas)
+template <typename T>
+GINLINE GVector<T> &GVector<T>::operator=(GVector<T> &&datas)
 {
 	if (this == &datas)
 	{
@@ -77,14 +77,14 @@ GINLINE GVector<DataT> &GVector<DataT>::operator=(GVector<DataT> &&datas)
 	return *this;
 }
 
-template <typename DataT> GINLINE
-gvoid GVector<DataT>::Reserve(gsize capacity)
+template <typename T> GINLINE
+gvoid GVector<T>::Reserve(gsize capacity)
 {
 	Reserve(capacity, 0);
 }
 
-template <typename DataT> GINLINE
-gvoid GVector<DataT>::Reserve(gsize capacity, gsize start)
+template <typename T> GINLINE
+gvoid GVector<T>::Reserve(gsize capacity, gsize start)
 {
 	gsize old_capacity = Capacity();
 	if (capacity <= old_capacity)
@@ -110,8 +110,8 @@ gvoid GVector<DataT>::Reserve(gsize capacity, gsize start)
 	}
 }
 
-template <typename DataT> GINLINE
-gvoid GVector<DataT>::Resize(gsize size)
+template <typename T> GINLINE
+gvoid GVector<T>::Resize(gsize size)
 {
 	if (size > Capacity())
 	{
@@ -124,8 +124,8 @@ gvoid GVector<DataT>::Resize(gsize size)
 	m_nTail = size - m_nHead;
 }
 
-template <typename DataT>
-GINLINE gsize GVector<DataT>::Size() const
+template <typename T>
+GINLINE gsize GVector<T>::Size() const
 {
 	if (!Valid())
 	{
@@ -134,8 +134,8 @@ GINLINE gsize GVector<DataT>::Size() const
 	return m_nTail - m_nHead;
 }
 
-template <typename DataT>
-GINLINE gsize GVector<DataT>::Capacity() const
+template <typename T>
+GINLINE gsize GVector<T>::Capacity() const
 {
 	gsize arr_size = m_tArray.Size();
 	if (m_nHead == NULL_POS)
@@ -146,14 +146,14 @@ GINLINE gsize GVector<DataT>::Capacity() const
 	return arr_size - m_nHead;
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::IsEmpty() const
+template <typename T>
+GINLINE gbool GVector<T>::IsEmpty() const
 {
 	return Size() == 0;
 }
 
-template <typename DataT>
-GINLINE gsize GVector<DataT>::RealPos(gsize pos) const
+template <typename T>
+GINLINE gsize GVector<T>::RealPos(gsize pos) const
 {
 	if (m_nHead == NULL_POS)
 	{
@@ -162,8 +162,8 @@ GINLINE gsize GVector<DataT>::RealPos(gsize pos) const
 	return m_nHead + pos;
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::Valid() const
+template <typename T>
+GINLINE gbool GVector<T>::Valid() const
 {
 	return m_nHead != NULL_POS
 		&& m_nTail != 0
@@ -171,24 +171,24 @@ GINLINE gbool GVector<DataT>::Valid() const
 		&& m_nTail <= m_tArray.Size();
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::Clear()
+template <typename T>
+GINLINE gvoid GVector<T>::Clear()
 {
 	m_tArray.Clear();
 	m_nHead = NULL_POS;
 	m_nTail = 0;
 }
 
-template <typename DataT>
-gvoid GVector<DataT>::Destroy()
+template <typename T>
+gvoid GVector<T>::Destroy()
 {
 	m_tArray.Destroy();
 	m_nHead = NULL_POS;
 	m_nTail = 0;
 }
 
-template <typename DataT>
-GINLINE DataT &GVector<DataT>::GetAt(gsize pos)
+template <typename T>
+GINLINE T &GVector<T>::GetAt(gsize pos)
 {
 	GASSERT(pos < Size());
 	gsize real_pos = RealPos(pos);
@@ -196,8 +196,8 @@ GINLINE DataT &GVector<DataT>::GetAt(gsize pos)
 	return m_tArray.GetAt(real_pos);
 }
 
-template <typename DataT>
-GINLINE const DataT &GVector<DataT>::GetAt(gsize pos) const
+template <typename T>
+GINLINE const T &GVector<T>::GetAt(gsize pos) const
 {
 	GASSERT(pos < Size());
 	gsize real_pos = RealPos(pos);
@@ -205,22 +205,22 @@ GINLINE const DataT &GVector<DataT>::GetAt(gsize pos) const
 	return m_tArray.GetAt(real_pos);
 }
 
-template <typename DataT>
-GINLINE DataT *GVector<DataT>::CursorAt(gsize pos)
+template <typename T>
+GINLINE T *GVector<T>::CursorAt(gsize pos)
 {
 	gsize real_pos = m_nHead + pos;
 	return m_tArray.CursorAt(real_pos);
 }
 
-template <typename DataT>
-GINLINE const DataT *GVector<DataT>::CursorAt(gsize pos) const
+template <typename T>
+GINLINE const T *GVector<T>::CursorAt(gsize pos) const
 {
 	gsize real_pos = m_nHead + pos;
 	return m_tArray.CursorAt(real_pos);
 }
 
-template <typename DataT>
-GINLINE DataT &GVector<DataT>::operator[](gsize pos)
+template <typename T>
+GINLINE T &GVector<T>::operator[](gsize pos)
 {
 	GASSERT(pos < Size());
 	gsize real_pos = RealPos(pos);
@@ -228,8 +228,8 @@ GINLINE DataT &GVector<DataT>::operator[](gsize pos)
 	return m_tArray[real_pos];
 }
 
-template <typename DataT>
-GINLINE const DataT &GVector<DataT>::operator[](gsize pos) const
+template <typename T>
+GINLINE const T &GVector<T>::operator[](gsize pos) const
 {
 	GASSERT(pos < Size());
 	gsize real_pos = RealPos(pos);
@@ -237,8 +237,8 @@ GINLINE const DataT &GVector<DataT>::operator[](gsize pos) const
 	return m_tArray[real_pos];
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PushBack(const DataT &data)
+template <typename T>
+GINLINE gvoid GVector<T>::PushBack(const T &data)
 {
 	gsize old_size = Size();
 	if (old_size >= Capacity())
@@ -255,8 +255,8 @@ GINLINE gvoid GVector<DataT>::PushBack(const DataT &data)
 	}
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PushBack(DataT &&data)
+template <typename T>
+GINLINE gvoid GVector<T>::PushBack(T &&data)
 {
 	gsize old_size = Size();
 	if (old_size >= Capacity())
@@ -267,15 +267,15 @@ GINLINE gvoid GVector<DataT>::PushBack(DataT &&data)
 	}
 
 	// 为了处理head指向null_pos的问题，必须使用Resize来处理
-	m_tArray[m_nTail++] = GForward<DataT>(data);
+	m_tArray[m_nTail++] = GForward<T>(data);
 	if (m_nHead == NULL_POS)
 	{
 		m_nHead = 0;
 	}
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PushFront(const DataT &data)
+template <typename T>
+GINLINE gvoid GVector<T>::PushFront(const T &data)
 {
 	if (m_nHead == NULL_POS)
 	{
@@ -296,8 +296,8 @@ GINLINE gvoid GVector<DataT>::PushFront(const DataT &data)
 	m_tArray[--m_nHead] = data;
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PushFront(DataT &&data)
+template <typename T>
+GINLINE gvoid GVector<T>::PushFront(T &&data)
 {
 	if (m_nHead == NULL_POS)
 	{
@@ -305,7 +305,7 @@ GINLINE gvoid GVector<DataT>::PushFront(DataT &&data)
 		Reserve(G_VECTOR_DEFAULT_CAPACITY);
 		m_nHead = 0;
 		m_nTail = 1;
-		m_tArray[0] = GForward<DataT>(data);
+		m_tArray[0] = GForward<T>(data);
 		return;
 	}
 	else if (m_nHead == 0)
@@ -315,11 +315,11 @@ GINLINE gvoid GVector<DataT>::PushFront(DataT &&data)
 		// 按照原来数据的一半进行扩容
 		Reserve(old_size + (old_size / 2 + 1), 1);
 	}
-	m_tArray[--m_nHead] = GForward<DataT>(data);
+	m_tArray[--m_nHead] = GForward<T>(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PopBack(DataT *data)
+template <typename T>
+GINLINE gvoid GVector<T>::PopBack(T *data)
 {
 	if (!Valid())
 	{
@@ -338,8 +338,8 @@ GINLINE gvoid GVector<DataT>::PopBack(DataT *data)
 	GDestruct(&m_tArray[m_nTail]);
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PopBack(gsize size)
+template <typename T>
+GINLINE gvoid GVector<T>::PopBack(gsize size)
 {
 	while (size > 0)
 	{
@@ -352,8 +352,8 @@ GINLINE gvoid GVector<DataT>::PopBack(gsize size)
 	}
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PopFront(DataT *data)
+template <typename T>
+GINLINE gvoid GVector<T>::PopFront(T *data)
 {
 	if (!Valid())
 	{
@@ -371,8 +371,8 @@ GINLINE gvoid GVector<DataT>::PopFront(DataT *data)
 	++m_nHead;
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::PopFront(gsize size)
+template <typename T>
+GINLINE gvoid GVector<T>::PopFront(gsize size)
 {
 	while (size > 0)
 	{
@@ -385,20 +385,20 @@ GINLINE gvoid GVector<DataT>::PopFront(gsize size)
 	}
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::Append(const DataT &data)
+template <typename T>
+GINLINE gvoid GVector<T>::Append(const T &data)
 {
 	PushBack(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::Append(DataT &&data)
+template <typename T>
+GINLINE gvoid GVector<T>::Append(T &&data)
 {
-	PushBack(GForward<DataT>(data));
+	PushBack(GForward<T>(data));
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::Append(const GVector<DataT> &arr)
+template <typename T>
+GINLINE gvoid GVector<T>::Append(const GVector<T> &arr)
 {
 	gsize add_size = arr.Size();
 	if (add_size == 0)
@@ -427,8 +427,8 @@ GINLINE gvoid GVector<DataT>::Append(const GVector<DataT> &arr)
 	}
 }
 
-template <typename DataT>
-GINLINE gvoid GVector<DataT>::Append(GVector<DataT> &&arr)
+template <typename T>
+GINLINE gvoid GVector<T>::Append(GVector<T> &&arr)
 {
 	gsize add_size = arr.Size();
 	if (add_size == 0)
@@ -459,72 +459,72 @@ GINLINE gvoid GVector<DataT>::Append(GVector<DataT> &&arr)
 	// arr.Destroy(); // 为了节省时间，不需要将arr销毁
 }
 
-template <typename DataT>
-GINLINE typename GVector<DataT>::Iterator GVector<DataT>::Begin()
+template <typename T>
+GINLINE typename GVector<T>::Iterator GVector<T>::Begin()
 {
-	return GVector<DataT>::Iterator(Head());
+	return GVector<T>::Iterator(Head());
 }
 
-template <typename DataT>
-GINLINE typename GVector<DataT>::ConstIterator GVector<DataT>::Begin() const
+template <typename T>
+GINLINE typename GVector<T>::ConstIterator GVector<T>::Begin() const
 {
-	return GVector<DataT>::ConstIterator(Head());
+	return GVector<T>::ConstIterator(Head());
 }
 
-template <typename DataT>
-GINLINE typename GVector<DataT>::ConstIterator GVector<DataT>::ConstBegin() const
+template <typename T>
+GINLINE typename GVector<T>::ConstIterator GVector<T>::ConstBegin() const
 {
-	return GVector<DataT>::ConstIterator(Head());
+	return GVector<T>::ConstIterator(Head());
 }
 
-template <typename DataT>
-GINLINE typename GVector<DataT>::Iterator GVector<DataT>::End()
+template <typename T>
+GINLINE typename GVector<T>::Iterator GVector<T>::End()
 {
-	return GVector<DataT>::Iterator(Tail());
+	return GVector<T>::Iterator(Tail());
 }
 
-template <typename DataT>
-GINLINE typename GVector<DataT>::ConstIterator GVector<DataT>::End() const
+template <typename T>
+GINLINE typename GVector<T>::ConstIterator GVector<T>::End() const
 {
-	return GVector<DataT>::ConstIterator(Tail());
+	return GVector<T>::ConstIterator(Tail());
 }
 
-template <typename DataT>
-GINLINE typename GVector<DataT>::ConstIterator GVector<DataT>::ConstEnd() const
+template <typename T>
+GINLINE typename GVector<T>::ConstIterator GVector<T>::ConstEnd() const
 {
-	return GVector<DataT>::ConstIterator(Tail());
+	return GVector<T>::ConstIterator(Tail());
 }
 
-template <typename DataT>
-GINLINE DataT &GVector<DataT>::First()
-{
-	GASSERT(Valid());
-	return *Head();
-}
-
-template <typename DataT>
-GINLINE const DataT &GVector<DataT>::First() const
+template <typename T>
+GINLINE T &GVector<T>::First()
 {
 	GASSERT(Valid());
 	return *Head();
 }
 
-template <typename DataT>
-GINLINE DataT &GVector<DataT>::Last()
+template <typename T>
+GINLINE const T &GVector<T>::First() const
+{
+	GASSERT(Valid());
+	return *Head();
+}
+
+template <typename T>
+GINLINE T &GVector<T>::Last()
 {
 	GASSERT(Valid());
 	return *(Tail() - 1);
 }
 
-template <typename DataT>
-GINLINE const DataT &GVector<DataT>::Last() const
+template <typename T>
+GINLINE const T &GVector<T>::Last() const
 {
 	GASSERT(Valid());
 	return *(Tail() - 1);
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::StartWith(const DataT &data) const
+template <typename T>
+GINLINE gbool GVector<T>::StartWith(const T &data) const
 {
 	if (IsEmpty())
 	{
@@ -533,8 +533,8 @@ GINLINE gbool GVector<DataT>::StartWith(const DataT &data) const
 	return First() == data;
 }
 
-template <typename DataT>
-GINLINE gbool GVector<DataT>::EndWith(const DataT &data) const
+template <typename T>
+GINLINE gbool GVector<T>::EndWith(const T &data) const
 {
 	if (IsEmpty())
 	{
@@ -543,8 +543,8 @@ GINLINE gbool GVector<DataT>::EndWith(const DataT &data) const
 	return Last() == data;
 }
 
-template <typename DataT> GINLINE
-gvoid GVector<DataT>::RemoveAt(gsize pos)
+template <typename T> GINLINE
+gvoid GVector<T>::RemoveAt(gsize pos)
 {
 	gsize old_size = Size();
 	GASSERT(old_size > 0);
@@ -560,8 +560,8 @@ gvoid GVector<DataT>::RemoveAt(gsize pos)
 	}
 }
 
-template <typename DataT>
-GINLINE DataT *GVector<DataT>::Head()
+template <typename T>
+GINLINE T *GVector<T>::Head()
 {
 	if (!Valid())
 	{
@@ -570,8 +570,8 @@ GINLINE DataT *GVector<DataT>::Head()
 	return m_tArray.CursorAt(m_nHead);
 }
 
-template <typename DataT>
-GINLINE const DataT *GVector<DataT>::Head() const
+template <typename T>
+GINLINE const T *GVector<T>::Head() const
 {
 	if (!Valid())
 	{
@@ -580,8 +580,8 @@ GINLINE const DataT *GVector<DataT>::Head() const
 	return m_tArray.CursorAt(m_nHead);
 }
 
-template <typename DataT>
-GINLINE DataT *GVector<DataT>::Tail()
+template <typename T>
+GINLINE T *GVector<T>::Tail()
 {
 	if (m_nTail > m_tArray.Size())
 	{
@@ -590,8 +590,8 @@ GINLINE DataT *GVector<DataT>::Tail()
 	return m_tArray.CursorAt(m_nTail);
 }
 
-template <typename DataT>
-GINLINE const DataT *GVector<DataT>::Tail() const
+template <typename T>
+GINLINE const T *GVector<T>::Tail() const
 {
 	if (!Valid())
 	{
@@ -600,14 +600,14 @@ GINLINE const DataT *GVector<DataT>::Tail() const
 	return m_tArray.CursorAt(m_nTail);
 }
 
-template <typename DataT> GINLINE
-guint GVector<DataT>::ClassCode() const GNOEXCEPT
+template <typename T> GINLINE
+guint GVector<T>::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::Vector);
 }
 
-template <typename DataT> GINLINE
-gbool GVector<DataT>::Serialize(GArchive &archive) const
+template <typename T> GINLINE
+gbool GVector<T>::Serialize(GArchive &archive) const
 {
 	if (!archive.Input())
 	{
@@ -620,7 +620,7 @@ gbool GVector<DataT>::Serialize(GArchive &archive) const
 
 	for (gsize i = 0; i < size; i++)
 	{
-		if (!GSerialize<DataT>(archive, GetAt(i)))
+		if (!GSerialize<T>(archive, GetAt(i)))
 		{
 			return false;
 		}
@@ -629,8 +629,8 @@ gbool GVector<DataT>::Serialize(GArchive &archive) const
 	return true;
 }
 
-template <typename DataT> GINLINE
-gbool GVector<DataT>::Deserialize(GArchive &archive)
+template <typename T> GINLINE
+gbool GVector<T>::Deserialize(GArchive &archive)
 {
 	if (!archive.Output())
 	{
@@ -647,7 +647,7 @@ gbool GVector<DataT>::Deserialize(GArchive &archive)
 
 	for (gsize i = 0; i < size; i++)
 	{
-		if (!GDeserialize<DataT>(archive, GetAt(i)))
+		if (!GDeserialize<T>(archive, GetAt(i)))
 		{
 			return false;
 		}

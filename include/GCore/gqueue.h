@@ -23,10 +23,10 @@ namespace gsystem { // gsystem
 /********************************************************************************
 **
 ** @brief 队列
-** @template {DataT} 队列元素的类型
+** @template T {type} 队列元素的类型
 **
 ********************************************************************************/
-template<typename DataT>
+template<typename T>
 class GQueue
 	: virtual public GObject
 {
@@ -77,52 +77,53 @@ public:
 	**
 	** @name EnQueue
 	** @brief 入队
-	** @param [in] value {const DataT &} 值
+	** @param [in] value {const T &} 值
 	**
 	** 值将被拷贝一份入队
 	**
 	****************************************************************************/
-	virtual gvoid EnQueue(const DataT &value) = 0;
+	virtual gvoid EnQueue(const T &value) = 0;
 
 	/****************************************************************************
 	**
 	** @name EnQueue
 	** @brief 入队
-	** @param [in] value {DataT &&} 值
+	** @param [in] value {T &&} 值
 	**
 	** 值将被优先使用移动入队，若无法移动则使用拷贝
 	**
 	****************************************************************************/
-	virtual gvoid EnQueue(DataT &&data) = 0;
+	virtual gvoid EnQueue(T &&data) = 0;
 
 	/****************************************************************************
 	**
 	** @name DeQueue
 	** @brief 出队
-	** @param [out] value {DataT *} 用于接受出队的值
+	** @param [out] value {T *} 用于接受出队的值
+	** @return {gbool} 若出队成功，则返回true，否则（队列为空）返回false
 	**
 	** 若参数为空（GNULL），则不会接受出队的值，否则会优先将出队的值移动到value中
 	**
 	****************************************************************************/
-	virtual gvoid DeQueue(DataT *value = GNULL) = 0;
+	virtual gbool DeQueue(T *value = GNULL) = 0;
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取队首元素
-	** @return {const DataT &} 队首元素的引用
+	** @return {const T &} 队首元素的引用
 	**
 	****************************************************************************/
-	virtual const DataT &Head() const = 0;
+	virtual const T &Head() const = 0;
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取队首元素
-	** @return {DataT &} 队首元素的引用
+	** @return {T &} 队首元素的引用
 	**
 	****************************************************************************/
-	virtual DataT &Head() = 0;
+	virtual T &Head() = 0;
 };
 
 } // namespace gsystem

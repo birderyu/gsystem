@@ -3,14 +3,14 @@
 
 namespace gsystem { // gsystem
 
-template <typename DataT>
-GINLINE GList<DataT>::GList()
+template <typename T>
+GINLINE GList<T>::GList()
 {
 
 }
 
-template <typename DataT>
-GINLINE GList<DataT>::GList(gsize size, const DataT &data)
+template <typename T>
+GINLINE GList<T>::GList(gsize size, const T &data)
 {
 	for (gsize i = 0; i < size; i++)
 	{
@@ -18,22 +18,22 @@ GINLINE GList<DataT>::GList(gsize size, const DataT &data)
 	}
 }
 
-template <typename DataT>
-GINLINE GList<DataT>::GList(const GList<DataT> &list)
+template <typename T>
+GINLINE GList<T>::GList(const GList<T> &list)
 : m_tList(list.m_tList)
 {
 
 }
 
-template <typename DataT>
-GINLINE GList<DataT>::GList(GList<DataT> &&list)
+template <typename T>
+GINLINE GList<T>::GList(GList<T> &&list)
 : m_tList(GMove(list.m_tList))
 {
 
 }
 
-template <typename DataT>
-GINLINE GList<DataT> &GList<DataT>::operator=(const GList<DataT> &list)
+template <typename T>
+GINLINE GList<T> &GList<T>::operator=(const GList<T> &list)
 {
 	if (this == &list)
 	{
@@ -45,8 +45,8 @@ GINLINE GList<DataT> &GList<DataT>::operator=(const GList<DataT> &list)
 	return *this;
 }
 
-template <typename DataT>
-GINLINE GList<DataT> &GList<DataT>::operator=(GList<DataT> &&list)
+template <typename T>
+GINLINE GList<T> &GList<T>::operator=(GList<T> &&list)
 {
 	if (this == &list)
 	{
@@ -58,8 +58,8 @@ GINLINE GList<DataT> &GList<DataT>::operator=(GList<DataT> &&list)
 	return *this;
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Resize(gsize size)
+template <typename T>
+GINLINE gvoid GList<T>::Resize(gsize size)
 {
 	gsize cur_size = Size();
 	if (size == cur_size)
@@ -70,7 +70,7 @@ GINLINE gvoid GList<DataT>::Resize(gsize size)
 	{
 		for (gsize i = cur_size; i < size; i++)
 		{
-			m_tList.AddLast(DataT());
+			m_tList.AddLast(T());
 		}
 	}
 	else
@@ -83,178 +83,178 @@ GINLINE gvoid GList<DataT>::Resize(gsize size)
 	}
 }
 
-template <typename DataT>
-GINLINE gsize GList<DataT>::Size() const
+template <typename T>
+GINLINE gsize GList<T>::Size() const
 {
 	return m_tList.Size();
 }
 
-template <typename DataT>
-GINLINE gbool GList<DataT>::IsEmpty() const
+template <typename T>
+GINLINE gbool GList<T>::IsEmpty() const
 {
 	return m_tList.IsEmpty();
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Clear()
+template <typename T>
+GINLINE gvoid GList<T>::Clear()
 {
 	m_tList.RemoveAll();
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Destroy()
+template <typename T>
+GINLINE gvoid GList<T>::Destroy()
 {
 	m_tList.RemoveAll();
 }
 
-template <typename DataT>
-GINLINE DataT &GList<DataT>::GetAt(gsize pos)
+template <typename T>
+GINLINE T &GList<T>::GetAt(gsize pos)
 {
-	return m_tList.GetDataAt(pos);
+	return m_tList.GetValueAt(pos);
 }
 
-template <typename DataT>
-GINLINE const DataT &GList<DataT>::GetAt(gsize pos) const
+template <typename T>
+GINLINE const T &GList<T>::GetAt(gsize pos) const
 {
-	return m_tList.GetDataAt(pos);
+	return m_tList.GetValueAt(pos);
 }
 
-template <typename DataT>
-GINLINE DataT &GList<DataT>::operator[](gsize pos)
-{
-	return m_tList[pos];
-}
-
-template <typename DataT>
-GINLINE const DataT &GList<DataT>::operator[](gsize pos) const
+template <typename T>
+GINLINE T &GList<T>::operator[](gsize pos)
 {
 	return m_tList[pos];
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::PushBack(const DataT &data)
+template <typename T>
+GINLINE const T &GList<T>::operator[](gsize pos) const
+{
+	return m_tList[pos];
+}
+
+template <typename T>
+GINLINE gvoid GList<T>::PushBack(const T &data)
 {
 	m_tList.AddLast(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::PushBack(DataT &&data)
+template <typename T>
+GINLINE gvoid GList<T>::PushBack(T &&data)
 {
-	m_tList.AddLast(GForward<DataT>(data));
+	m_tList.AddLast(GForward<T>(data));
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::PushFront(const DataT &data)
+template <typename T>
+GINLINE gvoid GList<T>::PushFront(const T &data)
 {
 	m_tList.AddFirst(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::PushFront(DataT &&data)
+template <typename T>
+GINLINE gvoid GList<T>::PushFront(T &&data)
 {
-	m_tList.AddFirst(GForward<DataT>(data));
+	m_tList.AddFirst(GForward<T>(data));
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::PopBack(DataT *data)
+template <typename T>
+GINLINE gvoid GList<T>::PopBack(T *data)
 {
 	m_tList.RemoveLast(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::PopFront(DataT *data)
+template <typename T>
+GINLINE gvoid GList<T>::PopFront(T *data)
 {
 	m_tList.RemoveFirst(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Append(const DataT &data)
+template <typename T>
+GINLINE gvoid GList<T>::Append(const T &data)
 {
 	m_tList.AddLast(data);
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Append(DataT &&data)
+template <typename T>
+GINLINE gvoid GList<T>::Append(T &&data)
 {
-	m_tList.AddLast(GForward<DataT>(data));
+	m_tList.AddLast(GForward<T>(data));
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Append(const GList<DataT> &list)
+template <typename T>
+GINLINE gvoid GList<T>::Append(const GList<T> &list)
 {
 	// 直接将list的链表拷贝到当前链表的后面
 	m_tList += list.m_tList;
 }
 
-template <typename DataT>
-GINLINE gvoid GList<DataT>::Append(GList<DataT> &&list)
+template <typename T>
+GINLINE gvoid GList<T>::Append(GList<T> &&list)
 {
 	// 直接将list的链表衔接到当前链表的后面，并将list置空
 	m_tList += GMove(list.m_tList);
 }
 
-template <typename DataT>
-GINLINE typename GList<DataT>::Iterator GList<DataT>::Begin()
+template <typename T>
+GINLINE typename GList<T>::Iterator GList<T>::Begin()
 {
-	return GList<DataT>::Iterator(m_tList.GetFirstNode());
+	return GList<T>::Iterator(m_tList.GetFirstNode());
 }
 
-template <typename DataT>
-GINLINE typename GList<DataT>::ConstIterator GList<DataT>::Begin() const
+template <typename T>
+GINLINE typename GList<T>::ConstIterator GList<T>::Begin() const
 {
-	return GList<DataT>::ConstIterator(m_tList.GetFirstNode());
+	return GList<T>::ConstIterator(m_tList.GetFirstNode());
 }
 
-template <typename DataT>
-GINLINE typename GList<DataT>::ConstIterator GList<DataT>::ConstBegin() const
+template <typename T>
+GINLINE typename GList<T>::ConstIterator GList<T>::ConstBegin() const
 {
-	return GList<DataT>::ConstIterator(m_tList.GetFirstNode());
+	return GList<T>::ConstIterator(m_tList.GetFirstNode());
 }
 
-template <typename DataT>
-GINLINE typename GList<DataT>::Iterator GList<DataT>::End()
+template <typename T>
+GINLINE typename GList<T>::Iterator GList<T>::End()
 {
-	return GList<DataT>::Iterator();
+	return GList<T>::Iterator();
 }
 
-template <typename DataT>
-GINLINE typename GList<DataT>::ConstIterator GList<DataT>::End() const
+template <typename T>
+GINLINE typename GList<T>::ConstIterator GList<T>::End() const
 {
-	return GList<DataT>::ConstIterator();
+	return GList<T>::ConstIterator();
 }
 
-template <typename DataT>
-GINLINE typename GList<DataT>::ConstIterator GList<DataT>::ConstEnd() const
+template <typename T>
+GINLINE typename GList<T>::ConstIterator GList<T>::ConstEnd() const
 {
-	return GList<DataT>::ConstIterator();
+	return GList<T>::ConstIterator();
 }
 
-template <typename DataT>
-GINLINE DataT &GList<DataT>::First()
+template <typename T>
+GINLINE T &GList<T>::First()
 {
-	return m_tList.GetFirstData();
+	return m_tList.GetFirstValue();
 }
 
-template <typename DataT>
-GINLINE const DataT &GList<DataT>::First() const
+template <typename T>
+GINLINE const T &GList<T>::First() const
 {
-	return m_tList.GetFirstData();
+	return m_tList.GetFirstValue();
 }
 
-template <typename DataT>
-GINLINE DataT &GList<DataT>::Last()
+template <typename T>
+GINLINE T &GList<T>::Last()
 {
-	return m_tList.GetLastData();
+	return m_tList.GetLastValue();
 }
 
-template <typename DataT>
-GINLINE const DataT &GList<DataT>::Last() const
+template <typename T>
+GINLINE const T &GList<T>::Last() const
 {
-	return m_tList.GetLastData();
+	return m_tList.GetLastValue();
 }
 
-template <typename DataT>
-GINLINE gbool GList<DataT>::StartWith(const DataT &data) const
+template <typename T>
+GINLINE gbool GList<T>::StartWith(const T &data) const
 {
 	if (IsEmpty())
 	{
@@ -263,8 +263,8 @@ GINLINE gbool GList<DataT>::StartWith(const DataT &data) const
 	return First() == data;
 }
 
-template <typename DataT>
-GINLINE gbool GList<DataT>::EndWith(const DataT &data) const
+template <typename T>
+GINLINE gbool GList<T>::EndWith(const T &data) const
 {
 	if (IsEmpty())
 	{

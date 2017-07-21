@@ -9,10 +9,10 @@
 
 namespace gsystem { // gsystem
 
-template <typename DataT>
+template <typename T>
 class GVector final
-	: public GArray<DataT>
-	, public GDeque<DataT>
+	: public GArray<T>
+	, public GDeque<T>
 	, public GSerializable
 {
 public:
@@ -22,12 +22,12 @@ public:
 		friend class ConstIterator;
 	public:
 		GINLINE Iterator() : m_pData(GNULL) {}
-		GINLINE Iterator(DataT *data) : m_pData(data) {}
+		GINLINE Iterator(T *data) : m_pData(data) {}
 		GINLINE explicit Iterator(const Iterator &iter) : m_pData(iter.m_pData) {}
 
-		GINLINE DataT &operator*() const { return *m_pData; }
-		GINLINE DataT *operator->() const { return m_pData; }
-		GINLINE DataT &operator[](gsize pos) const { return *(m_pData + pos); }
+		GINLINE T &operator*() const { return *m_pData; }
+		GINLINE T *operator->() const { return m_pData; }
+		GINLINE T &operator[](gsize pos) const { return *(m_pData + pos); }
 		GINLINE bool operator==(const Iterator &iter) const { return m_pData == iter.m_pData; }
 		GINLINE bool operator!=(const Iterator &iter) const { return m_pData != iter.m_pData; }
 		GINLINE bool operator<(const Iterator &iter) const { return m_pData < iter.m_pData; }
@@ -35,18 +35,18 @@ public:
 		GINLINE bool operator>(const Iterator &iter) const { return m_pData > iter.m_pData; }
 		GINLINE bool operator>=(const Iterator &iter) const { return m_pData >= iter.m_pData; }
 		GINLINE Iterator &operator++() { ++m_pData; return *this; }
-		GINLINE Iterator  operator++(gint) { DataT *data = m_pData; ++m_pData; return data; }
+		GINLINE Iterator  operator++(gint) { T *data = m_pData; ++m_pData; return data; }
 		GINLINE Iterator &operator--() { m_pData--; return *this; }
-		GINLINE Iterator  operator--(gint) { DataT *data = m_pData; m_pData--; return data; }
+		GINLINE Iterator  operator--(gint) { T *data = m_pData; m_pData--; return data; }
 		GINLINE Iterator &operator+=(gint i) { m_pData += i; return *this; }
 		GINLINE Iterator &operator-=(gint i) { m_pData -= i; return *this; }
 		GINLINE Iterator  operator+(gint i) const { return Iterator(m_pData + i); }
 		GINLINE Iterator  operator-(gint i) const { return Iterator(m_pData - i); }
 		GINLINE gint operator-(const Iterator &iter) const { return m_pData - iter.m_pData; }
-		GINLINE operator DataT*() const { return m_pData; }
+		GINLINE operator T*() const { return m_pData; }
 
 	private:
-		DataT *m_pData;
+		T *m_pData;
 	};
 
 	class ConstIterator
@@ -54,12 +54,12 @@ public:
 		friend class Iterator;
 	public:
 		GINLINE ConstIterator() : m_pData(GNULL) {}
-		GINLINE ConstIterator(const DataT *data) : m_pData(data) {}
+		GINLINE ConstIterator(const T *data) : m_pData(data) {}
 		GINLINE explicit ConstIterator(const Iterator &iter) : m_pData(iter.m_pData) {}
 
-		GINLINE const DataT &operator*() const { return *m_pData; }
-		GINLINE const DataT *operator->() const { return m_pData; }
-		GINLINE const DataT &operator[](gsize pos) const { return *(m_pData + pos); }
+		GINLINE const T &operator*() const { return *m_pData; }
+		GINLINE const T *operator->() const { return m_pData; }
+		GINLINE const T &operator[](gsize pos) const { return *(m_pData + pos); }
 		GINLINE gbool operator==(const ConstIterator &citer) const { return m_pData == citer.m_pData; }
 		GINLINE gbool operator!=(const ConstIterator &citer) const { return m_pData != citer.m_pData; }
 		GINLINE gbool operator<(const ConstIterator &citer) const { return m_pData < citer.m_pData; }
@@ -67,18 +67,18 @@ public:
 		GINLINE gbool operator>(const ConstIterator &citer) const { return m_pData > citer.m_pData; }
 		GINLINE gbool operator>=(const ConstIterator &citer) const { return m_pData >= citer.m_pData; }
 		GINLINE ConstIterator &operator++() { ++m_pData; return *this; }
-		GINLINE ConstIterator  operator++(gint) { const DataT *n = m_pData; ++m_pData; return n; }
+		GINLINE ConstIterator  operator++(gint) { const T *n = m_pData; ++m_pData; return n; }
 		GINLINE ConstIterator &operator--() { m_pData--; return *this; }
-		GINLINE ConstIterator  operator--(gint) { const DataT *data = m_pData; m_pData--; return data; }
+		GINLINE ConstIterator  operator--(gint) { const T *data = m_pData; m_pData--; return data; }
 		GINLINE ConstIterator &operator+=(gint i) { m_pData += i; return *this; }
 		GINLINE ConstIterator &operator-=(gint i) { m_pData -= i; return *this; }
 		GINLINE ConstIterator  operator+(gint i) const { return ConstIterator(m_pData + i); }
 		GINLINE ConstIterator  operator-(gint i) const { return ConstIterator(m_pData - i); }
 		GINLINE int operator-(const ConstIterator &citer) const { return m_pData - citer.m_pData; }
-		GINLINE operator const DataT*() const { return m_pData; }
+		GINLINE operator const T*() const { return m_pData; }
 
 	private:
-		const DataT *m_pData;
+		const T *m_pData;
 	};
 
 	friend class Iterator;
@@ -87,12 +87,12 @@ public:
 public:
 	GVector();
 	explicit GVector(gsize size);
-	explicit GVector(gsize size, const DataT &data);
-	GVector(const GVector<DataT> &);
-	GVector(GVector<DataT> &&);
+	explicit GVector(gsize size, const T &data);
+	GVector(const GVector<T> &);
+	GVector(GVector<T> &&);
 
-	GVector<DataT> &operator=(const GVector<DataT> &);
-	GVector<DataT> &operator=(GVector<DataT> &&);
+	GVector<T> &operator=(const GVector<T> &);
+	GVector<T> &operator=(GVector<T> &&);
 
 	gvoid Reserve(gsize);
 	gvoid Resize(gsize);
@@ -104,32 +104,32 @@ public:
 	gvoid Destroy(); // 销毁所有数据
 	//gvoid Collect(); // 回收垃圾
 
-	DataT &GetAt(gsize);
-	const DataT &GetAt(gsize) const;
+	T &GetAt(gsize);
+	const T &GetAt(gsize) const;
 
-	DataT *CursorAt(gsize);
-	const DataT *CursorAt(gsize) const;
+	T *CursorAt(gsize);
+	const T *CursorAt(gsize) const;
 
-	DataT &operator[](gsize);
-	const DataT &operator[](gsize) const;
+	T &operator[](gsize);
+	const T &operator[](gsize) const;
 
-	gvoid PushBack(const DataT &data);
-	gvoid PushBack(DataT &&data);
+	gvoid PushBack(const T &data);
+	gvoid PushBack(T &&data);
 
-	gvoid PushFront(const DataT &data);
-	gvoid PushFront(DataT &&data);
+	gvoid PushFront(const T &data);
+	gvoid PushFront(T &&data);
 
-	gvoid PopBack(DataT *data = GNULL);
+	gvoid PopBack(T *data = GNULL);
 	gvoid PopBack(gsize size); // 从队尾除去size个元素，这些元素会全部被析构
 
-	gvoid PopFront(DataT *data = GNULL);
+	gvoid PopFront(T *data = GNULL);
 	gvoid PopFront(gsize size); // 从队首除去size个元素，这些元素会全部被析构
 
-	gvoid Append(const DataT &data);
-	gvoid Append(DataT &&data);
+	gvoid Append(const T &data);
+	gvoid Append(T &&data);
 
-	gvoid Append(const GVector<DataT> &arr);
-	gvoid Append(GVector<DataT> &&arr);
+	gvoid Append(const GVector<T> &arr);
+	gvoid Append(GVector<T> &&arr);
 
 	Iterator Begin();
 	ConstIterator Begin() const;
@@ -138,29 +138,29 @@ public:
 	ConstIterator End() const;
 	ConstIterator ConstEnd() const;
 
-	DataT &First();
-	const DataT &First() const;
-	DataT &Last();
-	const DataT &Last() const;
+	T &First();
+	const T &First() const;
+	T &Last();
+	const T &Last() const;
 
-	gbool StartWith(const DataT &) const;
-	gbool EndWith(const DataT &) const;
+	gbool StartWith(const T &) const;
+	gbool EndWith(const T &) const;
 
 	//Iterator Erase(const Iterator &iter);
 	//Iterator Erase(const Iterator &begin, const Iterator &end);
 
 	gvoid RemoveAt(gsize pos);
 	//gvoid Remove(gsize start, gsize size);
-	//gvoid Remove(const DataT &);
-	//gsize FirstIndexOf(const DataT &);
-	//gsize LastIndexOf(const DataT &);
+	//gvoid Remove(const T &);
+	//gsize FirstIndexOf(const T &);
+	//gsize LastIndexOf(const T &);
 
-	DataT *Head();
-	const DataT *Head() const;
-	DataT *Tail();
-	const DataT *Tail() const;
+	T *Head();
+	const T *Head() const;
+	T *Tail();
+	const T *Tail() const;
 
-	//gvoid MemCopyFrom(const GVector<DataT> &);
+	//gvoid MemCopyFrom(const GVector<T> &);
 
 	guint ClassCode() const GNOEXCEPT;
 	gbool Serialize(GArchive &archive) const;
@@ -172,7 +172,7 @@ private:
 	gvoid Reserve(gsize, gsize start);
 
 	// 动态数组
-	GDynamicArray<DataT> m_tArray;
+	GDynamicArray<T> m_tArray;
 
 	// 头指针，指向首元素，初始值为NULL_POS
 	gsize m_nHead;

@@ -23,10 +23,10 @@ namespace gsystem { // gsystem
 /********************************************************************************
 **
 ** @brief 栈
-** @template {DataT} 栈元素的类型
+** @template T {type} 栈元素的类型
 **
 ********************************************************************************/
-template<typename DataT>
+template<typename T>
 class GStack 
 	: virtual public GObject
 {
@@ -77,52 +77,53 @@ public:
 	**
 	** @name Push
 	** @brief 入栈
-	** @param [in] value {const DataT &} 值
+	** @param [in] value {const T &} 值
 	**
 	** 值将被拷贝一份入栈
 	**
 	****************************************************************************/
-	virtual gvoid Push(const DataT &value) = 0;
+	virtual gvoid Push(const T &value) = 0;
 
 	/****************************************************************************
 	**
 	** @name Push
 	** @brief 入栈
-	** @param [in] value {DataT &&} 值
+	** @param [in] value {T &&} 值
 	**
 	** 值将被优先使用移动入栈，若无法移动则使用拷贝
 	**
 	****************************************************************************/
-	virtual gvoid Push(DataT &&value) = 0;
+	virtual gvoid Push(T &&value) = 0;
 
 	/****************************************************************************
 	**
 	** @name Pop
 	** @brief 出栈
-	** @param [out] value {DataT *} 用于接受出队的值
+	** @param [out] value {T *} 用于接受出队的值
+	** @return {gbool} 若出栈成功，则返回true，否则（栈为空）返回false
 	**
 	** 若参数为空（GNULL），则不会接受出栈的值，否则会优先将出栈的值移动到value中
 	**
 	****************************************************************************/
-	virtual gvoid Pop(DataT *data = GNULL) = 0;
+	virtual gbool Pop(T *data = GNULL) = 0;
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取栈顶元素
-	** @return {const DataT &} 栈顶元素的引用
+	** @return {const T &} 栈顶元素的引用
 	**
 	****************************************************************************/
-	virtual const DataT &Top() const = 0;
+	virtual const T &Top() const = 0;
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取栈顶元素
-	** @return {DataT &} 栈顶元素的引用
+	** @return {T &} 栈顶元素的引用
 	**
 	****************************************************************************/
-	virtual DataT &Top() = 0;
+	virtual T &Top() = 0;
 };
 
 } // namespace gsystem

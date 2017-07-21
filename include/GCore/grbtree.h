@@ -3,7 +3,7 @@
 ** GSystem: A quick, micro library of C++
 **
 ** @file	grbtree.h
-** @brief	该文件包含了红黑树的定义及实现
+** @brief	红黑树
 ** @author	birderyu
 ** @contact	https://github.com/birderyu
 ** @date	2016-08-17

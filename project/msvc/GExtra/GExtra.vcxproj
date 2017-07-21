@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\gextra\ggeojson.h" />
+    <ClInclude Include="..\..\..\include\gextra\gjsonarray.h" />
+    <ClInclude Include="..\..\..\include\gextra\gjsonobject.h" />
+    <ClInclude Include="..\..\..\include\gextra\gjsonpair.h" />
+    <ClInclude Include="..\..\..\include\gextra\gjsonparseexception.h" />
+    <ClInclude Include="..\..\..\include\gextra\gjsonparsermessage.h" />
+    <ClInclude Include="..\..\..\include\gextra\gjsonvalue.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C1150DC5-3B95-4853-8D87-82F53D823D56}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

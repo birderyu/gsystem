@@ -21,7 +21,7 @@ namespace gsystem { // gsystem
 template<typename DataT>
 class GHuffmanTreeNode 
 	: public GBinTreeNodeT<GHuffmanTreeNode<DataT>>
-	, public GDataNodeT<DataT>
+	, public GValueNodeT<DataT>
 	, public GNewT<GHuffmanTreeNode<DataT>>
 {
 public:
@@ -31,7 +31,7 @@ public:
 		GHuffmanTreeNode<DataT> *left = GNULL,
 		GHuffmanTreeNode<DataT> *right = GNULL)
 		: GBinTreeNodeT<GHuffmanTreeNode<DataT>>(parent, left, right)
-		, GDataNodeT<DataT>(data)
+		, GValueNodeT<DataT>(data)
 	{
 
 	}

@@ -91,13 +91,13 @@ gvoid GListQueue<DataT>::DeQueue(DataT *data)
 template <typename DataT> GINLINE
 const DataT &GListQueue<DataT>::Head() const
 {
-	return m_tList.GetFirstData();
+	return m_tList.GetFirstValue();
 }
 
 template <typename DataT> GINLINE
 DataT &GListQueue<DataT>::Head()
 {
-	return m_tList.GetFirstData();
+	return m_tList.GetFirstValue();
 }
 
 }

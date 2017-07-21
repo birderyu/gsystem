@@ -29,7 +29,7 @@ struct GNextNodeT
 {
 	NodeT *m_pNext;
 
-	GNextNodeT(NodeT *);
+	GNextNodeT(NodeT *node);
 };
 
 /// 双向链表节点
@@ -76,12 +76,13 @@ struct GBinTreeNodeT
 };
 
 /// 数据节点
-template<typename DataT>
-struct GDataNodeT
+template<typename T>
+struct GValueNodeT
 {
-	DataT m_tData;
+	T m_tData;
 
-	GDataNodeT(const DataT &);
+	GValueNodeT(const T &value);
+	GValueNodeT(T &&value);
 };
 
 /// 单孩子节点
@@ -90,7 +91,7 @@ struct GChildNodeT
 {
 	NodeT *m_pChild;
 
-	GChildNodeT(const NodeT *);
+	GChildNodeT(const NodeT *node);
 };
 
 /// 键值对节点

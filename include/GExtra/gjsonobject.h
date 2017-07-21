@@ -2,13 +2,12 @@
 **
 ** GSystem: A quick, micro library of C++
 **
-** @file	gjsonobject.h
-** @brief	Json对象类型的定义
-** @author	birderyu
-** @contact	https://github.com/birderyu
-** @date	2017-1-3
-** @version	1.0
-** @see		GJsonObject
+** @file gjsonobject.h
+** @brief Json对象类型的定义
+** @author birderyu
+** @contact https://github.com/birderyu
+** @date 2017-1-3
+** @version 0.5.0
 **
 ** Json对象在花括号中书写：
 ** 对象可以包含多个名称 / 值对：

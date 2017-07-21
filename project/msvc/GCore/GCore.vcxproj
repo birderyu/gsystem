@@ -175,6 +175,7 @@
     <ClInclude Include="..\..\..\include\gcore\gdeque.h" />
     <ClInclude Include="..\..\..\include\gcore\gexceptdef.h" />
     <ClInclude Include="..\..\..\include\gcore\gexception.h" />
+    <ClInclude Include="..\..\..\include\gcore\giterator.h" />
     <ClInclude Include="..\..\..\include\gcore\goutofrangeexception.h" />
     <ClInclude Include="..\..\..\include\gcore\ginitializerlist.h" />
     <ClInclude Include="..\..\..\include\gcore\goutofmemoryexception.h" />
@@ -402,6 +403,7 @@
     <None Include="..\..\..\include\gcore\inline\ghash.inl" />
     <None Include="..\..\..\include\gcore\inline\ghashtable.inl" />
     <None Include="..\..\..\include\gcore\inline\ghuffmantree.inl" />
+    <None Include="..\..\..\include\gcore\inline\glinkedlist.inl" />
     <None Include="..\..\..\include\gcore\inline\glist.inl" />
     <None Include="..\..\..\include\gcore\inline\glistqueue.inl" />
     <None Include="..\..\..\include\gcore\inline\gliststack.inl" />

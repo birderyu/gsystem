@@ -3,15 +3,15 @@
 
 namespace gsystem { // gsystem
 
-template<typename DataT, typename NodeT>
-GINLINE GCList<DataT, NodeT>::GCList()
+template<typename T, typename NodeT>
+GINLINE GCList<T, NodeT>::GCList()
 : m_pCursor(GNULL)
 {
 
 }
 
-template<typename DataT, typename NodeT>
-GINLINE typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetNext()
+template<typename T, typename NodeT>
+GINLINE typename GLinkedList<T, NodeT>::Node *GCList<T, NodeT>::GetNextNode()
 {
 	GASSERT(0 != m_nSize);
 
@@ -23,8 +23,8 @@ GINLINE typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetNext(
 	return m_pCursor;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetNext() const
+template<typename T, typename NodeT>
+GINLINE const typename GLinkedList<T, NodeT>::Node *GCList<T, NodeT>::GetNextNode() const
 {
 	GASSERT(0 != m_nSize);
 
@@ -36,8 +36,8 @@ GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::Ge
 	return m_pCursor;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gsize GCList<DataT, NodeT>::GetCurrentIndex() const
+template<typename T, typename NodeT>
+GINLINE gsize GCList<T, NodeT>::GetCurrentIndex() const
 {
 	GASSERT(0 != m_nSize);
 
@@ -52,20 +52,20 @@ GINLINE gsize GCList<DataT, NodeT>::GetCurrentIndex() const
 	return 0;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetCurrentNode()
+template<typename T, typename NodeT>
+GINLINE typename GLinkedList<T, NodeT>::Node *GCList<T, NodeT>::GetCurrentNode()
 {
 	return m_pCursor;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE const typename GLinkedList<DataT, NodeT>::Node *GCList<DataT, NodeT>::GetCurrentNode() const
+template<typename T, typename NodeT>
+GINLINE const typename GLinkedList<T, NodeT>::Node *GCList<T, NodeT>::GetCurrentNode() const
 {
 	return m_pCursor;
 }
 
-template<typename DataT, typename NodeT>
-GINLINE gvoid GCList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
+template<typename T, typename NodeT>
+GINLINE gvoid GCList<T, NodeT>::RemoveAt(gsize pos, T *value)
 {
 	GASSERT(pos < m_nSize);
 
@@ -74,10 +74,10 @@ GINLINE gvoid GCList<DataT, NodeT>::RemoveAt(gsize pos, DataT *data)
 	{
 		m_pFirst = m_pFirst->m_pNext;
 		m_pCursor = GNULL;
-		if (data)
+		if (value)
 		{
 			// 将元素移走，而非拷贝
-			*data = GMove(pTmpNode1->m_tData);
+			*value = GMove(pTmpNode1->m_tData);
 		}
 		delete pTmpNode1;
 		pTmpNode1 = GNULL;
