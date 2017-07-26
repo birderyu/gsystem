@@ -22,12 +22,12 @@ namespace gsystem { // gsystem
 /********************************************************************************
 **
 ** @brief 使用数组实现的队列
-** @template {DataT} 队列元素的类型
+** @template T {type} 队列元素的类型
 **
 ********************************************************************************/
-template <typename DataT>
+template <typename T>
 class GArrayQueue
-	: public GQueue<DataT>
+	: public GQueue<T>
 {
 public:
 	/****************************************************************************
@@ -45,39 +45,39 @@ public:
 	**
 	** @name GArrayQueue
 	** @brief 拷贝构造函数（copy constructor）
-	** @param [in] queue {const GArrayQueue<DataT> &} 队列
+	** @param [in] queue {const GArrayQueue<T> &} 队列
 	**
 	****************************************************************************/
-	GArrayQueue(const GArrayQueue<DataT> &queue);
+	GArrayQueue(const GArrayQueue<T> &queue);
 
 	/****************************************************************************
 	**
 	** @name GArrayQueue
 	** @brief 移动构造函数（move constructor）
-	** @param [in] queue {GArrayQueue<DataT> &&} 队列
+	** @param [in] queue {GArrayQueue<T> &&} 队列
 	**
 	****************************************************************************/
-	GArrayQueue(GArrayQueue<DataT> &&queue);
+	GArrayQueue(GArrayQueue<T> &&queue);
 
 	/****************************************************************************
 	**
 	** @name operator=
 	** @brief 拷贝运算符
-	** @param [in] queue {const GArrayQueue<DataT> &} 队列
-	** @return {GArrayQueue<DataT> &} 队列的引用
+	** @param [in] queue {const GArrayQueue<T> &} 队列
+	** @return {GArrayQueue<T> &} 队列的引用
 	**
 	****************************************************************************/
-	GArrayQueue<DataT> &operator=(const GArrayQueue<DataT> &queue);
+	GArrayQueue<T> &operator=(const GArrayQueue<T> &queue);
 
 	/****************************************************************************
 	**
 	** @name operator=
 	** @brief 移动运算符
-	** @param [in] queue {GArrayQueue<DataT> &&} 队列
-	** @return {GArrayQueue<DataT> &} 队列的引用
+	** @param [in] queue {GArrayQueue<T> &&} 队列
+	** @return {GArrayQueue<T> &} 队列的引用
 	**
 	****************************************************************************/
-	GArrayQueue<DataT> &operator=(GArrayQueue<DataT> &&queue);
+	GArrayQueue<T> &operator=(GArrayQueue<T> &&queue);
 
 	/****************************************************************************
 	**
@@ -125,51 +125,52 @@ public:
 	**
 	** @name EnQueue
 	** @brief 入队
-	** @param [in] value {const DataT &} 值
+	** @param [in] value {const T &} 值
 	** @see GQueue
 	**
 	****************************************************************************/
-	gvoid EnQueue(const DataT &value);
+	gvoid EnQueue(const T &value);
 
 	/****************************************************************************
 	**
 	** @name EnQueue
 	** @brief 入队
-	** @param [in] value {DataT &&} 值
+	** @param [in] value {T &&} 值
 	** @see GQueue
 	**
 	****************************************************************************/
-	gvoid EnQueue(DataT &&value);
+	gvoid EnQueue(T &&value);
 
 	/****************************************************************************
 	**
 	** @name DeQueue
 	** @brief 出队
-	** @param [out] value {DataT *} 用于接受出队的值
-	** @see GQueue
+	** @param [out] value {T *} 用于接受出队的值
+	** @return {gbool} 若出队成功，则返回true，否则（队列为空）返回false
+	** @see GQueue::DeQueue
 	**
 	****************************************************************************/
-	gvoid DeQueue(DataT *value = GNULL);
+	gbool DeQueue(T *value = GNULL);
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取队首元素
-	** @return {const DataT &} 队首元素的引用
+	** @return {const T &} 队首元素的引用
 	** @see GQueue
 	**
 	****************************************************************************/
-	const DataT &Head() const;
+	const T &Head() const;
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取队首元素
-	** @return {DataT &} 队首元素的引用
+	** @return {T &} 队首元素的引用
 	** @see GQueue
 	**
 	****************************************************************************/
-	DataT &Head();
+	T &Head();
 	
 private:
 	/****************************************************************************
@@ -210,7 +211,7 @@ private:
 	** 数组
 	**
 	****************************************************************************/
-	GDynamicArray<DataT> m_tArray;
+	GDynamicArray<T> m_tArray;
 };
 
 } // namespace gsystem

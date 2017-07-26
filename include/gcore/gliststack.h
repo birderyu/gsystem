@@ -7,16 +7,16 @@
 
 namespace gsystem { // gsystem
 
-template<typename DataT>
+template<typename T>
 class GListStack 
-	: public GStack<DataT>
+	: public GStack<T>
 {
 public:
 	GListStack();
-	GListStack(const GListStack<DataT> &stack);
-	GListStack(GListStack<DataT> &&stack);
-	GListStack<DataT>& operator=(const GListStack<DataT> &stack);
-	GListStack<DataT>& operator=(GListStack<DataT> &&stack);
+	GListStack(const GListStack<T> &stack);
+	GListStack(GListStack<T> &&stack);
+	GListStack<T>& operator=(const GListStack<T> &stack);
+	GListStack<T>& operator=(GListStack<T> &&stack);
 
 public:
 	gsize Size() const;
@@ -25,16 +25,16 @@ public:
 	gvoid Clear();
 	gvoid Destroy();
 
-	gvoid Push(const DataT &data);
-	gvoid Push(DataT &&data);
+	gvoid Push(const T &value);
+	gvoid Push(T &&value);
 
-	gvoid Pop(DataT *data = GNULL);
+	gbool Pop(T *value = GNULL);
 
-	const DataT &Top() const;
-	DataT &Top();
+	const T &Top() const;
+	T &Top();
 
 private:
-	GDList<DataT> m_tList;
+	GDList<T> m_tList;
 };
 
 } // namespace gsystem

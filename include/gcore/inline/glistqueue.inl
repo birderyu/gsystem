@@ -3,29 +3,29 @@
 
 namespace gsystem {
 
-template <typename DataT> GINLINE
-GListQueue<DataT>::GListQueue()
+template <typename T> GINLINE
+GListQueue<T>::GListQueue()
 	: m_tList()
 {
 
 }
 
-template<typename DataT> GINLINE 
-GListQueue<DataT>::GListQueue(const GListQueue<DataT> &queue)
+template<typename T> GINLINE 
+GListQueue<T>::GListQueue(const GListQueue<T> &queue)
 	: m_tList(queue.m_tList)
 {
 
 }
 
-template<typename DataT> GINLINE 
-GListQueue<DataT>::GListQueue(GListQueue<DataT> &&queue)
+template<typename T> GINLINE 
+GListQueue<T>::GListQueue(GListQueue<T> &&queue)
 	: m_tList(GMove(queue.m_tList))
 {
 
 }
 
-template<typename DataT> GINLINE
-GListQueue<DataT>& GListQueue<DataT>::operator=(const GListQueue<DataT> &queue)
+template<typename T> GINLINE
+GListQueue<T>& GListQueue<T>::operator=(const GListQueue<T> &queue)
 {
 	if (this == &queue)
 	{
@@ -35,8 +35,8 @@ GListQueue<DataT>& GListQueue<DataT>::operator=(const GListQueue<DataT> &queue)
 	return *this;
 }
 
-template<typename DataT> GINLINE
-GListQueue<DataT>& GListQueue<DataT>::operator=(GListQueue<DataT> &&queue)
+template<typename T> GINLINE
+GListQueue<T>& GListQueue<T>::operator=(GListQueue<T> &&queue)
 {
 	if (this == &queue)
 	{
@@ -46,56 +46,61 @@ GListQueue<DataT>& GListQueue<DataT>::operator=(GListQueue<DataT> &&queue)
 	return *this;
 }
 
-template <typename DataT> GINLINE
-gsize GListQueue<DataT>::Size() const
+template <typename T> GINLINE
+gsize GListQueue<T>::Size() const
 {
 	return m_tList.Size();
 }
 
-template <typename DataT> GINLINE
-gbool GListQueue<DataT>::IsEmpty() const
+template <typename T> GINLINE
+gbool GListQueue<T>::IsEmpty() const
 {
 	return m_tList.IsEmpty();
 }
 
-template <typename DataT> GINLINE
-gvoid GListQueue<DataT>::Destroy()
+template <typename T> GINLINE
+gvoid GListQueue<T>::Destroy()
 {
 	m_tList.RemoveAll();
 }
 
-template <typename DataT> GINLINE
-gvoid GListQueue<DataT>::Clear()
+template <typename T> GINLINE
+gvoid GListQueue<T>::Clear()
 {
 	m_tList.RemoveAll();
 }
 
-template <typename DataT> GINLINE
-gvoid GListQueue<DataT>::EnQueue(const DataT &data)
+template <typename T> GINLINE
+gvoid GListQueue<T>::EnQueue(const T &value)
 {
-	m_tList.AddLast(data);
+	m_tList.AddLast(value);
 }
 
-template <typename DataT> GINLINE
-gvoid GListQueue<DataT>::EnQueue(DataT &&data)
+template <typename T> GINLINE
+gvoid GListQueue<T>::EnQueue(T &&value)
 {
-	m_tList.AddLast(GForward<DataT>(data));
+	m_tList.AddLast(GForward<T>(value));
 }
 
-template <typename DataT> GINLINE
-gvoid GListQueue<DataT>::DeQueue(DataT *data)
+template <typename T> GINLINE
+gbool GListQueue<T>::DeQueue(T *value)
 {
-	m_tList.RemoveFirst(data);
+	if (IsEmpty())
+	{
+		return false;
+	}
+	m_tList.RemoveFirst(value);
+	return true;
 }
 
-template <typename DataT> GINLINE
-const DataT &GListQueue<DataT>::Head() const
+template <typename T> GINLINE
+const T &GListQueue<T>::Head() const
 {
 	return m_tList.GetFirstValue();
 }
 
-template <typename DataT> GINLINE
-DataT &GListQueue<DataT>::Head()
+template <typename T> GINLINE
+T &GListQueue<T>::Head()
 {
 	return m_tList.GetFirstValue();
 }

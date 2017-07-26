@@ -3,29 +3,29 @@
 
 namespace gsystem { // gsystem
 
-template<typename DataT>
-GINLINE GListStack<DataT>::GListStack() 
+template<typename T>
+GINLINE GListStack<T>::GListStack() 
 	: m_tList()
 {
 
 }
 
-template<typename DataT>
-GINLINE GListStack<DataT>::GListStack(const GListStack<DataT> &stack)
+template<typename T>
+GINLINE GListStack<T>::GListStack(const GListStack<T> &stack)
 	: m_tList(stack.m_tList)
 {
 
 }
 
-template<typename DataT>
-GINLINE GListStack<DataT>::GListStack(GListStack<DataT> &&stack)
+template<typename T>
+GINLINE GListStack<T>::GListStack(GListStack<T> &&stack)
 	:m_tList(GMove(stack.m_tList))
 {
 
 }
 
-template<typename DataT> GINLINE
-GListStack<DataT>& GListStack<DataT>::operator=(const GListStack<DataT> &stack)
+template<typename T> GINLINE
+GListStack<T>& GListStack<T>::operator=(const GListStack<T> &stack)
 {
 	if (this == &stack)
 	{
@@ -35,8 +35,8 @@ GListStack<DataT>& GListStack<DataT>::operator=(const GListStack<DataT> &stack)
 	return *this;
 }
 
-template<typename DataT> GINLINE
-GListStack<DataT>& GListStack<DataT>::operator=(GListStack<DataT> &&stack)
+template<typename T> GINLINE
+GListStack<T>& GListStack<T>::operator=(GListStack<T> &&stack)
 {
 	if (this == &stack)
 	{
@@ -46,56 +46,61 @@ GListStack<DataT>& GListStack<DataT>::operator=(GListStack<DataT> &&stack)
 	return *this;
 }
 
-template<typename DataT>
-GINLINE gbool GListStack<DataT>::IsEmpty() const
+template<typename T>
+GINLINE gbool GListStack<T>::IsEmpty() const
 {
 	return m_tList.IsEmpty();
 }
 
-template<typename DataT> GINLINE 
-gvoid GListStack<DataT>::Clear()
+template<typename T> GINLINE 
+gvoid GListStack<T>::Clear()
 {
 	m_tList.RemoveAll();
 }
 
-template<typename DataT> GINLINE
-gvoid GListStack<DataT>::Destroy()
+template<typename T> GINLINE
+gvoid GListStack<T>::Destroy()
 {
 	m_tList.RemoveAll();
 }
 
-template<typename DataT>
-GINLINE gsize GListStack<DataT>::Size() const
+template<typename T>
+GINLINE gsize GListStack<T>::Size() const
 {
 	return m_tList.Size();
 }
 
-template<typename DataT>
-GINLINE gvoid GListStack<DataT>::Push(const DataT& data)
+template<typename T>
+GINLINE gvoid GListStack<T>::Push(const T& value)
 {
-	m_tList.AddFirst(data);
+	m_tList.AddFirst(value);
 }
 
-template<typename DataT>
-GINLINE gvoid GListStack<DataT>::Push(DataT &&data)
+template<typename T>
+GINLINE gvoid GListStack<T>::Push(T &&value)
 {
-	m_tList.AddFirst(GForward<DataT>(data));
+	m_tList.AddFirst(GForward<T>(value));
 }
 
-template<typename DataT>
-GINLINE gvoid GListStack<DataT>::Pop(DataT *data)
+template<typename T>
+GINLINE gbool GListStack<T>::Pop(T *value)
 {
-	m_tList.RemoveFirst(data);
+	if (IsEmpty())
+	{
+		return false;
+	}
+	m_tList.RemoveFirst(value);
+	return true;
 }
 
-template<typename DataT>
-GINLINE const DataT &GListStack<DataT>::Top() const
+template<typename T>
+GINLINE const T &GListStack<T>::Top() const
 {
 	return m_tList.GetFirstValue();
 }
 
-template<typename DataT>
-GINLINE DataT &GListStack<DataT>::Top()
+template<typename T>
+GINLINE T &GListStack<T>::Top()
 {
 	return m_tList.GetFirstValue();
 }

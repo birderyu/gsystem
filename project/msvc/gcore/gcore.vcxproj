@@ -399,6 +399,7 @@
     <None Include="..\..\..\include\gcore\inline\gdlist.inl" />
     <None Include="..\..\..\include\gcore\inline\gdynamicarray.inl" />
     <None Include="..\..\..\include\gcore\inline\gendian.inl" />
+    <None Include="..\..\..\include\gcore\inline\gfunctor.inl" />
     <None Include="..\..\..\include\gcore\inline\ggraph.inl" />
     <None Include="..\..\..\include\gcore\inline\ghash.inl" />
     <None Include="..\..\..\include\gcore\inline\ghashtable.inl" />

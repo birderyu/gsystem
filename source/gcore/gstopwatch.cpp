@@ -11,24 +11,29 @@
 
 namespace gsystem { // gsystem
 
+GStopWatch::GStopWatch()
+{
+	Start();
+}
+
 gvoid GStopWatch::Start()
 {
-	m_nStart = Tick();
+	m_nStart = Moment();
 }
 
-gint GStopWatch::Pause() const
+gulong GStopWatch::Tick() const
 {
-	return Tick() - m_nStart;
+	return Moment() - m_nStart;
 }
 
-gint GStopWatch::Stop()
+gulong GStopWatch::Stop()
 {
-	gint t = Tick() - m_nStart;
+	gulong t = Moment() - m_nStart;
 	Start();
 	return t;
 }
 
-gulong GStopWatch::Tick() const
+gulong GStopWatch::Moment() const
 {
 #ifdef G_SYSTEM_WINDOWS 
 	return ::GetTickCount();

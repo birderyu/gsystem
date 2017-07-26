@@ -23,9 +23,6 @@
     <ClInclude Include="typedef_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="binarytree_test.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="binaryheap_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -45,6 +42,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="series_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hashtable_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="rbtree_test.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

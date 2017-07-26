@@ -22,12 +22,12 @@ namespace gsystem { // gsystem
 /********************************************************************************
 **
 ** @brief 使用数组实现的栈
-** @template {DataT} 栈元素的类型
+** @template {T} 栈元素的类型
 **
 ********************************************************************************/
-template<typename DataT>
+template<typename T>
 class GArrayStack 
-	: public GStack<DataT>
+	: public GStack<T>
 {
 public:
 	/****************************************************************************
@@ -45,39 +45,39 @@ public:
 	**
 	** @name GArrayStack
 	** @brief 拷贝构造函数（copy constructor）
-	** @param [in] stack {const GArrayStack<DataT> &} 栈
+	** @param [in] stack {const GArrayStack<T> &} 栈
 	**
 	****************************************************************************/
-	GArrayStack(const GArrayStack<DataT> &stack);
+	GArrayStack(const GArrayStack<T> &stack);
 
 	/****************************************************************************
 	**
 	** @name GArrayStack
 	** @brief 移动构造函数（move constructor）
-	** @param [in] stack {GArrayStack<DataT> &&} 栈
+	** @param [in] stack {GArrayStack<T> &&} 栈
 	**
 	****************************************************************************/
-	GArrayStack(GArrayStack<DataT> &&stack);
+	GArrayStack(GArrayStack<T> &&stack);
 
 	/****************************************************************************
 	**
 	** @name operator=
 	** @brief 拷贝运算符
-	** @param [in] stack {const GArrayStack<DataT> &} 栈
-	** @return {GArrayStack<DataT> &} 栈的引用
+	** @param [in] stack {const GArrayStack<T> &} 栈
+	** @return {GArrayStack<T> &} 栈的引用
 	**
 	****************************************************************************/
-	GArrayStack<DataT>& operator=(const GArrayStack<DataT> &stack);
+	GArrayStack<T>& operator=(const GArrayStack<T> &stack);
 
 	/****************************************************************************
 	**
 	** @name operator=
 	** @brief 移动运算符
-	** @param [in] stack {GArrayStack<DataT> &&} 栈
-	** @return {GArrayStack<DataT> &} 栈的引用
+	** @param [in] stack {GArrayStack<T> &&} 栈
+	** @return {GArrayStack<T> &} 栈的引用
 	**
 	****************************************************************************/
-	GArrayStack<DataT>& operator=(GArrayStack<DataT> &&stack);
+	GArrayStack<T>& operator=(GArrayStack<T> &&stack);
 
 	/****************************************************************************
 	**
@@ -125,51 +125,51 @@ public:
 	**
 	** @name Push
 	** @brief 入栈
-	** @param [in] value {const DataT &} 值
+	** @param [in] value {const T &} 值
 	** @see GStack
 	**
 	****************************************************************************/
-	gvoid Push(const DataT &data);
+	gvoid Push(const T &value);
 
 	/****************************************************************************
 	**
 	** @name Push
 	** @brief 入栈
-	** @param [in] value {DataT &&} 值
+	** @param [in] value {T &&} 值
 	** @see GStack
 	**
 	****************************************************************************/
-	gvoid Push(DataT &&data);
+	gvoid Push(T &&value);
 
 	/****************************************************************************
 	**
 	** @name Pop
 	** @brief 出栈
-	** @param [out] value {DataT *} 用于接受出队的值
+	** @param [out] value {T *} 用于接受出队的值
 	** @see GStack
 	**
 	****************************************************************************/
-	gvoid Pop(DataT *data = GNULL);
+	gbool Pop(T *value = GNULL);
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取栈顶元素
-	** @return {const DataT &} 栈顶元素的引用
+	** @return {const T &} 栈顶元素的引用
 	** @see GStack
 	**
 	****************************************************************************/
-	const DataT &Top() const;
+	const T &Top() const;
 
 	/****************************************************************************
 	**
 	** @name Head
 	** @brief 获取栈顶元素
-	** @return {DataT &} 栈顶元素的引用
+	** @return {T &} 栈顶元素的引用
 	** @see GStack
 	**
 	****************************************************************************/
-	DataT &Top();
+	T &Top();
 
 private:
 	/****************************************************************************
@@ -212,7 +212,7 @@ private:
 	** 数组
 	**
 	****************************************************************************/
-	GDynamicArray<DataT> m_tArray;
+	GDynamicArray<T> m_tArray;
 };
 
 } // namespace gsystem

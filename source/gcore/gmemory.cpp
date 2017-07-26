@@ -38,4 +38,9 @@ gptr GMemSet(gptr dst, gbyte value, gsize size)
 	return memset(dst, (gint)value, size);
 }
 
+gint GMemCmp(gcptr buf1, gcptr buf2, gsize size)
+{
+	return memcmp(buf1, buf2, size);
+}
+
 } // namespace gsystem

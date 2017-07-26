@@ -37,16 +37,10 @@ GINLINE G_RED_BLACK_TREE_NODE_QUAL::GRBTreeNode(
 
 }
 
-G_RED_BLACK_TREE_TEMPLATE
-GINLINE G_RED_BLACK_TREE_QUAL::~GRBTree()
-{
-
-}
-
-G_RED_BLACK_TREE_TEMPLATE
+G_RED_BLACK_TREE_TEMPLATE 
 GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &value, gbool *realInsert)
 {
-	NodeT *insert_point = GNULL; // ����λ�õ�˫�׽ڵ�
+	NodeT *insert_point = GNULL; // 插入位置的双亲节点
 	NodeT *node = m_pRoot;
 	while (node)
 	{
@@ -71,17 +65,17 @@ GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &valu
 		}
 	}
 
-	// ��������ڵ�
+	// 新增插入节点
 	NodeT* insert_node = new NodeT(key, value);
 	if (!insert_point)
 	{
-		//�������һ�ſ���
+		//插入的是一颗空树
 		m_pRoot = insert_node;
 		insert_node->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;
 	}
 	else
 	{
-		// �ҵ�����Ĳ���λ��
+		// 找到具体的插入位置
 		gint ret = m_fCompare(key, insert_point->m_tKey);
 		if (ret < 0)
 		{
@@ -93,11 +87,11 @@ GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &valu
 		}
 		else
 		{
-			// ����������ͬ�����
+			// 处理数据相同的情况
 		}
 		insert_node->m_pParent = insert_point;
 
-		// �����޸�
+		// 插入修复
 		InsertFixUp(insert_node);
 	}
 
@@ -108,10 +102,10 @@ GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, const ValueT &valu
 	return insert_node;
 }
 
-G_RED_BLACK_TREE_TEMPLATE
+G_RED_BLACK_TREE_TEMPLATE 
 GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, ValueT &&value, gbool *realInsert)
 {
-	NodeT *insert_point = GNULL; // ����λ�õ�˫�׽ڵ�
+	NodeT *insert_point = GNULL; // 插入位置的双亲节点
 	NodeT *node = m_pRoot;
 	while (node)
 	{
@@ -136,17 +130,17 @@ GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, ValueT &&value, gb
 		}
 	}
 
-	// ��������ڵ�
+	// 新增插入节点
 	NodeT* insert_node = new NodeT(key, GForward<ValueT>(value));
 	if (!insert_point)
 	{
-		//�������һ�ſ���
+		//插入的是一颗空树
 		m_pRoot = insert_node;
 		insert_node->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;
 	}
 	else
 	{
-		// �ҵ�����Ĳ���λ��
+		// 找到具体的插入位置
 		gint ret = m_fCompare(key, insert_point->m_tKey);
 		if (ret < 0)
 		{
@@ -158,11 +152,11 @@ GINLINE NodeT *G_RED_BLACK_TREE_QUAL::Insert(const KeyT &key, ValueT &&value, gb
 		}
 		else
 		{
-			// ����������ͬ�����
+			// 处理数据相同的情况
 		}
 		insert_node->m_pParent = insert_point;
 
-		// �����޸�
+		// 插入修复
 		InsertFixUp(insert_node);
 	}
 
@@ -193,7 +187,7 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::Delete(NodeT *delete_point, gbool *realDele
 	}
 	if (delete_point->m_pLeft && delete_point->m_pRight)
 	{
-		// �ҵ��ڵ㣬�Ҹýڵ���������������
+		// 找到节点，且该节点有左右两个孩子
 		NodeT *successor = delete_point->m_pRight->First();
 		SwitchNode(delete_point, successor);
 	}
@@ -217,6 +211,11 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::Delete(NodeT *delete_point, gbool *realDele
 	if (!delete_point_parent)
 	{
 		m_pRoot = delete_point_child;
+		// 将根设置为黑色
+		if (delete_point_child)
+		{
+			delete_point_child->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;
+		}
 	}
 	else
 	{
@@ -315,14 +314,17 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
 			NodeT *brother = node->m_pParent->m_pRight;
 			if (brother->m_nColor == G_RED_BLACK_TREE_NODE_RED)
 			{
+				// 兄弟节点为红色
 				brother->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;
 				node->m_pParent->m_nColor = G_RED_BLACK_TREE_NODE_RED;
 				RotateLeft(node->m_pParent);
 			}
 			else
 			{
-				if (brother->m_pLeft->m_nColor == G_RED_BLACK_TREE_NODE_BLACK
-					&& brother->m_pRight->m_nColor == G_RED_BLACK_TREE_NODE_BLACK)
+				// 兄弟节点为黑色
+				// 若兄弟节点的孩子也为黑色，注意空节点为黑色
+				if ((!brother->m_pLeft || brother->m_pLeft->m_nColor == G_RED_BLACK_TREE_NODE_BLACK)
+					&& (!brother->m_pRight || brother->m_pRight->m_nColor == G_RED_BLACK_TREE_NODE_BLACK))
 				{
 					brother->m_nColor = G_RED_BLACK_TREE_NODE_RED;
 					node = node->m_pParent;
@@ -354,8 +356,10 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
 			}
 			else
 			{
-				if (brother->m_pLeft->m_nColor == G_RED_BLACK_TREE_NODE_BLACK
-					&& brother->m_pRight->m_nColor == G_RED_BLACK_TREE_NODE_BLACK)
+				// 兄弟节点为黑色
+				// 若兄弟节点的孩子也为黑色，注意空节点为黑色
+				if ((!brother->m_pLeft || brother->m_pLeft->m_nColor == G_RED_BLACK_TREE_NODE_BLACK)
+					&& (!brother->m_pRight || brother->m_pRight->m_nColor == G_RED_BLACK_TREE_NODE_BLACK))
 				{
 					brother->m_nColor = G_RED_BLACK_TREE_NODE_RED;
 					node = node->m_pParent;
@@ -377,41 +381,56 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::DeleteFixUp(NodeT *node)
 			}
 		}
 	}
-	//���node��Ϊ����㣬
-	node->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;    //����Ϊ��ɫ��
+	//最后将node置为根结点，
+	node->m_nColor = G_RED_BLACK_TREE_NODE_BLACK;    //并改为黑色。
 }
 
 G_RED_BLACK_TREE_TEMPLATE
 GINLINE gvoid G_RED_BLACK_TREE_QUAL::RotateLeft(NodeT *node)
 {
+	// 
 	if (!node || !node->m_pRight)
 	{
 		return;
 	}
-	NodeT *lower_right = node->m_pRight;
+	NodeT *lower_right = node->m_pRight; // 节点原本的右孩子
+
+	// 左旋操作如下：
+	// 1）将节点原本右孩子的双亲设置为节点的双亲
 	lower_right->m_pParent = node->m_pParent;
+	// 2）将节点的右孩子设置为节点原本右孩子的左孩子
 	node->m_pRight = lower_right->m_pLeft;
 	if (lower_right->m_pLeft)
 	{
+		// 3）将节点原本右孩子的左孩子的双亲设置为节点
 		lower_right->m_pLeft->m_pParent = node;
 	}
+
+	// 4）将节点双亲的孩子（左孩子或者右孩子）设置为节点原本的右孩子
 	if (!node->m_pParent)
 	{
-		// nodeΪ���ڵ�
+		// 4.1）节点没有双亲，则节点原本的右孩子将被设置为根节点
 		m_pRoot = lower_right;
 	}
 	else
 	{
+		// 4.2）节点有双亲，则判断节点是其双亲的左孩子或右孩子
 		if (node == node->m_pParent->m_pLeft)
 		{
+			// 4.2.1）节点是其双亲的左孩子，将节点双亲的左孩子设置为节点原本的右孩子
 			node->m_pParent->m_pLeft = lower_right;
 		}
 		else
 		{
+			// 4.2.2）节点是其双亲的右孩子，将节点双亲的右孩子设置为节点原本的右孩子
 			node->m_pParent->m_pRight = lower_right;
 		}
 	}
+
+	// 5）将节点的双亲设置为节点原本的右孩子
 	node->m_pParent = lower_right;
+
+	// 6）将节点原本右孩子的左孩子设置为节点
 	lower_right->m_pLeft = node;
 }
 
@@ -431,7 +450,7 @@ GINLINE gvoid G_RED_BLACK_TREE_QUAL::RotateRight(NodeT *node)
 	}
 	if (!node->m_pParent)
 	{
-		// nodeΪ���ڵ�
+		// node为根节点
 		m_pRoot = lower_left;
 	}
 	else

@@ -7,7 +7,7 @@
 ** @author birderyu
 ** @contact https://github.com/birderyu
 ** @date 2017-1-24
-** @version 0.5.0
+** @version 1.0.0
 **
 ** 哈希表是一种以空间换取时间以达到高效数据检索的数据结构，其理论基础是数组下标的常数级访问效率。
 ** GHashTable是一个模板类，其键类型、值类型、哈希节点类型、求取哈希码的算法、比较值的算法、解
@@ -126,7 +126,7 @@ public:
 	/****************************************************************************
 	**
 	** @name Nodes
-	** @brief 哈希表节点指针的列表
+	** @brief 哈希表节点指针的列表类型
 	**
 	****************************************************************************/
 	typedef GList<NodeT *> Nodes;
@@ -134,7 +134,7 @@ public:
 	/****************************************************************************
 	**
 	** @name Nodes
-	** @brief 哈希表节点常量指针的列表
+	** @brief 哈希表节点常量指针的列表类型
 	**
 	****************************************************************************/
 	typedef GList<const NodeT *> ConstNodes;
@@ -216,45 +216,43 @@ public:
 
 	/****************************************************************************
 	**
-	** @name Search
-	** @brief 查找键
-	** @param [in] key {const KeyT &} 键
-	** @param [out] nodes {Nodes &} 键为key的节点的集合
-	** @return {gbool} 若查找成功，则返回true，否则返回false
-	**
-	****************************************************************************/
-	virtual gbool Search(const KeyT &key, Nodes &nodes) = 0;
-
-	/****************************************************************************
-	**
-	** @name Search
-	** @brief 查找键
-	** @param [in] key {const KeyT &} 键
-	** @param [out] nodes {ConstNodes &} 键为key的节点的集合
-	** @return {gbool} 若查找成功，则返回true，否则返回false
-	**
-	****************************************************************************/
-	virtual gbool Search(const KeyT &key, ConstNodes &nodes) const = 0;
-
-	/****************************************************************************
-	**
-	** @name SearchFirst
+	** @name Find
 	** @brief 查找键的第一个节点
 	** @param [in] key {const KeyT &} 键
 	** @return {NodeT *} 节点的指针，若查找失败则返回GNULL
 	**
 	****************************************************************************/
-	virtual NodeT *SearchFirst(const KeyT &key) = 0;
+	virtual NodeT *Find(const KeyT &key) = 0;
 
 	/****************************************************************************
 	**
-	** @name SearchFirst
+	** @name Find
 	** @brief 查找键的第一个节点
 	** @param [in] key {const KeyT &} 键
 	** @return {const NodeT *} 节点的指针，若查找失败则返回GNULL
 	**
 	****************************************************************************/
-	virtual const NodeT *SearchFirst(const KeyT &key) const = 0;
+	virtual const NodeT *Find(const KeyT &key) const = 0;
+
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {Nodes &} 节点的集合
+	**
+	****************************************************************************/
+	virtual Nodes Search(const KeyT &key) = 0;
+
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {ConstNodes &} 节点的集合
+	**
+	****************************************************************************/
+	virtual ConstNodes Search(const KeyT &key) const = 0;
 
 	/****************************************************************************
 	**
@@ -293,7 +291,7 @@ public:
 	** @param [in] key {const KeyT &} 键
 	** @return {gsize} 删除的节点数
 	**
-	** 删除指定键的节点，返回删除的节点数
+	** 删除指定键的节点，返回实际删除的节点数
 	**
 	****************************************************************************/
 	virtual gsize Delete(const KeyT &key) = 0;
@@ -306,7 +304,15 @@ public:
 	** @return {gbool} 若相等，则返回true，否则返回false
 	**
 	****************************************************************************/
-	virtual gbool Equals(const GHashTableSlot &slot) const = 0;
+	gbool Equals(const GHashTableSlot &slot) const;
+
+	/****************************************************************************
+	**
+	** @name Destroy
+	** @brief 销毁哈希桶
+	**
+	****************************************************************************/
+	virtual gvoid Destroy() = 0;
 
 	/****************************************************************************
 	**
@@ -325,7 +331,7 @@ public:
 	**
 	** @name RemoveNode
 	** @brief 移除一个节点
-	** @return {NodeT *} 节点的指针
+	** @return {NodeT *} 节点的指针，若无法移除，则返回GNULL
 	**
 	** 从哈希桶中移除一个节点，这个节点可以是任意位置，不做要求，移除出来的节点还未析构，如何使用
 	** 也不做要求。对于哈希桶，仅仅需要保证移除该节点后，剩余的结构仍然是一个正确有效的结构。
@@ -349,7 +355,7 @@ template<typename KeyT, typename ValueT,
 	typename CompareT, typename NodeT>
 class GListSlot
 	: public GHashTableSlot<KeyT, ValueT, NodeT>
-	, public GNewT<GListSlot<KeyT, ValueT, CompareT, NodeT>>
+	//, public GNewInPoolT<GListSlot<KeyT, ValueT, CompareT, NodeT>>
 {
 private:
 	/****************************************************************************
@@ -373,7 +379,7 @@ public:
 	**
 	** @name GListSlot
 	** @brief 拷贝构造函数（copy constructor）
-	** @param [in] slot {const GHashTableSlot &} 哈希桶
+	** @param [in] slot {const GListSlot &} 哈希桶
 	**
 	****************************************************************************/
 	GListSlot(const GListSlot &slot);
@@ -382,7 +388,7 @@ public:
 	**
 	** @name GListSlot
 	** @brief 移动构造函数（move constructor）
-	** @param [in] slot {GHashTableSlot &&} 哈希桶
+	** @param [in] slot {GListSlot &&} 哈希桶
 	**
 	****************************************************************************/
 	GListSlot(GListSlot &&slot);
@@ -399,8 +405,8 @@ public:
 	**
 	** @name operator=
 	** @brief 拷贝运算符
-	** @param [in] slot {const GHashTableSlot &} 哈希桶
-	** @return {GHashTableSlot &} 哈希桶的引用
+	** @param [in] slot {const GListSlot &} 哈希桶
+	** @return {GListSlot &} 哈希桶的引用
 	**
 	****************************************************************************/
 	GListSlot &operator=(const GListSlot &slot);
@@ -409,8 +415,8 @@ public:
 	**
 	** @name operator=
 	** @brief 移动运算符
-	** @param [in] slot {GHashTableSlot &&} 哈希桶
-	** @return {GHashTableSlot &} 哈希桶的引用
+	** @param [in] slot {GListSlot &&} 哈希桶
+	** @return {GListSlot &} 哈希桶的引用
 	**
 	****************************************************************************/
 	GListSlot &operator=(GListSlot &&slot);
@@ -490,49 +496,47 @@ public:
 
 	/****************************************************************************
 	**
-	** @name Search
-	** @brief 查找键
-	** @param [in] key {const KeyT &} 键
-	** @param [out] nodes {Nodes &} 键为key的节点的集合
-	** @return {gbool} 若查找成功，则返回true，否则返回false
-	** @see GHashTableSlot::Search
-	**
-	****************************************************************************/
-	gbool Search(const KeyT &key, Nodes &nodes);
-
-	/****************************************************************************
-	**
-	** @name Search
-	** @brief 查找键
-	** @param [in] key {const KeyT &} 键
-	** @param [out] nodes {ConstNodes &} 键为key的节点的集合
-	** @return {gbool} 若查找成功，则返回true，否则返回false
-	** @see GHashTableSlot::Search
-	**
-	****************************************************************************/
-	gbool Search(const KeyT &key, ConstNodes &nodes) const;
-
-	/****************************************************************************
-	**
-	** @name SearchFirst
+	** @name Find
 	** @brief 查找键的第一个节点
 	** @param [in] key {const KeyT &} 键
 	** @return {NodeT *} 节点的指针，若查找失败则返回GNULL
 	** @see GHashTableSlot::SearchFirst
 	**
 	****************************************************************************/
-	NodeT *SearchFirst(const KeyT &key);
+	NodeT *Find(const KeyT &key);
 
 	/****************************************************************************
 	**
-	** @name SearchFirst
+	** @name Find
 	** @brief 查找键的第一个节点
 	** @param [in] key {const KeyT &} 键
 	** @return {const NodeT *} 节点的指针，若查找失败则返回GNULL
 	** @see GHashTableSlot::SearchFirst
 	**
 	****************************************************************************/
-	const NodeT *SearchFirst(const KeyT &key) const;
+	const NodeT *Find(const KeyT &key) const;
+
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {Nodes &} 节点的集合
+	** @see GHashTableSlot::Search
+	**
+	****************************************************************************/
+	Nodes Search(const KeyT &key);
+
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {ConstNodes &} 节点的集合
+	** @see GHashTableSlot::Search
+	**
+	****************************************************************************/
+	ConstNodes Search(const KeyT &key) const;
 
 	/****************************************************************************
 	**
@@ -575,22 +579,20 @@ public:
 	**
 	** @name Equals
 	** @brief 比较两个哈希桶是否相等
-	** @param [in] slot {const GHashTableSlot &} 哈希桶
-	** @return {gbool} 若相等，则返回true，否则返回false
-	** @see GHashTableSlot::Equals
-	**
-	****************************************************************************/
-	gbool Equals(const GHashTableSlot &slot) const;
-
-	/****************************************************************************
-	**
-	** @name Equals
-	** @brief 比较两个哈希桶是否相等
 	** @param [in] slot {const GListSlot &} 线性哈希桶
 	** @return {gbool} 若相等，则返回true，否则返回false
 	**
 	****************************************************************************/
 	gbool Equals(const GListSlot &slot) const;
+
+	/****************************************************************************
+	**
+	** @name Destroy
+	** @brief 销毁哈希桶
+	** @see GHashTableSlot::Destroy
+	**
+	****************************************************************************/
+	gvoid Destroy();
 
 	/****************************************************************************
 	**
@@ -609,7 +611,7 @@ public:
 	**
 	** @name RemoveNode
 	** @brief 移除一个节点
-	** @return {NodeT *} 节点的指针
+	** @return {NodeT *} 节点的指针，若无法移除，则返回GNULL
 	** @see GHashTableSlot::InsertNode
 	**
 	** 对于线性哈希桶，该方法将头节点移除并返回，并将头节点设置为头节点的下一个节点
@@ -628,14 +630,6 @@ private:
 	**
 	****************************************************************************/
 	gbool DeleteAt(NodeT *node, NodeT *preNode);
-
-	/****************************************************************************
-	**
-	** @name Destroy
-	** @brief 销毁哈希桶
-	**
-	****************************************************************************/
-	gvoid Destroy();
 
 private:
 	/****************************************************************************
@@ -676,10 +670,283 @@ template<typename KeyT, typename ValueT,
 	typename HashT, typename CompareT, 
 	typename NodeT>
 class GHashSlot
+	: public GHashTableSlot<KeyT, ValueT, NodeT>
+	, public GNewT<GHashSlot<KeyT, ValueT, HashT, CompareT, NodeT>>
 {
+public:
+	/****************************************************************************
+	**
+	** @name GHashSlot
+	** @brief 构造函数（constructor）
+	** @param [in] unique {gbool} 键是否唯一，默认为true，表示键是唯一的
+	**
+	****************************************************************************/
+	GHashSlot(gbool unique = true);
+
+	/****************************************************************************
+	**
+	** @name GHashSlot
+	** @brief 拷贝构造函数（copy constructor）
+	** @param [in] slot {const GHashSlot &} 哈希桶
+	**
+	****************************************************************************/
+	GHashSlot(const GHashSlot &slot);
+
+	/****************************************************************************
+	**
+	** @name GHashSlot
+	** @brief 移动构造函数（move constructor）
+	** @param [in] slot {GHashSlot &&} 哈希桶
+	**
+	****************************************************************************/
+	GHashSlot(GHashSlot &&slot);
+
+	/****************************************************************************
+	**
+	** @name operator=
+	** @brief 拷贝运算符
+	** @param [in] slot {const GHashSlot &} 哈希桶
+	** @return {GHashSlot &} 哈希桶的引用
+	**
+	****************************************************************************/
+	GHashSlot &operator=(const GHashSlot &slot);
+
+	/****************************************************************************
+	**
+	** @name operator=
+	** @brief 移动运算符
+	** @param [in] slot {GHashSlot &&} 哈希桶
+	** @return {GHashSlot &} 哈希桶的引用
+	**
+	****************************************************************************/
+	GHashSlot &operator=(GHashSlot &&slot);
+
+	/****************************************************************************
+	**
+	** @name Size
+	** @brief 获取哈希桶中节点的个数
+	** @return {gsize} 节点的个数
+	** @see GHashTableSlot::Size
+	**
+	****************************************************************************/
+	gsize Size() const;
+
+	/****************************************************************************
+	**
+	** @name IsEmpty
+	** @brief 判断哈希桶是否为空
+	** @return {gbool} 若哈希桶为空，则返回true，否则返回false
+	** @see GHashTableSlot::IsEmpty
+	**
+	****************************************************************************/
+	gbool IsEmpty() const;
+
+	/****************************************************************************
+	**
+	** @name FirstNode
+	** @brief 获取第一个节点
+	** @return {NodeT *} 节点的指针
+	** @see GHashTableSlot::FirstNode
+	**
+	****************************************************************************/
+	NodeT *FirstNode();
+
+	/****************************************************************************
+	**
+	** @name FirstNode
+	** @brief 获取第一个节点
+	** @return {NodeT *} 节点的指针
+	** @see GHashTableSlot::FirstNode
+	**
+	****************************************************************************/
+	const NodeT *FirstNode() const;
+
+	/****************************************************************************
+	**
+	** @name NextNode
+	** @brief 获取节点的下一个节点
+	** @param [in] node {NodeT *} 节点的指针
+	** @return {NodeT *} 节点的指针
+	** @see GHashTableSlot::NextNode
+	**
+	****************************************************************************/
+	NodeT *NextNode(NodeT *node);
+
+	/****************************************************************************
+	**
+	** @name NextNode
+	** @brief 获取节点的下一个节点
+	** @param [in] node {const NodeT *} 节点的指针
+	** @return {const NodeT *} 节点的指针
+	** @see GHashTableSlot::NextNode
+	**
+	****************************************************************************/
+	const NodeT *NextNode(const NodeT *node) const;
+
+	/****************************************************************************
+	**
+	** @name Contains
+	** @brief 判断是否包含键
+	** @param [in] key {const KeyT &} 键
+	** @return {gbool} 节点的指针
+	** @see GHashTableSlot::Contains
+	**
+	****************************************************************************/
+	gbool Contains(const KeyT &key) const;
+
+	/****************************************************************************
+	**
+	** @name Find
+	** @brief 查找键的第一个节点
+	** @param [in] key {const KeyT &} 键
+	** @return {NodeT *} 节点的指针，若查找失败则返回GNULL
+	** @see GHashTableSlot::SearchFirst
+	**
+	****************************************************************************/
+	NodeT *Find(const KeyT &key);
+
+	/****************************************************************************
+	**
+	** @name Find
+	** @brief 查找键的第一个节点
+	** @param [in] key {const KeyT &} 键
+	** @return {const NodeT *} 节点的指针，若查找失败则返回GNULL
+	** @see GHashTableSlot::SearchFirst
+	**
+	****************************************************************************/
+	const NodeT *Find(const KeyT &key) const;
+
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {Nodes &} 节点的集合
+	** @see GHashTableSlot::Search
+	**
+	****************************************************************************/
+	Nodes Search(const KeyT &key);
+
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {ConstNodes &} 节点的集合
+	** @see GHashTableSlot::Search
+	**
+	****************************************************************************/
+	ConstNodes Search(const KeyT &key) const;
+
+	/****************************************************************************
+	**
+	** @name Insert
+	** @brief 插入一个键值对
+	** @param [in] key {const KeyT &} 键
+	** @param [in] value {const ValueT &} 值
+	** @param [out] realInsert {gbool &} 是否真正地插入了一个节点
+	** @return {NodeT *} 节点的指针
+	** @see GHashTableSlot::Insert
+	**
+	****************************************************************************/
+	NodeT *Insert(const KeyT &key, const ValueT &value, gbool &realInsert);
+
+	/****************************************************************************
+	**
+	** @name Insert
+	** @brief 插入一个键值对
+	** @param [in] key {const KeyT &} 键
+	** @param [in] value {ValueT &&} 值
+	** @param [out] realInsert {gbool &} 是否真正地插入了一个节点
+	** @return {NodeT *} 节点的指针
+	** @see GHashTableSlot::Insert
+	**
+	****************************************************************************/
+	NodeT *Insert(const KeyT &key, ValueT &&value, gbool &realInsert);
+
+	/****************************************************************************
+	**
+	** @name Delete
+	** @brief 删除指定键的节点
+	** @param [in] key {const KeyT &} 键
+	** @return {gsize} 删除的节点数
+	** @see GHashTableSlot::Delete
+	**
+	****************************************************************************/
+	gsize Delete(const KeyT &key);
+
+	/****************************************************************************
+	**
+	** @name Equals
+	** @brief 比较两个哈希桶是否相等
+	** @param [in] slot {const GHashSlot &} 二次哈希桶
+	** @return {gbool} 若相等，则返回true，否则返回false
+	**
+	****************************************************************************/
+	gbool Equals(const GHashSlot &slot) const;
+
+	/****************************************************************************
+	**
+	** @name Destroy
+	** @brief 销毁哈希桶
+	** @see GHashTableSlot::Destroy
+	**
+	****************************************************************************/
+	gvoid Destroy();
+
+	/****************************************************************************
+	**
+	** @name InsertNode
+	** @brief 插入一个节点
+	** @param [in] node {NodeT *} 节点的指针
+	** @return {NodeT *} 节点的指针
+	** @see GHashTableSlot::InsertNode
+	**
+	** 对于线性哈希桶，该方法在头节点之前插入一个新的节点，并将头节点设置为该节点
+	**
+	****************************************************************************/
+	NodeT *InsertNode(NodeT *node);
+
+	/****************************************************************************
+	**
+	** @name RemoveNode
+	** @brief 移除一个节点
+	** @return {NodeT *} 节点的指针，若无法移除，则返回GNULL
+	** @see GHashTableSlot::InsertNode
+	**
+	** 对于线性哈希桶，该方法将头节点移除并返回，并将头节点设置为头节点的下一个节点
+	**
+	****************************************************************************/
+	NodeT *RemoveNode();
 
 private:
-	GHashTable<KeyT, ValueT, HashT, CompareT, NodeT, GListSlot<KeyT, ValueT, CompareT, NodeT>> m_tTable;
+	/****************************************************************************
+	**
+	** 哈希表
+	**
+	****************************************************************************/
+	GHashTable<KeyT, ValueT, HashT, CompareT, NodeT, 
+		GListSlot<KeyT, ValueT, CompareT, NodeT>> m_tTable;
+};
+
+/********************************************************************************
+**
+** @brief 树型哈希桶
+** @template KeyT {type} 键类型
+** @template ValueT {type} 值类型
+** @template CompareT {gunctor} 键的比较算法
+** @template NodeT {type} 哈希节点类型
+**
+** 树型哈希桶是一种使用红黑树解决哈希冲突的数据结构
+**
+********************************************************************************/
+template<typename KeyT, typename ValueT,
+	typename CompareT, typename NodeT>
+class GTreeSlot
+	: public GHashTableSlot<KeyT, ValueT, NodeT>
+	, public GNewT<GTreeSlot<KeyT, ValueT, CompareT, NodeT>>
+{
+
 };
 
 /********************************************************************************
@@ -710,45 +977,295 @@ private:
 	static const HashT m_fHash;
 
 public:
+	/****************************************************************************
+	**
+	** @name Table
+	** @brief 哈希表类型
+	**
+	****************************************************************************/
 	typedef GHashTable<KeyT, ValueT, HashT, CompareT, NodeT, SlotT> Table;
+
+	/****************************************************************************
+	**
+	** @name Node
+	** @brief 哈希表节点类型
+	**
+	****************************************************************************/
 	typedef NodeT Node;
+
+	/****************************************************************************
+	**
+	** @name Nodes
+	** @brief 哈希表节点指针的列表类型
+	**
+	****************************************************************************/
 	typedef GList<NodeT *> Nodes;
+
+	/****************************************************************************
+	**
+	** @name Nodes
+	** @brief 哈希表节点常量指针的列表类型
+	**
+	****************************************************************************/
 	typedef GList<const NodeT *> ConstNodes;
 
 public:
+	/****************************************************************************
+	**
+	** @name GHashTable
+	** @brief 构造函数（constructor）
+	** @param [in] module {gsize} 哈希表初始模值，即初始哈希桶的个数，默认值为
+	**				G_HASH_TABLE_DEFAULT_MODULE_SIZE
+	** @param [in] factor {gsize} 哈希表负载因子，当哈希表中节点的数量大于当前模值乘以负载
+	**				因子时，哈希表会进行扩容，默认值为G_HASH_TABLE_DEFAULT_LOAD_FACTOR
+	** @param [in] unique {gbool} 键是否唯一，默认为true，表示键是唯一的
+	**
+	****************************************************************************/
 	GHashTable(gsize module = G_HASH_TABLE_DEFAULT_MODULE_SIZE, 
 		gfloat factor = G_HASH_TABLE_DEFAULT_LOAD_FACTOR,
 		gbool unique = true);
+
+	/****************************************************************************
+	**
+	** @name GHashTable
+	** @brief 拷贝构造函数（copy constructor）
+	** @param [in] table {const GHashTable &} 哈希表
+	**
+	****************************************************************************/
 	GHashTable(const GHashTable &table);
+
+	/****************************************************************************
+	**
+	** @name GHashTable
+	** @brief 移动构造函数（move constructor）
+	** @param [in] table {GHashTable &&} 哈希表
+	**
+	****************************************************************************/
 	GHashTable(GHashTable &&table);
+
+	/****************************************************************************
+	**
+	** @name ~GHashTable
+	** @brief 析构函数（destructor）
+	**
+	****************************************************************************/
 	~GHashTable();
 
+	/****************************************************************************
+	**
+	** @name operator=
+	** @brief 拷贝运算符
+	** @param [in] table {const GHashTable &} 哈希表
+	** @return {GHashTable &} 哈希表的引用
+	**
+	****************************************************************************/
 	GHashTable &operator=(const GHashTable &table);
+
+	/****************************************************************************
+	**
+	** @name operator=
+	** @brief 移动运算符
+	** @param [in] table {GHashTable &&} 哈希表
+	** @return {GHashTable &} 哈希表的引用
+	**
+	****************************************************************************/
 	GHashTable &operator=(GHashTable &&table);
 
+	/****************************************************************************
+	**
+	** @name Size
+	** @brief 获取哈希表中节点的个数
+	** @return {gsize} 节点的个数
+	**
+	****************************************************************************/
 	gsize Size() const;
+
+	/****************************************************************************
+	**
+	** @name IsEmpty
+	** @brief 判断哈希表是否为空
+	** @return {gbool} 若哈希表为空，则返回true，否则返回false
+	**
+	****************************************************************************/
 	gbool IsEmpty() const;
 
-	gvoid Destroy();
-
-	gbool Contains(const KeyT &key) const;
-
+	/****************************************************************************
+	**
+	** @name FirstNode
+	** @brief 获取第一个节点
+	** @return {NodeT *} 节点的指针
+	**
+	****************************************************************************/
 	NodeT *FirstNode();
+
+	/****************************************************************************
+	**
+	** @name FirstNode
+	** @brief 获取第一个节点
+	** @return {NodeT *} 节点的指针
+	**
+	****************************************************************************/
 	const NodeT *FirstNode() const;
 
+	/****************************************************************************
+	**
+	** @name NextNode
+	** @brief 获取节点的下一个节点
+	** @param [in] node {NodeT *} 节点的指针
+	** @return {NodeT *} 节点的指针
+	**
+	****************************************************************************/
 	NodeT *NextNode(NodeT *node);
+
+	/****************************************************************************
+	**
+	** @name NextNode
+	** @brief 获取节点的下一个节点
+	** @param [in] node {const NodeT *} 节点的指针
+	** @return {const NodeT *} 节点的指针
+	**
+	****************************************************************************/
 	const NodeT *NextNode(const NodeT *node) const;
 
+	/****************************************************************************
+	**
+	** @name Contains
+	** @brief 判断是否包含键
+	** @param [in] key {const KeyT &} 键
+	** @return {gbool} 节点的指针
+	**
+	****************************************************************************/
+	gbool Contains(const KeyT &key) const;
+
+	/****************************************************************************
+	**
+	** @name Find
+	** @brief 查找键的第一个节点
+	** @param [in] key {const KeyT &} 键
+	** @return {NodeT *} 节点的指针，若查找失败则返回GNULL
+	**
+	****************************************************************************/
 	NodeT *Find(const KeyT &key);
+
+	/****************************************************************************
+	**
+	** @name Find
+	** @brief 查找键的第一个节点
+	** @param [in] key {const KeyT &} 键
+	** @return {const NodeT *} 节点的指针，若查找失败则返回GNULL
+	**
+	****************************************************************************/
 	const NodeT *Find(const KeyT &key) const;
-	gbool Find(const KeyT &key, Nodes &nodes);
-	gbool Find(const KeyT &key, ConstNodes &nodes) const;
 
-	NodeT *Insert(const KeyT &key, const ValueT &value);
-	NodeT *Insert(const KeyT &key, ValueT &&value);
-	gvoid Delete(const KeyT &key);
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {Nodes &} 节点的集合
+	**
+	****************************************************************************/
+	Nodes Search(const KeyT &key);
 
+	/****************************************************************************
+	**
+	** @name Search
+	** @brief 查找键
+	** @param [in] key {const KeyT &} 键
+	** @return {ConstNodes &} 节点的集合
+	**
+	****************************************************************************/
+	ConstNodes Search(const KeyT &key) const;
+
+	/****************************************************************************
+	**
+	** @name Insert
+	** @brief 插入一个键值对
+	** @param [in] key {const KeyT &} 键
+	** @param [in] value {const ValueT &} 值
+	** @param [out] realInsert {gbool *} 是否真正地插入了一个节点，默认为GNULL，表示不关心
+	**				是否真正插入节点
+	** @return {NodeT *} 节点的指针
+	**
+	** 若当前哈希表键是唯一的，且已经存在键为key的节点，则不会执行真正的插入操作，而是将原本键为
+	** key的节点的值改为value，节点个数并没有增加。在这种情况下，realInsert会返回false。
+	**
+	****************************************************************************/
+	NodeT *Insert(const KeyT &key, const ValueT &value, gbool *realInsert = GNULL);
+
+	/****************************************************************************
+	**
+	** @name Insert
+	** @brief 插入一个键值对
+	** @param [in] key {const KeyT &} 键
+	** @param [in] value {ValueT &&} 值
+	** @param [out] realInsert {gbool *} 是否真正地插入了一个节点，默认为GNULL，表示不关心
+	**				是否真正插入节点
+	** @return {NodeT *} 节点的指针
+	**
+	** 若当前哈希表键是唯一的，且已经存在键为key的节点，则不会执行真正的插入操作，而是将原本键为
+	** key的节点的值改为value，节点个数并没有增加。在这种情况下，realInsert会返回false。
+	**
+	****************************************************************************/
+	NodeT *Insert(const KeyT &key, ValueT &&value, gbool *realInsert = GNULL);
+
+	/****************************************************************************
+	**
+	** @name Delete
+	** @brief 删除指定键的节点
+	** @param [in] key {const KeyT &} 键
+	** @return {gsize} 删除的节点数
+	**
+	** 删除指定键的节点，返回实际删除的节点数
+	**
+	****************************************************************************/
+	gsize Delete(const KeyT &key);
+
+	/****************************************************************************
+	**
+	** @name Destroy
+	** @brief 销毁哈希桶
+	**
+	****************************************************************************/
+	gvoid Destroy();
+
+	/****************************************************************************
+	**
+	** @name InsertNode
+	** @brief 插入一个节点
+	** @param [in] node {NodeT *} 节点的指针
+	** @return {NodeT *} 节点的指针
+	**
+	****************************************************************************/
+	NodeT *InsertNode(NodeT *node);
+
+	/****************************************************************************
+	**
+	** @name RemoveNode
+	** @brief 移除一个节点
+	** @return {NodeT *} 节点的指针，若无法移除，则返回GNULL
+	**
+	****************************************************************************/
+	NodeT *RemoveNode();
+
+	/****************************************************************************
+	**
+	** @name operator==
+	** @brief 判断哈希表是否相等
+	** @param [in] table {const GHashTable &} 哈希表
+	** @return {gbool} 若相等，则返回true，否则返回false
+	**
+	****************************************************************************/
 	gbool operator==(const GHashTable &table) const;
+
+	/****************************************************************************
+	**
+	** @name operator!=
+	** @brief 判断哈希表是否不相等
+	** @param [in] table {const GHashTable &} 哈希表
+	** @return {gbool} 若不相等，则返回true，否则返回false
+	**
+	****************************************************************************/
 	gbool operator!=(const GHashTable &table) const;
 
 protected:
@@ -838,9 +1355,21 @@ private:
 	GDynamicArray<SlotT*> m_tBuckets;
 };
 
-// 拉链哈希表
+/********************************************************************************
+**
+** @brief 拉链哈希表
+** @template KeyT {type} 键类型
+** @template ValueT {type} 值类型
+** @template HashT {gunctor} 键的哈希算法
+** @template CompareT {gunctor} 键的比较算法
+**
+** 拉链哈希表是一种常用的哈希表，它使用拉链法解决哈希冲突。即，若键的哈希码相等，则将这些键值对存
+** 入一个单链表，通过循环迭代的方式查找实际需要的键值对。
+**
+********************************************************************************/
 template<typename KeyT, typename ValueT, 
-	typename HashT, typename CompareT>
+	typename HashT = GHashF<KeyT>,
+	typename CompareT = GEqualToF<KeyT>>
 class GListHashTable
 	: public GHashTable<KeyT, ValueT, 
 		HashT, CompareT, 
@@ -850,17 +1379,31 @@ class GListHashTable
 
 };
 
-// 二次哈希表
-template<typename KeyT, typename ValueT, 
-	typename HashT, typename CompareT>
+/********************************************************************************
+**
+** @brief 二次哈希表
+** @template KeyT {type} 键类型
+** @template ValueT {type} 值类型
+** @template Hash1T {gunctor} 键的第一次哈希算法
+** @template Hash2T {gunctor} 键的第二次哈希算法
+** @template CompareT {gunctor} 键的比较算法
+**
+** 二次哈希表是一种特殊的哈希表，它使用二次哈希法解决哈希冲突的哈希表，即，若键的哈希码相等，则将
+** 这些键值对存入一个拉链哈希表，通过再一次哈希查询的方式查找实际需要的键值对。
+**
+********************************************************************************/
+template<typename KeyT, typename ValueT,
+	typename Hash1T, typename Hash2T,
+	typename CompareT = GEqualToF<KeyT>>
 class GDoubleHashTable
 	: public GHashTable<KeyT, ValueT,
-		HashT, CompareT,
+	Hash1T, CompareT,
 		GHashTableNode<KeyT, ValueT>,
-		GHashSlot<KeyT, ValueT, HashT, CompareT, GHashTableNode<KeyT, ValueT>>>
+		GHashSlot<KeyT, ValueT, Hash2T, CompareT, GHashTableNode<KeyT, ValueT>>>
 {
 
 };
+
 
 } // namespace gsystem
 

@@ -97,6 +97,19 @@ GAPI gptr GMemMove(gptr dst, gcptr src, gsize size);
 ********************************************************************************/
 GAPI gptr GMemSet(gptr dst, gbyte value, gsize size);
 
+/********************************************************************************
+**
+** @name GMemCmp
+** @brief 内存比较
+** @param [in] buf1 {gcptr} 内存首地址
+** @param [in] buf2 {gcptr} 内存首地址
+** @param [in] size {gsize} 内存字节大小
+** @return {gint} 比较结果，若buf1小于buf2，则返回值小于0；若buf1等于buf2，则返回值等于0；
+**				若buf1大于buf2，则返回值大于0。
+**
+********************************************************************************/
+GAPI gint GMemCmp(gcptr buf1, gcptr buf2, gsize size);
+
 } // namespace gsystem
 
 #endif // _CORE_MEMORY_H_

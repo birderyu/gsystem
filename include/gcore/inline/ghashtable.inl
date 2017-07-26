@@ -3,14 +3,22 @@
 
 #define G_HASH_TABLE_NODE_TEMPLATE	template<typename KeyT, typename ValueT>
 #define G_HASH_TABLE_NODE_QUAL		GHashTableNode<KeyT, ValueT>
-#define G_HASH_TABLE_SLOT_TEMPLATE	template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
-#define G_HASH_TABLE_SLOT_QUAL		GListSlot<KeyT, ValueT, CompareT, NodeT>
+#define G_HASH_TABLE_SLOT_TEMPLATE	template<typename KeyT, typename ValueT, typename NodeT>
+#define G_HASH_TABLE_SLOT_QUAL		GHashTableSlot<KeyT, ValueT, NodeT>
+#define G_LIST_SLOT_TEMPLATE		template<typename KeyT, typename ValueT, typename CompareT, typename NodeT>
+#define G_LIST_SLOT_QUAL			GListSlot<KeyT, ValueT, CompareT, NodeT>
+#define G_HASH_SLOT_TEMPLATE		template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT>
+#define G_HASH_SLOT_QUAL			GHashSlot<KeyT, ValueT, HashT, CompareT, NodeT>
 #define G_HASH_TABLE_TEMPLATE		template<typename KeyT, typename ValueT, typename HashT, typename CompareT, typename NodeT, typename SlotT>
 #define G_HASH_TABLE_QUAL			GHashTable<KeyT, ValueT, HashT, CompareT, NodeT, SlotT>
 
 #define G_HASH_TABLE_MODULE			(m_tBuckets.Size())
 
 namespace gsystem { // gsystem
+
+/****************************************************************************/
+/*  GHashTableNode                                                          */
+/****************************************************************************/
 
 G_HASH_TABLE_NODE_TEMPLATE GINLINE
 G_HASH_TABLE_NODE_QUAL::GHashTableNode(const KeyT &key, 
@@ -32,18 +40,84 @@ G_HASH_TABLE_NODE_QUAL::GHashTableNode(const KeyT &key,
 
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE
-const CompareT G_HASH_TABLE_SLOT_QUAL::m_fCompare;
+/****************************************************************************/
+/*  GHashTableSlot                                                          */
+/****************************************************************************/
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-G_HASH_TABLE_SLOT_QUAL::GListSlot(gbool unique)
+G_HASH_TABLE_SLOT_TEMPLATE
+gbool G_HASH_TABLE_SLOT_QUAL::Equals(const G_HASH_TABLE_SLOT_QUAL &slot) const
+{
+	if (this == &slot)
+	{
+		return true;
+	}
+
+	if (Size() != slot.Size())
+	{
+		return false;
+	}
+
+	const NodeT *node1 = FirstNode();
+	while (node1)
+	{
+		gbool contain = false;
+		const NodeT *node2 = slot.FirstNode();
+		while (node2)
+		{
+			if (m_fCompare(node1->m_tKey, node2->m_tKey))
+			{
+				contain = true;
+				break;
+			}
+			node2 = slot.NextNode(node2);
+		}
+		if (!contain)
+		{
+			return false;
+		}
+		node1 = NextNode(node1);
+	}
+
+	const NodeT *_node2 = slot.FirstNode();
+	while (_node2)
+	{
+		gbool contain = false;
+		const NodeT *_node1 = FirstNode();
+		while (_node1)
+		{
+			if (m_fCompare(node1->m_tKey, _node1->m_tKey))
+			{
+				contain = true;
+				break;
+			}
+			_node1 = NextNode(_node1);
+		}
+		if (!contain)
+		{
+			return false;
+		}
+		_node2 = NextNode(_node2);
+	}
+
+	return true;
+}
+
+/****************************************************************************/
+/*  GListSlot                                                               */
+/****************************************************************************/
+
+G_LIST_SLOT_TEMPLATE
+const CompareT G_LIST_SLOT_QUAL::m_fCompare;
+
+G_LIST_SLOT_TEMPLATE GINLINE
+G_LIST_SLOT_QUAL::GListSlot(gbool unique)
 	: m_pHead(GNULL), m_nSize(0), m_bUnique(unique)
 {
 
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-G_HASH_TABLE_SLOT_QUAL::GListSlot(const G_HASH_TABLE_SLOT_QUAL &slot)
+G_LIST_SLOT_TEMPLATE GINLINE
+G_LIST_SLOT_QUAL::GListSlot(const G_LIST_SLOT_QUAL &slot)
 	: m_pHead(GNULL), m_nSize(slot.m_nSize), m_bUnique(slot.m_bUnique)
 {
 	if (slot.IsEmpty())
@@ -62,22 +136,22 @@ G_HASH_TABLE_SLOT_QUAL::GListSlot(const G_HASH_TABLE_SLOT_QUAL &slot)
 	}
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-G_HASH_TABLE_SLOT_QUAL::GListSlot(G_HASH_TABLE_SLOT_QUAL &&slot)
+G_LIST_SLOT_TEMPLATE GINLINE
+G_LIST_SLOT_QUAL::GListSlot(G_LIST_SLOT_QUAL &&slot)
 	: m_pHead(slot.m_pHead), m_nSize(slot.m_nSize), m_bUnique(slot.m_bUnique)
 {
 	slot.m_pHead = GNULL;
 	slot.m_nSize = 0;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-G_HASH_TABLE_SLOT_QUAL::~GListSlot()
+G_LIST_SLOT_TEMPLATE GINLINE
+G_LIST_SLOT_QUAL::~GListSlot()
 {
 	Destroy();
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-G_HASH_TABLE_SLOT_QUAL &G_HASH_TABLE_SLOT_QUAL::operator=(const G_HASH_TABLE_SLOT_QUAL &slot)
+G_LIST_SLOT_TEMPLATE GINLINE
+G_LIST_SLOT_QUAL &G_LIST_SLOT_QUAL::operator=(const G_LIST_SLOT_QUAL &slot)
 {
 	if (this == &slot)
 	{
@@ -107,8 +181,8 @@ G_HASH_TABLE_SLOT_QUAL &G_HASH_TABLE_SLOT_QUAL::operator=(const G_HASH_TABLE_SLO
 	return *this;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-G_HASH_TABLE_SLOT_QUAL &G_HASH_TABLE_SLOT_QUAL::operator=(G_HASH_TABLE_SLOT_QUAL &&slot)
+G_LIST_SLOT_TEMPLATE GINLINE
+G_LIST_SLOT_QUAL &G_LIST_SLOT_QUAL::operator=(G_LIST_SLOT_QUAL &&slot)
 {
 	if (this == &slot)
 	{
@@ -127,44 +201,44 @@ G_HASH_TABLE_SLOT_QUAL &G_HASH_TABLE_SLOT_QUAL::operator=(G_HASH_TABLE_SLOT_QUAL
 	return *this;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gsize G_HASH_TABLE_SLOT_QUAL::Size() const
+G_LIST_SLOT_TEMPLATE GINLINE
+gsize G_LIST_SLOT_QUAL::Size() const
 {
 	return m_nSize;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::IsEmpty() const
+G_LIST_SLOT_TEMPLATE GINLINE
+gbool G_LIST_SLOT_QUAL::IsEmpty() const
 {
 	return m_pHead == GNULL && m_nSize <= 0;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::FirstNode()
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::FirstNode()
 {
 	return m_pHead;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-const NodeT *G_HASH_TABLE_SLOT_QUAL::FirstNode() const
+G_LIST_SLOT_TEMPLATE GINLINE
+const NodeT *G_LIST_SLOT_QUAL::FirstNode() const
 {
 	return m_pHead;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::NextNode(NodeT *node)
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::NextNode(NodeT *node)
 {
 	return node->m_pNext;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-const NodeT *G_HASH_TABLE_SLOT_QUAL::NextNode(const NodeT *node) const
+G_LIST_SLOT_TEMPLATE GINLINE
+const NodeT *G_LIST_SLOT_QUAL::NextNode(const NodeT *node) const
 {
 	return node->m_pNext;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::Contains(const KeyT &key) const
+G_LIST_SLOT_TEMPLATE GINLINE
+gbool G_LIST_SLOT_QUAL::Contains(const KeyT &key) const
 {
 	if (!m_pHead)
 	{
@@ -181,56 +255,8 @@ gbool G_HASH_TABLE_SLOT_QUAL::Contains(const KeyT &key) const
 	return false;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::Search(const KeyT &key, typename G_HASH_TABLE_SLOT_QUAL::Nodes &nodes)
-{
-	if (!m_pHead)
-	{
-		return false;
-	}
-	NodeT *node = m_pHead;
-	while (node)
-	{
-		if (m_fCompare(node->m_tKey, key))
-		{
-			nodes.PushBack(node);
-			if (m_bUnique)
-			{
-				// 不允许有重复元素
-				return true;
-			}
-		}
-		node = node->m_pNext;
-	}
-	return !nodes.IsEmpty();
-}
-
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::Search(const KeyT &key, typename G_HASH_TABLE_SLOT_QUAL::ConstNodes &nodes) const
-{
-	if (!m_pHead)
-	{
-		return false;
-	}
-	const NodeT *pNode = m_pHead;
-	while (pNode)
-	{
-		if (m_fCompare(pNode->m_tKey, key))
-		{
-			nodes.PushBack(pNode);
-			if (m_bUnique)
-			{
-				// 不允许有重复元素
-				return true;
-			}
-		}
-		pNode = pNode->m_pNext;
-	}
-	return !nodes.IsEmpty();
-}
-
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::SearchFirst(const KeyT &key)
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::Find(const KeyT &key)
 {
 	if (!m_pHead)
 	{
@@ -248,8 +274,8 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::SearchFirst(const KeyT &key)
 	return GNULL;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-const NodeT *G_HASH_TABLE_SLOT_QUAL::SearchFirst(const KeyT &key) const
+G_LIST_SLOT_TEMPLATE GINLINE
+const NodeT *G_LIST_SLOT_QUAL::Find(const KeyT &key) const
 {
 	if (!m_pHead)
 	{
@@ -267,8 +293,58 @@ const NodeT *G_HASH_TABLE_SLOT_QUAL::SearchFirst(const KeyT &key) const
 	return GNULL;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::Insert(const KeyT &key, const ValueT &value, gbool &realInsert)
+G_LIST_SLOT_TEMPLATE GINLINE
+typename G_LIST_SLOT_QUAL::Nodes G_LIST_SLOT_QUAL::Search(const KeyT &key)
+{
+	typename G_LIST_SLOT_QUAL::Nodes nodes;
+	if (!m_pHead)
+	{
+		return nodes;
+	}
+	NodeT *node = m_pHead;
+	while (node)
+	{
+		if (m_fCompare(node->m_tKey, key))
+		{
+			nodes.PushBack(node);
+			if (m_bUnique)
+			{
+				// 不允许有重复元素
+				return nodes;
+			}
+		}
+		node = node->m_pNext;
+	}
+	return nodes;
+}
+
+G_LIST_SLOT_TEMPLATE GINLINE
+typename G_LIST_SLOT_QUAL::ConstNodes G_LIST_SLOT_QUAL::Search(const KeyT &key) const
+{
+	typename G_LIST_SLOT_QUAL::ConstNodes nodes;
+	if (!m_pHead)
+	{
+		return nodes;
+	}
+	const NodeT *pNode = m_pHead;
+	while (pNode)
+	{
+		if (m_fCompare(pNode->m_tKey, key))
+		{
+			nodes.PushBack(pNode);
+			if (m_bUnique)
+			{
+				// 不允许有重复元素
+				return nodes;
+			}
+		}
+		pNode = pNode->m_pNext;
+	}
+	return nodes;
+}
+
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::Insert(const KeyT &key, const ValueT &value, gbool &realInsert)
 {
 	if (!m_bUnique)
 	{
@@ -279,7 +355,7 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::Insert(const KeyT &key, const ValueT &value, gboo
 	else
 	{
 		// 不允许有重复元素
-		NodeT *pnode = SearchFirst(key);
+		NodeT *pnode = Find(key);
 		if (!pnode)
 		{
 			// 不存在，插入到队首
@@ -296,8 +372,8 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::Insert(const KeyT &key, const ValueT &value, gboo
 	}
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::Insert(const KeyT &key, ValueT &&value, gbool &realInsert)
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::Insert(const KeyT &key, ValueT &&value, gbool &realInsert)
 {
 	if (!m_bUnique)
 	{
@@ -308,7 +384,7 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::Insert(const KeyT &key, ValueT &&value, gbool &re
 	else
 	{
 		// unique = true，不允许有重复元素
-		NodeT *pnode = SearchFirst(key);
+		NodeT *pnode = Find(key);
 		if (!pnode)
 		{
 			// 不存在，插入到队首
@@ -325,8 +401,8 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::Insert(const KeyT &key, ValueT &&value, gbool &re
 	}
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gsize G_HASH_TABLE_SLOT_QUAL::Delete(const KeyT &key)
+G_LIST_SLOT_TEMPLATE GINLINE
+gsize G_LIST_SLOT_QUAL::Delete(const KeyT &key)
 {
 	if (!m_pHead)
 	{
@@ -380,66 +456,8 @@ gsize G_HASH_TABLE_SLOT_QUAL::Delete(const KeyT &key)
 	return 0;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::Equals(const GHashTableSlot<KeyT, ValueT, NodeT> &slot) const
-{
-	if (this == &slot)
-	{
-		return true;
-	}
-
-	if (m_nSize != slot.Size())
-	{
-		return false;
-	}
-
-	const NodeT *node1 = m_pHead;
-	while (node1)
-	{
-		gbool contain = false;
-		const NodeT *node2 = slot.FirstNode();
-		while (node2)
-		{
-			if (m_fCompare(node1->m_tKey, node2->m_tKey))
-			{
-				contain = true;
-				break;
-			}
-			node2 = slot.NextNode(node2);
-		}
-		if (!contain)
-		{
-			return false;
-		}
-		node1 = node1->m_pNext;
-	}
-
-	const NodeT *_node2 = slot.FirstNode();
-	while (_node2)
-	{
-		gbool contain = false;
-		const NodeT *_node1 = m_pHead;
-		while (_node1)
-		{
-			if (m_fCompare(node1->m_tKey, _node1->m_tKey))
-			{
-				contain = true;
-				break;
-			}
-			_node1 = _node1->m_pNext;
-		}
-		if (!contain)
-		{
-			return false;
-		}
-		_node2 = NextNode(_node2);
-	}
-
-	return true;
-}
-
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::Equals(const G_HASH_TABLE_SLOT_QUAL &slot) const
+G_LIST_SLOT_TEMPLATE GINLINE
+gbool G_LIST_SLOT_QUAL::Equals(const G_LIST_SLOT_QUAL &slot) const
 {
 	if (this == &slot)
 	{
@@ -496,8 +514,26 @@ gbool G_HASH_TABLE_SLOT_QUAL::Equals(const G_HASH_TABLE_SLOT_QUAL &slot) const
 	return true;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::InsertNode(NodeT *node)
+G_LIST_SLOT_TEMPLATE GINLINE
+gvoid G_LIST_SLOT_QUAL::Destroy()
+{
+	if (!m_pHead)
+	{
+		return;
+	}
+	NodeT *node = m_pHead;
+	while (node)
+	{
+		m_pHead = node;
+		node = node->m_pNext;
+		delete m_pHead;
+	}
+	m_pHead = GNULL;
+	m_nSize = 0;
+}
+
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::InsertNode(NodeT *node)
 {
 	node->m_pNext = m_pHead;
 	m_pHead = node;
@@ -505,8 +541,8 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::InsertNode(NodeT *node)
 	return node;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-NodeT *G_HASH_TABLE_SLOT_QUAL::RemoveNode()
+G_LIST_SLOT_TEMPLATE GINLINE
+NodeT *G_LIST_SLOT_QUAL::RemoveNode()
 {
 	if (m_pHead == GNULL)
 	{
@@ -519,8 +555,8 @@ NodeT *G_HASH_TABLE_SLOT_QUAL::RemoveNode()
 	return node;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gbool G_HASH_TABLE_SLOT_QUAL::DeleteAt(NodeT *node, NodeT *preNode)
+G_LIST_SLOT_TEMPLATE GINLINE
+gbool G_LIST_SLOT_QUAL::DeleteAt(NodeT *node, NodeT *preNode)
 {
 	if (!node)
 	{
@@ -541,23 +577,167 @@ gbool G_HASH_TABLE_SLOT_QUAL::DeleteAt(NodeT *node, NodeT *preNode)
 	return true;
 }
 
-G_HASH_TABLE_SLOT_TEMPLATE GINLINE
-gvoid G_HASH_TABLE_SLOT_QUAL::Destroy()
+/****************************************************************************/
+/*  GHashSlot                                                               */
+/****************************************************************************/
+
+G_HASH_SLOT_TEMPLATE GINLINE
+G_HASH_SLOT_QUAL::GHashSlot(gbool unique)
+	: m_tTable(G_HASH_TABLE_DEFAULT_MODULE_SIZE, 
+		G_HASH_TABLE_DEFAULT_LOAD_FACTOR, unique)
 {
-	if (!m_pHead)
-	{
-		return;
-	}
-	NodeT *node = m_pHead;
-	while (node)
-	{
-		m_pHead = node;
-		node = node->m_pNext;
-		delete m_pHead;
-	}
-	m_pHead = GNULL;
-	m_nSize = 0;
+
 }
+
+G_HASH_SLOT_TEMPLATE GINLINE
+G_HASH_SLOT_QUAL::GHashSlot(const G_HASH_SLOT_QUAL &slot)
+	: m_tTable(slot.m_tTable)
+{
+
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+G_HASH_SLOT_QUAL::GHashSlot(G_HASH_SLOT_QUAL &&slot)
+	: m_tTable(GMove(slot.m_tTable))
+{
+
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+G_HASH_SLOT_QUAL &G_HASH_SLOT_QUAL::operator=(const G_HASH_SLOT_QUAL &slot)
+{
+	if (this == &slot)
+	{
+		return *this;
+	}
+
+	m_tTable = slot.m_tTable;
+	return *this;
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+G_HASH_SLOT_QUAL &G_HASH_SLOT_QUAL::operator=(G_HASH_SLOT_QUAL &&slot)
+{
+	if (this == &slot)
+	{
+		return *this;
+	}
+
+	m_tTable = GMove(slot.m_tTable);
+	return *this;
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+gsize G_HASH_SLOT_QUAL::Size() const
+{
+	return m_tTable.Size();
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+gbool G_HASH_SLOT_QUAL::IsEmpty() const
+{
+	return m_tTable.IsEmpty();
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::FirstNode()
+{
+	return m_tTable.FirstNode();
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+const NodeT *G_HASH_SLOT_QUAL::FirstNode() const
+{
+	return m_tTable.FirstNode();
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::NextNode(NodeT *node)
+{
+	return m_tTable.NextNode(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+const NodeT *G_HASH_SLOT_QUAL::NextNode(const NodeT *node) const
+{
+	return m_tTable.NextNode(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+gbool G_HASH_SLOT_QUAL::Contains(const KeyT &key) const
+{
+	return m_tTable.Contains(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::Find(const KeyT &key)
+{
+	return m_tTable.Find(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+const NodeT *G_HASH_SLOT_QUAL::Find(const KeyT &key) const
+{
+	return m_tTable.Find(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+typename G_HASH_SLOT_QUAL::Nodes G_HASH_SLOT_QUAL::Search(const KeyT &key)
+{
+	return m_tTable.Search(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+typename G_HASH_SLOT_QUAL::ConstNodes G_HASH_SLOT_QUAL::Search(const KeyT &key) const
+{
+	return m_tTable.Search(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::Insert(const KeyT &key, const ValueT &value, gbool &realInsert)
+{
+	return m_tTable.Insert(key, value, &realInsert);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::Insert(const KeyT &key, ValueT &&value, gbool &realInsert)
+{
+	return m_tTable.Insert(key, GForward<ValueT>(value), &realInsert);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+gsize G_HASH_SLOT_QUAL::Delete(const KeyT &key)
+{
+	return m_tTable.Delete(key);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+gbool G_HASH_SLOT_QUAL::Equals(const G_HASH_SLOT_QUAL &slot) const
+{
+	return m_tTable == slot.m_tTable;
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+gvoid G_HASH_SLOT_QUAL::Destroy()
+{
+	m_tTable.Destroy();
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::InsertNode(NodeT *node)
+{
+	return m_tTable.InsertNode(node);
+}
+
+G_HASH_SLOT_TEMPLATE GINLINE
+NodeT *G_HASH_SLOT_QUAL::RemoveNode()
+{
+	return m_tTable.RemoveNode();
+}
+
+/****************************************************************************/
+/*  GHashTable                                                              */
+/****************************************************************************/
 
 G_HASH_TABLE_TEMPLATE
 const HashT G_HASH_TABLE_QUAL::m_fHash;
@@ -685,32 +865,6 @@ GINLINE gbool G_HASH_TABLE_QUAL::IsEmpty() const
 }
 
 G_HASH_TABLE_TEMPLATE
-GINLINE gvoid G_HASH_TABLE_QUAL::Destroy()
-{
-	gsize size = m_tBuckets.Size();
-	for (gsize i = 0; i < size; i++)
-	{
-		if (GNULL != m_tBuckets[i])
-		{
-			delete m_tBuckets[i];
-			m_tBuckets[i] = GNULL;
-		}
-	}
-	m_nSize = 0;
-}
-
-G_HASH_TABLE_TEMPLATE
-GINLINE gbool G_HASH_TABLE_QUAL::Contains(const KeyT &key) const
-{
-	gsize pos = IndexOf(key, G_HASH_TABLE_MODULE);
-	if (!m_tBuckets[pos])
-	{
-		return false;
-	}
-	return m_tBuckets[pos]->Contains(key);
-}
-
-G_HASH_TABLE_TEMPLATE
 GINLINE NodeT *G_HASH_TABLE_QUAL::FirstNode()
 {
 	if (m_nSize <= 0)
@@ -795,6 +949,17 @@ GINLINE const NodeT *G_HASH_TABLE_QUAL::NextNode(const NodeT *node) const
 }
 
 G_HASH_TABLE_TEMPLATE
+GINLINE gbool G_HASH_TABLE_QUAL::Contains(const KeyT &key) const
+{
+	gsize pos = IndexOf(key, G_HASH_TABLE_MODULE);
+	if (!m_tBuckets[pos])
+	{
+		return false;
+	}
+	return m_tBuckets[pos]->Contains(key);
+}
+
+G_HASH_TABLE_TEMPLATE
 GINLINE NodeT *G_HASH_TABLE_QUAL::Find(const KeyT &key)
 {
 	gsize pos = IndexOf(key, G_HASH_TABLE_MODULE);
@@ -802,7 +967,7 @@ GINLINE NodeT *G_HASH_TABLE_QUAL::Find(const KeyT &key)
 	{
 		return GNULL;
 	}
-	return m_tBuckets[pos]->SearchFirst(key);
+	return m_tBuckets[pos]->Find(key);
 }
 
 G_HASH_TABLE_TEMPLATE
@@ -813,35 +978,33 @@ GINLINE const NodeT *G_HASH_TABLE_QUAL::Find(const KeyT &key) const
 	{
 		return GNULL;
 	}
-	return m_tBuckets[pos]->SearchFirst(key);
+	return m_tBuckets[pos]->Find(key);
 }
 
-G_HASH_TABLE_TEMPLATE
-GINLINE gbool G_HASH_TABLE_QUAL::Find(const KeyT &key, 
-	typename G_HASH_TABLE_QUAL::Nodes &nodes)
+G_HASH_TABLE_TEMPLATE GINLINE 
+typename G_HASH_TABLE_QUAL::Nodes G_HASH_TABLE_QUAL::Search(const KeyT &key)
 {
 	gsize pos = IndexOf(key, G_HASH_TABLE_MODULE);
 	if (!m_tBuckets[pos])
 	{
-		return false;
+		return typename G_HASH_TABLE_QUAL::Nodes();
 	}
-	return m_tBuckets[pos]->Search(key, nodes);
+	return m_tBuckets[pos]->Search(key);
 }
 
-G_HASH_TABLE_TEMPLATE
-GINLINE gbool G_HASH_TABLE_QUAL::Find(const KeyT &key, 
-	typename G_HASH_TABLE_QUAL::ConstNodes &nodes) const
+G_HASH_TABLE_TEMPLATE GINLINE 
+typename G_HASH_TABLE_QUAL::ConstNodes G_HASH_TABLE_QUAL::Search(const KeyT &key) const
 {
 	gsize pos = IndexOf(key, G_HASH_TABLE_MODULE);
 	if (!m_tBuckets[pos])
 	{
-		return false;
+		return typename G_HASH_TABLE_QUAL::ConstNodes();
 	}
-	return m_tBuckets[pos]->Search(key, m_bUnique, nodes);
+	return m_tBuckets[pos]->Search(key, m_bUnique);
 }
 
 G_HASH_TABLE_TEMPLATE
-GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, const ValueT &value)
+GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, const ValueT &value, gbool *realInsert)
 {
 	if (m_nSize >= m_nThreshold)
 	{
@@ -849,17 +1012,22 @@ GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, const ValueT &value)
 		Inflate(2 * m_nSize);
 	}
 
+	if (realInsert)
+	{
+		*realInsert = false;
+	}
+
 	gsize n = IndexOf(key, G_HASH_TABLE_MODULE);
 	if (!m_tBuckets[n])
 	{
 		m_tBuckets[n] = new SlotT(m_bUnique);
 	}
-	if (!m_tBuckets[n])
+	gbool _realInsert = false;
+	NodeT *pnode = m_tBuckets[n]->Insert(key, value, _realInsert);
+	if (realInsert)
 	{
-		return GNULL;
+		*realInsert = _realInsert;
 	}
-	gbool realInsert = false;
-	NodeT *pnode = m_tBuckets[n]->Insert(key, value, realInsert);
 	if (!pnode)
 	{
 		// 操作失败
@@ -867,7 +1035,7 @@ GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, const ValueT &value)
 	}
 
 	// 操作成功
-	if (realInsert)
+	if (_realInsert)
 	{
 		// 实际进行了插入操作
 		m_nSize++;
@@ -876,7 +1044,7 @@ GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, const ValueT &value)
 }
 
 G_HASH_TABLE_TEMPLATE
-GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, ValueT &&value)
+GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, ValueT &&value, gbool *realInsert)
 {
 	if (m_nSize >= m_nThreshold)
 	{
@@ -884,17 +1052,26 @@ GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, ValueT &&value)
 		Inflate(2 * m_nSize);
 	}
 
+	if (realInsert)
+	{
+		*realInsert = false;
+	}
+
 	gsize n = IndexOf(key, G_HASH_TABLE_MODULE);
+
 	if (!m_tBuckets[n])
 	{
 		m_tBuckets[n] = new SlotT(m_bUnique);
 	}
-	if (!m_tBuckets[n])
+
+	gbool _realInsert = false;
+	NodeT *pnode = m_tBuckets[n]->Insert(key, GForward<ValueT>(value), _realInsert);
+
+	if (realInsert)
 	{
-		return GNULL;
+		*realInsert = _realInsert;
 	}
-	gbool realInsert = false;
-	NodeT *pnode = m_tBuckets[n]->Insert(key, GForward<ValueT>(value), realInsert);
+
 	if (!pnode)
 	{
 		// 操作失败
@@ -902,29 +1079,83 @@ GINLINE NodeT *G_HASH_TABLE_QUAL::Insert(const KeyT &key, ValueT &&value)
 	}
 
 	// 操作成功
-	if (realInsert)
+	if (_realInsert)
 	{
 		// 实际进行了插入操作
 		m_nSize++;
 	}
+
 	return pnode;
 }
 
 G_HASH_TABLE_TEMPLATE
-GINLINE gvoid G_HASH_TABLE_QUAL::Delete(const KeyT &key)
+GINLINE gsize G_HASH_TABLE_QUAL::Delete(const KeyT &key)
 {
 	gsize n = IndexOf(key, G_HASH_TABLE_MODULE);
 	if (!m_tBuckets[n])
 	{
-		return;
+		return 0;
 	}
-	gsize i = m_tBuckets[n]->Delete(key, m_bUnique);
-	m_nSize -= i;
+	gsize size = m_tBuckets[n]->Delete(key, m_bUnique);
+	m_nSize -= size;
+	return size;
+}
+
+G_HASH_TABLE_TEMPLATE GINLINE
+NodeT *G_HASH_TABLE_QUAL::InsertNode(NodeT *node)
+{
+	if (!node)
+	{
+		return node;
+	}
+
+	gsize n = IndexOf(node->m_tKey, G_HASH_TABLE_MODULE);
+	if (!m_tBuckets[n])
+	{
+		m_tBuckets[n] = new SlotT(m_bUnique);
+	}
+	m_nSize++;
+	return m_tBuckets[n]->Insert(node);
+}
+
+G_HASH_TABLE_TEMPLATE GINLINE
+NodeT *G_HASH_TABLE_QUAL::RemoveNode()
+{
+	gsize m = G_HASH_TABLE_MODULE;
+	for (int i = 0; i < m; i++)
+	{
+		if (!m_tBuckets[i] || m_tBuckets[i]->IsEmpty())
+		{
+			continue;
+		}
+		return m_tBuckets[i]->RemoveNode();
+	}
+	return GNULL;
+}
+
+G_HASH_TABLE_TEMPLATE
+GINLINE gvoid G_HASH_TABLE_QUAL::Destroy()
+{
+	gsize size = m_tBuckets.Size();
+	for (gsize i = 0; i < size; i++)
+	{
+		if (GNULL != m_tBuckets[i])
+		{
+			delete m_tBuckets[i];
+			m_tBuckets[i] = GNULL;
+		}
+	}
+	m_nSize = 0;
 }
 
 G_HASH_TABLE_TEMPLATE
 GINLINE gbool G_HASH_TABLE_QUAL::operator==(const G_HASH_TABLE_QUAL &table) const
 {
+	if (this == &table)
+	{
+		return true;
+	}
+
 	if (m_nSize != table.m_nSize)
 	{
 		return false;
@@ -971,6 +1202,7 @@ GINLINE
 gvoid G_HASH_TABLE_QUAL::Inflate(gsize module)
 {
 	gsize new_module = RoundUpToPowerOf2(module);
+
 	m_nThreshold = new_module * m_nFactor;
 	if (m_nThreshold > G_HASH_TABLE_MAX_MODULE_SIZE + 1)
 	{
@@ -978,14 +1210,15 @@ gvoid G_HASH_TABLE_QUAL::Inflate(gsize module)
 	}
 
 	GDynamicArray<SlotT*> buckets(new_module, GNULL);
+
 	gsize old_module = G_HASH_TABLE_MODULE;
 	for (gsize i = 0; i < old_module; i++)
 	{
-		if (GNULL == m_tBuckets[i])
+		
+		if (!m_tBuckets[i])
 		{
 			continue;
 		}
-
 		NodeT *node = m_tBuckets[i]->RemoveNode();
 		while (node)
 		{
@@ -998,6 +1231,7 @@ gvoid G_HASH_TABLE_QUAL::Inflate(gsize module)
 			node = m_tBuckets[i]->RemoveNode();
 		}
 	}
+
 	m_tBuckets = GMove(buckets);
 }
 
@@ -1054,6 +1288,10 @@ GINLINE gsize G_HASH_TABLE_QUAL::IndexOf(const KeyT &key, gsize module) const
 #undef G_HASH_TABLE_MODULE
 #undef G_HASH_TABLE_QUAL
 #undef G_HASH_TABLE_TEMPLATE
+#undef G_HASH_SLOT_QUAL
+#undef G_HASH_SLOT_TEMPLATE
+#undef G_LIST_SLOT_QUAL
+#undef G_LIST_SLOT_TEMPLATE
 #undef G_HASH_TABLE_SLOT_QUAL
 #undef G_HASH_TABLE_SLOT_TEMPLATE
 #undef G_HASH_TABLE_NODE_QUAL

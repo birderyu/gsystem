@@ -6,16 +6,16 @@
 
 namespace gsystem { // gsystem
 
-template <typename DataT>
+template <typename T>
 class GListQueue
-	: public GQueue<DataT>
+	: public GQueue<T>
 {
 public:
 	GListQueue();
-	GListQueue(const GListQueue<DataT> &queue);
-	GListQueue(GListQueue<DataT> &&queue);
-	GListQueue<DataT>& operator=(const GListQueue<DataT> &queue);
-	GListQueue<DataT>& operator=(GListQueue<DataT> &&queue);
+	GListQueue(const GListQueue<T> &queue);
+	GListQueue(GListQueue<T> &&queue);
+	GListQueue<T>& operator=(const GListQueue<T> &queue);
+	GListQueue<T>& operator=(GListQueue<T> &&queue);
 
 	gsize Size() const;
 	gbool IsEmpty() const;
@@ -24,17 +24,17 @@ public:
 	gvoid Clear();
 
 	// 入队
-	gvoid EnQueue(const DataT &data);
-	gvoid EnQueue(DataT &&data);
+	gvoid EnQueue(const T &value);
+	gvoid EnQueue(T &&value);
 
 	// 出队
-	gvoid DeQueue(DataT *data = GNULL);
+	gbool DeQueue(T *value = GNULL);
 
-	const DataT &Head() const;
-	DataT &Head();
+	const T &Head() const;
+	T &Head();
 
 private:
-	GDList<DataT> m_tList;
+	GDList<T> m_tList;
 };
 
 } // namespace gsystem

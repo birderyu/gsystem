@@ -169,8 +169,9 @@
   <ItemGroup>
     <ClInclude Include="array_test.h" />
     <ClInclude Include="binaryheap_test.h" />
-    <ClInclude Include="binarytree_test.h" />
+    <ClInclude Include="rbtree_test.h" />
     <ClInclude Include="gbkcode.h" />
+    <ClInclude Include="hashtable_test.h" />
     <ClInclude Include="queue_test.h" />
     <ClInclude Include="series_test.h" />
     <ClInclude Include="stack_test.h" />

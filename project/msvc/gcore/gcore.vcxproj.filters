@@ -901,5 +901,8 @@
     <None Include="..\..\..\include\gcore\inline\glinkedlist.inl">
       <Filter>头文件\_inline</Filter>
     </None>
+    <None Include="..\..\..\include\gcore\inline\gfunctor.inl">
+      <Filter>头文件\_inline</Filter>
+    </None>
   </ItemGroup>
 </Project>
