@@ -24,7 +24,7 @@ public:
 	virtual gvoid SetZ(greal z) = 0;
 };
 
-typedef GSharedPointer<GPoint> GPointPtr;
+typedef GSharedPtr<GPoint> GPointPtr;
 
 }
 }
