@@ -91,7 +91,7 @@ gbool GDateTime::IsLeapYear(guint year)
 gvoid GDateTime::DayOfMonthToDayOfYear(guint year, guint month, guint day,
 	guint &day_of_year)
 {
-	//è®¡ç®—æŸæœˆä»¥å‰æœˆä»½çš„å¤©æ•°
+	//¼ÆËãÄ³ÔÂÒÔÇ°ÔÂ·İµÄÌìÊı
 	switch (month) {
 	case 1: day_of_year = 0; break;
 	case 2: day_of_year = 31; break;
@@ -110,7 +110,7 @@ gvoid GDateTime::DayOfMonthToDayOfYear(guint year, guint month, guint day,
 		break;
 	}
 
-	//æœˆä»½å¤©æ•°åŠ ä¸Šè¿™ä¸ªæœˆçš„æ—¥æ•°
+	//ÔÂ·İÌìÊı¼ÓÉÏÕâ¸öÔÂµÄÈÕÊı
 	day_of_year = day_of_year + day;
 
 	if (GDateTime::IsLeapYear(year))
@@ -121,7 +121,7 @@ gvoid GDateTime::DayOfMonthToDayOfYear(guint year, guint month, guint day,
 		}
 	}
 
-	// æ—¥æœŸçš„è®¡ç®—ä»0å¼€å§‹
+	// ÈÕÆÚµÄ¼ÆËã´Ó0¿ªÊ¼
 	--day_of_year;
 }
 
@@ -149,7 +149,7 @@ gvoid GDateTime::DayOfYearToDayOfMonth(guint year, guint day_of_year,
 
 	if (GDateTime::IsLeapYear(year))
 	{
-		// é—°å¹´
+		// ÈòÄê
 		if (day_of_year < 31 + 29)
 		{
 			month = 2;
@@ -212,8 +212,8 @@ gvoid GDateTime::DayOfYearToDayOfMonth(guint year, guint day_of_year,
 	}
 	else
 	{
-		// éé—°å¹´
-		// é—°å¹´
+		// ·ÇÈòÄê
+		// ÈòÄê
 		if (day_of_year < 31 + 28)
 		{
 			month = 2;
@@ -796,10 +796,10 @@ GDateTime &GDateTime::AddYears(gint y)
 
 	if (!GDateTime::IsLeapYear(new_year))
 	{
-		// æ–°çš„å¹´ä»½æ˜¯å¹³å¹´ï¼Œåˆ™å¯èƒ½å‡ºç°2æœˆ29æ—¥çš„é”™è¯¯
+		// ĞÂµÄÄê·İÊÇÆ½Äê£¬Ôò¿ÉÄÜ³öÏÖ2ÔÂ29ÈÕµÄ´íÎó
 		if (new_month == 2 && new_day_of_month == 29)
 		{
-			// 2æœˆ29æ—¥ï¼Œå¯¹äºå½“å‰å¹´ä»½æ˜¯éæ³•çš„ï¼Œæ”¹ä¸º3æœˆ1æ—¥
+			// 2ÔÂ29ÈÕ£¬¶ÔÓÚµ±Ç°Äê·İÊÇ·Ç·¨µÄ£¬¸ÄÎª3ÔÂ1ÈÕ
 			new_month = 3;
 			new_day_of_month = 1;
 
@@ -1066,7 +1066,7 @@ gbool GDateTime::Serialize(GArchive &archive) const
 {
 	if (!archive.Input())
 	{
-		// TODOï¼ŒæŠ›å‡ºå¼‚å¸¸
+		// TODO£¬Å×³öÒì³£
 		return false;
 	}
 
@@ -1083,7 +1083,7 @@ gbool GDateTime::Deserialize(GArchive &archive)
 	}
 	if (archive.PopCode() != ClassCode())
 	{
-		// TODOï¼ŒæŠ›å‡ºå¼‚å¸¸
+		// TODO£¬Å×³öÒì³£
 		return false;
 	}
 	archive.Detach(m_tDateTime, G_DATE_TIME_SIZE);
@@ -1211,7 +1211,7 @@ gbool operator>(const GDateTime &dt1, const GDateTime &dt2)
 							}
 							else
 							{
-								// å®Œå…¨ç›¸ç­‰
+								// ÍêÈ«ÏàµÈ
 								return false;
 							}
 						}
@@ -1306,7 +1306,7 @@ gbool operator<(const GDateTime &dt1, const GDateTime &dt2)
 							}
 							else
 							{
-								// å®Œå…¨ç›¸ç­‰
+								// ÍêÈ«ÏàµÈ
 								return false;
 							}
 						}
