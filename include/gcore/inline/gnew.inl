@@ -3,8 +3,8 @@
 
 namespace gsystem { // gsystem
 
-template<typename ClassT>
-GINLINE gptr GNewT<ClassT>::operator new(gsize size) GEXCEPT(false)
+template<typename ClassT> GINLINE 
+gptr GNewT<ClassT>::operator new(gsize size) GNOEXCEPT
 {
 	gptr ptr = GMalloc(size);
 	if (GNULL == ptr)

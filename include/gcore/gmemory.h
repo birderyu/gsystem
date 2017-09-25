@@ -25,7 +25,7 @@ namespace gsystem { // gsystem
 ** @name GMalloc
 ** @brief 分配内存
 ** @param [in] size {gsize} 分配内存的字节大小
-** @return {gptr} 分配内存的首地址，若分配失败则返回GNULL
+** @return {gptr} 分配内存的首地址，若分配失败则返回GNULL，而非抛出一个异常
 **
 ********************************************************************************/
 GAPI gptr GMalloc(gsize size) GNOEXCEPT;
@@ -36,7 +36,7 @@ GAPI gptr GMalloc(gsize size) GNOEXCEPT;
 ** @brief 批量分配内存
 ** @param [in] n {gsize} 分配内存的单位个数
 ** @param [in] size {gsize} 分配内存的单位字节大小
-** @return {gptr} 分配内存的首地址，大小为n*size个字节，若分配失败则返回GNULL
+** @return {gptr} 分配内存的首地址，大小为n*size个字节，若分配失败则返回GNULL，而非抛出一个异常
 **
 ********************************************************************************/
 GAPI gptr GCalloc(gsize n, gsize size) GNOEXCEPT;
@@ -47,7 +47,7 @@ GAPI gptr GCalloc(gsize n, gsize size) GNOEXCEPT;
 ** @brief 重新分配内存
 ** @param [in] oldptr {gptr} 旧内存首地址
 ** @param [in] newsize {gsize} 新内存的字节大小
-** @return{gptr} 新分配内存的首地址，若分配失败则返回GNULL
+** @return{gptr} 新分配内存的首地址，若分配失败则返回GNULL，而非抛出一个异常
 **
 ********************************************************************************/
 GAPI gptr GRealloc(gptr oldptr, gsize newsize) GNOEXCEPT;

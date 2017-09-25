@@ -90,7 +90,7 @@ public:
 		}
 	}
 
-	// 分配内存，分配失败则返回GNULL
+	// 分配内存，分配失败则返回GNULL（后面改为抛出异常）
 	gptr Alloc()
 	{
 		if (!m_pList)

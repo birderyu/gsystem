@@ -121,11 +121,11 @@ private:
 	gbyte m_nType;
 };
 
-GAPI typedef GSeries<gbyte, 4, false, 0>		GBytesData;
-GAPI typedef GSeries<gchar8, 8, true, 0>		GString8Data;
-GAPI typedef GSeries<gchar16, 4, true, 0>		GString16Data;
-GAPI typedef GSeries<gchar32, 2, true, 0>		GString32Data;
-GAPI typedef GSeries<gwchar, 4, true, 0>		GWStringData;
+GAPI typedef GSeries<gbyte, 4, false, 0> GBytesData;
+GAPI typedef GSeries<gchar8, 8, true, 0> GString8Data;
+GAPI typedef GSeries<gchar16, 4, true, 0> GString16Data;
+GAPI typedef GSeries<gchar32, 2, true, 0> GString32Data;
+GAPI typedef GSeries<gwchar, 4, true, 0> GWStringData;
 
 } // namespace gsystem
 

@@ -6,7 +6,7 @@
 namespace gsystem {
 
 class GAPI GUnclassifiedException
-	: public gsystemException
+	: public GSystemException
 {
 
 };

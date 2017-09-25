@@ -552,6 +552,12 @@
     <ClInclude Include="..\..\..\include\gcore\giterator.h">
       <Filter>头文件\structure</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\gcore\gstrings.h">
+      <Filter>头文件\string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\gcore\gserializationexception.h">
+      <Filter>头文件\exception</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\gcore\dlmalloc.c">

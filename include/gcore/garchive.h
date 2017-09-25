@@ -40,21 +40,21 @@ public:
 
 	/****************************************************************************
 	**
-	** @name Input
-	** @brief 判断档案是否可以进行输入操作
+	** @name IsInput
+	** @brief 判断档案是否可以进行输入操作（序列化）
 	** @return {gbool} 若可以进行输入操作，则返回true，否则返回false
 	**
 	****************************************************************************/
-	virtual gbool Input() const = 0;
+	virtual gbool IsInput() const = 0;
 
 	/****************************************************************************
 	**
-	** @name Output
-	** @brief 判断档案是否可以进行输出操作
+	** @name IsOutput
+	** @brief 判断档案是否可以进行输出操作（反序列化）
 	** @return {gbool} 若可以进行输出操作，则返回true，否则返回false
 	**
 	****************************************************************************/
-	virtual gbool Output() const = 0;
+	virtual gbool IsOutput() const = 0;
 
 	/****************************************************************************
 	**
@@ -89,12 +89,15 @@ public:
 	**
 	** @name Attach
 	** @brief 将字符数组添加进档案
-	** @param [in] str {gcstring} 字符数组
+	** @param [in] str {gcstring8} 字符数组
 	** @param [in] size {gsize} 字符数组的长度
 	** @return {GArchive &} 档案的引用
 	**
 	****************************************************************************/
-	virtual GArchive &Attach(gcstring str, gsize size) = 0;
+	virtual GArchive &Attach(gcstring8 str, gsize size) = 0;
+
+	virtual GArchive &Attach(gcstring16 str, gsize size) = 0;
+	virtual GArchive &Attach(gcstring32 str, gsize size) = 0;
 
 	/****************************************************************************
 	**

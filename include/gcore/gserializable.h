@@ -66,6 +66,7 @@ public:
 	** @brief 序列化
 	** @param [in] archive {GArchive &} 档案
 	** @return {gbool} 序列化成功，则返回true，否则返回false
+	** @throws GSerializationException
 	**
 	****************************************************************************/
 	virtual gbool Serialize(GArchive &archive) const = 0;
@@ -76,6 +77,7 @@ public:
 	** @brief 反序列化
 	** @param [in] archive {GArchive &} 档案
 	** @return {gbool} 反序列化成功，则返回true，否则返回false
+	** @throws GSerializationException
 	**
 	****************************************************************************/
 	virtual gbool Deserialize(GArchive &archive) = 0;

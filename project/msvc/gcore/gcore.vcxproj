@@ -181,6 +181,7 @@
     <ClInclude Include="..\..\..\include\gcore\goutofmemoryexception.h" />
     <ClInclude Include="..\..\..\include\gcore\grwlock.h" />
     <ClInclude Include="..\..\..\include\gcore\gserializable.h" />
+    <ClInclude Include="..\..\..\include\gcore\gserializationexception.h" />
     <ClInclude Include="..\..\..\include\gcore\gseries.h" />
     <ClInclude Include="..\..\..\include\gcore\garrayqueue.h" />
     <ClInclude Include="..\..\..\include\gcore\garraystack.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="..\..\..\include\gcore\gstring.h" />
     <ClInclude Include="..\..\..\include\gcore\gstring16.h" />
     <ClInclude Include="..\..\..\include\gcore\gstring32.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstrings.h" />
     <ClInclude Include="..\..\..\include\gcore\gstruct.h" />
     <ClInclude Include="..\..\..\include\gcore\gsinglefloat.h" />
     <ClInclude Include="..\..\..\include\gcore\ggraph.h" />

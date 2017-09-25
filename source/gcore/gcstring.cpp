@@ -21,7 +21,69 @@ gsystem::gint strncasecmp(const gsystem::gchar8 *s1, gsystem::gchar8 *s2, /*regi
 #	endif // !G_USE_MSVC_STRCMP
 #endif
 
+namespace gsystem {
+namespace detail {
+namespace cstring {
+
+static const gchar8 digits_8[] = "9876543210123456789";
+static const gchar8* zero_8 = digits_8 + 9;
+static_assert(sizeof(digits_8) == 20, "");
+
+template<typename T>
+gvoid GReverse(T* begin, T* end)
+{
+	for (; begin != end && begin != --end; ++begin)
+	{
+		GSwap(*begin, *end);
+	}
+}
+
+template<typename T>
+gsize GConvert(T value, gstring8 buf)
+{
+	T i = value;
+	gchar8* p = buf;
+
+	do
+	{
+		gint lsd = i % 10;
+		i /= 10;
+		*p++ = zero_8[lsd];
+	} while (i != 0);
+
+	if (value < 0)
+	{
+		*p++ = '-';
+	}
+	*p = '\0';
+	GReverse(buf, p);
+	return p - buf;
+}
+
+}
+}
+}
+
 namespace gsystem { // gsystem
+
+gcstring8 GCString::Number(gint value, gstring8 buf)
+{
+	gint i = value;
+	gchar8* p = buf;
+	do 
+	{
+		gint lsd = i % 10;
+		i /= 10;
+		*p++ = detail::cstring::zero_8[lsd];
+	} while (i != 0);
+	if (value < 0) 
+	{
+		*p++ = '-';
+	}
+	*p = '\0';
+	Reverse(buf, p);
+	return p;
+}
 
 gsize GCString::Size(gcstring8 str)
 {
@@ -934,6 +996,8 @@ gbool GCString::Replace(gcstring8 src, gsize size,
 	out_size += _len_;
 	str_out[out_size] = '\0';
 	return true;
+}
+
 }
 
 } // namespace gsystem

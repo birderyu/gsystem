@@ -71,10 +71,10 @@ void GSemaphore::Post()
 	::ReleaseSemaphore(pHandle->m_hSemaphore, 1, GNULL);
 }
 
-gint GSemaphore::Initialize(gint nInitialValue)
+gbool GSemaphore::Initialize(gint nInitialValue)
 {
 	GSemaphoreHandle *pHandle = (GSemaphoreHandle*)m_pHandle;
-	if (!pHandle) return -1;
+	if (!pHandle) return false;
 	m_pHandle = pHandle;
 
 	pHandle->m_hSemaphore = ::CreateSemaphore(GNULL, nInitialValue, 5000, GNULL);
@@ -82,10 +82,10 @@ gint GSemaphore::Initialize(gint nInitialValue)
 	{
 		delete pHandle;
 		m_pHandle = GNULL;
-		return -1;
+		return false;
 	}
 
-	return 0;
+	return true;
 }
 
 } // namespace gsystem

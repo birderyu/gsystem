@@ -3,15 +3,15 @@
 
 namespace gsystem { // gsystem
 
-template <typename LockT>
-GINLINE GLockGuard<LockT>::GLockGuard(LockT &tLock)
-: m_tLock(tLock)
+template <typename T>
+GINLINE GLockGuard<T>::GLockGuard(T &lock)
+: m_tLock(lock)
 {
 	m_tLock.Lock();
 }
 
-template <typename LockT>
-GINLINE GLockGuard<LockT>::~GLockGuard()
+template <typename T>
+GINLINE GLockGuard<T>::~GLockGuard()
 {
 	m_tLock.Unlock();
 }

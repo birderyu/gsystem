@@ -38,10 +38,8 @@ public:
 
 	/****************************************************************************
 	**
-	** GRunnable
-	**
-	** @name	~GRunnable
-	** @brief	析构函数（destructor）
+	** @name ~GRunnable
+	** @brief 析构函数（destructor）
 	**
 	** 析构函数中会自动关闭当前线程
 	**

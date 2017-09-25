@@ -1064,7 +1064,7 @@ GString GDateTime::ClassName() const GNOEXCEPT
 
 gbool GDateTime::Serialize(GArchive &archive) const
 {
-	if (!archive.Input())
+	if (!archive.IsInput())
 	{
 		// TODO£¬Å×³öÒì³£
 		return false;
@@ -1077,7 +1077,7 @@ gbool GDateTime::Serialize(GArchive &archive) const
 
 gbool GDateTime::Deserialize(GArchive &archive)
 {
-	if (!archive.Output())
+	if (!archive.IsOutput())
 	{
 		return false;
 	}

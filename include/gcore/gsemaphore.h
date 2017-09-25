@@ -9,14 +9,14 @@ namespace gsystem { // gsystem
 class GAPI GSemaphore
 {
 public:
-	GSemaphore(gint nInitialValue = 1);
+	GSemaphore(gint initialValue = 1);
 	~GSemaphore();
 	gbool Wait();
-	gbool Wait(gulong nMsecs);
+	gbool Wait(gulong msecs);
 	gvoid Post();
 
 private:
-	gint Initialize(gint nInitialValue);
+	gbool Initialize(gint initialValue);
 	gptr m_pHandle;
 };
 

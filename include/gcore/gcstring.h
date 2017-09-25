@@ -33,6 +33,8 @@ class GAPI GCChar
 class GAPI GCString
 {
 public:
+	static gcstring8 Number(gint value, gstring8 buf);
+
 	// 不包含'\0'的长度
 	static gsize Size(gcstring8 str);
 	static gsize Size(gcstring16 str);

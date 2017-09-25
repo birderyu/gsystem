@@ -24,6 +24,19 @@ private:
 	GNewHander &operator=(const GNewHander&);
 };
 
+template<typename T>
+class GNew
+{
+public:
+	static gptr operator new(gsize size) GNOEXCEPT;
+	static gvoid operator delete(gptr ptr) GNOEXCEPT;
+
+	static gvoid SetNewHandler();
+
+private:
+	// NewHandler
+};
+
 // 线程不安全
 // 不分配到内存池
 // 不带有NewHandler

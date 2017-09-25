@@ -5,16 +5,16 @@
 
 namespace gsystem { // gsystem
 
-template <typename LockT>
+template <typename T>
 class GLockGuard
 {
 public:
-	GLockGuard(LockT &tLock);
+	GLockGuard(T &lock);
 	~GLockGuard();
 
 private:
 	/// 锁
-	LockT &m_tLock;
+	T &m_tLock;
 };
 
 } // namespace gsystem

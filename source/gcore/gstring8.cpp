@@ -192,7 +192,7 @@ glongdouble GString8::ToLongDouble(gbool *ok) const
 	return detail::string::GStringToNumber<glongdouble>(*this, ok);
 }
 
-GString8 GString8::ReferenceOf(gcstring str)
+GString8 GString8::ReferenceOf(gcstring8 str)
 {
 	gsize size = GCString::Size(str);
 	if (size <= 0)
@@ -207,7 +207,7 @@ GString8 GString8::ReferenceOf(const GString8 &str)
 	return ReferenceOf(str.CString());
 }
 
-GString8 GString8::Format(gcstring format, ...)
+GString8 GString8::Format(gcstring8 format, ...)
 {
 	// TODO，模仿QString自己实现一套
 	va_list ap;
@@ -231,14 +231,14 @@ GString8::GString8(gchar8 c)
 	m_tString[0] = c;
 }
 
-GString8::GString8(gcstring str)
+GString8::GString8(gcstring8 str)
 {
 	gsize size = GCString::Size(str);
 	m_tString.Resize(size);
 	GCString::Copy(str, size, m_tString.Start());
 }
 
-GString8::GString8(gcstring str, gsize size)
+GString8::GString8(gcstring8 str, gsize size)
 	: m_tString(str, size)
 {
 	
@@ -344,7 +344,7 @@ GString8 GString8::ToLower() const
 	return str;
 }
 
-gcstring GString8::CString() const
+gcstring8 GString8::CString() const
 {
 	if (IsEmpty())
 	{

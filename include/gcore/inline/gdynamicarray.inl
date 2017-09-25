@@ -294,7 +294,7 @@ GINLINE guint GDynamicArray<DataT>::ClassCode() const GNOEXCEPT
 template <typename DataT>
 GINLINE gbool GDynamicArray<DataT>::Serialize(GArchive &archive) const
 {
-	if (!archive.Input())
+	if (!archive.IsInput())
 	{
 		return false;
 	}
@@ -317,7 +317,7 @@ GINLINE gbool GDynamicArray<DataT>::Serialize(GArchive &archive) const
 template <typename DataT>
 GINLINE gbool GDynamicArray<DataT>::Deserialize(GArchive &archive)
 {
-	if (!archive.Output())
+	if (!archive.IsOutput())
 	{
 		return false;
 	}

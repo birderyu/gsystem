@@ -5,17 +5,17 @@
 
 namespace gsystem {
 
-class GAPI gsystemException
+class GAPI GSystemException
 	: public GException
 {
 public:
-	virtual ~gsystemException() = 0;
-	static GExceptionPtr Create(std::exception &stdLibException,
+	virtual ~GSystemException() = 0;
+	static GExceptionPtr Create(std::exception &exception,
 		const GString &methodName, gsize lineNumber, const GString &fileName) GNOEXCEPT;
 
 protected:
-	gsystemException() GNOEXCEPT;
-	gsystemException(const GString &methodName, gsize lineNumber,
+	GSystemException() GNOEXCEPT;
+	GSystemException(const GString &methodName, gsize lineNumber,
 		const GString &fileName, const GStringList *whatArguments,
 		const GString &whyMessageId, const GStringList *whyArguments) GNOEXCEPT;
 };

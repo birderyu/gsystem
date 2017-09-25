@@ -6,7 +6,7 @@
 namespace gsystem {
 
 class GAPI GOutOfRangeException
-	: public gsystemException
+	: public GSystemException
 {
 
 };

@@ -42,118 +42,118 @@ struct GHasDeserializeFunction {
 	enum { value = sizeof(Foo<T>(GNULL)) == sizeof(gint8) };
 };
 
-// DataT包含了Serialize方法
-template<typename DataT>
-gbool ___GSerialize(GArchive &archive, const DataT &v, GTrueType)
+// T包含了Serialize方法
+template<typename T>
+gbool ___GSerialize(GArchive &archive, const T &v, GTrueType)
 {
 	return v.Serialize(archive);
 }
 
-// DataT未包含Serialize方法
-template<typename DataT>
-gbool ___GSerialize(GArchive &archive, const DataT &v, GFalseType)
+// T未包含Serialize方法
+template<typename T>
+gbool ___GSerialize(GArchive &archive, const T &v, GFalseType)
 {
 	// 无法序列化，抛出异常？（TODO）
 	return false;
 }
 
-// DataT是GSerializable的子类
-template<typename DataT>
-gbool __GSerialize(GArchive &archive, const DataT &v, GTrueType)
+// T是GSerializable的子类
+template<typename T>
+gbool __GSerialize(GArchive &archive, const T &v, GTrueType)
 {
 	return v.Serialize(archive);
 }
 
-// DataT不是GSerializable的子类
-template<typename DataT>
-gbool __GSerialize(GArchive &archive, const DataT &v, GFalseType)
+// T不是GSerializable的子类
+template<typename T>
+gbool __GSerialize(GArchive &archive, const T &v, GFalseType)
 {
-	// 检查DataT是否包含了Serialize方法
-	return ___GSerialize<DataT>(archive, v,
-		GCatBase<GHasSerializeFunction<DataT>::value>());
+	// 检查T是否包含了Serialize方法
+	return ___GSerialize<T>(archive, v,
+		GCatBase<GHasSerializeFunction<T>::value>());
 }
 
-// DataT是内置类型
-template<typename DataT>
-gbool _GSerialize(GArchive &archive, const DataT &v, GTrueType)
+// T是内置类型
+template<typename T>
+gbool _GSerialize(GArchive &archive, const T &v, GTrueType)
 {
 	archive << v;
 	return true;
 }
 
-// DataT不是内置类型
-template<typename DataT>
-gbool _GSerialize(GArchive &archive, const DataT &v, GFalseType)
+// T不是内置类型
+template<typename T>
+gbool _GSerialize(GArchive &archive, const T &v, GFalseType)
 {
-	// 检查DataT是否是GSerializable的子类
-	return __GSerialize<DataT>(archive, v,
-		GIsBaseOf<GSerializable, DataT>());
+	// 检查T是否是GSerializable的子类
+	return __GSerialize<T>(archive, v,
+		GIsBaseOf<GSerializable, T>());
 }
 
-// DataT包含了Deserialize方法
-template<typename DataT>
-gbool ___GDeserialize(GArchive &archive, DataT &v, GTrueType)
+// T包含了Deserialize方法
+template<typename T>
+gbool ___GDeserialize(GArchive &archive, T &v, GTrueType)
 {
 	return v.Deserialize(archive);
 }
 
-// DataT未包含Deserialize方法
-template<typename DataT>
-gbool ___GDeserialize(GArchive &archive, DataT &v, GFalseType)
+// T未包含Deserialize方法
+template<typename T>
+gbool ___GDeserialize(GArchive &archive, T &v, GFalseType)
 {
 	// 无法序列化，抛出异常？（TODO）
 	return false;
 }
 
-// DataT是GSerializable的子类
-template<typename DataT>
-gbool __GDeserialize(GArchive &archive, DataT &v, GTrueType)
+// T是GSerializable的子类
+template<typename T>
+gbool __GDeserialize(GArchive &archive, T &v, GTrueType)
 {
 	return v.Deserialize(archive);
 }
 
-// DataT不是GSerializable的子类
-template<typename DataT>
-gbool __GDeserialize(GArchive &archive, DataT &v, GFalseType)
+// T不是GSerializable的子类
+template<typename T>
+gbool __GDeserialize(GArchive &archive, T &v, GFalseType)
 {
-	// 检查DataT是否包含了Deserialize方法
-	return ___GDeserialize<DataT>(archive, v,
-		GCatBase<GHasDeserializeFunction<DataT>::value>());
+	// 检查T是否包含了Deserialize方法
+	return ___GDeserialize<T>(archive, v,
+		GCatBase<GHasDeserializeFunction<T>::value>());
 }
 
-// DataT是内置类型
-template<typename DataT>
-gbool _GDeserialize(GArchive &archive, DataT &v, GTrueType)
+// T是内置类型
+template<typename T>
+gbool _GDeserialize(GArchive &archive, T &v, GTrueType)
 {
 	archive >> v;
 	return true;
 }
 
-// DataT不是内置类型
-template<typename DataT>
-gbool _GDeserialize(GArchive &archive, DataT &v, GFalseType)
+// T不是内置类型
+template<typename T>
+gbool _GDeserialize(GArchive &archive, T &v, GFalseType)
 {
-	// 检查DataT是否是GSerializable的子类
-	return __GDeserialize<DataT>(archive, v,
-		GIsBaseOf<GSerializable, DataT>());
+	// 检查T是否是GSerializable的子类
+	return __GDeserialize<T>(archive, v,
+		GIsBaseOf<GSerializable, T>());
 }
 
 } // namespace gsystem.detail
 
-template<typename DataT> GINLINE
-gbool GSerialize(GArchive &archive, const DataT &v)
+template<typename T> GINLINE
+gbool GSerialize(GArchive &archive, const T &v)
 {
-	// 检查DataT是否是基本类型
-	return detail::_GSerialize<DataT>(archive, v,
-		GIsArithmetic<DataT>());
+	// 检查T是否是基本类型
+	return detail::_GSerialize<T>(archive, v,
+		GIsArithmetic<T>());
 }
 
-template<typename DataT> GINLINE
-gbool GDeserialize(GArchive &archive, DataT &v)
+template<typename T> GINLINE
+gbool GDeserialize(GArchive &archive, T &v)
 {
-	// 检查DataT是否是基本类型
-	return detail::_GDeserialize<DataT>(archive, v,
-		GIsArithmetic<DataT>());
+	// 检查T是否是基本类型
+	return detail::_GDeserialize<T>(archive, v,
+		GIsArithmetic<T>());
 }
 
 } // namespace gsystem

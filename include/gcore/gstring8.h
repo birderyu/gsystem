@@ -46,14 +46,14 @@ public: // 静态方法
 	static GString8 Number(gdouble num, gint base = 10);
 	static GString8 Number(gdecimal num, gint base = 10);
 
-	static GString8 ReferenceOf(gcstring str);
+	static GString8 ReferenceOf(gcstring8 str);
 	static GString8 ReferenceOf(const GString8 &str);
-	static GString8 Format(gcstring format, ...);
+	static GString8 Format(gcstring8 format, ...);
 
 public: // 构造方法
 	GString8();
 	GString8(gchar8 c);
-	GString8(gcstring str);
+	GString8(gcstring8 str);
 	GString8(const GString8 &str);
 	GString8(GString8 &&str);
 
@@ -79,7 +79,7 @@ public: // 字符串行为
 	GString8 TrimRight() const;
 	GString8 ToUpper() const;
 	GString8 ToLower() const;
-	gcstring CString() const;
+	gcstring8 CString() const;
 	GString8 &Replace(const GString8 &from, const GString8 &to, gbool bIsSensitive = true);
 	// ignoreEmpty：是否忽略空格; isSensitive：大小写是否敏感
 	GStringListT<GString8> Split(const GString8 &sep, gbool ignoreEmpty = false, gbool isSensitive = true) const;
@@ -120,7 +120,7 @@ public: // 运算符重载
 	gchar8 &operator[](gsize);
 
 private: // 私有方法
-	GString8(gcstring str, gsize size);
+	GString8(gcstring8 str, gsize size);
 	GString8(const GString8Data &str);
 	GString8(GString8Data &&str);
 
