@@ -24,22 +24,13 @@ GObjectPtr GObject::Clone() const
 	return GObjectPtr();
 }
 
-const GObject *GObject::Boxing() const
-{
-	return dynamic_cast<const GObject *>(this);
-}
-
-gbool GObject::Unboxing(const GObject *)
-{
-	// 默认情况下，不允许拆箱
-	return false;
-}
-
+/*
 GString GObject::ToString() const
 {
 	// 默认情况下，返回一个空字符串
 	return GString();
 }
+*/
 
 GBytes GObject::ToBytes() const
 {

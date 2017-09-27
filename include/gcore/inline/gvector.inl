@@ -609,7 +609,7 @@ guint GVector<T>::ClassCode() const GNOEXCEPT
 template <typename T> GINLINE
 gbool GVector<T>::Serialize(GArchive &archive) const
 {
-	if (!archive.Input())
+	if (!archive.IsInput())
 	{
 		return false;
 	}
@@ -632,7 +632,7 @@ gbool GVector<T>::Serialize(GArchive &archive) const
 template <typename T> GINLINE
 gbool GVector<T>::Deserialize(GArchive &archive)
 {
-	if (!archive.Output())
+	if (!archive.IsOutput())
 	{
 		return false;
 	}

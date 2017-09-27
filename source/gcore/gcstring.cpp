@@ -68,21 +68,7 @@ namespace gsystem { // gsystem
 
 gcstring8 GCString::Number(gint value, gstring8 buf)
 {
-	gint i = value;
-	gchar8* p = buf;
-	do 
-	{
-		gint lsd = i % 10;
-		i /= 10;
-		*p++ = detail::cstring::zero_8[lsd];
-	} while (i != 0);
-	if (value < 0) 
-	{
-		*p++ = '-';
-	}
-	*p = '\0';
-	Reverse(buf, p);
-	return p;
+	return GNULL;
 }
 
 gsize GCString::Size(gcstring8 str)
@@ -996,8 +982,6 @@ gbool GCString::Replace(gcstring8 src, gsize size,
 	out_size += _len_;
 	str_out[out_size] = '\0';
 	return true;
-}
-
 }
 
 } // namespace gsystem

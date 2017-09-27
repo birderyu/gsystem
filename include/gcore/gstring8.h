@@ -19,8 +19,7 @@ namespace gsystem { // gsystem
 **
 ****************************************************************************/
 class GAPI GString8 final 
-	: public GArray<gchar8>
-	, public GSerializable
+	: public GSerializable
 {
 	friend class GVariety;
 	friend GAPI GString8 operator+(const GString8 &s1, const GString8 &s2);
@@ -103,8 +102,8 @@ public: // 数字转换
 	glongdouble ToLongDouble(gbool *bIsOk = GNULL) const;
 
 public: // Object
-	const GObject *Boxing() const;
-	GString ToString() const;
+	//const GObject *Boxing() const;
+	//GString ToString() const;
 
 public: // Serializable
 	guint ClassCode() const GNOEXCEPT;
@@ -125,7 +124,8 @@ private: // 私有方法
 	GString8(GString8Data &&str);
 
 private: // 私有成员
-	GString8Data m_tString;
+	//GString8Data m_tString;
+	GSeries<gchar8, 8, true, 0> m_tString;
 };
 
 /// 运算符

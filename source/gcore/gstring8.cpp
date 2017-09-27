@@ -562,16 +562,6 @@ gvoid GString8::Append(GString8 &&str)
 	m_tString.Append(GMove(str.m_tString));
 }
 
-const GObject *GString8::Boxing() const
-{
-	return dynamic_cast<const GObject *>(this);
-}
-
-GString8 GString8::ToString() const
-{
-	return GString8(m_tString);
-}
-
 guint GString8::ClassCode() const GNOEXCEPT
 {
 	return static_cast<guint>(GClassCode::String);

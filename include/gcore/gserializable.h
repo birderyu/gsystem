@@ -14,7 +14,7 @@
 #ifndef _CORE_SERIALIZABLE_H_
 #define _CORE_SERIALIZABLE_H_
 
-#include "gglobal.h"
+#include "gtype.h"
 
 namespace gsystem { // gsystem
 	class GArchive;

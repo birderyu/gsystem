@@ -5,74 +5,125 @@
 
 namespace gsystem { // gsystem
 
-/// 一维表通用模式定义
-template<typename ListT>
+/********************************************************************************
+**
+** @brief 一维链表
+** @template T {type} 元素的类型
+**
+********************************************************************************/
+template<typename T>
 struct GListT
 {
+	/****************************************************************************
+	**
+	** 最大长度
+	**
+	****************************************************************************/
 	static const gsize MAX_SIZE = G_LIST_MAX_SIZE;
+
+	/****************************************************************************
+	**
+	** 空下标
+	**
+	****************************************************************************/
 	static const gsize NULL_POS = G_LIST_NULL_POS;
 };
 
-/// 二维表通用模式定义
-template<typename TableT>
+/********************************************************************************
+**
+** @brief 二维表
+** @template T {type} 元素的类型
+**
+********************************************************************************/
+template<typename T>
 struct GTableT
 {
+	/****************************************************************************
+	**
+	** 最大行数
+	**
+	****************************************************************************/
 	static const gsize MAX_ROW_SIZE = G_LIST_MAX_SIZE;
+
+	/****************************************************************************
+	**
+	** 空行标
+	**
+	****************************************************************************/
 	static const gsize NULL_ROW_POS = G_LIST_NULL_POS;
+
+	/****************************************************************************
+	**
+	** 最大列数
+	**
+	****************************************************************************/
 	static const gsize MAX_COLUMN_SIZE = G_LIST_MAX_SIZE;
+
+	/****************************************************************************
+	**
+	** 空列标
+	**
+	****************************************************************************/
 	static const gsize NULL_COLUMN_POS = G_LIST_NULL_POS;
 };
 
 /// 单向链表节点
-template<typename NodeT>
+template<typename T>
+struct GPreviousNodeT
+{
+	T *m_pPrevious;
+
+	GPreviousNodeT(T *previous) GNOEXCEPT;
+};
+
+/// 单向链表节点
+template<typename T>
 struct GNextNodeT
 {
-	NodeT *m_pNext;
+	T *m_pNext;
 
-	GNextNodeT(NodeT *node);
+	GNextNodeT(T *node) GNOEXCEPT;
 };
 
 /// 双向链表节点
-template<typename NodeT>
+template<typename T>
 struct GPreviousNextNodeT
+	: public GPreviousNodeT<T>, GNextNodeT<T>
 {
-	NodeT *m_pPrevious;
-	NodeT *m_pNext;
-
-	GPreviousNextNodeT(NodeT *previous, NodeT *next);
+	GPreviousNextNodeT(T *previous, T *next) GNOEXCEPT;
 };
 
 /// 二叉树节点
-template<typename NodeT>
+template<typename T>
 struct GBinTreeNodeT
 {
-	NodeT *m_pParent;	// 双亲
-	NodeT *m_pLeft;		// 左孩子
-	NodeT *m_pRight;	// 右孩子
+	T *m_pParent;	// 双亲
+	T *m_pLeft;		// 左孩子
+	T *m_pRight;	// 右孩子
 
-	GBinTreeNodeT(NodeT *parent, NodeT *left, NodeT *right);
+	GBinTreeNodeT(T *parent, T *left, T *right) GNOEXCEPT;
 
 	// 左兄弟
-	const NodeT *LeftSibling() const;
+	const T *LeftSibling() const GNOEXCEPT;
 
 	// 右兄弟
-	const NodeT *RightSibling() const;
+	const T *RightSibling() const GNOEXCEPT;
 
 	// 中序遍历的前驱节点
-	const NodeT *Next() const;
-	NodeT *Next();
+	const T *Next() const GNOEXCEPT;
+	T *Next() GNOEXCEPT;
 
 	// 中序遍历的后继节点
-	const NodeT *Previous() const;
-	NodeT *Previous();
+	const T *Previous() const GNOEXCEPT;
+	T *Previous() GNOEXCEPT;
 
 	// 中序遍历的首节点
-	const NodeT *First() const;
-	NodeT *First();
+	const T *First() const GNOEXCEPT;
+	T *First() GNOEXCEPT;
 
 	// 中序遍历的尾节点
-	const NodeT *Last() const;
-	NodeT *Last();
+	const T *Last() const GNOEXCEPT;
+	T *Last() GNOEXCEPT;
 };
 
 /// 数据节点
@@ -81,17 +132,17 @@ struct GValueNodeT
 {
 	T m_tData;
 
-	GValueNodeT(const T &value);
-	GValueNodeT(T &&value);
+	GValueNodeT(const T &value) GNOEXCEPT;
+	GValueNodeT(T &&value) GNOEXCEPT;
 };
 
 /// 单孩子节点
-template<typename NodeT>
+template<typename T>
 struct GChildNodeT
 {
-	NodeT *m_pChild;
+	T *m_pChild;
 
-	GChildNodeT(const NodeT *node);
+	GChildNodeT(const T *node) GNOEXCEPT;
 };
 
 /// 键值对节点
@@ -101,8 +152,8 @@ struct GPairNodeT
 	KeyT m_tKey;
 	ValueT m_tValue;
 
-	GPairNodeT(const KeyT &key, const ValueT &value);
-	GPairNodeT(const KeyT &key, ValueT &&value);
+	GPairNodeT(const KeyT &key, const ValueT &value) GNOEXCEPT;
+	GPairNodeT(const KeyT &key, ValueT &&value) GNOEXCEPT;
 };
 
 // 哑节点

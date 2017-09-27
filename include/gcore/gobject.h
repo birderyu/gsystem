@@ -19,7 +19,9 @@
 namespace gsystem { // gsystem
 	class GObject;
 	class GBytes;
-	template <typename ClassT> class GSharedPtr;
+	class GString8;
+
+	template <typename T> class GSharedPtr;
 	typedef GSharedPtr<GObject> GObjectPtr;
 } // namespace gsystem
 
@@ -67,7 +69,7 @@ public:
 	** 默认方法，同样可以工作。
 	**
 	****************************************************************************/
-	virtual const GObject *Boxing() const;
+	//virtual const GObject *Boxing() const;
 
 	/****************************************************************************
 	**
@@ -80,7 +82,7 @@ public:
 	** 操作成功，也可能会引起部分成员消失。
 	**
 	****************************************************************************/
-	virtual gbool Unboxing(const GObject *obj);
+	//virtual gbool Unboxing(const GObject *obj);
 
 	/****************************************************************************
 	**
@@ -89,7 +91,7 @@ public:
 	** @return {GString} 转换成的字符串
 	**
 	****************************************************************************/
-	virtual GString ToString() const;
+	//virtual GString ToString() const;
 
 	/****************************************************************************
 	**

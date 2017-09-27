@@ -10,10 +10,12 @@ class GStringListT final
 	: public GArray<StringT>
 	, public GSerializable
 {
+	/*
 	static_assert(GIsSame<StringT, GString8>::value 
 		|| GIsSame<StringT, GString16>::value
 		|| GIsSame<StringT, GString32>::value,
 		"string type of GStringListT must by GString8 or GString16 or GString32.");
+		*/
 
 public:
 	GStringListT();
