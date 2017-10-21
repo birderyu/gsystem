@@ -12,12 +12,12 @@ class GAPI GRegister
 	: public GSingleton<GRegister, GMutex>
 {
 public:
-	gbool Register(const GString &sClassName, guint nClassCode);
-	gvoid Initialize();
+	//gbool Register(const GString &sClassName, guint nClassCode);
+	//gvoid Initialize();
 	
 private:
-	GUnorderMap<GString, guint> m_tClassName_ClassCode;
-	GUnorderMap<guint, GString> m_tClassCode_ClassName;
+	//GUnorderMap<GString, guint> m_tClassName_ClassCode;
+	//GUnorderMap<guint, GString> m_tClassCode_ClassName;
 };
 
 } // namespace gsystem

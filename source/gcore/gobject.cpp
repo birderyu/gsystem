@@ -46,7 +46,8 @@ guint GObject::HashCode() const
 
 gbool GObject::Equals(const GObject &obj) const
 {
-	return Boxing() == obj.Boxing();
+	//return Boxing() == obj.Boxing();
+	return false;
 }
 
 } // namespace gsystem

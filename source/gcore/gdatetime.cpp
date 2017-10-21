@@ -1010,6 +1010,7 @@ gbool GDateTime::Unboxing(const GObject *obj)
 	return true;
 }
 
+/*
 GString GDateTime::ToString() const
 {
 	// 1991-02-28 20:40 00:000
@@ -1030,6 +1031,7 @@ GString GDateTime::ToString() const
 	str.Append(GString::Number(Millisecond()));
 	return str;
 }
+*/
 
 GBytes GDateTime::ToBytes() const
 {

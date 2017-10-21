@@ -52,7 +52,7 @@ public: // 日期时间计算
 	GTime &AddMilliseconds(gint ms);
 
 public:
-	GString ToString() const;
+	//GString ToString() const;
 
 private:
 	GTime(const gbyte *val);

@@ -312,6 +312,7 @@ GTime &GTime::AddMilliseconds(gint ms)
 	return *this;
 }
 
+/*
 GString GTime::ToString() const
 {
 	// 20:40 00:000
@@ -326,6 +327,7 @@ GString GTime::ToString() const
 	str.Append(GString::Number(Millisecond()));
 	return str;
 }
+*/
 
 } // namespace gsystem
 

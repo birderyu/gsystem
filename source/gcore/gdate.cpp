@@ -498,6 +498,7 @@ GDate &GDate::AddDays(gint d)
 	return *this;
 }
 
+/*
 GString GDate::ToString() const
 {
 	// 1991-02-28
@@ -510,6 +511,7 @@ GString GDate::ToString() const
 	str.Append(GString::Number(Day()));
 	return str;
 }
+*/
 
 } // namespace gsystem
 

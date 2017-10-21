@@ -116,7 +116,7 @@ public: // Object
 	GObjectPtr Clone() const;
 	const GObject *Boxing() const;
 	gbool Unboxing(const GObject *obj);
-	GString ToString() const;
+	//GString ToString() const;
 	GBytes ToBytes() const;
 	guint HashCode() const;
 	gbool Equals(const GObject *obj) const;

@@ -19,6 +19,10 @@ project/msvc/.vs/
 *.db
 *.opendb
 *.enc
+lib/gstringd.lib
+bin/gstringd.dll
+lib/gstring.lib
+bin/gstring.dll
 lib/gcored.lib
 bin/gcored.dll
 lib/gcore.lib

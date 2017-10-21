@@ -9,6 +9,7 @@
 
 namespace gsystem { // gsystem
 
+	/*
 GVariety::GVariety(const gchar *val)
 	: m_nType(VARIETY_TYPE_STRING)
 {
@@ -22,6 +23,7 @@ GVariety::GVariety(const GString &val)
 {
 	
 }
+	*/
 
 GVariety::GVariety(const GVariety &val)
 	: m_nType(val.m_nType)
@@ -81,7 +83,7 @@ GVariety::GVariety(const GVariety &val)
 	case VARIETY_TYPE_STRING:
 		// 不能直接调用m_strVal = val.m_strVal，因为此时的m_strVal处于未确定的状态
 		// 直接构造一个m_strVal
-		GCopyConstruct<GString8Data>(&m_strVal, val.m_strVal);
+		//GCopyConstruct<GString8Data>(&m_strVal, val.m_strVal);
 		break;
 	case VARIETY_TYPE_POINTER:
 		m_pVal = val.m_pVal;
@@ -149,7 +151,7 @@ GVariety::GVariety(GVariety &&val)
 	case VARIETY_TYPE_STRING:
 		// 不能直接调用m_strVal = GMove(val.m_strVal)，因为此时的m_strVal处于未确定的状态
 		// 直接移动构造一个m_strVal
-		GMoveConstruct<GString8Data>(&m_strVal, GMove(val.m_strVal));
+		//GMoveConstruct<GString8Data>(&m_strVal, GMove(val.m_strVal));
 		break;
 	case VARIETY_TYPE_POINTER:
 		m_pVal = val.m_pVal;
@@ -159,6 +161,7 @@ GVariety::GVariety(GVariety &&val)
 	}
 }
 
+/*
 gvoid GVariety::SetValue(const gchar *val)
 {
 	gsize size = GCString::Size(val);
@@ -206,13 +209,14 @@ gvoid GVariety::SetValue(GString &&val)
 		GMoveConstruct<GString8Data>(&m_strVal, GMove(val.m_tString));
 	}
 }
+*/
 
 gvoid GVariety::SetValue(const GVariety &val)
 {
 	if (m_nType == VARIETY_TYPE_STRING &&
 		val.m_nType == VARIETY_TYPE_STRING)
 	{
-		m_strVal = val.m_strVal;
+		//m_strVal = val.m_strVal;
 	}
 	else
 	{
@@ -271,7 +275,7 @@ gvoid GVariety::SetValue(const GVariety &val)
 			m_ldVal = val.m_ldVal;
 			break;
 		case VARIETY_TYPE_STRING:
-			GCopyConstruct<GString8Data>(&m_strVal, val.m_strVal);
+			//GCopyConstruct<GString8Data>(&m_strVal, val.m_strVal);
 			break;
 		case VARIETY_TYPE_POINTER:
 			m_pVal = val.m_pVal;
@@ -314,6 +318,7 @@ gbool GVariety::ToBool(gbool def) const
 		return m_ullVal != 0;
 	case VARIETY_TYPE_STRING:
 	{
+		/*
 		if (m_strVal.Size() != 4 && m_strVal.Size() != 5)
 		{
 			return def;
@@ -329,6 +334,7 @@ gbool GVariety::ToBool(gbool def) const
 		{
 			return false;
 		}
+		*/
 	}
 		break;
 	default:
@@ -355,6 +361,7 @@ gchar GVariety::ToChar(gchar def) const
 		return static_cast<gchar>(m_ucVal);
 	case VARIETY_TYPE_STRING:
 	{
+		/*
 		if (m_strVal.IsEmpty())
 		{
 			return ' ';
@@ -363,6 +370,7 @@ gchar GVariety::ToChar(gchar def) const
 		{
 			return m_strVal[0];
 		}
+		*/
 	}
 		break;
 	default:
@@ -389,6 +397,7 @@ gschar GVariety::ToSChar(gschar def) const
 		return static_cast<gschar>(m_ucVal);
 	case VARIETY_TYPE_STRING:
 	{
+		/*
 		if (m_strVal.IsEmpty())
 		{
 			return ' ';
@@ -397,6 +406,7 @@ gschar GVariety::ToSChar(gschar def) const
 		{
 			return static_cast<gschar>(m_strVal[0]);
 		}
+		*/
 	}
 		break;
 	default:
@@ -423,6 +433,7 @@ guchar GVariety::ToUChar(guchar def) const
 		return static_cast<guchar>(m_scVal);
 	case VARIETY_TYPE_STRING:
 	{
+		/*
 		if (m_strVal.IsEmpty())
 		{
 			return ' ';
@@ -431,6 +442,7 @@ guchar GVariety::ToUChar(guchar def) const
 		{
 			return static_cast<guchar>(m_strVal.GetAt(0));
 		}
+		*/
 	}
 		break;
 	default:
@@ -459,6 +471,7 @@ gwchar GVariety::ToWChar(gwchar def) const
 		return static_cast<gwchar>(m_ucVal);
 	case VARIETY_TYPE_STRING:
 	{
+		/*
 		if (m_pVal)
 		{
 			GString *pStr = static_cast<GString*>(m_pVal);
@@ -467,6 +480,7 @@ gwchar GVariety::ToWChar(gwchar def) const
 				return static_cast<gwchar>(pStr->CString()[0]);
 			}
 		}
+		*/
 	}
 		break;
 	default:
@@ -1018,6 +1032,7 @@ glongdouble GVariety::ToLongDouble(glongdouble def) const
 	return def;
 }
 
+/*
 GString GVariety::ToString() const
 {
 	switch (m_nType)
@@ -1080,6 +1095,7 @@ GString GVariety::ToString() const
 	}
 	return "";
 }
+*/
 
 gsmall GVariety::ToSmall(gsmall def) const
 {
@@ -1286,7 +1302,7 @@ GVariety &GVariety::operator=(const GVariety &val)
 		m_ldVal = val.m_ldVal;
 		break;
 	case VARIETY_TYPE_STRING:
-		m_strVal = GMove(val.m_strVal);
+		//m_strVal = GMove(val.m_strVal);
 		break;
 	case VARIETY_TYPE_POINTER:
 		m_pVal = val.m_pVal;
@@ -1358,7 +1374,7 @@ GVariety &GVariety::operator=(GVariety &&val)
 		m_ldVal = val.m_ldVal;
 		break;
 	case VARIETY_TYPE_STRING:
-		m_strVal = GMove(val.m_strVal);
+		//m_strVal = GMove(val.m_strVal);
 		break;
 	case VARIETY_TYPE_POINTER:
 		m_pVal = val.m_pVal;
@@ -1374,15 +1390,15 @@ gvoid GVariety::Free()
 {
 	if (m_nType == VARIETY_TYPE_BYTES)
 	{
-		GDestruct<GBytesData>(&m_bytesVal);
+		//GDestruct<GBytesData>(&m_bytesVal);
 	}
 	else if (m_nType == VARIETY_TYPE_STRING)
 	{
-		GDestruct<GString8Data>(&m_strVal);
+		//GDestruct<GString8Data>(&m_strVal);
 	}
 	else if (m_nType == VARIETY_TYPE_WSTRING)
 	{
-		GDestruct<GWStringData>(&m_wstrVal);
+		//GDestruct<GWStringData>(&m_wstrVal);
 	}
 
 	m_nType = VARIETY_TYPE_ILLEGAL;

@@ -66,17 +66,13 @@ GINLINE gbool GPackage<ValueT>::Unboxing(const GObject *pObj)
 	return false;
 }
 
-template <typename ValueT>
-GINLINE GString GPackage<ValueT>::ToString() const
-{
-	return GString::Number(m_nValue);
-}
-
+/*
 template <typename ValueT>
 GINLINE GString GPackage<ValueT>::ToString(gint nBase) const
 {
 	return GString::Number(m_nValue, nBase);
 }
+*/
 
 template <typename ValueT>
 GINLINE guint GPackage<ValueT>::HashCode() const

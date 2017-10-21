@@ -6,8 +6,8 @@ namespace gsystem { // gsystem
 namespace detail { // gsystem.detail
 
 GFile_Ex::GFile_Ex(const GString &sFileName)
-: m_sFileName(sFileName)
-, m_pFileStream(GNULL)
+: /*m_sFileName(sFileName)
+,*/ m_pFileStream(GNULL)
 , m_nOpenMode(GFile::NO_OPEN)
 {
 
@@ -32,6 +32,7 @@ gbool GFile_Ex::EndOfFile() const
 	return feof(m_pFileStream) != 0;
 }
 
+/*
 const GString &GFile_Ex::FileName() const
 {
 	return m_sFileName;
@@ -46,9 +47,11 @@ gvoid GFile_Ex::SetFileName(const GString &sFileName)
 {
 	m_sFileName = sFileName;
 }
+*/
 
 gbool GFile_Ex::Open(gbyte nOpenMode)
 {
+	/*
 	if (m_sFileName.IsEmpty() || 
 		nOpenMode == GFile::NO_OPEN)
 	{
@@ -73,6 +76,7 @@ gbool GFile_Ex::Open(gbyte nOpenMode)
 	// 关闭旧的文件流
 	Close();
 	m_pFileStream = new_file_stream;
+	*/
 	return true;
 }
 

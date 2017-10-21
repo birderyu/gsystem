@@ -20,6 +20,7 @@ namespace gsystem { // gsystem
 ****************************************************************************/
 class GAPI GString8 final 
 	: public GSerializable
+	, public GListT<gchar8>
 {
 	friend class GVariety;
 	friend GAPI GString8 operator+(const GString8 &s1, const GString8 &s2);

@@ -55,21 +55,43 @@ struct GVarietyGetReference
 
 namespace gsystem { // gsystem
 
-/// Ò»¸öÊ¹ÓÃunion½á¹¹¹¹¼şµÄ±äÌå½á¹¹£¨variant£©
-/// ÎªÁËÓëÊ¹ÓÃÄ£°åÊµÏÖµÄ±äÌåÀàĞÍÇø·Ö£¬½«ÆäÃüÃûÎªGVariety
-/// ÓÉÓÚunionµÄ¾ÖÏŞĞÔ£¬ÆäÖĞ¿ÉÒÔ±£´æµÄÊı¾İ½á¹¹ÓĞÏŞ
-/// Ê¹ÓÃÄ£°åÊµÏÖµÄ±äÌå½á¹¹ÔòÎŞ´Ë·½ÃæµÄÏŞÖÆ£¬¼ûGVariant
-/// GVarietyÖ§³ÖµÄÊı¾İÀàĞÍÓĞ£º
-/// »ù±¾ÄÚÖÃÀàĞÍ£ºgbool¡¢gchar¡¢gschar¡¢guchar¡¢gwchar¡¢gshort¡¢gushort¡¢gint¡¢guint¡¢
-/// glong¡¢gulong¡¢glonglong¡¢gulonglong¡¢gfloat¡¢gdouble¡¢glongdouble£¬¼°ÕâĞ©ÀàĞÍµÄµÈ¼ÛÀàĞÍ
-/// ×Ö·û´®GString¡¢×Ö½ÚÊı×éGBytes¡¢¿í×Ö·û´®GWString
+/********************************************************************************
+**
+** @brief å˜ä½“ç»“æ„
+**
+** ä½¿ç”¨unionç»“æ„æ„ä»¶çš„å˜ä½“ç»“æ„ï¼ˆvariantï¼‰
+** ä¸ºäº†ä¸ä½¿ç”¨æ¨¡æ¿å®ç°çš„å˜ä½“ç±»å‹åŒºåˆ†ï¼Œå°†å…¶å‘½åä¸ºGVariety
+** ç”±äºunionçš„å±€é™æ€§ï¼Œå…¶ä¸­å¯ä»¥ä¿å­˜çš„æ•°æ®ç»“æ„æœ‰é™
+** ä½¿ç”¨æ¨¡æ¿å®ç°çš„å˜ä½“ç»“æ„åˆ™æ— æ­¤æ–¹é¢çš„é™åˆ¶ï¼Œè§GVariant
+** GVarietyæ”¯æŒçš„æ•°æ®ç±»å‹æœ‰ï¼š
+** åŸºæœ¬å†…ç½®ç±»å‹ï¼šgboolã€gcharã€gscharã€gucharã€gwcharã€gshortã€gushortã€gintã€guintã€
+** glongã€gulongã€glonglongã€gulonglongã€gfloatã€gdoubleã€glongdoubleï¼ŒåŠè¿™äº›ç±»å‹çš„ç­‰ä»·ç±»å‹
+**
+********************************************************************************/
 class GAPI GVariety
 {
 public:
 	enum TYPE
 	{
+		/************************************************************************
+		**
+		** éæ³•çš„ç±»å‹
+		**
+		************************************************************************/
 		VARIETY_TYPE_ILLEGAL = 0,
+
+		/************************************************************************
+		**
+		** å¸ƒå°”ç±»å‹
+		**
+		************************************************************************/
 		VARIETY_TYPE_BOOL,
+
+		/************************************************************************
+		**
+		** å­—ç¬¦ç±»å‹
+		**
+		************************************************************************/
 		VARIETY_TYPE_CHAR,
 		VARIETY_TYPE_SCHAR,
 		VARIETY_TYPE_UCHAR,
@@ -85,11 +107,11 @@ public:
 		VARIETY_TYPE_FLOAT,
 		VARIETY_TYPE_DOUBLE,
 		VARIETY_TYPE_LONGDOUBLE,
-		VARIETY_TYPE_BYTES,			// ×Ö½ÚÊı×é
-		VARIETY_TYPE_STRING,		// ×Ö·û´®
-		VARIETY_TYPE_WSTRING,		// ×Ö·û´®
-		VARIETY_TYPE_DATETIME,		// ÈÕÆÚÊ±¼ä
-		VARIETY_TYPE_POINTER,		// Ö¸Õë
+		VARIETY_TYPE_BYTES,			// å­—èŠ‚æ•°ç»„
+		VARIETY_TYPE_STRING,		// å­—ç¬¦ä¸²
+		VARIETY_TYPE_WSTRING,		// å­—ç¬¦ä¸²
+		VARIETY_TYPE_DATETIME,		// æ—¥æœŸæ—¶é—´
+		VARIETY_TYPE_POINTER,		// æŒ‡é’ˆ
 	};
 
 public:
@@ -110,11 +132,6 @@ public:
 	GVariety(gfloat val);
 	GVariety(gdouble val);
 	GVariety(glongdouble val);
-	GVariety(const GBytes &val);
-	GVariety(const gchar *val);
-	GVariety(const GString &val);
-	GVariety(const gwchar *val);
-	GVariety(const GWString &val);
 	GVariety(const GDateTime &val);
 	GVariety(gptr val);
 	GVariety(const GVariety &val);
@@ -131,7 +148,7 @@ public:
 	//template<typename T> gvoid SetValue(const T &val);
 	//template<typename T> gvoid SetValue(T &&val);
 
-	GString ToString() const;
+	//GString ToString() const;
 
 	GVariety &operator=(const GVariety &val);
 	GVariety &operator=(GVariety &&val);
@@ -152,9 +169,9 @@ public:
 	gvoid SetValue(gfloat val);
 	gvoid SetValue(gdouble val);
 	gvoid SetValue(glongdouble val);
-	gvoid SetValue(const gchar *val);
-	gvoid SetValue(const GString &val);
-	gvoid SetValue(GString &&val);
+	//gvoid SetValue(const gchar *val);
+	//gvoid SetValue(const GString &val);
+	//gvoid SetValue(GString &&val);
 	gvoid SetValue(const GVariety &val);
 	gvoid SetPoiter(gptr val);
 
@@ -217,9 +234,9 @@ private:
 		gdouble			m_dVal;
 		glongdouble		m_ldVal;
 		gptr			m_pVal;
-		GBytesData		m_bytesVal;
-		GString8Data	m_strVal;
-		GWStringData	m_wstrVal;
+		//GBytesData		m_bytesVal;
+		//GString8Data	m_strVal;
+		//GWStringData	m_wstrVal;
 		gbyte			m_timeVal[G_DATE_TIME_SIZE];
 	};
 	gbyte m_nType;

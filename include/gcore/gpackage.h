@@ -42,8 +42,7 @@ public:
 	GObjectPtr Clone() const;
 	const GObject *Boxing() const;
 	gbool Unboxing(const GObject *);
-	GString ToString() const;
-	GString ToString(gint base) const;
+	//GString ToString(gint base) const;
 	guint HashCode() const;
 	virtual gbool Equals(const GObject *) const;
 	gbool Equals(ValueType) const;

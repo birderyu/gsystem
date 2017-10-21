@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2B4EB312-554B-4F94-BEE5-03170623DA20}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CBase</RootNamespace>
+    <ProjectName>gstring</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(BinaryFolder)</OutDir>
+    <IntDir>$(ObjectFolder)$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)$(Suffix)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(ObjectFolder)$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)$(Suffix)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>gprecompiler.h</PrecompiledHeaderFile>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(ImportFolder)\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(SymbolFolder)\$(TargetName).pdb</ProgramDatabaseFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>gprecompiler.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(ImportFolder)\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(SymbolFolder)\$(TargetName).pdb</ProgramDatabaseFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>gprecompiler.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDatabaseFile>$(SymbolFolder)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(ImportFolder)\$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CBASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\gcore\garchive.h" />
+    <ClInclude Include="..\..\..\include\gcore\gallocator.h" />
+    <ClInclude Include="..\..\..\include\gcore\garrays.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbasestring.h" />
+    <ClInclude Include="..\..\..\include\gcore\gclasscode.h" />
+    <ClInclude Include="..\..\..\include\gcore\gdeque.h" />
+    <ClInclude Include="..\..\..\include\gcore\giterator.h" />
+    <ClInclude Include="..\..\..\include\gcore\ginitializerlist.h" />
+    <ClInclude Include="..\..\..\include\gcore\grwlock.h" />
+    <ClInclude Include="..\..\..\include\gcore\gserializable.h" />
+    <ClInclude Include="..\..\..\include\gcore\gseries.h" />
+    <ClInclude Include="..\..\..\include\gcore\garrayqueue.h" />
+    <ClInclude Include="..\..\..\include\gcore\garraystack.h" />
+    <ClInclude Include="..\..\..\include\gcore\gatom.h" />
+    <ClInclude Include="..\..\..\include\gcore\gavltree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbinheap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbstree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbintree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbitset.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbtree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gbytes.h" />
+    <ClInclude Include="..\..\..\include\gcore\gclist.h" />
+    <ClInclude Include="..\..\..\include\gcore\gconstructor.h" />
+    <ClInclude Include="..\..\..\include\gcore\gcriticalsection.h" />
+    <ClInclude Include="..\..\..\include\gcore\gcstring.h" />
+    <ClInclude Include="..\..\..\include\gcore\gevent.h" />
+    <ClInclude Include="..\..\..\include\gcore\gfinal.h" />
+    <ClInclude Include="..\..\..\include\gcore\gfunctional.h" />
+    <ClInclude Include="..\..\..\include\gcore\glistqueue.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmemory.h" />
+    <ClInclude Include="..\..\..\include\gcore\gnomoveable.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmultimap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gnocopyable.h" />
+    <ClInclude Include="..\..\..\include\gcore\gordermultimap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gqueue.h" />
+    <ClInclude Include="..\..\..\include\gcore\gregister.h" />
+    <ClInclude Include="..\..\..\include\gcore\gserialize.h" />
+    <ClInclude Include="..\..\..\include\gcore\garray.h" />
+    <ClInclude Include="..\..\..\include\gcore\glinkedlist.h" />
+    <ClInclude Include="..\..\..\include\gcore\gdlist.h" />
+    <ClInclude Include="..\..\..\include\gcore\gseriespool.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstring.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstring16.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstring32.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstrings.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstruct.h" />
+    <ClInclude Include="..\..\..\include\gcore\ggraph.h" />
+    <ClInclude Include="..\..\..\include\gcore\ghash.h" />
+    <ClInclude Include="..\..\..\include\gcore\ghashtable.h" />
+    <ClInclude Include="..\..\..\include\gcore\ghuffmantree.h" />
+    <ClInclude Include="..\..\..\include\gcore\glist.h" />
+    <ClInclude Include="..\..\..\include\gcore\glock.h" />
+    <ClInclude Include="..\..\..\include\gcore\gliststack.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gorderset.h" />
+    <ClInclude Include="..\..\..\include\gcore\grtree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gset.h" />
+    <ClInclude Include="..\..\..\include\gcore\gsharedptr.h" />
+    <ClInclude Include="..\..\..\include\gcore\gsingleton.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstack.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstaticarray.h" />
+    <ClInclude Include="..\..\..\include\gcore\gtable.h" />
+    <ClInclude Include="..\..\..\include\gcore\gthread.h" />
+    <ClInclude Include="..\..\..\include\gcore\gtrietree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gtuple.h" />
+    <ClInclude Include="..\..\..\include\gcore\guniqueptr.h" />
+    <ClInclude Include="..\..\..\include\gcore\gunordermap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gsortedmap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gblock.h" />
+    <ClInclude Include="..\..\..\include\gcore\gnew.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmemorystore.h" />
+    <ClInclude Include="..\..\..\include\gcore\grefcounter.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstdstringhelper.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstringlist.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstringpool.h" />
+    <ClInclude Include="..\..\..\include\gcore\gutility.h" />
+    <ClInclude Include="..\..\..\include\gcore\gvariant.h" />
+    <ClInclude Include="..\..\..\include\gcore\grbtree.h" />
+    <ClInclude Include="..\..\..\include\gcore\gsort.h" />
+    <ClInclude Include="..\..\..\include\gcore\gdynamicarray.h" />
+    <ClInclude Include="..\..\..\include\gcore\glockguard.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmacro.h" />
+    <ClInclude Include="..\..\..\include\gcore\gendian.h" />
+    <ClInclude Include="..\..\..\include\gcore\gglobal.h" />
+    <ClInclude Include="..\..\..\include\gcore\gslist.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmath.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmempool.h" />
+    <ClInclude Include="..\..\..\include\gcore\gmutex.h" />
+    <ClInclude Include="..\..\..\include\gcore\gobject.h" />
+    <ClInclude Include="..\..\..\include\gcore\gsemaphore.h" />
+    <ClInclude Include="..\..\..\include\gcore\gstring8.h" />
+    <ClInclude Include="..\..\..\include\gcore\grunnable.h" />
+    <ClInclude Include="..\..\..\include\gcore\gtraits.h" />
+    <ClInclude Include="..\..\..\include\gcore\gtype.h" />
+    <ClInclude Include="..\..\..\include\gcore\gunordermultimap.h" />
+    <ClInclude Include="..\..\..\include\gcore\gunorderset.h" />
+    <ClInclude Include="..\..\..\include\gcore\gvariety.h" />
+    <ClInclude Include="..\..\..\include\gcore\gvector.h" />
+    <ClInclude Include="..\..\..\include\gcore\gversion.h" />
+    <ClInclude Include="..\..\..\include\gcore\gweakptr.h" />
+    <ClInclude Include="..\..\..\include\gcore\gfunctor.h" />
+    <ClInclude Include="..\..\..\thirds\gcore\dlmalloc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\gcore\gblock.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gbytes.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gcriticalsection.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gcstring.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gendian.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\ghash.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gmath.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gmutex.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gmemory.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gobject.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gmemorystore.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gregister.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gsemaphore.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gstdstringhelper.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gstring16.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gstring8.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gstringpool.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\grunnable.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gthread.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\gvariety.cpp" />
+    <ClCompile Include="..\..\..\source\gcore\dlmalloc.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\gcore\inline\gallocator.inl" />
+    <None Include="..\..\..\include\gcore\inline\garray.inl" />
+    <None Include="..\..\..\include\gcore\inline\garrayqueue.inl" />
+    <None Include="..\..\..\include\gcore\inline\garrays.inl" />
+    <None Include="..\..\..\include\gcore\inline\garraystack.inl" />
+    <None Include="..\..\..\include\gcore\inline\gatom.inl" />
+    <None Include="..\..\..\include\gcore\inline\gbasestring.inl" />
+    <None Include="..\..\..\include\gcore\inline\gbinheap.inl" />
+    <None Include="..\..\..\include\gcore\inline\gbintree.inl" />
+    <None Include="..\..\..\include\gcore\inline\gbstree.inl" />
+    <None Include="..\..\..\include\gcore\inline\gbtree.inl" />
+    <None Include="..\..\..\include\gcore\inline\gbytes.inl" />
+    <None Include="..\..\..\include\gcore\inline\gclist.inl" />
+    <None Include="..\..\..\include\gcore\inline\gconstructor.inl" />
+    <None Include="..\..\..\include\gcore\inline\gdeque.inl" />
+    <None Include="..\..\..\include\gcore\inline\gdlist.inl" />
+    <None Include="..\..\..\include\gcore\inline\gdynamicarray.inl" />
+    <None Include="..\..\..\include\gcore\inline\gendian.inl" />
+    <None Include="..\..\..\include\gcore\inline\gfunctor.inl" />
+    <None Include="..\..\..\include\gcore\inline\ggraph.inl" />
+    <None Include="..\..\..\include\gcore\inline\ghash.inl" />
+    <None Include="..\..\..\include\gcore\inline\ghashtable.inl" />
+    <None Include="..\..\..\include\gcore\inline\ghuffmantree.inl" />
+    <None Include="..\..\..\include\gcore\inline\glinkedlist.inl" />
+    <None Include="..\..\..\include\gcore\inline\glist.inl" />
+    <None Include="..\..\..\include\gcore\inline\glistqueue.inl" />
+    <None Include="..\..\..\include\gcore\inline\gliststack.inl" />
+    <None Include="..\..\..\include\gcore\inline\glockguard.inl" />
+    <None Include="..\..\..\include\gcore\inline\gmath.inl" />
+    <None Include="..\..\..\include\gcore\inline\gmempool.inl" />
+    <None Include="..\..\..\include\gcore\inline\gnew.inl" />
+    <None Include="..\..\..\include\gcore\inline\gorderset.inl" />
+    <None Include="..\..\..\include\gcore\inline\gpackage.inl" />
+    <None Include="..\..\..\include\gcore\inline\grbtree.inl" />
+    <None Include="..\..\..\include\gcore\inline\grefcounter.inl" />
+    <None Include="..\..\..\include\gcore\inline\grtree.inl" />
+    <None Include="..\..\..\include\gcore\inline\gserialize.inl" />
+    <None Include="..\..\..\include\gcore\inline\gseries.inl" />
+    <None Include="..\..\..\include\gcore\inline\gsharedptr.inl" />
+    <None Include="..\..\..\include\gcore\inline\gslist.inl" />
+    <None Include="..\..\..\include\gcore\inline\gsort.inl" />
+    <None Include="..\..\..\include\gcore\inline\gsortedmap.inl" />
+    <None Include="..\..\..\include\gcore\inline\gstaticarray.inl" />
+    <None Include="..\..\..\include\gcore\inline\gstringlist.inl" />
+    <None Include="..\..\..\include\gcore\inline\gstruct.inl" />
+    <None Include="..\..\..\include\gcore\inline\gtable.inl" />
+    <None Include="..\..\..\include\gcore\inline\gtuple.inl" />
+    <None Include="..\..\..\include\gcore\inline\guniqueptr.inl" />
+    <None Include="..\..\..\include\gcore\inline\gunordermap.inl" />
+    <None Include="..\..\..\include\gcore\inline\gunorderset.inl" />
+    <None Include="..\..\..\include\gcore\inline\gutility.inl" />
+    <None Include="..\..\..\include\gcore\inline\gvariant.inl" />
+    <None Include="..\..\..\include\gcore\inline\gvariety.inl" />
+    <None Include="..\..\..\include\gcore\inline\gvector.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

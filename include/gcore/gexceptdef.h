@@ -4,6 +4,8 @@
 #include "gsharedptr.h"
 #include "gstring.h"
 
+/*
+
 #define GTRY() \
     gsystem::GSharedPtr<gsystem::GException> exception; \
     gsystem::GString stackParams; \
@@ -50,5 +52,6 @@
 #define G_THROW_EXCEPTION(exceptionClass, methodName, whatArguments, whyMessageId, whyArguments) \
     throw new exceptionClass(methodName, GLINE, GFILE, whatArguments, whyMessageId, whyArguments) \
 
+*/
 
 #endif // _CORE_EXCEPT_DEFINE_H_

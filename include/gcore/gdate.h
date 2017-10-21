@@ -63,7 +63,7 @@ public:
 	GDate &AddDays(gint d);
 
 public:
-	GString ToString() const;
+	//GString ToString() const;
 
 private:
 	GDate(const gbyte *val);

@@ -20,9 +20,9 @@ public:
 
 	virtual gbyte Format() const = 0;
 
-	const GString &FileName() const;
-	GString &FileName();
-	gvoid SetFileName(const GString &);
+	//const GString &FileName() const;
+	//GString &FileName();
+	//gvoid SetFileName(const GString &);
 
 	gbool Open(gbyte nOpenMode);
 	gvoid Flush();
@@ -38,7 +38,7 @@ protected:
 	virtual gcstring OpenMode() const = 0;
 
 protected:
-	GString m_sFileName;
+	//GString m_sFileName;
 	FILE *m_pFileStream;
 	gbyte m_nOpenMode;
 };
