@@ -10,7 +10,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
 		<Link>
-			<AdditionalDependencies>gstring(Suffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>gstring$(Suffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
 		</Link>
 	</ItemDefinitionGroup>
 

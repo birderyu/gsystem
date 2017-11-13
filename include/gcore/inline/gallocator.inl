@@ -8,12 +8,12 @@ namespace gsystem { // gsystem
 template <typename ClassT> GINLINE
 ClassT *GAllocate(gsize n) GEXCEPT(false)
 {
-	ClassT *ptr = (ClassT *)GMalloc(n * sizeof(ClassT));
+	gptr ptr = GMalloc(n * sizeof(ClassT));
 	if (GNULL == ptr)
 	{
 		throw std::bad_alloc();
 	}
-	return ptr;
+	return static_cast<ClassT *>(ptr);
 }
 
 template <typename ClassT> GINLINE 
@@ -25,12 +25,12 @@ gvoid GDeallocate(ClassT *ptr) GNOEXCEPT
 template <typename ClassT> GINLINE 
 ClassT *GReallocate(ClassT *oldptr, gsize n) GEXCEPT(false)
 {
-	ClassT *ptr = (ClassT *)GRealloc(oldptr, n * sizeof(ClassT));
+	gptr ptr = GRealloc(oldptr, n * sizeof(ClassT));
 	if (GNULL == ptr)
 	{
 		throw std::bad_alloc();
 	}
-	return ptr;
+	return static_cast<ClassT *>(ptr);
 }
 
 template <typename ClassT> GINLINE
