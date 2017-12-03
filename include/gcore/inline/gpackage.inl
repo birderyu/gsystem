@@ -207,13 +207,13 @@ GINLINE ValueT GNumber<ValueT>::operator+(const GNumber<ValueT> &val)
 }
 
 template <typename ValueT>
-GINLINE ValueT GNumber<ValueT>::operator++()
+GINLINE ValueT &GNumber<ValueT>::operator++()
 {
 	return ++m_nValue;
 }
 
 template <typename ValueT>
-GINLINE ValueT GNumber<ValueT>::operator++(gint)
+GINLINE const ValueT GNumber<ValueT>::operator++(gint)
 {
 	return m_nValue++;
 }
@@ -243,13 +243,13 @@ GINLINE ValueT GNumber<ValueT>::operator-(const GNumber<ValueT> &val)
 }
 
 template <typename ValueT>
-GINLINE ValueT GNumber<ValueT>::operator--()
+GINLINE ValueT &GNumber<ValueT>::operator--()
 {
 	return --m_nValue;
 }
 
 template <typename ValueT>
-GINLINE ValueT GNumber<ValueT>::operator--(gint)
+GINLINE const ValueT GNumber<ValueT>::operator--(gint)
 {
 	return m_nValue--;
 }

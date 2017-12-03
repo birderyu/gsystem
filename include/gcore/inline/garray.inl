@@ -1,6 +1,8 @@
 #ifndef _CORE_ARRAY_INLINE_
 #define _CORE_ARRAY_INLINE_
 
+#include "gmath.h"
+
 namespace gsystem { // gsystem
 
 template<typename T> GINLINE
@@ -113,6 +115,22 @@ GINLINE gsize GArray<T>::CountOf(const T &value) const
 		}
 	}
 	return count;
+}
+
+template<typename T>
+GINLINE gvoid GArray<T>::Shuffle() 
+{
+	// Fisher Yates
+	if (IsEmpty()) 
+	{
+		return;
+	}
+	gsize i = Size();
+	while (--i)
+	{
+		gsize j = GMath::Rand() % (i + 1);
+		GSwap(GetAt(i), GetAt(j));
+	}
 }
 
 template<typename T> GINLINE

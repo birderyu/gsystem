@@ -8,6 +8,8 @@ namespace gsystem { // gsystem
 class GAPI GMath
 {
 public:
+	static gint Rand();
+
 	/// 根号2
 	static gdouble SQRT_2;
 

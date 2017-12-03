@@ -35,9 +35,9 @@ public:
 		GINLINE bool operator>(const Iterator &iter) const { return m_pData > iter.m_pData; }
 		GINLINE bool operator>=(const Iterator &iter) const { return m_pData >= iter.m_pData; }
 		GINLINE Iterator &operator++() { ++m_pData; return *this; }
-		GINLINE Iterator  operator++(gint) { T *data = m_pData; ++m_pData; return data; }
+		GINLINE const Iterator  operator++(gint) { T *data = m_pData; ++m_pData; return data; }
 		GINLINE Iterator &operator--() { m_pData--; return *this; }
-		GINLINE Iterator  operator--(gint) { T *data = m_pData; m_pData--; return data; }
+		GINLINE const Iterator  operator--(gint) { T *data = m_pData; m_pData--; return data; }
 		GINLINE Iterator &operator+=(gint i) { m_pData += i; return *this; }
 		GINLINE Iterator &operator-=(gint i) { m_pData -= i; return *this; }
 		GINLINE Iterator  operator+(gint i) const { return Iterator(m_pData + i); }
@@ -67,9 +67,9 @@ public:
 		GINLINE gbool operator>(const ConstIterator &citer) const { return m_pData > citer.m_pData; }
 		GINLINE gbool operator>=(const ConstIterator &citer) const { return m_pData >= citer.m_pData; }
 		GINLINE ConstIterator &operator++() { ++m_pData; return *this; }
-		GINLINE ConstIterator  operator++(gint) { const T *n = m_pData; ++m_pData; return n; }
+		GINLINE const ConstIterator  operator++(gint) { const T *n = m_pData; ++m_pData; return n; }
 		GINLINE ConstIterator &operator--() { m_pData--; return *this; }
-		GINLINE ConstIterator  operator--(gint) { const T *data = m_pData; m_pData--; return data; }
+		GINLINE const ConstIterator  operator--(gint) { const T *data = m_pData; m_pData--; return data; }
 		GINLINE ConstIterator &operator+=(gint i) { m_pData += i; return *this; }
 		GINLINE ConstIterator &operator-=(gint i) { m_pData -= i; return *this; }
 		GINLINE ConstIterator  operator+(gint i) const { return ConstIterator(m_pData + i); }

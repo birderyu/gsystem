@@ -75,7 +75,7 @@ public:
 			m_pNode = m_pTable->NextNode(m_pNode);
 			return *this;
 		}
-		GINLINE Iterator operator++(gint)
+		GINLINE const Iterator operator++(gint)
 		{
 			GASSERT(m_pNode && m_pTable);
 			GUnorderMapNode *node = m_pNode;
@@ -185,7 +185,7 @@ public:
 			m_pNode = m_pTable->NextNode(m_pNode);
 			return *this;
 		}
-		GINLINE ConstIterator operator++(gint)
+		GINLINE const ConstIterator operator++(gint)
 		{
 			GASSERT(m_pNode && m_pTable);
 			const GUnorderMapNode *node = m_pNode;

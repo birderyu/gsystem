@@ -18,6 +18,11 @@ gdouble GMath::LOG_10_E	= 0.43429448190325182765;
 gdouble GMath::LN_2		= 0.69314718055994530942;
 gdouble GMath::LN_10	= 2.30258509299404568402;
 
+gint GMath::Rand()
+{
+	return rand();
+}
+
 guint GMath::Abs(gint v)
 {
 	using std::abs;

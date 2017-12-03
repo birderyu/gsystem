@@ -367,8 +367,18 @@
 ** @brief 内联
 **
 ********************************************************************************/
-#	define GINLINE	inline
+#	define GINLINE inline
 #endif // !GINLINE
+
+#ifndef GOVERRIDE
+/********************************************************************************
+**
+** @name GOVERRIDE
+** @brief 重写
+**
+********************************************************************************/
+#	define GOVERRIDE override
+#endif // !GOVERRIDE
 
 // 字符处理
 #define GUCHAR(c)				((gsystem::guchar)(c))

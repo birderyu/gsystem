@@ -52,7 +52,7 @@ template<typename T>
 GINLINE gvoid GSwap(T &a, T &b)
 {
 	detail::utility::GSwap(a, b,
-		GTypeTraits<T>::Arithmetic())
+		GTypeTraits<T>::Arithmetic());
 }
 
 } // namespace gsystem

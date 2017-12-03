@@ -76,14 +76,14 @@ public:
 	// 运算符重载
 	ValueT operator+(ValueType);
 	ValueT operator+(const GNumber<ValueT> &);
-	ValueT operator++();
-	ValueT operator++(gint);
+	ValueT &operator++();
+	const ValueT operator++(gint);
 	ValueT operator+=(ValueType);
 	ValueT operator+=(const GNumber<ValueT> &);
 	ValueT operator-(ValueType);
 	ValueT operator-(const GNumber<ValueT> &);
-	ValueT operator--();
-	ValueT operator--(gint);
+	ValueT &operator--();
+	const ValueT operator--(gint);
 	ValueT operator-=(ValueType);
 	ValueT operator-=(const GNumber<ValueT> &);
 	gbool operator>=(ValueType) const;

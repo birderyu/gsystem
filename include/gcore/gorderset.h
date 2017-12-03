@@ -90,7 +90,7 @@ public:
 			m_pNode = m_pNode->Next();
 			return *this;
 		}
-		GINLINE Iterator operator++(gint)
+		GINLINE const Iterator operator++(gint)
 		{
 			GASSERT(m_pNode);
 			GOrderSetNode *node = m_pNode;
@@ -103,7 +103,8 @@ public:
 			m_pNode = m_pNode->Previous();
 			return *this;
 		}
-		GINLINE Iterator operator--(gint) {
+		GINLINE const Iterator operator--(gint) 
+		{
 			GASSERT(m_pNode);
 			GOrderSetNode *node = m_pNode;
 			m_pNode = m_pNode->Previous();
@@ -215,7 +216,7 @@ public:
 			m_pNode = m_pNode->Next();
 			return *this;
 		}
-		GINLINE ConstIterator operator++(gint)
+		GINLINE const ConstIterator operator++(gint)
 		{
 			GASSERT(m_pNode);
 			const GOrderSetNode *node = m_pNode;
@@ -228,7 +229,8 @@ public:
 			m_pNode = m_pNode->Previous();
 			return *this;
 		}
-		GINLINE ConstIterator operator--(gint) {
+		GINLINE const ConstIterator operator--(gint) 
+		{
 			GASSERT(m_pNode);
 			const GOrderSetNode *node = m_pNode;
 			m_pNode = m_pNode->Previous();

@@ -946,7 +946,7 @@ class GTreeSlot
 	: public GHashTableSlot<KeyT, ValueT, NodeT>
 	, public GNewT<GTreeSlot<KeyT, ValueT, CompareT, NodeT>>
 {
-
+	// TODO
 };
 
 /********************************************************************************

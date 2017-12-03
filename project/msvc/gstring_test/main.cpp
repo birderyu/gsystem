@@ -8,33 +8,20 @@
 //#include "rbtree_test.h"
 
 #include "gstopwatch.h"
+#include "gdynamicarray.h"
+#include "gutility.h"
 
 using namespace gsystem;
 
 gint main(gint argc, gchar *argv[])
 {
-	/*
-	//GRBTree<gint, gint> mmap;
-	//GHashTable<gint, gint> mmap(10000000);
-	GStopWatch sw;
-	for (int i = 0; i < 10000000; i++)
+	for (gsize i = 0; i < 1000000000; i++)
 	{
-		mmap.Insert(i, 0);
+		// 分配
+		gint *ptr = GAllocate<gint>(10);
+		// 释放
+		GDeallocate<gint>(ptr);
 	}
-	gulong t1 = sw.Stop();
-
-	sw.Start();
-	for (int i = 0; i < 10000000; i++)
-	{
-		mmap.Find(i);
-	}
-	gulong t2 = sw.Stop();
-
-	std::cout << "构建用时: " << t1 << "ms, "
-		<< "查询用时: " << t2 << "ms" 
-		//<< ", 树深度: " << mmap.Depth() 
-		<< std::endl; // for test
-	*/
 
 	testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
