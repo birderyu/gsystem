@@ -117,22 +117,19 @@ GINLINE NodeT* GBinTree<NodeT>::Root() const
 }
 
 template<typename NodeT>
-template<typename VisitorT>  
-GINLINE gvoid GBinTree<NodeT>::PreOrderTraverse(VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PreOrderTraverse(const GFunction<gbool(const NodeT &)> &visitor) const
 {
 	PreOrderTraverse(m_pRoot, visitor);
 }
 
 template<typename NodeT>
-template<typename VisitorT>
-GINLINE gvoid GBinTree<NodeT>::InOrderTraverse(VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::InOrderTraverse(const GFunction<gbool(const NodeT &)> &visitor) const
 {
 	InOrderTraverse(m_pRoot, visitor);
 }
 
 template<typename NodeT>
-template<typename VisitorT>
-GINLINE gvoid GBinTree<NodeT>::PostOrderTraverse(VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PostOrderTraverse(const GFunction<gbool(const NodeT &)> &visitor) const
 {
 	PostOrderTraverse(m_pRoot, visitor);
 }
@@ -197,38 +194,44 @@ GINLINE NodeT *GBinTree<NodeT>::CopySubTree(NodeT *node)
 }
 
 template<typename NodeT>
-template<typename VisitorT>
-GINLINE gvoid GBinTree<NodeT>::PreOrderTraverse(const NodeT *node, VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PreOrderTraverse(const NodeT *node, const GFunction<gbool(const NodeT &)> &visitor) const
 {
-	if (node)
+	if (node && visitor)
 	{
-		visitor(*node);
+		if (!visitor(*node))
+		{
+			return;
+		}
 		PreOrderTraverse(node->m_pLeft, visitor);
 		PreOrderTraverse(node->m_pRight, visitor);
 	}
 }
 
 template<typename NodeT>
-template<typename VisitorT>
-GINLINE gvoid GBinTree<NodeT>::InOrderTraverse(const NodeT *node, VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::InOrderTraverse(const NodeT *node, const GFunction<gbool(const NodeT &)> &visitor) const
 {
-	if (node)
+	if (node && visitor)
 	{
 		InOrderTraverse(node->m_pLeft, visitor);
-		visitor(*node);
+		if (!visitor(*node))
+		{
+			return;
+		}
 		InOrderTraverse(node->m_pRight, visitor);
 	}
 }
 
 template<typename NodeT>
-template<typename VisitorT>
-GINLINE gvoid GBinTree<NodeT>::PostOrderTraverse(const NodeT *node, VisitorT &visitor) const
+GINLINE gvoid GBinTree<NodeT>::PostOrderTraverse(const NodeT *node, const GFunction<gbool(const NodeT &)> &visitor) const
 {
-	if (node)
+	if (node && visitor)
 	{
 		PostOrderTraverse(node->m_pLeft, visitor);
 		PostOrderTraverse(node->m_pRight, visitor);
-		visitor(*node);
+		if (!visitor(*node))
+		{
+			return;
+		}
 	}
 }
 

@@ -18,6 +18,7 @@
 #include "gstruct.h"
 #include "gnew.h"
 #include "glist.h"
+#include "gfunctional.h"
 
 namespace gsystem { // gsystem
 
@@ -205,31 +206,28 @@ public:
 	**
 	** @name PreOrderTraverse
 	** @brief 先（根）序遍历
-	** @template VisitorT 访问节点的函数
-	** @param [in] visitor {VisitorT &} 访问节点的函数对象
+	** @param [in] visitor {const GFunction<gbool(const NodeT &)> &} 访问节点的函数对象
 	**
 	****************************************************************************/
-	template<typename VisitorT> gvoid PreOrderTraverse(VisitorT &visitor) const;
+	gvoid PreOrderTraverse(const GFunction<gbool(const NodeT &)> &visitor) const;
 
 	/****************************************************************************
 	**
 	** @name InOrderTraverse
 	** @brief 中（根）序遍历
-	** @template VisitorT 访问节点的函数
 	** @param [in] visitor {VisitorT &} 访问节点的函数对象
 	**
 	****************************************************************************/
-	template<typename VisitorT> gvoid InOrderTraverse(VisitorT &visitor) const;
+	gvoid InOrderTraverse(const GFunction<gbool(const NodeT &)> &visitor) const;
 
 	/****************************************************************************
 	**
 	** @name PostOrderTraverse
 	** @brief 后（根）序遍历
-	** @template VisitorT 访问节点的函数
 	** @param [in] visitor {VisitorT &} 访问节点的函数对象
 	**
 	****************************************************************************/
-	template<typename VisitorT> gvoid PostOrderTraverse(VisitorT &visitor) const;
+	gvoid PostOrderTraverse(const GFunction<gbool(const NodeT &)> &visitor) const;
 
 public:
 	/****************************************************************************
@@ -300,34 +298,31 @@ protected:
 	**
 	** @name PreOrderTraverse
 	** @brief 先（根）序遍历一棵子树
-	** @template VisitorT 访问节点的函数
 	** @param [in] node {const NodeT *} 子树的根节点
-	** @param [in] visitor {VisitorT &} 访问节点的函数对象
+	** @param [in] visitor {const GFunction<gbool(const NodeT &)> &} 访问节点的函数对象
 	**
 	****************************************************************************/
-	template<typename VisitorT> gvoid PreOrderTraverse(const NodeT *node, VisitorT &visitor) const;
+	gvoid PreOrderTraverse(const NodeT *node, const GFunction<gbool(const NodeT &)> &visitor) const;
 
 	/****************************************************************************
 	**
 	** @name InOrderTraverse
 	** @brief 中（根）序遍历一棵子树
-	** @template VisitorT 访问节点的函数
 	** @param [in] node {const NodeT *} 子树的根节点
-	** @param [in] visitor {VisitorT &} 访问节点的函数对象
+	** @param [in] visitor {const GFunction<gbool(const NodeT &)> &} 访问节点的函数对象
 	**
 	****************************************************************************/
-	template<typename VisitorT> gvoid InOrderTraverse(const NodeT *node, VisitorT &visitor) const;
+	gvoid InOrderTraverse(const NodeT *node, const GFunction<gbool(const NodeT &)> &visitor) const;
 
 	/****************************************************************************
 	**
 	** @name PostOrderTraverse
 	** @brief 后（根）序遍历一棵子树
-	** @template VisitorT 访问节点的函数
 	** @param [in] node {const NodeT *} 子树的根节点
-	** @param [in] visitor {VisitorT &} 访问节点的函数对象
+	** @param [in] visitor {const GFunction<gbool(const NodeT &)> &} 访问节点的函数对象
 	**
 	****************************************************************************/
-	template<typename VisitorT> gvoid PostOrderTraverse(const NodeT *node, VisitorT &visitor) const;
+	gvoid PostOrderTraverse(const NodeT *node, const GFunction<gbool(const NodeT &)> &visitor) const;
 
 	/****************************************************************************
 	**

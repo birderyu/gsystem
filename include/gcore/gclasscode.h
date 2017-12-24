@@ -4,7 +4,7 @@
 #include "gmacro.h"
 
 #ifndef G_FIRST_CLASS_CODE_CORE
-#	define G_FIRST_CLASS_CODE_CORE 19910228
+#	define G_FIRST_CLASS_CODE_CORE 0x12FCE54
 #endif // G_FIRST_CLASS_CODE_CORE
 
 #ifndef G_ERROR_CLASS_CODE
