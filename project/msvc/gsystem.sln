@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gcore", "gcore\gcore.vcxproj", "{248D9550-B9EC-4A1C-B914-9E17B2483266}"
 EndProject
@@ -40,6 +40,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gstring", "gstring\gstring.vcxproj", "{2B4EB312-554B-4F94-BEE5-03170623DA20}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gstring_test", "gstring_test\gstring_test.vcxproj", "{D793467E-20E0-4E48-8F82-A626D1BD91BE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B4EB312-554B-4F94-BEE5-03170623DA20} = {2B4EB312-554B-4F94-BEE5-03170623DA20}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,5 +131,8 @@ Global
 		{E65C8832-92BC-4757-93E6-C1186200CC81} = {69A72910-D55B-40B0-AF74-3CBE660E8012}
 		{C1150DC5-3B95-4853-8D87-82F53D823D56} = {0F020C8E-F223-4CF0-B406-AC68D5523C7B}
 		{D793467E-20E0-4E48-8F82-A626D1BD91BE} = {69A72910-D55B-40B0-AF74-3CBE660E8012}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA33E47C-CAC9-4B13-967E-CCE125C8EE81}
 	EndGlobalSection
 EndGlobal

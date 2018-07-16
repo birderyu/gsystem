@@ -49,12 +49,67 @@ public:
 	static GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> ReferenceOf(const T *ref_arr, gsize ref_size);
 
 public:
+	/****************************************************************************
+	**
+	** @name GSeries
+	** @brief 构造函数（constructor）
+	** @param [in] capacity {gsize} 默认元素的容量
+	**
+	****************************************************************************/
 	GSeries(gsize capacity = 0);
+
+	/****************************************************************************
+	**
+	** @name GSeries
+	** @brief 构造函数（constructor）
+	** @param [in] arr {const T *} 被拷贝的数组首地址
+	** @param [in] size {gsize} 被拷贝的数组的元素个数
+	**
+	****************************************************************************/
 	GSeries(const T *arr, gsize size);
+
+	/****************************************************************************
+	**
+	** @name GSeries
+	** @brief 构造函数（constructor）
+	** @param [in] arr {const GArray<T> &} 数组
+	**
+	****************************************************************************/
 	GSeries(const GArray<T> &arr);
+
+	/****************************************************************************
+	**
+	** @name GSeries
+	** @brief 构造函数（constructor）
+	** @param [in] arr {GArray<T> &&} 数组
+	**
+	****************************************************************************/
 	GSeries(GArray<T> &&arr);
-	GSeries(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr);
-	GSeries(GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &&arr);
+
+	/****************************************************************************
+	**
+	** @name GSeries
+	** @brief 拷贝构造函数（copy constructor）
+	** @param [in] arr {const GSeries &} 数组
+	**
+	****************************************************************************/
+	GSeries(const GSeries &arr);
+
+	/****************************************************************************
+	**
+	** @name GSeries
+	** @brief 移动构造函数（move constructor）
+	** @param [in] arr {GSeries &&} 数组
+	**
+	****************************************************************************/
+	GSeries(GSeries &&arr);
+
+	/****************************************************************************
+	**
+	** @name ~GSeries
+	** @brief 析构函数（destructor）
+	**
+	****************************************************************************/
 	~GSeries();
 
 	GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &operator=(const GSeries<T, LOCAL_SIZE, HAS_END_FLAG, END_FLAG> &arr);

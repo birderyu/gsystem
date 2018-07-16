@@ -552,14 +552,16 @@ gbool GString8::EndWith(gchar8 c) const
 	return m_tString[m_tString.Size() - 1] == c;
 }
 
-gvoid GString8::Append(const GString8 &str)
+GString8 &GString8::Append(const GString8 &str)
 {
 	m_tString.Append(str.m_tString);
+	return *this;
 }
 
-gvoid GString8::Append(GString8 &&str)
+GString8 &GString8::Append(GString8 &&str)
 {
 	m_tString.Append(GMove(str.m_tString));
+	return *this;
 }
 
 guint GString8::ClassCode() const GNOEXCEPT

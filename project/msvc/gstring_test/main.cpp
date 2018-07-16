@@ -64,33 +64,18 @@ public:
 	}
 };
 
+struct S
+{
+	int a;
+	int b;
+};
+
 
 gint main(gint argc, gchar *argv[])
 {
-	int val = 0;
-
-	//auto const_val_lambda = [=]() { val = 1; }; // error
-
-	//auto mutable_val_lambda = [=]() mutable { val = 1; }; // succeed
-
-	//auto const_ref_lambda = [&]() { val = 1; }; // succeed
-
-	const_ref_functor _const_ref_functor(val);
-	_const_ref_functor();
-
-
-	GFunction<gvoid(gint)> func = foo;
-	if (func)
-	{
-		func(123);
-	}
-	GFunction<gvoid(gint)> func2;
-	func2 = func;
-	if (func2)
-	{
-		func2(123);
-	}
-
+	int i = 1;
+	S *s = (S *)i;
+	
 	//testing::InitGoogleTest(&argc, argv);
 	//RUN_ALL_TESTS();
 	system("pause");

@@ -44,7 +44,7 @@ public: // 静态方法
 	static GString8 Number(gulonglong num, gint base = 10);
 	static GString8 Number(gfloat num, gint base = 10);
 	static GString8 Number(gdouble num, gint base = 10);
-	static GString8 Number(gdecimal num, gint base = 10);
+	static GString8 Number(glongdouble num, gint base = 10);
 
 	static GString8 ReferenceOf(gcstring8 str);
 	static GString8 ReferenceOf(const GString8 &str);
@@ -59,7 +59,6 @@ public: // 构造方法
 
 public:
 	gsize Size() const;
-	gsize Length() const; // 字符的长度
 	gbool IsEmpty() const;
 	gchar8 &GetAt(gsize pos);
 	const gchar8 &GetAt(gsize pos) const;
@@ -69,8 +68,8 @@ public:
 	gvoid Reserve(gsize size);
 	gbool StartWith(gchar8 c) const;
 	gbool EndWith(gchar8 c) const;
-	gvoid Append(const GString8 &str);
-	gvoid Append(GString8 &&str);
+	GString8 &Append(const GString8 &str);
+	GString8 &Append(GString8 &&str);
 
 public: // 字符串行为
 	gbool Equals(const GString8 &str, gbool bIsSensitive = true) const;

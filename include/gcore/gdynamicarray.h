@@ -130,7 +130,7 @@ public:
 	** @name Size
 	** @brief 获取数组元素的数量
 	** @return {gsize} 元素的数量
-	** @see GArray
+	** @see GArray#Size()
 	**
 	****************************************************************************/
 	gsize Size() const GOVERRIDE;

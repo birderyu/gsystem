@@ -28,6 +28,7 @@ struct GSelectType
 	using Type = typename GConditional<GTypeExist<T, TS...>::exist, T, typename GSelectConvertible<T, TS...>::Type>::Type;
 };
 
+// TODO，该为函数对象
 using construct_func_t = gvoid(*)(gbyte *);
 using copy_func_t = gvoid(*)(gbyte *, const gbyte *);
 using move_func_t = gvoid(*)(gbyte *, gbyte *);
